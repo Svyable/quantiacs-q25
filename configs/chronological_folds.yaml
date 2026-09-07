@@ -1,0 +1,29 @@
+# Chronological selection / walk-forward folds (L6).
+# Selection decisions use earlier folds only. Live remains untouched.
+
+folds:
+  - id: research
+    start: "2016-01-01"
+    end: "2020-12-31"
+    use: "hypothesis / feature search"
+  - id: dev
+    start: "2021-01-01"
+    end: "2022-12-31"
+    use: "parameter development"
+  - id: validation
+    start: "2023-01-01"
+    end: "2024-12-31"
+    use: "promotion decisions"
+  - id: diagnostic
+    start: "2025-01-01"
+    end: null
+    use: "diagnostics only — not free validation"
+  - id: live
+    start: "2026-10-01"
+    end: "2027-01-31"
+    use: "UNTOUCHED — contest live evaluation"
+
+rules:
+  - Do not fit or select on live.
+  - Do not promote solely on diagnostic (2025+).
+  - Record which fold drove each promotion decision in the experiment ledger.

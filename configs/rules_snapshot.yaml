@@ -1,0 +1,51 @@
+# Q25 hard rules snapshot — dated 2026-09-07
+# Encode published contest facts only. Do not invent backtest metrics.
+# Re-verify against Quantiacs docs before submission; amend date if rules change.
+
+snapshot_date: "2026-09-07"
+contest_name: "Q25 Crypto Top-10 Long"
+competition_type: "crypto_daily_long"
+
+calendar:
+  deadline: "2026-09-30"
+  live_start: "2026-10-01"
+  live_end: "2027-01-31"   # Oct 2026 – Jan 2027
+
+data:
+  loader: "qndata.cryptodaily_load_data"
+  sponsor_data_only: true
+  liquidity_field: "is_liquid"
+  position_side: "long_only"
+  no_manual_coin_picking: true
+
+eligibility:
+  in_sample_start: "2016-01-01"
+  # Contest hard gate: IS Sharpe > 1.0 (arithmetic crypto Sharpe).
+  # Library soft checks may mention ~0.7 — use 1.0 for this contest.
+  sharpe_is_min: 1.0
+  sharpe_is_note: "NOT 0.7 — contest requires > 1.0 since 2016-01-01"
+
+capacity:
+  max_running_strategies: 50
+  max_participate: 15
+
+filters:
+  uniqueness_correlation_filter: true
+  reject_buy_and_hold: true
+  reject_toolbox_loopholes: true
+  automatic_allocation_required: true
+
+ranking:
+  live_contest_sharpe_ranks: true
+  positive_contest_period_performance_required: true
+  note: "Live contest Sharpe ranks; positive performance over contest/live period required."
+
+multipass_defaults:
+  lookback_period: 365
+  start_date: "2016-01-01"
+  analyze: true
+  check_correlation: true
+
+references:
+  official_guide: "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  related_local: "configs/contest_q25.yaml"

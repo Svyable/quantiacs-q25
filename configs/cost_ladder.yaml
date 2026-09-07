@@ -1,0 +1,13 @@
+# Transaction-cost stress ladder (L4).
+# Units: match Quantiacs / research convention used in local stress tests
+# (fractional cost parameter). Do not invent results; record per rung after real runs.
+
+cost_ladder:
+  - 0.00
+  - 0.04
+  - 0.08
+  - 0.12
+
+notes: |
+  Evaluate Sharpe / equity / turnover at each rung.
+  Prefer mechanisms that degrade gracefully through mid ladder (0.04–0.08).

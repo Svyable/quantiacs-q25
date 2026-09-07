@@ -1,0 +1,91 @@
+# Predeclared promotion gates for Q25 research.
+# CONTEST_HARD = must satisfy for eligibility / ranking rules.
+# POLICY_SOFT  = research policy; numeric thresholds are TODO for the human.
+# Never invent observed metrics; gates evaluate real runs only.
+
+version: 1
+updated: "2026-09-07"
+
+contest_hard:
+  sharpe_is_min:
+    value: 1.0
+    class: CONTEST_HARD
+    note: "IS Sharpe > 1.0 since 2016-01-01"
+  long_only:
+    value: true
+    class: CONTEST_HARD
+  liquid_only:
+    value: true
+    class: CONTEST_HARD
+  uniqueness_correlation:
+    value: true
+    class: CONTEST_HARD
+    note: "Must pass Quantiacs uniqueness / correlation filter"
+  positive_contest_period_performance:
+    value: true
+    class: CONTEST_HARD
+    note: "Positive performance over contest/live ranking period required"
+  reject_buy_and_hold:
+    value: true
+    class: CONTEST_HARD
+  reject_toolbox_loopholes:
+    value: true
+    class: CONTEST_HARD
+  no_manual_coin_picking:
+    value: true
+    class: CONTEST_HARD
+  sponsor_data_only:
+    value: true
+    class: CONTEST_HARD
+
+policy_soft:
+  # --- HUMAN MUST SET numeric soft thresholds below (TODO) ---
+  sharpe_is_soft_min:
+    value: null  # TODO(human): e.g. aspirational cook target; see targets.yaml
+    class: POLICY_SOFT
+    status: TODO_HUMAN
+  cost_stressed_sharpe_min:
+    value: null  # TODO(human): min Sharpe at cost 0.08 or 0.12
+    class: POLICY_SOFT
+    status: TODO_HUMAN
+    cost_bps_ref: [0.08, 0.12]
+  max_drawdown_max:
+    value: null  # TODO(human): e.g. 0.40 absolute
+    class: POLICY_SOFT
+    status: TODO_HUMAN
+  fold_validation_sharpe_min:
+    value: null  # TODO(human): min Sharpe on chronological validation fold
+    class: POLICY_SOFT
+    status: TODO_HUMAN
+  residual_sharpe_min:
+    value: null  # TODO(human): residual vs core after L7
+    class: POLICY_SOFT
+    status: TODO_HUMAN
+  max_corr_vs_core:
+    value: null  # TODO(human): e.g. 0.85 — reject near-clones
+    class: POLICY_SOFT
+    status: TODO_HUMAN
+  multipass_consistent_with_singlepass:
+    value: true
+    class: POLICY_SOFT
+    note: "Qualitative consistency; set numeric tolerance TODO(human)"
+    tolerance: null  # TODO(human)
+  cleaner_mutation_sharpe_approx_zero:
+    value: true
+    class: POLICY_SOFT
+    note: "Noise/cleaner mutation should not pass; max |Sharpe| TODO(human)"
+    max_abs_sharpe: null  # TODO(human)
+  prefix_causality_pass:
+    value: true
+    class: POLICY_SOFT
+  preregistration_present:
+    value: true
+    class: POLICY_SOFT
+  dual_track_convergence_bonus:
+    value: true
+    class: POLICY_SOFT
+    note: "Not a hard gate; stronger evidence when discovery+robustness agree"
+
+notes: |
+  Soft cook aspirations remain in configs/targets.yaml and are NOT automatic
+  promotion criteria until the human copies numbers into policy_soft above.

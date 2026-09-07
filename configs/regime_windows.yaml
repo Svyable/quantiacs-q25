@@ -1,0 +1,37 @@
+# Temporal robustness regimes (L5). Rolling Sharpes from real runs only.
+
+regimes:
+  - id: Full
+    start: "2016-01-01"
+    end: null  # through available data
+  - id: "2016-2018"
+    start: "2016-01-01"
+    end: "2018-12-31"
+  - id: "2019-2021"
+    start: "2019-01-01"
+    end: "2021-12-31"
+  - id: "2022-2024"
+    start: "2022-01-01"
+    end: "2024-12-31"
+  - id: "2025"
+    start: "2025-01-01"
+    end: "2025-12-31"
+  - id: "2026YTD"
+    start: "2026-01-01"
+    end: null
+  - id: "3Y"
+    lookback_days: 1095
+  - id: "1Y"
+    lookback_days: 365
+  - id: "180D"
+    lookback_days: 180
+  - id: "90D"
+    lookback_days: 90
+  - id: "Q25-preview"
+    start: "2026-01-01"
+    end: "2026-09-30"
+    note: "Pre-live diagnostic only — not the contest live window"
+
+notes: |
+  Live contest window 2026-10-01..2027-01-31 is untouched for fitting.
+  Rolling Sharpe series: compute only from real qnt/hosted stats.

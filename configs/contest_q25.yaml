@@ -1,0 +1,39 @@
+# Hard contest rules for Quantiacs Q25 Crypto Top-10 Long.
+# Encode facts only — do not invent backtest metrics.
+
+contest_name: "Q25 Crypto Top-10 Long"
+competition_type: "crypto_daily_long"
+data_loader: "qndata.cryptodaily_load_data"
+liquidity_field: "is_liquid"
+position_side: "long_only"
+
+# In-sample evaluation window (hard gate start)
+in_sample_start: "2016-01-01"
+lookback_period: 365
+
+# Hard eligibility gate
+# Contest requires IS Sharpe > 1.0 (arithmetic crypto Sharpe from 2016-01-01).
+# Note: some Quantiacs library soft checks use ~0.7 — use 1.0 for this contest.
+hard_gates:
+  sharpe_is_min: 1.0
+  long_only: true
+  liquid_only: true
+  automatic_allocation: true  # no manual asset hand-picking
+  quantiacs_data_only: true
+
+# Contest calendar
+deadline: "2026-09-30"
+live_start: "2026-10-01"
+live_end: "2027-01-31"
+
+# Official pattern reference
+official_guide: "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+
+# Multipass backtester defaults (match working pattern: include load_data)
+multipass:
+  competition_type: "crypto_daily_long"
+  load_data: true
+  lookback_period: 365
+  start_date: "2016-01-01"
+  analyze: true
+  check_correlation: true

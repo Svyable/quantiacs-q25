@@ -1,0 +1,16 @@
+# Soft "cook" research targets (aspirational — NOT claimed results).
+# Separate from hard contest gates in contest_q25.yaml.
+#
+# Quantiacs equity is a growth factor (1.0 = break-even).
+# equity >= 100 means ~100x terminal equity ≈ +9900% ≈ "10000%" return target.
+# Document units carefully; never fabricate metrics until a real run.
+
+soft_cook_gates:
+  sharpe_min: 2.0
+  max_drawdown_max: 0.40   # absolute drawdown <= 40%
+  equity_min: 100.0        # growth factor: 100x ≈ +9900% ≈ 10000% return target
+
+notes: |
+  These are user-stated research aspirations for the factory ranking loop.
+  Passing soft gates does NOT mean a strategy has been backtested to those numbers.
+  No backtest numbers are claimed in this repository until a real qnt run produces them.

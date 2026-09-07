@@ -30,7 +30,7 @@ Rich feature ensembles: breakout, flow, tail, risk-guards. Higher capacity, heav
 
 ### B) `robustness/` — deliberately simple track
 
-Few bounded signals, **weekly rebalance**, **cash allowed** (gross &lt; 1 OK), **capped water-fill**, no hand-picked assets, execution delay left to evaluator. See `factory/tracks.py` → `ROBUSTNESS` and `strategies/robust_weekly_waterfill.py`.
+Few bounded signals, **weekly rebalance**, **cash allowed** (gross < 1 OK), **capped water-fill**, no hand-picked assets, execution delay left to evaluator. See `factory/tracks.py` → `ROBUSTNESS` and `strategies/robust_weekly_waterfill.py`.
 
 **Convergence rule:** when both tracks independently land on the **same mechanism**, treat that as stronger evidence than either track alone.
 
@@ -38,7 +38,7 @@ Few bounded signals, **weekly rebalance**, **cash allowed** (gross &lt; 1 OK), *
 
 - Quantiacs data only (`cryptodaily` + `is_liquid`)
 - Weekly rebalance (reduce ATR-linked turnover cost)
-- Permit cash (gross exposure &lt; 1 is OK)
+- Permit cash (gross exposure < 1 is OK)
 - Capped water-fill allocation (unused capacity stays cash)
 - Long-only × `is_liquid`
 - Optional modules: market-risk guards, vol targeting, drawdown fades, turnover smoothing

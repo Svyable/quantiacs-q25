@@ -252,3 +252,7 @@ def propose_all() -> list[IdeaSpec]:
     for desk_id in DESKS:
         out.extend(propose_specs(desk_id))
     return out
+
+# Expanded mechanism catalog lives in factory/mechanisms.py
+# Dual-track metadata lives in factory/tracks.py
+

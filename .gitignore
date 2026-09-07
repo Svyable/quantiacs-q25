@@ -36,3 +36,13 @@ strategies/generated/*
 *.swp
 .pytest_cache/
 .mypy_cache/
+
+# Experiment payloads (keep README + gitkeep; ignore run artifacts)
+experiments/**/preregistration.json
+experiments/**/preregistration.sha256
+experiments/**/pm_report.md
+experiments/**/formula_ledger.csv
+experiments/_prereg_smoke/
+!experiments/.gitkeep
+!experiments/README.md
+

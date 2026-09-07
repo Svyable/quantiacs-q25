@@ -1,0 +1,1 @@
+experiment_id,created_utc,track,mechanism,thesis_short,falsifier_short,prereg_sha256,code_path,status,sharpe_is,max_dd,equity,cost_0p08_sharpe,residual_sharpe,corr_vs_core,fold_validation_sharpe,prefix_pass,cleaner_pass,promoted,notes

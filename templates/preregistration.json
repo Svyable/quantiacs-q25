@@ -1,0 +1,22 @@
+{
+  "experiment_id": "",
+  "created_utc": "",
+  "track": "discovery|robustness",
+  "mechanism": "",
+  "thesis": "",
+  "falsifier": "",
+  "universe_rule": "long-only * is_liquid; Quantiacs cryptodaily only; no manual coin picking",
+  "rebalance": "weekly|daily|other",
+  "allocation_rule": "e.g. capped water-fill; gross<=1; unused=cash",
+  "param_grid_or_fixed": {},
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "promotion_gates_ref": "configs/promotion_gates.yaml",
+  "code_sha_or_path": "",
+  "cost_ladder_ref": "configs/cost_ladder.yaml",
+  "regime_windows_ref": "configs/regime_windows.yaml",
+  "notes": "",
+  "status": "preregistered"
+}

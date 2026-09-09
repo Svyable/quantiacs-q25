@@ -1,0 +1,164 @@
+# Frozen historical Q25 research roster
+# Evidence date: 2026-08-20. Review assembled: 2026-08-28.
+#
+# IMPORTANT:
+# - These are historical research / execution-translation results, not current
+#   official Quantiacs scores and not forecasts of the 2026-10-01 live window.
+# - Baseline research costs were 4% x ATR(14). `stress_sharpe` is evaluated at
+#   the `stress_atr_fraction` shown for each row.
+# - Ranking is a research-preparation roster. A high rank is not a submission
+#   approval. Current cleaner, multipass, liquidity, runtime and correlation
+#   checks remain mandatory.
+
+as_of: "2026-08-20"
+review_date: "2026-08-28"
+in_sample_start: "2016-01-01"
+metric_basis: "historical local research / execution-translation unless noted"
+baseline_cost_atr_fraction: 0.04
+current_official_clearance: false
+
+strategies:
+  - rank: 1
+    id: V10
+    name: "V10 multi-factor ensemble — Pareto"
+    role: "primary legacy core"
+    full_sharpe: 2.261
+    max_drawdown: -0.3090
+    stress_sharpe: 1.965
+    stress_atr_fraction: 0.12
+    mode: "aqr_ensemble_pareto_v10"
+    implementation: "historical wrapper / preparation candidate"
+    status: "prepare_precheck"
+
+  - rank: 2
+    id: V11_balanced
+    name: "V11 new-only event ensemble — Balanced"
+    role: "orthogonal event / lifecycle core"
+    full_sharpe: 1.261
+    max_drawdown: -0.2311
+    stress_sharpe: 0.899
+    stress_atr_fraction: 0.12
+    mode: "newonly_balanced_v11"
+    implementation: "historical standalone source"
+    status: "prepare_precheck"
+
+  - rank: 3
+    id: C165
+    name: "C165 mobility / consensus risk"
+    role: "risk-efficiency core"
+    full_sharpe: 1.230
+    max_drawdown: -0.2145
+    stress_sharpe: 0.934
+    stress_atr_fraction: 0.12
+    mode: "C165__anchor_trend21__market_trend_h63__w10__geometric__hl0__f00"
+    implementation: "historical research engine; contest adapter required"
+    status: "prepare_precheck"
+
+  - rank: 4
+    id: V12
+    name: "V12 signed volume diffusion — 50/50 bridge"
+    role: "structural volume/return network core"
+    full_sharpe: 1.035
+    max_drawdown: -0.3386
+    stress_sharpe: 0.750
+    stress_atr_fraction: 0.12
+    mode: "signed_bridge_six5"
+    implementation: "historical standalone source"
+    status: "prepare_precheck_exact_official_gate_required"
+
+  - rank: 5
+    id: CoCrash126
+    name: "Co-crash shelter — base 126D"
+    role: "defensive crash-comovement sleeve"
+    full_sharpe: 1.772
+    max_drawdown: -0.1438
+    stress_sharpe: 1.627
+    stress_atr_fraction: 0.12
+    mode: "cocrash_shelter / cocrash_base_r1"
+    implementation: "historical research engine; contest adapter required"
+    status: "prepare_precheck"
+
+  - rank: 6
+    id: hrt_dispersion_switch
+    name: "Residual dispersion switch"
+    role: "sparse dispersion-conditioned residual sleeve"
+    full_sharpe: 1.536
+    max_drawdown: -0.1200
+    stress_sharpe: 1.410
+    stress_atr_fraction: 0.08
+    mode: "hrt_dispersion_switch"
+    implementation: "historical standalone source"
+    status: "prepare_precheck"
+
+  - rank: 7
+    id: Breadth
+    name: "Breadth Thrust Switch"
+    role: "market breadth acceleration timing"
+    full_sharpe: 1.185
+    max_drawdown: -0.2149
+    stress_sharpe: 1.075
+    stress_atr_fraction: 0.08
+    mode: "breadth_thrust_switch"
+    implementation: "historical submission suite mode"
+    status: "prepare_precheck"
+
+  - rank: 8
+    id: aqr_factor_balance
+    name: "Slow defensive factor balance"
+    role: "multi-factor defensive balance"
+    full_sharpe: 1.526
+    max_drawdown: -0.2472
+    stress_sharpe: 1.445
+    stress_atr_fraction: 0.08
+    mode: "aqr_factor_balance"
+    implementation: "historical standalone source"
+    status: "prepare_precheck"
+
+  - rank: 9
+    id: Trend_hit126
+    name: "126D positive-return consistency — five names"
+    role: "persistent trend reserve"
+    full_sharpe: 1.700
+    max_drawdown: -0.2484
+    stress_sharpe: 1.538
+    stress_atr_fraction: 0.12
+    mode: "trend_hit126__concentrated5"
+    implementation: "historical research engine; adapter required"
+    status: "conditional_reserve"
+
+  - rank: 10
+    id: V5_latency
+    name: "V5 latency ensemble"
+    role: "low-risk alternative within the V10 family"
+    full_sharpe: 2.105
+    max_drawdown: -0.1030
+    stress_sharpe: 1.830
+    stress_atr_fraction: 0.12
+    mode: "latency_ensemble_v4"
+    implementation: "historical standalone source"
+    status: "conditional_reserve_high_overlap_with_v10"
+
+core_matched_correlation_2022_to_2026_08_20:
+  labels: [V10, V11_balanced, C165, V12]
+  matrix:
+    - [1.000, 0.288, 0.329, 0.398]
+    - [0.288, 1.000, 0.334, 0.414]
+    - [0.329, 0.334, 1.000, 0.281]
+    - [0.398, 0.414, 0.281, 1.000]
+
+known_family_overlap_notes:
+  - "V10 vs V9 historical matched correlation: 0.9998"
+  - "C165 vs R002 historical matched correlation: 0.9983"
+  - "V10 vs V5 latency historical matched correlation: 0.9156"
+
+frontier_not_in_top10:
+  - id: V13
+    name: "low residual-skew satellite"
+    reason: "historically interesting orthogonal higher-moment seam; excluded from current roster under newer internal drawdown discipline"
+    historical_full_sharpe: 1.446
+    historical_max_drawdown: -0.6238
+
+provenance_note: >-
+  The frozen values above come from the 2026-08-28 roster review of prior Q25
+  research artifacts. Keep this file immutable unless a new dated review is
+  created. Never silently replace local evidence with official platform values.

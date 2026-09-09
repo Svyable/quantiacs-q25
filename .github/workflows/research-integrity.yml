@@ -44,6 +44,50 @@ jobs:
           print("historical_top10.yaml integrity OK")
           PY
 
+      - name: Validate research frontier and agent contract
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+          from factory.mechanisms import mechanism_ids
+
+          frontier = yaml.safe_load(Path("configs/research_frontier.yaml").read_text())
+          axes = frontier["novelty_axes"]
+          assert axes == [
+              "information_primitive",
+              "transform",
+              "timing_or_state_condition",
+              "portfolio_construction",
+          ]
+          assert len(frontier["priority_frontiers"]) >= 8
+          assert frontier["candidate_contract"]["max_initial_free_parameters"] <= 3
+          assert frontier["campaign_default"]["ideation_count"] > frontier["campaign_default"]["preregister_count"]
+          assert frontier["campaign_default"]["preregister_count"] >= frontier["campaign_default"]["implement_count"]
+
+          mechanisms = set(mechanism_ids())
+          required = {
+              "price_delay",
+              "correlation_topology",
+              "liquidity_hysteresis",
+              "vol_term_structure",
+              "tail_dependence",
+              "range_volume_geometry",
+              "nonlinear_response",
+              "opportunity_density",
+              "execution_aware_alpha",
+          }
+          missing = required - mechanisms
+          assert not missing, f"frontier mechanisms missing from catalog: {sorted(missing)}"
+
+          prompt = Path("docs/AGENT_PROMPT.md").read_text()
+          playbook = Path("docs/STRATEGY_GENERATION_PLAYBOOK.md").read_text()
+          assert "configs/research_frontier.yaml" in prompt
+          assert "24 hypothesis" in prompt.lower()
+          assert "nearest incumbent" in prompt.lower()
+          assert "novelty axes" in playbook.lower()
+          print("research frontier / next-agent contract integrity OK")
+          PY
+
       - name: Audit PENDING meta-ensemble source for obvious lookahead primitives
         run: |
           python - <<'PY'

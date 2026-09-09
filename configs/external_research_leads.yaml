@@ -1,0 +1,261 @@
+# Public-internet research intelligence for Q25 strategy ideation.
+#
+# This file records research leads, NOT trusted alpha and NOT official strategy
+# reproductions. Public metrics, leaderboard titles and third-party code are
+# hypothesis inputs only. Re-run every candidate under this repo's own causal,
+# cost, fold, correlation and multipass process before attaching any evidence.
+#
+# Q25 admissibility is deliberately conservative. A dataset demonstrated in a
+# prior Quantiacs contest is NOT automatically marked Q25-approved here.
+
+as_of: "2026-09-09"
+
+interpretation_rules:
+  - "Leaderboard titles are breadcrumbs only; never infer an implementation from a title."
+  - "Third-party backtest metrics are untrusted until independently reproduced with our conventions."
+  - "Public source code may contain leakage, symbol-specific logic, weak costs, stale rules, or overfit tuning; audit before reuse."
+  - "Borrow mechanisms and experimental designs, not performance claims or tuned parameter values."
+  - "Anything whose Q25 data admissibility is uncertain remains research-only until current official rules/platform behavior confirm it."
+  - "Do not tune against current Q25 preview/OOS values; they are already-observed diagnostics and often have very few post-submission days."
+
+sources:
+  official_q24_guide:
+    kind: "official_quantiacs_documentation"
+    url: "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+    observed: >-
+      Q24 crypto guide states long-only, automatic top-10 selection, IS Sharpe > 1
+      since 2016-01-01, Quantiacs-provided data only, and explicitly demonstrates
+      qndata.blockchaincom_load_list() plus qndata.blockchaincom_load_data(id='miners-revenue').
+    use: "Evidence that Quantiacs has exposed blockchain.com-derived data in a prior crypto Top-10 contest workflow."
+    caveat: "Q25 permission/availability must be re-verified before any submission uses blockchain data."
+
+  q25_leaderboard:
+    kind: "official_quantiacs_leaderboard"
+    url: "https://quantiacs.com/leaderboard/25"
+    observed: >-
+      Public strategy titles include clues such as 'sharpe classifier', rolling
+      classifiers, correlation clusters, Markov variants, elasticity breakout,
+      high-low range continuity, low-volatility and compression/breadth variants.
+    use: "Idea-space reconnaissance only. Titles do not disclose code or mechanism details."
+    caveat: "Preview/OOS readings can be extremely unstable for strategies with only a handful of days after submission."
+
+  q24_leaderboard:
+    kind: "official_quantiacs_leaderboard"
+    url: "https://quantiacs.com/leaderboard/24"
+    observed: >-
+      Q24 winner Q24_Tobin_crypto finished with contest Sharpe 3.76, max drawdown
+      -17.06% and average turnover 0.78% according to the public leaderboard.
+    use: >-
+      Portfolio-design lesson: low turnover and persistent holdings can coexist
+      with strong contest outcomes; use this as motivation for naturally slow
+      mechanisms, not as evidence about the winner's hidden signal.
+    caveat: "The public leaderboard does not reveal the winner's source code or causal mechanism."
+
+  public_q25_lowvol_repo:
+    kind: "third_party_github"
+    url: "https://github.com/berabhishek/quantiacs-q25-strategies"
+    observed: >-
+      Public code includes persistent low-volatility, momentum/low-volatility,
+      cross-sectional momentum and regime-style controls. Its published local
+      2024-2025 report claims persistent low volatility was strongest among its
+      tested variants. The implementation ranks realized volatility and buys a
+      low-volatility subset.
+    use: "Implement as an independent sanity/control benchmark; do not call it frontier alpha."
+    caveat: "Metrics are third-party local results, not official Q25 evidence and not comparable without parity checks."
+
+  public_predictive_coding_repo:
+    kind: "third_party_github"
+    url: "https://github.com/RinKaname/project-001/blob/master/predictive_coding_quantiacs.py"
+    observed: >-
+      Stateful online predictive-coding model for crypto_daily_long using local
+      prediction-error updates and a learned readout. Interesting information
+      primitive is forecast error / online model surprise, not the specific
+      neural architecture.
+    use: "Motivation for simple, auditable online-surprise and model-disagreement hypotheses."
+    caveat: "Do not copy the architecture or assume it has valid performance; simplify aggressively and audit state causality."
+
+  public_q24_optimizer_repo:
+    kind: "third_party_github"
+    url: "https://github.com/Thanh-Van-2001/quantiacs_tool"
+    observed: >-
+      Public Q24 optimizer exposes conventional TA families and loads CRYPTO10
+      benchmark weights with qndata.index_load_weights(index_name='CRYPTO10').
+    use: >-
+      The benchmark-weight loader suggests a possible index-composition / market-
+      cap migration research primitive if it is available and admissible in Q25.
+    caveat: >-
+      Its Optuna-over-full-history TA search is an anti-pattern for this repo.
+      Do not import its optimized parameters or objective workflow.
+
+  official_ml_voting_template:
+    kind: "official_quantiacs_github"
+    url: "https://github.com/quantiacs/strategy-ml-voting-crypto"
+    observed: >-
+      Official example demonstrates rolling retraining with a voting classifier.
+    use: >-
+      Reference for causal retraining mechanics and model-state handling if a
+      lightweight classifier/disagreement experiment is pursued.
+    caveat: "The example is not a Q25 alpha claim and must be adapted to Q25 rules and our evidence process."
+
+priority_leads:
+  - id: "onchain_state_cross_section"
+    priority: 1
+    mechanism_catalog_id: "onchain_state"
+    information_primitive: "Quantiacs blockchain.com-derived network metrics, conditional on current Q25 admissibility"
+    q25_admissibility: "UNVERIFIED_FOR_Q25"
+    nearest_incumbents: [V10, V11_balanced, C165]
+    novelty_axes_expected: [information_primitive, timing_or_state_condition]
+    thesis: >-
+      Network-level blockchain state may change which cross-sectional crypto
+      characteristics are rewarded. Use the on-chain metric as a global causal
+      state and interact it with asset-agnostic OHLCV/liquidity features rather
+      than trying to map a Bitcoin metric directly to a hand-picked coin.
+    first_falsifiers:
+      - "Randomize on-chain state dates while preserving regime frequency."
+      - "Replace the on-chain state with matched-frequency market-volatility states."
+      - "Lag the on-chain state materially; edge should decay if timing matters."
+    implementation_guardrails:
+      - "Verify exact Q25 dataset permission and availability before any submission path."
+      - "No hard-coded asset symbols or asset-specific coefficients."
+      - "Use publication/availability timing conservatively; avoid same-day information if timestamp semantics are ambiguous."
+      - "Start with one on-chain metric and one interaction, not a large metric zoo."
+
+  - id: "online_forecast_surprise"
+    priority: 1
+    mechanism_catalog_id: "forecast_surprise"
+    information_primitive: "causal prediction error from a tiny rolling model of next residual return or price response"
+    q25_admissibility: "LIKELY_WITH_OHLCV_ONLY_BUT_VERIFY_IMPLEMENTATION"
+    nearest_incumbents: [V10, V12, Trend_hit126]
+    novelty_axes_expected: [transform, timing_or_state_condition]
+    thesis: >-
+      The difference between what a simple causal model expected yesterday and
+      what actually occurred today may contain state information that raw momentum
+      and residual momentum miss. Test surprise persistence, reversal, calibration
+      drift and cross-sectional surprise rank with tiny walk-forward models.
+    first_falsifiers:
+      - "Shuffle model predictions across assets while preserving realized returns."
+      - "Replace forecast error with raw return; incremental value should remain if surprise is real."
+      - "Freeze model coefficients; if results are identical, online adaptation is not the mechanism."
+    implementation_guardrails:
+      - "No future labels inside the current decision window."
+      - "Train only on observations whose target is already realized."
+      - "Prefer ridge/OLS/EWMA baselines before nonlinear models."
+      - "Track model-state parity under multipass/restart conditions."
+
+  - id: "forecast_disagreement_opportunity"
+    priority: 1
+    mechanism_catalog_id: "forecast_disagreement"
+    information_primitive: "cross-model disagreement / calibration dispersion from 2-3 deliberately different tiny causal models"
+    q25_admissibility: "LIKELY_WITH_OHLCV_ONLY_BUT_VERIFY_IMPLEMENTATION"
+    nearest_incumbents: [hrt_dispersion_switch, q25_sota_meta_ensemble_v1]
+    novelty_axes_expected: [information_primitive, timing_or_state_condition, portfolio_construction]
+    thesis: >-
+      Model disagreement may indicate either uncertainty (hold cash) or unusually
+      rich opportunity (concentrate only when one model is historically reliable
+      in that state). Treat disagreement as an explicit deploy/cash variable and
+      preregister the direction before testing.
+    first_falsifiers:
+      - "Randomly permute model identities by date."
+      - "Replace disagreement with ordinary cross-sectional return dispersion."
+      - "Invert the disagreement gate."
+    implementation_guardrails:
+      - "At most three simple models initially."
+      - "Do not optimize ensemble weights on the full history."
+      - "Separate alpha forecast from confidence/deployment signal."
+
+  - id: "price_volume_elasticity"
+    priority: 1
+    mechanism_catalog_id: "price_elasticity"
+    information_primitive: "price/range displacement relative to abnormal dollar volume and path geometry"
+    q25_admissibility: "OHLCV_ONLY"
+    nearest_incumbents: [V12, q25_sota_meta_ensemble_v1]
+    novelty_axes_expected: [transform, timing_or_state_condition]
+    thesis: >-
+      A move that consumes extreme volume but produces little directional
+      displacement may encode absorption/exhaustion, while a clean large move on
+      modest abnormal volume may encode fragile or efficient repricing. Study the
+      causal geometry of displacement per unit flow rather than cross-asset
+      volume-to-next-return diffusion.
+    first_falsifiers:
+      - "Destroy the price-volume interaction while preserving marginal price and volume ranks."
+      - "Replace elasticity with abnormal volume alone."
+      - "Replace range/close-location geometry with raw return magnitude."
+    implementation_guardrails:
+      - "Use robust ranks/log transforms to avoid near-zero denominators."
+      - "No claim that public 'Elasticity Breakout' titles use this formula."
+      - "Keep self-asset elasticity distinct from V12 directed network diffusion."
+
+  - id: "benchmark_composition_ecology"
+    priority: 2
+    mechanism_catalog_id: "index_ecology"
+    information_primitive: "historical CRYPTO10 benchmark/index weights or membership dynamics"
+    q25_admissibility: "UNVERIFIED_FOR_Q25"
+    nearest_incumbents: [V11_balanced, C165]
+    novelty_axes_expected: [information_primitive, transform, timing_or_state_condition]
+    thesis: >-
+      Index concentration, member-weight acceleration, rank migration, entrant
+      pressure and cohort turnover may capture market-cap ecology that OHLCV-only
+      signals approximate poorly. Treat benchmark composition as a state process,
+      not as a static allocation target.
+    first_falsifiers:
+      - "Replace exact index-weight changes with historical is_liquid transitions only."
+      - "Shuffle member-weight changes within each date while preserving concentration."
+      - "Use equal-liquid concentration proxy; exact benchmark ecology should add information if the thesis is real."
+    implementation_guardrails:
+      - "Verify qndata.index_load_weights availability and Q25 permissibility before implementation/submission."
+      - "No asset-name rules."
+      - "Guard against benchmark weights being published with timing that creates same-date lookahead."
+
+  - id: "persistent_low_vol_control"
+    priority: 3
+    mechanism_catalog_id: "persistent_low_vol_control"
+    information_primitive: "cross-sectional realized volatility rank"
+    q25_admissibility: "OHLCV_ONLY"
+    nearest_incumbents: [aqr_factor_balance, C165]
+    novelty_axes_expected: []
+    thesis: >-
+      Simple persistent low-volatility selection is a valuable external control
+      because one public Q25 repo reports strong local 2024-2025 behavior and the
+      Q24 winner's public leaderboard profile was extremely low-turnover. This is
+      a benchmark/control, not a new alpha claim.
+    first_falsifiers:
+      - "Compare bottom-vol selection with equal-liquid and inverse-vol controls."
+      - "Test whether any apparent edge is only a recent-period artifact."
+    implementation_guardrails:
+      - "Reproduce independently; do not copy the public repo's claimed metrics."
+      - "Do not promote as novel without residual value and a genuinely new mechanism."
+
+leaderboard_breadcrumbs:
+  note: >-
+    Names observed on the public Q25 leaderboard. They indicate what other
+    participants may be exploring, but titles are not source code and must not be
+    treated as verified mechanism descriptions.
+  examples:
+    - "sharpe classifier"
+    - "022_xgboost_rolling_classifier"
+    - "Q25-19 v15 - Correlation Cluster EMA-RSI"
+    - "Markov Upgrade"
+    - "Price Elasticity Breakout by Rich"
+    - "High-Low Range Continuity by Rich"
+    - "Q25 LowVol90 Top1"
+    - "Q25 ES Compression Breakout VT30"
+    - "Q25 ES Breadth Dispersion VT30"
+  agent_instruction: >-
+    Use these only to ask whether an idea class is already crowded. Do not reverse
+    engineer formulas from names and do not optimize against their public preview
+    performance.
+
+next_campaign:
+  ideation_total: 24
+  allocation:
+    onchain_state_cross_section: 7
+    online_surprise_and_disagreement: 7
+    price_volume_elasticity: 5
+    benchmark_composition_ecology: 5
+  fallback_if_external_data_not_q25_admissible: >-
+    Reallocate on-chain/index slots to OHLCV-only forecast surprise, volatility
+    term-structure, correlation-topology and range-volume geometry rather than
+    forcing an uncertain dataset into the contest implementation.
+  selection_rule: >-
+    Score all 24 before returns using the standard novelty/falsifiability rubric;
+    preregister at most six and implement at most three.

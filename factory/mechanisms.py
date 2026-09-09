@@ -5,8 +5,8 @@ Families describe *what* is tested; they do not claim empirical edge.
 
 Important: this catalog contains both crowded controls and open frontier areas.
 Before treating a family as new alpha, consult configs/research_frontier.yaml and
-compare the proposal with the incumbent roster on information primitive,
-transform, timing/state, and portfolio construction.
+configs/external_research_leads.yaml, then compare the proposal with the incumbent
+roster on information primitive, transform, timing/state, and portfolio construction.
 """
 
 from __future__ import annotations
@@ -136,6 +136,13 @@ MECHANISM_FAMILIES: dict[str, MechanismFamily] = {
         typical_track="discovery",
         falsifier_hint="Destroying the range/close-location interaction while preserving trend and volume should remove the effect.",
     ),
+    "price_elasticity": MechanismFamily(
+        id="price_elasticity",
+        name="Price-volume elasticity / absorption",
+        description="Self-asset directional or range displacement relative to abnormal dollar volume, close location and path geometry; distinguish absorption/exhaustion from efficient or fragile repricing.",
+        typical_track="discovery",
+        falsifier_hint="Randomly re-pair price displacement and volume ranks while preserving marginals; the effect should disappear if the interaction is causal.",
+    ),
     "serial_dependence": MechanismFamily(
         id="serial_dependence",
         name="Serial dependence",
@@ -198,6 +205,41 @@ MECHANISM_FAMILIES: dict[str, MechanismFamily] = {
         description="Threshold, saturation, sign-asymmetric or state-dependent leader/follower response using causal OHLCV histories.",
         typical_track="discovery",
         falsifier_hint="A linear response model explains the same return stream and state dependence disappears under sign/threshold ablation.",
+    ),
+    "forecast_surprise": MechanismFamily(
+        id="forecast_surprise",
+        name="Online forecast surprise",
+        description="Use the causal error of a tiny rolling forecast as an information primitive: signed surprise, standardized error, calibration drift or surprise half-life beyond raw residual return.",
+        typical_track="discovery",
+        falsifier_hint="Replacing model surprise with raw residual return or shuffled predictions preserves the result.",
+    ),
+    "forecast_disagreement": MechanismFamily(
+        id="forecast_disagreement",
+        name="Forecast disagreement / calibration state",
+        description="Use disagreement among two or three deliberately different simple causal models as an uncertainty, opportunity or gross-risk state.",
+        typical_track="both",
+        falsifier_hint="Permuting model identities or replacing disagreement with ordinary return dispersion gives the same deployment benefit.",
+    ),
+    "onchain_state": MechanismFamily(
+        id="onchain_state",
+        name="On-chain network state × cross-section",
+        description="Condition automatic cross-sectional crypto selection on Quantiacs-provided blockchain/network state, only after current Q25 admissibility and timestamp semantics are verified.",
+        typical_track="discovery",
+        falsifier_hint="Matched-frequency market-volatility states or shuffled network-state dates reproduce the effect.",
+    ),
+    "index_ecology": MechanismFamily(
+        id="index_ecology",
+        name="CRYPTO10 benchmark-composition ecology",
+        description="If current Q25 rules permit historical benchmark weights, study concentration, member weight migration, entry maturation and leadership turnover rather than static benchmark holding.",
+        typical_track="discovery",
+        falsifier_hint="Binary is_liquid transitions or shuffled within-date benchmark-weight changes explain the same effect.",
+    ),
+    "persistent_low_vol_control": MechanismFamily(
+        id="persistent_low_vol_control",
+        name="Persistent low-volatility external control",
+        description="Simple cross-sectional realized-volatility rank selector reproduced independently as a control, not a frontier novelty claim.",
+        typical_track="robustness",
+        falsifier_hint="Equal-liquid or ordinary inverse-vol controls provide the same result and residual value versus defensive incumbents is absent.",
     ),
     "opportunity_density": MechanismFamily(
         id="opportunity_density",

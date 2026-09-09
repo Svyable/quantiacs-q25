@@ -59,10 +59,12 @@ jobs:
               "timing_or_state_condition",
               "portfolio_construction",
           ]
-          assert len(frontier["priority_frontiers"]) >= 8
+          assert len(frontier["priority_frontiers"]) >= 12
           assert frontier["candidate_contract"]["max_initial_free_parameters"] <= 3
+          assert frontier["candidate_contract"]["external_data_requires_current_q25_verification"] is True
           assert frontier["campaign_default"]["ideation_count"] > frontier["campaign_default"]["preregister_count"]
           assert frontier["campaign_default"]["preregister_count"] >= frontier["campaign_default"]["implement_count"]
+          assert frontier["external_research_ref"] == "configs/external_research_leads.yaml"
 
           mechanisms = set(mechanism_ids())
           required = {
@@ -75,17 +77,69 @@ jobs:
               "nonlinear_response",
               "opportunity_density",
               "execution_aware_alpha",
+              "onchain_state",
+              "forecast_surprise",
+              "forecast_disagreement",
+              "price_elasticity",
+              "index_ecology",
+              "persistent_low_vol_control",
           }
           missing = required - mechanisms
           assert not missing, f"frontier mechanisms missing from catalog: {sorted(missing)}"
 
           prompt = Path("docs/AGENT_PROMPT.md").read_text()
           playbook = Path("docs/STRATEGY_GENERATION_PLAYBOOK.md").read_text()
+          agents = Path("AGENTS.md").read_text()
+          external_doc = Path("docs/EXTERNAL_RESEARCH_LEADS.md").read_text()
           assert "configs/research_frontier.yaml" in prompt
           assert "24 hypothesis" in prompt.lower()
           assert "nearest incumbent" in prompt.lower()
           assert "novelty axes" in playbook.lower()
+          assert "EXTERNAL_RESEARCH_LEADS.md" in agents
+          assert "external_research_leads.yaml" in agents
+          assert "UNVERIFIED_FOR_Q25" in agents
+          assert "forecast surprise" in agents.lower()
+          assert "price-volume elasticity" in agents.lower()
+          assert "leaderboard title" in external_doc.lower()
+          assert "public sharpe" in external_doc.lower()
           print("research frontier / next-agent contract integrity OK")
+          PY
+
+      - name: Validate external public-research intelligence
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          data = yaml.safe_load(Path("configs/external_research_leads.yaml").read_text())
+          sources = data["sources"]
+          leads = {row["id"]: row for row in data["priority_leads"]}
+
+          assert "official_q24_guide" in sources
+          assert "q25_leaderboard" in sources
+          assert "q24_leaderboard" in sources
+          assert "public_q25_lowvol_repo" in sources
+          assert "public_predictive_coding_repo" in sources
+
+          required = {
+              "onchain_state_cross_section",
+              "online_forecast_surprise",
+              "forecast_disagreement_opportunity",
+              "price_volume_elasticity",
+              "benchmark_composition_ecology",
+              "persistent_low_vol_control",
+          }
+          assert required <= set(leads)
+          assert leads["onchain_state_cross_section"]["q25_admissibility"] == "UNVERIFIED_FOR_Q25"
+          assert leads["benchmark_composition_ecology"]["q25_admissibility"] == "UNVERIFIED_FOR_Q25"
+          assert data["next_campaign"]["ideation_total"] == 24
+          assert sum(data["next_campaign"]["allocation"].values()) == 24
+
+          text = Path("docs/EXTERNAL_RESEARCH_LEADS.md").read_text()
+          assert "Q25 admissibility" in text
+          assert "Do not infer" in text
+          assert "Q24 winner" in text
+          print("external research intelligence integrity OK")
           PY
 
       - name: Audit PENDING meta-ensemble source for obvious lookahead primitives

@@ -4,9 +4,12 @@
 #
 # This is a guidance map, not a performance registry. Historical metrics live in
 # configs/historical_top10.yaml. Promotion thresholds live in
-# configs/promotion_gates.yaml. Do not infer edge from priority alone.
+# configs/promotion_gates.yaml. External public-intelligence provenance lives in
+# configs/external_research_leads.yaml and docs/EXTERNAL_RESEARCH_LEADS.md.
+# Do not infer edge from priority alone.
 
 as_of: "2026-09-09"
+external_research_ref: "configs/external_research_leads.yaml"
 
 novelty_axes:
   - information_primitive
@@ -52,8 +55,71 @@ occupied_or_crowded:
   - family: "path_efficient_trend"
     incumbents: [aqr_factor_balance, q25_sota_meta_ensemble_v1]
     note: "Plain efficiency-ratio trend is a control, not a new frontier."
+  - family: "generic_classifier_ta"
+    incumbents: []
+    note: >-
+      Public Q25 titles show rolling classifiers/XGBoost/Markov work is already
+      common. A classifier is not novel unless the label/information primitive
+      is economically distinct and survives a non-ML ablation.
+  - family: "generic_low_vol_selection"
+    incumbents: [aqr_factor_balance, C165]
+    note: >-
+      Public Q25 research and leaderboard titles make simple low-volatility
+      ranking a useful control but a crowded discovery claim.
 
 priority_frontiers:
+  - id: "onchain_state_cross_section"
+    priority: 1
+    q25_admissibility: "UNVERIFIED_FOR_Q25"
+    thesis_space: >-
+      Use a Quantiacs-provided blockchain/network metric as a global causal state
+      variable and interact it with automatic cross-sectional OHLCV/liquidity
+      features. Candidate objects include network-state acceleration, state age,
+      price/on-chain disagreement and network-state-conditioned liquidity age or
+      elasticity. Official Q24 documentation demonstrated blockchaincom loaders,
+      but Q25 permission and timestamp semantics must be verified before any
+      submission implementation.
+    avoid: >-
+      Do not hard-code BTC or another symbol, do not mine a large zoo of chain
+      metrics, and do not assume Q24 dataset permission automatically carries to Q25.
+
+  - id: "online_forecast_surprise"
+    priority: 1
+    q25_admissibility: "OHLCV_ONLY_IF_IMPLEMENTED_WITH_CONTEST_DATA"
+    thesis_space: >-
+      Treat the error of a tiny causal rolling forecast as an information object:
+      signed surprise, standardized surprise, calibration drift, surprise rank
+      and surprise half-life. Ask whether unexpected residual realizations have
+      continuation/reversal information beyond raw residual momentum.
+    avoid: >-
+      Do not turn this into a feature-zoo AutoML search. The model should be
+      intentionally simple and every training target must already be realized.
+
+  - id: "forecast_disagreement_state"
+    priority: 1
+    q25_admissibility: "OHLCV_ONLY_IF_IMPLEMENTED_WITH_CONTEST_DATA"
+    thesis_space: >-
+      Use disagreement among two or three deliberately different tiny causal
+      models as a deployment/opportunity state. Predeclare whether disagreement
+      means uncertainty/cash or structural opportunity. Compare directly with
+      ordinary return/residual dispersion so this does not collapse into the
+      existing dispersion family.
+    avoid: "No large ensembles, full-history model weighting, or post-hoc choice of disagreement direction."
+
+  - id: "price_volume_elasticity"
+    priority: 1
+    q25_admissibility: "OHLCV_ONLY"
+    thesis_space: >-
+      Model self-asset price/range displacement relative to abnormal dollar
+      volume and close-location/path geometry. Distinguish absorption/exhaustion
+      (large flow, little net displacement) from efficient/fragile repricing
+      (large displacement per unit flow). Keep this structurally separate from
+      V12 directed abnormal-volume -> next residual-return diffusion.
+    avoid: >-
+      Do not infer a formula from public leaderboard titles. Avoid unstable raw
+      division near zero; prefer bounded/rank/log transforms and explicit
+      interaction falsifiers.
+
   - id: "assimilation_delay_dynamics"
     priority: 1
     thesis_space: >-
@@ -71,7 +137,7 @@ priority_frontiers:
       migration, eigenvalue concentration, cluster fragmentation, bridge nodes,
       correlation breakdown or recovery. Focus on topology dynamics rather than
       static low-correlation ranking.
-    avoid: "Do not reduce this to residual dispersion or low beta."
+    avoid: "Do not reduce this to residual dispersion, generic HRP or low beta."
 
   - id: "liquidity_transition_hysteresis"
     priority: 1
@@ -89,6 +155,18 @@ priority_frontiers:
       whether the *shape* of the vol curve predicts cross-sectional returns or
       safe deployment, not merely whether high vol should reduce gross.
     avoid: "Plain inverse-vol weighting and generic high-vol risk-off are controls."
+
+  - id: "benchmark_composition_ecology"
+    priority: 2
+    q25_admissibility: "UNVERIFIED_FOR_Q25"
+    thesis_space: >-
+      If historical CRYPTO10 benchmark weights are available and permitted, treat
+      index composition as a dynamic market-cap ecology: concentration, member
+      rank migration, weight acceleration, entry maturation and leadership
+      turnover. This can add information beyond binary is_liquid membership.
+    avoid: >-
+      Do not hold the benchmark directly, use future-finalized monthly weights,
+      or assume qndata.index_load_weights is Q25-admissible without verification.
 
   - id: "tail_dependence_state"
     priority: 2
@@ -139,6 +217,15 @@ priority_frontiers:
       are smoothed after the fact.
     avoid: "Post-hoc turnover smoothing without an alpha-per-cost hypothesis is not a new mechanism."
 
+  - id: "persistent_low_vol_external_control"
+    priority: 3
+    classification: "CONTROL_NOT_FRONTIER_ALPHA"
+    thesis_space: >-
+      Independently reproduce a simple cross-sectional persistent low-volatility
+      selector as an external benchmark/control. A public Q25 repo reports strong
+      local 2024-2025 behavior, but those numbers are not trusted evidence here.
+    avoid: "Do not import public metrics or exact tuned parameters and do not call a basic low-vol rank a new mechanism."
+
 candidate_contract:
   max_initial_free_parameters: 3
   require_named_falsifier: true
@@ -150,15 +237,24 @@ candidate_contract:
   forbid_manual_symbols: true
   forbid_external_strategy_data: true
   forbid_holdout_tuning: true
+  external_data_requires_current_q25_verification: true
+  external_inspiration_requires_source_provenance: true
 
 campaign_default:
   ideation_count: 24
   preregister_count: 6
   implement_count: 3
+  internet_sweep_suggested_allocation:
+    onchain_state_cross_section: 7
+    online_surprise_and_disagreement: 7
+    price_volume_elasticity: 5
+    benchmark_composition_ecology: 5
   note: >-
     These counts are a default research cadence, not a statistical guarantee.
     Generate broadly before testing, then spend compute only on the most novel,
-    falsifiable proposals. Do not alter a rejected mechanism repeatedly until it
+    falsifiable proposals. If on-chain/index data are not currently Q25-admissible,
+    reallocate those idea slots to OHLCV-only surprise, topology, vol-term and
+    range-volume work. Do not alter a rejected mechanism repeatedly until it
     passes; open a new experiment only for a materially new hypothesis.
 
 stop_rules:
@@ -168,3 +264,5 @@ stop_rules:
   - "Do not treat an already observed diagnostic period as a fresh validation set."
   - "Do not promote a family merely because one parameter point has the highest Sharpe."
   - "Do not convert a failed correlation gate into a blend-weight optimization problem."
+  - "Do not use a Q24-supported dataset in Q25 until current Q25 admissibility and timing are verified."
+  - "Do not infer implementation details from a public leaderboard strategy title."

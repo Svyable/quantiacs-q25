@@ -1,0 +1,170 @@
+# Q25 research frontier / novelty map
+# Purpose: stop future agents from spending research budget rediscovering the
+# same return streams under new names.
+#
+# This is a guidance map, not a performance registry. Historical metrics live in
+# configs/historical_top10.yaml. Promotion thresholds live in
+# configs/promotion_gates.yaml. Do not infer edge from priority alone.
+
+as_of: "2026-09-09"
+
+novelty_axes:
+  - information_primitive
+  - transform
+  - timing_or_state_condition
+  - portfolio_construction
+
+novelty_rule: >-
+  Before backtesting, compare every proposal with the nearest incumbent. A new
+  alpha candidate should differ on at least two novelty axes. If it differs on
+  only one axis, treat it as an ablation, control, or family refinement rather
+  than a new independent strategy. A new filename, lookback, threshold, blend
+  weight, rebalance day, or risk scaler is not sufficient evidence of novelty.
+
+occupied_or_crowded:
+  - family: "multi_factor_trend_quality_risk"
+    incumbents: [V10, aqr_factor_balance, V5_latency, Trend_hit126]
+    note: "Crowded. New work must show residual value beyond the V10/factor/trend lineage."
+  - family: "event_lifecycle_calendar_motif"
+    incumbents: [V11_balanced]
+    note: "V11 already owns simple lifecycle, calendar recurrence, shock-network and short motif combinations."
+  - family: "market_consensus_risk_timing"
+    incumbents: [C165]
+    note: "Treat fast/medium market-trend blend variations as C165-family refinements."
+  - family: "abnormal_volume_directed_return_diffusion"
+    incumbents: [V12]
+    note: "Simple abnormal-volume -> next residual-return network variants are V12-family work unless the network object or state variable is materially new."
+  - family: "crash_comovement_defense"
+    incumbents: [CoCrash126]
+    note: "Simple low co-crash / low-beta / downside-safety sorts are likely crowded."
+  - family: "residual_dispersion_timing"
+    incumbents: [hrt_dispersion_switch]
+    note: "Simple residual-dispersion gates are occupied."
+  - family: "breadth_risk_gate"
+    incumbents: [Breadth]
+    note: "Simple percent-above-MA / breadth-thrust risk-on gates are occupied."
+  - family: "low_residual_skew"
+    incumbents: [V13, q25_sota_meta_ensemble_v1]
+    note: "Higher moments remain interesting, but raw low residual skew is already explored and V13 had unacceptable historical drawdown."
+  - family: "residual_momentum"
+    incumbents: [V10, q25_sota_meta_ensemble_v1]
+    note: "Residual momentum alone is not frontier research."
+  - family: "path_efficient_trend"
+    incumbents: [aqr_factor_balance, q25_sota_meta_ensemble_v1]
+    note: "Plain efficiency-ratio trend is a control, not a new frontier."
+
+priority_frontiers:
+  - id: "assimilation_delay_dynamics"
+    priority: 1
+    thesis_space: >-
+      Model how quickly each asset absorbs common-market or cross-asset shocks,
+      including changes in lag structure, acceleration/deceleration, cohort
+      response and leader/follower turnover. Prior delay work found signal but
+      hit correlation gates, so seek a more structurally independent observable,
+      not a retuned copy of the rejected candidates.
+    avoid: "Do not tune directly against already observed rejected delay candidates."
+
+  - id: "correlation_topology_change"
+    priority: 1
+    thesis_space: >-
+      Use causal changes in the residual correlation/covariance graph: centrality
+      migration, eigenvalue concentration, cluster fragmentation, bridge nodes,
+      correlation breakdown or recovery. Focus on topology dynamics rather than
+      static low-correlation ranking.
+    avoid: "Do not reduce this to residual dispersion or low beta."
+
+  - id: "liquidity_transition_hysteresis"
+    priority: 1
+    thesis_space: >-
+      Study pre/post is_liquid transitions, age-since-entry, persistence after
+      entry, re-entry, and hysteresis around eligibility changes. Treat universe
+      membership itself as a state process while remaining fully asset-agnostic.
+    avoid: "Do not reproduce V11's simple positive-entry lifecycle sleeve."
+
+  - id: "volatility_term_structure"
+    priority: 1
+    thesis_space: >-
+      Compare short/medium/long realized volatility, volatility-of-volatility,
+      acceleration, compression and cross-sectional relative vol states. Ask
+      whether the *shape* of the vol curve predicts cross-sectional returns or
+      safe deployment, not merely whether high vol should reduce gross.
+    avoid: "Plain inverse-vol weighting and generic high-vol risk-off are controls."
+
+  - id: "tail_dependence_state"
+    priority: 2
+    thesis_space: >-
+      Go beyond skew and co-crash with semivariance, downside co-exceedance,
+      conditional tail dependence, recovery asymmetry, drawdown duration and
+      robust quantile-state features using only causal OHLCV histories.
+    avoid: "Do not repackage CoCrash126 or V13 with a different lookback."
+
+  - id: "range_volume_geometry"
+    priority: 2
+    thesis_space: >-
+      Explore the joint geometry of high-low range, close location, volume shock,
+      path efficiency and subsequent response. Prefer interaction structure and
+      state transitions over single-indicator candles.
+    avoid: "Simple volume confirmation or efficiency-ratio trend is crowded."
+
+  - id: "shock_recovery_surface"
+    priority: 2
+    thesis_space: >-
+      Model recovery after asset-specific or market shocks: time-since-shock,
+      depth, breadth, recovery slope, failed recovery and relative recovery
+      sequencing. Separate continuation after recovery from blind dip-buying.
+    avoid: "Do not select one visually compelling crash window."
+
+  - id: "cross_sectional_response_convexity"
+    priority: 2
+    thesis_space: >-
+      Estimate nonlinear or state-dependent response of one asset/cohort to
+      another asset or market shock: saturation, sign asymmetry, threshold
+      effects, lag compression and conditional leader reliability.
+    avoid: "A linear V12-style volume diffusion network with new thresholds is not enough."
+
+  - id: "opportunity_density"
+    priority: 3
+    thesis_space: >-
+      Predict when the cross-section contains enough independent opportunity to
+      justify concentration: score dispersion, rank stability, leader turnover,
+      breadth of residual alpha and disagreement across mechanism families.
+    avoid: "Do not use the target strategy's realized future return to define opportunity."
+
+  - id: "execution_aware_alpha_density"
+    priority: 3
+    thesis_space: >-
+      Rank or gate expected signal strength relative to ATR-linked turnover cost,
+      state-dependent trade distance and persistence. The research question is
+      whether an alpha survives *because it waits*, not simply because weights
+      are smoothed after the fact.
+    avoid: "Post-hoc turnover smoothing without an alpha-per-cost hypothesis is not a new mechanism."
+
+candidate_contract:
+  max_initial_free_parameters: 3
+  require_named_falsifier: true
+  require_nearest_incumbent: true
+  require_novelty_axes_changed: true
+  require_ablation: true
+  require_cash_allowed: true
+  require_historical_is_liquid: true
+  forbid_manual_symbols: true
+  forbid_external_strategy_data: true
+  forbid_holdout_tuning: true
+
+campaign_default:
+  ideation_count: 24
+  preregister_count: 6
+  implement_count: 3
+  note: >-
+    These counts are a default research cadence, not a statistical guarantee.
+    Generate broadly before testing, then spend compute only on the most novel,
+    falsifiable proposals. Do not alter a rejected mechanism repeatedly until it
+    passes; open a new experiment only for a materially new hypothesis.
+
+stop_rules:
+  - "Kill obvious incumbent clones before a backtest."
+  - "Kill a mechanism when its stated falsifier passes or the mechanism interpretation collapses."
+  - "Do not relax a gate because a candidate narrowly misses it."
+  - "Do not treat an already observed diagnostic period as a fresh validation set."
+  - "Do not promote a family merely because one parameter point has the highest Sharpe."
+  - "Do not convert a failed correlation gate into a blend-weight optimization problem."

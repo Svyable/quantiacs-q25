@@ -8,7 +8,7 @@ This repository is our research-and-validation stack for the **Quantiacs Q25 Cry
 
 ### Explore
 
-[**Quant Research Showcase**](docs/index.md) · [**Strategy Atlas**](docs/STRATEGY_ATLAS.md) · [Research Method](docs/RESEARCH_METHOD.md) · [Testing Pyramid](docs/TESTING_PYRAMID.md) · [Submission Checklist](docs/SUBMISSION_CHECKLIST.md) · [Historical Top-10 YAML](configs/historical_top10.yaml)
+[**Strategy Generation Playbook**](docs/STRATEGY_GENERATION_PLAYBOOK.md) · [**Next-Agent Prompt**](docs/AGENT_PROMPT.md) · [**Research Frontier YAML**](configs/research_frontier.yaml) · [Quant Research Showcase](docs/index.md) · [Strategy Atlas](docs/STRATEGY_ATLAS.md) · [Research Method](docs/RESEARCH_METHOD.md) · [Testing Pyramid](docs/TESTING_PYRAMID.md) · [Historical Top-10 YAML](configs/historical_top10.yaml)
 
 The `docs/` landing page is GitHub-Pages-ready via [`docs/_config.yml`](docs/_config.yml).
 
@@ -125,6 +125,28 @@ See [docs/index.md](docs/index.md) for the full public research narrative.
 
 ---
 
+## Next agent: generate frontier strategies, not aliases
+
+The next strategy agent should start with the [Strategy Generation Playbook](docs/STRATEGY_GENERATION_PLAYBOOK.md) and [`configs/research_frontier.yaml`](configs/research_frontier.yaml), **before** opening the old seed factory.
+
+Default cadence:
+
+```text
+map incumbents
+→ generate 24 hypotheses across multiple frontier areas
+→ score novelty/falsifiability before returns
+→ preregister 6
+→ implement up to 3 under strategies/generated/
+→ run L0–L9 + falsifiers + residual tests
+→ promote / reserve / kill
+```
+
+Current preferred frontiers are **assimilation-delay dynamics, correlation-topology change, liquidity-transition hysteresis, volatility term structure, tail dependence, range-volume geometry, shock-recovery surfaces, nonlinear response, opportunity density, and execution-aware alpha density**.
+
+The novelty rule is intentionally strict: a proposed independent alpha should differ from its nearest incumbent on at least **two** of information primitive, transform, timing/state, and portfolio construction. Otherwise label it as a refinement or ablation.
+
+---
+
 ## Contest facts
 
 | Item | Value |
@@ -166,9 +188,9 @@ python scripts/run_strategy.py strategies/robust_weekly_waterfill.py
 python scripts/run_strategy.py strategies/q25_sota_meta_ensemble.py
 
 # create a preregistered experiment
-python scripts/new_experiment.py --track discovery --mechanism residual_momentum
+python scripts/new_experiment.py --track discovery --mechanism correlation_topology
 
-# factory search
+# old deterministic factory is primarily plumbing/control infrastructure
 python scripts/bootstrap_ideas.py
 python scripts/run_factory.py --top-n 3 --mutants 2 --seed 42
 ```
@@ -178,11 +200,11 @@ python scripts/run_factory.py --top-n 3 --mutants 2 --seed 42
 ## Repository map
 
 ```text
-docs/           public showcase, strategy atlas, research method, testing pyramid
-configs/        rules, historical top-10, promotion gates, costs, regimes, folds
-factory/        desks, mechanisms, tracks, render, gates, evolve, runner
+docs/           showcase, atlas, next-agent prompt, generation playbook, method, pyramid
+configs/        rules, historical top-10, research frontier, gates, costs, regimes, folds
+factory/        desks, expanded mechanism catalog, tracks, render, gates, evolve, runner
 research/       static audit, prefix tests, preregistration
-strategies/     baselines + PENDING SOTA meta-ensemble
+strategies/     baselines + PENDING SOTA meta-ensemble; new work in generated/
 experiments/    append-only experiment directories / ledgers
 results/        measured outputs only; no invented metrics
 templates/      preregistration, ledger, PM report, hosted strategy notebook

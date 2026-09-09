@@ -1,0 +1,68 @@
+name: research-integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  static-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install static-audit dependencies
+        run: python -m pip install --disable-pip-version-check numpy pandas xarray pyyaml
+
+      - name: Compile Python research surface
+        run: python -m compileall -q factory research scripts strategies
+
+      - name: Run repository static-audit self test
+        run: python research/static_audit.py
+
+      - name: Validate frozen historical roster
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          path = Path("configs/historical_top10.yaml")
+          data = yaml.safe_load(path.read_text())
+          rows = data["strategies"]
+          assert len(rows) == 10
+          assert [row["rank"] for row in rows] == list(range(1, 11))
+          assert all(row["full_sharpe"] > 0 for row in rows)
+          assert data["current_official_clearance"] is False
+          print("historical_top10.yaml integrity OK")
+          PY
+
+      - name: Audit PENDING meta-ensemble source for obvious lookahead primitives
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import ast
+
+          path = Path("strategies/q25_sota_meta_ensemble.py")
+          text = path.read_text()
+          ast.parse(text)
+
+          forbidden = {
+              "center=True": "centered rolling window",
+              "shift(-": "negative pandas shift",
+              "shift(time=-": "negative xarray shift",
+              "isel(time=1": "hard-coded future row access",
+          }
+          failures = [label for token, label in forbidden.items() if token in text]
+          assert not failures, f"obvious causality hazards: {failures}"
+          assert "PENDING RESEARCH STRATEGY" in text
+          assert "is_liquid" in text
+          print("SOTA meta-ensemble source audit OK")
+          PY

@@ -1,0 +1,299 @@
+{
+  "base_candidates": {
+    "flow_absorption_w28": {
+      "dev_sharpe_0": 0.3707604774204123,
+      "dev_sharpe_12": -0.22607884558311164,
+      "family": "flow_absorption",
+      "mean_turnover_12": 0.1519827712298799,
+      "rank": 11,
+      "research_sharpe_0": 2.1329322785899905,
+      "research_sharpe_12": 1.5860892408542755,
+      "selection_score": -0.22607884558311164,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.91573777873883
+    },
+    "flow_absorption_w42": {
+      "dev_sharpe_0": 0.47107102925748173,
+      "dev_sharpe_12": -0.10566235451746961,
+      "family": "flow_absorption",
+      "mean_turnover_12": 0.13815427977883923,
+      "rank": 8,
+      "research_sharpe_0": 2.0609160022504676,
+      "research_sharpe_12": 1.5835300591430992,
+      "selection_score": -0.10566235451746961,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.8862119992084382
+    },
+    "flow_absorption_w56": {
+      "dev_sharpe_0": 0.2355950435448335,
+      "dev_sharpe_12": -0.28805603693376935,
+      "family": "flow_absorption",
+      "mean_turnover_12": 0.13215462217841598,
+      "rank": 13,
+      "research_sharpe_0": 2.097495649477544,
+      "research_sharpe_12": 1.6373941055251187,
+      "selection_score": -0.28805603693376935,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.9174646963301065
+    },
+    "forecast_surprise_w28": {
+      "dev_sharpe_0": 0.6730775624322174,
+      "dev_sharpe_12": -0.060480270214234286,
+      "family": "forecast_surprise",
+      "mean_turnover_12": 0.18041404851245985,
+      "rank": 6,
+      "research_sharpe_0": 1.6811682354324637,
+      "research_sharpe_12": 1.0326190819938263,
+      "selection_score": -0.060480270214234286,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.9732705149247509
+    },
+    "forecast_surprise_w42": {
+      "dev_sharpe_0": 0.6375610425030254,
+      "dev_sharpe_12": -0.12719919411548145,
+      "family": "forecast_surprise",
+      "mean_turnover_12": 0.18134205215300359,
+      "rank": 9,
+      "research_sharpe_0": 1.742324951977256,
+      "research_sharpe_12": 1.111436637697504,
+      "selection_score": -0.12719919411548145,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.9589048566616099
+    },
+    "forecast_surprise_w56": {
+      "dev_sharpe_0": 0.5779724611424096,
+      "dev_sharpe_12": -0.15655214714080803,
+      "family": "forecast_surprise",
+      "mean_turnover_12": 0.17764658503167557,
+      "rank": 10,
+      "research_sharpe_0": 1.8198029360199255,
+      "research_sharpe_12": 1.213056528362287,
+      "selection_score": -0.15655214714080803,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.9556150467858985
+    },
+    "vol_curve_w14": {
+      "dev_sharpe_0": 0.7603948919176373,
+      "dev_sharpe_12": 0.3113988806573695,
+      "family": "vol_curve",
+      "mean_turnover_12": 0.032916225809546645,
+      "rank": 7,
+      "research_sharpe_0": 0.3174066227015786,
+      "research_sharpe_12": -0.10563585788754642,
+      "selection_score": -0.10563585788754642,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.3755264134178702
+    },
+    "vol_curve_w21": {
+      "dev_sharpe_0": 0.7194592377314577,
+      "dev_sharpe_12": 0.26901593724054423,
+      "family": "vol_curve",
+      "mean_turnover_12": 0.033365316077666046,
+      "rank": 12,
+      "research_sharpe_0": 0.10046020538460679,
+      "research_sharpe_12": -0.23135051639889442,
+      "selection_score": -0.23135051639889442,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.5920588120758644
+    },
+    "vol_curve_w28": {
+      "dev_sharpe_0": 0.6541851896916855,
+      "dev_sharpe_12": 0.23586915693128152,
+      "family": "vol_curve",
+      "mean_turnover_12": 0.036380217569879074,
+      "rank": 14,
+      "research_sharpe_0": 0.02875735449357196,
+      "research_sharpe_12": -0.29587940095417486,
+      "selection_score": -0.29587940095417486,
+      "status": "COMPLETE",
+      "worst_drawdown_12": -0.5439034201710009
+    }
+  },
+  "base_residual_diagnostics": {
+    "flow_absorption_w28": {
+      "correlations": {
+        "equal_liquid": 0.8892154441527156,
+        "inverse_vol_trend": 0.8156781830396562,
+        "persistent_low_vol": 0.8693453699830014
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": -1.54455755675894,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "flow_absorption_w42": {
+      "correlations": {
+        "equal_liquid": 0.8553455887513195,
+        "inverse_vol_trend": 0.8570098851985516,
+        "persistent_low_vol": 0.8415909894581908
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": -1.1597571460392317,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "flow_absorption_w56": {
+      "correlations": {
+        "equal_liquid": 0.8525081862798888,
+        "inverse_vol_trend": 0.8753598335133036,
+        "persistent_low_vol": 0.8358209862881751
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": -1.7375713629988978,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "forecast_surprise_w28": {
+      "correlations": {
+        "equal_liquid": 0.9332914490929648,
+        "inverse_vol_trend": 0.730264485547129,
+        "persistent_low_vol": 0.8939182770386562
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": -0.12744240775294438,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "forecast_surprise_w42": {
+      "correlations": {
+        "equal_liquid": 0.935122153348624,
+        "inverse_vol_trend": 0.7374184417650033,
+        "persistent_low_vol": 0.8995042492986565
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": -0.33622267497129826,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "forecast_surprise_w56": {
+      "correlations": {
+        "equal_liquid": 0.9332071572751227,
+        "inverse_vol_trend": 0.7483565774136387,
+        "persistent_low_vol": 0.9007951712695695
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": -0.6418698862633592,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "vol_curve_w14": {
+      "correlations": {
+        "equal_liquid": 0.34010641870320174,
+        "inverse_vol_trend": 0.3606809830020494,
+        "persistent_low_vol": 0.3425994872578159
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": 0.868681302930308,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "vol_curve_w21": {
+      "correlations": {
+        "equal_liquid": 0.35712532938284686,
+        "inverse_vol_trend": 0.3681025939468028,
+        "persistent_low_vol": 0.33552088087644044
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": 1.090578331052185,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    },
+    "vol_curve_w28": {
+      "correlations": {
+        "equal_liquid": 0.3911400894936236,
+        "inverse_vol_trend": 0.36558405331603794,
+        "persistent_low_vol": 0.3664770544919731
+      },
+      "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+      "observations": 730,
+      "residual_sharpe": 0.9788582482384286,
+      "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+    }
+  },
+  "campaign": "frontier_20260910",
+  "evidence_stage": "development_observed",
+  "family_decisions": [
+    {
+      "best_score": -0.10566235451746961,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "flow_absorption_ablation"
+      ],
+      "family": "flow_absorption",
+      "family_rank": 2,
+      "invalid_cells": [],
+      "median_score": -0.22607884558311164,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    },
+    {
+      "best_score": -0.060480270214234286,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "KILL_WEAK_ALPHA",
+      "declared_cells": 5,
+      "failed_controls": [],
+      "family": "forecast_surprise",
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": -0.12719919411548145,
+      "pending_cells": [],
+      "reason": "every valid base cell is below predefined development floor Sharpe 1.0"
+    },
+    {
+      "best_score": -0.10563585788754642,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "vol_curve_ablation"
+      ],
+      "family": "vol_curve",
+      "family_rank": 3,
+      "invalid_cells": [],
+      "median_score": -0.23135051639889442,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "interpretation": {
+    "flow_absorption": "FALSIFIED_SIMPLE_ABSORPTION",
+    "forecast_surprise": "KILL_SIMPLE_AR_SURPRISE",
+    "next_alpha_implication": "Do not retune these formulas. Vol-curve low control correlations and positive dev residuals justify a new signed/asymmetric-volatility hypothesis; this is a new preregistration, not a rescue.",
+    "vol_curve": "FALSIFIED_STANDALONE_CURVE"
+  },
+  "schema_version": 1,
+  "source": {
+    "access_mode": "public_default",
+    "artifact_id": 10152401387,
+    "artifact_name": "frontier_20260910-alpha-measured-34478068210",
+    "costs": [
+      0.0,
+      0.04,
+      0.08,
+      0.12
+    ],
+    "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+    "folds": [
+      {
+        "end": "2020-12-31",
+        "id": "research",
+        "start": "2016-01-01",
+        "use": "hypothesis / feature search"
+      },
+      {
+        "end": "2022-12-31",
+        "id": "dev",
+        "start": "2021-01-01",
+        "use": "parameter development"
+      }
+    ],
+    "head_sha": "767434fd94809f822d11aede720e8f4eb6790072",
+    "manifest_sha256": "4686635ce60b19ccb932c8c41c438f71bcc453190d8f8045e823e99fb14f660e",
+    "workflow_run_id": 34478068210
+  }
+}

@@ -1,0 +1,35 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.main-content {
+  max-width: 76rem;
+}
+
+.main-content table {
+  display: table;
+  width: 100%;
+  font-size: 0.92rem;
+}
+
+.main-content table th {
+  white-space: nowrap;
+}
+
+.main-content table td,
+.main-content table th {
+  vertical-align: top;
+}
+
+.main-content code {
+  font-size: 0.88em;
+}
+
+@media screen and (max-width: 64em) {
+  .main-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

@@ -8,7 +8,12 @@ on:
       - 'experiments/frontier_20260910b/manifest.json'
       - 'experiments/frontier_20260910b/*/preregistration.json'
       - 'experiments/frontier_20260910b/*/preregistration.sha256'
+      - 'research/benchmark.py'
+      - 'research/iteration.py'
+      - 'scripts/build_research_dashboard.py'
+      - 'tests/test_frontier.py'
       - 'tests/test_frontier_b.py'
+      - 'tests/test_evidence_dashboard.py'
       - '.github/workflows/frontier-b-benchmark.yml'
   workflow_dispatch:
 
@@ -34,6 +39,9 @@ jobs:
       - name: Run software and causality gates
         run: python -m pytest -q tests
 
+      - name: Verify generated dashboard is canonical
+        run: python scripts/build_research_dashboard.py --check
+
       - name: Run exact development campaign with public/default access
         run: |
           python -m research.iteration \
@@ -52,53 +60,28 @@ jobs:
           import json
           import sys
           from pathlib import Path
-          import numpy as np
-          import pandas as pd
 
           root = Path(sys.argv[1])
           ranks = json.loads((root / "rankings.json").read_text())
-          print("\n=== FULL RANKINGS JSON ===")
+          print("\n=== FULL EVIDENCE MATRIX ===")
           print(json.dumps(ranks, indent=2, sort_keys=True))
 
-          print("\n=== CANONICAL BASE METRICS ===")
+          print("\n=== CANONICAL BASE PACKETS ===")
           for family, cid in [
               ("topology_migration", "topology_migration_w63"),
               ("liquidity_hysteresis", "liquidity_hysteresis_w42"),
               ("shock_recovery_surface", "shock_recovery_surface_w42"),
           ]:
-              path = root / f"{cid}.json"
-              if not path.exists():
+              record_path = root / f"{cid}.json"
+              packet_path = root / "candidate_packets" / f"{cid}.json"
+              if not record_path.exists():
                   print(f"{family}: MISSING")
                   continue
-              record = json.loads(path.read_text())
-              print(f"\n{family} status={record.get('status')}")
+              record = json.loads(record_path.read_text())
+              print(f"\n{family} status={record.get('status')} failure_stage={record.get('failure_stage')}")
+              if packet_path.exists():
+                  print(json.dumps(json.loads(packet_path.read_text()), indent=2, sort_keys=True))
               print(json.dumps(record.get("metrics", {}), indent=2, sort_keys=True))
-              ret_path = root / f"{cid}_returns.csv"
-              if not ret_path.exists():
-                  continue
-              frame = pd.read_csv(ret_path, index_col=0, parse_dates=True)
-              for fold in ("research", "dev"):
-                  if fold not in frame:
-                      continue
-                  rr = frame[fold].dropna().astype(float)
-                  if rr.empty:
-                      continue
-                  downside = np.minimum(rr.to_numpy(), 0.0)
-                  downside_dev = float(np.sqrt(np.mean(downside ** 2)))
-                  sortino = float(np.sqrt(365) * rr.mean() / downside_dev) if downside_dev > 0 else None
-                  growth = float(np.prod(1.0 + rr.to_numpy()))
-                  cagr = growth ** (365.0 / len(rr)) - 1.0 if growth > 0 else None
-                  cell = record.get("metrics", {}).get(fold, {}).get("0.04", {})
-                  max_dd = cell.get("max_drawdown")
-                  calmar = cagr / abs(max_dd) if cagr is not None and max_dd not in (None, 0) else None
-                  print(json.dumps({
-                      "fold": fold,
-                      "cost": "0.04",
-                      "derived_cagr": cagr,
-                      "derived_sortino": sortino,
-                      "derived_calmar": calmar,
-                      "observations": len(rr),
-                  }, sort_keys=True))
           PY
 
       - name: Preserve measured evidence

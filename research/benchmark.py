@@ -152,7 +152,7 @@ def derived_return_metrics(relative_return, points_per_year=365):
 
 
 def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
-    """Measure official translation, including row normalization induced by data anomalies."""
+    """Attribute official translation only when an ambiguous data cell actually changes."""
     raw = raw.transpose("time", "asset")
     cleaned = cleaned.sel(time=raw.time, asset=raw.asset).transpose("time", "asset")
     delta = np.abs(np.asarray(cleaned.values, float) - np.asarray(raw.values, float))
@@ -161,12 +161,13 @@ def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
     close = data.sel(field="close").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
     liquid = data.sel(field="is_liquid").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
     missing_close = ~np.isfinite(np.asarray(close.values, float))
-    not_strictly_liquid = np.asarray(liquid.values, float) != 1
-    direct_mask = missing_close | not_strictly_liquid
-    anomaly_day = direct_mask.any(axis=1)
-    explainable_mask = np.broadcast_to(anomaly_day[:, None], changed.shape)
-    direct = changed & direct_mask
-    secondary = changed & ~direct_mask & explainable_mask
+    liquid_values = np.asarray(liquid.values, float)
+    nonfinite_liquidity = ~np.isfinite(liquid_values)
+    ambiguous_data = missing_close | nonfinite_liquidity
+    direct = changed & ambiguous_data
+    translation_day = direct.any(axis=1)
+    explainable_mask = ambiguous_data | np.broadcast_to(translation_day[:, None], changed.shape)
+    secondary = changed & ~ambiguous_data & explainable_mask
     unexplained = changed & ~explainable_mask
     raw_gross = np.abs(np.asarray(raw.values, float)).sum(axis=1)
     clean_gross = np.abs(np.asarray(cleaned.values, float)).sum(axis=1)
@@ -176,13 +177,13 @@ def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
         "max_abs_difference": max_delta if np.isfinite(max_delta) else None,
         "changed_cells": int(changed.sum()),
         "changed_days": int(changed_days.sum()),
-        "anomaly_days": int(anomaly_day.sum()),
+        "translation_days": int(translation_day.sum()),
         "changed_fraction": float(changed.mean()) if changed.size else 0.0,
-        "direct_data_cell_changes": int(direct.sum()),
+        "direct_ambiguous_data_changes": int(direct.sum()),
         "same_day_normalization_changes": int(secondary.sum()),
         "unexplained_changed_cells": int(unexplained.sum()),
         "changed_on_missing_close_cells": int((changed & missing_close).sum()),
-        "changed_on_not_strictly_liquid_cells": int((changed & not_strictly_liquid).sum()),
+        "changed_on_nonfinite_liquidity_cells": int((changed & nonfinite_liquidity).sum()),
         "raw_mean_gross": float(np.mean(raw_gross)),
         "cleaned_mean_gross": float(np.mean(clean_gross)),
         "raw_max_gross": float(np.max(raw_gross)),
@@ -204,7 +205,7 @@ class QuantiacsEvaluator:
         impact = cleaner_impact(weights, cleaned, self.data)
         if impact["unexplained_changed_cells"]:
             raise AssertionError(
-                "cleaner parity failed outside official data-availability translation days: "
+                "cleaner parity failed outside observed missing-price/non-finite-liquidity translation days: "
                 f"{impact['unexplained_changed_cells']} unexplained cells"
             )
         result, returns = {"cleaner_impact": impact}, {}

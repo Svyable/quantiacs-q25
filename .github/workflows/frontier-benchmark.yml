@@ -1,0 +1,45 @@
+name: frontier-benchmark
+on:
+  workflow_dispatch:
+    inputs:
+      budget:
+        description: Maximum candidates to evaluate (18 completes the declared campaign)
+        default: '18'
+        required: true
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Configure Quantiacs access
+        env:
+          QUANTIACS_PARTICIPANT_KEY: ${{ secrets.API_KEY }}
+        run: |
+          if [ -n "$QUANTIACS_PARTICIPANT_KEY" ]; then
+            echo "API_KEY=$QUANTIACS_PARTICIPANT_KEY" >> "$GITHUB_ENV"
+            echo 'Using authenticated Quantiacs access.'
+          else
+            echo 'API_KEY=default' >> "$GITHUB_ENV"
+            echo 'Using Quantiacs public/default access; no repository secret required.'
+          fi
+      - name: Install toolbox and test dependencies
+        run: python -m pip install -r requirements.txt pytest
+      - name: Run software gates
+        run: python -m pytest -q tests
+      - name: Run development benchmark
+        env:
+          BENCHMARK_BUDGET: ${{ inputs.budget }}
+        run: python -m research.iteration --budget "$BENCHMARK_BUDGET"
+      - name: Preserve benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontier-benchmark-${{ github.run_id }}
+          path: results/frontier_20260910/
+          if-no-files-found: ignore

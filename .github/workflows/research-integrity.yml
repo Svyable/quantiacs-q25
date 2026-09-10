@@ -20,7 +20,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install static-audit dependencies
-        run: python -m pip install --disable-pip-version-check numpy pandas xarray pyyaml
+        run: python -m pip install --disable-pip-version-check numpy pandas xarray pyyaml pytest
 
       - name: Compile Python research surface
         run: python -m compileall -q factory research scripts strategies
@@ -164,3 +164,7 @@ jobs:
           assert "is_liquid" in text
           print("SOTA meta-ensemble source audit OK")
           PY
+
+
+      - name: Test frontier strategies and iteration evidence boundaries
+        run: python -m pytest -q tests

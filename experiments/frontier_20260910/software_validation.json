@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-10",
+  "pytest": {
+    "command": "python -m pytest -q tests",
+    "passed": 27,
+    "failed": 0,
+    "seconds": 2.2
+  },
+  "compileall": "PASS",
+  "static_audit_self_test": "PASS",
+  "data": "synthetic mechanics only",
+  "market_metrics": null
+}

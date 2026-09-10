@@ -1,0 +1,227 @@
+{
+  "campaign": "frontier_20260910",
+  "candidates": [
+    {
+      "id": "forecast_surprise_w28",
+      "family": "forecast_surprise",
+      "path": "strategies/generated/frontier_20260910_forecast_surprise.py",
+      "params": {
+        "window": 28,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": "forecast_surprise_w42",
+      "preregistration": "experiments/frontier_20260910/forecast_surprise/preregistration.json",
+      "preregistration_sha256": "ac90b36dfa285a3359ede0eabe51a2aedd74bced24792d161198efb7e74ca6ff"
+    },
+    {
+      "id": "forecast_surprise_w42",
+      "family": "forecast_surprise",
+      "path": "strategies/generated/frontier_20260910_forecast_surprise.py",
+      "params": {
+        "window": 42,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260910/forecast_surprise/preregistration.json",
+      "preregistration_sha256": "ac90b36dfa285a3359ede0eabe51a2aedd74bced24792d161198efb7e74ca6ff"
+    },
+    {
+      "id": "forecast_surprise_w56",
+      "family": "forecast_surprise",
+      "path": "strategies/generated/frontier_20260910_forecast_surprise.py",
+      "params": {
+        "window": 56,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": "forecast_surprise_w42",
+      "preregistration": "experiments/frontier_20260910/forecast_surprise/preregistration.json",
+      "preregistration_sha256": "ac90b36dfa285a3359ede0eabe51a2aedd74bced24792d161198efb7e74ca6ff"
+    },
+    {
+      "id": "forecast_surprise_ablation",
+      "family": "forecast_surprise",
+      "path": "strategies/generated/frontier_20260910_forecast_surprise.py",
+      "params": {
+        "window": 42,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "ablation",
+      "parent_id": "forecast_surprise_w42",
+      "preregistration": "experiments/frontier_20260910/forecast_surprise/preregistration.json",
+      "preregistration_sha256": "ac90b36dfa285a3359ede0eabe51a2aedd74bced24792d161198efb7e74ca6ff"
+    },
+    {
+      "id": "forecast_surprise_falsifier",
+      "family": "forecast_surprise",
+      "path": "strategies/generated/frontier_20260910_forecast_surprise.py",
+      "params": {
+        "window": 42,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "falsifier",
+      "parent_id": "forecast_surprise_w42",
+      "preregistration": "experiments/frontier_20260910/forecast_surprise/preregistration.json",
+      "preregistration_sha256": "ac90b36dfa285a3359ede0eabe51a2aedd74bced24792d161198efb7e74ca6ff"
+    },
+    {
+      "id": "flow_absorption_w28",
+      "family": "flow_absorption",
+      "path": "strategies/generated/frontier_20260910_flow_absorption.py",
+      "params": {
+        "window": 28,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": "flow_absorption_w42",
+      "preregistration": "experiments/frontier_20260910/flow_absorption/preregistration.json",
+      "preregistration_sha256": "1c6dc94c4fe2ea477ff3b04637453edae90abb868870959702e9f3657e1c077a"
+    },
+    {
+      "id": "flow_absorption_w42",
+      "family": "flow_absorption",
+      "path": "strategies/generated/frontier_20260910_flow_absorption.py",
+      "params": {
+        "window": 42,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260910/flow_absorption/preregistration.json",
+      "preregistration_sha256": "1c6dc94c4fe2ea477ff3b04637453edae90abb868870959702e9f3657e1c077a"
+    },
+    {
+      "id": "flow_absorption_w56",
+      "family": "flow_absorption",
+      "path": "strategies/generated/frontier_20260910_flow_absorption.py",
+      "params": {
+        "window": 56,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": "flow_absorption_w42",
+      "preregistration": "experiments/frontier_20260910/flow_absorption/preregistration.json",
+      "preregistration_sha256": "1c6dc94c4fe2ea477ff3b04637453edae90abb868870959702e9f3657e1c077a"
+    },
+    {
+      "id": "flow_absorption_ablation",
+      "family": "flow_absorption",
+      "path": "strategies/generated/frontier_20260910_flow_absorption.py",
+      "params": {
+        "window": 42,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "ablation",
+      "parent_id": "flow_absorption_w42",
+      "preregistration": "experiments/frontier_20260910/flow_absorption/preregistration.json",
+      "preregistration_sha256": "1c6dc94c4fe2ea477ff3b04637453edae90abb868870959702e9f3657e1c077a"
+    },
+    {
+      "id": "flow_absorption_falsifier",
+      "family": "flow_absorption",
+      "path": "strategies/generated/frontier_20260910_flow_absorption.py",
+      "params": {
+        "window": 42,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "falsifier",
+      "parent_id": "flow_absorption_w42",
+      "preregistration": "experiments/frontier_20260910/flow_absorption/preregistration.json",
+      "preregistration_sha256": "1c6dc94c4fe2ea477ff3b04637453edae90abb868870959702e9f3657e1c077a"
+    },
+    {
+      "id": "vol_curve_w14",
+      "family": "vol_curve",
+      "path": "strategies/generated/frontier_20260910_vol_curve.py",
+      "params": {
+        "window": 14,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": "vol_curve_w21",
+      "preregistration": "experiments/frontier_20260910/vol_curve/preregistration.json",
+      "preregistration_sha256": "2723da4e46b234345cc572c994e51af493497b5814ba6ecf3118b74f45169536"
+    },
+    {
+      "id": "vol_curve_w21",
+      "family": "vol_curve",
+      "path": "strategies/generated/frontier_20260910_vol_curve.py",
+      "params": {
+        "window": 21,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260910/vol_curve/preregistration.json",
+      "preregistration_sha256": "2723da4e46b234345cc572c994e51af493497b5814ba6ecf3118b74f45169536"
+    },
+    {
+      "id": "vol_curve_w28",
+      "family": "vol_curve",
+      "path": "strategies/generated/frontier_20260910_vol_curve.py",
+      "params": {
+        "window": 28,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "base",
+      "parent_id": "vol_curve_w21",
+      "preregistration": "experiments/frontier_20260910/vol_curve/preregistration.json",
+      "preregistration_sha256": "2723da4e46b234345cc572c994e51af493497b5814ba6ecf3118b74f45169536"
+    },
+    {
+      "id": "vol_curve_ablation",
+      "family": "vol_curve",
+      "path": "strategies/generated/frontier_20260910_vol_curve.py",
+      "params": {
+        "window": 21,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "ablation",
+      "parent_id": "vol_curve_w21",
+      "preregistration": "experiments/frontier_20260910/vol_curve/preregistration.json",
+      "preregistration_sha256": "2723da4e46b234345cc572c994e51af493497b5814ba6ecf3118b74f45169536"
+    },
+    {
+      "id": "vol_curve_falsifier",
+      "family": "vol_curve",
+      "path": "strategies/generated/frontier_20260910_vol_curve.py",
+      "params": {
+        "window": 21,
+        "persistence": 5,
+        "top_k": 5
+      },
+      "mode": "falsifier",
+      "parent_id": "vol_curve_w21",
+      "preregistration": "experiments/frontier_20260910/vol_curve/preregistration.json",
+      "preregistration_sha256": "2723da4e46b234345cc572c994e51af493497b5814ba6ecf3118b74f45169536"
+    }
+  ],
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "protected_live_start": "2026-10-01",
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "max_unique_candidates": 15,
+  "automatic_promotion": false
+}

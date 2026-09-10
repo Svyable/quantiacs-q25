@@ -28,7 +28,7 @@ def _field(data, name):
 
 def _centrality(frame, min_periods):
     corr = frame.corr(min_periods=min_periods)
-    values = corr.to_numpy(dtype=float)
+    values = corr.to_numpy(dtype=float).copy()
     if values.size == 0:
         return pd.Series(dtype=float), np.nan
     np.fill_diagonal(values, np.nan)
@@ -101,6 +101,7 @@ def strategy(data, params=None, mode="base"):
         raise ValueError("assets must be unique")
     score, liquid = signals(data, p["window"], mode)
     return _allocate(score, liquid, data.time, p["top_k"])
+
 
 def _allocate(score, liquid, times, top_k):
     ranked = score.where(liquid & (score > 0)).sort_index(axis=1)

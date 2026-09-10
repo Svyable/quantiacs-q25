@@ -1,5 +1,9 @@
 # quantiacs-q25 — Q25 Quantitative Research Lab
 
+> 🌐 **Q25 Quant Lab site:** https://svyable.github.io/quantiacs-q25/
+>
+> The Pages site is the public-facing research surface: the historical Top-10 roster, mechanism atlas, research/testing system, evidence boundaries, and selected frontier work in a form that is easier to browse than the raw repo. **The repository remains the source of truth.** If the URL has not been activated yet, enable **Settings → Pages → Source: GitHub Actions**; `.github/workflows/pages.yml` will build and deploy `docs/` automatically from `main`.
+
 ## Executable frontier campaign
 
 Three new standalone families—forecast surprise, flow absorption, and volatility
@@ -34,11 +38,15 @@ This repository is our research-and-validation stack for the **Quantiacs Q25 Cry
 
 > **Evidence boundary:** historical numbers in the Top 10 below are frozen local research / execution-translation evidence through **2026-08-20**. They are **not current official Quantiacs scores, forecasts, or promises of live performance**. Current platform cleaner/checker, multipass, liquidity/runtime and external-correlation checks remain mandatory.
 
+### Public research site
+
+The GitHub Pages surface at **https://svyable.github.io/quantiacs-q25/** is deliberately a **showcase, not a second source of truth**. It should explain what the lab is doing, why the mechanisms differ, what evidence exists, what remains PENDING, and how cost/causality/originality gates work. Measured results are recorded in repository artifacts first; Pages may summarize them only after the exact strategy/run is traceable. Deployment details live in [docs/PAGES.md](docs/PAGES.md).
+
 ### Explore
 
-[**Local Research Access**](docs/LOCAL_RESEARCH_ACCESS.md) · [**Frontier Iteration Engine**](docs/FRONTIER_ITERATION.md) · [**Strategy Generation Playbook**](docs/STRATEGY_GENERATION_PLAYBOOK.md) · [**Next-Agent Prompt**](docs/AGENT_PROMPT.md) · [**Research Frontier YAML**](configs/research_frontier.yaml) · [Quant Research Showcase](docs/index.md) · [Strategy Atlas](docs/STRATEGY_ATLAS.md) · [Research Method](docs/RESEARCH_METHOD.md) · [Testing Pyramid](docs/TESTING_PYRAMID.md) · [Historical Top-10 YAML](configs/historical_top10.yaml)
+[**🌐 Q25 Quant Lab**](https://svyable.github.io/quantiacs-q25/) · [**Local Research Access**](docs/LOCAL_RESEARCH_ACCESS.md) · [**Frontier Iteration Engine**](docs/FRONTIER_ITERATION.md) · [**Strategy Generation Playbook**](docs/STRATEGY_GENERATION_PLAYBOOK.md) · [**Next-Agent Prompt**](docs/AGENT_PROMPT.md) · [**Research Frontier YAML**](configs/research_frontier.yaml) · [Quant Research Showcase source](docs/index.md) · [Strategy Atlas](docs/STRATEGY_ATLAS.md) · [Research Method](docs/RESEARCH_METHOD.md) · [Testing Pyramid](docs/TESTING_PYRAMID.md) · [Historical Top-10 YAML](configs/historical_top10.yaml)
 
-The `docs/` landing page is GitHub-Pages-ready via [`docs/_config.yml`](docs/_config.yml).
+The `docs/` site is built with Jekyll from [`docs/_config.yml`](docs/_config.yml) and deployed by [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
 
 ---
 
@@ -246,11 +254,11 @@ API_KEY=default python path/to/strategy.py
 
 ```text
 AGENTS.md       first-read agentic research contract
-docs/           access guide, frontier engine, showcase, atlas, playbook, method, pyramid
+docs/           access guide, Pages site, frontier engine, showcase, atlas, playbook, method, pyramid
 configs/        rules, historical top-10, research frontier, external leads, gates, costs, regimes, folds
 factory/        desks, expanded mechanism catalog, tracks, render, gates, evolve, runner
 research/       executable frontier iteration, benchmark, static audit, prefix tests, preregistration
-strategies/     baselines + PENDING SOTA meta-ensemble; new work in generated/
+strategies/     baselines + frozen champion mirrors + PENDING/new work in generated/
 experiments/    append-only experiment directories / ledgers
 results/        measured outputs only; no invented metrics
 templates/      preregistration, ledger, PM report, hosted strategy notebook

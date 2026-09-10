@@ -84,6 +84,7 @@ def control_weights(data, name):
 
 
 def check_weights(weights, data):
+    """Strict raw-strategy contract: only historical is_liquid == 1 is eligible."""
     if weights.dims != ("time", "asset"):
         raise ValueError("strategy must return full time/asset path")
     if not weights.time.equals(data.time) or not weights.asset.equals(data.asset):
@@ -92,6 +93,27 @@ def check_weights(weights, data):
     result = audit_weights(weights, liq.where(np.isfinite(liq), 0))
     if not result.ok or float(weights.max()) > 0.25 + 1e-10:
         raise ValueError("inadmissible weights: " + str(result.messages))
+
+
+def check_platform_cleaned_weights(weights, data, tolerance=1e-10):
+    """Audit official cleaner output using the cleaner/checker's explicit-zero liquidity semantics."""
+    if weights.dims != ("time", "asset"):
+        raise ValueError("cleaned output must be time/asset")
+    if not weights.time.equals(data.time) or not weights.asset.equals(data.asset):
+        raise ValueError("cleaned output coordinates differ from data")
+    w = np.asarray(weights.values, float)
+    if not np.isfinite(w).all():
+        raise ValueError("platform-cleaned weights contain NaN/Inf")
+    if (w < -tolerance).any():
+        raise ValueError("platform-cleaned weights contain negative positions")
+    if (np.abs(w).sum(axis=1) > 1.0 + 1e-9).any():
+        raise ValueError("platform-cleaned gross exceeds 1")
+    if np.max(w) > 0.25 + tolerance:
+        raise ValueError("platform cleaner breached internal 25% name cap")
+    liq = np.asarray(data.sel(field="is_liquid").transpose("time", "asset").values, float)
+    explicit_non_liquid = np.isfinite(liq) & (liq == 0)
+    if ((np.abs(w) > tolerance) & explicit_non_liquid).any():
+        raise ValueError("platform-cleaned output trades explicit is_liquid == 0")
 
 
 def check_causality(fn, data, full=None, checkpoints=7):
@@ -139,8 +161,8 @@ def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
     close = data.sel(field="close").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
     liquid = data.sel(field="is_liquid").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
     missing_close = ~np.isfinite(np.asarray(close.values, float))
-    non_liquid = np.asarray(liquid.values, float) != 1
-    platform_mask = missing_close | non_liquid
+    not_strictly_liquid = np.asarray(liquid.values, float) != 1
+    platform_mask = missing_close | not_strictly_liquid
     explained = changed & platform_mask
     unexplained = changed & ~platform_mask
     raw_gross = np.abs(np.asarray(raw.values, float)).sum(axis=1)
@@ -155,7 +177,7 @@ def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
         "explained_changed_cells": int(explained.sum()),
         "unexplained_changed_cells": int(unexplained.sum()),
         "changed_on_missing_close_cells": int((changed & missing_close).sum()),
-        "changed_on_non_liquid_cells": int((changed & non_liquid).sum()),
+        "changed_on_not_strictly_liquid_cells": int((changed & not_strictly_liquid).sum()),
         "raw_mean_gross": float(np.mean(raw_gross)),
         "cleaned_mean_gross": float(np.mean(clean_gross)),
         "raw_max_gross": float(np.max(raw_gross)),
@@ -173,11 +195,11 @@ class QuantiacsEvaluator:
         check_weights(weights, self.data)
         cleaned = self.output.clean(weights, self.data, "crypto_daily_long")
         cleaned = cleaned.sel(time=weights.time, asset=weights.asset).transpose("time", "asset")
-        check_weights(cleaned, self.data)
+        check_platform_cleaned_weights(cleaned, self.data)
         impact = cleaner_impact(weights, cleaned, self.data)
         if impact["unexplained_changed_cells"]:
             raise AssertionError(
-                "cleaner parity failed outside official data-gap/liquidity translation: "
+                "cleaner parity failed outside official data-availability translation: "
                 f"{impact['unexplained_changed_cells']} unexplained cells"
             )
         result, returns = {"cleaner_impact": impact}, {}

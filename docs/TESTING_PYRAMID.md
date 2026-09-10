@@ -12,9 +12,11 @@ Code / weight shape before any economic claim.
 - [ ] Positions only where `is_liquid` (or equivalent mask)
 - [ ] Finite weights (no NaN / Inf after clean)
 - [ ] No external data / no hand-picked coin list
-- [ ] `API_KEY` present for any toolbox I/O
+- [ ] Quantiacs access initialized **before** any `qnt` import; `API_KEY=default` is sufficient for local/public research and no personal credential is required
 
 Tool: `research/static_audit.py`
+
+See `docs/LOCAL_RESEARCH_ACCESS.md` for the public/default vs authenticated boundary.
 
 ## L1 — Deterministic strategy tests
 
@@ -33,7 +35,7 @@ Tool: `research/prefix_test.py` (TODO stubs if `qnt` absent)
 
 ## L3 — Exact Quantiacs stats
 
-Record fields from a **real** `qnt` / hosted stats object only:
+Record fields from a **real** `qnt` / hosted stats object only. Local runs using `API_KEY=default` count as **observed local Quantiacs-toolbox evidence**; they do not count as participant-specific uniqueness clearance or submission evidence.
 
 | Field | Notes |
 |-------|--------|
@@ -45,9 +47,13 @@ Record fields from a **real** `qnt` / hosted stats object only:
 | `avg_turnover` / related | |
 | `avg_holding` | if available |
 | `freq` / rebalance cadence | document |
-| correlation vs templates | uniqueness filter |
+| correlation vs templates | local diagnostic unless participant-specific remote check actually ran |
 
-Unrun = leave blank / `PENDING`. Never invent.
+- [ ] Access provenance recorded as `public_default` or `authenticated`, never the credential itself
+- [ ] Executable candidates were actually measured when public/default data were reachable
+- [ ] Local metrics and account-bound/hosted metrics are labeled separately
+
+Unrun = leave blank / `PENDING`. A missing **personal** key is not a valid reason for local-toolbox PENDING; attempt the public/default path first. Never invent.
 
 ## L4 — Cost ladder
 
@@ -68,6 +74,7 @@ Full, 2016–2018, 2019–2021, 2022–2024, 2025, 2026YTD, 3Y, 1Y, 180D, 90D, Q
 - [ ] Rolling Sharpes computed per window (real runs only)
 - [ ] No single-regime concentration as sole justification
 - [ ] Note crypto regime breaks explicitly
+- [ ] Previously inspected 2025/Q25-preview windows labeled diagnostic, not fresh holdout
 
 ## L6 — Chronological selection / walk-forward
 
@@ -89,6 +96,7 @@ Folds in `configs/chronological_folds.yaml`:
 - [ ] Correlate vs simple cores (SMA trend, equal liquid, buy-and-hold liquid)
 - [ ] Residual Sharpe / incremental R² after controlling for cores
 - [ ] Reject near-clones even if raw Sharpe looks strong
+- [ ] Participant-specific remote uniqueness/correlation remains a separate hosted/account-bound check
 
 ## L8 — Multiple-testing / preregistration
 
@@ -103,6 +111,10 @@ Folds in `configs/chronological_folds.yaml`:
 - [ ] Sign-flip / shuffle / lag-break / liquidity-drop stress
 - [ ] Cleaner mutation ≈ 0 (noise-only variant should not “pass”)
 - [ ] Kill criteria executed; failures logged in `experiments/`
+
+## Infrastructure vs alpha failure
+
+If the public/default toolbox or data endpoint genuinely fails, record `BLOCKED_INFRA` with the safe access mode and frozen code identity. Do not count that as an alpha failure and do not change strategy parameters while repairing infrastructure.
 
 ## Promotion
 

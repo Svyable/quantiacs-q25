@@ -17,13 +17,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Require configured Quantiacs credential
+      - name: Configure Quantiacs access
         env:
-          API_KEY: ${{ secrets.API_KEY }}
+          QUANTIACS_PARTICIPANT_KEY: ${{ secrets.API_KEY }}
         run: |
-          if [ -z "$API_KEY" ]; then
-            echo 'Configure the repository API_KEY secret before running a market benchmark.'
-            exit 1
+          if [ -n "$QUANTIACS_PARTICIPANT_KEY" ]; then
+            echo "API_KEY=$QUANTIACS_PARTICIPANT_KEY" >> "$GITHUB_ENV"
+            echo 'Using authenticated Quantiacs access.'
+          else
+            echo 'API_KEY=default' >> "$GITHUB_ENV"
+            echo 'Using Quantiacs public/default access; no repository secret required.'
           fi
       - name: Install toolbox and test dependencies
         run: python -m pip install -r requirements.txt pytest
@@ -31,7 +34,6 @@ jobs:
         run: python -m pytest -q tests
       - name: Run development benchmark
         env:
-          API_KEY: ${{ secrets.API_KEY }}
           BENCHMARK_BUDGET: ${{ inputs.budget }}
         run: python -m research.iteration --budget "$BENCHMARK_BUDGET"
       - name: Preserve benchmark evidence

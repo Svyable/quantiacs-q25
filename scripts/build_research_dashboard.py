@@ -150,7 +150,7 @@ def main():
     if args.check:
         if not DOC.exists() or DOC.read_text() != markdown:
             raise SystemExit("docs/RESEARCH_MATRIX.md is stale; run scripts/build_research_dashboard.py")
-        if not DATA.exists() or DATA.read_text() != json_text:
+        if not DATA.exists() or json.loads(DATA.read_text()) != payload:
             raise SystemExit("docs/data/strategy_matrix.json is stale; run scripts/build_research_dashboard.py")
         print("research dashboard is current")
         return

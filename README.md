@@ -3,7 +3,7 @@
 ## Executable frontier campaign
 
 Three new standalone families—forecast surprise, flow absorption, and volatility
-curve shape—now have a 24-hypothesis slate, six preregistrations and an exact
+curve shape—have a 24-hypothesis slate, six preregistrations and an exact
 Quantiacs benchmark/iteration engine.
 
 ```bash
@@ -11,14 +11,22 @@ python -m pytest -q tests
 python -m research.iteration --budget 18
 ```
 
-The second command requires `API_KEY` in your environment or `.env`. It evaluates
-18 candidates/controls across development folds and ATR cost stresses, resumes
-completed work, and writes candidate/family stack rankings and a freeze ledger.
-**Real-data performance is PENDING: the recorded attempt had no API key.**
+**No personal Quantiacs API key is required for local research.** When `API_KEY`
+is absent or blank, the repo harness injects `API_KEY=default` before importing
+`qnt`. That behavior is supported by the current open-source Quantiacs toolbox,
+which explicitly special-cases `default` and uses it in its own tests.
+
+A real participant credential is reserved for **account-bound** operations such as
+participant-specific remote correlation/precheck, account identity and submission.
+Local/public market-data backtests and local Quantiacs stats should be measured
+without waiting for one. See [Local Research Access](docs/LOCAL_RESEARCH_ACCESS.md).
+
+The checked-in blocked benchmark attempt predates this fix. It is retained as audit
+history, not as evidence that public Quantiacs data require a personal key. Rerun
+the same frozen campaign with the corrected harness before changing its parameters.
 
 See [engine usage and evidence boundaries](docs/FRONTIER_ITERATION.md) and the
 [campaign report](experiments/frontier_20260910/pm_report.md).
-
 
 **Causal crypto alpha. Orthogonality before cosmetics. Costs before screenshots. Live-window robustness over backtest theater.**
 
@@ -28,7 +36,7 @@ This repository is our research-and-validation stack for the **Quantiacs Q25 Cry
 
 ### Explore
 
-[**Strategy Generation Playbook**](docs/STRATEGY_GENERATION_PLAYBOOK.md) · [**Next-Agent Prompt**](docs/AGENT_PROMPT.md) · [**Research Frontier YAML**](configs/research_frontier.yaml) · [Quant Research Showcase](docs/index.md) · [Strategy Atlas](docs/STRATEGY_ATLAS.md) · [Research Method](docs/RESEARCH_METHOD.md) · [Testing Pyramid](docs/TESTING_PYRAMID.md) · [Historical Top-10 YAML](configs/historical_top10.yaml)
+[**Local Research Access**](docs/LOCAL_RESEARCH_ACCESS.md) · [**Frontier Iteration Engine**](docs/FRONTIER_ITERATION.md) · [**Strategy Generation Playbook**](docs/STRATEGY_GENERATION_PLAYBOOK.md) · [**Next-Agent Prompt**](docs/AGENT_PROMPT.md) · [**Research Frontier YAML**](configs/research_frontier.yaml) · [Quant Research Showcase](docs/index.md) · [Strategy Atlas](docs/STRATEGY_ATLAS.md) · [Research Method](docs/RESEARCH_METHOD.md) · [Testing Pyramid](docs/TESTING_PYRAMID.md) · [Historical Top-10 YAML](configs/historical_top10.yaml)
 
 The `docs/` landing page is GitHub-Pages-ready via [`docs/_config.yml`](docs/_config.yml).
 
@@ -145,9 +153,9 @@ See [docs/index.md](docs/index.md) for the full public research narrative.
 
 ---
 
-## Next agent: generate frontier strategies, not aliases
+## Next agent: generate frontier strategies, then measure them
 
-The next strategy agent should start with the [Strategy Generation Playbook](docs/STRATEGY_GENERATION_PLAYBOOK.md) and [`configs/research_frontier.yaml`](configs/research_frontier.yaml), **before** opening the old seed factory.
+The next strategy agent should start with [`AGENTS.md`](AGENTS.md), [Local Research Access](docs/LOCAL_RESEARCH_ACCESS.md), the [Strategy Generation Playbook](docs/STRATEGY_GENERATION_PLAYBOOK.md) and [`configs/research_frontier.yaml`](configs/research_frontier.yaml), **before** opening the old seed factory.
 
 Default cadence:
 
@@ -157,11 +165,15 @@ map incumbents
 → score novelty/falsifiability before returns
 → preregister 6
 → implement up to 3 under strategies/generated/
+→ run them with public/default Quantiacs access
+→ produce measured fold + cost + drawdown + turnover evidence
 → run L0–L9 + falsifiers + residual tests
 → promote / reserve / kill
 ```
 
-Current preferred frontiers are **assimilation-delay dynamics, correlation-topology change, liquidity-transition hysteresis, volatility term structure, tail dependence, range-volume geometry, shock-recovery surfaces, nonlinear response, opportunity density, and execution-aware alpha density**.
+A missing personal credential is **not** permission to stop at code generation. The agent should dogfood the local evaluator with `API_KEY=default` and report actual metrics whenever the toolbox/data endpoint is reachable. Account-bound remote correlation and submission can remain `PENDING` until authenticated.
+
+Current preferred frontiers include **on-chain state (conditional on Q25 admissibility), forecast surprise/disagreement, price-volume elasticity, index ecology (conditional on admissibility), assimilation-delay dynamics, correlation-topology change, liquidity-transition hysteresis, volatility term structure, tail dependence, range-volume geometry, shock-recovery surfaces, nonlinear response, opportunity density, and execution-aware alpha density**.
 
 The novelty rule is intentionally strict: a proposed independent alpha should differ from its nearest incumbent on at least **two** of information primitive, transform, timing/state, and portfolio construction. Otherwise label it as a refinement or ablation.
 
@@ -191,28 +203,41 @@ conda install -c quantiacs-source qnt
 # or
 pip install "git+https://github.com/quantiacs/toolbox.git"
 pip install -r requirements.txt
-cp .env.example .env   # set API_KEY=
 ```
 
-A non-empty Quantiacs `API_KEY` is required for local data access. Free profile key: [Quantiacs personal page](https://quantiacs.com/personalpage/homepage).
+You do **not** need a personal Quantiacs key for the local/public research path.
+The harness automatically sets `API_KEY=default` if no key exists. If you want an
+explicit `.env`, copy `.env.example`; it already contains the public sentinel.
+
+```bash
+cp .env.example .env   # optional; API_KEY=default
+```
+
+A real participant key should stay private and is only needed for authenticated,
+account-bound platform operations.
 
 ## Run
 
 ```bash
-export API_KEY=...
-
-# simple reference baseline
+# No personal credential required.
 python scripts/run_strategy.py strategies/robust_weekly_waterfill.py
+python -m research.iteration --budget 18
 
-# new multi-mechanism PENDING synthesis
+# New multi-mechanism synthesis.
 python scripts/run_strategy.py strategies/q25_sota_meta_ensemble.py
 
-# create a preregistered experiment
+# Create a preregistered experiment.
 python scripts/new_experiment.py --track discovery --mechanism correlation_topology
 
-# old deterministic factory is primarily plumbing/control infrastructure
+# Old deterministic factory is primarily plumbing/control infrastructure.
 python scripts/bootstrap_ideas.py
 python scripts/run_factory.py --top-n 3 --mutants 2 --seed 42
+```
+
+For a standalone script that imports `qnt` before using this repo's runner:
+
+```bash
+API_KEY=default python path/to/strategy.py
 ```
 
 ---
@@ -220,10 +245,11 @@ python scripts/run_factory.py --top-n 3 --mutants 2 --seed 42
 ## Repository map
 
 ```text
-docs/           showcase, atlas, next-agent prompt, generation playbook, method, pyramid
-configs/        rules, historical top-10, research frontier, gates, costs, regimes, folds
+AGENTS.md       first-read agentic research contract
+docs/           access guide, frontier engine, showcase, atlas, playbook, method, pyramid
+configs/        rules, historical top-10, research frontier, external leads, gates, costs, regimes, folds
 factory/        desks, expanded mechanism catalog, tracks, render, gates, evolve, runner
-research/       static audit, prefix tests, preregistration
+research/       executable frontier iteration, benchmark, static audit, prefix tests, preregistration
 strategies/     baselines + PENDING SOTA meta-ensemble; new work in generated/
 experiments/    append-only experiment directories / ledgers
 results/        measured outputs only; no invented metrics
@@ -233,9 +259,10 @@ templates/      preregistration, ledger, PM report, hosted strategy notebook
 ## Evidence labels
 
 - **Historical research** — frozen evidence from a dated prior campaign.
+- **Observed local / public-default** — real Quantiacs-toolbox measurements produced locally with `API_KEY=default`; not account-bound platform clearance.
 - **Prepare / precheck** — worthy of current official verification; not approved yet.
 - **Conditional reserve** — strong result with overlap, packaging or evidence limitations.
-- **PENDING** — new implementation with no attached performance claim.
+- **PENDING** — a specific layer has genuinely not run or could not run; do not use “no personal key” as the reason for local-toolbox PENDING.
 
 ## Non-negotiables
 
@@ -247,6 +274,6 @@ templates/      preregistration, ledger, PM report, hosted strategy notebook
 - Correlation / residual-alpha checks are promotion gates, not reporting decorations.
 - Previously observed 2025 / preview periods are diagnostics, not magically fresh OOS data.
 - A strategy can be rejected even when its equity curve looks spectacular.
+- **Dogfood the evaluator:** if local/public Quantiacs data are reachable, measure the candidate instead of leaving it unrun.
 
 **The goal is not ten submissions. The goal is the smallest set of causal, distinct, cost-aware mechanisms that can survive the live window.**
-

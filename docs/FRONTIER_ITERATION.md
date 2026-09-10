@@ -30,17 +30,28 @@ The Lattice attachment motivates a finite candidate space, explicit constraints,
 and preserving eliminated candidates. It supplies no financial evidence, and
 statistical falsification here is not claimed to be sound logical deduction.
 
-## Run
+## Run — no personal API key required
 
-Install the repository requirements plus pytest in a Python environment, then set
-`API_KEY` through your environment or the gitignored `.env` file. Never put it in
-code, a command-line argument, a result artifact, or a commit.
+Install the repository requirements plus pytest and run the campaign directly:
 
 ```bash
 python -m pip install -r requirements.txt pytest
 python -m pytest -q tests
 python -m research.iteration --budget 18
 ```
+
+The repository harness configures `API_KEY=default` automatically when no key is
+present, before importing `qnt`. This matches the current open-source Quantiacs
+toolbox behavior and its own tests. A personal participant key is optional for
+local research and should be supplied only when an account-bound service needs it.
+See [`LOCAL_RESEARCH_ACCESS.md`](LOCAL_RESEARCH_ACCESS.md) for source-level evidence,
+import-order details and the authenticated boundary.
+
+The checked-in `benchmark_attempt/` blocked artifact predates this access fix. It
+records a **harness/configuration mistake**, not proof that Quantiacs public market
+data require a personal credential. Preserve it as audit history, then rerun the
+same frozen campaign with the corrected harness. Do not change strategy parameters
+at the same time merely to make the rerun look better.
 
 The default campaign has **18 evaluations**: three coarse lookbacks for each of
 three families, one matched canonical ablation and one canonical falsifier per
@@ -62,6 +73,22 @@ preserved and skipped. A new code/data/config identity creates a separate result
 set; never overwrite a failed run. Exit code 2 means blocked or incomplete, not a
 successful economic evaluation. Setup failures produce a dated blocked report
 with null metrics and no ranks. There is no synthetic-performance fallback.
+
+## Access provenance
+
+Every successful or blocked benchmark context records only:
+
+```text
+quantiacs_access_mode = public_default | authenticated
+```
+
+It never records the credential. `public_default` is sufficient for local/public
+market-data research and local statistics; it is not participant-specific remote
+correlation clearance or submission evidence.
+
+A missing personal key is **not** a reason to mark local metrics PENDING. The agent
+must attempt the default path. PENDING/BLOCKED is appropriate only when the run
+actually did not execute or the toolbox/data environment genuinely failed.
 
 ## Benchmark conventions
 
@@ -91,10 +118,32 @@ with null metrics and no ranks. There is no synthetic-performance fallback.
 Each run writes `context.json`, per-candidate metrics, daily return CSVs,
 `attempts.jsonl`, the existing `RunRecord` registry format, `rankings.json`, a
 readable `report.md`, residual diagnostics and a freeze ledger. Identity includes
-strategy and engine hashes, data fingerprint, toolbox stats source and policies.
-Code changes must be interpreted as additional research looks, even when a data
-refresh produces a new directory. Budgets count candidates, not individual cost
-rungs: an ordinary evaluation makes eight exact fold/cost calls.
+strategy and engine hashes, data fingerprint, toolbox stats source, access mode
+and policies. Code changes must be interpreted as additional research looks, even
+when a data refresh produces a new directory. Budgets count candidates, not
+individual cost rungs: an ordinary evaluation makes eight exact fold/cost calls.
+
+## What a measured report should show
+
+When local execution succeeds, do not hide behind a binary PASS/FAIL. Report the
+actual economic shape of the strategy, including where available:
+
+- Sharpe and return/CAGR-style metrics;
+- Sortino or downside-risk diagnostics;
+- volatility;
+- maximum drawdown;
+- average turnover / holding period;
+- cost-ladder Sharpe;
+- research, development and allowed validation/diagnostic windows with their
+  evidence status clearly labeled;
+- CRYPTO10/simple-control comparison;
+- prefix error, bounded-lookback mismatch, production/research mismatch and
+  non-liquid exposure checks;
+- matched correlations/residual diagnostics against incumbents when streams exist.
+
+The point is to **dogfood the evaluator**: measured metrics should drive the next
+research decision, while contamination labels prevent us from pretending an
+inspected diagnostic period is pristine holdout evidence.
 
 ## Boundaries and next iteration
 
@@ -111,8 +160,9 @@ policy gates remain unset. Neither a high development rank nor green software CI
 qualifies a contest entry. Full-IS Sharpe strictly greater than 1 must be measured
 on the official evaluation span; this engine does not claim that gate passed.
 
-Sources: the supplied Q25 rules/example; the repository frontier and external
-research leads; [official guide mechanics](https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html)
-and [official toolbox stats implementation](https://github.com/quantiacs/toolbox/blob/master/qnt/stats.py).
+Sources: the supplied Q25 rules; the repository frontier and external research
+leads; [official guide mechanics](https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html);
+[toolbox data access implementation](https://github.com/quantiacs/toolbox/blob/9e5274c5ce102a66debc799fd2a2300969fb90f6/qnt/data/common.py);
+and [official toolbox stats implementation](https://github.com/quantiacs/toolbox/blob/9e5274c5ce102a66debc799fd2a2300969fb90f6/qnt/stats.py).
 The linked guide is labeled Q24 and is used for API mechanics, not as a substitute
 for current Q25 submission verification.

@@ -1,0 +1,52 @@
+{
+  "ablation": "age-only maturity curve across all currently liquid assets, without re-entry or transition-churn information",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260910b_liquidity_hysteresis.py",
+  "contamination_notes": "2016-2022 reused research/development; 2025+ previously viewed diagnostics; live excluded",
+  "cost_hypothesis": "episode metadata changes slowly; weekly rebalance with off-cycle exits limits churn",
+  "created_utc": "2026-09-10T04:15:00+00:00",
+  "data_admissibility": "VERIFIED_OHLCV_AGAINST_SUPPLIED_Q25_RULES",
+  "experiment_id": "frontier_20260910b_liquidity_hysteresis",
+  "failure_mode": "re-entry history adds nothing beyond simple age-since-entry or trend",
+  "falsifier": "rotate episode-age/re-entry/churn metadata across sorted asset labels while preserving current membership",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      21,
+      42,
+      63
+    ]
+  },
+  "mechanism": "liquidity_hysteresis",
+  "nearest_incumbent": "V11 simple liquidity lifecycle sleeve",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 42
+  },
+  "portfolio_role": "eligibility-state satellite distinct from price-only alpha",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Mechanism selected from the repository frontier before performance inspection; current campaign does not use public performance claims.",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if falsifier or ablation matches/beats base development score; no automatic promotion",
+  "thesis": "Stable recent re-entrants near a finite eligibility maturity age outperform freshly unstable or repeatedly crossing members; non-re-entrant episodes are excluded from the primary mechanism.",
+  "timing": "historical is_liquid state through the current completed day; episode age capped at 126 days; no future membership",
+  "track": "robustness",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

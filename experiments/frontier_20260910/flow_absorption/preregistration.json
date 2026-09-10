@@ -1,0 +1,53 @@
+{
+  "ablation": "abnormal flow alone",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive score means cash",
+  "code_path": "strategies/generated/frontier_20260910_flow_absorption.py",
+  "contamination_notes": "2016-2022 reused development; 2025+ previously viewed diagnostics; live excluded",
+  "cost_hypothesis": "weekly rebalancing limits unnecessary target changes",
+  "created_utc": "2026-09-10T01:39:49+00:00",
+  "data_admissibility": "VERIFIED_OHLCV_AGAINST_SUPPLIED_Q25_RULES",
+  "experiment_id": "frontier_20260910_flow_absorption",
+  "failure_mode": "state proxy duplicates incumbent or decays before next execution",
+  "falsifier": "permute current flow across assets",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      28,
+      42,
+      56
+    ]
+  },
+  "mechanism": "flow_absorption",
+  "nearest_incumbent": "V12 directed volume diffusion",
+  "novelty_axes_changed": [
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "persistence": 5,
+    "top_k": 5,
+    "window": 42
+  },
+  "portfolio_role": "orthogonal satellite only if matched residual tests support it",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Mechanism inspired by repository frontier and supplied Q25 example; Lattice motivates finite candidate elimination only, not financial evidence",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if falsifier or ablation matches/beats base development score; no automatic promotion",
+  "template_sha256": "c0e13adafda5f45e6490a0386d6ee32d637adabc7af1b7b5e620bdc0d44140c9",
+  "thesis": "High flow with low body displacement and high close location indicates absorption",
+  "timing": "completed daily bars; forecast coefficients strictly pre-outcome",
+  "track": "robustness",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

@@ -1,5 +1,25 @@
 # quantiacs-q25 — Q25 Quantitative Research Lab
 
+## Executable frontier campaign
+
+Three new standalone families—forecast surprise, flow absorption, and volatility
+curve shape—now have a 24-hypothesis slate, six preregistrations and an exact
+Quantiacs benchmark/iteration engine.
+
+```bash
+python -m pytest -q tests
+python -m research.iteration --budget 18
+```
+
+The second command requires `API_KEY` in your environment or `.env`. It evaluates
+18 candidates/controls across development folds and ATR cost stresses, resumes
+completed work, and writes candidate/family stack rankings and a freeze ledger.
+**Real-data performance is PENDING: the recorded attempt had no API key.**
+
+See [engine usage and evidence boundaries](docs/FRONTIER_ITERATION.md) and the
+[campaign report](experiments/frontier_20260910/pm_report.md).
+
+
 **Causal crypto alpha. Orthogonality before cosmetics. Costs before screenshots. Live-window robustness over backtest theater.**
 
 This repository is our research-and-validation stack for the **Quantiacs Q25 Crypto Top-10 Long** contest. The objective is not “find one pretty Sharpe and tune it until green.” We build a small portfolio of **distinct, falsifiable mechanisms** using Quantiacs-provided data only, then try to kill them with causality, cost, drawdown, fold, correlation and multipass tests.
@@ -229,3 +249,4 @@ templates/      preregistration, ledger, PM report, hosted strategy notebook
 - A strategy can be rejected even when its equity curve looks spectacular.
 
 **The goal is not ten submissions. The goal is the smallest set of causal, distinct, cost-aware mechanisms that can survive the live window.**
+

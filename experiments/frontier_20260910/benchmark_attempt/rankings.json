@@ -1,0 +1,151 @@
+{
+  "candidates": [
+    {
+      "family": "flow_absorption",
+      "id": "flow_absorption_ablation",
+      "mode": "ablation",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "flow_absorption",
+      "id": "flow_absorption_falsifier",
+      "mode": "falsifier",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "flow_absorption",
+      "id": "flow_absorption_w28",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "flow_absorption",
+      "id": "flow_absorption_w42",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "flow_absorption",
+      "id": "flow_absorption_w56",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "forecast_surprise",
+      "id": "forecast_surprise_ablation",
+      "mode": "ablation",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "forecast_surprise",
+      "id": "forecast_surprise_falsifier",
+      "mode": "falsifier",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "forecast_surprise",
+      "id": "forecast_surprise_w28",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "forecast_surprise",
+      "id": "forecast_surprise_w42",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "forecast_surprise",
+      "id": "forecast_surprise_w56",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "vol_curve",
+      "id": "vol_curve_ablation",
+      "mode": "ablation",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "vol_curve",
+      "id": "vol_curve_falsifier",
+      "mode": "falsifier",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "vol_curve",
+      "id": "vol_curve_w14",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "vol_curve",
+      "id": "vol_curve_w21",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "vol_curve",
+      "id": "vol_curve_w28",
+      "mode": "base",
+      "rank": null,
+      "selection_score": null,
+      "status": "PENDING"
+    }
+  ],
+  "context": {
+    "reason": "API_KEY missing",
+    "status": "BLOCKED"
+  },
+  "families": [
+    {
+      "decision": "PENDING",
+      "family": "flow_absorption",
+      "family_rank": null,
+      "median_score": null,
+      "reason": "all preregistered variants and destructive controls required"
+    },
+    {
+      "decision": "PENDING",
+      "family": "forecast_surprise",
+      "family_rank": null,
+      "median_score": null,
+      "reason": "all preregistered variants and destructive controls required"
+    },
+    {
+      "decision": "PENDING",
+      "family": "vol_curve",
+      "family_rank": null,
+      "median_score": null,
+      "reason": "all preregistered variants and destructive controls required"
+    }
+  ]
+}

@@ -1,0 +1,386 @@
+[
+  {
+    "id": "forecast_surprise",
+    "area": "forecast",
+    "thesis": "Positive rolling AR residual forecast errors persist",
+    "falsifier": "replace forecasts with other assets' forecasts",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 2
+    },
+    "priority_score": 11,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "surprise_reversal",
+    "area": "forecast",
+    "thesis": "Large positive forecast errors reverse after overshoot",
+    "falsifier": "raw residual instead of model surprise",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "calibration_drift",
+    "area": "forecast",
+    "thesis": "Rising signed model bias identifies structural repricing",
+    "falsifier": "freeze model bias state",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "error_half_life",
+    "area": "forecast",
+    "thesis": "Slow decay of errors identifies incomplete assimilation",
+    "falsifier": "destroy lag order",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "model_disagreement",
+    "area": "forecast",
+    "thesis": "Disagreement between AR and mean forecasts warrants cash",
+    "falsifier": "replace disagreement with return dispersion",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 2
+    },
+    "priority_score": 10,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "error_topology",
+    "area": "forecast",
+    "thesis": "Forecast error graph fragmentation precedes repricing",
+    "falsifier": "use raw-return graph",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 7,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "flow_absorption",
+    "area": "geometry",
+    "thesis": "High flow with low body displacement and high close location indicates absorption",
+    "falsifier": "permute current flow across assets",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 2
+    },
+    "priority_score": 11,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "failed_displacement",
+    "area": "geometry",
+    "thesis": "Large range without follow-through signals exhaustion",
+    "falsifier": "remove close location",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "elasticity_acceleration",
+    "area": "geometry",
+    "thesis": "Rising displacement per unit flow indicates fragile repricing",
+    "falsifier": "remove flow pairing",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "range_compression",
+    "area": "geometry",
+    "thesis": "Volume-supported shrinking ranges precede continuation",
+    "falsifier": "range alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "downside_absorption",
+    "area": "geometry",
+    "thesis": "High-flow lower wicks damp subsequent downside",
+    "falsifier": "invert close location",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 7,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "gap_repair",
+    "area": "geometry",
+    "thesis": "Partial overnight gap repair reveals directional absorption",
+    "falsifier": "replace gaps with close returns",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 7,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "vol_curve",
+    "area": "volatility",
+    "thesis": "Concave descending vol curves with positive recovery returns identify stabilization",
+    "falsifier": "invert shape gate",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 2
+    },
+    "priority_score": 11,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "vol_of_vol",
+    "area": "volatility",
+    "thesis": "Falling variance instability precedes safer deployment",
+    "falsifier": "realized volatility level only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "semivariance_curve",
+    "area": "volatility",
+    "thesis": "Downside variance decays faster than upside variance",
+    "falsifier": "symmetric variance",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "tail_recovery",
+    "area": "volatility",
+    "thesis": "Shortening underwater duration indicates improving recovery",
+    "falsifier": "drawdown depth alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "range_return_wedge",
+    "area": "volatility",
+    "thesis": "Range variance and close variance disagreement identifies choppy markets",
+    "falsifier": "close variance alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 7,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "vol_spillover",
+    "area": "volatility",
+    "thesis": "Changes in lagged variance transmission reveal fragile leaders",
+    "falsifier": "destroy lead-lag structure",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 7,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "reentry_hysteresis",
+    "area": "membership_topology",
+    "thesis": "Repeat top10 entrants require longer stabilization than first entrants",
+    "falsifier": "erase prior membership spells",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 2
+    },
+    "priority_score": 10,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "cohort_maturity",
+    "area": "membership_topology",
+    "thesis": "Broad entrant maturity changes cross-sectional risk appetite",
+    "falsifier": "current membership alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "leadership_churn",
+    "area": "membership_topology",
+    "thesis": "Rapid turnover of return leadership warrants cash",
+    "falsifier": "current rank dispersion only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "bridge_migration",
+    "area": "membership_topology",
+    "thesis": "Changing residual graph bridges identify integration shocks",
+    "falsifier": "static low correlation",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "cluster_reconnection",
+    "area": "membership_topology",
+    "thesis": "Reconnecting isolated return clusters predicts assimilation",
+    "falsifier": "freeze graph",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 7,
+    "score_basis": "research judgment before returns"
+  },
+  {
+    "id": "rank_hysteresis",
+    "area": "membership_topology",
+    "thesis": "Persistent ranking after membership loss differs from first entry",
+    "falsifier": "erase membership history",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 0
+    },
+    "priority_score": 7,
+    "score_basis": "research judgment before returns"
+  }
+]

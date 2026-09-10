@@ -1,0 +1,23 @@
+[
+  {
+    "decision": "PENDING",
+    "family": "flow_absorption",
+    "family_rank": null,
+    "median_score": null,
+    "reason": "all preregistered variants and destructive controls required"
+  },
+  {
+    "decision": "PENDING",
+    "family": "forecast_surprise",
+    "family_rank": null,
+    "median_score": null,
+    "reason": "all preregistered variants and destructive controls required"
+  },
+  {
+    "decision": "PENDING",
+    "family": "vol_curve",
+    "family_rank": null,
+    "median_score": null,
+    "reason": "all preregistered variants and destructive controls required"
+  }
+]

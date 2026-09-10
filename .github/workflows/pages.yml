@@ -17,6 +17,7 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Pages is configured to deploy from GitHub Actions. Touch this workflow to publish after Pages is enabled.
 jobs:
   build:
     runs-on: ubuntu-latest

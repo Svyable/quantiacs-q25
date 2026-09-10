@@ -1,7 +1,13 @@
 """Subprocess/import runner for strategy .py files.
 
-API_KEY is REQUIRED — empty/blank does NOT work (toolbox sys.exit).
-Ensure API_KEY is set in the environment or project .env before running.
+Local Quantiacs research does not require a personal credential. The current
+open-source toolbox special-cases ``API_KEY=default`` and uses it throughout its
+own tests. This harness injects that value when no key is configured, *before*
+anything imports ``qnt``.
+
+A real participant API key is still required for account-bound services such as
+participant-specific remote correlation/precheck/submission flows. Never commit
+or print a real credential.
 """
 
 from __future__ import annotations
@@ -15,6 +21,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+PUBLIC_API_KEY = "default"
 
 
 @dataclass
@@ -28,7 +35,7 @@ class RunResult:
 
 
 def load_dotenv(path: Path | None = None) -> None:
-    """Load API_KEY from .env if present and not already set (no extra deps)."""
+    """Load environment values from .env if present and not already set."""
     env_file = path or (ROOT / ".env")
     if not env_file.is_file():
         return
@@ -42,19 +49,56 @@ def load_dotenv(path: Path | None = None) -> None:
             os.environ[k] = v
 
 
-def require_api_key() -> None:
-    """Fail clearly if API_KEY is missing/empty (blank does not enable free runs)."""
+def ensure_local_data_access() -> str:
+    """Ensure qnt can import for local/public research and return the access mode key.
+
+    The Quantiacs toolbox reads API_KEY at import time and exits on an empty
+    value. Its source explicitly accepts the sentinel value ``default`` without
+    account authentication. Therefore an absent/blank personal key is not a
+    research blocker: inject ``default`` before importing qnt.
+    """
     load_dotenv()
-    if not os.environ.get("API_KEY"):
+    key = os.environ.get("API_KEY", "").strip()
+    if not key:
+        key = PUBLIC_API_KEY
+        os.environ["API_KEY"] = key
+    return key
+
+
+def require_api_key() -> str:
+    """Backward-compatible alias for local research access.
+
+    Historically this function raised when no personal API key was present.
+    Keep the name so older harness code keeps working, but use public/default
+    access instead of blocking research.
+    """
+    return ensure_local_data_access()
+
+
+def has_authenticated_api_key() -> bool:
+    """True only when a non-default participant credential is configured."""
+    return ensure_local_data_access() != PUBLIC_API_KEY
+
+
+def require_authenticated_api_key() -> str:
+    """Return a participant credential or raise for account-bound operations."""
+    key = ensure_local_data_access()
+    if key == PUBLIC_API_KEY:
         raise RuntimeError(
-            "API_KEY is missing or empty. Create a free Quantiacs account, "
-            "copy your profile key from https://quantiacs.com/personalpage/homepage, "
-            "then export API_KEY=... or put it in .env (see .env.example)."
+            "This operation is account-bound and requires a real Quantiacs "
+            "participant API key. Local/public market-data research and local "
+            "stats should use API_KEY=default instead."
         )
+    return key
+
+
+def quantiacs_access_mode() -> str:
+    """Return a safe provenance label without exposing the credential."""
+    return "authenticated" if has_authenticated_api_key() else "public_default"
 
 
 def _env_for_run(extra: dict[str, str] | None = None) -> dict[str, str]:
-    load_dotenv()
+    ensure_local_data_access()
     env = dict(os.environ)
     if extra:
         env.update(extra)
@@ -67,11 +111,11 @@ def run_strategy_subprocess(
     timeout: int | None = None,
     cwd: str | Path | None = None,
 ) -> RunResult:
-    """Run ``python path/to/strategy.py`` with API_KEY from env/.env.
+    """Run ``python path/to/strategy.py`` with public/default or authenticated access.
 
     Does not invent metrics — returns raw stdout/stderr.
     """
-    require_api_key()
+    ensure_local_data_access()
     path = Path(strategy_path).resolve()
     if not path.exists():
         return RunResult(
@@ -114,7 +158,7 @@ def run_strategy_subprocess(
 
 def load_strategy_module(strategy_path: str | Path) -> Any:
     """Import a strategy .py (executes module body; ``__main__`` block is skipped)."""
-    require_api_key()
+    ensure_local_data_access()
     path = Path(strategy_path).resolve()
     spec = importlib.util.spec_from_file_location(path.stem, path)
     if spec is None or spec.loader is None:
@@ -126,7 +170,8 @@ def load_strategy_module(strategy_path: str | Path) -> Any:
 
 
 def qnt_available() -> bool:
-    """True if quantiacs toolbox appears importable."""
+    """True if the Quantiacs toolbox appears importable."""
+    ensure_local_data_access()
     try:
         import qnt.backtester  # noqa: F401
 

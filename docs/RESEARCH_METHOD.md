@@ -16,12 +16,31 @@ Never ask *“How can I increase this backtest?”* before *“What independent 
 
 Before creating a new strategy, read:
 
-1. `configs/historical_top10.yaml` — frozen incumbent roster;
-2. `configs/research_frontier.yaml` — crowded families and preferred frontier;
-3. `docs/STRATEGY_ATLAS.md` — what incumbents actually measure;
-4. `docs/STRATEGY_GENERATION_PLAYBOOK.md` — campaign design for new strategies.
+1. `docs/LOCAL_RESEARCH_ACCESS.md` — how to run measured local research without a personal key;
+2. `configs/historical_top10.yaml` — frozen incumbent roster;
+3. `configs/research_frontier.yaml` — crowded families and preferred frontier;
+4. `configs/external_research_leads.yaml` — public-research leads and admissibility labels;
+5. `docs/STRATEGY_ATLAS.md` — what incumbents actually measure;
+6. `docs/STRATEGY_GENERATION_PLAYBOOK.md` — campaign design for new strategies.
 
-A research agent that skips these files is likely to spend compute rediscovering an old family.
+A research agent that skips these files is likely to spend compute rediscovering an old family or stop unnecessarily before measuring it.
+
+## Local access model: measure first, authenticate only when needed
+
+A personal Quantiacs API key is **not required for local/public-data research**. The current open-source toolbox explicitly accepts `API_KEY=default`, and its own tests use that sentinel. This repository's runner sets it before importing `qnt` when no credential is configured.
+
+Use two distinct evidence layers:
+
+| Access mode | Credential | Appropriate work |
+|---|---|---|
+| `public_default` | `API_KEY=default` | public Quantiacs data, local toolbox backtests/stats, prefix checks, cost ladders, folds, local multipass where supported |
+| `authenticated` | real participant key / hosted session | participant-specific remote correlation/precheck, account identity, submission and other account-bound services |
+
+Do not ask for a personal credential before attempting the local/public path. Do not leave local strategy metrics `PENDING` merely because a personal key is absent.
+
+If public/default data access genuinely fails, record `BLOCKED_INFRA` with toolbox/version/access mode and preserve the exact frozen candidate. Infrastructure blocking is not alpha failure.
+
+See [LOCAL_RESEARCH_ACCESS.md](LOCAL_RESEARCH_ACCESS.md) for source-level evidence and import-order details.
 
 ## Novelty is a pre-backtest gate
 
@@ -44,6 +63,7 @@ Default discovery cadence:
 - score novelty, causality, falsifiability, parameter economy, cost plausibility and portfolio complement;
 - preregister the best **6**;
 - implement the best **3**;
+- run measured local/public Quantiacs research;
 - run the full pyramid;
 - promote zero or more based on evidence.
 
@@ -51,15 +71,32 @@ The counts are defaults, not magic. The principle is more important: **diversify
 
 Initial candidates should usually have no more than **three free parameters**. Prefer coarse stability tests over dense lookback optimization.
 
-## Three layers
+## Three evidence layers
 
 | Layer | Role | Status rule |
 |-------|------|-------------|
 | **1. Rules / docs snapshot** | Contest hard rules + promotion policy (`configs/rules_snapshot.yaml`, `promotion_gates.yaml`) | Always current; dated |
-| **2. Local toolbox research** | Single-pass screen → exact stats → prefix causality → multipass | Metrics only after real `qnt` runs |
-| **3. Hosted Quantiacs boundary** | `strategy.ipynb` clean/check/write **or** multipass on Quantiacs host | Mark **PENDING** if not run |
+| **2. Local toolbox research** | Public/default data → single-pass screen → exact stats → prefix causality → folds/costs/multipass | **Measure whenever executable**; `API_KEY=default` is sufficient for the public/local path |
+| **3. Hosted/account-bound boundary** | Hosted notebook, participant-specific correlation/precheck, submission | Mark specific unrun account-bound checks **PENDING** |
 
-Do not invent Sharpe, returns, or drawdown. Unrun evaluations = `PENDING` / empty registry fields.
+Do not invent Sharpe, returns, or drawdown. A metric is `PENDING` only when that layer genuinely did not run or could not run.
+
+## Dogfood the evaluator
+
+Once a strategy is executable, use the actual Quantiacs toolbox to characterize it. Do not stop at “code compiles” or “tests pass.” Where supported, report:
+
+- Sharpe;
+- mean return and correctly derived CAGR-style return;
+- Sortino / downside-risk diagnostics;
+- volatility and maximum drawdown;
+- turnover / holding diagnostics;
+- Sharpe across the ATR cost ladder;
+- chronological folds and explicitly labeled diagnostics;
+- simple controls / CRYPTO10 comparison;
+- prefix-causality, bounded-replay, cleaner-mutation, missed-date, long-only, gross and liquidity checks;
+- matched correlations / residual alpha against incumbent streams when available.
+
+Metrics measured with `public_default` are real **local Quantiacs-toolbox evidence**, not official participant-specific uniqueness clearance or a submission result.
 
 ## Dual research tracks
 
@@ -77,6 +114,10 @@ Few bounded signals, slower/event-driven rebalance, **cash allowed** (gross < 1 
 
 The machine-readable source is `configs/research_frontier.yaml`. Current priority areas include:
 
+- on-chain state × cross-section, conditional on current Q25 admissibility;
+- forecast surprise / model disagreement;
+- price-volume elasticity / absorption geometry;
+- benchmark/index ecology, conditional on current Q25 admissibility;
 - assimilation-delay dynamics;
 - residual correlation-topology change;
 - liquidity-transition hysteresis;
@@ -97,14 +138,15 @@ These are **research priorities, not claims of edge**.
 3. **Preregister** — write `preregistration.json` + SHA256 before holdout-sensitive testing (`scripts/new_experiment.py`, `research/preregister.py`).
 4. **Hypothesis** — name mechanism, nearest incumbent, novelty axes, falsifier and ablation.
 5. **L0–L1** — static admissibility + deterministic strategy tests (`research/static_audit.py`).
-6. **Single-pass screen** — cheap exploratory stats only; do not promote on screen alone.
-7. **L3 exact stats** — Quantiacs stats fields; cost ladder L4.
-8. **L2 prefix** — causality / look-ahead check (`research/prefix_test.py`).
-9. **L5–L6** — regimes + chronological folds; live window untouched.
-10. **L7–L9** — residual vs core, multiple-testing ledger, adversarial falsification.
-11. **Portfolio admission** — test marginal contribution, not just standalone metrics.
-12. **Promote or kill** — gates in `configs/promotion_gates.yaml`; append to formula ledger.
-13. **Hosted boundary** — only after local gates; submission checklist; mark PENDING if skipped.
+6. **Initialize local access** — use the repo runner; `API_KEY=default` if no participant key exists.
+7. **Single-pass screen** — cheap exploratory stats only; do not promote on screen alone.
+8. **L3 exact stats** — Quantiacs stats fields; cost ladder L4.
+9. **L2 prefix** — causality / look-ahead check (`research/prefix_test.py`).
+10. **L5–L6** — regimes + chronological folds; live window untouched.
+11. **L7–L9** — residual vs core, multiple-testing ledger, adversarial falsification.
+12. **Portfolio admission** — test marginal contribution, not just standalone metrics.
+13. **Promote or kill** — gates in `configs/promotion_gates.yaml`; append to formula ledger.
+14. **Hosted/account boundary** — only after local gates; submission checklist; mark account-bound checks PENDING if skipped.
 
 ## Falsification before optimization
 
@@ -129,7 +171,7 @@ Originality is tested three times:
 
 1. **Before returns** — four-axis novelty map.
 2. **During research** — matched correlations / residualization against incumbent families and simple controls.
-3. **At the platform boundary** — current external strategy-correlation check.
+3. **At the platform boundary** — current participant-specific external strategy-correlation check.
 
 A strong raw backtest with no residual value is a family refinement, not a new alpha.
 
@@ -147,8 +189,8 @@ Do not tune blend weights to make a failed correlation gate barely pass.
 
 ## Behavioral rules
 
-1. No fabricated metrics. Empty / `null` / `PENDING` until a real run.
-2. `API_KEY` required (blank exits). Never commit it.
+1. No fabricated metrics. Empty / `null` / `PENDING` only until a real run or genuine infrastructure block.
+2. **No personal API key is required for local/public research.** Initialize `API_KEY=default` before `qnt` imports when no participant key exists; real credentials are account-bound only and must never be committed or printed.
 3. Long-only, historical `is_liquid`, sponsor data only, no manual coin picking.
 4. Hard IS Sharpe **> 1.0** since 2016-01-01.
 5. Desk / firm names are inspiration only — no affiliation claimed.
@@ -157,12 +199,14 @@ Do not tune blend weights to make a failed correlation gate barely pass.
 8. Ask what would falsify the mechanism before tuning parameters.
 9. Do not use previously observed diagnostic windows as fresh validation.
 10. “No promotion” is a valid successful research outcome.
+11. **Dogfood the evaluator:** an executable strategy with reachable public data should produce measured local evidence, not credential-based excuses.
 
 ## Related docs
 
+- [LOCAL_RESEARCH_ACCESS.md](LOCAL_RESEARCH_ACCESS.md) — credential-free local/public Quantiacs research and authenticated boundary
 - [STRATEGY_GENERATION_PLAYBOOK.md](STRATEGY_GENERATION_PLAYBOOK.md) — **start here for new strategy campaigns**
 - [AGENT_PROMPT.md](AGENT_PROMPT.md) — paste-ready next-agent contract
 - [STRATEGY_ATLAS.md](STRATEGY_ATLAS.md) — incumbent mechanism map
 - [TESTING_PYRAMID.md](TESTING_PYRAMID.md) — Levels 0–9
-- [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) — hosted `strategy.ipynb` workflow
+- [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) — hosted/account-bound workflow
 - [`../configs/research_frontier.yaml`](../configs/research_frontier.yaml) — machine-readable novelty frontier

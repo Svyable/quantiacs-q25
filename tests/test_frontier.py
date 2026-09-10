@@ -194,12 +194,14 @@ def test_benchmark_adapter_exact_cost_and_cleaner_contract():
 
 def test_blocked_run_contains_no_metrics_or_ranks(tmp_path, monkeypatch):
     import research.iteration as engine
-    def missing():
-        raise RuntimeError('API_KEY is missing')
-    monkeypatch.setattr(engine, 'require_api_key', missing)
+    def unavailable():
+        raise RuntimeError('public data unavailable')
+    monkeypatch.setattr(engine, 'ensure_local_data_access', unavailable)
     path, complete = engine.run(ROOT / f'experiments/{CAMPAIGN}/manifest.json', tmp_path, 1)
     assert not complete
-    assert json.loads((path / 'status.json').read_text())['metrics'] is None
+    status = json.loads((path / 'status.json').read_text())
+    assert status['metrics'] is None
+    assert status['quantiacs_access_mode'] == 'unknown'
     ranks = json.loads((path / 'rankings.json').read_text())
     assert all(c['rank'] is None for c in ranks['candidates'])
 
@@ -218,7 +220,8 @@ def test_iteration_budget_resume_and_preserved_failures(tmp_path, monkeypatch):
     monkeypatch.setitem(sys.modules, 'qnt', fake_qnt)
     monkeypatch.setitem(sys.modules, 'qnt.data', fake_data)
     monkeypatch.setitem(sys.modules, 'qnt.stats', fake_stats)
-    monkeypatch.setattr(engine, 'require_api_key', lambda: None)
+    monkeypatch.setattr(engine, 'ensure_local_data_access', lambda: 'default')
+    monkeypatch.setattr(engine, 'quantiacs_access_mode', lambda: 'public_default')
     monkeypatch.setattr(engine, 'check_causality', lambda *a: {'status': 'TEST_DOUBLE'})
     calls = []
     class Evaluator:

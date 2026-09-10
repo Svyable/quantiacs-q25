@@ -1,0 +1,24 @@
+{
+  "salvaged_from_branch": "sota-top10-pages-20260907",
+  "salvaged_from_commit": "c7deebf0ef3e7179463022417301e7279913ac1b",
+  "salvaged_on": "2026-09-10",
+  "evidence_boundary": "historical mirror only; rerun exact file before attaching current metrics",
+  "mirrors": [
+    {
+      "candidate_id": "C165",
+      "path": "strategies/champions/03_c165_mobility_rotation.py",
+      "blob_sha": "a3fa4eb78e80358dc2a96179bcb15ee73567a28e",
+      "legacy_validated_artifact_sha256": "8ff56cee8081845d120997d46c03975fa458464c091374f9bcacebac4bd6796e",
+      "legacy_source_provenance": "q25_roster_ready_v2/q25_c165_candidate.py",
+      "legacy_source_sha256": "9ddac6694546ab48441ab20926b72030772b84932a0a2260296ab6aa8c127de1"
+    },
+    {
+      "candidate_id": "V12",
+      "path": "strategies/champions/04_v12_volume_diffusion.py",
+      "blob_sha": "c800665b4203c42313e6f2be66134fabc06b6de5",
+      "legacy_validated_artifact_sha256": "2eb8e6a32e60b090b7f29f535c46dbb7bc4aefb51b33596dae71f922e4f4317a",
+      "legacy_source_provenance": "entry_review_restore/q25_v12_signed_volume_diffusion_bundle/q25_v12_signed_volume_diffusion_submission.py",
+      "legacy_source_sha256": "6333ed5800d8933185d4045d627bf92ac3b10ca5ccc459e8cd3cc5219f2ed304"
+    }
+  ]
+}

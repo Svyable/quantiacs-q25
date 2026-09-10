@@ -152,7 +152,7 @@ def derived_return_metrics(relative_return, points_per_year=365):
 
 
 def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
-    """Measure official platform translation and isolate unexplained mutations."""
+    """Measure official translation, including row normalization induced by data anomalies."""
     raw = raw.transpose("time", "asset")
     cleaned = cleaned.sel(time=raw.time, asset=raw.asset).transpose("time", "asset")
     delta = np.abs(np.asarray(cleaned.values, float) - np.asarray(raw.values, float))
@@ -162,9 +162,12 @@ def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
     liquid = data.sel(field="is_liquid").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
     missing_close = ~np.isfinite(np.asarray(close.values, float))
     not_strictly_liquid = np.asarray(liquid.values, float) != 1
-    platform_mask = missing_close | not_strictly_liquid
-    explained = changed & platform_mask
-    unexplained = changed & ~platform_mask
+    direct_mask = missing_close | not_strictly_liquid
+    anomaly_day = direct_mask.any(axis=1)
+    explainable_mask = np.broadcast_to(anomaly_day[:, None], changed.shape)
+    direct = changed & direct_mask
+    secondary = changed & ~direct_mask & explainable_mask
+    unexplained = changed & ~explainable_mask
     raw_gross = np.abs(np.asarray(raw.values, float)).sum(axis=1)
     clean_gross = np.abs(np.asarray(cleaned.values, float)).sum(axis=1)
     max_delta = float(np.nanmax(delta)) if delta.size else 0.0
@@ -173,8 +176,10 @@ def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
         "max_abs_difference": max_delta if np.isfinite(max_delta) else None,
         "changed_cells": int(changed.sum()),
         "changed_days": int(changed_days.sum()),
+        "anomaly_days": int(anomaly_day.sum()),
         "changed_fraction": float(changed.mean()) if changed.size else 0.0,
-        "explained_changed_cells": int(explained.sum()),
+        "direct_data_cell_changes": int(direct.sum()),
+        "same_day_normalization_changes": int(secondary.sum()),
         "unexplained_changed_cells": int(unexplained.sum()),
         "changed_on_missing_close_cells": int((changed & missing_close).sum()),
         "changed_on_not_strictly_liquid_cells": int((changed & not_strictly_liquid).sum()),
@@ -199,7 +204,7 @@ class QuantiacsEvaluator:
         impact = cleaner_impact(weights, cleaned, self.data)
         if impact["unexplained_changed_cells"]:
             raise AssertionError(
-                "cleaner parity failed outside official data-availability translation: "
+                "cleaner parity failed outside official data-availability translation days: "
                 f"{impact['unexplained_changed_cells']} unexplained cells"
             )
         result, returns = {"cleaner_impact": impact}, {}

@@ -1,298 +1,177 @@
 # AGENTS.md — Q25 Research Agent Entry Point
 
-This file is the **first read for any coding/research agent** working in this repository.
+This is the first read for any coding/research agent in this repository.
 
-Your mission is not to produce more strategy files. Your mission is to discover, falsify and document **causal, distinct, Q25-admissible mechanisms** that add portfolio value beyond the incumbent research stack — and to **measure them with the Quantiacs toolbox** rather than stopping at code generation.
+The job is **not to produce more strategy files**. The job is to increase independent information about the Q25 portfolio: discover a causal mechanism, preregister it, implement it, dogfood the exact evaluator, try to destroy the thesis, and leave a traceable evidence packet.
 
-## Mandatory reading order
-
-Before proposing code or running a backtest, read:
+## Read before touching strategy code
 
 1. `configs/rules_snapshot.yaml`
 2. `docs/LOCAL_RESEARCH_ACCESS.md`
-3. `docs/AGENT_PROMPT.md`
-4. `configs/historical_top10.yaml`
-5. `configs/research_frontier.yaml`
-6. `configs/external_research_leads.yaml`
-7. `docs/EXTERNAL_RESEARCH_LEADS.md`
-8. `docs/STRATEGY_ATLAS.md`
-9. `docs/STRATEGY_GENERATION_PLAYBOOK.md`
-10. `docs/RESEARCH_METHOD.md`
-11. `docs/TESTING_PYRAMID.md`
-12. `configs/promotion_gates.yaml`
-13. `configs/chronological_folds.yaml`
-14. `configs/cost_ladder.yaml`
+3. `docs/EVIDENCE_MODEL.md`
+4. `docs/RESEARCH_MATRIX.md`
+5. `docs/AGENT_PROMPT.md`
+6. `configs/historical_top10.yaml`
+7. `configs/research_frontier.yaml`
+8. `configs/external_research_leads.yaml`
+9. `docs/EXTERNAL_RESEARCH_LEADS.md`
+10. `docs/STRATEGY_ATLAS.md`
+11. `docs/STRATEGY_GENERATION_PLAYBOOK.md`
+12. `docs/RESEARCH_METHOD.md`
+13. `docs/TESTING_PYRAMID.md`
+14. `configs/promotion_gates.yaml`
+15. `configs/chronological_folds.yaml`
+16. `configs/cost_ladder.yaml`
 
-Also inspect `strategies/q25_sota_meta_ensemble.py` before calling any residual-momentum / volume-response / co-crash / residual-skew / path-efficiency idea new.
+Also inspect the executable incumbents and controls before claiming novelty. A new filename is not a new mechanism.
 
-## Local research access — do not block on credentials
+## The three-axis evidence model
 
-**A personal Quantiacs API key is not required for local/public-data research.**
+Never collapse these into one status:
 
-The current open-source toolbox explicitly accepts `API_KEY=default`, and its own tests use that sentinel. This repo's runner calls `ensure_local_data_access()` before any `qnt` import and automatically sets `API_KEY=default` when no credential is configured.
+- **Strategy quality** — economics of a valid observed return stream: robust Sharpe, CAGR/return, Sortino, Calmar, drawdown, turnover, cost sensitivity, residual contribution.
+- **Evidence quality** — development vs validation vs diagnostic vs authenticated preclear, provenance hashes, completeness, comparable harness.
+- **Implementation health** — source audit, causality, liquid-only, long-only, cleaner parity, bounded replay, runtime.
+
+A software/integrity failure is **not** a zero Sharpe and does not automatically falsify every other preregistered cell in the family. A great development Sharpe is also **not validation**.
+
+`docs/EVIDENCE_MODEL.md` is normative.
+
+## Local Quantiacs access — do not block on credentials
+
+A personal Quantiacs API key is not required for local/public-data research. The repo configures **`API_KEY=default` before importing `qnt`** when no participant credential is present.
 
 Therefore:
 
-- do **not** ask the user for an API key before attempting local research;
-- do **not** mark local performance `PENDING` merely because a personal key is absent;
-- do **not** add a credential gate to local backtests or research workflows;
-- **do** run the strategy and extract real local Quantiacs metrics when the toolbox/data endpoint is reachable;
-- reserve a real participant key for account-bound remote correlation/precheck, participant identity and submission flows.
+- do not ask the user for credentials before local research;
+- do not mark performance `PENDING` just because a personal key is absent;
+- run exact Quantiacs local stats when the public/default endpoint is reachable;
+- reserve authenticated credentials for participant-specific correlation/precheck, identity and submission;
+- if public infrastructure fails, record `BLOCKED_INFRA`, preserve the frozen candidate, and do not retune while fixing infrastructure.
 
-The import order matters: configure `API_KEY=default` **before** importing `qnt`. Use the repo runner instead of duplicating this logic.
+See `docs/LOCAL_RESEARCH_ACCESS.md`.
 
-If public/default access genuinely fails, classify that as `BLOCKED_INFRA`, record the toolbox/version/access mode, and leave the frozen candidate unchanged. Do not call it an alpha failure and do not retune while fixing infrastructure.
+## Dogfood contract
 
-## Dogfood rule — measured research is the default
+A strategy change is incomplete until the same repository machinery used to criticize incumbents has criticized it.
 
-Once a candidate is executable, use the evaluator aggressively. A useful agent should return a measured table like the historical rounds, not just “tests passed.” At minimum, where the data and stats object support them, report:
+Default loop:
 
-- Sharpe;
-- mean return / correctly derived CAGR-style return;
-- Sortino or downside-risk diagnostics;
-- volatility;
-- maximum drawdown;
-- average turnover / holding diagnostics;
-- Sharpe across the configured ATR cost ladder;
-- chronological research/development/validation diagnostics with contamination labels;
-- CRYPTO10 or simple-control comparison;
-- prefix-causality error / bounded-replay mismatch;
-- cleaner mutation, missed-date, long-only, gross and non-liquid exposure checks;
-- matched correlations and residual alpha against incumbent streams when available.
+```text
+map nearest incumbent
+→ generate broad hypothesis slate
+→ score novelty/falsifiability before returns
+→ preregister
+→ causal implementation
+→ static/unit/prefix/replay checks
+→ API_KEY=default exact Quantiacs run
+→ candidate packet
+→ ablation + destructive falsifier
+→ residual/control diagnostics
+→ evidence-aware matrix
+→ kill / repair / forward-test
+```
 
-Metrics obtained using `API_KEY=default` are **observed local Quantiacs-toolbox evidence**. They are not official participant-specific correlation clearance or a submission result. Keep those layers separate.
+Each attempted cell must emit or preserve:
 
-## Current external-intelligence update
+- campaign / candidate / family / mode / exact params;
+- preregistration, source, data and toolbox hashes;
+- evidence stage and Quantiacs access mode;
+- failure status **and failure stage** if invalid;
+- Sharpe across research/dev × configured cost ladder;
+- worst-fold/cost Sharpe;
+- CAGR, Sortino, Calmar and hit-rate where return streams support them;
+- max drawdown and turnover;
+- causality / prefix / bounded replay status;
+- cleaner parity;
+- destructive-control relationship;
+- available residual/correlation diagnostics.
 
-The public Q24/Q25 sweep surfaced four especially useful research directions:
+Missing evidence stays missing. Never copy a metric from a related implementation.
 
-1. **On-chain state × cross-section** — official Q24 docs demonstrate Quantiacs blockchain loaders. Q25 use is **not yet assumed admissible**; verify current rules, loader behavior and timestamps first.
-2. **Online forecast surprise / model disagreement** — inspired by public stateful Quantiacs code and official rolling-ML examples, but implement as tiny causal models with explicit non-ML ablations.
-3. **Price-volume elasticity / absorption geometry** — OHLCV-only, but must remain distinct from V12 directed volume diffusion.
-4. **CRYPTO10 benchmark-composition ecology** — potentially new market-cap state if historical benchmark weights are currently available and Q25-permitted; otherwise fall back to `is_liquid`-only lifecycle research.
+After changing canonical evidence, run:
 
-A simple **persistent low-volatility selector** is also worth reproducing as an external control, not as a novelty claim.
+```bash
+python scripts/build_research_dashboard.py
+python scripts/build_research_dashboard.py --check
+python -m pytest -q tests
+```
 
-Read `docs/EXTERNAL_RESEARCH_LEADS.md` for source URLs, caveats, candidate formulations, falsifiers and contamination notes.
+The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are public views, not hand-edited scoreboards.
 
-## Internet evidence discipline
+## Current read-through
 
-Never treat public material as trusted strategy evidence.
+The latest observed Frontier-B packet is **development only**. Its strongest valid base cell is `topology_migration_w84`; topology is therefore a priority seam for forward research, not a production winner. One topology grid cell failed implementation/integrity and must be repaired without parameter expansion.
 
-- Official docs: useful for rules/API capabilities.
-- Official examples: useful for mechanics, not alpha proof.
-- Third-party code: idea source only until audited/reproduced.
-- Leaderboard title: breadcrumb only; never reverse-engineer a formula from the name.
-- Public Sharpe/CAGR/DD: untrusted until independently reproduced under this repo's conventions.
-- Current Q25 preview/OOS: diagnostic and contaminated, often based on very few post-submission days.
+The liquidity-hysteresis base family is weak as standalone alpha in the captured development packet. Preserve lifecycle/hysteresis as a possible conditioning variable; do not keep tuning the same standalone hypothesis.
 
-Record the external source URL in preregistration whenever it materially inspired the hypothesis.
+Shock-recovery base economics remain unresolved because invalid implementation cells did not earn a valid return stream.
 
-## Data-admissibility rule
+The historical V10/V11/C165/V12/defensive roster remains a **separate frozen evidence lane** until those exact implementations are brought through the current harness.
 
-`Quantiacs-provided` is necessary but **do not assume it is sufficient for Q25** merely because a loader exists or was allowed in Q24.
+## Family adjudication
 
-For any nonstandard data source such as blockchain or benchmark weights, verify before implementation/promotion:
+Independent preregistered cells should continue running even when a sibling cell fails.
 
-- current Q25 rules;
-- current loader availability;
-- decision-time publication semantics;
-- revisions/backfills;
-- historical replay/multipass behavior;
-- runtime.
+Use:
 
-Until verified, mark the primitive `UNVERIFIED_FOR_Q25` and keep it out of a submission candidate.
+- `CONTINUE / NEEDS_FORWARD_EVIDENCE` when valid development evidence survives controls;
+- `CONTINUE / REPAIR_INVALID_CELLS_THEN_FORWARD` when promising valid cells coexist with implementation/integrity failures;
+- `FREEZE / KILL_WEAK_ALPHA` when every valid base cell is below the predefined development floor;
+- `FREEZE / FALSIFIED_DEVELOPMENT` when a valid destructive control or ablation matches/beats its valid parent;
+- `PENDING / INSUFFICIENT_VALID_EVIDENCE` when no valid base cell exists.
+
+Do not family-rank a campaign with unattempted preregistered cells.
 
 ## Novelty gate before returns
 
-For every proposed independent alpha, compare it to the nearest incumbent across:
+For an independent alpha, compare with the nearest incumbent on:
 
 1. information primitive;
 2. transform;
 3. timing/state condition;
 4. portfolio construction.
 
-Require at least **two changed axes** before calling it a new alpha family.
+Require at least **two changed axes** before calling it a new alpha family. A new lookback, threshold, top-K, cap, classifier, smoothing constant or blend weight is usually a refinement.
 
-A new lookback, threshold, smoothing constant, rebalance day, top-K, risk cap, classifier type or blend weight is not sufficient.
+The default campaign remains **24 hypotheses → 6 preregistrations → at most 3 implementations**.
 
-## Default campaign
+## Frontier pressure
 
-Run broad-before-deep:
+Do not let a successful family create a monoculture. Current useful seams include correlation-topology change, topology rank stability, fragmentation/recovery, volatility term structure, forecast surprise/disagreement, price-volume elasticity, assimilation-delay dynamics, tail dependence, range-volume geometry, opportunity density, and execution-aware alpha density.
 
-```text
-24 hypothesis sketches
-→ novelty/falsifiability scoring before returns
-→ 6 preregistrations
-→ up to 3 implementations
-→ run local/public Quantiacs measurements with API_KEY=default
-→ L0-L9 + falsifiers + costs + folds + residual/correlation
-→ promote / reserve / kill
-```
+On-chain state and index ecology remain `UNVERIFIED_FOR_Q25` until current admissibility, timestamps, replay and runtime are established. `configs/external_research_leads.yaml` and `docs/EXTERNAL_RESEARCH_LEADS.md` contain provenance and caveats.
 
-For the next campaign, the external-intelligence allocation is:
+For any **forecast surprise** or ML idea, start with a tiny causal model and a non-ML ablation. For **price-volume elasticity**, destroy the price/volume pairing as a mechanism falsifier rather than merely shifting a lookback.
 
-- 7 on-chain-state hypotheses;
-- 7 forecast-surprise/disagreement hypotheses;
-- 5 price-volume-elasticity hypotheses;
-- 5 benchmark/index-ecology hypotheses.
+## Falsification beats tuning
 
-If on-chain/index data fail Q25 admissibility, reallocate those slots to OHLCV-only surprise, topology, vol-term, liquidity-hysteresis and range-volume research. Do not force uncertain data into the contest path.
+Use destructive controls that attack the proposed causal story:
 
-## Candidate contract
+- remove the defining transform;
+- permute identities/dates while preserving marginal distributions;
+- replace the state with a matched generic market state;
+- freeze online coefficients;
+- add execution delay;
+- invert the gate;
+- replace exact ecology/lifecycle information with simple `is_liquid`.
 
-Before deeper testing, write down:
+If the destructive control preserves the edge, the story is wrong or incomplete.
 
-```text
-ID:
-Track: discovery | robustness
-Source/inspiration URL(s):
-Mechanism family:
-One-sentence thesis:
-Raw information primitive:
-Q25 data admissibility: VERIFIED | UNVERIFIED
-Transform into score:
-Decision-time availability:
-Timing/state condition:
-Selection rule:
-Allocation rule:
-Cash rule:
-Rebalance rule:
-Initial free parameters: <= 3
-Nearest incumbent:
-Novelty axes changed:
-Why this is not an incumbent variant:
-Primary falsifier:
-Ablation:
-Expected failure mode:
-Cost hypothesis:
-Portfolio role if it works:
-Contamination notes:
-```
-
-If the source inspired the idea but the mechanism cannot be stated independently, do not backtest it yet.
-
-## Strong next hypotheses
-
-These are examples to seed ideation, not instructions to blindly implement all of them.
-
-### On-chain / network state
-
-- network stress × age since `is_liquid` entry;
-- on-chain / price disagreement;
-- network state × self price-volume elasticity;
-- network acceleration × residual forecast surprise;
-- on-chain state-transition events;
-- state persistence / duration;
-- 2–3 metric agreement only after single-metric mechanisms survive.
-
-### Forecast surprise / disagreement
-
-- residual surprise continuation;
-- residual surprise reversal — separate preregistration, not post-hoc direction choice;
-- model calibration drift as regime state;
-- surprise half-life;
-- two-model disagreement as cash gate;
-- disagreement × liquidity age;
-- topology of forecast errors rather than topology of raw returns.
-
-### Price-volume elasticity
-
-- abnormal volume consumed per unit directional displacement;
-- range displacement per abnormal dollar volume;
-- close-location × flow absorption;
-- failed displacement after high flow;
-- elasticity acceleration/compression relative to own history.
-
-### Index ecology — conditional on data permission
-
-- benchmark concentration / effective number of names;
-- member weight acceleration;
-- market-cap rank migration;
-- entrant/re-entry trajectory;
-- leadership turnover;
-- concentration shock × liquidity age.
-
-## Required falsification style
-
-Mechanism-specific destructive controls should be stronger than generic parameter sensitivity.
-
-Examples:
-
-- shuffle external state dates at matched frequency;
-- replace on-chain state with matched market-vol state;
-- replace forecast surprise with raw residual return;
-- freeze online model coefficients;
-- permute model identities for disagreement tests;
-- destroy price-volume pairing while preserving marginal ranks;
-- replace exact benchmark-weight dynamics with binary `is_liquid` only;
-- add extra execution delay;
-- invert the state gate.
-
-If the destructive control preserves the edge, the mechanism story is wrong or incomplete.
-
-## ML rule
-
-Do not use ML as a substitute for a hypothesis.
-
-Good:
-
-> classify continuation vs reversal of a predeclared residual-surprise state using three causal inputs.
-
-Bad:
-
-> feed a large indicator zoo into XGBoost and optimize Sharpe.
-
-Start with ridge/OLS/EWMA/simple classifiers. Always compare to the same mechanism without ML.
-
-## Low-turnover preference
-
-The public Q24 leaderboard reports the winner with very low average turnover. This does **not** reveal the winner's signal, but it reinforces a portfolio principle:
-
-> when evidence is comparable, prefer the mechanism that earns information with less unnecessary position movement.
-
-Naturally persistent/event-driven alpha is preferable to post-hoc smoothing of a churning signal.
-
-## Public controls worth reproducing
-
-Reimplement independently, do not copy metrics:
-
-- persistent low-volatility selection;
-- equal-liquid;
-- inverse-vol trend;
-- generic cross-sectional momentum;
-- simple classifier/non-ML baseline for any ML experiment.
-
-Controls are there to embarrass complicated ideas.
+Do not rescue a failed family by widening the parameter grid after seeing returns.
 
 ## Hard prohibitions
 
-- no fabricated metrics;
-- no future leakage;
-- no centered windows / negative shifts / future-known membership;
+- no fabricated or transplanted metrics;
+- no future leakage, centered windows or negative shifts;
 - no manual symbols;
-- no external non-Quantiacs strategy data in a contest strategy;
-- no full-history Sharpe hyperparameter search as evidence;
-- no rescuing a failed correlation gate by blend-weight tuning;
-- no promotion from a single narrow parameter optimum;
-- no claiming public leaderboard titles reveal implementation;
-- no importing public performance claims into our registry;
-- no touching the 2026-10-01 → 2027-01-31 live window for fitting/selection;
-- **no stopping local research to request a personal API key before trying `API_KEY=default`.**
+- no external non-Quantiacs strategy data in contest code;
+- no full-history Sharpe hyperparameter optimizer as evidence;
+- no one-point optimum promotion;
+- no blend-weight rescue after a failed correlation gate;
+- no fitting on the 2026-10-01 → 2027-01-31 live window;
+- no treating leaderboard titles as implementation disclosure;
+- no treating a software exception as economic falsification;
+- no stopping local research to request a personal key before trying `API_KEY=default`.
 
-## Definition of a successful agent run
-
-A successful run may promote **zero** strategies.
-
-Success means the repo ends with more information:
-
-- a broad idea slate;
-- source-aware preregistrations;
-- causal implementations;
-- **measured local Quantiacs metrics when the public/default data path is reachable**;
-- explicit failed falsifiers / kills;
-- independent control comparisons;
-- residual/correlation evidence;
-- a clear statement of what frontier shrank or expanded.
-
-The goal is not strategy count. The goal is **independent information per research look**.
+A successful agent run may promote **zero** strategies. Success is a cleaner frontier, stronger controls, repaired measurement, and more information per research look.

@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "available_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "requested_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "status": "COMPLETE"
+  },
+  "rank_transition_ablation": {
+    "correlations": {
+      "equal_liquid": 0.7363751476859915,
+      "inverse_vol_trend": 0.7650495339891662,
+      "persistent_low_vol": 0.7117792411062137
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.2415225028612857,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "rank_transition_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.7363751476859915,
+      "inverse_vol_trend": 0.7650495339891662,
+      "persistent_low_vol": 0.7117792411062137
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.236877039505062,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "rank_transition_w42": {
+    "correlations": {
+      "equal_liquid": 0.7379955846978505,
+      "inverse_vol_trend": 0.7707439636256529,
+      "persistent_low_vol": 0.7140981290804203
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.273344058995479,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "rank_transition_w63": {
+    "correlations": {
+      "equal_liquid": 0.7363751476859915,
+      "inverse_vol_trend": 0.7650495339891662,
+      "persistent_low_vol": 0.7117792411062137
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.2376367527110448,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "rank_transition_w84": {
+    "correlations": {
+      "equal_liquid": 0.731063067443326,
+      "inverse_vol_trend": 0.7656975109811069,
+      "persistent_low_vol": 0.7071656870107066
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.760001403175915,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "variance_ratio_reversal_ablation": {
+    "correlations": {
+      "equal_liquid": 0.7194553829978827,
+      "inverse_vol_trend": 0.7907526759738934,
+      "persistent_low_vol": 0.727438493785525
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.18464308673636717,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "variance_ratio_reversal_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.46611875169176975,
+      "inverse_vol_trend": 0.540848805481715,
+      "persistent_low_vol": 0.4775687409125778
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.3476760465339304,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "variance_ratio_reversal_w42": {
+    "correlations": {
+      "equal_liquid": 0.6797647750880939,
+      "inverse_vol_trend": 0.7411443553144826,
+      "persistent_low_vol": 0.6765528691487298
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.7887280761337372,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "variance_ratio_reversal_w63": {
+    "correlations": {
+      "equal_liquid": 0.6742334547885883,
+      "inverse_vol_trend": 0.7335145041935482,
+      "persistent_low_vol": 0.6782834546896428
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.393841054302171,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "variance_ratio_reversal_w84": {
+    "correlations": {
+      "equal_liquid": 0.6772636062689245,
+      "inverse_vol_trend": 0.7432072939647504,
+      "persistent_low_vol": 0.680609126358248
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.222887346009122,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  }
+}

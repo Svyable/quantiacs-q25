@@ -138,7 +138,27 @@ def build_markdown(payload):
 def render():
     historical, frontier = load()
     payload = build_payload(historical, frontier)
-    return payload, build_markdown(payload)
+    # Keep separately measured campaigns in their own evidence contexts. A
+    # comparable date range alone does not establish identical implementations.
+    payload["additional_campaigns"] = {}
+    markdown = build_markdown(payload)
+    for path in sorted((ROOT / "evidence").glob("*/matrix.json")):
+        campaign = path.parent.name
+        packet = json.loads(path.read_text())
+        payload["additional_campaigns"][campaign] = packet
+        payload["generated_from"][campaign] = str(path.relative_to(ROOT))
+        lines = ["", f"## {campaign}: separate development campaign", "",
+                 "Exact local measurements; no automatic promotion or cross-campaign ranking.", "",
+                 "| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |",
+                 "|---|---|---:|---:|---|"]
+        for row in packet["candidates"]:
+            lines.append(f"| `{row['id']}` | {row['mode']} | {f3(row.get('selection_score'))} | {pct(row.get('worst_drawdown_12'))} | {row['status']} |")
+        lines += ["", "| Family | Decision | Reason |", "|---|---|---|"]
+        for row in packet["families"]:
+            lines.append(f"| {row['family']} | {row['decision_code']} | {row['reason']} |")
+        lines += ["", f"[Evidence packet](../evidence/{campaign}/report.md) · [Research report](../experiments/{campaign}/pm_report.md)", ""]
+        markdown += "\n".join(lines)
+    return payload, markdown
 
 
 def main():

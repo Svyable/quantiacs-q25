@@ -25,6 +25,12 @@ novelty_rule: >-
   weight, rebalance day, or risk scaler is not sufficient evidence of novelty.
 
 occupied_or_crowded:
+  - family: "variance_ratio_conditioned_reversal"
+    incumbents: [frontier_20260910d_variance_ratio_reversal]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: three base windows miss the floor; removing or inverting the serial-dependence condition beats the central base. No parameter-grid rescue. See evidence/frontier_20260910d."
+  - family: "ordinal_rank_transition_reliability"
+    incumbents: [frontier_20260910d_rank_transition]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: reliability weighting is largely erased by fixed-slot allocation; central base, ablation and falsifier have identical dev returns. Check target-level identifiability before claiming a new interaction."
   - family: "multi_factor_trend_quality_risk"
     incumbents: [V10, aqr_factor_balance, V5_latency, Trend_hit126]
     note: "Crowded. New work must show residual value beyond the V10/factor/trend lineage."

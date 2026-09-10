@@ -94,3 +94,26 @@ def test_campaign_contract():
     manifest = load_manifest(DIRECTORY / 'manifest.json')
     assert len(manifest['candidates']) == 10
     assert manifest['automatic_promotion'] is False
+
+
+def test_captured_evidence_matches_frozen_sources_and_preserves_failures():
+    from research.preregister import sha256_file
+    directory = ROOT / 'evidence/frontier_20260910d'
+    context = json.loads((directory / 'context.json').read_text())
+    assert context['manifest_sha256'] == sha256_file(DIRECTORY / 'manifest.json')
+    manifest = load_manifest(DIRECTORY / 'manifest.json')
+    for row in manifest['candidates']:
+        assert context['source_hashes'][row['path']] == sha256_file(ROOT / row['path'])
+        packet = json.loads((directory / 'candidate_packets' / (row['id'] + '.json')).read_text())
+        assert packet['params'] == row['params']
+        assert packet['preregistration_sha256'] == row['preregistration_sha256']
+        assert packet['data_sha256'] == context['data_sha256']
+        assert packet['evidence_stage'] == 'DEVELOPMENT_OBSERVED'
+    matrix = json.loads((directory / 'matrix.json').read_text())
+    assert len(matrix['candidates']) == 13
+    assert all(r['decision_code'] == 'FALSIFIED_DEVELOPMENT' for r in matrix['families'])
+    diagnostics = json.loads((directory / 'mechanism_diagnostics.json').read_text())
+    assert diagnostics['analysis_plan_sha256'] == sha256_file(DIRECTORY / 'analysis_plan.json')
+    rank_pairs = [p for p in diagnostics['pairs'] if p['parent'] == 'rank_transition_w63']
+    assert len(rank_pairs) == 2
+    assert all(p['return_uncertainty']['annualized_mean_difference'] == 0 for p in rank_pairs)

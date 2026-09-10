@@ -1,6 +1,8 @@
 """Finite preregistered iteration, exact benchmarks, resume and stack ranking.
 
 No auto-promotion and no continuous scheduling. Each invocation has a budget.
+Local Quantiacs market-data research uses the toolbox's public/default access
+sentinel when no participant credential is configured.
 """
 from __future__ import annotations
 import argparse
@@ -12,7 +14,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from factory.registry import Registry, RunRecord
-from factory.runner import require_api_key
+from factory.runner import ensure_local_data_access, quantiacs_access_mode
 from research.preregister import sha256_file
 from research.campaign import CAMPAIGN
 from research.benchmark import (ROOT, QuantiacsEvaluator, check_causality, control_weights,
@@ -108,7 +110,9 @@ def report(directory, manifest, records, context):
              "| Rank | Candidate | Mode | Worst fold/cost Sharpe | Status |", "|---:|---|---|---:|---|"]
     for r in rankings:
         lines.append(f"| {r['rank'] or '—'} | {r['id']} | {r['mode']} | {r['selection_score'] if r['selection_score'] is not None else 'PENDING'} | {r['status']} |")
-    lines += ["", "Family ranking uses median development robustness score across the entire declared grid.",
+    lines += ["", f"Quantiacs local access mode: {context.get('quantiacs_access_mode', 'unknown')}.",
+              "Public/default access is sufficient for local market-data research; it is not account-bound uniqueness clearance.", "",
+              "Family ranking uses median development robustness score across the entire declared grid.",
               "A ranked family may be frozen by its falsifier. Rank is not permission to promote.", "",
               "| Family rank | Family | Decision | Reason |", "|---:|---|---|---|"]
     for f in families:
@@ -126,9 +130,12 @@ def run(manifest_path, output, budget=18):
     manifest = load_manifest(manifest_path)
     folds, costs = policy()
     output.mkdir(parents=True, exist_ok=True)
+    access_mode = "unknown"
     # Failed setup gets a reviewable record instead of fictitious performance.
     try:
-        require_api_key()
+        ensure_local_data_access()
+        access_mode = quantiacs_access_mode()
+        # qnt reads API_KEY during import, so access must be configured first.
         import qnt.data as qndata
         import qnt.stats as qnstats
         data = qndata.cryptodaily_load_data(min_date="2015-01-01", max_date=folds[-1]["end"])
@@ -138,10 +145,12 @@ def run(manifest_path, output, budget=18):
         blocked = output / ("blocked_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
         blocked.mkdir()
         # Exception messages from network libraries can contain request secrets.
-        reason = "API_KEY missing" if isinstance(e, RuntimeError) and "API_KEY is missing" in str(e) else type(e).__name__ + ": toolbox/data setup failed"
-        write_json(blocked / "status.json", dict(status="BLOCKED", reason=reason, metrics=None))
+        reason = type(e).__name__ + ": toolbox/data setup failed"
+        write_json(blocked / "status.json", dict(status="BLOCKED", reason=reason, metrics=None,
+                                                   quantiacs_access_mode=access_mode))
         records = [dict(id=c["id"], family=c["family"], mode=c["mode"], status="PENDING") for c in manifest["candidates"]]
-        report(blocked, manifest, records, dict(status="BLOCKED", reason=reason))
+        report(blocked, manifest, records, dict(status="BLOCKED", reason=reason,
+                                                quantiacs_access_mode=access_mode))
         return blocked, False
     source_hashes = {c["path"]: sha256_file(ROOT / c["path"]) for c in manifest["candidates"]}
     for name in ("research/benchmark.py", "research/iteration.py", "configs/promotion_gates.yaml"):
@@ -149,7 +158,8 @@ def run(manifest_path, output, budget=18):
     context = dict(manifest_sha256=sha256_file(manifest_path), data_sha256=panel_hash(data),
                    source_hashes=source_hashes, folds=folds, costs=costs,
                    toolbox_stats_sha256=sha256_file(qnstats.__file__), python=platform.python_version(),
-                   numpy=np.__version__, pandas=pd.__version__, status="DEVELOPMENT_ONLY")
+                   numpy=np.__version__, pandas=pd.__version__, status="DEVELOPMENT_ONLY",
+                   quantiacs_access_mode=access_mode)
     directory = output / digest(context)[:20]
     directory.mkdir(exist_ok=True)
     write_json(directory / "context.json", context)
@@ -184,7 +194,7 @@ def run(manifest_path, output, budget=18):
         Registry(directory / "registry.jsonl").append(RunRecord(run_id=directory.name + "_" + c["id"],
             idea_id=c["id"], strategy_path=c.get("path", "research/benchmark.py"), params=c["params"],
             family=c["family"], metrics=record["metrics"], status="ran" if record["status"] == "COMPLETE" else "failed",
-            notes="Development folds only; hard/soft qualification pending"))
+            notes=f"Development folds only; hard/soft qualification pending; access={access_mode}"))
         print(c["id"], record["status"], flush=True)
     records = []
     streams = {}

@@ -1,0 +1,52 @@
+{
+  "ablation": "static residual-network centrality level",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": null,
+  "contamination_notes": "Frontier-A and Frontier-B 2016-2022 development results were observed before this campaign. Frontier-C is a new development research look, not a fresh holdout. 2023+ remains excluded from selection.",
+  "cost_hypothesis": "weekly rebalancing plus state-transition features should reduce reaction to one-day noise; cost ladder is fixed before returns",
+  "created_utc": "2026-09-10T12:45:00+00:00",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260910c_topology_reconnection",
+  "failure_mode": "mechanism collapses into an occupied level factor, generic trend, low volatility, or previously rejected delay formulation",
+  "falsifier": "rotate reconnection assignments across sorted labels",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "topology_reconnection",
+  "nearest_incumbent": "topology_migration",
+  "novelty_axes_changed": [
+    "transform",
+    "timing_or_state_condition",
+    "portfolio_construction"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "orthogonal satellite only if destructive controls and matched residual diagnostics support independence",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Reserved complement to the already-observed topology-migration family; not a parameter variant and not implemented in this campaign.",
+  "source_urls": [
+    "https://doi.org/10.1016/j.econmod.2020.11.013"
+  ],
+  "status": "PREREGISTERED_NOT_IMPLEMENTED",
+  "stop_rule": "freeze if falsifier or ablation matches/beats canonical base or if every valid base cell is below the fixed development floor; do not retune after failure",
+  "thesis": "Assets that reconnect from residual-network periphery while preserving positive idiosyncratic trend may capture a different phase than topology migration toward periphery.",
+  "timing": "completed daily bars only; all transition states compare trailing estimates with a fixed 21-day-prior estimate",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 remains untouched during development selection; 2025+ diagnostic/live evidence never drives mutation"
+}

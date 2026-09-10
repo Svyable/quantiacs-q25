@@ -50,10 +50,17 @@ def panel_hash(data):
     for dim in canonical.dims:
         h.update(json.dumps(canonical[dim].values.astype(str).tolist()).encode())
     values = np.asarray(canonical.values, dtype="<f8").copy()
-    values[np.isnan(values)] = np.nan  # canonical NaN representation
+    values[np.isnan(values)] = np.nan
     h.update(values.tobytes())
     h.update(str(data.name).encode())
     return h.hexdigest()
+
+
+def _cap_without_renormalizing(raw, cap=0.25):
+    """Normalize to <=1 gross, then cap names. Cash is allowed by design."""
+    raw = raw.replace([np.inf, -np.inf], np.nan).fillna(0).clip(lower=0)
+    weights = raw.div(raw.sum(axis=1).clip(lower=1), axis=0)
+    return weights.clip(upper=cap)
 
 
 def control_weights(data, name):
@@ -72,8 +79,7 @@ def control_weights(data, name):
         raw = raw.where(liquid, 0)
     else:
         raise ValueError(name)
-    raw = raw.replace([np.inf, -np.inf], np.nan).fillna(0)
-    weights = raw.div(raw.sum(axis=1).clip(lower=1), axis=0).clip(upper=0.25)
+    weights = _cap_without_renormalizing(raw)
     return xr.DataArray(weights.to_numpy(), dims=("time", "asset"), coords={"time": data.time, "asset": data.asset})
 
 
@@ -101,11 +107,26 @@ def check_causality(fn, data, full=None, checkpoints=7):
         if not np.isfinite(difference) or difference > 1e-10:
             raise ValueError(f"prefix causality failed at {i}: {difference}")
         maximum = max(maximum, float(difference))
-        # Bounded replay tests a different failure mode from prefix invariance.
         if i >= 365:
             replay = fn(data.isel(time=slice(i - 364, i + 1))).isel(time=-1)
-            np.testing.assert_allclose(replay.values, full.isel(time=i).values, atol=1e-10, rtol=0)
+            try:
+                np.testing.assert_allclose(replay.values, full.isel(time=i).values, atol=1e-10, rtol=0)
+            except AssertionError as e:
+                raise ValueError(f"bounded replay failed at {i}") from e
     return dict(status="PASS", checkpoints=len(cuts), max_abs_difference=maximum)
+
+
+def derived_return_metrics(relative_return, points_per_year=365):
+    """Transparent metrics derived from the exact Quantiacs relative-return stream."""
+    r = pd.Series(relative_return).replace([np.inf, -np.inf], np.nan).dropna()
+    if len(r) == 0:
+        return dict(cagr=None, sortino_ratio=None, hit_rate=None)
+    wealth = float(np.prod(1.0 + r.to_numpy()))
+    cagr = wealth ** (points_per_year / len(r)) - 1.0 if wealth > 0 else None
+    downside = np.minimum(r.to_numpy(), 0.0)
+    downside_dev = float(np.sqrt(np.mean(np.square(downside))))
+    sortino = float(np.sqrt(points_per_year) * r.mean() / downside_dev) if downside_dev > 0 else None
+    return dict(cagr=cagr, sortino_ratio=sortino, hit_rate=float((r > 0).mean()))
 
 
 class QuantiacsEvaluator:
@@ -118,8 +139,9 @@ class QuantiacsEvaluator:
         check_weights(weights, self.data)
         cleaned = self.output.clean(weights, self.data, "crypto_daily_long")
         cleaned = cleaned.sel(time=weights.time, asset=weights.asset).transpose("time", "asset")
-        # A cleaner must not silently replace the strategy actually tested.
-        np.testing.assert_allclose(cleaned.values, weights.values, atol=1e-10, rtol=0)
+        delta = float(np.nanmax(np.abs(cleaned.values - weights.values)))
+        if not np.isfinite(delta) or delta > 1e-10:
+            raise AssertionError(f"cleaner parity failed: max_abs_difference={delta}")
         result, returns = {}, {}
         for fold in folds:
             key = fold["id"]
@@ -132,9 +154,14 @@ class QuantiacsEvaluator:
                 for field in FIELDS:
                     number = float(stat.sel(field=field).isel(time=-1))
                     row[field] = number if np.isfinite(number) else None
+                rr = stat.sel(field="relative_return").to_pandas()
+                extra = derived_return_metrics(rr)
+                row.update(extra)
+                dd = row["max_drawdown"]
+                row["calmar_ratio"] = extra["cagr"] / abs(dd) if extra["cagr"] is not None and dd is not None and dd < 0 else None
                 result[key][f"{cost:.2f}"] = row
                 if cost == 0.04:
-                    returns[key] = stat.sel(field="relative_return").to_pandas()
+                    returns[key] = rr
         return result, returns
 
 

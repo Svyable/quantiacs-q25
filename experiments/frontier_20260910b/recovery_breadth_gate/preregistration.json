@@ -1,0 +1,51 @@
+{
+  "ablation": "individual recovery score without breadth gate",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260910b_recovery_breadth_gate.py",
+  "contamination_notes": "2016-2022 reused research/development; 2025+ previously viewed diagnostics; live excluded",
+  "cost_hypothesis": "broad recovery states are persistent",
+  "created_utc": "2026-09-10T04:15:00+00:00",
+  "data_admissibility": "VERIFIED_OHLCV_AGAINST_SUPPLIED_Q25_RULES",
+  "experiment_id": "frontier_20260910b_recovery_breadth_gate",
+  "failure_mode": "breadth gate duplicates generic market trend/breadth",
+  "falsifier": "preserve individual recovery scores but randomize breadth-state dates at matched frequency",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      28,
+      42,
+      56
+    ]
+  },
+  "mechanism": "shock_recovery",
+  "nearest_incumbent": "Breadth Thrust Switch / CoCrash126",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 42
+  },
+  "portfolio_role": "cash-allocation overlay for event strategies",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Mechanism selected from the repository frontier before performance inspection; current campaign does not use public performance claims.",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "PREREGISTERED_NOT_IMPLEMENTED",
+  "stop_rule": "freeze if falsifier or ablation matches/beats base development score; no automatic promotion",
+  "thesis": "The cross-section is safer to deploy after shocks when multiple assets exhibit independent positive recovery slopes rather than one concentrated rebound.",
+  "timing": "completed residual shock/recovery states only",
+  "track": "robustness",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

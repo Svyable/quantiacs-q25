@@ -1,0 +1,52 @@
+{
+  "ablation": "static residual-network periphery score with no centrality migration term",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260910b_topology_migration.py",
+  "contamination_notes": "2016-2022 reused research/development; 2025+ previously viewed diagnostics; live excluded",
+  "cost_hypothesis": "weekly topology state changes slowly enough to keep turnover bounded",
+  "created_utc": "2026-09-10T04:15:00+00:00",
+  "data_admissibility": "VERIFIED_OHLCV_AGAINST_SUPPLIED_Q25_RULES",
+  "experiment_id": "frontier_20260910b_topology_migration",
+  "failure_mode": "edge collapses into residual momentum or static low-correlation selection",
+  "falsifier": "rotate current asset topology assignments across sorted asset labels while preserving the graph-state distribution",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "correlation_topology",
+  "nearest_incumbent": "C165 / residual-dispersion and V10 residual-momentum families",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "orthogonal topology satellite during cross-sectional fragmentation",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Mechanism selected from the repository frontier before performance inspection; current campaign does not use public performance claims.",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if falsifier or ablation matches/beats base development score; no automatic promotion",
+  "thesis": "During residual-correlation fragmentation, assets migrating from crowded centrality toward the network periphery while retaining positive residual trend exhibit persistent idiosyncratic leadership.",
+  "timing": "completed daily returns; graph estimated only from trailing residual returns; rebalance-day topology compared with a fixed 21-day-prior graph",
+  "track": "robustness",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

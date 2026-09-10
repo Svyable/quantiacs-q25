@@ -1,0 +1,52 @@
+{
+  "ablation": "symmetric rolling market beta",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": null,
+  "contamination_notes": "Frontier-A and Frontier-B 2016-2022 development results were observed before this campaign. Frontier-C is a new development research look, not a fresh holdout. 2023+ remains excluded from selection.",
+  "cost_hypothesis": "weekly rebalancing plus state-transition features should reduce reaction to one-day noise; cost ladder is fixed before returns",
+  "created_utc": "2026-09-10T12:45:00+00:00",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260910c_downside_beta_decoupling",
+  "failure_mode": "mechanism collapses into an occupied level factor, generic trend, low volatility, or previously rejected delay formulation",
+  "falsifier": "swap downside-beta transition assignments across asset labels",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "downside_beta_decoupling",
+  "nearest_incumbent": "CoCrash126 / C165",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "orthogonal satellite only if destructive controls and matched residual diagnostics support independence",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Reserved hypothesis only. Downside-risk literature motivates signed exposure; no exact external strategy or performance is adopted.",
+  "source_urls": [
+    "https://doi.org/10.1016/j.jbankfin.2021.106246"
+  ],
+  "status": "PREREGISTERED_NOT_IMPLEMENTED",
+  "stop_rule": "freeze if falsifier or ablation matches/beats canonical base or if every valid base cell is below the fixed development floor; do not retune after failure",
+  "thesis": "Assets whose downside market beta is falling faster than upside beta may be shedding common crash sensitivity before leadership becomes obvious.",
+  "timing": "completed daily bars only; all transition states compare trailing estimates with a fixed 21-day-prior estimate",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 remains untouched during development selection; 2025+ diagnostic/live evidence never drives mutation"
+}

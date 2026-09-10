@@ -2,27 +2,65 @@
 
 This file is the **first read for any coding/research agent** working in this repository.
 
-Your mission is not to produce more strategy files. Your mission is to discover, falsify and document **causal, distinct, Q25-admissible mechanisms** that add portfolio value beyond the incumbent research stack.
+Your mission is not to produce more strategy files. Your mission is to discover, falsify and document **causal, distinct, Q25-admissible mechanisms** that add portfolio value beyond the incumbent research stack — and to **measure them with the Quantiacs toolbox** rather than stopping at code generation.
 
 ## Mandatory reading order
 
 Before proposing code or running a backtest, read:
 
 1. `configs/rules_snapshot.yaml`
-2. `docs/AGENT_PROMPT.md`
-3. `configs/historical_top10.yaml`
-4. `configs/research_frontier.yaml`
-5. `configs/external_research_leads.yaml`
-6. `docs/EXTERNAL_RESEARCH_LEADS.md`
-7. `docs/STRATEGY_ATLAS.md`
-8. `docs/STRATEGY_GENERATION_PLAYBOOK.md`
-9. `docs/RESEARCH_METHOD.md`
-10. `docs/TESTING_PYRAMID.md`
-11. `configs/promotion_gates.yaml`
-12. `configs/chronological_folds.yaml`
-13. `configs/cost_ladder.yaml`
+2. `docs/LOCAL_RESEARCH_ACCESS.md`
+3. `docs/AGENT_PROMPT.md`
+4. `configs/historical_top10.yaml`
+5. `configs/research_frontier.yaml`
+6. `configs/external_research_leads.yaml`
+7. `docs/EXTERNAL_RESEARCH_LEADS.md`
+8. `docs/STRATEGY_ATLAS.md`
+9. `docs/STRATEGY_GENERATION_PLAYBOOK.md`
+10. `docs/RESEARCH_METHOD.md`
+11. `docs/TESTING_PYRAMID.md`
+12. `configs/promotion_gates.yaml`
+13. `configs/chronological_folds.yaml`
+14. `configs/cost_ladder.yaml`
 
 Also inspect `strategies/q25_sota_meta_ensemble.py` before calling any residual-momentum / volume-response / co-crash / residual-skew / path-efficiency idea new.
+
+## Local research access — do not block on credentials
+
+**A personal Quantiacs API key is not required for local/public-data research.**
+
+The current open-source toolbox explicitly accepts `API_KEY=default`, and its own tests use that sentinel. This repo's runner calls `ensure_local_data_access()` before any `qnt` import and automatically sets `API_KEY=default` when no credential is configured.
+
+Therefore:
+
+- do **not** ask the user for an API key before attempting local research;
+- do **not** mark local performance `PENDING` merely because a personal key is absent;
+- do **not** add a credential gate to local backtests or research workflows;
+- **do** run the strategy and extract real local Quantiacs metrics when the toolbox/data endpoint is reachable;
+- reserve a real participant key for account-bound remote correlation/precheck, participant identity and submission flows.
+
+The import order matters: configure `API_KEY=default` **before** importing `qnt`. Use the repo runner instead of duplicating this logic.
+
+If public/default access genuinely fails, classify that as `BLOCKED_INFRA`, record the toolbox/version/access mode, and leave the frozen candidate unchanged. Do not call it an alpha failure and do not retune while fixing infrastructure.
+
+## Dogfood rule — measured research is the default
+
+Once a candidate is executable, use the evaluator aggressively. A useful agent should return a measured table like the historical rounds, not just “tests passed.” At minimum, where the data and stats object support them, report:
+
+- Sharpe;
+- mean return / correctly derived CAGR-style return;
+- Sortino or downside-risk diagnostics;
+- volatility;
+- maximum drawdown;
+- average turnover / holding diagnostics;
+- Sharpe across the configured ATR cost ladder;
+- chronological research/development/validation diagnostics with contamination labels;
+- CRYPTO10 or simple-control comparison;
+- prefix-causality error / bounded-replay mismatch;
+- cleaner mutation, missed-date, long-only, gross and non-liquid exposure checks;
+- matched correlations and residual alpha against incumbent streams when available.
+
+Metrics obtained using `API_KEY=default` are **observed local Quantiacs-toolbox evidence**. They are not official participant-specific correlation clearance or a submission result. Keep those layers separate.
 
 ## Current external-intelligence update
 
@@ -87,6 +125,7 @@ Run broad-before-deep:
 → novelty/falsifiability scoring before returns
 → 6 preregistrations
 → up to 3 implementations
+→ run local/public Quantiacs measurements with API_KEY=default
 → L0-L9 + falsifiers + costs + folds + residual/correlation
 → promote / reserve / kill
 ```
@@ -238,7 +277,8 @@ Controls are there to embarrass complicated ideas.
 - no promotion from a single narrow parameter optimum;
 - no claiming public leaderboard titles reveal implementation;
 - no importing public performance claims into our registry;
-- no touching the 2026-10-01 → 2027-01-31 live window for fitting/selection.
+- no touching the 2026-10-01 → 2027-01-31 live window for fitting/selection;
+- **no stopping local research to request a personal API key before trying `API_KEY=default`.**
 
 ## Definition of a successful agent run
 
@@ -249,6 +289,7 @@ Success means the repo ends with more information:
 - a broad idea slate;
 - source-aware preregistrations;
 - causal implementations;
+- **measured local Quantiacs metrics when the public/default data path is reachable**;
 - explicit failed falsifiers / kills;
 - independent control comparisons;
 - residual/correlation evidence;

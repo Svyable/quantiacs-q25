@@ -1,0 +1,63 @@
+{
+  "ablation": "remove defining conditioning term; preserve allocator and gate",
+  "allocation": "fixed 0.2 per slot; 0.25 cap; unused slots cash",
+  "cash_rule": "no positive eligible scores means cash; no midweek reentry",
+  "code_path": null,
+  "code_sha": "PENDING_IMPLEMENTATION; actual frozen source hashes captured before execution",
+  "contamination_notes": "Earlier research/dev folds reused across A\u2013C; public 2024\u20132025 examples already observed; no pristine validation claim; live window excluded",
+  "cost_hypothesis": "weekly entries and persistent eligibility exits; explicit delay sensitivity needed before promotion",
+  "created_utc": "2026-09-10T22:13:19+00:00",
+  "data_admissibility": "OHLCV_ONLY_PER_REPOSITORY_RULES; no newly admitted external data",
+  "experiment_id": "frontier_20260910d_rank_reentry",
+  "failure_mode": "weekly execution outlasts reversal or rank signal; state may duplicate generic momentum; rank changes may reflect universe changes",
+  "falsifier": "erase prior rank peak",
+  "fixed_design_constants": {
+    "max_name_weight": 0.25,
+    "rank_noise_multiplier": 2,
+    "short_horizon": 5,
+    "state_lag": 21
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "rank_reentry",
+  "nearest_incumbent": "V11 liquidity lifecycle",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "independent satellite only after matched control and incumbent residual tests",
+  "primitive": "Quantiacs OHLCV and historical is_liquid",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday only; immediate invalid-price/eligibility exits persist until next Monday",
+  "selection": "positive scores, top five; labels used only for tie breaking",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR slippage; drawdown then turnover",
+  "source_notes": "OHLCV/execution reference only; economic hypotheses are original research proposals informed by repo frontier, not a claim from official documentation",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "PREREGISTERED_NOT_IMPLEMENTED",
+  "stop_rule": "freeze if central ablation/falsifier matches or beats central base; weak floor 1.0; no post-return parameter expansion; no automatic promotion",
+  "thesis": "Reclaiming a prior rank after a drawdown differs from first-time leadership.",
+  "timing": "completed t daily bars; estimated conditioning states through t-1; toolbox owns next-bar execution",
+  "track": "robustness",
+  "transform": "Current 5-day-return rank crosses above 0.5 after falling below it in the prior 21 days, conditional on prior W-day rank maximum above 0.8. Ablate historical peak; invert peak gate.",
+  "universe": "historical is_liquid == 1 and positive finite close; rank/market cross-section contains current eligible observations only"
+}

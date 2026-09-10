@@ -1,0 +1,148 @@
+{
+  "campaign": "frontier_20260910d",
+  "candidates": [
+    {
+      "id": "variance_ratio_reversal_w42",
+      "family": "variance_ratio_reversal",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_variance_ratio_reversal.py",
+      "parent_id": "variance_ratio_reversal_w63",
+      "preregistration": "experiments/frontier_20260910d/variance_ratio_reversal/preregistration.json",
+      "preregistration_sha256": "37e486539e7388879e37392ef6f5dcf44eff142811391ee9595466a3618becca"
+    },
+    {
+      "id": "variance_ratio_reversal_w63",
+      "family": "variance_ratio_reversal",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_variance_ratio_reversal.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260910d/variance_ratio_reversal/preregistration.json",
+      "preregistration_sha256": "37e486539e7388879e37392ef6f5dcf44eff142811391ee9595466a3618becca"
+    },
+    {
+      "id": "variance_ratio_reversal_w84",
+      "family": "variance_ratio_reversal",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_variance_ratio_reversal.py",
+      "parent_id": "variance_ratio_reversal_w63",
+      "preregistration": "experiments/frontier_20260910d/variance_ratio_reversal/preregistration.json",
+      "preregistration_sha256": "37e486539e7388879e37392ef6f5dcf44eff142811391ee9595466a3618becca"
+    },
+    {
+      "id": "variance_ratio_reversal_ablation",
+      "family": "variance_ratio_reversal",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_variance_ratio_reversal.py",
+      "parent_id": "variance_ratio_reversal_w63",
+      "preregistration": "experiments/frontier_20260910d/variance_ratio_reversal/preregistration.json",
+      "preregistration_sha256": "37e486539e7388879e37392ef6f5dcf44eff142811391ee9595466a3618becca"
+    },
+    {
+      "id": "variance_ratio_reversal_falsifier",
+      "family": "variance_ratio_reversal",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_variance_ratio_reversal.py",
+      "parent_id": "variance_ratio_reversal_w63",
+      "preregistration": "experiments/frontier_20260910d/variance_ratio_reversal/preregistration.json",
+      "preregistration_sha256": "37e486539e7388879e37392ef6f5dcf44eff142811391ee9595466a3618becca"
+    },
+    {
+      "id": "rank_transition_w42",
+      "family": "rank_transition",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_rank_transition.py",
+      "parent_id": "rank_transition_w63",
+      "preregistration": "experiments/frontier_20260910d/rank_transition/preregistration.json",
+      "preregistration_sha256": "6beba6d363a24fb38823053454680fb59c4c26e69911241fa802e6c2766e48e4"
+    },
+    {
+      "id": "rank_transition_w63",
+      "family": "rank_transition",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_rank_transition.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260910d/rank_transition/preregistration.json",
+      "preregistration_sha256": "6beba6d363a24fb38823053454680fb59c4c26e69911241fa802e6c2766e48e4"
+    },
+    {
+      "id": "rank_transition_w84",
+      "family": "rank_transition",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_rank_transition.py",
+      "parent_id": "rank_transition_w63",
+      "preregistration": "experiments/frontier_20260910d/rank_transition/preregistration.json",
+      "preregistration_sha256": "6beba6d363a24fb38823053454680fb59c4c26e69911241fa802e6c2766e48e4"
+    },
+    {
+      "id": "rank_transition_ablation",
+      "family": "rank_transition",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_rank_transition.py",
+      "parent_id": "rank_transition_w63",
+      "preregistration": "experiments/frontier_20260910d/rank_transition/preregistration.json",
+      "preregistration_sha256": "6beba6d363a24fb38823053454680fb59c4c26e69911241fa802e6c2766e48e4"
+    },
+    {
+      "id": "rank_transition_falsifier",
+      "family": "rank_transition",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260910d_rank_transition.py",
+      "parent_id": "rank_transition_w63",
+      "preregistration": "experiments/frontier_20260910d/rank_transition/preregistration.json",
+      "preregistration_sha256": "6beba6d363a24fb38823053454680fb59c4c26e69911241fa802e6c2766e48e4"
+    }
+  ],
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "max_unique_candidates": 10,
+  "automatic_promotion": false,
+  "protected_live_start": "2026-10-01",
+  "implementation_budget_note": "Two mechanisms allow deeper adversarial checks; four unimplemented preregistrations are not failed alpha."
+}

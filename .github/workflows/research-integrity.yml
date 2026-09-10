@@ -105,6 +105,42 @@ jobs:
           print("research frontier / next-agent contract integrity OK")
           PY
 
+      - name: Validate public-default local research access contract
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import os
+
+          env_example = Path(".env.example").read_text()
+          agents = Path("AGENTS.md").read_text()
+          prompt = Path("docs/AGENT_PROMPT.md").read_text()
+          method = Path("docs/RESEARCH_METHOD.md").read_text()
+          pyramid = Path("docs/TESTING_PYRAMID.md").read_text()
+          access = Path("docs/LOCAL_RESEARCH_ACCESS.md").read_text()
+          submission = Path("docs/SUBMISSION_CHECKLIST.md").read_text()
+          readme = Path("README.md").read_text()
+
+          assert "API_KEY=default" in env_example
+          assert "LOCAL_RESEARCH_ACCESS.md" in agents
+          assert "LOCAL_RESEARCH_ACCESS.md" in prompt
+          assert "API_KEY=default" in agents
+          assert "API_KEY=default" in prompt
+          assert "API_KEY=default" in method
+          assert "API_KEY=default" in pyramid
+          assert "API_KEY=default" in access
+          assert "API_KEY=default" in submission
+          assert "No personal Quantiacs API key is required" in readme
+          assert "participant-specific" in submission
+
+          os.environ.pop("API_KEY", None)
+          import factory.runner as runner
+          runner.load_dotenv = lambda path=None: None
+          assert runner.ensure_local_data_access() == "default"
+          assert runner.quantiacs_access_mode() == "public_default"
+          assert not runner.has_authenticated_api_key()
+          print("public-default local research access contract OK")
+          PY
+
       - name: Validate external public-research intelligence
         run: |
           python - <<'PY'
@@ -164,7 +200,6 @@ jobs:
           assert "is_liquid" in text
           print("SOTA meta-ensemble source audit OK")
           PY
-
 
       - name: Test frontier strategies and iteration evidence boundaries
         run: python -m pytest -q tests

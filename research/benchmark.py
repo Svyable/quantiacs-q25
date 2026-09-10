@@ -130,7 +130,7 @@ def derived_return_metrics(relative_return, points_per_year=365):
 
 
 def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
-    """Measure official platform translation; mutation is evidence, not automatically failure."""
+    """Measure official platform translation and isolate unexplained mutations."""
     raw = raw.transpose("time", "asset")
     cleaned = cleaned.sel(time=raw.time, asset=raw.asset).transpose("time", "asset")
     delta = np.abs(np.asarray(cleaned.values, float) - np.asarray(raw.values, float))
@@ -140,15 +140,20 @@ def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
     liquid = data.sel(field="is_liquid").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
     missing_close = ~np.isfinite(np.asarray(close.values, float))
     non_liquid = np.asarray(liquid.values, float) != 1
+    platform_mask = missing_close | non_liquid
+    explained = changed & platform_mask
+    unexplained = changed & ~platform_mask
     raw_gross = np.abs(np.asarray(raw.values, float)).sum(axis=1)
     clean_gross = np.abs(np.asarray(cleaned.values, float)).sum(axis=1)
     max_delta = float(np.nanmax(delta)) if delta.size else 0.0
     return {
-        "status": "UNCHANGED" if not bool(changed.any()) else "MUTATED_BY_PLATFORM_CLEANER",
+        "status": "UNCHANGED" if not bool(changed.any()) else ("PLATFORM_DATA_TRANSLATION" if not bool(unexplained.any()) else "UNEXPLAINED_MUTATION"),
         "max_abs_difference": max_delta if np.isfinite(max_delta) else None,
         "changed_cells": int(changed.sum()),
         "changed_days": int(changed_days.sum()),
         "changed_fraction": float(changed.mean()) if changed.size else 0.0,
+        "explained_changed_cells": int(explained.sum()),
+        "unexplained_changed_cells": int(unexplained.sum()),
         "changed_on_missing_close_cells": int((changed & missing_close).sum()),
         "changed_on_non_liquid_cells": int((changed & non_liquid).sum()),
         "raw_mean_gross": float(np.mean(raw_gross)),
@@ -170,6 +175,11 @@ class QuantiacsEvaluator:
         cleaned = cleaned.sel(time=weights.time, asset=weights.asset).transpose("time", "asset")
         check_weights(cleaned, self.data)
         impact = cleaner_impact(weights, cleaned, self.data)
+        if impact["unexplained_changed_cells"]:
+            raise AssertionError(
+                "cleaner parity failed outside official data-gap/liquidity translation: "
+                f"{impact['unexplained_changed_cells']} unexplained cells"
+            )
         result, returns = {"cleaner_impact": impact}, {}
         for fold in folds:
             key = fold["id"]

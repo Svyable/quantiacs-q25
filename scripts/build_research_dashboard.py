@@ -125,7 +125,7 @@ def build_markdown(payload):
         "", "## Evidence health", "",
         f"Frontier-B observed artifact: workflow run **{payload['frontier_source']['workflow_run_id']}**, artifact **{payload['frontier_source']['artifact_id']}**, Quantiacs access **`{payload['frontier_source']['access_mode']}`**, data hash `{payload['frontier_source']['data_sha256'][:16]}…`.", "",
         f"The artifact contains **{payload['frontier_interpretation']['rankable_complete_cells']} completed cells** and **{payload['frontier_interpretation']['failed_cells']} failed cells**. Failed cells stay visible. A software/integrity failure is not converted into a bad Sharpe, and it does not automatically falsify every other preregistered cell in the mechanism family.", "",
-        "The next harness version emits a candidate packet for every attempted cell with strategy quality, evidence completeness, implementation health, cost ladder, drawdown, turnover, causality and provenance. Missing fields remain missing; they are never imputed to make a matrix look complete.", "",
+        "The next harness version emits a candidate packet for every attempted cell with strategy quality, evidence completeness, implementation health, cost ladder, CAGR/Sortino/Calmar, drawdown, turnover, causality and provenance. Missing fields remain missing; they are never imputed to make a matrix look complete.", "",
         "[Back to Quant Lab](index.md) · [Evidence model](EVIDENCE_MODEL.md) · [Strategy atlas](STRATEGY_ATLAS.md) · [Testing pyramid](TESTING_PYRAMID.md)",
     ]
     if failed:

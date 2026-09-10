@@ -44,7 +44,7 @@ def test_compare_refuses_false_exactness_when_method_changes():
     newer["candidates"][0]["selection_score"] = 1.2
     result = compare(base, newer)
     assert result["comparability"] == "METHODOLOGY_OR_SOURCE_DELTA"
-    assert result["candidate_deltas"][0]["selection_score_delta"] == 0.1
+    assert round(result["candidate_deltas"][0]["selection_score_delta"], 10) == 0.1
 
 
 def test_current_canonical_matrix_triages_topology_without_tuning():

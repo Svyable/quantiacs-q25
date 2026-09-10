@@ -84,6 +84,7 @@ def control_weights(data, name):
 
 
 def check_weights(weights, data):
+    """Strict raw-strategy contract: only historical is_liquid == 1 is eligible."""
     if weights.dims != ("time", "asset"):
         raise ValueError("strategy must return full time/asset path")
     if not weights.time.equals(data.time) or not weights.asset.equals(data.asset):
@@ -92,6 +93,27 @@ def check_weights(weights, data):
     result = audit_weights(weights, liq.where(np.isfinite(liq), 0))
     if not result.ok or float(weights.max()) > 0.25 + 1e-10:
         raise ValueError("inadmissible weights: " + str(result.messages))
+
+
+def check_platform_cleaned_weights(weights, data, tolerance=1e-10):
+    """Audit official cleaner output using the cleaner/checker's explicit-zero liquidity semantics."""
+    if weights.dims != ("time", "asset"):
+        raise ValueError("cleaned output must be time/asset")
+    if not weights.time.equals(data.time) or not weights.asset.equals(data.asset):
+        raise ValueError("cleaned output coordinates differ from data")
+    w = np.asarray(weights.values, float)
+    if not np.isfinite(w).all():
+        raise ValueError("platform-cleaned weights contain NaN/Inf")
+    if (w < -tolerance).any():
+        raise ValueError("platform-cleaned weights contain negative positions")
+    if (np.abs(w).sum(axis=1) > 1.0 + 1e-9).any():
+        raise ValueError("platform-cleaned gross exceeds 1")
+    if np.max(w) > 0.25 + tolerance:
+        raise ValueError("platform cleaner breached internal 25% name cap")
+    liq = np.asarray(data.sel(field="is_liquid").transpose("time", "asset").values, float)
+    explicit_non_liquid = np.isfinite(liq) & (liq == 0)
+    if ((np.abs(w) > tolerance) & explicit_non_liquid).any():
+        raise ValueError("platform-cleaned output trades explicit is_liquid == 0")
 
 
 def check_causality(fn, data, full=None, checkpoints=7):
@@ -129,6 +151,46 @@ def derived_return_metrics(relative_return, points_per_year=365):
     return dict(cagr=cagr, sortino_ratio=sortino, hit_rate=float((r > 0).mean()))
 
 
+def cleaner_impact(raw, cleaned, data, tolerance=1e-10):
+    """Attribute official translation only when an ambiguous data cell actually changes."""
+    raw = raw.transpose("time", "asset")
+    cleaned = cleaned.sel(time=raw.time, asset=raw.asset).transpose("time", "asset")
+    delta = np.abs(np.asarray(cleaned.values, float) - np.asarray(raw.values, float))
+    changed = np.isfinite(delta) & (delta > tolerance)
+    changed_days = changed.any(axis=1)
+    close = data.sel(field="close").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
+    liquid = data.sel(field="is_liquid").transpose("time", "asset").sel(time=raw.time, asset=raw.asset)
+    missing_close = ~np.isfinite(np.asarray(close.values, float))
+    liquid_values = np.asarray(liquid.values, float)
+    nonfinite_liquidity = ~np.isfinite(liquid_values)
+    ambiguous_data = missing_close | nonfinite_liquidity
+    direct = changed & ambiguous_data
+    translation_day = direct.any(axis=1)
+    explainable_mask = ambiguous_data | np.broadcast_to(translation_day[:, None], changed.shape)
+    secondary = changed & ~ambiguous_data & explainable_mask
+    unexplained = changed & ~explainable_mask
+    raw_gross = np.abs(np.asarray(raw.values, float)).sum(axis=1)
+    clean_gross = np.abs(np.asarray(cleaned.values, float)).sum(axis=1)
+    max_delta = float(np.nanmax(delta)) if delta.size else 0.0
+    return {
+        "status": "UNCHANGED" if not bool(changed.any()) else ("PLATFORM_DATA_TRANSLATION" if not bool(unexplained.any()) else "UNEXPLAINED_MUTATION"),
+        "max_abs_difference": max_delta if np.isfinite(max_delta) else None,
+        "changed_cells": int(changed.sum()),
+        "changed_days": int(changed_days.sum()),
+        "translation_days": int(translation_day.sum()),
+        "changed_fraction": float(changed.mean()) if changed.size else 0.0,
+        "direct_ambiguous_data_changes": int(direct.sum()),
+        "same_day_normalization_changes": int(secondary.sum()),
+        "unexplained_changed_cells": int(unexplained.sum()),
+        "changed_on_missing_close_cells": int((changed & missing_close).sum()),
+        "changed_on_nonfinite_liquidity_cells": int((changed & nonfinite_liquidity).sum()),
+        "raw_mean_gross": float(np.mean(raw_gross)),
+        "cleaned_mean_gross": float(np.mean(clean_gross)),
+        "raw_max_gross": float(np.max(raw_gross)),
+        "cleaned_max_gross": float(np.max(clean_gross)),
+    }
+
+
 class QuantiacsEvaluator:
     def __init__(self, data):
         import qnt.stats as stats
@@ -139,10 +201,14 @@ class QuantiacsEvaluator:
         check_weights(weights, self.data)
         cleaned = self.output.clean(weights, self.data, "crypto_daily_long")
         cleaned = cleaned.sel(time=weights.time, asset=weights.asset).transpose("time", "asset")
-        delta = float(np.nanmax(np.abs(cleaned.values - weights.values)))
-        if not np.isfinite(delta) or delta > 1e-10:
-            raise AssertionError(f"cleaner parity failed: max_abs_difference={delta}")
-        result, returns = {}, {}
+        check_platform_cleaned_weights(cleaned, self.data)
+        impact = cleaner_impact(weights, cleaned, self.data)
+        if impact["unexplained_changed_cells"]:
+            raise AssertionError(
+                "cleaner parity failed outside observed missing-price/non-finite-liquidity translation days: "
+                f"{impact['unexplained_changed_cells']} unexplained cells"
+            )
+        result, returns = {"cleaner_impact": impact}, {}
         for fold in folds:
             key = fold["id"]
             result[key] = {}

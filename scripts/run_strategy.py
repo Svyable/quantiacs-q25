@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Run a Quantiacs strategy module.
 
+No personal Quantiacs credential is required for local/public-data research.
+When API_KEY is absent, the repo harness injects ``API_KEY=default`` before qnt
+imports. Set a real participant key only when an account-bound service needs it.
+
 Usage:
-  export API_KEY=...   # required — blank does NOT work
   python scripts/run_strategy.py strategies/baseline_sma_rsi.py
+  API_KEY=default python scripts/run_strategy.py strategies/baseline_sma_rsi.py
 """
 
 from __future__ import annotations
@@ -16,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from factory.runner import require_api_key, run_strategy_subprocess, qnt_available
+from factory.runner import ensure_local_data_access, quantiacs_access_mode, run_strategy_subprocess, qnt_available
 
 
 def main() -> int:
@@ -25,11 +29,8 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=None, help="Optional timeout seconds")
     args = parser.parse_args()
 
-    try:
-        require_api_key()
-    except RuntimeError as e:
-        print(e, file=sys.stderr)
-        return 2
+    ensure_local_data_access()
+    print(f"Quantiacs access mode: {quantiacs_access_mode()}", file=sys.stderr)
 
     if not qnt_available():
         print(

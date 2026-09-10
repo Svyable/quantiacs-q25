@@ -65,6 +65,10 @@ def failure_status(stage):
     return "FAILED_SOFTWARE"
 
 
+def _finite(value):
+    return value is not None and np.isfinite(value)
+
+
 def metric_packet(record):
     packet = {
         "schema_version": SCHEMA_VERSION,
@@ -78,6 +82,14 @@ def metric_packet(record):
         "research_sharpe_12": None,
         "dev_sharpe_0": None,
         "dev_sharpe_12": None,
+        "research_cagr_12": None,
+        "dev_cagr_12": None,
+        "research_sortino_12": None,
+        "dev_sortino_12": None,
+        "research_calmar_12": None,
+        "dev_calmar_12": None,
+        "research_hit_rate_12": None,
+        "dev_hit_rate_12": None,
         "worst_drawdown_12": None,
         "mean_turnover_12": None,
         "evidence_completeness": 0.0,
@@ -92,17 +104,23 @@ def metric_packet(record):
     packet["research_sharpe_12"] = m["research"]["0.12"]["sharpe_ratio"]
     packet["dev_sharpe_0"] = m["dev"]["0.00"]["sharpe_ratio"]
     packet["dev_sharpe_12"] = m["dev"]["0.12"]["sharpe_ratio"]
+    for fold in ("research", "dev"):
+        cell = m[fold]["0.12"]
+        packet[f"{fold}_cagr_12"] = cell.get("cagr")
+        packet[f"{fold}_sortino_12"] = cell.get("sortino_ratio")
+        packet[f"{fold}_calmar_12"] = cell.get("calmar_ratio")
+        packet[f"{fold}_hit_rate_12"] = cell.get("hit_rate")
     dds = [m[f]["0.12"]["max_drawdown"] for f in ("research", "dev")]
     turns = [m[f]["0.12"]["avg_turnover"] for f in ("research", "dev")]
-    packet["worst_drawdown_12"] = min(dds) if all(v is not None and np.isfinite(v) for v in dds) else None
-    packet["mean_turnover_12"] = float(np.mean(turns)) if all(v is not None and np.isfinite(v) for v in turns) else None
+    packet["worst_drawdown_12"] = min(dds) if all(_finite(v) for v in dds) else None
+    packet["mean_turnover_12"] = float(np.mean(turns)) if all(_finite(v) for v in turns) else None
     required = [
         packet["selection_score"], packet["research_sharpe_0"], packet["research_sharpe_12"],
         packet["dev_sharpe_0"], packet["dev_sharpe_12"], packet["worst_drawdown_12"],
         packet["mean_turnover_12"],
     ]
-    packet["evidence_completeness"] = sum(v is not None and np.isfinite(v) for v in required) / len(required)
-    packet["rankable"] = packet["evidence_completeness"] == 1.0
+    packet["evidence_completeness"] = float(sum(bool(_finite(v)) for v in required) / len(required))
+    packet["rankable"] = bool(packet["evidence_completeness"] == 1.0)
     return packet
 
 
@@ -331,7 +349,8 @@ def run(manifest_path, output, budget=18):
         ))
         print(c["id"], record["status"], flush=True)
 
-    records, streams = [], {}
+    records = []
+    streams = {}
     for c in jobs:
         path = directory / (c["id"] + ".json")
         records.append(json.loads(path.read_text()) if path.exists() else dict(id=c["id"], family=c["family"], mode=c["mode"], status="PENDING"))

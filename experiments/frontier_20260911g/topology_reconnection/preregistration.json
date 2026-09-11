@@ -1,0 +1,54 @@
+{
+  "ablation": "static residual-network centrality level",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260911g_topology_reconnection.py",
+  "contamination_notes": "Frontier-A through Frontier-F development evidence is already observed. Frontier-G is a new development research look, not a fresh holdout. 2023+ remains excluded from selection.",
+  "cost_hypothesis": "weekly structural-state changes should limit unnecessary target changes",
+  "created_utc": "2026-09-11T11:40:00+00:00",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260911g_topology_reconnection",
+  "failure_mode": "reconnection is merely the reverse sign of topology migration or generic trend",
+  "falsifier": "rotate reconnection assignments across sorted asset labels while preserving the cross-sectional transition distribution",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "topology_reconnection",
+  "nearest_incumbent": "topology_migration",
+  "novelty_axes_changed": [
+    "transform",
+    "timing_or_state_condition",
+    "portfolio_construction"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "post-fragmentation reintegration satellite",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "prior_preregistration": "experiments/frontier_20260910c/topology_reconnection/preregistration.json",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Frontier-G exact implementation registered after prior campaign evidence; hypothesis provenance predates Frontier-G performance. Prior source: experiments/frontier_20260910c/topology_reconnection/preregistration.json",
+  "source_urls": [
+    "https://doi.org/10.1016/j.econmod.2020.11.013",
+    "https://doi.org/10.1016/j.jempfin.2023.101428"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if falsifier or ablation matches/beats canonical base or if every valid base cell is below the fixed development floor; do not retune after failure",
+  "thesis": "Assets reconnecting from residual-network periphery while retaining positive idiosyncratic trend capture a distinct post-fragmentation phase.",
+  "timing": "completed daily bars only; all structural comparisons use trailing estimates and fixed historical lags",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 remains untouched during development selection; 2025+ diagnostic/live evidence never drives mutation"
+}

@@ -19,8 +19,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install static-audit dependencies
-        run: python -m pip install --disable-pip-version-check numpy pandas xarray pyyaml pytest
+      - name: Install research dependencies
+        run: python -m pip install -r requirements.txt pytest
 
       - name: Compile Python research surface
         run: python -m compileall -q factory research scripts strategies

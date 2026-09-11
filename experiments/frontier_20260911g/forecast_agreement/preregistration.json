@@ -1,0 +1,64 @@
+{
+  "ablation": "slow residual mean only; drop fast forecast and rank agreement",
+  "allocation": "min(0.25, 1/K) times bounded score per selected name; no gross renormalization.",
+  "cash_rule": "Missing model state or nonpositive score means cash.",
+  "classification": "discovery_hypothesis",
+  "code_path": "strategies/generated/frontier_20260911g_forecast_agreement.py",
+  "contamination_notes": "A\u2013F research/dev history repeatedly observed. No fresh holdout claim; no live data.",
+  "cost_hypothesis": "Weekly entries, cash, and name caps; exact ATR-linked costs decide viability.",
+  "created_utc": "2026-09-11T12:00:00+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911g_forecast_agreement",
+  "failure_mode": "agreement collapses into residual momentum or the weekly posterior's pooled control",
+  "falsifier": "prefer disagreement while keeping the same slow-positive gate",
+  "fixed_constants": {
+    "atr_days": 14,
+    "cost_lookback_is_atr": true,
+    "fast_forecast_days": 7,
+    "graph_lag": 21,
+    "persistence_lag": 7,
+    "residual_trend_days": 21
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      21,
+      42,
+      63
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "forecast_agreement",
+  "nearest_incumbent": "Frontier-A AR forecast surprise / Frontier-F weekly payoff posterior",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 42
+  },
+  "portfolio_role": "Research satellite requiring residual evidence versus generic controls and later incumbents",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday entries; six-bar bounded carry; eligibility-loss exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K with label tie-breaking on sorted asset ids.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from the repository frontier map after A\u2013F freezes. Unverified on-chain and index-data proposals excluded.",
+  "source_urls": [],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "Agreement between a slow residual-mean forecast and a fully realized one-week residual forecast identifies usable positive leadership.",
+  "timing": "Completed daily bars only; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Residual = own log return minus equal-liquid market. Slow forecast = W-day residual mean. Fast forecast = fully realized 7-day residual mean. Both use completed bars only. Among currently liquid names with finite slow and fast forecasts, rank each forecast descending with first-method ties on sorted labels. Agreement = 1 - |rank_slow-rank_fast|/(n-1) when n>1. Base score = agreement when slow>0 and fast>0, else 0. Ablation ignores the fast forecast and agreement, scoring clip(slow,0,1) after dividing by the day's max positive slow (or 0 if none). Falsifier keeps the slow>0 and fast>0 gate but scores disagreement instead of agreement. No added market-timing gate.",
+  "universe": "historical is_liquid == 1 and positive finite close; rotations ignore inactive and future-listed assets",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

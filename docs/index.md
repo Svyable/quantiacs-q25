@@ -17,35 +17,48 @@ This is the public research dashboard for the Quantiacs Q25 Crypto Top-10 Long p
 
 | Current object | State | Why it matters |
 |---|---:|---|
-| **Best valid Frontier-B base cell** | **Topology migration w84 — robust SR 1.376** | minimum Sharpe across research/dev × 4/8/12% ATR cost cells |
-| **Topology w84 SR @ 12% ATR** | **1.376 research / 1.863 dev** | survives the harshest cost cell in both development folds |
-| **Frontier-B implementation coverage** | **11 / 18 complete** | failed cells remain visible instead of becoming fake zeroes |
+| **Latest measured campaign** | **Frontier-G — promote zero** | 18/18 exact cells complete; three new families frozen |
+| **Best G base cell** | **Forecast agreement w42 — robust SR 0.458** | beat its ablation and falsifier, missed the 1.0 floor |
+| **Best valid development cell still** | **Topology migration w84 — robust SR 1.376** | Frontier-B; not cross-ranked against later snapshots |
 | **Local Quantiacs access** | **`public_default`** | measured research does not wait for a personal API key |
 | **Evidence stage** | **development only** | validation, recent diagnostics, official IS and uniqueness are untouched |
 
-The latest observed campaign came from GitHub Actions run **34437464861**, artifact **10136721138**, against an immutable data hash and preregistered manifest. See the [full matrix](RESEARCH_MATRIX.md) for every valid/invalid cell and provenance.
+Frontier-G evidence is in [`evidence/frontier_20260911g`](https://github.com/Svyable/quantiacs-q25/tree/main/evidence/frontier_20260911g) with [PM report](https://github.com/Svyable/quantiacs-q25/blob/main/experiments/frontier_20260911g/pm_report.md). See the [full matrix](RESEARCH_MATRIX.md) for every valid/invalid cell and provenance.
 
 ---
 
-## Current development ranking
+## Campaign scoreboard
 
-This is a **development lane**, not a contest leaderboard. The score is intentionally hostile: take the minimum Sharpe across the 2016–2020 research fold and 2021–2022 dev fold under 4%, 8%, and 12% ATR-linked slippage.
+Later campaigns use the same hostile score — minimum Sharpe across 2016–2020 research and 2021–2022 development at 4%, 8%, and 12% ATR-linked slippage — but **separate sponsor snapshots**. Do not blend them into one leaderboard.
 
-| Dev rank | Candidate | Mechanism | Robust SR | Research SR @12% | Dev SR @12% | Research DD @12% | Dev DD @12% |
-|---:|---|---|---:|---:|---:|---:|---:|
-| **1** | **`topology_migration_w84`** | residual-correlation topology migration | **1.376** | **1.376** | **1.863** | -46.3% | -26.7% |
-| 2 | `topology_migration_w63` | same family, shorter memory | 1.080 | 1.205 | 1.080 | -51.1% | -53.4% |
-| 3 | `liquidity_hysteresis_w21` | liquidity lifecycle / re-entry state | 0.333 | 1.062 | 0.333 | -52.0% | -51.8% |
-| 4 | `liquidity_hysteresis_w42` | liquidity lifecycle / re-entry state | 0.333 | 1.062 | 0.333 | -52.0% | -51.8% |
-| 5 | `liquidity_hysteresis_w63` | liquidity lifecycle / re-entry state | 0.333 | 1.062 | 0.333 | -52.0% | -51.8% |
+| Campaign | What was tested | Result | Best valid base |
+|---|---|---|---|
+| B | topology migration, liquidity hysteresis, shock recovery | topology survives development; hysteresis weak; shock unrepaired | `topology_migration_w84` **1.376** |
+| C | signed risk, tail decay, assimilation | frozen / not a promotion lane | — |
+| D | variance-ratio reversal, rank-transition reliability | `FALSIFIED_DEVELOPMENT`; rank term was allocator-erased | — |
+| E | impact relief, range escape, response convexity | `FALSIFIED_DEVELOPMENT` | — |
+| F | signed triangles, weekly posterior, expert/cash policy | `FALSIFIED_DEVELOPMENT`; posterior 0.944 lost to pooled ablation | — |
+| **G** | edge uncertainty, forecast agreement, cost-relative persistence | agreement `KILL_WEAK_ALPHA` 0.458; other two `FALSIFIED_DEVELOPMENT` | none ≥ 1.0 |
 
-### What the matrix says
+### Frontier-G development ranking
 
-**Topology migration is the seam to press.** Two valid base windows clear the internal 1.0 development floor. The w84 cell also beats its topology-destroying falsifier (robust SR 0.387) and its ablation (1.009) on the preregistered scalar score. But the drawdown is still too large to call this production-ready, and the w42 neighbor failed an integrity/software assertion. The correct next move is **repair + forward test**, not retune w84 until the screenshot gets prettier.
+| Dev rank | Candidate | Mechanism | Robust SR | Research SR @12% | Dev SR @12% | Worst DD @12% |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `persistent_low_vol` | generic control | 0.641 | 1.495 | 0.641 | -93.3% |
+| 2 | **`forecast_agreement_w42`** | slow/fast residual rank agreement | **0.458** | **1.064** | **0.458** | -79.5% |
+| 3 | `equal_liquid` | generic control | 0.270 | 1.436 | 0.270 | -93.6% |
+| 4 | `forecast_agreement_ablation` | slow residual only | 0.255 | 0.968 | 0.255 | -67.1% |
+| 5 | `forecast_agreement_w63` | same family, longer memory | 0.213 | 1.034 | 0.213 | -73.7% |
 
-**Liquidity hysteresis is not a standalone alpha winner in this form.** All valid windows land at the same 0.333 robust score. Keep the lifecycle state as a possible conditioner for another mechanism; do not keep parameter-searching the same hypothesis.
+### What Frontier-G says
 
-**Shock recovery is unresolved, not secretly bad.** The base cells failed implementation/integrity in the captured artifact, so their economics are unknown. Repair only if the mechanism remains worth the engineering time.
+**Forecast agreement is a real mechanism and a weak book.** The 42-day parent beat the slow-only ablation (0.255) and the disagreement falsifier (−0.134). That is the opposite of Frontier-F's weekly posterior, whose market-state condition lost to pooling. It still missed the 1.0 floor, correlated 0.859 with equal-liquid, and carried −79.5% stressed drawdown. Keep the formula frozen. Do not search nearby windows.
+
+**Residual-edge uncertainty change failed.** Every change-based window was negative; the level-only ablation scored 0.116. Do not invert the change sign. This does not touch Frontier-B topology migration, which remains the strongest valid development cell in an earlier snapshot.
+
+**Cost-relative persistence failed.** All bases were negative and the no-ATR ablation beat the central parent. ATR scaling changed 86% of target days without earning its complexity.
+
+**Topology migration w84 is still the development seam to press**, on its own evidence packet, not because G was weak. Drawdown is still too large for production, and one B neighbor failed integrity. Repair + forward test, not retune.
 
 ---
 
@@ -111,10 +124,10 @@ The v2 packet adds robust fold/cost ranking, max drawdown, turnover, causality s
 
 ## Next research pressure
 
-1. **Topology follow-ups already preregistered before these returns were seen** — rank stability, fragmentation/recovery, and related topology-state hypotheses. Avoid tuning w84 itself.
-2. **Repair invalid Frontier-B cells** only enough to establish whether the original frozen hypotheses work; no parameter expansion.
-3. **Bring more incumbents into the exact current harness** so topology is compared against executable V10/C165/V12-quality controls rather than weak generic baselines.
-4. **Press independent P1 seams** such as volatility term structure and online forecast surprise so a topology success does not turn the whole lab into a topology monoculture.
+1. **Do not retune G.** Edge-uncertainty change, forecast-agreement windows, and ATR persistence stay frozen. The slow-only ablation is not a new winner.
+2. **Topology follow-ups already preregistered before B returns were seen** — rank stability, fragmentation/recovery. Avoid tuning `topology_migration_w84` itself.
+3. **Bring executable V10/C165/V12 controls into the current harness** so residual tests stop using only generic equal-liquid / inverse-vol / low-vol baselines.
+4. **Opportunity-density cash gates and unrepaired B shock-recovery cells** remain open, as implementation repairs rather than grid searches.
 
 The research agent contract remains **24 hypotheses → score before returns → preregister 6 → implement at most 3 → falsify aggressively**.
 

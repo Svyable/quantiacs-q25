@@ -1,0 +1,19 @@
+{
+  "captured_utc": "2026-09-11T12:50:03.416462+00:00",
+  "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "xarray": "2025.12.0"
+  },
+  "live_data_used": false,
+  "note": "Python 3.13.9 local measurement with frozen numpy/pandas/xarray/toolbox versions. Data hash differs from Frontier-F because the sponsor snapshot refreshed; do not cross-rank campaigns.",
+  "python": "3.13.9",
+  "remote_freeze_precedes_measurement": true,
+  "remote_implementation_freeze_commit": "3fcb319",
+  "run_id": "bfb07980136856e7f50e",
+  "selection_end": "2022-12-31",
+  "software_tests": "Frontier-G synthetic tests passed before measurement; captured evidence provenance checked after copy",
+  "source": "Exact local Quantiacs cryptodaily loader, public_default; sponsor snapshot served by toolbox cache",
+  "toolbox_commit": "9e5274c5ce102a66debc799fd2a2300969fb90f6"
+}

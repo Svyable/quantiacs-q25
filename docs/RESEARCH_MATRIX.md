@@ -169,3 +169,36 @@ Exact local measurements; no automatic promotion or cross-campaign ranking.
 | weekly_payoff_posterior | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
 
 [Evidence packet](../evidence/frontier_20260911f/report.md) · [Research report](../experiments/frontier_20260911f/pm_report.md)
+
+## frontier_20260911g: separate development campaign
+
+Exact local measurements; no automatic promotion or cross-campaign ranking.
+
+| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |
+|---|---|---:|---:|---|
+| `persistent_low_vol` | control | 0.641 | -93.3% | COMPLETE |
+| `forecast_agreement_w42` | base | 0.458 | -79.5% | COMPLETE |
+| `equal_liquid` | control | 0.270 | -93.6% | COMPLETE |
+| `forecast_agreement_ablation` | ablation | 0.255 | -67.1% | COMPLETE |
+| `forecast_agreement_w63` | base | 0.213 | -73.7% | COMPLETE |
+| `forecast_agreement_w21` | base | 0.145 | -76.8% | COMPLETE |
+| `edge_uncertainty_ablation` | ablation | 0.116 | -31.0% | COMPLETE |
+| `inverse_vol_trend` | control | 0.053 | -87.1% | COMPLETE |
+| `cost_relative_persistence_w84` | base | -0.121 | -31.4% | COMPLETE |
+| `cost_relative_persistence_w42` | base | -0.127 | -22.3% | COMPLETE |
+| `forecast_agreement_falsifier` | falsifier | -0.134 | -32.5% | COMPLETE |
+| `cost_relative_persistence_ablation` | ablation | -0.200 | -9.2% | COMPLETE |
+| `edge_uncertainty_w84` | base | -0.208 | -3.1% | COMPLETE |
+| `edge_uncertainty_w42` | base | -0.387 | -5.5% | COMPLETE |
+| `cost_relative_persistence_w63` | base | -0.400 | -25.5% | COMPLETE |
+| `cost_relative_persistence_falsifier` | falsifier | -0.432 | -30.0% | COMPLETE |
+| `edge_uncertainty_falsifier` | falsifier | -0.552 | -4.6% | COMPLETE |
+| `edge_uncertainty_w63` | base | -0.568 | -3.9% | COMPLETE |
+
+| Family | Decision | Reason |
+|---|---|---|
+| cost_relative_persistence | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| edge_uncertainty | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| forecast_agreement | KILL_WEAK_ALPHA | every valid base cell is below predefined development floor Sharpe 1.0 |
+
+[Evidence packet](../evidence/frontier_20260911g/report.md) · [Research report](../experiments/frontier_20260911g/pm_report.md)

@@ -284,6 +284,18 @@ V13 estimates rolling beta to the equal-weight market, forms residual returns, r
 
 A later family estimated how much of each asset's response to market moves arrived at lags 0–3 and searched for abrupt contraction in delayed response. Several sparse candidates passed many performance and cost gates but breached the frozen recent-correlation ceiling. The seam remains worth studying; the failed gate remains binding.
 
+## Frontier-G — edge uncertainty, forecast agreement, cost-relative persistence
+
+Campaign `frontier_20260911g` implemented three new objects after Frontier-F froze signed triangles, weekly posteriors and expert routing:
+
+| Family | Object | Development result |
+|---|---|---|
+| Forecast agreement | slow vs 7-day residual rank agreement | `KILL_WEAK_ALPHA` — best robust SR **0.458**, beat ablation and falsifier, missed the 1.0 floor |
+| Edge-uncertainty change | rising variance of residual-correlation edges | `FALSIFIED_DEVELOPMENT` — level ablation beat every change window |
+| Cost-relative persistence | persistent residual / own relative ATR | `FALSIFIED_DEVELOPMENT` — no-ATR ablation beat the central parent |
+
+These are frozen research seams, not contest entries. Details: [campaign note](FRONTIER_CAMPAIGN_G.md), [PM report](https://github.com/Svyable/quantiacs-q25/blob/main/experiments/frontier_20260911g/pm_report.md).
+
 ## VIPER–HELIOS engineering library
 
 The VIPER–HELIOS line contributed reusable architecture: causal IC-weighting, covariance shrinkage, equal-risk contribution, multi-horizon momentum, ATR-aware no-trade bands, absolute trend gates and crash overlays. These are **engineering primitives**, not licenses to transfer old metrics onto a new strategy.

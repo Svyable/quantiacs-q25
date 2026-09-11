@@ -1,0 +1,213 @@
+{
+  "campaign": "frontier_20260911g",
+  "candidates": [
+    {
+      "id": "edge_uncertainty_w42",
+      "family": "edge_uncertainty",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_edge_uncertainty.py",
+      "parent_id": "edge_uncertainty_w63",
+      "preregistration": "experiments/frontier_20260911g/edge_uncertainty/preregistration.json",
+      "preregistration_sha256": "7b1432c558ea68754f3e12c1f64105dd1c53bc69530b0c11e58e820a1d759fc1"
+    },
+    {
+      "id": "edge_uncertainty_w63",
+      "family": "edge_uncertainty",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_edge_uncertainty.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911g/edge_uncertainty/preregistration.json",
+      "preregistration_sha256": "7b1432c558ea68754f3e12c1f64105dd1c53bc69530b0c11e58e820a1d759fc1"
+    },
+    {
+      "id": "edge_uncertainty_w84",
+      "family": "edge_uncertainty",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_edge_uncertainty.py",
+      "parent_id": "edge_uncertainty_w63",
+      "preregistration": "experiments/frontier_20260911g/edge_uncertainty/preregistration.json",
+      "preregistration_sha256": "7b1432c558ea68754f3e12c1f64105dd1c53bc69530b0c11e58e820a1d759fc1"
+    },
+    {
+      "id": "edge_uncertainty_ablation",
+      "family": "edge_uncertainty",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_edge_uncertainty.py",
+      "parent_id": "edge_uncertainty_w63",
+      "preregistration": "experiments/frontier_20260911g/edge_uncertainty/preregistration.json",
+      "preregistration_sha256": "7b1432c558ea68754f3e12c1f64105dd1c53bc69530b0c11e58e820a1d759fc1"
+    },
+    {
+      "id": "edge_uncertainty_falsifier",
+      "family": "edge_uncertainty",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_edge_uncertainty.py",
+      "parent_id": "edge_uncertainty_w63",
+      "preregistration": "experiments/frontier_20260911g/edge_uncertainty/preregistration.json",
+      "preregistration_sha256": "7b1432c558ea68754f3e12c1f64105dd1c53bc69530b0c11e58e820a1d759fc1"
+    },
+    {
+      "id": "forecast_agreement_w21",
+      "family": "forecast_agreement",
+      "mode": "base",
+      "params": {
+        "window": 21,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_forecast_agreement.py",
+      "parent_id": "forecast_agreement_w42",
+      "preregistration": "experiments/frontier_20260911g/forecast_agreement/preregistration.json",
+      "preregistration_sha256": "34803e473e8eae5a03519e1e0a0007b4291b247eed3c2c1ed015e7b6256c7180"
+    },
+    {
+      "id": "forecast_agreement_w42",
+      "family": "forecast_agreement",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_forecast_agreement.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911g/forecast_agreement/preregistration.json",
+      "preregistration_sha256": "34803e473e8eae5a03519e1e0a0007b4291b247eed3c2c1ed015e7b6256c7180"
+    },
+    {
+      "id": "forecast_agreement_w63",
+      "family": "forecast_agreement",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_forecast_agreement.py",
+      "parent_id": "forecast_agreement_w42",
+      "preregistration": "experiments/frontier_20260911g/forecast_agreement/preregistration.json",
+      "preregistration_sha256": "34803e473e8eae5a03519e1e0a0007b4291b247eed3c2c1ed015e7b6256c7180"
+    },
+    {
+      "id": "forecast_agreement_ablation",
+      "family": "forecast_agreement",
+      "mode": "ablation",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_forecast_agreement.py",
+      "parent_id": "forecast_agreement_w42",
+      "preregistration": "experiments/frontier_20260911g/forecast_agreement/preregistration.json",
+      "preregistration_sha256": "34803e473e8eae5a03519e1e0a0007b4291b247eed3c2c1ed015e7b6256c7180"
+    },
+    {
+      "id": "forecast_agreement_falsifier",
+      "family": "forecast_agreement",
+      "mode": "falsifier",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_forecast_agreement.py",
+      "parent_id": "forecast_agreement_w42",
+      "preregistration": "experiments/frontier_20260911g/forecast_agreement/preregistration.json",
+      "preregistration_sha256": "34803e473e8eae5a03519e1e0a0007b4291b247eed3c2c1ed015e7b6256c7180"
+    },
+    {
+      "id": "cost_relative_persistence_w42",
+      "family": "cost_relative_persistence",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_cost_relative_persistence.py",
+      "parent_id": "cost_relative_persistence_w63",
+      "preregistration": "experiments/frontier_20260911g/cost_relative_persistence/preregistration.json",
+      "preregistration_sha256": "1ceaef0d2e5d62364a1d533ba8bfaed9d9b201244e26cdac117a593d44e010a3"
+    },
+    {
+      "id": "cost_relative_persistence_w63",
+      "family": "cost_relative_persistence",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_cost_relative_persistence.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911g/cost_relative_persistence/preregistration.json",
+      "preregistration_sha256": "1ceaef0d2e5d62364a1d533ba8bfaed9d9b201244e26cdac117a593d44e010a3"
+    },
+    {
+      "id": "cost_relative_persistence_w84",
+      "family": "cost_relative_persistence",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_cost_relative_persistence.py",
+      "parent_id": "cost_relative_persistence_w63",
+      "preregistration": "experiments/frontier_20260911g/cost_relative_persistence/preregistration.json",
+      "preregistration_sha256": "1ceaef0d2e5d62364a1d533ba8bfaed9d9b201244e26cdac117a593d44e010a3"
+    },
+    {
+      "id": "cost_relative_persistence_ablation",
+      "family": "cost_relative_persistence",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_cost_relative_persistence.py",
+      "parent_id": "cost_relative_persistence_w63",
+      "preregistration": "experiments/frontier_20260911g/cost_relative_persistence/preregistration.json",
+      "preregistration_sha256": "1ceaef0d2e5d62364a1d533ba8bfaed9d9b201244e26cdac117a593d44e010a3"
+    },
+    {
+      "id": "cost_relative_persistence_falsifier",
+      "family": "cost_relative_persistence",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911g_cost_relative_persistence.py",
+      "parent_id": "cost_relative_persistence_w63",
+      "preregistration": "experiments/frontier_20260911g/cost_relative_persistence/preregistration.json",
+      "preregistration_sha256": "1ceaef0d2e5d62364a1d533ba8bfaed9d9b201244e26cdac117a593d44e010a3"
+    }
+  ],
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "max_unique_candidates": 15,
+  "automatic_promotion": false,
+  "protected_live_start": "2026-10-01",
+  "classification_note": "Three discovery hypotheses: residual-edge uncertainty change, two-speed forecast agreement, and cost-relative residual persistence."
+}

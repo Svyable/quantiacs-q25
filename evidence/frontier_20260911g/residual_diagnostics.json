@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "available_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "requested_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "status": "COMPLETE"
+  },
+  "cost_relative_persistence_ablation": {
+    "correlations": {
+      "equal_liquid": 0.6430030162379908,
+      "inverse_vol_trend": 0.5147901922099517,
+      "persistent_low_vol": 0.6436961840203292
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.0516533663113312,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cost_relative_persistence_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.7144633564128843,
+      "inverse_vol_trend": 0.5639538720395689,
+      "persistent_low_vol": 0.7033880318401163
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.3970768782015543,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cost_relative_persistence_w42": {
+    "correlations": {
+      "equal_liquid": 0.6698074492743071,
+      "inverse_vol_trend": 0.566632674752431,
+      "persistent_low_vol": 0.6779972556436351
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.4233191719034538,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cost_relative_persistence_w63": {
+    "correlations": {
+      "equal_liquid": 0.7073946955793977,
+      "inverse_vol_trend": 0.5427576713948399,
+      "persistent_low_vol": 0.7026563693448391
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.16813285031565056,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cost_relative_persistence_w84": {
+    "correlations": {
+      "equal_liquid": 0.6925494377188816,
+      "inverse_vol_trend": 0.49187191749837805,
+      "persistent_low_vol": 0.6952938424448782
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.9175792870073696,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "edge_uncertainty_ablation": {
+    "correlations": {
+      "equal_liquid": 0.9052119221413005,
+      "inverse_vol_trend": 0.6483259058128362,
+      "persistent_low_vol": 0.88152905236229
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.10011725376027929,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "edge_uncertainty_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.6277456940206737,
+      "inverse_vol_trend": 0.37781097973777367,
+      "persistent_low_vol": 0.5933192369293171
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.7640068942000214,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "edge_uncertainty_w42": {
+    "correlations": {
+      "equal_liquid": 0.6413424505595829,
+      "inverse_vol_trend": 0.47266371735394214,
+      "persistent_low_vol": 0.5879423357035329
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.004270833886593482,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "edge_uncertainty_w63": {
+    "correlations": {
+      "equal_liquid": 0.645434294822027,
+      "inverse_vol_trend": 0.40620702544009407,
+      "persistent_low_vol": 0.5931841659422247
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.335590084869221,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "edge_uncertainty_w84": {
+    "correlations": {
+      "equal_liquid": 0.5634064042233606,
+      "inverse_vol_trend": 0.31123626994173387,
+      "persistent_low_vol": 0.5306351887902622
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.16121535211251065,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "forecast_agreement_ablation": {
+    "correlations": {
+      "equal_liquid": 0.9168116702685775,
+      "inverse_vol_trend": 0.7870348499546453,
+      "persistent_low_vol": 0.8997672439098527
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.9760360839128477,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "forecast_agreement_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.7059804740005649,
+      "inverse_vol_trend": 0.5244883988329222,
+      "persistent_low_vol": 0.7075021816557815
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.6211344230522589,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "forecast_agreement_w21": {
+    "correlations": {
+      "equal_liquid": 0.8915403231378305,
+      "inverse_vol_trend": 0.7211564027355816,
+      "persistent_low_vol": 0.8774350075803448
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.14242137877494102,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "forecast_agreement_w42": {
+    "correlations": {
+      "equal_liquid": 0.8586586677435918,
+      "inverse_vol_trend": 0.7187396342855369,
+      "persistent_low_vol": 0.8519383741354911
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.9452066640980427,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "forecast_agreement_w63": {
+    "correlations": {
+      "equal_liquid": 0.8530241061643711,
+      "inverse_vol_trend": 0.7111791260567777,
+      "persistent_low_vol": 0.844636518072078
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.5694468774761615,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  }
+}

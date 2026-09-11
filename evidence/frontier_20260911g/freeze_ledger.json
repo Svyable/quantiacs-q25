@@ -1,0 +1,49 @@
+[
+  {
+    "best_score": -0.12109203792378205,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "cost_relative_persistence_ablation"
+    ],
+    "family": "cost_relative_persistence",
+    "family_rank": 2,
+    "invalid_cells": [],
+    "median_score": -0.12685798470636075,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  },
+  {
+    "best_score": -0.20765209632421805,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "edge_uncertainty_ablation",
+      "edge_uncertainty_falsifier"
+    ],
+    "family": "edge_uncertainty",
+    "family_rank": 3,
+    "invalid_cells": [],
+    "median_score": -0.3868820057237612,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  },
+  {
+    "best_score": 0.4577398177018593,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "KILL_WEAK_ALPHA",
+    "declared_cells": 5,
+    "failed_controls": [],
+    "family": "forecast_agreement",
+    "family_rank": 1,
+    "invalid_cells": [],
+    "median_score": 0.21310223380844132,
+    "pending_cells": [],
+    "reason": "every valid base cell is below predefined development floor Sharpe 1.0"
+  }
+]

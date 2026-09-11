@@ -1,0 +1,12 @@
+{
+  "campaign": "frontier_20260911g",
+  "frozen_before_new_returns": true,
+  "secondary_diagnostics": {
+    "block_days": 21,
+    "bootstrap_replicates": 2000,
+    "seed": 20260913
+  },
+  "progression": "Require all valid cells, central base beating both controls, >=2 base robust Sharpes >=1 and positive central dev residual SR. Only then test one extra execution day with SAME frozen parameters. Only survivors may receive a separately labeled contaminated 2023-2024 diagnostic; no 2025+ or live retrieval.",
+  "policy_note": "This progression rule allocates research compute; it does not replace repository promotion gates.",
+  "multiple_testing": "24 sketches, six registrations, 15 new cells and three generic controls; A\u2013F history already observed."
+}

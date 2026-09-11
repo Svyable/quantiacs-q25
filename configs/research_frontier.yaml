@@ -8,7 +8,7 @@
 # configs/external_research_leads.yaml and docs/EXTERNAL_RESEARCH_LEADS.md.
 # Do not infer edge from priority alone.
 
-as_of: "2026-09-09"
+as_of: "2026-09-11"
 external_research_ref: "configs/external_research_leads.yaml"
 
 novelty_axes:
@@ -25,6 +25,15 @@ novelty_rule: >-
   weight, rebalance day, or risk scaler is not sufficient evidence of novelty.
 
 occupied_or_crowded:
+  - family: "residual_edge_uncertainty_change"
+    incumbents: [frontier_20260911g_edge_uncertainty]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: all change-based development Sharpes negative; level-only ablation 0.116 beats the central change signal (−0.568). Do not invert the change sign. Does not falsify Frontier-B topology migration."
+  - family: "two_speed_forecast_agreement"
+    incumbents: [frontier_20260911g_forecast_agreement]
+    note: "FROZEN / KILL_WEAK_ALPHA: best base robust SR 0.458 beats slow-only ablation 0.255 and disagreement falsifier −0.134; every base window misses the 1.0 floor. High correlation to equal-liquid (0.859). No grid rescue."
+  - family: "cost_relative_residual_persistence"
+    incumbents: [frontier_20260911g_cost_relative_persistence]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: all base windows negative; central −0.400 loses to no-ATR ablation −0.200. ATR pairing changes capital but does not earn its complexity. Do not promote the ablation."
   - family: "signed_triangle_coherence_change"
     incumbents: [frontier_20260911f_triangle_coherence]
     note: "FROZEN / FALSIFIED_DEVELOPMENT: all base development Sharpes negative; both balance-level ablation and eligible identity rotation beat the central change signal. Does not falsify every topology hypothesis."

@@ -101,6 +101,17 @@ The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are
 
 ## Current read-through
 
+Frontier-G (`experiments/frontier_20260911g/pm_report.md`) tested residual-edge
+uncertainty change, two-speed forecast agreement and cost-relative residual
+persistence. All 18 objects completed exact local evaluation after a
+coordinate-order repair in the agreement family. Agreement was frozen as
+`KILL_WEAK_ALPHA`: the central 42-day base scored 0.458, beat both its ablation
+(0.255) and disagreement falsifier (−0.134), and still missed the 1.0 floor.
+Edge-uncertainty change and cost-relative persistence were frozen as
+`FALSIFIED_DEVELOPMENT`. Preserve these formulas and grids. No execution-delay
+or later chronological diagnostic was triggered. Full evidence is in
+`evidence/frontier_20260911g/` with source and preregistration freezes.
+
 Frontier-F (`experiments/frontier_20260911f/pm_report.md`) tested signed-triangle
 coherence, a conditional weekly-payoff posterior and an adaptive expert/cash
 policy. The policy is an `allocator_experiment`, not independent alpha. All 18

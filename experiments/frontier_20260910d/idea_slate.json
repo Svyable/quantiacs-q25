@@ -1,0 +1,410 @@
+[
+  {
+    "area": "serial",
+    "id": "variance_ratio_reversal",
+    "thesis": "Negative serial dependence predicts reversal of a recent relative loss during a positive market trend.",
+    "falsifier": "invert serial-dependence state",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 2
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "serial",
+    "id": "horizon_disagreement",
+    "thesis": "Opposite daily and weekly serial-dependence signs mark unstable forecasts.",
+    "falsifier": "replace disagreement with volatility",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "serial",
+    "id": "autocovariance_decay",
+    "thesis": "Shrinking negative autocovariance reduces the usefulness of reversal entries.",
+    "falsifier": "freeze lag profile",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "serial",
+    "id": "runs_asymmetry",
+    "thesis": "Long losing runs followed by shorter losing runs reveal exhaustion.",
+    "falsifier": "permute run order",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "serial",
+    "id": "sign_entropy",
+    "thesis": "Low entropy in return signs changes whether small losses are transitory.",
+    "falsifier": "magnitude-only state",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "serial",
+    "id": "overnight_repair",
+    "thesis": "Gap reversals accompanied by intraday repair persist differently from close-only losses.",
+    "falsifier": "erase open-close split",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 0,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "ordinal",
+    "id": "rank_transition",
+    "thesis": "Positive cross-sectional rank migration with low transition noise identifies durable leadership.",
+    "falsifier": "rotate noise state within eligible names",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "ordinal",
+    "id": "rank_reentry",
+    "thesis": "Reclaiming a prior rank after a drawdown differs from first-time leadership.",
+    "falsifier": "erase prior rank peak",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "ordinal",
+    "id": "cohort_rank_breadth",
+    "thesis": "A widening cohort of stable leaders supports deployment.",
+    "falsifier": "current breadth alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "ordinal",
+    "id": "rank_crossings",
+    "thesis": "Fewer pairwise rank crossings indicate persistent relative-value information.",
+    "falsifier": "freeze pair identities",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "ordinal",
+    "id": "rank_tail_spacing",
+    "thesis": "Large upper-rank gaps make concentration more reliable.",
+    "falsifier": "replace gaps with ranks",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "ordinal",
+    "id": "rank_agreement",
+    "thesis": "Agreement of rank migration across independent horizons reduces noisy leadership.",
+    "falsifier": "shuffle horizon pairing",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "range",
+    "id": "range_acceptance",
+    "thesis": "Repeated acceptance inside earlier ranges before an upside escape identifies durable repricing.",
+    "falsifier": "destroy temporal range pairing",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "range",
+    "id": "range_rejection",
+    "thesis": "Failed attempts to reclaim prior ranges reveal weak recoveries.",
+    "falsifier": "close momentum only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "range",
+    "id": "support_migration",
+    "thesis": "A rising distribution of prior lows changes downside absorption.",
+    "falsifier": "static range location",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "range",
+    "id": "range_containment",
+    "thesis": "Nested high-low ranges followed by ordered expansion reveal latent demand.",
+    "falsifier": "randomize nesting order",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "range",
+    "id": "range_gap_density",
+    "thesis": "Price regions with little historical range coverage admit rapid repricing.",
+    "falsifier": "replace coverage with volatility",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "range",
+    "id": "volume_location_memory",
+    "thesis": "High-volume range locations predict which future revisits fail.",
+    "falsifier": "destroy price-volume pairing",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "execution",
+    "id": "execution_hurdle",
+    "thesis": "A forecast must clear a predetermined ATR-linked round-trip hurdle before taking risk.",
+    "falsifier": "zero hurdle with same forecast",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "execution",
+    "id": "quote_recovery",
+    "thesis": "Persistent valid quotations following gaps contain more usable alpha than first recovered prints.",
+    "falsifier": "current validity only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "execution",
+    "id": "trade_distance",
+    "thesis": "Expected improvement relative to turnover distance supports sparse target replacement.",
+    "falsifier": "replace distance with constant",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "execution",
+    "id": "signal_decay_budget",
+    "thesis": "Empirically estimated signal decay can determine when execution delay is too costly.",
+    "falsifier": "freeze decay estimate",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "execution",
+    "id": "opportunity_synchrony",
+    "thesis": "Staggered independent signals support lower-turnover deployment than synchronized signals.",
+    "falsifier": "shuffle signal dates",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  },
+  {
+    "area": "execution",
+    "id": "capacity_density",
+    "thesis": "Signal breadth relative to eligible capacity predicts when fixed-slot allocation should hold cash.",
+    "falsifier": "equal gross every date",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after reading Frontier A\u2013C mechanisms; no Frontier-D returns"
+  }
+]

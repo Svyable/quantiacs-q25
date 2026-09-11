@@ -108,9 +108,17 @@ Folds in `configs/chronological_folds.yaml`:
 ## L9 — Adversarial falsification
 
 - [ ] State falsifier up front (what result kills the thesis?)
+- [ ] Check allocator identifiability: count changed target days versus the ablation. A score interaction discarded by the allocator is not additional deployed alpha.
+- [ ] Cross-sectional permutations preserve the eligible, finite marginal distribution and remain invariant to asset order or inactive future-listed columns.
 - [ ] Sign-flip / shuffle / lag-break / liquidity-drop stress
 - [ ] Cleaner mutation ≈ 0 (noise-only variant should not “pass”)
 - [ ] Kill criteria executed; failures logged in `experiments/`
+
+`research/mechanism_diagnostics.py` provides target-path comparisons and paired
+circular block-bootstrap intervals. Freeze the block length, seed, number of
+draws and comparison before inspecting returns. Intervals on reused development
+data are diagnostics, not selection-adjusted significance or promotion gates.
+See `scripts/analyze_mechanism_controls.py` for source/data-hash-checked use.
 
 ## Infrastructure vs alpha failure
 

@@ -54,3 +54,11 @@ experiments/_prereg_smoke/
 !experiments/frontier_20260910/**/preregistration.sha256
 !experiments/frontier_20260910/pm_report.md
 !experiments/frontier_20260910/formula_ledger.csv
+
+# Frozen Frontier-D discovery campaign.
+!strategies/generated/frontier_20260910d_*.py
+!experiments/frontier_20260910d/**/preregistration.json
+!experiments/frontier_20260910d/**/preregistration.sha256
+!experiments/frontier_20260910d/pm_report.md
+!experiments/frontier_20260910d/formula_ledger.csv
+data-cache/

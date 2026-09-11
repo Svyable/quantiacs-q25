@@ -1,0 +1,17 @@
+{
+  "campaign": "frontier_20260910d",
+  "frozen_before_new_returns": true,
+  "primary_decision": "Existing preregistered worst-fold/cost score and central-cell destructive-control rules are unchanged.",
+  "secondary_diagnostics": {
+    "allocator_identifiability": "Compare the full target path of each central candidate with its ablation and falsifier. Different signals with identical targets are no deployable alpha contribution.",
+    "paired_return_uncertainty": "Candidate minus its matched ablation/falsifier at 4% ATR slippage, dev fold only, preserving contiguous daily dependence with circular moving blocks.",
+    "block_days": 21,
+    "bootstrap_replicates": 2000,
+    "seed": 20260910,
+    "interval": "95% percentile interval for annualized arithmetic mean return difference; not CAGR and not a selection-adjusted significance test.",
+    "minimum_observations": 126,
+    "historical_incumbents": "Unavailable matched V10/V11/V12 streams remain PENDING; no metric borrowing."
+  },
+  "interpretation": "Secondary diagnostics can undermine a mechanism claim; they cannot promote a strategy or rescue a failed preregistered gate. Reused development history and multiple testing limit inference.",
+  "execution_delay": "Additional delay stress is required only for surviving candidates before forward testing. No delay parameter optimization."
+}

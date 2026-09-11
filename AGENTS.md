@@ -101,6 +101,16 @@ The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are
 
 ## Current read-through
 
+Frontier-D (`experiments/frontier_20260910d/pm_report.md`) measured all ten
+candidate cells and three controls with exact public/default Quantiacs data.
+Both variance-ratio reversal and rank-transition reliability were frozen as
+`FALSIFIED_DEVELOPMENT`; do not rescue them with a wider parameter grid. The
+rank-reliability term produced identical development returns to its ablation.
+Use `research/mechanism_diagnostics.py` to check whether proposed signal changes
+survive portfolio construction, and preserve eligibility exits until the next
+scheduled rebalance. Evidence is in `evidence/frontier_20260910d/` and remains
+separate from older campaign contexts.
+
 The latest observed Frontier-B packet is **development only**. Its strongest valid base cell is `topology_migration_w84`; topology is therefore a priority seam for forward research, not a production winner. One topology grid cell failed implementation/integrity and must be repaired without parameter expansion.
 
 The liquidity-hysteresis base family is weak as standalone alpha in the captured development packet. Preserve lifecycle/hysteresis as a possible conditioning variable; do not keep tuning the same standalone hypothesis.

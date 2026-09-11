@@ -76,3 +76,30 @@ The next harness version emits a candidate packet for every attempted cell with 
 | `shock_recovery_surface_w42` | shock_recovery_surface | AssertionError |
 | `shock_recovery_surface_w56` | shock_recovery_surface | AssertionError |
 | `topology_migration_w42` | topology_migration | AssertionError |
+
+## frontier_20260910d: separate development campaign
+
+Exact local measurements; no automatic promotion or cross-campaign ranking.
+
+| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |
+|---|---|---:|---:|---|
+| `persistent_low_vol` | control | 0.641 | -93.3% | COMPLETE |
+| `variance_ratio_reversal_falsifier` | falsifier | 0.478 | -59.1% | COMPLETE |
+| `equal_liquid` | control | 0.270 | -93.6% | COMPLETE |
+| `variance_ratio_reversal_ablation` | ablation | 0.158 | -81.8% | COMPLETE |
+| `rank_transition_w84` | base | 0.144 | -78.7% | COMPLETE |
+| `rank_transition_w42` | base | 0.110 | -75.8% | COMPLETE |
+| `rank_transition_w63` | base | 0.057 | -75.7% | COMPLETE |
+| `rank_transition_ablation` | ablation | 0.057 | -75.7% | COMPLETE |
+| `rank_transition_falsifier` | falsifier | 0.057 | -76.4% | COMPLETE |
+| `inverse_vol_trend` | control | 0.053 | -87.1% | COMPLETE |
+| `variance_ratio_reversal_w42` | base | -0.140 | -80.2% | COMPLETE |
+| `variance_ratio_reversal_w84` | base | -0.176 | -76.3% | COMPLETE |
+| `variance_ratio_reversal_w63` | base | -0.284 | -75.2% | COMPLETE |
+
+| Family | Decision | Reason |
+|---|---|---|
+| rank_transition | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| variance_ratio_reversal | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+
+[Evidence packet](../evidence/frontier_20260910d/report.md) · [Research report](../experiments/frontier_20260910d/pm_report.md)

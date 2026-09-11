@@ -1,0 +1,212 @@
+{
+  "campaign": "frontier_20260911e",
+  "candidates": [
+    {
+      "id": "downside_impact_relief_w42",
+      "family": "downside_impact_relief",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_downside_impact_relief.py",
+      "parent_id": "downside_impact_relief_w63",
+      "preregistration": "experiments/frontier_20260911e/downside_impact_relief/preregistration.json",
+      "preregistration_sha256": "34f860a577c0f84fe5f1ba985be5e2d513f968c8df1d2a549f1f1ea435171354"
+    },
+    {
+      "id": "downside_impact_relief_w63",
+      "family": "downside_impact_relief",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_downside_impact_relief.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911e/downside_impact_relief/preregistration.json",
+      "preregistration_sha256": "34f860a577c0f84fe5f1ba985be5e2d513f968c8df1d2a549f1f1ea435171354"
+    },
+    {
+      "id": "downside_impact_relief_w84",
+      "family": "downside_impact_relief",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_downside_impact_relief.py",
+      "parent_id": "downside_impact_relief_w63",
+      "preregistration": "experiments/frontier_20260911e/downside_impact_relief/preregistration.json",
+      "preregistration_sha256": "34f860a577c0f84fe5f1ba985be5e2d513f968c8df1d2a549f1f1ea435171354"
+    },
+    {
+      "id": "downside_impact_relief_ablation",
+      "family": "downside_impact_relief",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_downside_impact_relief.py",
+      "parent_id": "downside_impact_relief_w63",
+      "preregistration": "experiments/frontier_20260911e/downside_impact_relief/preregistration.json",
+      "preregistration_sha256": "34f860a577c0f84fe5f1ba985be5e2d513f968c8df1d2a549f1f1ea435171354"
+    },
+    {
+      "id": "downside_impact_relief_falsifier",
+      "family": "downside_impact_relief",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_downside_impact_relief.py",
+      "parent_id": "downside_impact_relief_w63",
+      "preregistration": "experiments/frontier_20260911e/downside_impact_relief/preregistration.json",
+      "preregistration_sha256": "34f860a577c0f84fe5f1ba985be5e2d513f968c8df1d2a549f1f1ea435171354"
+    },
+    {
+      "id": "range_acceptance_escape_w42",
+      "family": "range_acceptance_escape",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_range_acceptance_escape.py",
+      "parent_id": "range_acceptance_escape_w63",
+      "preregistration": "experiments/frontier_20260911e/range_acceptance_escape/preregistration.json",
+      "preregistration_sha256": "ba60992f66b9bf9f063fe5c2172872acbe5cbe63180d5b4a612f13caeaffe1cd"
+    },
+    {
+      "id": "range_acceptance_escape_w63",
+      "family": "range_acceptance_escape",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_range_acceptance_escape.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911e/range_acceptance_escape/preregistration.json",
+      "preregistration_sha256": "ba60992f66b9bf9f063fe5c2172872acbe5cbe63180d5b4a612f13caeaffe1cd"
+    },
+    {
+      "id": "range_acceptance_escape_w84",
+      "family": "range_acceptance_escape",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_range_acceptance_escape.py",
+      "parent_id": "range_acceptance_escape_w63",
+      "preregistration": "experiments/frontier_20260911e/range_acceptance_escape/preregistration.json",
+      "preregistration_sha256": "ba60992f66b9bf9f063fe5c2172872acbe5cbe63180d5b4a612f13caeaffe1cd"
+    },
+    {
+      "id": "range_acceptance_escape_ablation",
+      "family": "range_acceptance_escape",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_range_acceptance_escape.py",
+      "parent_id": "range_acceptance_escape_w63",
+      "preregistration": "experiments/frontier_20260911e/range_acceptance_escape/preregistration.json",
+      "preregistration_sha256": "ba60992f66b9bf9f063fe5c2172872acbe5cbe63180d5b4a612f13caeaffe1cd"
+    },
+    {
+      "id": "range_acceptance_escape_falsifier",
+      "family": "range_acceptance_escape",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_range_acceptance_escape.py",
+      "parent_id": "range_acceptance_escape_w63",
+      "preregistration": "experiments/frontier_20260911e/range_acceptance_escape/preregistration.json",
+      "preregistration_sha256": "ba60992f66b9bf9f063fe5c2172872acbe5cbe63180d5b4a612f13caeaffe1cd"
+    },
+    {
+      "id": "upside_response_convexity_w42",
+      "family": "upside_response_convexity",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_upside_response_convexity.py",
+      "parent_id": "upside_response_convexity_w63",
+      "preregistration": "experiments/frontier_20260911e/upside_response_convexity/preregistration.json",
+      "preregistration_sha256": "aa671b257c19c4b8ba172564fbef05081f07350f85ec7aec4d0c0da98324e931"
+    },
+    {
+      "id": "upside_response_convexity_w63",
+      "family": "upside_response_convexity",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_upside_response_convexity.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911e/upside_response_convexity/preregistration.json",
+      "preregistration_sha256": "aa671b257c19c4b8ba172564fbef05081f07350f85ec7aec4d0c0da98324e931"
+    },
+    {
+      "id": "upside_response_convexity_w84",
+      "family": "upside_response_convexity",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_upside_response_convexity.py",
+      "parent_id": "upside_response_convexity_w63",
+      "preregistration": "experiments/frontier_20260911e/upside_response_convexity/preregistration.json",
+      "preregistration_sha256": "aa671b257c19c4b8ba172564fbef05081f07350f85ec7aec4d0c0da98324e931"
+    },
+    {
+      "id": "upside_response_convexity_ablation",
+      "family": "upside_response_convexity",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_upside_response_convexity.py",
+      "parent_id": "upside_response_convexity_w63",
+      "preregistration": "experiments/frontier_20260911e/upside_response_convexity/preregistration.json",
+      "preregistration_sha256": "aa671b257c19c4b8ba172564fbef05081f07350f85ec7aec4d0c0da98324e931"
+    },
+    {
+      "id": "upside_response_convexity_falsifier",
+      "family": "upside_response_convexity",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911e_upside_response_convexity.py",
+      "parent_id": "upside_response_convexity_w63",
+      "preregistration": "experiments/frontier_20260911e/upside_response_convexity/preregistration.json",
+      "preregistration_sha256": "aa671b257c19c4b8ba172564fbef05081f07350f85ec7aec4d0c0da98324e931"
+    }
+  ],
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "max_unique_candidates": 15,
+  "automatic_promotion": false,
+  "protected_live_start": "2026-10-01"
+}

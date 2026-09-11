@@ -11,6 +11,29 @@ CAMPAIGN='frontier_20260911f'
 FAMILIES=('triangle_coherence','weekly_payoff_posterior','adaptive_expert_cash')
 
 
+def test_observed_evidence_matches_frozen_implementation_and_classification():
+    from research.preregister import sha256_file
+    dest=ROOT/'experiments'/CAMPAIGN
+    evidence=ROOT/'evidence'/CAMPAIGN
+    freeze=json.loads((dest/'implementation_freeze.json').read_text())
+    assert all(sha256_file(ROOT/path)==h for path,h in freeze['sha256'].items())
+    manifest=load_manifest(dest/'manifest.json')
+    context=json.loads((evidence/'context.json').read_text())
+    assert context['manifest_sha256']==sha256_file(dest/'manifest.json')
+    for job in manifest['candidates']:
+        row=json.loads((evidence/'candidate_packets'/(job['id']+'.json')).read_text())
+        assert row['data_sha256']==context['data_sha256']
+        assert row['strategy_source_sha256']==sha256_file(ROOT/job['path'])
+        assert row['preregistration_sha256']==job['preregistration_sha256']
+        assert row['params']==job['params']
+        expected='allocator_experiment' if job['family']=='adaptive_expert_cash' else 'discovery_hypothesis'
+        assert row['classification']==expected
+    matrix=json.loads((evidence/'matrix.json').read_text())
+    assert len(matrix['candidates'])==18
+    assert all(row['status']=='COMPLETE' for row in matrix['candidates'])
+    assert all(row['decision']=='FREEZE' for row in matrix['families'])
+
+
 def module(family):
     return load_module(ROOT/f'strategies/generated/{CAMPAIGN}_{family}.py')
 

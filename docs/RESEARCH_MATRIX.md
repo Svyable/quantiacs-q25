@@ -136,3 +136,36 @@ Exact local measurements; no automatic promotion or cross-campaign ranking.
 | upside_response_convexity | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
 
 [Evidence packet](../evidence/frontier_20260911e/report.md) · [Research report](../experiments/frontier_20260911e/pm_report.md)
+
+## frontier_20260911f: separate development campaign
+
+Exact local measurements; no automatic promotion or cross-campaign ranking.
+
+| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |
+|---|---|---:|---:|---|
+| `weekly_payoff_posterior_ablation` | ablation | 0.970 | -23.3% | COMPLETE |
+| `weekly_payoff_posterior_w84` | base | 0.944 | -38.1% | COMPLETE |
+| `weekly_payoff_posterior_w126` | base | 0.788 | -37.9% | COMPLETE |
+| `adaptive_expert_cash_falsifier` | falsifier | 0.778 | -76.2% | COMPLETE |
+| `adaptive_expert_cash_w84` | base | 0.671 | -82.2% | COMPLETE |
+| `persistent_low_vol` | control | 0.641 | -93.3% | COMPLETE |
+| `adaptive_expert_cash_w126` | base | 0.571 | -79.0% | COMPLETE |
+| `weekly_payoff_posterior_w168` | base | 0.538 | -38.3% | COMPLETE |
+| `adaptive_expert_cash_w168` | base | 0.461 | -76.8% | COMPLETE |
+| `adaptive_expert_cash_ablation` | ablation | 0.444 | -77.4% | COMPLETE |
+| `weekly_payoff_posterior_falsifier` | falsifier | 0.409 | -40.3% | COMPLETE |
+| `equal_liquid` | control | 0.270 | -93.6% | COMPLETE |
+| `triangle_coherence_ablation` | ablation | 0.207 | -76.3% | COMPLETE |
+| `inverse_vol_trend` | control | 0.053 | -87.1% | COMPLETE |
+| `triangle_coherence_falsifier` | falsifier | -0.219 | -19.0% | COMPLETE |
+| `triangle_coherence_w84` | base | -0.652 | -19.4% | COMPLETE |
+| `triangle_coherence_w63` | base | -0.683 | -20.6% | COMPLETE |
+| `triangle_coherence_w42` | base | -1.000 | -28.0% | COMPLETE |
+
+| Family | Decision | Reason |
+|---|---|---|
+| adaptive_expert_cash | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| triangle_coherence | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| weekly_payoff_posterior | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+
+[Evidence packet](../evidence/frontier_20260911f/report.md) · [Research report](../experiments/frontier_20260911f/pm_report.md)

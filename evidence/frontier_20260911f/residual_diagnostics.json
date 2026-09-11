@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "available_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "requested_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "status": "COMPLETE"
+  },
+  "adaptive_expert_cash_ablation": {
+    "correlations": {
+      "equal_liquid": 0.9438877019217532,
+      "inverse_vol_trend": 0.9047437994021158,
+      "persistent_low_vol": 0.9497445197691405
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.9442384299736191,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "adaptive_expert_cash_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.8644038475104462,
+      "inverse_vol_trend": 0.879700442253125,
+      "persistent_low_vol": 0.8783875735073426
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.6021119057098561,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "adaptive_expert_cash_w126": {
+    "correlations": {
+      "equal_liquid": 0.8421061454352303,
+      "inverse_vol_trend": 0.8923838964158245,
+      "persistent_low_vol": 0.8704578076834333
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.5607236858596457,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "adaptive_expert_cash_w168": {
+    "correlations": {
+      "equal_liquid": 0.8328498860852918,
+      "inverse_vol_trend": 0.8742486129594924,
+      "persistent_low_vol": 0.8604526733396327
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.20506598956182562,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "adaptive_expert_cash_w84": {
+    "correlations": {
+      "equal_liquid": 0.8587597962007482,
+      "inverse_vol_trend": 0.9220386483324529,
+      "persistent_low_vol": 0.8847104405935916
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.3148230196221848,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "triangle_coherence_ablation": {
+    "correlations": {
+      "equal_liquid": 0.9198650814101729,
+      "inverse_vol_trend": 0.676796368736847,
+      "persistent_low_vol": 0.8954147199080882
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.15303597551702372,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "triangle_coherence_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.6801134878403823,
+      "inverse_vol_trend": 0.3927056525742171,
+      "persistent_low_vol": 0.6371548299102933
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.7968855858540481,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "triangle_coherence_w42": {
+    "correlations": {
+      "equal_liquid": 0.6921672729516538,
+      "inverse_vol_trend": 0.5665847671366144,
+      "persistent_low_vol": 0.645478373335437
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.9227577774274538,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "triangle_coherence_w63": {
+    "correlations": {
+      "equal_liquid": 0.722210772894598,
+      "inverse_vol_trend": 0.5040838949893589,
+      "persistent_low_vol": 0.6701689134373848
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.7477112436335499,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "triangle_coherence_w84": {
+    "correlations": {
+      "equal_liquid": 0.6420500196144436,
+      "inverse_vol_trend": 0.4301704711937041,
+      "persistent_low_vol": 0.596059426384509
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.6804033283315438,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "weekly_payoff_posterior_ablation": {
+    "correlations": {
+      "equal_liquid": 0.6062648686658713,
+      "inverse_vol_trend": 0.7379581406237053,
+      "persistent_low_vol": 0.6350907048274944
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.5627370820691288,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "weekly_payoff_posterior_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.6283093355182784,
+      "inverse_vol_trend": 0.7510507686146682,
+      "persistent_low_vol": 0.670865603636694
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.3198728779196162,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "weekly_payoff_posterior_w126": {
+    "correlations": {
+      "equal_liquid": 0.63161005994509,
+      "inverse_vol_trend": 0.75738882961029,
+      "persistent_low_vol": 0.6570930741090706
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.27179694133213683,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "weekly_payoff_posterior_w168": {
+    "correlations": {
+      "equal_liquid": 0.626507925234922,
+      "inverse_vol_trend": 0.7392464403253218,
+      "persistent_low_vol": 0.653221594588818
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.4364590271258681,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "weekly_payoff_posterior_w84": {
+    "correlations": {
+      "equal_liquid": 0.5922385775777034,
+      "inverse_vol_trend": 0.7449372814826845,
+      "persistent_low_vol": 0.6218110475407791
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.3288061831365793,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  }
+}

@@ -1,0 +1,54 @@
+name: frontier-g-alpha-benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/frontier_20260911g/**'
+      - 'strategies/generated/frontier_20260911g_*.py'
+      - 'tests/test_frontier_g.py'
+      - '.github/workflows/frontier-g-alpha-benchmark.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  measured-alpha-campaign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      CAMPAIGN: frontier_20260911g
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Quantiacs toolbox and tests
+        run: python -m pip install -r requirements.txt pytest
+      - name: Run full software and causality suite
+        run: python -m pytest -q tests
+      - name: Prove Frontier-G registration exists before measurement
+        run: |
+          sha256sum experiments/$CAMPAIGN/idea_slate.json experiments/$CAMPAIGN/manifest.json experiments/$CAMPAIGN/*/preregistration.json strategies/generated/${CAMPAIGN}_*.py
+      - name: Run exact Frontier-G development campaign
+        run: |
+          python -m research.iteration --manifest "experiments/$CAMPAIGN/manifest.json" --output "results/$CAMPAIGN" --budget 18
+      - name: Print new-alpha evidence
+        if: always()
+        run: |
+          RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          test -n "$RESULT_DIR"
+          cat "$RESULT_DIR/report.md" || true
+          echo "\n=== RESIDUAL DIAGNOSTICS ==="
+          cat "$RESULT_DIR/residual_diagnostics.json" || true
+          echo "\n=== FAMILY DECISIONS ==="
+          cat "$RESULT_DIR/freeze_ledger.json" || true
+      - name: Preserve measured Frontier-G evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.CAMPAIGN }}-measured-${{ github.run_id }}
+          path: results/${{ env.CAMPAIGN }}/
+          if-no-files-found: warn

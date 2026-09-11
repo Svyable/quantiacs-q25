@@ -69,3 +69,10 @@ data-cache/
 !experiments/frontier_20260911e/**/preregistration.sha256
 !experiments/frontier_20260911e/pm_report.md
 !experiments/frontier_20260911e/formula_ledger.csv
+
+# Frozen Frontier-F campaign.
+!strategies/generated/frontier_20260911f_*.py
+!experiments/frontier_20260911f/**/preregistration.json
+!experiments/frontier_20260911f/**/preregistration.sha256
+!experiments/frontier_20260911f/pm_report.md
+!experiments/frontier_20260911f/formula_ledger.csv

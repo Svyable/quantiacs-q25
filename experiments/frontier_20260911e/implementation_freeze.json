@@ -1,0 +1,11 @@
+{
+  "frozen_before_measurement": true,
+  "sha256": {
+    "strategies/generated/frontier_20260911e_range_acceptance_escape.py": "5c1be2979346f4e5d02c0ac799a654a423b9d24e0f86826a275b32ddf13fec2d",
+    "strategies/generated/frontier_20260911e_downside_impact_relief.py": "ee7dd16505e6a071fa2aa414f305354f9aadde011cb0a8b233877857e2db936f",
+    "strategies/generated/frontier_20260911e_upside_response_convexity.py": "8f97e70b09ae3d0dbaa0844d2ee09778fe834cbbbe9d413ebdb29f28e99acb6b",
+    "experiments/frontier_20260911e/analysis_plan.json": "3a79568df095aa58aa7c7c513c641f3a394c82a9fb7d4e213a7d29a9c557d613",
+    "experiments/frontier_20260911e/manifest.json": "c2423d49822fea7e3fcdcb25bb493a4574cdf77e77a5075b9dd0c133374409bc"
+  },
+  "synthetic_tests": "42 passed; no economic metrics used"
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "best_score": 0.6712867226828962,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "adaptive_expert_cash_falsifier"
+    ],
+    "family": "adaptive_expert_cash",
+    "family_rank": 2,
+    "invalid_cells": [],
+    "median_score": 0.5713726723612166,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  },
+  {
+    "best_score": -0.6521798435449112,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "triangle_coherence_ablation",
+      "triangle_coherence_falsifier"
+    ],
+    "family": "triangle_coherence",
+    "family_rank": 3,
+    "invalid_cells": [],
+    "median_score": -0.6833892753440983,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  },
+  {
+    "best_score": 0.9441662683271208,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "weekly_payoff_posterior_ablation"
+    ],
+    "family": "weekly_payoff_posterior",
+    "family_rank": 1,
+    "invalid_cells": [],
+    "median_score": 0.788477796766099,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  }
+]

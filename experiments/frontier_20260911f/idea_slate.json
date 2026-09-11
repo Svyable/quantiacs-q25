@@ -1,0 +1,434 @@
+[
+  {
+    "id": "triangle_coherence",
+    "area": "network_structure",
+    "thesis": "Increasing consistency of signed residual-correlation triangles identifies coherent emerging opportunity.",
+    "falsifier": "rotate node coherence changes inside the matched eligible cohort",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "bridge_persistence",
+    "area": "network_structure",
+    "thesis": "Persistent graph bridges identify stable cross-cluster information links.",
+    "falsifier": "degree centrality alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "community_survival",
+    "area": "network_structure",
+    "thesis": "Long-lived inferred communities behave differently from transient clusters.",
+    "falsifier": "freeze community assignments",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "spectral_localization",
+    "area": "network_structure",
+    "thesis": "A falling concentration of leading residual eigenvectors indicates independent opportunity.",
+    "falsifier": "equal-liquid rank",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "edge_sign_turnover",
+    "area": "network_structure",
+    "thesis": "Changes in the sign stability of residual edges predict fragmentation risk.",
+    "falsifier": "absolute correlations only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "network_redundancy",
+    "area": "network_structure",
+    "thesis": "Redundant paths make leaders less dependent on any single correlated peer.",
+    "falsifier": "degree-matched random graph",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "weekly_payoff_posterior",
+    "area": "probability_forecasting",
+    "thesis": "Past fully realized weekly gain probabilities and loss magnitudes conditioned on market state predict whether taking risk has positive utility.",
+    "falsifier": "rotate realized weekly outcomes across eligible start-date assets",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "quantile_calibration",
+    "area": "probability_forecasting",
+    "thesis": "Past quantile forecast violations reveal changes in downside risk.",
+    "falsifier": "fixed historical quantiles",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "record_arrival_hazard",
+    "area": "probability_forecasting",
+    "thesis": "Changing waiting times between relative-price records identify new leadership.",
+    "falsifier": "record frequency without ordering",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "survival_duration",
+    "area": "probability_forecasting",
+    "thesis": "Survival of a positive residual spell predicts continuation differently from its magnitude.",
+    "falsifier": "return magnitude only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "conditional_payoff_skew",
+    "area": "probability_forecasting",
+    "thesis": "Gain/loss asymmetry depends on common-market recovery age.",
+    "falsifier": "unconditional payoff model",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "forecast_set_width",
+    "area": "probability_forecasting",
+    "thesis": "Prediction-interval width predicts when a point forecast is insufficient to justify risk.",
+    "falsifier": "constant confidence width",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "adaptive_expert_cash",
+    "area": "allocation_policy",
+    "thesis": "A causal downside-penalized exponential policy over fixed trend, low-volatility and cash experts improves allocation versus a static mixture.",
+    "falsifier": "swap trend and defensive utility histories while leaving cash fixed",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "drawdown_budget",
+    "area": "allocation_policy",
+    "thesis": "Allocate a fixed risk budget according to each sleeve's trailing downside contribution.",
+    "falsifier": "equal sleeve budget",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "minimax_exposure",
+    "area": "allocation_policy",
+    "thesis": "Choose conservative exposure under a small set of recent return scenarios.",
+    "falsifier": "average scenario only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "switching_penalty",
+    "area": "allocation_policy",
+    "thesis": "A fixed switching penalty reduces allocation churn between two experts.",
+    "falsifier": "zero switching penalty",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "cash_option_value",
+    "area": "allocation_policy",
+    "thesis": "Conditional uncertainty raises the value of waiting for clearer signals.",
+    "falsifier": "always-deployed portfolio",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "factor_residual_budget",
+    "area": "allocation_policy",
+    "thesis": "Limit funding of sleeves explained by the same market factor.",
+    "falsifier": "equal gross rather than residual funding",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "onchain_price_disagreement",
+    "area": "new_information_and_controls",
+    "thesis": "Disagreement between network activity and price changes the opportunity state.",
+    "falsifier": "matched price-only state",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 0,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "UNVERIFIED_FOR_Q25"
+  },
+  {
+    "id": "index_weight_pressure",
+    "area": "new_information_and_controls",
+    "thesis": "Point-in-time index-weight migration predicts subsequent flow pressure.",
+    "falsifier": "binary liquidity membership",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 0,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "UNVERIFIED_FOR_Q25"
+  },
+  {
+    "id": "cross_horizon_forecast_conflict",
+    "area": "new_information_and_controls",
+    "thesis": "Disagreement of independently estimated short and long payoff probabilities predicts cash demand.",
+    "falsifier": "one probability model only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "eligibility_boundary_pressure",
+    "area": "new_information_and_controls",
+    "thesis": "Repeated crossings of an eligibility boundary affect next-spell behavior.",
+    "falsifier": "current membership only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "execution_surprise",
+    "area": "new_information_and_controls",
+    "thesis": "The gap between anticipated and realized execution cost predicts reduced opportunity.",
+    "falsifier": "ATR level alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "market_neutral_residual_control",
+    "area": "new_information_and_controls",
+    "thesis": "A beta-explained residual diagnostic separates market timing from independent contribution.",
+    "falsifier": "raw Sharpe only",
+    "scores": {
+      "novelty": 0,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013E; no Frontier-F returns; one intentionally labeled allocation experiment",
+    "admissibility": "OHLCV_ONLY"
+  }
+]

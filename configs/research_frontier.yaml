@@ -25,6 +25,16 @@ novelty_rule: >-
   weight, rebalance day, or risk scaler is not sufficient evidence of novelty.
 
 occupied_or_crowded:
+  - family: "signed_triangle_coherence_change"
+    incumbents: [frontier_20260911f_triangle_coherence]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: all base development Sharpes negative; both balance-level ablation and eligible identity rotation beat the central change signal. Does not falsify every topology hypothesis."
+  - family: "conditional_weekly_payoff_posterior"
+    incumbents: [frontier_20260911f_weekly_payoff_posterior]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: best base robust SR 0.944; central 0.788 loses to pooled-state ablation 0.970. Identity rotation weakens this implementation, but the chosen market-state condition adds no measured value. No control promotion or grid rescue."
+  - family: "adaptive_expert_cash_policy"
+    incumbents: [frontier_20260911f_adaptive_expert_cash, V5_latency, V10]
+    classification: "ALLOCATOR_EXPERIMENT_NOT_INDEPENDENT_ALPHA"
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: central adaptive routing 0.571 beats static thirds 0.444 but loses to swapped expert labels 0.778. Teacher proxy is not exact execution P&L; positive residual SR does not rescue the failed interpretation."
   - family: "downside_impact_relief"
     incumbents: [frontier_20260911e_downside_impact_relief]
     note: "FROZEN / FALSIFIED_DEVELOPMENT: removing volume beats the central relief cell; no base window reaches the 1.0 robust floor. A price-impact proxy is not observed order flow."

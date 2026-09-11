@@ -101,6 +101,17 @@ The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are
 
 ## Current read-through
 
+Frontier-F (`experiments/frontier_20260911f/pm_report.md`) tested signed-triangle
+coherence, a conditional weekly-payoff posterior and an adaptive expert/cash
+policy. The policy is an `allocator_experiment`, not independent alpha. All 18
+objects completed exact local evaluation; all three approaches were frozen as
+`FALSIFIED_DEVELOPMENT`. The best base posterior scored 0.944; its central
+market-state-conditioned model lost to the pooled-state ablation. The policy
+lost to swapped expert labels, and every signed-triangle base had negative
+development Sharpe. Preserve these formulas and grids. No execution-delay or
+later chronological diagnostic was triggered. Full evidence is in
+`evidence/frontier_20260911f/` with source and preregistration freezes.
+
 Frontier-E (`experiments/frontier_20260911e/pm_report.md`) tested downside impact
 relief, range acceptance escape and upside response convexity. All 18 objects
 completed exact local evaluation, but all three families were frozen as

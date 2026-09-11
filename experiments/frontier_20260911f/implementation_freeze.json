@@ -1,0 +1,11 @@
+{
+  "frozen_before_measurement": true,
+  "sha256": {
+    "strategies/generated/frontier_20260911f_weekly_payoff_posterior.py": "ae666b15b00bfa8a71ba20b07f49ba5eb9b5adb74ee945cc5bbd70ce1a8e92e2",
+    "strategies/generated/frontier_20260911f_adaptive_expert_cash.py": "0932f31200852672b9f8f3c619c7294341ddf4685a269aa660ac65abe3105431",
+    "strategies/generated/frontier_20260911f_triangle_coherence.py": "52c43e44ccf334112cfde14ec2a48d1e753b09c828dee124982fb0e0d475a8f1",
+    "experiments/frontier_20260911f/analysis_plan.json": "b70d1127a335428c77315749a967c2201d9e6ea22c0abbc4a8d639df62229ee4",
+    "experiments/frontier_20260911f/manifest.json": "1635c7b74148802f38e2ce1ec9548ed6691fa7fb662a868290c7abe22266779d"
+  },
+  "synthetic_tests": "41 passed; no economic metrics used"
+}

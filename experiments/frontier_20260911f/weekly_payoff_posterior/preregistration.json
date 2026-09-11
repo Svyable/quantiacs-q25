@@ -1,0 +1,70 @@
+{
+  "ablation": "As specified in transform; shared gate and warmup.",
+  "allocation": "Discovery: min(0.25,1/K)*bounded score per selected name; no normalization. Policy: convex mixture of two capped experts and cash.",
+  "cash_rule": "Missing model state or nonpositive forecast means cash; policy cash expert has zero utility.",
+  "classification": "discovery_hypothesis",
+  "code_path": "strategies/generated/frontier_20260911f_weekly_payoff_posterior.py",
+  "contamination_notes": "A\u2013E research/dev history repeatedly observed. 2024\u20132025 public examples previously read. No fresh holdout claim; no live data.",
+  "cost_hypothesis": "Weekly observations and entries; cash and risk caps; exact costs decide viability.",
+  "created_utc": "2026-09-11T03:44:25+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911f_weekly_payoff_posterior",
+  "failure_mode": "Graph motif is redundant, conditional payoff estimates are sparse, or policy merely retimes incumbents using inaccurate proxy P&L.",
+  "falsifier": "rotate realized weekly outcomes across eligible start-date assets",
+  "fixed_constants": {
+    "beta_prior": [
+      1,
+      1
+    ],
+    "expert_downside_penalty": 3,
+    "expert_trend_vol_days": 63,
+    "graph_lag": 21,
+    "loss_aversion": 1.5,
+    "market_state_days": 21,
+    "minimum_weekly_labels": 4,
+    "payoff_prior": 0.02,
+    "policy_exponent_multiplier": 2,
+    "weekly_horizon": 7
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      84,
+      126,
+      168
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "weekly_payoff_posterior",
+  "nearest_incumbent": "Frontier-A AR forecast surprise / V10 regime routing",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 126
+  },
+  "portfolio_role": "Research satellite requiring residual evidence",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday, six-bar bounded carry; invalid price/eligibility exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K, label tie-breaking only; allocator experiment blends frozen experts.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from repository research map. Unverified onchain and index-data proposals are excluded. Policy overlap with V5/V10 is explicit.",
+  "source_urls": [],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "Past fully realized weekly gain probabilities and loss magnitudes conditioned on market state predict whether taking risk has positive utility.",
+  "timing": "Completed daily bars only; fully realized labels; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Every Monday t observes the fully realized log(close_t/close_{t-7}) label from the preceding Monday, for assets liquid at t-7 with valid endpoints. State at label origin: eligible equal-market preceding21day log return sum >0 (two states). Current state selects a rolling W-calendar-day set of completed nonoverlapping weekly labels. Conditional counts n,wins,losses; p=(wins+1)/(n+2), gain=(sum_positive+0.02)/(wins+1), loss=(-sum_negative+0.02)/(losses+1). Score=clip((p*gain-1.5*(1-p)*loss)/(gain+loss),0,1), require >=4 matched labels. Ablation pools market states but keeps the base matched-state count gate. Falsifier rotates weekly labels within eligible label-origin finite assets before posterior estimation. No added price-trend gate. These are price-forecast labels, not execution P&L.",
+  "universe": "historical is_liquid == 1 and positive finite close; graph/rotations ignore inactive and future-listed assets"
+}

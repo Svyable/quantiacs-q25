@@ -1,0 +1,213 @@
+{
+  "campaign": "frontier_20260911f",
+  "candidates": [
+    {
+      "id": "triangle_coherence_w42",
+      "family": "triangle_coherence",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_triangle_coherence.py",
+      "parent_id": "triangle_coherence_w63",
+      "preregistration": "experiments/frontier_20260911f/triangle_coherence/preregistration.json",
+      "preregistration_sha256": "21319da5235308bb87745b343ceda9a27310f11d1d5bb839fb491335b1d2cd31"
+    },
+    {
+      "id": "triangle_coherence_w63",
+      "family": "triangle_coherence",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_triangle_coherence.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911f/triangle_coherence/preregistration.json",
+      "preregistration_sha256": "21319da5235308bb87745b343ceda9a27310f11d1d5bb839fb491335b1d2cd31"
+    },
+    {
+      "id": "triangle_coherence_w84",
+      "family": "triangle_coherence",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_triangle_coherence.py",
+      "parent_id": "triangle_coherence_w63",
+      "preregistration": "experiments/frontier_20260911f/triangle_coherence/preregistration.json",
+      "preregistration_sha256": "21319da5235308bb87745b343ceda9a27310f11d1d5bb839fb491335b1d2cd31"
+    },
+    {
+      "id": "triangle_coherence_ablation",
+      "family": "triangle_coherence",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_triangle_coherence.py",
+      "parent_id": "triangle_coherence_w63",
+      "preregistration": "experiments/frontier_20260911f/triangle_coherence/preregistration.json",
+      "preregistration_sha256": "21319da5235308bb87745b343ceda9a27310f11d1d5bb839fb491335b1d2cd31"
+    },
+    {
+      "id": "triangle_coherence_falsifier",
+      "family": "triangle_coherence",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_triangle_coherence.py",
+      "parent_id": "triangle_coherence_w63",
+      "preregistration": "experiments/frontier_20260911f/triangle_coherence/preregistration.json",
+      "preregistration_sha256": "21319da5235308bb87745b343ceda9a27310f11d1d5bb839fb491335b1d2cd31"
+    },
+    {
+      "id": "weekly_payoff_posterior_w84",
+      "family": "weekly_payoff_posterior",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_weekly_payoff_posterior.py",
+      "parent_id": "weekly_payoff_posterior_w126",
+      "preregistration": "experiments/frontier_20260911f/weekly_payoff_posterior/preregistration.json",
+      "preregistration_sha256": "e99c5f26dd2d7d91c94c9f06b4fb0828c2ecc5d96c30abc39f430c4e22da8748"
+    },
+    {
+      "id": "weekly_payoff_posterior_w126",
+      "family": "weekly_payoff_posterior",
+      "mode": "base",
+      "params": {
+        "window": 126,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_weekly_payoff_posterior.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911f/weekly_payoff_posterior/preregistration.json",
+      "preregistration_sha256": "e99c5f26dd2d7d91c94c9f06b4fb0828c2ecc5d96c30abc39f430c4e22da8748"
+    },
+    {
+      "id": "weekly_payoff_posterior_w168",
+      "family": "weekly_payoff_posterior",
+      "mode": "base",
+      "params": {
+        "window": 168,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_weekly_payoff_posterior.py",
+      "parent_id": "weekly_payoff_posterior_w126",
+      "preregistration": "experiments/frontier_20260911f/weekly_payoff_posterior/preregistration.json",
+      "preregistration_sha256": "e99c5f26dd2d7d91c94c9f06b4fb0828c2ecc5d96c30abc39f430c4e22da8748"
+    },
+    {
+      "id": "weekly_payoff_posterior_ablation",
+      "family": "weekly_payoff_posterior",
+      "mode": "ablation",
+      "params": {
+        "window": 126,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_weekly_payoff_posterior.py",
+      "parent_id": "weekly_payoff_posterior_w126",
+      "preregistration": "experiments/frontier_20260911f/weekly_payoff_posterior/preregistration.json",
+      "preregistration_sha256": "e99c5f26dd2d7d91c94c9f06b4fb0828c2ecc5d96c30abc39f430c4e22da8748"
+    },
+    {
+      "id": "weekly_payoff_posterior_falsifier",
+      "family": "weekly_payoff_posterior",
+      "mode": "falsifier",
+      "params": {
+        "window": 126,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_weekly_payoff_posterior.py",
+      "parent_id": "weekly_payoff_posterior_w126",
+      "preregistration": "experiments/frontier_20260911f/weekly_payoff_posterior/preregistration.json",
+      "preregistration_sha256": "e99c5f26dd2d7d91c94c9f06b4fb0828c2ecc5d96c30abc39f430c4e22da8748"
+    },
+    {
+      "id": "adaptive_expert_cash_w84",
+      "family": "adaptive_expert_cash",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_adaptive_expert_cash.py",
+      "parent_id": "adaptive_expert_cash_w126",
+      "preregistration": "experiments/frontier_20260911f/adaptive_expert_cash/preregistration.json",
+      "preregistration_sha256": "b4ca0b64a63c4d18da2e573b7fc61ffae53d495b5a3f3efb613a46138b7fb0f4"
+    },
+    {
+      "id": "adaptive_expert_cash_w126",
+      "family": "adaptive_expert_cash",
+      "mode": "base",
+      "params": {
+        "window": 126,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_adaptive_expert_cash.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911f/adaptive_expert_cash/preregistration.json",
+      "preregistration_sha256": "b4ca0b64a63c4d18da2e573b7fc61ffae53d495b5a3f3efb613a46138b7fb0f4"
+    },
+    {
+      "id": "adaptive_expert_cash_w168",
+      "family": "adaptive_expert_cash",
+      "mode": "base",
+      "params": {
+        "window": 168,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_adaptive_expert_cash.py",
+      "parent_id": "adaptive_expert_cash_w126",
+      "preregistration": "experiments/frontier_20260911f/adaptive_expert_cash/preregistration.json",
+      "preregistration_sha256": "b4ca0b64a63c4d18da2e573b7fc61ffae53d495b5a3f3efb613a46138b7fb0f4"
+    },
+    {
+      "id": "adaptive_expert_cash_ablation",
+      "family": "adaptive_expert_cash",
+      "mode": "ablation",
+      "params": {
+        "window": 126,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_adaptive_expert_cash.py",
+      "parent_id": "adaptive_expert_cash_w126",
+      "preregistration": "experiments/frontier_20260911f/adaptive_expert_cash/preregistration.json",
+      "preregistration_sha256": "b4ca0b64a63c4d18da2e573b7fc61ffae53d495b5a3f3efb613a46138b7fb0f4"
+    },
+    {
+      "id": "adaptive_expert_cash_falsifier",
+      "family": "adaptive_expert_cash",
+      "mode": "falsifier",
+      "params": {
+        "window": 126,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911f_adaptive_expert_cash.py",
+      "parent_id": "adaptive_expert_cash_w126",
+      "preregistration": "experiments/frontier_20260911f/adaptive_expert_cash/preregistration.json",
+      "preregistration_sha256": "b4ca0b64a63c4d18da2e573b7fc61ffae53d495b5a3f3efb613a46138b7fb0f4"
+    }
+  ],
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "max_unique_candidates": 15,
+  "automatic_promotion": false,
+  "protected_live_start": "2026-10-01",
+  "classification_note": "Two discovery hypotheses and one allocator experiment; never label policy routing as independent alpha."
+}

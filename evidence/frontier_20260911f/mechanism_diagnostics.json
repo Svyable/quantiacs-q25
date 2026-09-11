@@ -1,0 +1,153 @@
+{
+  "analysis_plan_sha256": "b70d1127a335428c77315749a967c2201d9e6ea22c0abbc4a8d639df62229ee4",
+  "campaign": "frontier_20260911f",
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "diagnostics_source_sha256": "0916a491f07a4d68cef7247b40d93e2360a019029357a13856a589e8fa86a9e9",
+  "pairs": [
+    {
+      "allocation": {
+        "changed_day_fraction": 0.9698836413415469,
+        "changed_days": 2834,
+        "max_cell_difference": 0.2,
+        "mean_absolute_gross_difference": 0.4928060170049553,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "triangle_coherence_ablation",
+      "parent": "triangle_coherence_w63",
+      "return_uncertainty": {
+        "annualized_mean_difference": -0.2944635160575805,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.9846045930931313,
+          0.39688048485070465
+        ],
+        "replicates": 2000,
+        "seed": 20260912,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.8764544832306639,
+        "changed_days": 2561,
+        "max_cell_difference": 0.14245599722421107,
+        "mean_absolute_gross_difference": 0.0679334688912276,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "triangle_coherence_falsifier",
+      "parent": "triangle_coherence_w63",
+      "return_uncertainty": {
+        "annualized_mean_difference": -0.03389350260818178,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.10448436334565625,
+          0.04275759648278046
+        ],
+        "replicates": 2000,
+        "seed": 20260912,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.6824093086926762,
+        "changed_days": 1994,
+        "max_cell_difference": 0.13454855893509388,
+        "mean_absolute_gross_difference": 0.06652455835136838,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "weekly_payoff_posterior_ablation",
+      "parent": "weekly_payoff_posterior_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": -0.022784768462686036,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.08748732045520725,
+          0.046658235529616336
+        ],
+        "replicates": 2000,
+        "seed": 20260912,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.6365503080082136,
+        "changed_days": 1860,
+        "max_cell_difference": 0.14984021069475292,
+        "mean_absolute_gross_difference": 0.1346568671373024,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "weekly_payoff_posterior_falsifier",
+      "parent": "weekly_payoff_posterior_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": 0.07846091739557762,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.023295051745270526,
+          0.2084554069686045
+        ],
+        "replicates": 2000,
+        "seed": 20260912,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.9315537303216974,
+        "changed_days": 2722,
+        "max_cell_difference": 0.12068569182547818,
+        "mean_absolute_gross_difference": 0.18808615935006984,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "adaptive_expert_cash_ablation",
+      "parent": "adaptive_expert_cash_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": 0.13614498479244436,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.13483580622232605,
+          0.4261599256861197
+        ],
+        "replicates": 2000,
+        "seed": 20260912,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.9315537303216974,
+        "changed_days": 2722,
+        "max_cell_difference": 0.17603889490286811,
+        "mean_absolute_gross_difference": 0.17041812312724905,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "adaptive_expert_cash_falsifier",
+      "parent": "adaptive_expert_cash_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": -0.13965348503772845,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.26598088476622145,
+          -0.0067703667760090425
+        ],
+        "replicates": 2000,
+        "seed": 20260912,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    }
+  ],
+  "script_sha256": "112918789c52329357600911259eda8af1d1db02a7cd589a36621dd9165cea53"
+}

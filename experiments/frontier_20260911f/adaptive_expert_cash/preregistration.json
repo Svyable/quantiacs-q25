@@ -1,0 +1,68 @@
+{
+  "ablation": "As specified in transform; shared gate and warmup.",
+  "allocation": "Discovery: min(0.25,1/K)*bounded score per selected name; no normalization. Policy: convex mixture of two capped experts and cash.",
+  "cash_rule": "Missing model state or nonpositive forecast means cash; policy cash expert has zero utility.",
+  "classification": "allocator_experiment",
+  "code_path": "strategies/generated/frontier_20260911f_adaptive_expert_cash.py",
+  "contamination_notes": "A\u2013E research/dev history repeatedly observed. 2024\u20132025 public examples previously read. No fresh holdout claim; no live data.",
+  "cost_hypothesis": "Weekly observations and entries; cash and risk caps; exact costs decide viability.",
+  "created_utc": "2026-09-11T03:44:25+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911f_adaptive_expert_cash",
+  "failure_mode": "Graph motif is redundant, conditional payoff estimates are sparse, or policy merely retimes incumbents using inaccurate proxy P&L.",
+  "falsifier": "swap trend and defensive utility histories while leaving cash fixed",
+  "fixed_constants": {
+    "beta_prior": [
+      1,
+      1
+    ],
+    "expert_downside_penalty": 3,
+    "expert_trend_vol_days": 63,
+    "graph_lag": 21,
+    "loss_aversion": 1.5,
+    "market_state_days": 21,
+    "minimum_weekly_labels": 4,
+    "payoff_prior": 0.02,
+    "policy_exponent_multiplier": 2,
+    "weekly_horizon": 7
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      84,
+      126,
+      168
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "adaptive_expert_cash",
+  "nearest_incumbent": "V5 latency / V10 portfolio routing",
+  "novelty_axes_changed": [
+    "transform"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 126
+  },
+  "portfolio_role": "Portfolio refinement only",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday, six-bar bounded carry; invalid price/eligibility exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K, label tie-breaking only; allocator experiment blends frozen experts.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from repository research map. Unverified onchain and index-data proposals are excluded. Policy overlap with V5/V10 is explicit.",
+  "source_urls": [],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "A causal downside-penalized exponential policy over fixed trend, low-volatility and cash experts improves allocation versus a static mixture.",
+  "timing": "Completed daily bars only; fully realized labels; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Allocation experiment, NOT independent alpha. Freeze three experts: weekly top-five positive 63-day log-return trend names (20% slots); weekly five lowest 63-day realized-volatility names (20% slots); cash. Each expert honors persistent eligibility exits. Learning proxy for each noncash expert on day t is sum(previous-day expert targets * current close-to-close simple returns), treating missing component returns as zero; this is explicitly NOT exact execution P&L. Utility=proxy_return-3*min(proxy_return,0)^2. On Monday use utilities through yesterday: softmax(2*trailing_W_day_sum(utility)), with cash utility zero. Blend current expert targets using these probabilities, then hold to next Monday subject to eligibility exits. Exponent input clipped [-40,40]. Warm up W+71 daily observations for all modes. Ablation uses equal thirds; falsifier swaps trend/defensive utility labels, leaving cash fixed. No optimized expert definitions, thresholds or learning rate.",
+  "universe": "historical is_liquid == 1 and positive finite close; graph/rotations ignore inactive and future-listed assets"
+}

@@ -10,12 +10,28 @@
   "experiment_id": "frontier_20260911g_topology_rank_stability",
   "failure_mode": "rank stability collapses into static low-correlation/periphery or ordinary residual momentum",
   "falsifier": "rotate current and prior topology-rank histories together across sorted asset labels while preserving each date's rank distribution",
-  "folds_allowed_for_selection": ["research", "dev"],
-  "grid": {"window": [42, 63, 84]},
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
   "mechanism": "topology_rank_stability",
   "nearest_incumbent": "topology_migration / V10 residual momentum",
-  "novelty_axes_changed": ["information_primitive", "transform", "timing_or_state_condition"],
-  "params": {"top_k": 5, "window": 63},
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
   "portfolio_role": "slow structural topology satellite",
   "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
   "prior_preregistration": "experiments/frontier_20260910b/topology_rank_stability/preregistration.json",
@@ -24,7 +40,10 @@
   "selection": "positive scores, top-K, deterministic label tie breaks",
   "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
   "source_notes": "Frontier-G exact implementation registered after prior campaign evidence; hypothesis provenance predates Frontier-G performance. Prior source: experiments/frontier_20260910b/topology_rank_stability/preregistration.json",
-  "source_urls": ["https://doi.org/10.1016/j.econmod.2020.11.013", "https://doi.org/10.1016/j.jempfin.2023.101428"],
+  "source_urls": [
+    "https://doi.org/10.1016/j.econmod.2020.11.013",
+    "https://doi.org/10.1016/j.jempfin.2023.101428"
+  ],
   "status": "IMPLEMENTED_PENDING_EVIDENCE",
   "stop_rule": "freeze if falsifier or ablation matches/beats canonical base or if every valid base cell is below the fixed development floor; do not retune after failure",
   "thesis": "Stable residual-topology rank while raw-return leadership churns identifies durable structural independence.",

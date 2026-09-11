@@ -1,0 +1,63 @@
+{
+  "ablation": "residual magnitude without rank stability",
+  "allocation": "min(0.25, 1/K) times bounded score per selected name; no gross renormalization.",
+  "cash_rule": "Missing model state or nonpositive score means cash.",
+  "classification": "discovery_hypothesis",
+  "code_path": null,
+  "contamination_notes": "A\u2013F research/dev history repeatedly observed. No fresh holdout claim; no live data.",
+  "cost_hypothesis": "Weekly entries, cash, and name caps; exact ATR-linked costs decide viability.",
+  "created_utc": "2026-09-11T12:00:00+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911g_rank_stability_density",
+  "failure_mode": "stability is a volatility proxy or a restatement of residual dispersion",
+  "falsifier": "current residual magnitude only",
+  "fixed_constants": {
+    "atr_days": 14,
+    "cost_lookback_is_atr": true,
+    "fast_forecast_days": 7,
+    "graph_lag": 21,
+    "persistence_lag": 7,
+    "residual_trend_days": 21
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "rank_stability_density",
+  "nearest_incumbent": "opportunity-density / residual dispersion switch",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "Research satellite requiring residual evidence versus generic controls and later incumbents",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday entries; six-bar bounded carry; eligibility-loss exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K with label tie-breaking on sorted asset ids.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from the repository frontier map after A\u2013F freezes. Unverified on-chain and index-data proposals excluded.",
+  "source_urls": [],
+  "status": "PREREGISTERED_NOT_IMPLEMENTED",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "Stable residual ranks plus positive residual trend identify when the cross-section contains tradable opportunity.",
+  "timing": "Completed daily bars only; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Rolling Spearman stability of residual ranks, gated on positive residual trend.",
+  "universe": "historical is_liquid == 1 and positive finite close; rotations ignore inactive and future-listed assets",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

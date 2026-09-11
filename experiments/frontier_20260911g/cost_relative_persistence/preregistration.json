@@ -1,0 +1,64 @@
+{
+  "ablation": "persistent residual edge without dividing by own relative ATR",
+  "allocation": "min(0.25, 1/K) times bounded score per selected name; no gross renormalization.",
+  "cash_rule": "Missing model state or nonpositive score means cash.",
+  "classification": "discovery_hypothesis",
+  "code_path": "strategies/generated/frontier_20260911g_cost_relative_persistence.py",
+  "contamination_notes": "A\u2013F research/dev history repeatedly observed. No fresh holdout claim; no live data.",
+  "cost_hypothesis": "Weekly entries, cash, and name caps; exact ATR-linked costs decide viability.",
+  "created_utc": "2026-09-11T12:00:00+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911g_cost_relative_persistence",
+  "failure_mode": "ATR scaling is inverse-vol in disguise or persistence adds no residual value",
+  "falsifier": "pair each asset with another eligible name's relative ATR",
+  "fixed_constants": {
+    "atr_days": 14,
+    "cost_lookback_is_atr": true,
+    "fast_forecast_days": 7,
+    "graph_lag": 21,
+    "persistence_lag": 7,
+    "residual_trend_days": 21
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "cost_relative_persistence",
+  "nearest_incumbent": "V10 residual momentum / unimplemented Frontier-D/E execution hurdle",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "Research satellite requiring residual evidence versus generic controls and later incumbents",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday entries; six-bar bounded carry; eligibility-loss exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K with label tie-breaking on sorted asset ids.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from the repository frontier map after A\u2013F freezes. Unverified on-chain and index-data proposals excluded.",
+  "source_urls": [],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "Persistent residual leadership scaled by own relative ATR is more deployable than raw residual leadership.",
+  "timing": "Completed daily bars only; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Residual = own log return minus equal-liquid market. Persistence = W-day rolling correlation between residual and residual lagged 7 days, floored at 0. Expected edge = W-day residual sum times persistence. Relative ATR = 14-day mean true range / close, true range using prior close. Base score = expected / (expected + relative ATR) when expected>0, else 0. Ablation drops ATR and uses clip(expected,0,1). Falsifier preserves expected edge but replaces own relative ATR with a rotated eligible identity's relative ATR before the same density map. ATR lookback 14 and lag 7 are fixed. No extra market-timing gate.",
+  "universe": "historical is_liquid == 1 and positive finite close; rotations ignore inactive and future-listed assets",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

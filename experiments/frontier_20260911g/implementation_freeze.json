@@ -1,0 +1,11 @@
+{
+  "frozen_before_measurement": true,
+  "sha256": {
+    "strategies/generated/frontier_20260911g_edge_uncertainty.py": "3eb83ed84ec1d3548345e06e0766a7c51e4c88c2cc51da748b8cea3d1a3f9da0",
+    "strategies/generated/frontier_20260911g_forecast_agreement.py": "0c19d57952f7ed0eba2398f893fb612e3c448bf770e6372f90e7b997968229ed",
+    "strategies/generated/frontier_20260911g_cost_relative_persistence.py": "b6e8fe03245bad4018a14080741825620d34e95299802aef7f64a685c864e334",
+    "experiments/frontier_20260911g/analysis_plan.json": "f40bd10ea2d56a9835077b0506d496963e85bee1272f3ff61ae53372ad2d20a1",
+    "experiments/frontier_20260911g/manifest.json": "35ca1f09aebc00fbb9fe90e80abea2dd7d8d0b49e08ddd367fdb095ce059c6db"
+  },
+  "synthetic_tests": "41 Frontier-G tests plus captured-evidence provenance; no economic metrics used to choose parameters"
+}

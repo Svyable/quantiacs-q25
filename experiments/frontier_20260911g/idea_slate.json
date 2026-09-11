@@ -1,0 +1,434 @@
+[
+  {
+    "id": "edge_uncertainty",
+    "area": "graph_uncertainty",
+    "thesis": "Rising variance of residual-correlation edges plus a positive own residual identifies idiosyncratic leadership during graph fragmentation.",
+    "falsifier": "rotate uncertainty-change across currently eligible identities",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "spectral_gap_change",
+    "area": "graph_uncertainty",
+    "thesis": "A widening gap between the leading residual-correlation eigenvalues indicates collapsing independent opportunity.",
+    "falsifier": "destroy the eigenvalue ordering",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "neighborhood_churn",
+    "area": "graph_uncertainty",
+    "thesis": "Turnover in an asset's strongest residual neighbors is a fragmentation state, not a static low-correlation sort.",
+    "falsifier": "freeze neighbor identities",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "bridge_entropy",
+    "area": "graph_uncertainty",
+    "thesis": "High entropy of residual-edge weights identifies assets that are not concentrated in one correlated clique.",
+    "falsifier": "degree-matched random edges",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "local_clustering_drift",
+    "area": "graph_uncertainty",
+    "thesis": "A falling residual clustering coefficient with positive residual trend marks escape from a crowded cohort.",
+    "falsifier": "current clustering level only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "signed_weight_dispersion",
+    "area": "graph_uncertainty",
+    "thesis": "Dispersion of signed residual-edge weights is a different object from triangle balance or centrality.",
+    "falsifier": "absolute weights only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "forecast_agreement",
+    "area": "forecast_structure",
+    "thesis": "Agreement between a slow residual-mean forecast and a fully realized one-week residual forecast identifies usable positive leadership.",
+    "falsifier": "prefer disagreement while keeping the same slow-positive gate",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "leader_response_lag",
+    "area": "forecast_structure",
+    "thesis": "Shortening lag of an asset's residual response to the equal-liquid market identifies faster assimilation than a static delay sort.",
+    "falsifier": "shuffle response lags inside the eligible cohort",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "two_speed_sign_lock",
+    "area": "forecast_structure",
+    "thesis": "Same-sign slow and fast residual forecasts are a weaker agreement object than rank agreement.",
+    "falsifier": "require opposite signs",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "surprise_half_life",
+    "area": "forecast_structure",
+    "thesis": "Slow decay of residual AR forecast errors identifies incomplete assimilation rather than raw residual momentum.",
+    "falsifier": "destroy lag order",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "interval_width_cash",
+    "area": "forecast_structure",
+    "thesis": "A widening residual prediction interval is a cash state, not a return forecast.",
+    "falsifier": "constant interval width",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "calibration_slope",
+    "area": "forecast_structure",
+    "thesis": "The slope of predicted versus fully realized residual quantiles detects miscalibrated leadership.",
+    "falsifier": "pooled residual quantile only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "cost_relative_persistence",
+    "area": "execution_density",
+    "thesis": "Persistent residual leadership scaled by own relative ATR is more deployable than raw residual leadership.",
+    "falsifier": "pair each asset with another eligible name's relative ATR",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "rank_stability_density",
+    "area": "execution_density",
+    "thesis": "Stable residual ranks plus positive residual trend identify when the cross-section contains tradable opportunity.",
+    "falsifier": "current residual magnitude only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "trade_distance_hurdle",
+    "area": "execution_density",
+    "thesis": "Only accept a new Monday book when the score improvement exceeds a predeclared ATR-linked distance.",
+    "falsifier": "always accept the new book",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "no_trade_band",
+    "area": "execution_density",
+    "thesis": "A symmetric no-trade band around the current target reduces churn without post-hoc smoothing.",
+    "falsifier": "zero band",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "delay_option",
+    "area": "execution_density",
+    "thesis": "Waiting one extra Monday has option value when residual persistence is below a fixed hurdle.",
+    "falsifier": "never wait",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "monday_gap_cost",
+    "area": "execution_density",
+    "thesis": "Weekend range relative to Friday ATR is an execution-state, not a direction forecast.",
+    "falsifier": "weekday range control",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "score_dispersion_cash",
+    "area": "opportunity_state",
+    "thesis": "Low cross-sectional residual-score dispersion is a cash state because opportunity is concentrated.",
+    "falsifier": "mean residual instead of dispersion",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "breadth_of_positive_residual",
+    "area": "opportunity_state",
+    "thesis": "The fraction of eligible names with positive residual trend is an opportunity-density gate.",
+    "falsifier": "equal-liquid market sign only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "disagreement_across_horizons",
+    "area": "opportunity_state",
+    "thesis": "Disagreement among 7/21/63-day residual ranks is a cash state rather than a blend weight.",
+    "falsifier": "replace disagreement with residual variance",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "concentration_penalty",
+    "area": "opportunity_state",
+    "thesis": "Penalize names whose residual score share exceeds a predeclared concentration cap.",
+    "falsifier": "no concentration penalty",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "liquidity_age_conditioner",
+    "area": "opportunity_state",
+    "thesis": "Use age-since-liquidity-entry only as a conditioner on another score, not as standalone alpha.",
+    "falsifier": "current is_liquid only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "failed_recovery_count",
+    "area": "opportunity_state",
+    "thesis": "Repeated failed recoveries after a defined residual shock identify exhaustion rather than dip-buying.",
+    "falsifier": "shock depth alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; no Frontier-G returns. Does not reuse failed signed-triangle, weekly-posterior, or expert-policy formulas.",
+    "admissibility": "OHLCV_ONLY"
+  }
+]

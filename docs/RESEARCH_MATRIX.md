@@ -103,3 +103,36 @@ Exact local measurements; no automatic promotion or cross-campaign ranking.
 | variance_ratio_reversal | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
 
 [Evidence packet](../evidence/frontier_20260910d/report.md) · [Research report](../experiments/frontier_20260910d/pm_report.md)
+
+## frontier_20260911e: separate development campaign
+
+Exact local measurements; no automatic promotion or cross-campaign ranking.
+
+| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |
+|---|---|---:|---:|---|
+| `upside_response_convexity_falsifier` | falsifier | 0.985 | -33.5% | COMPLETE |
+| `upside_response_convexity_w42` | base | 0.827 | -23.9% | COMPLETE |
+| `upside_response_convexity_w63` | base | 0.725 | -34.1% | COMPLETE |
+| `persistent_low_vol` | control | 0.641 | -93.3% | COMPLETE |
+| `upside_response_convexity_w84` | base | 0.639 | -30.7% | COMPLETE |
+| `downside_impact_relief_w42` | base | 0.296 | -54.8% | COMPLETE |
+| `equal_liquid` | control | 0.270 | -93.6% | COMPLETE |
+| `upside_response_convexity_ablation` | ablation | 0.224 | -56.5% | COMPLETE |
+| `downside_impact_relief_ablation` | ablation | 0.164 | -48.4% | COMPLETE |
+| `range_acceptance_escape_w84` | base | 0.154 | -30.7% | COMPLETE |
+| `range_acceptance_escape_ablation` | ablation | 0.113 | -50.7% | COMPLETE |
+| `range_acceptance_escape_w42` | base | 0.109 | -32.0% | COMPLETE |
+| `range_acceptance_escape_falsifier` | falsifier | 0.089 | -30.6% | COMPLETE |
+| `range_acceptance_escape_w63` | base | 0.085 | -30.7% | COMPLETE |
+| `inverse_vol_trend` | control | 0.053 | -87.1% | COMPLETE |
+| `downside_impact_relief_w84` | base | -0.032 | -70.9% | COMPLETE |
+| `downside_impact_relief_w63` | base | -0.222 | -70.3% | COMPLETE |
+| `downside_impact_relief_falsifier` | falsifier | -0.289 | -62.8% | COMPLETE |
+
+| Family | Decision | Reason |
+|---|---|---|
+| downside_impact_relief | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| range_acceptance_escape | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| upside_response_convexity | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+
+[Evidence packet](../evidence/frontier_20260911e/report.md) · [Research report](../experiments/frontier_20260911e/pm_report.md)

@@ -25,6 +25,15 @@ novelty_rule: >-
   weight, rebalance day, or risk scaler is not sufficient evidence of novelty.
 
 occupied_or_crowded:
+  - family: "downside_impact_relief"
+    incumbents: [frontier_20260911e_downside_impact_relief]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: removing volume beats the central relief cell; no base window reaches the 1.0 robust floor. A price-impact proxy is not observed order flow."
+  - family: "range_acceptance_escape"
+    incumbents: [frontier_20260911e_range_acceptance_escape]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: central acceptance-conditioned breakout loses to both its acceptance-free and stale-state controls. Do not widen the grid."
+  - family: "upside_response_convexity"
+    incumbents: [frontier_20260911e_upside_response_convexity]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: best base robust SR 0.827; inverted central control 0.985. Positive central residual diagnostic does not rescue the failed direction or qualify either cell."
   - family: "variance_ratio_conditioned_reversal"
     incumbents: [frontier_20260910d_variance_ratio_reversal]
     note: "FROZEN / FALSIFIED_DEVELOPMENT: three base windows miss the floor; removing or inverting the serial-dependence condition beats the central base. No parameter-grid rescue. See evidence/frontier_20260910d."

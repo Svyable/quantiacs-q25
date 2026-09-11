@@ -101,6 +101,16 @@ The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are
 
 ## Current read-through
 
+Frontier-E (`experiments/frontier_20260911e/pm_report.md`) tested downside impact
+relief, range acceptance escape and upside response convexity. All 18 objects
+completed exact local evaluation, but all three families were frozen as
+`FALSIFIED_DEVELOPMENT`. Convexity's best base robust Sharpe was 0.827; its
+inverted control was stronger at 0.985. Neither is a promotion. Unlike the
+Frontier-D ordinal interaction, these defining transforms do materially alter
+capital. Preserve their failed directions and grids; do not rescue them by
+retuning. No later chronological window was opened. See the separate
+`evidence/frontier_20260911e/` context and immutable implementation freeze.
+
 Frontier-D (`experiments/frontier_20260910d/pm_report.md`) measured all ten
 candidate cells and three controls with exact public/default Quantiacs data.
 Both variance-ratio reversal and rank-transition reliability were frozen as

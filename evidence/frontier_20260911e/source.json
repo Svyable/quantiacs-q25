@@ -1,0 +1,24 @@
+{
+  "captured_utc": "2026-09-11T03:30:52.879370+00:00",
+  "source": "Exact local Quantiacs cryptodaily loader, public_default; sponsor snapshot served by toolbox cache",
+  "run_id": "b13f81eb7eb58e4ce49f",
+  "toolbox_commit": "9e5274c5ce102a66debc799fd2a2300969fb90f6",
+  "remote_preregistration_commit": "7fa091d5875434a78a67b9db25c5d32609b5c675",
+  "remote_implementation_freeze_commit": "656e004eac1b63c648058f612d06caecf6b6a2c7",
+  "remote_freeze_precedes_measurement": true,
+  "python": "3.12.14",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "xarray": "2025.12.0",
+    "numba": "0.61.2",
+    "llvmlite": "0.44.0",
+    "scipy": "1.18.1",
+    "PyYAML": "6.0.3",
+    "bottleneck": "1.6.0"
+  },
+  "software_tests": "147 passed, including captured-evidence integrity",
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "live_data_used": false,
+  "selection_end": "2022-12-31"
+}

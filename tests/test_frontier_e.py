@@ -92,3 +92,24 @@ def test_registered_campaign_is_finite_and_unpromoted():
     assert len({x['area'] for x in slate}) == 4
     assert all(sum(x['scores'].values()) == x['priority_score'] for x in slate)
     assert not manifest['automatic_promotion']
+
+
+def test_observed_packet_matches_preregistration_and_frozen_implementation():
+    from research.preregister import sha256_file
+    dest=ROOT/'experiments'/CAMPAIGN
+    evidence=ROOT/'evidence'/CAMPAIGN
+    freeze=json.loads((dest/'implementation_freeze.json').read_text())
+    assert all(sha256_file(ROOT/path)==h for path,h in freeze['sha256'].items())
+    manifest=load_manifest(dest/'manifest.json')
+    context=json.loads((evidence/'context.json').read_text())
+    assert context['manifest_sha256']==sha256_file(dest/'manifest.json')
+    for job in manifest['candidates']:
+        row=json.loads((evidence/'candidate_packets'/(job['id']+'.json')).read_text())
+        assert row['data_sha256']==context['data_sha256']
+        assert row['strategy_source_sha256']==sha256_file(ROOT/job['path'])
+        assert row['preregistration_sha256']==job['preregistration_sha256']
+        assert row['params']==job['params']
+    matrix=json.loads((evidence/'matrix.json').read_text())
+    assert len(matrix['candidates'])==18
+    assert all(row['status']=='COMPLETE' for row in matrix['candidates'])
+    assert all(row['decision']=='FREEZE' for row in matrix['families'])

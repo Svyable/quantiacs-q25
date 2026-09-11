@@ -1,0 +1,15 @@
+{
+  "campaign": "frontier_20260911e",
+  "frozen_before_new_returns": true,
+  "secondary_diagnostics": {
+    "block_days": 21,
+    "bootstrap_replicates": 2000,
+    "seed": 20260911,
+    "comparison": "central candidate versus own ablation/falsifier; 4% ATR dev returns; not selection-adjusted"
+  },
+  "progression": {
+    "criteria": "At least two base windows have robust SR >=1, central base beats both controls, central dev residual SR >0, and all family cells pass integrity. Then evaluate the frozen central cell and both controls with one extra execution-day delay on development folds; only if still robust, inspect 2023\u20132024 as contaminated forward diagnostic. No automatic promotion; no live or 2025+ retrieval.",
+    "reason": "Campaign-specific compute allocation, not replacement of repository promotion policy."
+  },
+  "multiple_testing": "24 sketches; six registrations; 15 new economic cells and three generic controls; prior development reuse disclosed."
+}

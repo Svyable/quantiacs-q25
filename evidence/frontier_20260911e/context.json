@@ -1,0 +1,39 @@
+{
+  "costs": [
+    0.0,
+    0.04,
+    0.08,
+    0.12
+  ],
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "folds": [
+    {
+      "end": "2020-12-31",
+      "id": "research",
+      "start": "2016-01-01",
+      "use": "hypothesis / feature search"
+    },
+    {
+      "end": "2022-12-31",
+      "id": "dev",
+      "start": "2021-01-01",
+      "use": "parameter development"
+    }
+  ],
+  "manifest_sha256": "c2423d49822fea7e3fcdcb25bb493a4574cdf77e77a5075b9dd0c133374409bc",
+  "numpy": "2.2.6",
+  "pandas": "2.2.3",
+  "python": "3.12.14",
+  "quantiacs_access_mode": "public_default",
+  "schema_version": 2,
+  "source_hashes": {
+    "configs/promotion_gates.yaml": "2cdcd7568a3f1b01b20da283d6dc719c790a1193bac24771a2af7c03986ec586",
+    "research/benchmark.py": "8fbe3f5e463a97f5e0fe697e044a35d3fb49e234c69e1d1d0d05e75f3b40c825",
+    "research/iteration.py": "8be5ad0130eefb872a0cce8d16348a2b62ce8d73330dcf0e9747ae73483dce66",
+    "strategies/generated/frontier_20260911e_downside_impact_relief.py": "ee7dd16505e6a071fa2aa414f305354f9aadde011cb0a8b233877857e2db936f",
+    "strategies/generated/frontier_20260911e_range_acceptance_escape.py": "5c1be2979346f4e5d02c0ac799a654a423b9d24e0f86826a275b32ddf13fec2d",
+    "strategies/generated/frontier_20260911e_upside_response_convexity.py": "8f97e70b09ae3d0dbaa0844d2ee09778fe834cbbbe9d413ebdb29f28e99acb6b"
+  },
+  "status": "DEVELOPMENT_ONLY",
+  "toolbox_stats_sha256": "8cdaf120de844db91ddb01bbce510f2201f55b18223765c2ba5110bfb2f08b54"
+}

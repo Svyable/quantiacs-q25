@@ -1,0 +1,57 @@
+{
+  "campaign": "frontier_20260911e",
+  "evidence": "../../evidence/frontier_20260911e/matrix.json",
+  "families": [
+    {
+      "best_score": 0.2961152165676002,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "downside_impact_relief_ablation"
+      ],
+      "family": "downside_impact_relief",
+      "family_rank": 3,
+      "invalid_cells": [],
+      "median_score": -0.032489432701289865,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    },
+    {
+      "best_score": 0.15351550141718423,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "range_acceptance_escape_ablation",
+        "range_acceptance_escape_falsifier"
+      ],
+      "family": "range_acceptance_escape",
+      "family_rank": 2,
+      "invalid_cells": [],
+      "median_score": 0.10850243024716894,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    },
+    {
+      "best_score": 0.8265822119739936,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "upside_response_convexity_falsifier"
+      ],
+      "family": "upside_response_convexity",
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": 0.7246333287916581,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "forward_progression": "NOT_ELIGIBLE: no family has two base robust Sharpes >= 1; all fail a defining control.",
+  "automatic_promotion": false
+}

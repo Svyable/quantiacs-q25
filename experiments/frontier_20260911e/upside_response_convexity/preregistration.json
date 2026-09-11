@@ -1,0 +1,71 @@
+{
+  "ablation": "Remove defining conditioning transform as specified, preserving gate, validity, schedule and direct-score allocator.",
+  "allocation": "Each selected name gets min(0.25,1/top_k)*clip(score,0,1). No renormalization. Strength survives construction; weak signal capacity stays cash.",
+  "cash_rule": "Missing state, no positive scores, or nonpositive 63-day sum of eligible equal-market log returns means no new allocation.",
+  "code_path": "strategies/generated/frontier_20260911e_upside_response_convexity.py",
+  "code_sha": "Captured in immutable premeasurement implementation freeze and evaluator context",
+  "contamination_notes": "2016\u20132022 repeatedly reused across A\u2013D; public 2024\u20132025 examples already read. Any later chronological test is forward diagnostic, not pristine holdout. Live is never used.",
+  "cost_hypothesis": "Weekly targets, bounded confidence sizing and cash reduce unnecessary exposure; exact cost ladder decides economics.",
+  "created_utc": "2026-09-11T03:23:52+00:00",
+  "data_admissibility": "OHLCV_ONLY_PER_REPOSITORY_RULES",
+  "experiment_id": "frontier_20260911e_upside_response_convexity",
+  "failure_mode": "OHLCV proxy or response curve duplicates ordinary risk/trend; liquidity/quantile estimates unstable; events sparse; execution too slow.",
+  "falsifier": "invert tail-minus-middle response",
+  "fixed_design_constants": {
+    "atr_days": 14,
+    "event_persistence_days": 5,
+    "market_gate_days": 63,
+    "minimum_bucket_events": 5,
+    "own_trend_days": 21,
+    "relative_volume_clip": [
+      0.1,
+      10
+    ],
+    "replay_days": 365,
+    "response_scale": 2,
+    "score_cap": 1,
+    "short_impact_days": 7,
+    "tail_quantile": 0.75
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "upside_response_convexity",
+  "nearest_incumbent": "C165 market timing / queued Frontier-C response_sign_asymmetry",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "Unpromoted research satellite; require incremental value against matched controls and incumbents.",
+  "primitive": "Quantiacs cryptodaily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday only; eligibility/invalid-close exits remain closed until next Monday; gross gate sets scheduled targets, not daily unscheduled exits.",
+  "selection": "Positive bounded score, top_k with deterministic sorted-label tie breaking.",
+  "selection_objective": "minimum research/dev Sharpe at 4/8/12% ATR costs; existing tie breakers; no promotion from research alone",
+  "source_notes": "Original hypothesis development from repository frontier and unimplemented ideas; no external performance claims or newly admitted datasets.",
+  "source_urls": [],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "Frozen existing family adjudication: central ablation/falsifier matching/beating base freezes family; every base below 1.0 freezes weak alpha; no post-return grid expansion.",
+  "thesis": "Assets whose response increases in large positive peer-market moves retain upside participation in established uptrends.",
+  "timing": "Completed t bars; conditioning estimates through t-1; toolbox owns execution lag.",
+  "track": "robustness",
+  "transform": "For every asset construct equal-weight return of the OTHER currently eligible observed assets, requiring >=2 peers. Tail threshold is preceding W-day 75th percentile of peer-market return, clipped below at zero. Partition positive peer days into tail above threshold and middle below threshold. Through-origin response coefficient=sum(asset_return*peer_return)/sum(peer_return^2), preceding W days, requiring >=5 paired events in EACH bucket. Convexity=tail_coefficient-middle_coefficient. Score=clip(max(convexity,0)/2,0,1) with positive own 21-day return. Ablation uses positive through-origin coefficient over ALL paired days, divided by two, with same bucket-history validity. Falsifier uses max(-convexity,0)/2. Coefficients are shifted one day.",
+  "universe": "Historical is_liquid == 1; valid positive finite close; current eligible observations alone form peer market and permutations."
+}

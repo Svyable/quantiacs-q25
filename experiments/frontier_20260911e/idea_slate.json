@@ -1,0 +1,410 @@
+[
+  {
+    "id": "downside_impact_relief",
+    "area": "liquidity",
+    "thesis": "Declining downside displacement per unit relative dollar volume marks recovering absorption capacity.",
+    "falsifier": "rotate relative volume among eligible assets before computing impact",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "upside_impact_acceleration",
+    "area": "liquidity",
+    "thesis": "Rising upside price displacement at ordinary volume reveals scarce supply.",
+    "falsifier": "remove volume normalization",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "impact_sign_asymmetry",
+    "area": "liquidity",
+    "thesis": "Downside versus upside impact asymmetry identifies vulnerable rebounds.",
+    "falsifier": "erase return sign",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "volume_resilience",
+    "area": "liquidity",
+    "thesis": "Volume recovers faster than price after an idiosyncratic event.",
+    "falsifier": "destroy temporal volume-price pairing",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "liquidity_dispersion",
+    "area": "liquidity",
+    "thesis": "Falling cross-sectional impact dispersion predicts broader risk capacity.",
+    "falsifier": "ordinary return dispersion",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "quote_continuity",
+    "area": "liquidity",
+    "thesis": "Stable valid quotation spells change the value of otherwise identical signals.",
+    "falsifier": "current validity only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "range_acceptance_escape",
+    "area": "range",
+    "thesis": "An upside escape following sustained acceptance inside prior daily ranges has better continuation than a generic breakout.",
+    "falsifier": "use W-day-old acceptance",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "range_supply_gap",
+    "area": "range",
+    "thesis": "A close enters a sparsely covered historical range region and reprices quickly.",
+    "falsifier": "uniform coverage density",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "range_rejection_streak",
+    "area": "range",
+    "thesis": "Repeated rejection of lower price regions marks durable demand.",
+    "falsifier": "remove order of rejections",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "upper_range_migration",
+    "area": "range",
+    "thesis": "Upper high-low bands rise while lower bands stop falling.",
+    "falsifier": "single close trend",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "range_retest_age",
+    "area": "range",
+    "thesis": "The time since an accepted range was last visited predicts retest failure.",
+    "falsifier": "erase age",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "nested_ranges",
+    "area": "range",
+    "thesis": "Ordered contraction of overlapping ranges predicts a sparse breakout opportunity.",
+    "falsifier": "shuffle nesting chronology",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 0
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "upside_response_convexity",
+    "area": "nonlinear_response",
+    "thesis": "Assets whose response increases in large positive peer-market moves retain upside participation in established uptrends.",
+    "falsifier": "invert tail-minus-middle response",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "downside_response_saturation",
+    "area": "nonlinear_response",
+    "thesis": "Downside response flattens during increasingly large market losses.",
+    "falsifier": "linear downside beta",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "peer_shock_threshold",
+    "area": "nonlinear_response",
+    "thesis": "An asset begins responding only after a peer-market move clears a persistent threshold.",
+    "falsifier": "remove threshold",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "recovery_response_asymmetry",
+    "area": "nonlinear_response",
+    "thesis": "The same market move has different effects during recovery and expansion.",
+    "falsifier": "erase state interaction",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "response_calibration",
+    "area": "nonlinear_response",
+    "thesis": "Stable differences between predicted and realized market response identify drifting sensitivity.",
+    "falsifier": "frozen coefficient",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "tail_response_breadth",
+    "area": "nonlinear_response",
+    "thesis": "A widening group of positive convex responders supports market deployment.",
+    "falsifier": "generic breadth",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "execution_hurdle",
+    "area": "execution_opportunity",
+    "thesis": "Expected multi-day displacement must exceed a predeclared ATR-linked round-trip cost before entry.",
+    "falsifier": "zero hurdle",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 1
+    },
+    "priority_score": 11,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "independent_opportunity_count",
+    "area": "execution_opportunity",
+    "thesis": "Effective rank of eligible signal histories governs how much simultaneous opportunity can be funded.",
+    "falsifier": "raw count only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "forecast_decay_horizon",
+    "area": "execution_opportunity",
+    "thesis": "Recently realized forecast decay determines whether weekly entry is too slow.",
+    "falsifier": "frozen horizon",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "reentry_cost_asymmetry",
+    "area": "execution_opportunity",
+    "thesis": "A lost eligibility spell makes reopening more costly than continuing an intact position.",
+    "falsifier": "erase exit history",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "signal_disagreement_cash",
+    "area": "execution_opportunity",
+    "thesis": "Disagreement of fixed simple forecasts predicts when cash is preferable.",
+    "falsifier": "return dispersion instead",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  },
+  {
+    "id": "opportunity_age",
+    "area": "execution_opportunity",
+    "thesis": "Signals freshly crossing a cost threshold differ from mature signals still above it.",
+    "falsifier": "ignore signal age",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "research judgment after Frontier A\u2013D; no Frontier-E returns inspected"
+  }
+]

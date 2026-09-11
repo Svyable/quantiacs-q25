@@ -62,3 +62,10 @@ experiments/_prereg_smoke/
 !experiments/frontier_20260910d/pm_report.md
 !experiments/frontier_20260910d/formula_ledger.csv
 data-cache/
+
+# Frozen Frontier-E hypotheses and implementations.
+!strategies/generated/frontier_20260911e_*.py
+!experiments/frontier_20260911e/**/preregistration.json
+!experiments/frontier_20260911e/**/preregistration.sha256
+!experiments/frontier_20260911e/pm_report.md
+!experiments/frontier_20260911e/formula_ledger.csv

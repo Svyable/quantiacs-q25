@@ -73,3 +73,5 @@ def test_ebenezar_profiles_return_exact_causal_weight_coordinates(name: str, win
 
     result = check_causality(fn, data, full=weights, checkpoints=3)
     assert result["status"] == "PASS"
+    assert result["checkpoints"] == 3
+    assert result["max_abs_difference"] <= 1e-10

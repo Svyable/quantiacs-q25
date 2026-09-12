@@ -9,7 +9,8 @@ description: Evidence-aware crypto alpha research for Quantiacs Q25 — causal m
     <h1>Build mechanisms. Try to kill them. Let newer evidence rewrite the story.</h1>
     <p class="q25-lede">This page reads the same generated evidence-health packet used by CI. It keeps economics, causal support, validation, evidence depth, and the measurement queue separate so the research loop gets sharper without inventing one gameable score.</p>
     <div class="q25-actions">
-      <a class="q25-button q25-button-primary" href="METHODOLOGY_HEALTH.html">Methodology health</a>
+      <a class="q25-button q25-button-primary" href="{{ '/backtest/' | relative_url }}">Backtest studio</a>
+      <a class="q25-button" href="METHODOLOGY_HEALTH.html">Methodology health</a>
       <a class="q25-button" href="RESEARCH_MATRIX.html">Research matrix</a>
       <a class="q25-button" href="STRATEGY_ATLAS.html">Strategy atlas</a>
       <a class="q25-button" href="https://github.com/Svyable/quantiacs-q25">Repository</a>
@@ -173,6 +174,7 @@ description: Evidence-aware crypto alpha research for Quantiacs Q25 — causal m
       </div>
     </div>
     <div class="q25-link-grid">
+      <a href="{{ '/backtest/' | relative_url }}"><strong>Backtest Studio</strong><span>equity, Crypto10, drawdown, risk, score, and seasonality</span></a>
       <a href="METHODOLOGY_HEALTH.html"><strong>Methodology Health</strong><span>generated recursive telemetry + reconciliation</span></a>
       <a href="RESEARCH_MATRIX.html"><strong>Research Matrix</strong><span>comparable evidence lanes and campaign packets</span></a>
       <a href="EVIDENCE_MODEL.html"><strong>Evidence Model</strong><span>strategy quality ≠ evidence quality ≠ implementation health</span></a>
@@ -185,8 +187,9 @@ description: Evidence-aware crypto alpha research for Quantiacs Q25 — causal m
   <div class="q25-footnote">
     <strong>Machine-readable:</strong>
     <a href="data/methodology_health.json">methodology_health.json</a> ·
-    <a href="data/strategy_matrix.json">strategy_matrix.json</a>.
-    Missing evidence stays missing; the homepage progressively enhances from the generated health JSON and does not invent results.
+    <a href="data/strategy_matrix.json">strategy_matrix.json</a> ·
+    <a href="data/backtest_dashboard.json">backtest_dashboard.json</a>.
+    Missing evidence stays missing; the homepage progressively enhances from generated evidence JSON and does not invent results.
   </div>
 </div>
 

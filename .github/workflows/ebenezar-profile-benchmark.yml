@@ -59,6 +59,34 @@ jobs:
           print('Ebenezar profile freeze verified')
           PY
 
+      - name: Diagnose exact causality gate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import qnt.data as qndata
+          from research.benchmark import check_causality, load_module, policy
+          from research.iteration import load_manifest
+
+          root = Path('.')
+          manifest = load_manifest(root / 'experiments/ebenezar_20260912/manifest.json')
+          folds, _ = policy()
+          data = qndata.cryptodaily_load_data(min_date='2015-01-01', max_date=folds[-1]['end'])
+          data = data.sel(time=slice('2015-01-01', folds[-1]['end']))
+          for candidate in manifest['candidates']:
+              module = load_module(root / candidate['path'])
+              fn = lambda d, m=module, c=candidate: m.strategy(d, c['params'], c['mode'])
+              try:
+                  weights = fn(data)
+                  result = check_causality(fn, data, weights)
+                  print(candidate['id'], 'PASS', result, 'coords=', list(weights.coords))
+              except Exception as exc:
+                  try:
+                      coords = list(weights.coords)
+                  except Exception:
+                      coords = []
+                  print(candidate['id'], 'FAIL', type(exc).__name__, repr(str(exc)), 'coords=', coords)
+          PY
+
       - name: Run exact Quantiacs development screen
         run: |
           python -m research.iteration \

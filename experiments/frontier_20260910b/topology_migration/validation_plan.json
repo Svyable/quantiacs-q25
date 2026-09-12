@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_id": "frontier_20260910b_topology_migration_validation",
+  "status": "FROZEN_PLAN_BEFORE_VALIDATION_OPEN",
+  "created_from": {
+    "preregistration": "experiments/frontier_20260910b/topology_migration/preregistration.json",
+    "preregistration_sha256": "bd61d69cd3859ee459162755259281e1fc9b741e8a4a6e2624e49c98a4b660d4",
+    "strategy_path": "strategies/generated/frontier_20260910b_topology_migration.py",
+    "strategy_sha256": "f93f33a2c6eceec14e7555fb8a864f50d49eebe7b33a870282e3564ec3c0073d",
+    "development_evidence": "evidence/frontier_20260910b/observed.json",
+    "development_selection_score": 1.376132031691156,
+    "development_selected_id": "topology_migration_w84"
+  },
+  "candidate": {
+    "id": "topology_migration_w84",
+    "family": "topology_migration",
+    "mode": "base",
+    "params": {"top_k": 5, "window": 84}
+  },
+  "validation_fold": {
+    "id": "validation",
+    "start": "2023-01-01",
+    "end": "2024-12-31",
+    "use": "frozen chronological validation; never drives mutation"
+  },
+  "warmup_start": "2022-01-01",
+  "costs": [0.0, 0.04, 0.08, 0.12],
+  "context_controls": ["equal_liquid", "inverse_vol_trend", "persistent_low_vol"],
+  "decision_policy": {
+    "automatic_promotion": false,
+    "soft_validation_threshold": null,
+    "reason": "configs/promotion_gates.yaml leaves fold_validation_sharpe_min unset; do not invent a cutoff after opening validation",
+    "allowed_outcomes": [
+      "BLOCKED_SOURCE_DRIFT",
+      "FAILED_SOFTWARE_OR_CAUSALITY",
+      "MEASURED_VALIDATION_REPORT_ONLY"
+    ],
+    "mutation_after_observation": "forbidden",
+    "diagnostic_2025_plus": "excluded",
+    "live_2026_10_01_plus": "excluded"
+  },
+  "reporting": {
+    "metrics": ["sharpe", "max_drawdown", "avg_turnover"],
+    "cost_ladder": true,
+    "generic_control_context": true,
+    "cross_campaign_megascore": false,
+    "claim_limits": "validation evidence only; no uniqueness, hosted multipass, live, or contest-clearance claim"
+  }
+}

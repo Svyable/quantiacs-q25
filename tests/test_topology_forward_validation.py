@@ -41,6 +41,8 @@ def test_validation_objects_cannot_select_a_new_window():
 
 
 def test_runner_is_validation_only_and_reuses_exact_quantiacs_evaluator():
+    # The forward runner gets exactly one bounded sponsor-data load. Report prose
+    # may describe later prohibited periods; executable data access may not open them.
     source = (ROOT / "scripts/validate_topology_forward.py").read_text()
     assert 'max_date=fold["end"]' in source
     assert 'data.sel(time=slice("2015-01-01", fold["end"]))' in source

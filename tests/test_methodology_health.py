@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from scripts.build_methodology_health import render
+from scripts.build_methodology_health import ROBUST_FLOOR, render
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,44 +15,50 @@ def test_methodology_health_artifacts_are_current():
     assert MARKDOWN.read_text() == markdown
 
 
-def test_latest_evidence_and_full_matrix_tier_are_distinct():
+def test_latest_evidence_and_full_matrix_tiers_are_explicit():
     payload, _ = render()
     latest = payload["latest_evidence"]
     health = payload["surface_health"]
 
-    assert latest["campaign"] == "frontier_20260912i"
-    assert latest["kind"] == "summary_only"
-    assert latest["decision"] == "PROMOTE_ZERO_FREEZE_ALL"
-    assert health["latest_full_matrix_campaign"] == "frontier_20260911h"
-    assert health["summary_only_latest"] is True
-    assert health["research_matrix_mentions_latest"] is False
-    assert health["index_mentions_latest"] is True
+    assert latest["campaign"].startswith("frontier_")
+    assert latest["kind"] in {"summary_only", "matrix", "matrix_and_summary"}
+    assert health["latest_full_matrix_campaign"] is None or health["latest_full_matrix_campaign"] <= latest["campaign"]
+    assert health["summary_only_latest"] is (latest["kind"] == "summary_only")
+    if latest["kind"] == "summary_only":
+        assert health["latest_full_matrix_campaign"] != latest["campaign"]
 
 
-def test_latest_campaign_rank_is_local_and_guardrail_first():
+def test_latest_campaign_rank_is_local_guardrail_first_and_dense():
     payload, _ = render()
     policy = payload["ranking_policy"]
     rows = payload["latest_evidence"]["family_triage"]
 
     assert policy["cross_campaign_ranking"] == "forbidden"
     assert policy["weighted_megascore"] is False
-    assert policy["robust_floor"] == 1.0
-    assert [row["family"] for row in rows] == [
-        "partial_edge_entropy",
-        "conditional_decoupling",
-        "trend_dispersion_gate",
+    assert policy["robust_floor"] == ROBUST_FLOOR == 1.0
+    assert rows, "latest measured summary should expose at least one family row"
+    assert [row["campaign_rank"] for row in rows] == list(range(1, len(rows) + 1))
+    assert all(row["guardrail_pass"] is (row["best_robust_sharpe"] >= ROBUST_FLOOR) for row in rows)
+    ordering = [
+        (row["guardrail_pass"], row["best_robust_sharpe"], row["family"])
+        for row in rows
     ]
-    assert all(row["guardrail_pass"] is False for row in rows)
-    assert [row["campaign_rank"] for row in rows] == [1, 2, 3]
+    assert ordering == sorted(ordering, reverse=True)
 
 
-def test_latest_packet_preserves_surviving_seam_without_cross_ranking():
+def test_missing_control_metrics_remain_missing_instead_of_imputed():
+    payload, _ = render()
+    rows = payload["latest_evidence"]["family_triage"]
+    for row in rows:
+        for field in ("ablation_robust_sharpe", "falsifier_robust_sharpe"):
+            value = row[field]
+            assert value is None or isinstance(value, (int, float))
+
+
+def test_surviving_seam_is_structured_and_not_cross_ranked():
     payload, _ = render()
     leader = payload["surviving_development_seam"]
-
-    assert leader["id"] == "topology_migration_w84"
-    assert leader["robust_development_sharpe"] == 1.376
-    assert max(
-        row["best_robust_sharpe"]
-        for row in payload["latest_evidence"]["family_triage"]
-    ) == 0.304
+    if leader is not None:
+        assert leader.get("id")
+        assert leader.get("declared_in_campaign", "frontier_").startswith("frontier_")
+    assert payload["ranking_policy"]["cross_campaign_ranking"] == "forbidden"

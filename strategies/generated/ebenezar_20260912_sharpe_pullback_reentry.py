@@ -18,7 +18,7 @@ def _std(x,n,m): return x.rolling(time=n,min_periods=m).std()
 def _mean(x,l):
     n=l.sum("asset"); return xr.where(n>0,(xr.where(np.isfinite(x),x,0.0)*l).sum("asset")/n,0.0)
 def _alloc(raw,l):
-    raw=xr.where(np.isfinite(raw)&(raw>0),raw,0.0)*l; g=raw.sum("asset"); w=xr.where(g>EPS,raw/g,0.0); return (xr.where(w>NAME_CAP,NAME_CAP,w)*l).transpose("time","asset").fillna(0.0)
+    raw=xr.where(np.isfinite(raw)&(raw>0),raw,0.0)*l; g=raw.sum("asset"); w=xr.where(g>EPS,raw/g,0.0); return ((xr.where(w>NAME_CAP,NAME_CAP,w)*l).transpose("time","asset").fillna(0.0).reset_coords("field",drop=True))
 def load_data(period):
     os.environ.setdefault("API_KEY","default"); import qnt.data as qndata; return qndata.cryptodaily_load_data(tail=period)
 def strategy(data,params=None,mode="base"):

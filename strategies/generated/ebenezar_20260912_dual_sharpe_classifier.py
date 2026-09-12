@@ -24,7 +24,7 @@ def _liquid_cs_mean(x,liquid):
     n=liquid.sum("asset"); return xr.where(n>0,(xr.where(np.isfinite(x),x,0.0)*liquid).sum("asset")/n,0.0)
 def _allocate(raw,liquid):
     raw=xr.where(np.isfinite(raw)&(raw>0),raw,0.0)*liquid; gross=raw.sum("asset"); normalized=xr.where(gross>EPS,raw/gross,0.0); capped=xr.where(normalized>NAME_CAP,NAME_CAP,normalized)*liquid
-    return capped.transpose("time","asset").fillna(0.0)
+    return capped.transpose("time","asset").fillna(0.0).reset_coords("field",drop=True)
 def _params(params,window):
     p={"window":window} if params is None else dict(params)
     if set(p)!={"window"} or p["window"]!=window: raise ValueError(f"expected frozen window={window}")

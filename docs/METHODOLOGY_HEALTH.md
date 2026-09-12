@@ -6,12 +6,12 @@
 
 | Check | State |
 |---|---|
-| Latest measured campaign | `frontier_20260912i` |
+| Latest measured campaign | `frontier_20260912j` |
 | Latest evidence tier | `summary_only` |
-| Latest campaign decision | `PROMOTE_ZERO_FREEZE_ALL` |
+| Latest campaign decision | `PROMOTE_ZERO` |
 | Latest full matrix packet | `frontier_20260911h` |
 | Detailed research matrix includes latest | **no — gap is explicit** |
-| Dashboard index includes latest | **yes** |
+| Dashboard index includes latest | **no** |
 
 The detailed matrix and this health surface intentionally have different evidence tiers. A summary-only campaign is shown here rather than silently inventing matrix rows that were never committed.
 
@@ -21,26 +21,27 @@ This ordering is valid **only inside the latest campaign**. Families first have 
 
 | Rank | Family | Best base | Robust SR | Floor ≥1.0 | Decision | Central | Ablation | Falsifier |
 |---:|---|---|---:|---:|---|---:|---:|---:|
-| 1 | `partial_edge_entropy` | `partial_edge_entropy_w84` | 0.304 | FAIL | `KILL_WEAK_ALPHA` | 0.138 | 0.119 | 0.127 |
-| 2 | `conditional_decoupling` | `conditional_decoupling_w84` | 0.288 | FAIL | `FALSIFIED_DEVELOPMENT` | 0.155 | 0.201 | 0.196 |
-| 3 | `trend_dispersion_gate` | `trend_dispersion_gate_w42` | -0.358 | FAIL | `FALSIFIED_DEVELOPMENT` | -0.812 | 0.210 | 0.384 |
+| 1 | `spectral_diversification_gate` | `spectral_diversification_gate_w42` | 0.786 | FAIL | `FALSIFIED_DEVELOPMENT` | — | — | — |
+| 2 | `positive_edge_shedding` | `positive_edge_shedding_w63` | 0.752 | FAIL | `FALSIFIED_DEVELOPMENT` | 0.752 | — | — |
+| 3 | `spectral_residual_momentum` | `spectral_residual_momentum_w63` | 0.667 | FAIL | `KILL_WEAK_ALPHA` | 0.667 | — | — |
 
 ## Surviving development seam
 
-The latest packet still identifies **`topology_migration_w84`** as the surviving new-alpha seam, with a reported robust-development Sharpe of **1.376** in its earlier evidence packet.
+The most recent structured packet that names a survivor identifies **`topology_migration_w84`** with reported robust-development Sharpe **1.376**. Structured declaration from `frontier_20260912i`.
 
 > Earlier Frontier-B development evidence; not cross-validated here and not an official submission clearance.
 
 ## Dogfood checks
 
 - **Recency is not rank.** The newest campaign can fail while an older, separately measured seam remains alive.
+- **Evidence schemas are normalized, not guessed.** Known committed summary schemas map into one control surface; absent metrics remain absent.
 - **No cross-campaign scalar.** Sponsor snapshots and evidence stages stay separate; the renderer refuses to manufacture one global score.
 - **Missing packets stay missing.** Summary-only evidence is labeled as such instead of being expanded into synthetic matrix rows.
-- **CI is the freshness alarm.** Tests compare this renderer with the checked-in JSON/Markdown, so the next committed campaign makes the surface stale until it is regenerated.
-- **Controls remain visible.** Parent, ablation and falsifier results sit beside the family rank so a high number cannot hide failed causality/economic controls.
+- **CI is the freshness alarm.** Tests compare this renderer with checked-in JSON/Markdown, so new evidence makes the surface stale until regenerated.
+- **Controls remain visible when structured.** Parent, ablation and falsifier metrics are displayed when the packet actually contains them.
 
 ## Current interpretation
 
-Changing from marginal residual-correlation topology to shrinkage partial-correlation topology did not reproduce the topology-migration edge. The non-topology residual-trend dispersion expansion gate was harmful. Preserve these as negative evidence and do not tune or invert after observation.
+Do not retune Frontier-J. topology_migration_w84 remains the only new-campaign family above the internal 1.0 robust-development floor; the next high-value action is a frozen forward/validation evaluation of that pre-existing survivor.
 
-The next iteration should attack the surviving seam with preregistered, causally distinct repairs and forward-safe diagnostics—not tune the latest failed families after observation.
+The next iteration should follow the latest packet's declared boundary and preregister any new mutation before return inspection.

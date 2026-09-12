@@ -1,0 +1,20 @@
+{
+  "campaign": "frontier_20260912i",
+  "frozen_before_measurement": true,
+  "created_utc": "2026-09-12T04:18:00+00:00",
+  "base_main_sha": "2303da285716e3f30898f9799802820e5d37a666",
+  "note": "Exact preregistration hashes are frozen here. Strategy source hashes are captured by the measurement candidate packets; no Frontier-I return was inspected before this freeze.",
+  "preregistration_sha256": {
+    "conditional_decoupling": "60410c3e4dcd707ffe7196b67b3b45238ca80579ec50393a0ebb0f76d64a355b",
+    "partial_edge_entropy": "daf813f71630d44e58ff0e3b83cc1860778f472fb57b6ea5544351aacf51701f",
+    "trend_dispersion_gate": "062ab46bc0a8be30198dce08d46a5625d5893544b6d309cfa844fec1cd7df35b",
+    "signed_partial_balance": "29f66e49cb8b3132d982bab8f4e8a23a53793884705b4ccd94635d16eed79bd6",
+    "precision_bridge": "1b39f8170b8b4f77c86785d6da6d4dedfd190fea236e6be92957df5fdd38aeb3",
+    "cohort_residual_divergence": "ab8868ca75e1d6225dd68322589fe8f82260b1f81cbd580f3e584dc60e134bd6"
+  },
+  "strategy_paths": [
+    "strategies/generated/frontier_20260912i_conditional_decoupling.py",
+    "strategies/generated/frontier_20260912i_partial_edge_entropy.py",
+    "strategies/generated/frontier_20260912i_trend_dispersion_gate.py"
+  ]
+}

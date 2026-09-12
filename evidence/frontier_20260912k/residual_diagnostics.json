@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "available_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "requested_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "status": "COMPLETE"
+  },
+  "cohort_residual_divergence_ablation": {
+    "correlations": {
+      "equal_liquid": 0.9288903593589423,
+      "inverse_vol_trend": 0.7889285074089302,
+      "persistent_low_vol": 0.9039562425214793
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 2.1884577005550567,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cohort_residual_divergence_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.8844322401878928,
+      "inverse_vol_trend": 0.7722351663268343,
+      "persistent_low_vol": 0.8695164659776489
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.487295315399699,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cohort_residual_divergence_w42": {
+    "correlations": {
+      "equal_liquid": 0.8770674435595704,
+      "inverse_vol_trend": 0.7412650790982208,
+      "persistent_low_vol": 0.8526010383735274
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.8082958408157165,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cohort_residual_divergence_w63": {
+    "correlations": {
+      "equal_liquid": 0.8904287095360472,
+      "inverse_vol_trend": 0.7700834933741485,
+      "persistent_low_vol": 0.8706456152954895
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.9427580463136553,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "cohort_residual_divergence_w84": {
+    "correlations": {
+      "equal_liquid": 0.8804750214499629,
+      "inverse_vol_trend": 0.7451349808821044,
+      "persistent_low_vol": 0.8576505174657395
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.4258828603895901,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "nearest_peer_detachment_ablation": {
+    "correlations": {
+      "equal_liquid": 0.6460457756937515,
+      "inverse_vol_trend": 0.664894518398699,
+      "persistent_low_vol": 0.6543291679704454
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.39881473930164696,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "nearest_peer_detachment_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.6149576078248087,
+      "inverse_vol_trend": 0.6540923736859486,
+      "persistent_low_vol": 0.6273494343509447
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.7950676134694967,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "nearest_peer_detachment_w42": {
+    "correlations": {
+      "equal_liquid": 0.6571474540138513,
+      "inverse_vol_trend": 0.5866218684923472,
+      "persistent_low_vol": 0.6799806241965521
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.118322232312389,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "nearest_peer_detachment_w63": {
+    "correlations": {
+      "equal_liquid": 0.6161362674796637,
+      "inverse_vol_trend": 0.6330327965492313,
+      "persistent_low_vol": 0.6361538035982705
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.0266414863894051,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "nearest_peer_detachment_w84": {
+    "correlations": {
+      "equal_liquid": 0.6614469189083134,
+      "inverse_vol_trend": 0.6685156492776245,
+      "persistent_low_vol": 0.6669716082450525
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.1079709164169026,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "subspace_rotation_opportunity_ablation": {
+    "correlations": {
+      "equal_liquid": 0.7393707132596464,
+      "inverse_vol_trend": 0.5019678655528219,
+      "persistent_low_vol": 0.7028690403781725
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.2245935890096857,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "subspace_rotation_opportunity_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.9504198577180154,
+      "inverse_vol_trend": 0.762064096741121,
+      "persistent_low_vol": 0.9291620313842007
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.39090101173923497,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "subspace_rotation_opportunity_w42": {
+    "correlations": {
+      "equal_liquid": 0.939768410722272,
+      "inverse_vol_trend": 0.744457901066241,
+      "persistent_low_vol": 0.916853705529617
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.22097295956287408,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "subspace_rotation_opportunity_w63": {
+    "correlations": {
+      "equal_liquid": 0.9506017457983482,
+      "inverse_vol_trend": 0.7618296180989688,
+      "persistent_low_vol": 0.9266638555401926
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.18246297822045923,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "subspace_rotation_opportunity_w84": {
+    "correlations": {
+      "equal_liquid": 0.9511635871646335,
+      "inverse_vol_trend": 0.7540291346961316,
+      "persistent_low_vol": 0.9234640823388892
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.3748320242738577,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  }
+}

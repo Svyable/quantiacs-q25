@@ -21,14 +21,14 @@ def test_latest_evidence_and_full_matrix_tier_are_distinct():
     latest = payload["latest_evidence"]
     health = payload["surface_health"]
 
-    assert latest["campaign"] == "frontier_20260912j"
-    assert latest["kind"] == "summary_only"
+    assert latest["campaign"] == "frontier_20260912k"
+    assert latest["kind"] == "matrix_and_summary"
     assert latest["decision"] == "PROMOTE_ZERO"
     assert latest["evidence_stage"] == "DEVELOPMENT_ONLY"
-    assert health["latest_full_matrix_campaign"] == "frontier_20260911h"
-    assert health["measured_campaigns_since_full_matrix"] == 2
-    assert health["summary_only_latest"] is True
-    assert health["research_matrix_mentions_latest"] is False
+    assert health["latest_full_matrix_campaign"] == "frontier_20260912k"
+    assert health["measured_campaigns_since_full_matrix"] == 0
+    assert health["summary_only_latest"] is False
+    assert health["research_matrix_mentions_latest"] is True
     assert health["index_uses_generated_health"] is True
 
 
@@ -41,15 +41,15 @@ def test_latest_campaign_rank_is_local_and_exposes_control_margins():
     assert policy["weighted_megascore"] is False
     assert policy["robust_floor"] == 1.0
     assert [row["family"] for row in rows] == [
-        "spectral_diversification_gate",
-        "positive_edge_shedding",
-        "spectral_residual_momentum",
+        "nearest_peer_detachment",
+        "subspace_rotation_opportunity",
+        "cohort_residual_divergence",
     ]
     assert all(row["guardrail_pass"] is False for row in rows)
     assert all(row["falsification_complete"] is True for row in rows)
-    assert [row["control_supported"] for row in rows] == [False, False, True]
-    assert rows[0]["central_control_margin"] == 0.498 - 0.665
-    assert rows[2]["central_control_margin"] == 0.6670427141125492 - 0.487
+    assert [row["control_supported"] for row in rows] == [True, False, False]
+    assert rows[0]["central_control_margin"] == 0.7820101586330442 - 0.7008911597193725
+    assert rows[1]["central_control_margin"] == 0.3316438596528032 - 0.41498169088201087
 
 
 def test_forward_validation_supersedes_stale_development_survivor_claim():
@@ -64,7 +64,7 @@ def test_forward_validation_supersedes_stale_development_survivor_claim():
     assert leader["validation"]["selected_forward_sharpe_12"] == 0.314
     assert leader["validation"]["decision"] == "FAIL_FORWARD_GATE"
     assert payload["active_new_alpha_seam"] is None
-    assert feedback["guidance_superseded_by_newer_validation"] is True
+    assert feedback["guidance_superseded_by_newer_validation"] is False
 
 
 def test_recursive_learning_vector_and_measurement_queue_are_explicit():
@@ -80,10 +80,8 @@ def test_recursive_learning_vector_and_measurement_queue_are_explicit():
     assert latest["economic_survival"]["count"] == 0
     assert latest["promotion_ready"]["count"] == 0
     assert latest["decision_resolution"]["count"] == 3
-    assert queue["count"] == 1
-    assert queue["next_campaign"]["campaign"] == "frontier_20260912k"
-    assert queue["next_campaign"]["candidate_count"] == 15
-    assert queue["next_campaign"]["family_count"] == 3
+    assert queue["count"] == 0
+    assert queue["next_campaign"] is None
 
 
 def test_homepage_is_bound_to_generated_health_packet():

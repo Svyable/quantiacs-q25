@@ -101,6 +101,15 @@ The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are
 
 ## Current read-through
 
+Frontier-K (`experiments/frontier_20260912k/pm_report.md`) measured three
+previously unmeasured reserves. All 18 exact local cells completed on 2016–2022;
+2023–2024 was excluded because it is spent. Nearest-peer detachment is
+`KILL_WEAK_ALPHA` (best robust SR 0.782, beats both controls, misses the 1.0
+floor). Subspace rotation and cohort residual divergence are
+`FALSIFIED_DEVELOPMENT`. Promote zero. Stop mining residual-correlation node
+changes. `topology_migration_w84` already failed its frozen forward gate
+(0.314 SR@12%). Evidence is in `evidence/frontier_20260912k/`.
+
 Frontier-G (`experiments/frontier_20260911g/pm_report.md`) tested residual-edge
 uncertainty change, two-speed forecast agreement and cost-relative residual
 persistence. All 18 objects completed exact local evaluation after a

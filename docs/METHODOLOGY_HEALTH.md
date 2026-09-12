@@ -6,13 +6,13 @@
 
 | Check | State |
 |---|---|
-| Latest measured campaign | `frontier_20260912j` |
-| Latest evidence tier | `summary_only` |
+| Latest measured campaign | `frontier_20260912k` |
+| Latest evidence tier | `matrix_and_summary` |
 | Latest campaign decision | `PROMOTE_ZERO` |
-| Latest full matrix packet | `frontier_20260911h` |
-| Measured campaigns since full matrix | **2** |
+| Latest full matrix packet | `frontier_20260912k` |
+| Measured campaigns since full matrix | **0** |
 | Homepage bound to generated health JSON | **yes** |
-| Detailed research matrix includes latest | **no — evidence-depth gap is explicit** |
+| Detailed research matrix includes latest | **yes** |
 
 ## Recursive learning telemetry
 
@@ -25,8 +25,8 @@ These metrics are a **vector, not a score**. They are intended to make the next 
 | Economic survival | **0/3 (0%)** | best base clears the fixed robust-development floor |
 | Promotion-ready intersection | **0/3 (0%)** | clears the floor **and** survives controls; still not validation |
 | Decision resolution | **3/3 (100%)** | measured families ended with an explicit decision code |
-| Best floor margin | **-0.214** | best latest-family robust SR minus the fixed 1.0 floor |
-| Median central-vs-control margin | **-0.167** | positive is causal support; negative means a control matched/beat the parent |
+| Best floor margin | **-0.218** | best latest-family robust SR minus the fixed 1.0 floor |
+| Median central-vs-control margin | **-0.083** | positive is causal support; negative means a control matched/beat the parent |
 
 ## Validation correction
 
@@ -37,17 +37,9 @@ The earlier development leader **`topology_migration_w84`** reported robust-deve
 - Validation fold: **2023-01-01 → 2024-12-31**
 - Fold state: **`SPENT_DO_NOT_MUTATE`**
 
-The latest development summary's instruction to forward-test this seam is therefore **superseded by newer committed validation evidence**. The dashboard now self-corrects this conflict instead of preserving the stale development narrative.
-
 ## Measurement queue
 
-The committed measurement frontier is ahead of the evidence frontier by **1 preregistered campaign(s)**.
-
-Next frozen campaign: **`frontier_20260912k`** — 15 candidate/control cells across 3 families; automatic promotion is `False`.
-
-Activates three unmeasured reserves preregistered before their own returns: local peer detachment, residual eigenspace rotation, and non-graph cohort divergence. Frontier-K selection is development-only; 2023-2024 is already spent and excluded.
-
-Until measured evidence is committed, this is a queue item—not a result. The useful recursive action is to measure or ingest the frozen packet unchanged, not mutate it because the dashboard is empty.
+No preregistered campaign is currently ahead of the committed measurement frontier.
 
 ## Latest-campaign family triage
 
@@ -55,9 +47,9 @@ This ordering is valid **only inside the latest measured campaign**. Controls ar
 
 | Rank | Family | Best base | Robust SR | Floor margin | Central | Control ceiling | Causal margin | Support | Decision |
 |---:|---|---|---:|---:|---:|---:|---:|---:|---|
-| 1 | `spectral_diversification_gate` | `spectral_diversification_gate_w42` | 0.786 | -0.214 | 0.498 | 0.665 | -0.167 | FAIL | `FALSIFIED_DEVELOPMENT` |
-| 2 | `positive_edge_shedding` | `positive_edge_shedding_w63` | 0.752 | -0.248 | 0.752 | 0.935 | -0.183 | FAIL | `FALSIFIED_DEVELOPMENT` |
-| 3 | `spectral_residual_momentum` | `spectral_residual_momentum_w63` | 0.667 | -0.333 | 0.667 | 0.487 | 0.180 | PASS | `KILL_WEAK_ALPHA` |
+| 1 | `nearest_peer_detachment` | `nearest_peer_detachment_w63` | 0.782 | -0.218 | 0.782 | 0.701 | 0.081 | PASS | `KILL_WEAK_ALPHA` |
+| 2 | `subspace_rotation_opportunity` | `subspace_rotation_opportunity_w42` | 0.354 | -0.646 | 0.332 | 0.415 | -0.083 | FAIL | `FALSIFIED_DEVELOPMENT` |
+| 3 | `cohort_residual_divergence` | `cohort_residual_divergence_w63` | 0.131 | -0.869 | 0.131 | 0.241 | -0.110 | FAIL | `FALSIFIED_DEVELOPMENT` |
 
 ## Dogfood checks
 
@@ -69,8 +61,4 @@ This ordering is valid **only inside the latest measured campaign**. Controls ar
 
 ## Latest measured interpretation
 
-Frontier-J changed the graph object rather than tuning topology_migration_w84. Signed positive-edge shedding, spectral diversification gating, and leading-PC residual momentum all failed their frozen development rules. Preserve them as negative evidence; topology_migration_w84 remains the only new-campaign family above the internal 1.0 robust-development floor and should face frozen chronological validation unchanged.
-
-### Superseding read-through
-
-The quoted interpretation above is preserved as historical development context, but its topology-forward-test recommendation is no longer current. The frozen forward packet failed its gate; the active recursive pressure is now the next preregistered, unmeasured campaign rather than another topology rescue.
+Frontier-K measured three previously unmeasured reserves on the reused 2016-2022 development surface. Nearest-peer detachment is the strongest base at robust Sharpe 0.782 and beats both matched controls, but every window misses the 1.0 floor (KILL_WEAK_ALPHA). Subspace rotation and cohort residual divergence are FALSIFIED_DEVELOPMENT. Do not grid-rescue. 2023-2024 remains spent and was excluded. Topology_migration_w84 already failed its frozen forward gate (0.314); this campaign does not restore it.

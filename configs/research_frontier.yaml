@@ -25,6 +25,15 @@ novelty_rule: >-
   weight, rebalance day, or risk scaler is not sufficient evidence of novelty.
 
 occupied_or_crowded:
+  - family: "nearest_peer_detachment"
+    incumbents: [frontier_20260912k_nearest_peer_detachment]
+    note: "FROZEN / KILL_WEAK_ALPHA: best base robust SR 0.782 beats ablation 0.701 and falsifier 0.699; every window misses the 1.0 floor. Causal support without economic survival. No grid rescue."
+  - family: "subspace_rotation_opportunity"
+    incumbents: [frontier_20260912k_subspace_rotation_opportunity]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: best base 0.354; central 0.332 loses to identity-rotated residual-trend labels 0.415 under the same rotation state."
+  - family: "cohort_residual_divergence"
+    incumbents: [frontier_20260912k_cohort_residual_divergence]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: central 0.131 loses to plain residual-trend ablation 0.241. Do not invert to cohort-conforming leaders after seeing this."
   - family: "residual_edge_uncertainty_change"
     incumbents: [frontier_20260911g_edge_uncertainty]
     note: "FROZEN / FALSIFIED_DEVELOPMENT: all change-based development Sharpes negative; level-only ablation 0.116 beats the central change signal (−0.568). Do not invert the change sign. Does not falsify Frontier-B topology migration."

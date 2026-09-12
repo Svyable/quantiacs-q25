@@ -1,0 +1,48 @@
+[
+  {
+    "best_score": 0.1305431207422551,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "cohort_residual_divergence_ablation"
+    ],
+    "family": "cohort_residual_divergence",
+    "family_rank": 3,
+    "invalid_cells": [],
+    "median_score": -0.004083727640593755,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  },
+  {
+    "best_score": 0.7820101586330442,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "KILL_WEAK_ALPHA",
+    "declared_cells": 5,
+    "failed_controls": [],
+    "family": "nearest_peer_detachment",
+    "family_rank": 1,
+    "invalid_cells": [],
+    "median_score": 0.5384331580612771,
+    "pending_cells": [],
+    "reason": "every valid base cell is below predefined development floor Sharpe 1.0"
+  },
+  {
+    "best_score": 0.3536037651085109,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "subspace_rotation_opportunity_falsifier"
+    ],
+    "family": "subspace_rotation_opportunity",
+    "family_rank": 2,
+    "invalid_cells": [],
+    "median_score": 0.3316438596528032,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  }
+]

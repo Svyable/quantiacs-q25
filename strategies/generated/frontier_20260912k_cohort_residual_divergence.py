@@ -5,10 +5,12 @@ Preregistration SHA256: 9b95e58d47c288ee9beaac384553f72033ea351f79971ca31a8bee27
 Prior reserve SHA256: ab8868ca75e1d6225dd68322589fe8f82260b1f81cbd580f3e584dc60e134bd6
 
 Mechanism: form a causal high-residual-trend cohort from the historical liquid
-universe. Among those leaders, reward positive residual trend whose recent path
-is less correlated with the equal-weight path of the *other* cohort leaders.
-The ablation is plain residual trend inside the same cohort; the destructive
-control explicitly rewards cohort conformity instead.
+universe. Among those leaders, deploy capital only to the more-divergent half,
+where divergence means lower correlation to the equal-weight path of the *other*
+cohort leaders. The ablation is plain residual trend inside the same cohort; the
+destructive control deploys to the more-conforming half instead. The median split
+is a rank/state transform rather than a fitted numeric threshold, and ensures the
+mechanism changes the fixed-slot portfolio rather than only rescaling scores.
 """
 from __future__ import annotations
 
@@ -47,6 +49,28 @@ def _peer_corr(path, labels):
     return out
 
 
+def _split_by_peer_correlation(trend, corr, mode):
+    """Make the mechanism change membership under fixed-slot allocation.
+
+    Base keeps the lower-correlation (more divergent) half; falsifier keeps the
+    higher-correlation (more conforming) half. The ablation removes the split.
+    Ties at the cross-sectional median are broken deterministically by asset label
+    through stable ranking rather than by adding a fitted threshold.
+    """
+    valid = pd.concat([trend.rename("trend"), corr.rename("corr")], axis=1).dropna()
+    if valid.empty:
+        return pd.Series(dtype=float)
+    if mode == "ablation":
+        return valid["trend"].clip(lower=0.0)
+
+    ascending = mode == "base"
+    ordered = valid.sort_index()
+    ranks = ordered["corr"].rank(method="first", ascending=ascending)
+    keep_n = max(1, int(np.ceil(len(ordered) / 2)))
+    keep = ranks <= keep_n
+    return ordered["trend"].clip(lower=0.0).where(keep, 0.0)
+
+
 def signals(data, window, mode="base"):
     close = _field(data, "close").where(lambda x: np.isfinite(x) & (x > 0))
     liquid = _field(data, "is_liquid").eq(1) & close.notna()
@@ -81,18 +105,10 @@ def signals(data, window, mode="base"):
         path = residual_s.iloc[i - PATH_DAYS + 1:i + 1]
         corr = _peer_corr(path, labels).clip(-1.0, 1.0)
         t = trend.reindex(labels).clip(lower=0.0)
-        divergence = (1.0 - corr) / 2.0
-        conformity = (1.0 + corr) / 2.0
-
-        if mode == "base":
-            score = t * divergence
-        elif mode == "ablation":
-            score = t
-        elif mode == "falsifier":
-            score = t * conformity
-        else:
+        if mode not in {"base", "ablation", "falsifier"}:
             raise ValueError("unknown control mode")
-        out.loc[times[i], labels] = score.replace([np.inf, -np.inf], np.nan).fillna(0.0).to_numpy()
+        score = _split_by_peer_correlation(t, corr, mode)
+        out.loc[times[i], score.index] = score.replace([np.inf, -np.inf], np.nan).fillna(0.0).to_numpy()
 
     return out.reindex(columns=close.columns), liquid
 

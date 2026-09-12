@@ -235,3 +235,36 @@ Exact local measurements; no automatic promotion or cross-campaign ranking.
 | neighbor_identity_churn | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
 
 [Evidence packet](../evidence/frontier_20260911h/report.md) · [Research report](../experiments/frontier_20260911h/pm_report.md)
+
+## frontier_20260912k: separate development campaign
+
+Exact local measurements; no automatic promotion or cross-campaign ranking.
+
+| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |
+|---|---|---:|---:|---|
+| `nearest_peer_detachment_w63` | base | 0.782 | -64.9% | COMPLETE |
+| `nearest_peer_detachment_ablation` | ablation | 0.701 | -73.4% | COMPLETE |
+| `nearest_peer_detachment_falsifier` | falsifier | 0.699 | -63.4% | COMPLETE |
+| `persistent_low_vol` | control | 0.641 | -93.3% | COMPLETE |
+| `nearest_peer_detachment_w42` | base | 0.538 | -72.3% | COMPLETE |
+| `subspace_rotation_opportunity_falsifier` | falsifier | 0.415 | -89.2% | COMPLETE |
+| `subspace_rotation_opportunity_w42` | base | 0.354 | -89.4% | COMPLETE |
+| `subspace_rotation_opportunity_w63` | base | 0.332 | -89.7% | COMPLETE |
+| `equal_liquid` | control | 0.270 | -93.6% | COMPLETE |
+| `cohort_residual_divergence_ablation` | ablation | 0.241 | -86.9% | COMPLETE |
+| `subspace_rotation_opportunity_w84` | base | 0.222 | -88.9% | COMPLETE |
+| `cohort_residual_divergence_w63` | base | 0.131 | -75.1% | COMPLETE |
+| `nearest_peer_detachment_w84` | base | 0.106 | -72.9% | COMPLETE |
+| `inverse_vol_trend` | control | 0.053 | -87.1% | COMPLETE |
+| `subspace_rotation_opportunity_ablation` | ablation | 0.006 | -84.8% | COMPLETE |
+| `cohort_residual_divergence_w84` | base | -0.004 | -75.1% | COMPLETE |
+| `cohort_residual_divergence_falsifier` | falsifier | -0.063 | -75.9% | COMPLETE |
+| `cohort_residual_divergence_w42` | base | -0.091 | -67.0% | COMPLETE |
+
+| Family | Decision | Reason |
+|---|---|---|
+| cohort_residual_divergence | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| nearest_peer_detachment | KILL_WEAK_ALPHA | every valid base cell is below predefined development floor Sharpe 1.0 |
+| subspace_rotation_opportunity | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+
+[Evidence packet](../evidence/frontier_20260912k/report.md) · [Research report](../experiments/frontier_20260912k/pm_report.md)

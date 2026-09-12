@@ -1,0 +1,17 @@
+{
+  "captured_utc": "2026-09-12T20:13:55.010737+00:00",
+  "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "xarray": "2025.12.0"
+  },
+  "live_data_used": false,
+  "measured_head_sha": "8e2e4bb0361e827c5a72137fd95265dc07ad2e25",
+  "python": "3.13.9",
+  "run_id": "9f60725e9ce55335108b",
+  "selection_end": "2022-12-31",
+  "source": "Exact local Quantiacs cryptodaily loader, public_default",
+  "spent_validation_fold_excluded": "2023-01-01/2024-12-31",
+  "toolbox_commit": "9e5274c5ce102a66debc799fd2a2300969fb90f6"
+}

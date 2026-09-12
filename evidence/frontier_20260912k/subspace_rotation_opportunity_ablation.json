@@ -1,0 +1,135 @@
+{
+  "causality": {
+    "checkpoints": 7,
+    "max_abs_difference": 0.0,
+    "status": "PASS"
+  },
+  "family": "subspace_rotation_opportunity",
+  "id": "subspace_rotation_opportunity_ablation",
+  "metrics": {
+    "cleaner_impact": {
+      "changed_cells": 0,
+      "changed_days": 0,
+      "changed_fraction": 0.0,
+      "changed_on_missing_close_cells": 0,
+      "changed_on_nonfinite_liquidity_cells": 0,
+      "cleaned_max_gross": 1.0,
+      "cleaned_mean_gross": 0.36331279945242984,
+      "direct_ambiguous_data_changes": 0,
+      "max_abs_difference": 0.0,
+      "raw_max_gross": 1.0,
+      "raw_mean_gross": 0.36331279945242984,
+      "same_day_normalization_changes": 0,
+      "status": "UNCHANGED",
+      "translation_days": 0,
+      "unexplained_changed_cells": 0
+    },
+    "dev": {
+      "0.00": {
+        "avg_turnover": 0.08206434983649262,
+        "cagr": 0.05637095505372902,
+        "calmar_ratio": 0.08441697484938515,
+        "equity": 1.1159195946811276,
+        "hit_rate": 0.25205479452054796,
+        "max_drawdown": -0.6677680070187874,
+        "mean_return": 0.252200616690739,
+        "sharpe_ratio": 0.4054219054422144,
+        "sortino_ratio": 0.5617673597252961,
+        "volatility": 0.6220695362172177
+      },
+      "0.04": {
+        "avg_turnover": 0.08214312609880048,
+        "cagr": -0.027745848392495054,
+        "calmar_ratio": -0.04072931482049259,
+        "equity": 0.9452781353180292,
+        "hit_rate": 0.23972602739726026,
+        "max_drawdown": -0.6812255132397901,
+        "mean_return": 0.16939483747766304,
+        "sharpe_ratio": 0.2722427735580798,
+        "sortino_ratio": 0.37527557005193657,
+        "volatility": 0.6222197756206911
+      },
+      "0.08": {
+        "avg_turnover": 0.0822233967369039,
+        "cagr": -0.10538505624768091,
+        "calmar_ratio": -0.15181484695057598,
+        "equity": 0.8003358975849652,
+        "hit_rate": 0.236986301369863,
+        "max_drawdown": -0.6941683133401932,
+        "mean_return": 0.08655812615710873,
+        "sharpe_ratio": 0.13900892753591287,
+        "sortino_ratio": 0.1906092184809276,
+        "volatility": 0.6226803392519267
+      },
+      "0.12": {
+        "avg_turnover": 0.08230525357973964,
+        "cagr": -0.17709422667367591,
+        "calmar_ratio": -0.2428196922278443,
+        "equity": 0.6771739117737955,
+        "hit_rate": 0.2356164383561644,
+        "max_drawdown": -0.7293239895366624,
+        "mean_return": 0.0036093957933660548,
+        "sharpe_ratio": 0.005789402862028664,
+        "sortino_ratio": 0.00789580612197788,
+        "volatility": 0.6234487181811506
+      }
+    },
+    "research": {
+      "0.00": {
+        "avg_turnover": 0.07696552287097909,
+        "cagr": 0.9068721306583392,
+        "calmar_ratio": 1.1598897258763132,
+        "equity": 25.301360001613023,
+        "hit_rate": 0.2731253420908593,
+        "max_drawdown": -0.7818606462551294,
+        "mean_return": 0.8007653071390344,
+        "sharpe_ratio": 1.4152801477977668,
+        "sortino_ratio": 2.385636405329161,
+        "volatility": 0.5657998583425745
+      },
+      "0.04": {
+        "avg_turnover": 0.07703904709691771,
+        "cagr": 0.7611191677905365,
+        "calmar_ratio": 0.9438938507932723,
+        "equity": 16.99380017371285,
+        "hit_rate": 0.26053639846743293,
+        "max_drawdown": -0.806360977085371,
+        "mean_return": 0.7212996306670939,
+        "sharpe_ratio": 1.2749845915325502,
+        "sortino_ratio": 2.127762972355762,
+        "volatility": 0.5657320374359044
+      },
+      "0.08": {
+        "avg_turnover": 0.07711420021323669,
+        "cagr": 0.6262006629824299,
+        "calmar_ratio": 0.7561370474192559,
+        "equity": 11.403227465059254,
+        "hit_rate": 0.2594417077175698,
+        "max_drawdown": -0.828157627138748,
+        "mean_return": 0.6418263286315073,
+        "sharpe_ratio": 1.1340704693297372,
+        "sortino_ratio": 1.873055192222767,
+        "volatility": 0.5659492474139125
+      },
+      "0.12": {
+        "avg_turnover": 0.07719099063241906,
+        "cagr": 0.5012958586473035,
+        "calmar_ratio": 0.5914642054038299,
+        "equity": 7.643607387753063,
+        "hit_rate": 0.25779967159277506,
+        "max_drawdown": -0.8475506278609661,
+        "mean_return": 0.5623200973190052,
+        "sharpe_ratio": 0.9927076646059015,
+        "sortino_ratio": 1.622086877702093,
+        "volatility": 0.5664508468787159
+      }
+    }
+  },
+  "mode": "ablation",
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "runtime_seconds": 3.126566874794662,
+  "status": "COMPLETE"
+}

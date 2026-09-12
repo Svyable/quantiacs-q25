@@ -29,12 +29,12 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Quantiacs toolbox and tests
-        run: python -m pip install -r requirements.txt pytest
+      - name: Install Quantiacs toolbox
+        run: python -m pip install -r requirements.txt
 
-      - name: Run repository software, provenance and causality tests
-        run: python -m pytest -q tests
-
+      # The repository-wide pytest/static suite is enforced independently by
+      # research-integrity on the same PR. Do not duplicate it here; this job
+      # is the exact market-evidence lane.
       - name: Compile translated strategies
         run: python -m compileall -q strategies/generated/ebenezar_20260912_*.py
 

@@ -1,0 +1,53 @@
+{
+  "ablation": "current low edge-entropy level under the same fragmentation and trend state",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260912i_edge_entropy_specialization.py",
+  "contamination_notes": "A-H research/development evidence is already observed. Frontier-I is another development research look, not a fresh holdout. 2023+ excluded from selection.",
+  "cost_hypothesis": "weekly rebalance and structural graph state should keep target persistence materially above daily signal noise",
+  "created_utc": "2026-09-12T03:57:00+00:00",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260912i_edge_entropy_specialization",
+  "failure_mode": "mechanism collapses into ordinary unsigned topology migration, static isolation, generic residual trend, or another occupied family",
+  "falsifier": "rotate entropy-change assignments across eligible identities",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "edge_entropy_specialization",
+  "nearest_incumbent": "topology_migration / Frontier-H static-isolation controls",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "dependence-concentration structural satellite",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Designed after A-H development evidence. Frontier-I changes graph mathematics rather than retuning topology_migration_w84. No public performance claim is inherited.",
+  "source_urls": [
+    "https://doi.org/10.1016/j.econmod.2020.11.013",
+    "https://doi.org/10.1016/j.jempfin.2023.101428"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if falsifier or ablation matches/beats canonical base or if every valid base cell is below the fixed development floor; no post-look formula rescue",
+  "thesis": "A falling entropy of each asset's residual dependence distribution during global fragmentation identifies specialization into fewer relationships before idiosyncratic continuation.",
+  "timing": "completed daily bars only; fixed 21-day prior graph comparison; evaluator owns execution lag",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 remains untouched during development selection; 2025+ diagnostic/live evidence never drives mutation"
+}

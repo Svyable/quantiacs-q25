@@ -20,9 +20,10 @@ def test_latest_evidence_and_full_matrix_tier_are_distinct():
     latest = payload["latest_evidence"]
     health = payload["surface_health"]
 
-    assert latest["campaign"] == "frontier_20260912i"
+    assert latest["campaign"] == "frontier_20260912j"
     assert latest["kind"] == "summary_only"
-    assert latest["decision"] == "PROMOTE_ZERO_FREEZE_ALL"
+    assert latest["decision"] == "PROMOTE_ZERO"
+    assert latest["evidence_stage"] == "DEVELOPMENT_ONLY"
     assert health["latest_full_matrix_campaign"] == "frontier_20260911h"
     assert health["summary_only_latest"] is True
     assert health["research_matrix_mentions_latest"] is False
@@ -38,9 +39,9 @@ def test_latest_campaign_rank_is_local_and_guardrail_first():
     assert policy["weighted_megascore"] is False
     assert policy["robust_floor"] == 1.0
     assert [row["family"] for row in rows] == [
-        "partial_edge_entropy",
-        "conditional_decoupling",
-        "trend_dispersion_gate",
+        "spectral_diversification_gate",
+        "positive_edge_shedding",
+        "spectral_residual_momentum",
     ]
     assert all(row["guardrail_pass"] is False for row in rows)
     assert [row["campaign_rank"] for row in rows] == [1, 2, 3]
@@ -55,4 +56,4 @@ def test_latest_packet_preserves_surviving_seam_without_cross_ranking():
     assert max(
         row["best_robust_sharpe"]
         for row in payload["latest_evidence"]["family_triage"]
-    ) == 0.304
+    ) == 0.7858359375232994

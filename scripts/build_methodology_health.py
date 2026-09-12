@@ -1,24 +1,15 @@
 #!/usr/bin/env python3
-"""Build the Q25 methodology-health and latest-campaign triage surfaces.
+"""Build methodology-health surfaces from committed frontier evidence.
 
-This deliberately does *not* create a cross-campaign mega-score. It answers three
-separate questions from committed evidence:
-
-1. What is the latest measured campaign?
-2. How did the families inside that campaign triage under the declared robust floor?
-3. What older development seam is still alive according to the latest packet?
-
-The checked-in artifacts are compared against render() in tests. A new evidence
-campaign therefore makes CI fail until the public surface is regenerated, which
-lets the repository dogfood its own evidence discipline.
+The renderer is intentionally evidence-schema tolerant but ranking-policy strict:
+latest-campaign triage is local to one comparable packet, cross-campaign scalar
+ranking is forbidden, and missing metrics remain missing.
 """
-
 from __future__ import annotations
 
 import json
 from pathlib import Path
 from typing import Any
-
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "evidence"
@@ -34,7 +25,7 @@ def _load_json(path: Path) -> Any:
 
 
 def _campaign_entries() -> list[dict[str, Any]]:
-    entries: list[dict[str, Any]] = []
+    entries = []
     for directory in sorted(EVIDENCE.glob("frontier_*")):
         if not directory.is_dir():
             continue
@@ -45,29 +36,47 @@ def _campaign_entries() -> list[dict[str, Any]]:
         }
         kinds = [name for name, path in sources.items() if path.exists()]
         if kinds:
-            entries.append(
-                {
-                    "campaign": directory.name,
-                    "kinds": kinds,
-                    "paths": sources,
-                }
-            )
+            entries.append({"campaign": directory.name, "kinds": kinds, "paths": sources})
     return entries
 
 
 def _latest_full_matrix(entries: list[dict[str, Any]]) -> str | None:
-    campaigns = [entry["campaign"] for entry in entries if "matrix" in entry["kinds"]]
+    campaigns = [e["campaign"] for e in entries if "matrix" in e["kinds"]]
     return max(campaigns) if campaigns else None
 
 
-def _triage_summary(summary: dict[str, Any]) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
-    for family in summary.get("families", []):
-        robust = family.get("best_robust_sharpe")
-        if robust is None:
+def _declared_survivor(entries: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Return the most recent *structured* surviving seam declaration, if any."""
+    for entry in sorted(entries, key=lambda e: e["campaign"], reverse=True):
+        path = entry["paths"]["summary"]
+        if not path.exists():
             continue
-        rows.append(
-            {
+        summary = _load_json(path)
+        survivor = summary.get("current_new_alpha_leader")
+        if survivor:
+            result = dict(survivor)
+            result.setdefault("declared_in_campaign", entry["campaign"])
+            return result
+    return None
+
+
+def _best_notable(summary: dict[str, Any], family: str) -> tuple[str | None, float | None]:
+    cells = summary.get("notable_base_cells", {})
+    candidates = []
+    for cid, metrics in cells.items():
+        if cid.startswith(family + "_") and metrics.get("robust_sharpe") is not None:
+            candidates.append((cid, float(metrics["robust_sharpe"])))
+    return max(candidates, key=lambda x: (x[1], x[0])) if candidates else (None, None)
+
+
+def _triage_summary(summary: dict[str, Any]) -> list[dict[str, Any]]:
+    rows = []
+    if summary.get("families"):
+        for family in summary["families"]:
+            robust = family.get("best_robust_sharpe")
+            if robust is None:
+                continue
+            rows.append({
                 "family": family.get("family"),
                 "best_base_id": family.get("best_base_id"),
                 "best_robust_sharpe": float(robust),
@@ -76,21 +85,33 @@ def _triage_summary(summary: dict[str, Any]) -> list[dict[str, Any]]:
                 "ablation_robust_sharpe": family.get("ablation_robust_sharpe"),
                 "falsifier_robust_sharpe": family.get("falsifier_robust_sharpe"),
                 "decision_code": family.get("decision_code"),
-                "guardrail_pass": float(robust) >= ROBUST_FLOOR,
-            }
-        )
+            })
+    else:
+        for family in summary.get("family_decisions", []):
+            name = family.get("family")
+            best_id, notable_score = _best_notable(summary, name)
+            robust = family.get("best_score")
+            if robust is None:
+                robust = notable_score
+            if robust is None:
+                continue
+            central_id = f"{name}_w63" if f"{name}_w63" in summary.get("notable_base_cells", {}) else None
+            central = summary.get("notable_base_cells", {}).get(central_id or "", {}).get("robust_sharpe")
+            rows.append({
+                "family": name,
+                "best_base_id": best_id,
+                "best_robust_sharpe": float(robust),
+                "central_id": central_id,
+                "central_robust_sharpe": central,
+                "ablation_robust_sharpe": None,
+                "falsifier_robust_sharpe": None,
+                "decision_code": family.get("decision_code"),
+            })
 
-    # A transparent lexicographic triage, not a weighted score. This ordering is
-    # valid only *inside this one campaign*.
-    rows.sort(
-        key=lambda row: (
-            bool(row["guardrail_pass"]),
-            float(row["best_robust_sharpe"]),
-            str(row["family"]),
-        ),
-        reverse=True,
-    )
-    for rank, row in enumerate(rows, start=1):
+    for row in rows:
+        row["guardrail_pass"] = float(row["best_robust_sharpe"]) >= ROBUST_FLOOR
+    rows.sort(key=lambda r: (bool(r["guardrail_pass"]), float(r["best_robust_sharpe"]), str(r["family"])), reverse=True)
+    for rank, row in enumerate(rows, 1):
         row["campaign_rank"] = rank
     return rows
 
@@ -99,8 +120,7 @@ def build_payload() -> dict[str, Any]:
     entries = _campaign_entries()
     if not entries:
         raise RuntimeError("No measured frontier evidence found")
-
-    latest = max(entries, key=lambda entry: entry["campaign"])
+    latest = max(entries, key=lambda e: e["campaign"])
     campaign = latest["campaign"]
     summary_path = latest["paths"]["summary"]
     matrix_path = latest["paths"]["matrix"]
@@ -108,28 +128,24 @@ def build_payload() -> dict[str, Any]:
     if summary_path.exists():
         summary = _load_json(summary_path)
         triage = _triage_summary(summary)
-        evidence_stage = summary.get("evidence_stage")
+        evidence_stage = summary.get("evidence_stage") or summary.get("status")
         decision = summary.get("decision")
-        interpretation = summary.get("interpretation")
-        surviving = summary.get("current_new_alpha_leader")
+        interpretation = summary.get("interpretation") or summary.get("next_boundary")
         evidence_kind = "summary_only" if not matrix_path.exists() else "matrix_and_summary"
     elif matrix_path.exists():
         matrix = _load_json(matrix_path)
-        summary = {}
         triage = []
         evidence_stage = matrix.get("status")
         decision = None
         interpretation = None
-        surviving = None
         evidence_kind = "matrix"
     else:
         raise RuntimeError(f"Latest campaign {campaign} has no supported evidence payload")
 
     index_text = INDEX.read_text() if INDEX.exists() else ""
     matrix_text = RESEARCH_MATRIX.read_text() if RESEARCH_MATRIX.exists() else ""
-
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "ranking_policy": {
             "cross_campaign_ranking": "forbidden",
             "within_campaign_order": [
@@ -150,7 +166,7 @@ def build_payload() -> dict[str, Any]:
             "family_triage": triage,
             "interpretation": interpretation,
         },
-        "surviving_development_seam": surviving,
+        "surviving_development_seam": _declared_survivor(entries),
         "surface_health": {
             "latest_full_matrix_campaign": _latest_full_matrix(entries),
             "research_matrix_mentions_latest": campaign in matrix_text,
@@ -173,86 +189,50 @@ def render() -> tuple[dict[str, Any], str]:
     latest = payload["latest_evidence"]
     health = payload["surface_health"]
     leader = payload.get("surviving_development_seam") or {}
-
     lines = [
-        "# Methodology Health",
-        "",
-        "> Generated from committed evidence. This is a control surface for the research process, not a cross-campaign leaderboard.",
-        "",
-        "## Evidence pulse",
-        "",
-        "| Check | State |",
-        "|---|---|",
+        "# Methodology Health", "",
+        "> Generated from committed evidence. This is a control surface for the research process, not a cross-campaign leaderboard.", "",
+        "## Evidence pulse", "",
+        "| Check | State |", "|---|---|",
         f"| Latest measured campaign | `{latest['campaign']}` |",
         f"| Latest evidence tier | `{latest['kind']}` |",
         f"| Latest campaign decision | `{latest.get('decision') or '—'}` |",
         f"| Latest full matrix packet | `{health.get('latest_full_matrix_campaign') or '—'}` |",
         f"| Detailed research matrix includes latest | **{'yes' if health['research_matrix_mentions_latest'] else 'no — gap is explicit'}** |",
-        f"| Dashboard index includes latest | **{'yes' if health['index_mentions_latest'] else 'no'}** |",
-        "",
-        "The detailed matrix and this health surface intentionally have different evidence tiers. A summary-only campaign is shown here rather than silently inventing matrix rows that were never committed.",
-        "",
-        "## Latest-campaign family triage",
-        "",
-        "This ordering is valid **only inside the latest campaign**. Families first have to clear the fixed robust-development floor; ties are then ordered by measured robust Sharpe. No weighted mega-score is used.",
-        "",
+        f"| Dashboard index includes latest | **{'yes' if health['index_mentions_latest'] else 'no'}** |", "",
+        "The detailed matrix and this health surface intentionally have different evidence tiers. A summary-only campaign is shown here rather than silently inventing matrix rows that were never committed.", "",
+        "## Latest-campaign family triage", "",
+        "This ordering is valid **only inside the latest campaign**. Families first have to clear the fixed robust-development floor; ties are then ordered by measured robust Sharpe. No weighted mega-score is used.", "",
         "| Rank | Family | Best base | Robust SR | Floor ≥1.0 | Decision | Central | Ablation | Falsifier |",
         "|---:|---|---|---:|---:|---|---:|---:|---:|",
     ]
-
     for row in latest["family_triage"]:
-        lines.append(
-            "| {rank} | `{family}` | `{best}` | {robust} | {gate} | `{decision}` | {central} | {ablation} | {falsifier} |".format(
-                rank=row["campaign_rank"],
-                family=row["family"],
-                best=row["best_base_id"],
-                robust=_fmt(row["best_robust_sharpe"]),
-                gate="PASS" if row["guardrail_pass"] else "FAIL",
-                decision=row["decision_code"],
-                central=_fmt(row["central_robust_sharpe"]),
-                ablation=_fmt(row["ablation_robust_sharpe"]),
-                falsifier=_fmt(row["falsifier_robust_sharpe"]),
-            )
-        )
-
-    lines.extend(
-        [
-            "",
-            "## Surviving development seam",
-            "",
-        ]
-    )
+        lines.append("| {rank} | `{family}` | `{best}` | {robust} | {gate} | `{decision}` | {central} | {ablation} | {falsifier} |".format(
+            rank=row["campaign_rank"], family=row["family"], best=row["best_base_id"] or "—",
+            robust=_fmt(row["best_robust_sharpe"]), gate="PASS" if row["guardrail_pass"] else "FAIL",
+            decision=row["decision_code"], central=_fmt(row["central_robust_sharpe"]),
+            ablation=_fmt(row["ablation_robust_sharpe"]), falsifier=_fmt(row["falsifier_robust_sharpe"])))
+    lines += ["", "## Surviving development seam", ""]
     if leader:
-        lines.extend(
-            [
-                f"The latest packet still identifies **`{leader.get('id')}`** as the surviving new-alpha seam, with a reported robust-development Sharpe of **{_fmt(leader.get('robust_development_sharpe'))}** in its earlier evidence packet.",
-                "",
-                f"> {leader.get('note', '')}".rstrip(),
-            ]
-        )
-    else:
-        lines.append("No surviving development seam was declared by the latest packet.")
-
-    lines.extend(
-        [
-            "",
-            "## Dogfood checks",
-            "",
-            "- **Recency is not rank.** The newest campaign can fail while an older, separately measured seam remains alive.",
-            "- **No cross-campaign scalar.** Sponsor snapshots and evidence stages stay separate; the renderer refuses to manufacture one global score.",
-            "- **Missing packets stay missing.** Summary-only evidence is labeled as such instead of being expanded into synthetic matrix rows.",
-            "- **CI is the freshness alarm.** Tests compare this renderer with the checked-in JSON/Markdown, so the next committed campaign makes the surface stale until it is regenerated.",
-            "- **Controls remain visible.** Parent, ablation and falsifier results sit beside the family rank so a high number cannot hide failed causality/economic controls.",
-            "",
-            "## Current interpretation",
-            "",
-            latest.get("interpretation") or "No campaign interpretation was committed.",
-            "",
-            "The next iteration should attack the surviving seam with preregistered, causally distinct repairs and forward-safe diagnostics—not tune the latest failed families after observation.",
-            "",
+        source = leader.get("declared_in_campaign")
+        provenance = f" Structured declaration from `{source}`." if source else ""
+        lines += [
+            f"The most recent structured packet that names a survivor identifies **`{leader.get('id')}`** with reported robust-development Sharpe **{_fmt(leader.get('robust_development_sharpe'))}**.{provenance}", "",
+            f"> {leader.get('note', '')}".rstrip(),
         ]
-    )
-
+    else:
+        lines.append("No structured surviving development seam is present in committed packets.")
+    lines += [
+        "", "## Dogfood checks", "",
+        "- **Recency is not rank.** The newest campaign can fail while an older, separately measured seam remains alive.",
+        "- **Evidence schemas are normalized, not guessed.** Known committed summary schemas map into one control surface; absent metrics remain absent.",
+        "- **No cross-campaign scalar.** Sponsor snapshots and evidence stages stay separate; the renderer refuses to manufacture one global score.",
+        "- **Missing packets stay missing.** Summary-only evidence is labeled as such instead of being expanded into synthetic matrix rows.",
+        "- **CI is the freshness alarm.** Tests compare this renderer with checked-in JSON/Markdown, so new evidence makes the surface stale until regenerated.",
+        "- **Controls remain visible when structured.** Parent, ablation and falsifier metrics are displayed when the packet actually contains them.",
+        "", "## Current interpretation", "", latest.get("interpretation") or "No campaign interpretation was committed.", "",
+        "The next iteration should follow the latest packet's declared boundary and preregister any new mutation before return inspection.", "",
+    ]
     return payload, "\n".join(lines)
 
 

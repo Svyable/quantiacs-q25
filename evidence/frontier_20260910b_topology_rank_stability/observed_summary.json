@@ -1,0 +1,59 @@
+{
+  "access_mode": "public_default",
+  "artifact_digest": "sha256:e8bce2f1276e9f0ca0696c23ba88db5ca76b2ea334912ba943d22f34acaa43b4",
+  "artifact_id": 10291802505,
+  "campaign": "frontier_20260910b_topology_rank_stability",
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "decision": "PROMOTE_ZERO_FREEZE_ALL",
+  "family_decisions": [
+    {
+      "best_score": -0.04761460362711585,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "family": "topology_rank_stability",
+      "reason": "the declared ablation robust score 0.211 exceeded every base; the family failed its destructive-control gate"
+    }
+  ],
+  "manifest_sha256": "8059abcd58a1e5510b3f04bdcdc56e632aa54f246ddb1201fe1f4a5738279501",
+  "notable_base_cells": {
+    "topology_rank_stability_w42": {
+      "dev_residual_sharpe": -0.7424847386420901,
+      "dev_sharpe_12": -0.04761460362711585,
+      "research_sharpe_12": 1.2095260254471023,
+      "robust_sharpe": -0.04761460362711585,
+      "worst_drawdown_12": -0.9609123308686572
+    },
+    "topology_rank_stability_w63": {
+      "dev_residual_sharpe": -1.1121195828909114,
+      "dev_sharpe_12": -0.175311681104714,
+      "research_sharpe_12": 1.19906518515022,
+      "robust_sharpe": -0.175311681104714,
+      "worst_drawdown_12": -0.9532525986961475
+    },
+    "topology_rank_stability_w84": {
+      "dev_residual_sharpe": -1.1032063186244598,
+      "dev_sharpe_12": -0.09151971159349041,
+      "research_sharpe_12": 1.3179047649421987,
+      "robust_sharpe": -0.09151971159349041,
+      "worst_drawdown_12": -0.9498840834784065
+    }
+  },
+  "control_cells": {
+    "topology_rank_stability_ablation": {
+      "dev_residual_sharpe": -0.3138328814437363,
+      "robust_sharpe": 0.2110762834838362
+    },
+    "topology_rank_stability_falsifier": {
+      "dev_residual_sharpe": -1.2252202923335072,
+      "robust_sharpe": -0.1756466564973601
+    }
+  },
+  "next_boundary": "Freeze topology_rank_stability. Do not tune, invert, or search neighboring rank-stability variants after observation. topology_migration_w84 remains the pre-existing development survivor and should only advance through its already-declared forward/validation boundary.",
+  "source_hashes": {
+    "research/benchmark.py": "8fbe3f5e463a97f5e0fe697e044a35d3fb49e234c69e1d1d0d05e75f3b40c825",
+    "research/iteration.py": "8be5ad0130eefb872a0cce8d16348a2b62ce8d73330dcf0e9747ae73483dce66",
+    "strategies/generated/frontier_20260910b_topology_rank_stability.py": "5708214efd0f4518a79e9367738f0e1fef5290d7a047abd94df180803538ea07"
+  },
+  "status": "MEASURED_DEVELOPMENT_ONLY",
+  "workflow_run": 34675022256
+}

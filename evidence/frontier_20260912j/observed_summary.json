@@ -3,8 +3,46 @@
   "artifact_digest": "sha256:77154132014707ad86066f93227ea10cfc8ffa6bbc6b5795d50fafa25747583b",
   "artifact_id": 10291064478,
   "campaign": "frontier_20260912j",
+  "current_new_alpha_leader": {
+    "id": "topology_migration_w84",
+    "note": "Earlier Frontier-B development evidence; not yet forward-validated here and not an official submission clearance.",
+    "robust_development_sharpe": 1.376
+  },
   "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
   "decision": "PROMOTE_ZERO",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "families": [
+    {
+      "ablation_robust_sharpe": 0.935,
+      "best_base_id": "positive_edge_shedding_w63",
+      "best_robust_sharpe": 0.7519241563118731,
+      "central_id": "positive_edge_shedding_w63",
+      "central_robust_sharpe": 0.7519241563118731,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": 0.811,
+      "family": "positive_edge_shedding"
+    },
+    {
+      "ablation_robust_sharpe": 0.665,
+      "best_base_id": "spectral_diversification_gate_w42",
+      "best_robust_sharpe": 0.7858359375232994,
+      "central_id": "spectral_diversification_gate_w63",
+      "central_robust_sharpe": 0.498,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": 0.188,
+      "family": "spectral_diversification_gate"
+    },
+    {
+      "ablation_robust_sharpe": 0.487,
+      "best_base_id": "spectral_residual_momentum_w63",
+      "best_robust_sharpe": 0.6670427141125492,
+      "central_id": "spectral_residual_momentum_w63",
+      "central_robust_sharpe": 0.6670427141125492,
+      "decision_code": "KILL_WEAK_ALPHA",
+      "falsifier_robust_sharpe": 0.254,
+      "family": "spectral_residual_momentum"
+    }
+  ],
   "family_decisions": [
     {
       "best_score": 0.7519241563118731,
@@ -28,13 +66,35 @@
       "reason": "every valid base cell is below predefined development floor Sharpe 1.0"
     }
   ],
+  "interpretation": "Frontier-J changed the graph object rather than tuning topology_migration_w84. Signed positive-edge shedding, spectral diversification gating, and leading-PC residual momentum all failed their frozen development rules. Preserve them as negative evidence; topology_migration_w84 remains the only new-campaign family above the internal 1.0 robust-development floor and should face frozen chronological validation unchanged.",
   "manifest_sha256": "4deba8cf8937972efa3d72e8ebc4874b4e3f2841ee7e99cae90489e174d68836",
   "measured_head_sha": "e683b911d0a2ae2c04d60167008d56f5691308f8",
+  "metric_precision_note": "Base-cell metrics retain exact values from the measured summary. Ablation/falsifier robust values are copied from the checked-in measured report at its published three-decimal precision.",
   "notable_base_cells": {
-    "positive_edge_shedding_w42": {"robust_sharpe": 0.3137940808893762, "research_sharpe_12": 0.3137940808893762, "dev_sharpe_12": 1.6810698742851298, "dev_residual_sharpe": 2.1909441035738038},
-    "positive_edge_shedding_w63": {"robust_sharpe": 0.7519241563118731, "research_sharpe_12": 0.7519241563118731, "dev_sharpe_12": 1.1587438088835853, "dev_residual_sharpe": 1.1391840452455262},
-    "spectral_diversification_gate_w42": {"robust_sharpe": 0.7858359375232994, "research_sharpe_12": 0.7858359375232994, "dev_sharpe_12": 1.1454154036047675, "dev_residual_sharpe": 1.461427830675977},
-    "spectral_residual_momentum_w63": {"robust_sharpe": 0.6670427141125492, "research_sharpe_12": 1.1648854968163382, "dev_sharpe_12": 0.6670427141125492, "dev_residual_sharpe": 0.32953884734309824}
+    "positive_edge_shedding_w42": {
+      "dev_residual_sharpe": 2.1909441035738038,
+      "dev_sharpe_12": 1.6810698742851298,
+      "research_sharpe_12": 0.3137940808893762,
+      "robust_sharpe": 0.3137940808893762
+    },
+    "positive_edge_shedding_w63": {
+      "dev_residual_sharpe": 1.1391840452455262,
+      "dev_sharpe_12": 1.1587438088835853,
+      "research_sharpe_12": 0.7519241563118731,
+      "robust_sharpe": 0.7519241563118731
+    },
+    "spectral_diversification_gate_w42": {
+      "dev_residual_sharpe": 1.461427830675977,
+      "dev_sharpe_12": 1.1454154036047675,
+      "research_sharpe_12": 0.7858359375232994,
+      "robust_sharpe": 0.7858359375232994
+    },
+    "spectral_residual_momentum_w63": {
+      "dev_residual_sharpe": 0.32953884734309824,
+      "dev_sharpe_12": 0.6670427141125492,
+      "research_sharpe_12": 1.1648854968163382,
+      "robust_sharpe": 0.6670427141125492
+    }
   },
   "next_boundary": "Do not retune Frontier-J. topology_migration_w84 remains the only new-campaign family above the internal 1.0 robust-development floor; the next high-value action is a frozen forward/validation evaluation of that pre-existing survivor.",
   "status": "MEASURED_DEVELOPMENT_ONLY",

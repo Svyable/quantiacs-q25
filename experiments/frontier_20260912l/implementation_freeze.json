@@ -1,0 +1,22 @@
+{
+  "activation_type": "NEW_PREREGISTERED_FRONTIER",
+  "campaign": "frontier_20260912l",
+  "created_utc": "2026-09-12T20:45:00Z",
+  "frozen_before_measurement": true,
+  "implemented_families": ["permutation_entropy_contraction", "dollar_volume_share_migration", "relative_value_convergence"],
+  "market_returns_observed_before_freeze": false,
+  "note": "No Frontier-L market return was observed before this freeze. Any family failing controls or the 1.0 robust-development floor freezes without grid rescue.",
+  "preregistration_sha256": {
+    "dollar_volume_share_migration": "b6abb0d28b86db9d73f8a64170e70b5535f59a2357b4c43c557db6e3e761219f",
+    "permutation_entropy_contraction": "d9554ac8335e568e6a6503d4bdb5eb423c29c007e466f40d3fd1502a50df7c18",
+    "relative_value_convergence": "df0820cac4a7624f388aac15f3f64ea360b8fe3f5f3d9c09ebb20a62c08b1b65"
+  },
+  "reserve_families": ["volume_share_entropy_state", "dispersion_curvature", "entropy_disagreement_cash"],
+  "reserve_preregistration_sha256": {
+    "dispersion_curvature": "0190a407eb2ecd9babb9af5b29348cb1ce54ebda8a60aa9fe6bc561f154f101e",
+    "entropy_disagreement_cash": "14d83b5552f1f592cc0a6577708909e57ab6b4a79769202c4421157b35672fb6",
+    "volume_share_entropy_state": "d8daeac8ba195ddf026bb9f487e35cceb6bd5e878939bcc5edbc4b2554f4f126"
+  },
+  "selection_folds": ["research", "dev"],
+  "spent_validation": "2023-2024 SPENT_DO_NOT_MUTATE"
+}

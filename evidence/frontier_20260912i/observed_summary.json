@@ -1,0 +1,54 @@
+{
+  "campaign": "frontier_20260912i",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "decision": "PROMOTE_ZERO_FREEZE_ALL",
+  "source": {
+    "workflow_run_id": 34672135922,
+    "artifact_id": 10291466031,
+    "artifact_digest": "sha256:bda7bfeab1840cc5a552b8e1b86f162f2bbd799eb1b2738dfc992c2ba1a2368e",
+    "access_mode": "public_default",
+    "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+    "manifest_sha256": "ab42288f99a20eb0fcf5b0de913b4d0fd152c74fd6cc7e403ebeccfd067daf07"
+  },
+  "families": [
+    {
+      "family": "conditional_decoupling",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "best_base_id": "conditional_decoupling_w84",
+      "best_robust_sharpe": 0.288,
+      "central_id": "conditional_decoupling_w63",
+      "central_robust_sharpe": 0.155,
+      "ablation_robust_sharpe": 0.201,
+      "falsifier_robust_sharpe": 0.196,
+      "central_vs_ablation_changed_target_fraction": 0.2108
+    },
+    {
+      "family": "partial_edge_entropy",
+      "decision_code": "KILL_WEAK_ALPHA",
+      "best_base_id": "partial_edge_entropy_w84",
+      "best_robust_sharpe": 0.304,
+      "central_id": "partial_edge_entropy_w63",
+      "central_robust_sharpe": 0.138,
+      "ablation_robust_sharpe": 0.119,
+      "falsifier_robust_sharpe": 0.127,
+      "central_vs_ablation_changed_target_fraction": 0.1437
+    },
+    {
+      "family": "trend_dispersion_gate",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "best_base_id": "trend_dispersion_gate_w42",
+      "best_robust_sharpe": -0.358,
+      "central_id": "trend_dispersion_gate_w63",
+      "central_robust_sharpe": -0.812,
+      "ablation_robust_sharpe": 0.210,
+      "falsifier_robust_sharpe": 0.384,
+      "central_vs_ablation_changed_target_fraction": 0.5387
+    }
+  ],
+  "interpretation": "Changing from marginal residual-correlation topology to shrinkage partial-correlation topology did not reproduce the topology-migration edge. The non-topology residual-trend dispersion expansion gate was harmful. Preserve these as negative evidence and do not tune or invert after observation.",
+  "current_new_alpha_leader": {
+    "id": "topology_migration_w84",
+    "robust_development_sharpe": 1.376,
+    "note": "Earlier Frontier-B development evidence; not cross-validated here and not an official submission clearance."
+  }
+}

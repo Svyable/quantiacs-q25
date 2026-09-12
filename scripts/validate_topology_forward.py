@@ -8,7 +8,16 @@ from __future__ import annotations
 import hashlib
 import json
 import platform
+import sys
 from pathlib import Path
+
+# Executing `python scripts/validate_topology_forward.py` puts `scripts/`, not the
+# repository root, on sys.path. Bootstrap the repository package path before any
+# local imports. This is execution plumbing only; it does not change validation
+# data, strategy parameters, controls, costs, or the frozen gate.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 import numpy as np
 import pandas as pd

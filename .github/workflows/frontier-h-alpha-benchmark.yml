@@ -32,6 +32,15 @@ jobs:
         run: |
           python -m pip install "git+https://github.com/quantiacs/toolbox.git@9e5274c5ce102a66debc799fd2a2300969fb90f6" \
             numpy==2.2.6 pandas==2.2.3 xarray==2025.12.0 numba==0.61.2 llvmlite==0.44.0 pyyaml pytest
+      - name: Regenerate dashboard on rebased evidence tree
+        run: python scripts/build_research_dashboard.py
+      - name: Export rebased generated dashboard
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontier-h-rebased-dashboard-${{ github.run_id }}
+          path: |
+            docs/RESEARCH_MATRIX.md
+            docs/data/strategy_matrix.json
       - name: Test software integrity
         run: python -m pytest -q tests
       - name: Measure frozen development campaign and matched controls

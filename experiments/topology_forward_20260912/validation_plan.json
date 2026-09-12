@@ -1,0 +1,36 @@
+{
+  "experiment_id": "topology_forward_20260912",
+  "purpose": "First frozen chronological validation of the already-selected Frontier-B topology-migration family; no parameter or mechanism mutation is permitted from this result.",
+  "created_before_validation_returns": true,
+  "source_experiment": "frontier_20260910b_topology_migration",
+  "source_preregistration": "experiments/frontier_20260910b/topology_migration/preregistration.json",
+  "source_preregistration_sha256": "bd61d69cd3859ee459162755259281e1fc9b741e8a4a6e2624e49c98a4b660d4",
+  "source_strategy": "strategies/generated/frontier_20260910b_topology_migration.py",
+  "selected_candidate_before_validation": "topology_migration_w84",
+  "family_shape_diagnostics": ["topology_migration_w42", "topology_migration_w63"],
+  "matched_original_controls": ["topology_migration_ablation", "topology_migration_falsifier"],
+  "generic_controls": ["equal_liquid", "inverse_vol_trend", "persistent_low_vol"],
+  "validation_fold": {"start": "2023-01-01", "end": "2024-12-31"},
+  "cost_ladder": [0.0, 0.04, 0.08, 0.12],
+  "objects": [
+    {"id": "topology_migration_w42", "mode": "base", "params": {"window": 42, "top_k": 5}},
+    {"id": "topology_migration_w63", "mode": "base", "params": {"window": 63, "top_k": 5}},
+    {"id": "topology_migration_w84", "mode": "base", "params": {"window": 84, "top_k": 5}},
+    {"id": "topology_migration_ablation", "mode": "ablation", "params": {"window": 63, "top_k": 5}},
+    {"id": "topology_migration_falsifier", "mode": "falsifier", "params": {"window": 63, "top_k": 5}}
+  ],
+  "forward_gate": {
+    "note": "This gate was frozen before the first 2023-2024 topology-migration return was inspected. It allocates confidence; it does not replace contest eligibility or authenticated uniqueness checks.",
+    "selected_w84_sharpe_12_min": 1.0,
+    "selected_w84_all_cost_sharpes_positive": true,
+    "canonical_w63_must_beat_original_ablation_and_falsifier_at_12": true,
+    "minimum_positive_base_windows_at_12": 2,
+    "no_window_switching_after_validation": true
+  },
+  "prohibitions": [
+    "Do not change the selected w84 window because of validation.",
+    "Do not alter GRAPH_LAG, TREND_DAYS, top_k, allocation, rebalance, controls, cost ladder or universe from this result.",
+    "Do not open 2025+ or live data to rescue a failed validation.",
+    "Do not relabel an ablation or falsifier as a promoted alpha."
+  ]
+}

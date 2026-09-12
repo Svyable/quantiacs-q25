@@ -1,0 +1,85 @@
+name: frontier-j-alpha-benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/frontier-j-alpha-benchmark.yml'
+      - 'strategies/generated/frontier_20260912j_*.py'
+      - 'experiments/frontier_20260912j/**'
+      - 'tests/test_frontier_j.py'
+      - 'research/benchmark.py'
+      - 'research/iteration.py'
+      - 'research/mechanism_diagnostics.py'
+      - 'scripts/analyze_mechanism_controls.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  measured-alpha-campaign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      API_KEY: default
+      CAMPAIGN: frontier_20260912j
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen measurement dependencies
+        run: |
+          python -m pip install "git+https://github.com/quantiacs/toolbox.git@9e5274c5ce102a66debc799fd2a2300969fb90f6" \
+            numpy==2.2.6 pandas==2.2.3 xarray==2025.12.0 numba==0.61.2 llvmlite==0.44.0 pyyaml pytest
+      - name: Test software integrity before market look
+        run: python -m pytest -q tests
+      - name: Prove Frontier-J registration exists before measurement
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from research.iteration import load_manifest
+          from research.preregister import sha256_file
+          campaign = Path('experiments/frontier_20260912j')
+          freeze = json.loads((campaign/'implementation_freeze.json').read_text())
+          assert freeze['frozen_before_measurement'] is True
+          manifest = load_manifest(campaign/'manifest.json')
+          assert len(manifest['candidates']) == 15
+          assert len(freeze['preregistration_sha256']) == 6
+          for family, digest in freeze['preregistration_sha256'].items():
+              assert sha256_file(campaign/family/'preregistration.json') == digest
+          print('Frontier-J registration frozen before measurement')
+          PY
+      - name: Run exact Frontier-J development campaign
+        run: |
+          python -m research.iteration --manifest "experiments/$CAMPAIGN/manifest.json" --output "results/$CAMPAIGN" --budget 18
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import qnt.data as qndata
+          from scripts.analyze_mechanism_controls import analyze
+          campaign = os.environ['CAMPAIGN']
+          contexts = list(Path('results', campaign).glob('*/context.json'))
+          assert len(contexts) == 1, 'expected one complete data context'
+          run = contexts[0].parent
+          data_path = Path('results', campaign, 'development.nc')
+          qndata.cryptodaily_load_data(min_date='2015-01-01', max_date='2022-12-31').to_netcdf(data_path)
+          analyze(Path('experiments', campaign, 'manifest.json'), run, data_path,
+                  Path('experiments', campaign, 'analysis_plan.json'))
+          PY
+      - name: Print Frontier-J evidence summary
+        if: always()
+        run: |
+          find results/frontier_20260912j -name 'matrix.json' -o -name 'report.md' | sort
+          find results/frontier_20260912j -name 'matrix.json' -exec cat {} \; || true
+      - name: Preserve Frontier-J evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontier-j-measured-${{ github.run_id }}
+          path: |
+            results/frontier_20260912j/
+            !results/frontier_20260912j/*.nc
+          if-no-files-found: warn

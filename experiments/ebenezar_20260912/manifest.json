@@ -1,0 +1,101 @@
+{
+  "automatic_promotion": false,
+  "campaign": "ebenezar_20260912",
+  "candidates": [
+    {
+      "family": "short_horizon_sharpe_refinement",
+      "id": "ebenezar_sharpe3_vol_guard",
+      "mode": "base",
+      "params": {"window": 3},
+      "parent_id": null,
+      "path": "strategies/generated/ebenezar_20260912_sharpe3_vol_guard.py",
+      "preregistration": "experiments/ebenezar_20260912/sharpe3_vol_guard/preregistration.json",
+      "preregistration_sha256": "0c12aa833752bdf58026752e72c87076c5b13131f0f9337dc34d058175461bc1"
+    },
+    {
+      "family": "weekly_sharpe_trend_refinement",
+      "id": "ebenezar_sharpe7_vol2",
+      "mode": "base",
+      "params": {"window": 7},
+      "parent_id": null,
+      "path": "strategies/generated/ebenezar_20260912_sharpe7_vol2.py",
+      "preregistration": "experiments/ebenezar_20260912/sharpe7_vol2/preregistration.json",
+      "preregistration_sha256": "53641b0fe2964ac3ef4de7ed0227ae22f37f3041cc40fa6abef1a1437bc625d7"
+    },
+    {
+      "family": "generic_classifier_ta_refinement",
+      "id": "ebenezar_dual_sharpe_classifier",
+      "mode": "base",
+      "params": {"window": 7},
+      "parent_id": null,
+      "path": "strategies/generated/ebenezar_20260912_dual_sharpe_classifier.py",
+      "preregistration": "experiments/ebenezar_20260912/dual_sharpe_classifier/preregistration.json",
+      "preregistration_sha256": "63d6e18b215401c8ac9adb730879a6ef9490aad7cb57b6605798eeabfadd8a0b"
+    },
+    {
+      "family": "sharpe_acceleration_refinement",
+      "id": "ebenezar_sharpe_acceleration",
+      "mode": "base",
+      "params": {"window": 3},
+      "parent_id": null,
+      "path": "strategies/generated/ebenezar_20260912_sharpe_acceleration.py",
+      "preregistration": "experiments/ebenezar_20260912/sharpe_acceleration/preregistration.json",
+      "preregistration_sha256": "35078edff67b24625a71e559d23cc8f12e9685a401a1c6675992762b09bd7c0a"
+    },
+    {
+      "family": "residual_sharpe_refinement",
+      "id": "ebenezar_residual_sharpe",
+      "mode": "base",
+      "params": {"window": 7},
+      "parent_id": null,
+      "path": "strategies/generated/ebenezar_20260912_residual_sharpe.py",
+      "preregistration": "experiments/ebenezar_20260912/residual_sharpe/preregistration.json",
+      "preregistration_sha256": "c0cdffae445bd8e2f564da27df262b5f1e9939b10fc2a5d4681bfe3699aff82b"
+    },
+    {
+      "family": "consensus_filter_refinement",
+      "id": "ebenezar_lattice_consensus",
+      "mode": "base",
+      "params": {"window": 7},
+      "parent_id": null,
+      "path": "strategies/generated/ebenezar_20260912_lattice_consensus.py",
+      "preregistration": "experiments/ebenezar_20260912/lattice_consensus/preregistration.json",
+      "preregistration_sha256": "e838918ae7c19e118ca51cfaa3c49f1aad686c48eba04731344367ea6b217860"
+    },
+    {
+      "family": "trend_pullback_reentry_refinement",
+      "id": "ebenezar_sharpe_pullback_reentry",
+      "mode": "base",
+      "params": {"window": 21},
+      "parent_id": null,
+      "path": "strategies/generated/ebenezar_20260912_sharpe_pullback_reentry.py",
+      "preregistration": "experiments/ebenezar_20260912/sharpe_pullback_reentry/preregistration.json",
+      "preregistration_sha256": "643de7d1bf8607de00d790d56d7c73e551dedd859984ecf10135e1996b38e2b6"
+    }
+  ],
+  "classification_note": "User-directed translation screen of seven public/profile-style Sharpe/vol/classifier motifs. These are explicitly family refinements/controls unless later originality evidence says otherwise.",
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "max_unique_candidates": 7,
+  "prior_development_evidence": [
+    "frontier_20260910",
+    "frontier_20260910b",
+    "frontier_20260910c",
+    "frontier_20260910d",
+    "frontier_20260911e",
+    "frontier_20260911f",
+    "frontier_20260911g",
+    "frontier_20260911h",
+    "frontier_20260912i",
+    "frontier_20260912j",
+    "frontier_20260912k"
+  ],
+  "protected_live_start": "2026-10-01",
+  "selection_folds": [
+    "research",
+    "dev"
+  ]
+}

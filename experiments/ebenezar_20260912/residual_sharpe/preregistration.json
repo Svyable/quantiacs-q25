@@ -1,0 +1,48 @@
+{
+  "ablation": "compute the same Sharpe score on raw returns rather than equal-weight residual returns",
+  "allocation": "positive-score normalization, hard 25% single-name cap, unused gross remains cash",
+  "cash_rule": "no positive qualified score means cash; cap-induced unused gross is cash",
+  "code_path": "strategies/generated/ebenezar_20260912_residual_sharpe.py",
+  "contamination_notes": "User-directed translation of already-observed public Q25 profile motifs. This is a family-refinement screen, not a fresh novelty campaign; 2023+ is excluded from selection.",
+  "cost_hypothesis": "three-day persistence and a 21-day absolute trend gate should avoid one-day residual noise",
+  "created_utc": "2026-09-12T18:40:00+00:00",
+  "data_admissibility": "OHLCV_AND_HISTORICAL_IS_LIQUID_ONLY",
+  "experiment_id": "ebenezar_20260912_residual_sharpe",
+  "failure_mode": "equal-weight residualization duplicates existing residual momentum and offers no residual value versus controls",
+  "falsifier": "prefer negative residual Sharpe while keeping the same absolute-trend gate",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      7
+    ]
+  },
+  "mechanism": "residual_sharpe_refinement",
+  "nearest_incumbent": "V10 residual momentum / residual dispersion switch",
+  "novelty_axes_changed": [
+    "transform",
+    "portfolio_construction"
+  ],
+  "params": {
+    "window": 7
+  },
+  "portfolio_role": "residual-profile refinement; explicitly occupied family",
+  "primitive": "Quantiacs daily crypto OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "daily score update with predeclared persistence smoothing; no calendar exclusions",
+  "selection": "automatic cross-sectional thresholds only; no asset symbols or manual identities",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst drawdown, lower turnover, id",
+  "source_notes": "Derived from user-supplied Q25 leaderboard/profile family patterns; parameters frozen before repository measurement.",
+  "source_urls": [
+    "https://quantiacs.com/leaderboard/25"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "screen only; no parameter repair after results. Fail if causal/integrity checks fail or development evidence is weak. Do not claim independent alpha without separate controls/originality work.",
+  "thesis": "Cross-sectional return quality after removing the contemporaneous equal-weight liquid-universe return can separate idiosyncratic strength from market beta.",
+  "timing": "completed daily bars only; trailing windows; no future shifts",
+  "track": "robustness_family_refinement",
+  "universe": "historical is_liquid == 1 for scores and weights; no hand-picked symbols",
+  "validation": "2023+ excluded from this screen; participant-specific correlation remains PENDING"
+}

@@ -1,0 +1,218 @@
+[
+  {
+    "area": "conditional_dependence",
+    "falsifier": "rotate partial-correlation migration assignments across eligible asset identities",
+    "id": "partial_corr_migration",
+    "priority_score": 12,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 2, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 2},
+    "thesis": "Migration toward conditional-dependence periphery during residual-network fragmentation identifies direct structural decoupling that ordinary correlation conflates with indirect links."
+  },
+  {
+    "area": "conditional_dependence",
+    "falsifier": "replace precision bridges with ordinary-correlation bridges",
+    "id": "precision_bridge_migration",
+    "priority_score": 9,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 1, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Falling precision-network bridge load identifies assets escaping conditional transmission chains."
+  },
+  {
+    "area": "conditional_dependence",
+    "falsifier": "use ordinary-correlation entropy",
+    "id": "partial_corr_entropy",
+    "priority_score": 9,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 1, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Falling entropy of direct conditional links reveals specialization before residual trend continuation."
+  },
+  {
+    "area": "conditional_dependence",
+    "falsifier": "use ordinary degree dispersion",
+    "id": "precision_degree_dispersion",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Cross-sectional dispersion in direct conditional degree creates sparse leadership opportunity."
+  },
+  {
+    "area": "conditional_dependence",
+    "falsifier": "shuffle precision-neighbor histories across names",
+    "id": "conditional_neighbor_turnover",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Stable direct-neighbor identity while pairwise neighbors churn identifies durable relationships."
+  },
+  {
+    "area": "conditional_dependence",
+    "falsifier": "pool partial-correlation signs",
+    "id": "conditional_sign_asymmetry",
+    "priority_score": 8,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Positive and negative partial-correlation edges migrate differently during fragmentation."
+  },
+  {
+    "area": "signed_topology",
+    "falsifier": "rotate signed migration assignments across eligible identities",
+    "id": "signed_edge_migration",
+    "priority_score": 12,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 2, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 2},
+    "thesis": "Assets that shed positive residual links while retaining or gaining negative residual links during fragmentation capture a distinct decoupling phase."
+  },
+  {
+    "area": "signed_topology",
+    "falsifier": "use absolute-edge decay",
+    "id": "positive_edge_shedding",
+    "priority_score": 9,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 1, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Positive-edge strength decay is more informative than unsigned centrality decay."
+  },
+  {
+    "area": "signed_topology",
+    "falsifier": "invert edge sign labels",
+    "id": "negative_edge_retention",
+    "priority_score": 8,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Retention of negative residual links during market fragmentation marks resilient diversifiers."
+  },
+  {
+    "area": "signed_topology",
+    "falsifier": "ignore edge signs",
+    "id": "edge_sign_turnover",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Low sign-flip turnover while positive centrality falls identifies stable structural escape."
+  },
+  {
+    "area": "signed_topology",
+    "falsifier": "swap positive and negative bridge roles",
+    "id": "signed_bridge_direction",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Loss of positive bridges without loss of negative bridges predicts continuation."
+  },
+  {
+    "area": "signed_topology",
+    "falsifier": "use level change only",
+    "id": "signed_strength_curvature",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Acceleration in positive-edge shedding contains information beyond one-step migration."
+  },
+  {
+    "area": "dependence_concentration",
+    "falsifier": "rotate entropy-change assignments across eligible identities",
+    "id": "edge_entropy_specialization",
+    "priority_score": 12,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 2, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 2},
+    "thesis": "A falling entropy of each asset's residual dependence distribution during global fragmentation identifies specialization into fewer relationships before idiosyncratic continuation."
+  },
+  {
+    "area": "dependence_concentration",
+    "falsifier": "use current effective-neighbor level",
+    "id": "effective_neighbor_collapse",
+    "priority_score": 9,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 1, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "A falling effective-neighbor count is a robust discrete analogue of edge-entropy specialization."
+  },
+  {
+    "area": "dependence_concentration",
+    "falsifier": "use first difference only",
+    "id": "edge_concentration_acceleration",
+    "priority_score": 8,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Acceleration in dependence concentration marks a second-stage structural break."
+  },
+  {
+    "area": "dependence_concentration",
+    "falsifier": "remove neighbor centrality weighting",
+    "id": "hub_exposure_concentration",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Concentration into one highly central neighbor differs from generic low entropy."
+  },
+  {
+    "area": "dependence_concentration",
+    "falsifier": "invert entropy change",
+    "id": "entropy_recovery",
+    "priority_score": 6,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 0, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Re-expansion of dependence entropy after fragmentation marks reintegration rather than continuation."
+  },
+  {
+    "area": "dependence_concentration",
+    "falsifier": "time-shuffle dispersion state within past-only blocks",
+    "id": "concentration_dispersion",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Cross-sectional dispersion of edge entropy is an opportunity-density state."
+  },
+  {
+    "area": "orthogonal_reserves",
+    "falsifier": "rotate conditional transition forecasts across eligible identities",
+    "id": "residual_sign_transition_entropy",
+    "priority_score": 10,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 2, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Asset-specific residual sign transition probabilities add directional information beyond unconditional positive-return consistency."
+  },
+  {
+    "area": "orthogonal_reserves",
+    "falsifier": "use run length without historical surprisal",
+    "id": "residual_run_surprisal",
+    "priority_score": 8,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Unexpectedly long positive residual runs carry continuation information not captured by return magnitude."
+  },
+  {
+    "area": "orthogonal_reserves",
+    "falsifier": "remove volume-memory term",
+    "id": "volume_shock_memory_ratio",
+    "priority_score": 8,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 2, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Persistence of abnormal-volume shocks relative to price displacement separates information absorption from transient flow."
+  },
+  {
+    "area": "orthogonal_reserves",
+    "falsifier": "current volatility rank only",
+    "id": "volatility_rank_duration",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Duration in a relative volatility state contains information beyond the current low-volatility rank."
+  },
+  {
+    "area": "orthogonal_reserves",
+    "falsifier": "run length only",
+    "id": "downside_run_repair",
+    "priority_score": 7,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 1, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "The rate at which downside residual runs terminate identifies recovery quality without using drawdown depth."
+  },
+  {
+    "area": "orthogonal_reserves",
+    "falsifier": "age-since-entry only",
+    "id": "liquidity_spell_surprise",
+    "priority_score": 6,
+    "score_basis": "research judgment before Frontier-I returns",
+    "scores": {"causal_clarity": 0, "cost_plausibility": 0, "falsifiability": 2, "novelty": 2, "parameter_economy": 2, "portfolio_complement": 0},
+    "thesis": "Unexpected persistence of historical liquid eligibility contains state information beyond age-since-entry."
+  }
+]

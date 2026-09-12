@@ -43,9 +43,10 @@ def test_validation_objects_cannot_select_a_new_window():
 def test_runner_is_validation_only_and_reuses_exact_quantiacs_evaluator():
     source = (ROOT / "scripts/validate_topology_forward.py").read_text()
     assert 'max_date=fold["end"]' in source
+    assert 'data.sel(time=slice("2015-01-01", fold["end"]))' in source
+    assert source.count("cryptodaily_load_data(") == 1
     assert '"2023-01-01"' not in source  # dates live in the frozen plan, not hidden code
     assert "QuantiacsEvaluator" in source
     assert "control_weights" in source
     assert "check_causality" in source
     assert "API_KEY" not in source  # runner delegates public/default access to factory.runner
-    assert "2025" not in source

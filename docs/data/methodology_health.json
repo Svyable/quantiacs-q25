@@ -1,4 +1,44 @@
 {
+  "active_new_alpha_seam": null,
+  "development_leader": {
+    "active_after_validation": false,
+    "id": "topology_migration_w84",
+    "note": "Earlier Frontier-B development evidence; not yet forward-validated here and not an official submission clearance.",
+    "robust_development_sharpe": 1.376,
+    "state": "FAILED_FORWARD_GATE",
+    "validation": {
+      "campaign": "frontier_20260910b",
+      "decision": "FAIL_FORWARD_GATE",
+      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
+      "family": "topology_migration",
+      "fold_status": "SPENT_DO_NOT_MUTATE",
+      "selected_development_candidate": "topology_migration_w84",
+      "selected_development_robust_sharpe": 1.376132031691156,
+      "selected_forward_sharpe_12": 0.314,
+      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
+      "validation_fold": {
+        "end": "2024-12-31",
+        "start": "2023-01-01"
+      }
+    }
+  },
+  "forward_validation": [
+    {
+      "campaign": "frontier_20260910b",
+      "decision": "FAIL_FORWARD_GATE",
+      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
+      "family": "topology_migration",
+      "fold_status": "SPENT_DO_NOT_MUTATE",
+      "selected_development_candidate": "topology_migration_w84",
+      "selected_development_robust_sharpe": 1.376132031691156,
+      "selected_forward_sharpe_12": 0.314,
+      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
+      "validation_fold": {
+        "end": "2024-12-31",
+        "start": "2023-01-01"
+      }
+    }
+  ],
   "latest_evidence": {
     "campaign": "frontier_20260912j",
     "decision": "PROMOTE_ZERO",
@@ -10,11 +50,16 @@
         "best_base_id": "spectral_diversification_gate_w42",
         "best_robust_sharpe": 0.7858359375232994,
         "campaign_rank": 1,
+        "central_control_margin": -0.16700000000000004,
         "central_id": "spectral_diversification_gate_w63",
         "central_robust_sharpe": 0.498,
+        "control_ceiling": 0.665,
+        "control_supported": false,
         "decision_code": "FALSIFIED_DEVELOPMENT",
+        "falsification_complete": true,
         "falsifier_robust_sharpe": 0.188,
         "family": "spectral_diversification_gate",
+        "floor_margin": -0.2141640624767006,
         "guardrail_pass": false
       },
       {
@@ -22,11 +67,16 @@
         "best_base_id": "positive_edge_shedding_w63",
         "best_robust_sharpe": 0.7519241563118731,
         "campaign_rank": 2,
+        "central_control_margin": -0.1830758436881269,
         "central_id": "positive_edge_shedding_w63",
         "central_robust_sharpe": 0.7519241563118731,
+        "control_ceiling": 0.935,
+        "control_supported": false,
         "decision_code": "FALSIFIED_DEVELOPMENT",
+        "falsification_complete": true,
         "falsifier_robust_sharpe": 0.811,
         "family": "positive_edge_shedding",
+        "floor_margin": -0.24807584368812685,
         "guardrail_pass": false
       },
       {
@@ -34,16 +84,123 @@
         "best_base_id": "spectral_residual_momentum_w63",
         "best_robust_sharpe": 0.6670427141125492,
         "campaign_rank": 3,
+        "central_control_margin": 0.18004271411254924,
         "central_id": "spectral_residual_momentum_w63",
         "central_robust_sharpe": 0.6670427141125492,
+        "control_ceiling": 0.487,
+        "control_supported": true,
         "decision_code": "KILL_WEAK_ALPHA",
+        "falsification_complete": true,
         "falsifier_robust_sharpe": 0.254,
         "family": "spectral_residual_momentum",
+        "floor_margin": -0.33295728588745077,
         "guardrail_pass": false
       }
     ],
     "interpretation": "Frontier-J changed the graph object rather than tuning topology_migration_w84. Signed positive-edge shedding, spectral diversification gating, and leading-PC residual momentum all failed their frozen development rules. Preserve them as negative evidence; topology_migration_w84 remains the only new-campaign family above the internal 1.0 robust-development floor and should face frozen chronological validation unchanged.",
-    "kind": "summary_only"
+    "kind": "summary_only",
+    "next_boundary": "Do not retune Frontier-J. topology_migration_w84 remains the only new-campaign family above the internal 1.0 robust-development floor; the next high-value action is a frozen forward/validation evaluation of that pre-existing survivor."
+  },
+  "learning_loop": {
+    "evidence_depth": {
+      "latest_full_matrix_campaign": "frontier_20260911h",
+      "latest_kind": "summary_only",
+      "measured_campaigns_since_full_matrix": 2,
+      "summary_only_latest": true
+    },
+    "latest_campaign": {
+      "best_floor_margin": -0.2141640624767006,
+      "best_robust_sharpe": 0.7858359375232994,
+      "causal_support": {
+        "count": 1,
+        "rate": 0.3333333333333333,
+        "total": 3
+      },
+      "decision_resolution": {
+        "count": 3,
+        "rate": 1.0,
+        "total": 3
+      },
+      "economic_survival": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 3
+      },
+      "falsification_coverage": {
+        "count": 3,
+        "rate": 1.0,
+        "total": 3
+      },
+      "families_measured": 3,
+      "median_central_control_margin": -0.16700000000000004,
+      "promotion_ready": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 3
+      }
+    },
+    "measurement_queue": {
+      "campaigns": [
+        {
+          "automatic_promotion": false,
+          "campaign": "frontier_20260912k",
+          "candidate_count": 15,
+          "classification_note": "Activates three unmeasured reserves preregistered before their own returns: local peer detachment, residual eigenspace rotation, and non-graph cohort divergence. Frontier-K selection is development-only; 2023-2024 is already spent and excluded.",
+          "families": [
+            "cohort_residual_divergence",
+            "nearest_peer_detachment",
+            "subspace_rotation_opportunity"
+          ],
+          "family_count": 3,
+          "modes": {
+            "ablation": 3,
+            "base": 9,
+            "falsifier": 3
+          },
+          "selection_folds": [
+            "research",
+            "dev"
+          ],
+          "source_path": "experiments/frontier_20260912k/manifest.json"
+        }
+      ],
+      "count": 1,
+      "next_campaign": {
+        "automatic_promotion": false,
+        "campaign": "frontier_20260912k",
+        "candidate_count": 15,
+        "classification_note": "Activates three unmeasured reserves preregistered before their own returns: local peer detachment, residual eigenspace rotation, and non-graph cohort divergence. Frontier-K selection is development-only; 2023-2024 is already spent and excluded.",
+        "families": [
+          "cohort_residual_divergence",
+          "nearest_peer_detachment",
+          "subspace_rotation_opportunity"
+        ],
+        "family_count": 3,
+        "modes": {
+          "ablation": 3,
+          "base": 9,
+          "falsifier": 3
+        },
+        "selection_folds": [
+          "research",
+          "dev"
+        ],
+        "source_path": "experiments/frontier_20260912k/manifest.json"
+      }
+    },
+    "policy": {
+      "aggregate_score": "forbidden",
+      "optimization_target": false,
+      "purpose": "diagnostic feedback vector for the research loop"
+    },
+    "validation_feedback": {
+      "active_after_validation": false,
+      "development_leader": "topology_migration_w84",
+      "forward_gate_decision": "FAIL_FORWARD_GATE",
+      "forward_sharpe_12": 0.314,
+      "guidance_superseded_by_newer_validation": true,
+      "state": "FAILED_FORWARD_GATE"
+    }
   },
   "ranking_policy": {
     "cross_campaign_ranking": "forbidden",
@@ -56,16 +213,35 @@
       "family name deterministic tie-break"
     ]
   },
-  "schema_version": 1,
+  "schema_version": 2,
   "surface_health": {
-    "index_mentions_latest": true,
+    "index_mentions_latest": false,
+    "index_uses_generated_health": true,
     "latest_full_matrix_campaign": "frontier_20260911h",
+    "measured_campaigns_since_full_matrix": 2,
     "research_matrix_mentions_latest": false,
     "summary_only_latest": true
   },
   "surviving_development_seam": {
+    "active_after_validation": false,
     "id": "topology_migration_w84",
     "note": "Earlier Frontier-B development evidence; not yet forward-validated here and not an official submission clearance.",
-    "robust_development_sharpe": 1.376
+    "robust_development_sharpe": 1.376,
+    "state": "FAILED_FORWARD_GATE",
+    "validation": {
+      "campaign": "frontier_20260910b",
+      "decision": "FAIL_FORWARD_GATE",
+      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
+      "family": "topology_migration",
+      "fold_status": "SPENT_DO_NOT_MUTATE",
+      "selected_development_candidate": "topology_migration_w84",
+      "selected_development_robust_sharpe": 1.376132031691156,
+      "selected_forward_sharpe_12": 0.314,
+      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
+      "validation_fold": {
+        "end": "2024-12-31",
+        "start": "2023-01-01"
+      }
+    }
   }
 }

@@ -1,29 +1,42 @@
 # Chronological selection / walk-forward folds (L6).
-# Selection decisions use earlier folds only. Live remains untouched.
+# Selection decisions use earlier folds only. The 2023-2024 fold has now been
+# observed under a preregistered topology-migration forward test and is SPENT.
+# Live remains untouched.
 
 folds:
   - id: research
     start: "2016-01-01"
     end: "2020-12-31"
-    use: "hypothesis / feature search"
+    use: "hypothesis / feature search; repeatedly observed development surface"
+    status: "OBSERVED_REUSED"
   - id: dev
     start: "2021-01-01"
     end: "2022-12-31"
-    use: "parameter development"
+    use: "parameter development; repeatedly observed development surface"
+    status: "OBSERVED_REUSED"
   - id: validation
     start: "2023-01-01"
     end: "2024-12-31"
-    use: "promotion decisions"
+    use: "SPENT preregistered forward evidence; never again a fresh selection or mutation fold"
+    status: "SPENT_DO_NOT_MUTATE"
+    first_observed_workflow_run: 34675541608
+    first_observed_pr: 22
+    durable_evidence: "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
+    observed_decision: "FAIL_FORWARD_GATE"
   - id: diagnostic
     start: "2025-01-01"
     end: null
-    use: "diagnostics only — not free validation"
+    use: "diagnostics only — not free validation and never repair a failed forward test"
+    status: "CONTAMINATED_DIAGNOSTIC"
   - id: live
     start: "2026-10-01"
     end: "2027-01-31"
     use: "UNTOUCHED — contest live evaluation"
+    status: "UNTOUCHED_LIVE"
 
 rules:
   - Do not fit or select on live.
   - Do not promote solely on diagnostic (2025+).
+  - Do not use 2023-2024 to invent, tune, switch, or rescue a new strategy after its first observation.
+  - Exact 2023-2024 replay is reproducibility only; it does not restore fresh validation status.
   - Record which fold drove each promotion decision in the experiment ledger.

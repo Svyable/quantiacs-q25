@@ -1,8 +1,10 @@
 """Frozen chronological validation for a pre-selected Q25 strategy.
 
-This module deliberately has no selection loop. It verifies the committed validation
-plan and frozen source fingerprint before opening 2023-2024, evaluates exactly one
-pre-selected implementation, and reports generic controls only as context.
+The validation contract was frozen before opening 2023-2024, but that fold has now
+been observed by the preregistered PR #22 workflow. The committed observation
+sidecar is authoritative for evidence state. A normal invocation therefore refuses
+to reopen the spent fold; ``--allow-replay`` exists only for exact reproducibility
+and labels its output as a replay rather than fresh validation evidence.
 """
 from __future__ import annotations
 
@@ -28,6 +30,7 @@ from research.benchmark import (
 from research.preregister import sha256_file
 
 DEFAULT_PLAN = ROOT / "experiments/frontier_20260910b/topology_migration/validation_plan.json"
+DEFAULT_OBSERVED_STATUS = ROOT / "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
 
 
 def _write_json(path: Path, value) -> None:
@@ -35,6 +38,12 @@ def _write_json(path: Path, value) -> None:
 
 
 def load_plan(path: Path = DEFAULT_PLAN) -> dict:
+    """Load the immutable contract that was frozen before a validation opening.
+
+    The status string records the state at freeze time; current observation state is
+    deliberately held in DEFAULT_OBSERVED_STATUS so the original contract need not
+    be rewritten after returns are seen.
+    """
     plan = json.loads(path.read_text())
     if plan.get("status") != "FROZEN_PLAN_BEFORE_VALIDATION_OPEN":
         raise ValueError("validation plan is not frozen")
@@ -81,12 +90,39 @@ def load_plan(path: Path = DEFAULT_PLAN) -> dict:
     return plan
 
 
+def load_observed_status(path: Path = DEFAULT_OBSERVED_STATUS) -> dict | None:
+    """Return durable observation state, or None only if the fold is truly unopened."""
+    if not path.exists():
+        return None
+    observed = json.loads(path.read_text())
+    if observed.get("evidence_stage") != "PREREGISTERED_FORWARD_OBSERVED":
+        raise ValueError("unexpected validation evidence stage")
+    if observed.get("fold_status") != "SPENT_DO_NOT_MUTATE":
+        raise ValueError("unexpected validation fold status")
+    if observed.get("validation_fold") != {"start": "2023-01-01", "end": "2024-12-31"}:
+        raise ValueError("observed validation fold differs from frozen contract")
+    if observed.get("mutation_policy", {}).get("retune_topology_migration_from_this_result") is not False:
+        raise ValueError("observed status must forbid topology retuning")
+    return observed
+
+
+def validation_fold_is_spent(path: Path = DEFAULT_OBSERVED_STATUS) -> bool:
+    return load_observed_status(path) is not None
+
+
 def _metric_row(metrics: dict, fold_id: str = "validation") -> dict:
     return {cost: metrics[fold_id][cost] for cost in ("0.00", "0.04", "0.08", "0.12")}
 
 
-def run(plan_path: Path, output: Path) -> Path:
+def run(plan_path: Path, output: Path, *, allow_replay: bool = False) -> Path:
     plan = load_plan(plan_path)
+    observed = load_observed_status()
+    if observed is not None and not allow_replay:
+        raise RuntimeError(
+            "2023-2024 validation is already observed and permanently spent; "
+            "use --allow-replay only to reproduce the frozen result"
+        )
+
     output.mkdir(parents=True, exist_ok=True)
     access_mode = "unknown"
     try:
@@ -116,8 +152,9 @@ def run(plan_path: Path, output: Path) -> Path:
             controls[name] = _metric_row(cm)
 
         packet = {
-            "schema_version": 1,
-            "status": "MEASURED_VALIDATION_REPORT_ONLY",
+            "schema_version": 2,
+            "status": "REPLAY_OF_SPENT_VALIDATION" if observed is not None else "MEASURED_VALIDATION_REPORT_ONLY",
+            "fresh_evidence": observed is None,
             "candidate": plan["candidate"],
             "validation_fold": fold,
             "metrics": _metric_row(metrics),
@@ -126,7 +163,11 @@ def run(plan_path: Path, output: Path) -> Path:
             "decision": {
                 "automatic_promotion": False,
                 "soft_validation_threshold": None,
-                "note": "Report-only because the predeclared soft validation threshold is unset. Results must not drive strategy mutation.",
+                "note": (
+                    "Exact replay of an already-spent fold; cannot create new selection evidence."
+                    if observed is not None
+                    else "Report-only because the predeclared soft validation threshold is unset. Results must not drive strategy mutation."
+                ),
             },
             "provenance": {
                 "plan_sha256": sha256_file(plan_path),
@@ -139,28 +180,31 @@ def run(plan_path: Path, output: Path) -> Path:
                 "numpy": np.__version__,
                 "pandas": pd.__version__,
                 "measured_utc": datetime.now(timezone.utc).isoformat(),
+                "prior_observation": str(DEFAULT_OBSERVED_STATUS.relative_to(ROOT)) if observed is not None else None,
             },
         }
         run_dir = output / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
         run_dir.mkdir()
         _write_json(run_dir / "validation.json", packet)
-        lines = [
-            "# Frozen topology-migration validation", "",
-            "This packet evaluates the pre-selected `topology_migration_w84` implementation on the untouched 2023-2024 validation fold. It is report-only: no post-hoc validation threshold is invented.", "",
-            "| Cost | Sharpe | Max DD | Avg turnover |", "|---:|---:|---:|---:|",
-        ]
+        title = "# Frozen topology-migration validation replay" if observed is not None else "# Frozen topology-migration validation"
+        boundary = (
+            "This is an exact replay of the already-observed 2023-2024 fold. It is not a fresh validation look and cannot drive mutation or promotion."
+            if observed is not None
+            else "This packet evaluates the pre-selected `topology_migration_w84` implementation on the chronological 2023-2024 validation fold. It is report-only: no post-hoc validation threshold is invented."
+        )
+        lines = [title, "", boundary, "", "| Cost | Sharpe | Max DD | Avg turnover |", "|---:|---:|---:|---:|"]
         for cost, row in packet["metrics"].items():
             lines.append(f"| {cost} | {row['sharpe_ratio'] if row['sharpe_ratio'] is not None else '—'} | {row['max_drawdown'] if row['max_drawdown'] is not None else '—'} | {row['avg_turnover'] if row['avg_turnover'] is not None else '—'} |")
         lines += ["", "Generic controls are context only; they are not a new selection set.", "", "No strategy mutation is permitted from this packet."]
         (run_dir / "report.md").write_text("\n".join(lines) + "\n")
         return run_dir
-    except Exception as exc:
+    except Exception:
+        # Refusal to reopen an already-spent fold occurs before this try block and
+        # therefore does not masquerade as an infrastructure/software failure.
         run_dir = output / ("blocked_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
         run_dir.mkdir()
         _write_json(run_dir / "validation.json", {
             "status": "FAILED_SOFTWARE_OR_CAUSALITY",
-            "error_type": type(exc).__name__,
-            "error": str(exc),
             "quantiacs_access_mode": access_mode,
         })
         raise
@@ -170,8 +214,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--plan", type=Path, default=DEFAULT_PLAN)
     parser.add_argument("--output", type=Path, default=ROOT / "results/topology_migration_validation")
+    parser.add_argument(
+        "--allow-replay",
+        action="store_true",
+        help="explicitly replay the already-spent 2023-2024 fold for reproducibility; never fresh evidence",
+    )
     args = parser.parse_args()
-    print(run(args.plan, args.output))
+    print(run(args.plan, args.output, allow_replay=args.allow_replay))
 
 
 if __name__ == "__main__":

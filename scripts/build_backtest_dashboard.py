@@ -94,6 +94,16 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     rows = load_csv(args.input)
     benchmark_rows = load_csv(args.benchmark) if args.benchmark else []
     benchmark = {date_key(row): row for row in benchmark_rows}
+
+    strategy_vol = metric(rows, "volatility")
+    benchmark_vol = metric(benchmark_rows, "volatility") if benchmark_rows else None
+    strategy_scale = min(0.1 / strategy_vol, 1.0) if strategy_vol and strategy_vol > 0 else None
+    benchmark_scale = min(0.1 / benchmark_vol, 1.0) if benchmark_vol and benchmark_vol > 0 else None
+
+    scaled_strategy = 1.0
+    scaled_benchmark = 1.0
+    can_scale_strategy = strategy_scale is not None
+    can_scale_benchmark = benchmark_scale is not None and bool(benchmark_rows)
     series: list[dict[str, Any]] = []
     for row in rows:
         date = date_key(row)
@@ -102,7 +112,23 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             continue
         b_row = benchmark.get(date, {})
         b_equity = finite(b_row.get("equity"))
-        score = equity / max(b_equity, 1.0) if b_equity is not None else None
+        strategy_return = finite(row.get("relative_return"))
+        benchmark_return = finite(b_row.get("relative_return"))
+
+        if can_scale_strategy:
+            if strategy_return is None:
+                can_scale_strategy = False
+            else:
+                scaled_strategy *= 1.0 + strategy_scale * strategy_return
+        if can_scale_benchmark:
+            if benchmark_return is None:
+                can_scale_benchmark = False
+            else:
+                scaled_benchmark *= 1.0 + benchmark_scale * benchmark_return
+
+        score = None
+        if can_scale_strategy and can_scale_benchmark:
+            score = scaled_strategy / max(scaled_benchmark, 1.0)
         series.append({
             "date": date,
             "strategy_equity": equity,
@@ -116,14 +142,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
 
     first_eq, last_eq = series[0]["strategy_equity"], series[-1]["strategy_equity"]
     total_return = last_eq / first_eq - 1.0 if first_eq else None
-    strategy_vol = metric(rows, "volatility")
-    benchmark_vol = metric(benchmark_rows, "volatility") if benchmark_rows else None
-    strategy_scale = min(0.1 / strategy_vol, 1.0) if strategy_vol and strategy_vol > 0 else None
-    benchmark_scale = min(0.1 / benchmark_vol, 1.0) if benchmark_vol and benchmark_vol > 0 else None
-    strategy_equity_scaled = 1 + strategy_scale * (last_eq - 1) if strategy_scale is not None else last_eq
-    last_b = series[-1]["benchmark_equity"]
-    benchmark_equity_scaled = (1 + benchmark_scale * (last_b - 1)) if benchmark_scale is not None and last_b is not None else last_b
-    relative_score = strategy_equity_scaled / max(benchmark_equity_scaled, 1.0) if benchmark_equity_scaled is not None else None
+    strategy_equity_scaled = scaled_strategy if can_scale_strategy else None
+    benchmark_equity_scaled = scaled_benchmark if can_scale_benchmark else None
+    relative_score = series[-1]["score"] if series else None
 
     metrics = {
         "sharpe": metric(rows, "sharpe_ratio"),
@@ -137,17 +158,13 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         "avg_holding_time": metric(rows, "avg_holding_time"),
         "observations": len(series),
     }
+    note = args.note or "Rendered from committed Quantiacs calc_stat output; missing fields are preserved as null. Q25 scaled score requires relative_return in both strategy and benchmark exports."
     return {
         "schema_version": 1,
         "status": "available",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "period": {"start": series[0]["date"], "end": series[-1]["date"]},
-        "source": {
-            "label": args.source_label,
-            "path": args.source_path or str(args.input),
-            "commit": args.source_commit,
-            "note": args.note or "Rendered from committed Quantiacs calc_stat output; missing fields are preserved as null.",
-        },
+        "source": {"label": args.source_label, "path": args.source_path or str(args.input), "commit": args.source_commit, "note": note},
         "metrics": metrics,
         "live_model": {
             "strategy_scale": strategy_scale,

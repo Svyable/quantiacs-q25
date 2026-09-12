@@ -1,0 +1,63 @@
+name: topology-forward-validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/topology-forward-validation.yml'
+      - 'experiments/topology_forward_20260912/**'
+      - 'scripts/validate_topology_forward.py'
+      - 'tests/test_topology_forward_validation.py'
+      - 'strategies/generated/frontier_20260910b_topology_migration.py'
+      - 'research/benchmark.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen measurement dependencies
+        run: |
+          python -m pip install "git+https://github.com/quantiacs/toolbox.git@9e5274c5ce102a66debc799fd2a2300969fb90f6" \
+            numpy==2.2.6 pandas==2.2.3 xarray==2025.12.0 numba==0.61.2 llvmlite==0.44.0 pyyaml pytest
+      - name: Test repository and frozen validation contract before forward look
+        run: python -m pytest -q tests
+      - name: Prove source and validation plan are frozen
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from research.preregister import sha256_file
+          plan_path = Path('experiments/topology_forward_20260912/validation_plan.json')
+          plan = json.loads(plan_path.read_text())
+          assert plan['created_before_validation_returns'] is True
+          assert plan['selected_candidate_before_validation'] == 'topology_migration_w84'
+          assert plan['validation_fold'] == {'start': '2023-01-01', 'end': '2024-12-31'}
+          assert sha256_file(Path(plan['source_preregistration'])) == plan['source_preregistration_sha256']
+          assert plan['source_preregistration_sha256'] in Path(plan['source_strategy']).read_text()
+          print('Frozen topology validation plan verified before first validation return')
+          PY
+      - name: Run first exact 2023-2024 topology validation
+        run: python scripts/validate_topology_forward.py
+      - name: Print forward evidence
+        if: always()
+        run: |
+          cat results/topology_forward_20260912/validation_report.md || true
+          cat results/topology_forward_20260912/validation_results.json || true
+      - name: Preserve validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: topology-forward-validation-${{ github.run_id }}
+          path: results/topology_forward_20260912/
+          if-no-files-found: warn

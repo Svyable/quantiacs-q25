@@ -6,9 +6,9 @@
 
 | Check | State |
 |---|---|
-| Latest measured campaign | `frontier_20260912i` |
+| Latest measured campaign | `frontier_20260912j` |
 | Latest evidence tier | `summary_only` |
-| Latest campaign decision | `PROMOTE_ZERO_FREEZE_ALL` |
+| Latest campaign decision | `PROMOTE_ZERO` |
 | Latest full matrix packet | `frontier_20260911h` |
 | Detailed research matrix includes latest | **no — gap is explicit** |
 | Dashboard index includes latest | **yes** |
@@ -21,15 +21,15 @@ This ordering is valid **only inside the latest campaign**. Families first have 
 
 | Rank | Family | Best base | Robust SR | Floor ≥1.0 | Decision | Central | Ablation | Falsifier |
 |---:|---|---|---:|---:|---|---:|---:|---:|
-| 1 | `partial_edge_entropy` | `partial_edge_entropy_w84` | 0.304 | FAIL | `KILL_WEAK_ALPHA` | 0.138 | 0.119 | 0.127 |
-| 2 | `conditional_decoupling` | `conditional_decoupling_w84` | 0.288 | FAIL | `FALSIFIED_DEVELOPMENT` | 0.155 | 0.201 | 0.196 |
-| 3 | `trend_dispersion_gate` | `trend_dispersion_gate_w42` | -0.358 | FAIL | `FALSIFIED_DEVELOPMENT` | -0.812 | 0.210 | 0.384 |
+| 1 | `spectral_diversification_gate` | `spectral_diversification_gate_w42` | 0.786 | FAIL | `FALSIFIED_DEVELOPMENT` | 0.498 | 0.665 | 0.188 |
+| 2 | `positive_edge_shedding` | `positive_edge_shedding_w63` | 0.752 | FAIL | `FALSIFIED_DEVELOPMENT` | 0.752 | 0.935 | 0.811 |
+| 3 | `spectral_residual_momentum` | `spectral_residual_momentum_w63` | 0.667 | FAIL | `KILL_WEAK_ALPHA` | 0.667 | 0.487 | 0.254 |
 
 ## Surviving development seam
 
 The latest packet still identifies **`topology_migration_w84`** as the surviving new-alpha seam, with a reported robust-development Sharpe of **1.376** in its earlier evidence packet.
 
-> Earlier Frontier-B development evidence; not cross-validated here and not an official submission clearance.
+> Earlier Frontier-B development evidence; not yet forward-validated here and not an official submission clearance.
 
 ## Dogfood checks
 
@@ -41,6 +41,6 @@ The latest packet still identifies **`topology_migration_w84`** as the surviving
 
 ## Current interpretation
 
-Changing from marginal residual-correlation topology to shrinkage partial-correlation topology did not reproduce the topology-migration edge. The non-topology residual-trend dispersion expansion gate was harmful. Preserve these as negative evidence and do not tune or invert after observation.
+Frontier-J changed the graph object rather than tuning topology_migration_w84. Signed positive-edge shedding, spectral diversification gating, and leading-PC residual momentum all failed their frozen development rules. Preserve them as negative evidence; topology_migration_w84 remains the only new-campaign family above the internal 1.0 robust-development floor and should face frozen chronological validation unchanged.
 
 The next iteration should attack the surviving seam with preregistered, causally distinct repairs and forward-safe diagnostics—not tune the latest failed families after observation.

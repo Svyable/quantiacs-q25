@@ -1,0 +1,15 @@
+{
+  "automatic_promotion": false,
+  "campaign": "frontier_20260910b_topology_rank_stability",
+  "candidates": [
+    {"family":"topology_rank_stability","id":"topology_rank_stability_w42","mode":"base","params":{"top_k":5,"window":42},"parent_id":"topology_rank_stability_w63","path":"strategies/generated/frontier_20260910b_topology_rank_stability.py","preregistration":"experiments/frontier_20260910b/topology_rank_stability/preregistration.json","preregistration_sha256":"a14cfe3d1aaf565bc16965a5e632b4dce9f827b2c4308f6b042380982e0cf354"},
+    {"family":"topology_rank_stability","id":"topology_rank_stability_w63","mode":"base","params":{"top_k":5,"window":63},"parent_id":null,"path":"strategies/generated/frontier_20260910b_topology_rank_stability.py","preregistration":"experiments/frontier_20260910b/topology_rank_stability/preregistration.json","preregistration_sha256":"a14cfe3d1aaf565bc16965a5e632b4dce9f827b2c4308f6b042380982e0cf354"},
+    {"family":"topology_rank_stability","id":"topology_rank_stability_w84","mode":"base","params":{"top_k":5,"window":84},"parent_id":"topology_rank_stability_w63","path":"strategies/generated/frontier_20260910b_topology_rank_stability.py","preregistration":"experiments/frontier_20260910b/topology_rank_stability/preregistration.json","preregistration_sha256":"a14cfe3d1aaf565bc16965a5e632b4dce9f827b2c4308f6b042380982e0cf354"},
+    {"family":"topology_rank_stability","id":"topology_rank_stability_ablation","mode":"ablation","params":{"top_k":5,"window":63},"parent_id":"topology_rank_stability_w63","path":"strategies/generated/frontier_20260910b_topology_rank_stability.py","preregistration":"experiments/frontier_20260910b/topology_rank_stability/preregistration.json","preregistration_sha256":"a14cfe3d1aaf565bc16965a5e632b4dce9f827b2c4308f6b042380982e0cf354"},
+    {"family":"topology_rank_stability","id":"topology_rank_stability_falsifier","mode":"falsifier","params":{"top_k":5,"window":63},"parent_id":"topology_rank_stability_w63","path":"strategies/generated/frontier_20260910b_topology_rank_stability.py","preregistration":"experiments/frontier_20260910b/topology_rank_stability/preregistration.json","preregistration_sha256":"a14cfe3d1aaf565bc16965a5e632b4dce9f827b2c4308f6b042380982e0cf354"}
+  ],
+  "controls": ["equal_liquid", "inverse_vol_trend", "persistent_low_vol"],
+  "max_unique_candidates": 5,
+  "protected_live_start": "2026-10-01",
+  "selection_folds": ["research", "dev"]
+}

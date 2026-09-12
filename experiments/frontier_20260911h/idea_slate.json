@@ -1,0 +1,434 @@
+[
+  {
+    "id": "clustering_escape",
+    "area": "local_graph_structure",
+    "thesis": "A falling residual-correlation clustering coefficient during graph fragmentation, with positive residual trend, marks escape from a crowded clique rather than a static low-centrality sort.",
+    "falsifier": "rotate clustering-change across currently eligible identities",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 2
+    },
+    "priority_score": 12,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "wedge_closure",
+    "area": "local_graph_structure",
+    "thesis": "The residual of local clustering versus degree centrality identifies bridges leaving cliques.",
+    "falsifier": "degree-matched clustering",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "triangle_count_drift",
+    "area": "local_graph_structure",
+    "thesis": "A falling count of strong residual triangles is a different object from signed triangle balance.",
+    "falsifier": "current triangle count only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "strength_entropy",
+    "area": "local_graph_structure",
+    "thesis": "Rising entropy of an asset's residual-edge weights identifies leaving a concentrated clique.",
+    "falsifier": "degree-matched random edges",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "kcore_exit",
+    "area": "local_graph_structure",
+    "thesis": "Leaving a high residual k-core during fragmentation is clique-exit, not low beta.",
+    "falsifier": "current k-core level",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "motif_rotation",
+    "area": "local_graph_structure",
+    "thesis": "Replacement of an asset's dominant 3-node residual motif is a local-structure change.",
+    "falsifier": "freeze motif labels",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "factor_loading_escape",
+    "area": "spectral_factor_topology",
+    "thesis": "A declining absolute loading on the leading residual-correlation eigenvector during spectral-gap compression identifies leaving the common residual factor.",
+    "falsifier": "rotate loading-change across currently eligible identities",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 2
+    },
+    "priority_score": 12,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "spectral_gap_cash",
+    "area": "spectral_factor_topology",
+    "thesis": "A widening leading-eigenvalue gap is a cash state because independent residual opportunity is collapsing.",
+    "falsifier": "invert the gap-change gate",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 10,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "subspace_drift",
+    "area": "spectral_factor_topology",
+    "thesis": "The principal-angle change of the top-two residual eigenspace is factor rotation, not centrality.",
+    "falsifier": "random orthogonal rotation of the same subspace",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "participation_ratio",
+    "area": "spectral_factor_topology",
+    "thesis": "A falling inverse-participation-ratio of the leading residual eigenvector marks concentrating factor risk.",
+    "falsifier": "leading eigenvalue share only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "sign_unstable_factor",
+    "area": "spectral_factor_topology",
+    "thesis": "Names whose residual factor-loading sign flips while magnitude stays large are unstable leaders.",
+    "falsifier": "magnitude without sign flips",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 7,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "residual_pca_momentum",
+    "area": "spectral_factor_topology",
+    "thesis": "Residual return orthogonal to the current leading eigenvector is a spectral residual, not a market residual.",
+    "falsifier": "equal-liquid residual only",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "neighbor_identity_churn",
+    "area": "neighbor_identity_dynamics",
+    "thesis": "Turnover in an asset's strongest residual neighbors, with positive residual trend, is cluster-membership change rather than static isolation.",
+    "falsifier": "rotate neighbor-churn scores across currently eligible identities",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 2,
+      "portfolio_complement": 2
+    },
+    "priority_score": 12,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "neighbor_rank_inversion",
+    "area": "neighbor_identity_dynamics",
+    "thesis": "A former top residual neighbor becoming a bottom neighbor is a signed identity reversal.",
+    "falsifier": "absolute rank change",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "cohort_leader_handoff",
+    "area": "neighbor_identity_dynamics",
+    "thesis": "The residual leader inside a persistent neighbor cohort changing identity is leadership handoff.",
+    "falsifier": "shuffle leadership inside the same cohort",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "frozen_neighbor_beta",
+    "area": "neighbor_identity_dynamics",
+    "thesis": "Beta to last week's neighbor set, not the current set, measures delayed cluster dependence.",
+    "falsifier": "current-neighbor beta",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "exclusive_neighbor_gain",
+    "area": "neighbor_identity_dynamics",
+    "thesis": "Gaining residual neighbors that other eligibles do not share is bridge formation.",
+    "falsifier": "degree-matched random neighbors",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "neighbor_overlap_cash",
+    "area": "neighbor_identity_dynamics",
+    "thesis": "High average neighbor-set overlap across the eligible universe is a cash state.",
+    "falsifier": "mean absolute correlation instead of overlap",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "rank_stability_breadth",
+    "area": "residual_opportunity_geometry",
+    "thesis": "The fraction of eligible names with stable residual ranks is opportunity density, not residual dispersion.",
+    "falsifier": "residual-variance breadth",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "failed_recovery_count",
+    "area": "residual_opportunity_geometry",
+    "thesis": "Repeated failed recoveries after a defined residual shock identify exhaustion rather than dip-buying.",
+    "falsifier": "shock depth alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "path_to_range_wedge",
+    "area": "residual_opportunity_geometry",
+    "thesis": "Close-to-close path length rising while high-low range compresses is trapped volatility, not efficiency-ratio trend.",
+    "falsifier": "range alone",
+    "scores": {
+      "novelty": 2,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "signed_gap_persistence",
+    "area": "residual_opportunity_geometry",
+    "thesis": "Persistent overnight gap direction after controlling for residual trend is an opening-state object.",
+    "falsifier": "unsigned gap size",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 1,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 7,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "liquidity_age_residual",
+    "area": "residual_opportunity_geometry",
+    "thesis": "Age-since-liquidity-entry only as a conditioner on residual trend, not standalone lifecycle alpha.",
+    "falsifier": "current is_liquid only",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 2,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 9,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  },
+  {
+    "id": "cross_horizon_rank_lock",
+    "area": "residual_opportunity_geometry",
+    "thesis": "Agreement of 7/21/63-day residual ranks with positive slow residual is usable leadership density.",
+    "falsifier": "prefer disagreement",
+    "scores": {
+      "novelty": 1,
+      "causal_clarity": 2,
+      "falsifiability": 2,
+      "parameter_economy": 1,
+      "cost_plausibility": 1,
+      "portfolio_complement": 1
+    },
+    "priority_score": 8,
+    "performance_seen_before_score": false,
+    "score_basis": "Research judgment after A\u2013F; topology_migration is the only new-campaign family with a valid development floor. No Frontier-H returns. Does not reuse failed A\u2013F formulas, unsigned centrality migration, or uncommitted G objects.",
+    "admissibility": "OHLCV_ONLY"
+  }
+]

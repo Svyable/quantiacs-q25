@@ -1,0 +1,63 @@
+{
+  "ablation": "current low leading-factor loading with the same spectral-gap compression gate",
+  "allocation": "min(0.25, 1/K) times bounded score per selected name; no gross renormalization.",
+  "cash_rule": "Missing model state or nonpositive score means cash.",
+  "classification": "discovery_hypothesis",
+  "code_path": "strategies/generated/frontier_20260911h_factor_loading_escape.py",
+  "contamination_notes": "A\u2013F research/dev history repeatedly observed. No fresh holdout claim; no live data. Uncommitted G objects are not reused.",
+  "cost_hypothesis": "Weekly entries, cash, and name caps; exact ATR-linked costs decide viability.",
+  "created_utc": "2026-09-11T12:30:00+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911h_factor_loading_escape",
+  "failure_mode": "leading-factor loadings duplicate degree centrality or equal-liquid residual trend",
+  "falsifier": "rotate loading-change across currently eligible identities",
+  "fixed_constants": {
+    "graph_lag": 21,
+    "leading_factor_absolute_loadings": true,
+    "neighbor_count": 3,
+    "onnela_clustering": true,
+    "residual_trend_days": 21
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "factor_loading_escape",
+  "nearest_incumbent": "Frontier-B topology_migration / C165 residual-dispersion timing",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "Research satellite on the topology seam that is not unsigned degree-centrality migration",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday entries; six-bar bounded carry; eligibility-loss exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K with label tie-breaking on sorted asset ids.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from the repository frontier map after A\u2013F. Topology_migration is the nearest successful seam; these objects are local clustering, leading-factor loadings, and neighbor-set identity, not centrality.",
+  "source_urls": [],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "A declining absolute loading on the leading residual-correlation eigenvector during spectral-gap compression identifies leaving the common residual factor.",
+  "timing": "Completed daily bars only; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Same residual and eligibility construction as clustering_escape. On each eligible finite residual-correlation matrix, compute a symmetric eigendecomposition. Leading loadings are the absolute values of the eigenvector for the largest eigenvalue. Spectral gap share is (lambda1-lambda2)/sum(|lambda|). Compression is max(previous gap share - current gap share, 0). Escape is previous leading loading minus current leading loading. Base score = clip(escape, 0, 1) * clip(compression, 0, 1) only if the 21-day residual sum is positive. Ablation uses clip(1 - current loading, 0, 1) with the same compression and residual-trend gates. Falsifier rotates the loading-change vector inside the eligible finite cohort. Eigenvector sign is removed by the absolute value; no extra market-timing gate.",
+  "universe": "historical is_liquid == 1 and positive finite close; rotations ignore inactive and future-listed assets",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

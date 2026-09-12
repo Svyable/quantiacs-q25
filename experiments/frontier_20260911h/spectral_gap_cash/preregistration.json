@@ -1,0 +1,62 @@
+{
+  "ablation": "always deploy residual trend",
+  "allocation": "min(0.25, 1/K) times bounded score per selected name; no gross renormalization.",
+  "cash_rule": "Missing model state or nonpositive score means cash.",
+  "classification": "discovery_hypothesis",
+  "code_path": null,
+  "contamination_notes": "A\u2013F research/dev history repeatedly observed. No fresh holdout claim; no live data. Uncommitted G objects are not reused.",
+  "cost_hypothesis": "Weekly entries, cash, and name caps; exact ATR-linked costs decide viability.",
+  "created_utc": "2026-09-11T12:30:00+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911h_spectral_gap_cash",
+  "failure_mode": "gap gate restates mean-|corr| fragmentation already used in topology_migration",
+  "falsifier": "invert the gap-change gate",
+  "fixed_constants": {
+    "graph_lag": 21,
+    "leading_factor_absolute_loadings": true,
+    "neighbor_count": 3,
+    "onnela_clustering": true,
+    "residual_trend_days": 21
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "spectral_gap_cash",
+  "nearest_incumbent": "C165 / Frontier-B fragmentation gate",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "Research satellite on the topology seam that is not unsigned degree-centrality migration",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday entries; six-bar bounded carry; eligibility-loss exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K with label tie-breaking on sorted asset ids.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from the repository frontier map after A\u2013F. Topology_migration is the nearest successful seam; these objects are local clustering, leading-factor loadings, and neighbor-set identity, not centrality.",
+  "source_urls": [],
+  "status": "PREREGISTERED_NOT_IMPLEMENTED",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "A widening leading-eigenvalue gap is a cash state because independent residual opportunity is collapsing.",
+  "timing": "Completed daily bars only; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Deploy residual-trend top-K only when the residual-correlation spectral gap share is falling; cash when it is rising.",
+  "universe": "historical is_liquid == 1 and positive finite close; rotations ignore inactive and future-listed assets",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

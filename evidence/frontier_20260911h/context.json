@@ -1,0 +1,39 @@
+{
+  "costs": [
+    0.0,
+    0.04,
+    0.08,
+    0.12
+  ],
+  "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+  "folds": [
+    {
+      "end": "2020-12-31",
+      "id": "research",
+      "start": "2016-01-01",
+      "use": "hypothesis / feature search"
+    },
+    {
+      "end": "2022-12-31",
+      "id": "dev",
+      "start": "2021-01-01",
+      "use": "parameter development"
+    }
+  ],
+  "manifest_sha256": "fdca54777ea04cca6557e5bfc08039b0000512dd71f7d5a00060d852a69ced5e",
+  "numpy": "2.2.6",
+  "pandas": "2.2.3",
+  "python": "3.13.9",
+  "quantiacs_access_mode": "public_default",
+  "schema_version": 2,
+  "source_hashes": {
+    "configs/promotion_gates.yaml": "2cdcd7568a3f1b01b20da283d6dc719c790a1193bac24771a2af7c03986ec586",
+    "research/benchmark.py": "8fbe3f5e463a97f5e0fe697e044a35d3fb49e234c69e1d1d0d05e75f3b40c825",
+    "research/iteration.py": "8be5ad0130eefb872a0cce8d16348a2b62ce8d73330dcf0e9747ae73483dce66",
+    "strategies/generated/frontier_20260911h_clustering_escape.py": "3b61ae652524c401c827c32316dfdee078ae2a65a039d0ec9cf5ebba1af0cd24",
+    "strategies/generated/frontier_20260911h_factor_loading_escape.py": "b715b61013c607122008cfc4880e3be57d561cb4bfd46455595e7ac1df63e35f",
+    "strategies/generated/frontier_20260911h_neighbor_identity_churn.py": "6cd72fc95f1f51bbe1505747b513fd7c83bb384422155e4ab9e1da9eb3083999"
+  },
+  "status": "DEVELOPMENT_ONLY",
+  "toolbox_stats_sha256": "8cdaf120de844db91ddb01bbce510f2201f55b18223765c2ba5110bfb2f08b54"
+}

@@ -202,3 +202,36 @@ Exact local measurements; no automatic promotion or cross-campaign ranking.
 | forecast_agreement | KILL_WEAK_ALPHA | every valid base cell is below predefined development floor Sharpe 1.0 |
 
 [Evidence packet](../evidence/frontier_20260911g/report.md) · [Research report](../experiments/frontier_20260911g/pm_report.md)
+
+## frontier_20260911h: separate development campaign
+
+Exact local measurements; no automatic promotion or cross-campaign ranking.
+
+| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |
+|---|---|---:|---:|---|
+| `neighbor_identity_churn_ablation` | ablation | 0.884 | -69.8% | COMPLETE |
+| `persistent_low_vol` | control | 0.641 | -93.3% | COMPLETE |
+| `clustering_escape_ablation` | ablation | 0.558 | -2.2% | COMPLETE |
+| `neighbor_identity_churn_falsifier` | falsifier | 0.448 | -47.5% | COMPLETE |
+| `factor_loading_escape_w84` | base | 0.401 | -0.3% | COMPLETE |
+| `clustering_escape_w84` | base | 0.385 | -0.1% | COMPLETE |
+| `neighbor_identity_churn_w84` | base | 0.341 | -50.2% | COMPLETE |
+| `neighbor_identity_churn_w63` | base | 0.320 | -55.9% | COMPLETE |
+| `neighbor_identity_churn_w42` | base | 0.282 | -58.9% | COMPLETE |
+| `equal_liquid` | control | 0.270 | -93.6% | COMPLETE |
+| `clustering_escape_falsifier` | falsifier | 0.250 | -0.2% | COMPLETE |
+| `factor_loading_escape_ablation` | ablation | 0.095 | -4.6% | COMPLETE |
+| `inverse_vol_trend` | control | 0.053 | -87.1% | COMPLETE |
+| `factor_loading_escape_falsifier` | falsifier | 0.029 | -0.5% | COMPLETE |
+| `clustering_escape_w63` | base | -0.065 | -0.2% | COMPLETE |
+| `factor_loading_escape_w63` | base | -0.096 | -0.5% | COMPLETE |
+| `clustering_escape_w42` | base | -0.244 | -1.6% | COMPLETE |
+| `factor_loading_escape_w42` | base | -0.448 | -0.8% | COMPLETE |
+
+| Family | Decision | Reason |
+|---|---|---|
+| clustering_escape | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| factor_loading_escape | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+| neighbor_identity_churn | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+
+[Evidence packet](../evidence/frontier_20260911h/report.md) · [Research report](../experiments/frontier_20260911h/pm_report.md)

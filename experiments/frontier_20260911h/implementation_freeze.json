@@ -1,0 +1,11 @@
+{
+  "frozen_before_measurement": true,
+  "sha256": {
+    "strategies/generated/frontier_20260911h_clustering_escape.py": "3b61ae652524c401c827c32316dfdee078ae2a65a039d0ec9cf5ebba1af0cd24",
+    "strategies/generated/frontier_20260911h_factor_loading_escape.py": "b715b61013c607122008cfc4880e3be57d561cb4bfd46455595e7ac1df63e35f",
+    "strategies/generated/frontier_20260911h_neighbor_identity_churn.py": "6cd72fc95f1f51bbe1505747b513fd7c83bb384422155e4ab9e1da9eb3083999",
+    "experiments/frontier_20260911h/analysis_plan.json": "b8642450442bfaafc93b9b78c5a4ad400ba9bdbf1d94023cc29394b038a18d19",
+    "experiments/frontier_20260911h/manifest.json": "fdca54777ea04cca6557e5bfc08039b0000512dd71f7d5a00060d852a69ced5e"
+  },
+  "synthetic_tests": "40 Frontier-H tests passed; 229 repository tests passed; no economic metrics used"
+}

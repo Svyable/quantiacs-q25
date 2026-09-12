@@ -1,0 +1,62 @@
+{
+  "ablation": "current low clustering level with the same fragmentation and residual-trend gates",
+  "allocation": "min(0.25, 1/K) times bounded score per selected name; no gross renormalization.",
+  "cash_rule": "Missing model state or nonpositive score means cash.",
+  "classification": "discovery_hypothesis",
+  "code_path": "strategies/generated/frontier_20260911h_clustering_escape.py",
+  "contamination_notes": "A\u2013F research/dev history repeatedly observed. No fresh holdout claim; no live data. Uncommitted G objects are not reused.",
+  "cost_hypothesis": "Weekly entries, cash, and name caps; exact ATR-linked costs decide viability.",
+  "created_utc": "2026-09-11T12:30:00+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "frontier_20260911h_clustering_escape",
+  "failure_mode": "clustering change restates unsigned centrality migration or residual trend",
+  "falsifier": "rotate clustering-change across currently eligible identities",
+  "fixed_constants": {
+    "graph_lag": 21,
+    "leading_factor_absolute_loadings": true,
+    "neighbor_count": 3,
+    "onnela_clustering": true,
+    "residual_trend_days": 21
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "clustering_escape",
+  "nearest_incumbent": "Frontier-B topology_migration (unsigned degree-centrality change)",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "Research satellite on the topology seam that is not unsigned degree-centrality migration",
+  "primitive": "Historical Quantiacs cryptodaily OHLCV and is_liquid; no external strategy data",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday entries; six-bar bounded carry; eligibility-loss exits stay closed until next Monday.",
+  "selection": "Positive bounded score top-K with label tie-breaking on sorted asset ids.",
+  "selection_objective": "minimum research/dev SR at 4/8/12% ATR costs with existing tie breakers",
+  "source_notes": "Original designs from the repository frontier map after A\u2013F. Topology_migration is the nearest successful seam; these objects are local clustering, leading-factor loadings, and neighbor-set identity, not centrality.",
+  "source_urls": [],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "Existing central-parent destructive-control/ablation and 1.0 weak-alpha floor; no parameter expansion after returns; no automatic promotion.",
+  "thesis": "A falling residual-correlation clustering coefficient during graph fragmentation, with positive residual trend, marks escape from a crowded clique rather than a static low-centrality sort.",
+  "timing": "Completed daily bars only; toolbox applies candidate execution lag.",
+  "track": "robustness",
+  "transform": "Each Monday t, among assets liquid at t and t-21 with finite residual history, form residual log returns (own minus equal-liquid market). Compute the W-day residual correlation matrix on [t-W+1, t] and the matched matrix ending t-21, requiring at least max(16, W//2) pairwise observations. Local clustering is the Onnela weighted clustering coefficient of |corr|: elementwise cube-root of clipped |corr|, then diag(W^3) / (k(k-1)) where k is the number of strictly positive off-diagonal edges. Fragmentation is max(previous mean |corr| - current mean |corr|, 0). Escape is previous clustering minus current clustering. Base score = clip(escape, 0, 1) * clip(fragmentation, 0, 1) only if the 21-day residual sum is positive. Ablation replaces escape with clip(1 - current clustering, 0, 1) and keeps the fragmentation and residual-trend gates. Falsifier rotates the escape vector inside the eligible finite cohort before clipping. No extra market-timing gate.",
+  "universe": "historical is_liquid == 1 and positive finite close; rotations ignore inactive and future-listed assets",
+  "validation": "2023-2024 only after freeze; never drives mutation"
+}

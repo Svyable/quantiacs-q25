@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "available_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "requested_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "status": "COMPLETE"
+  },
+  "clustering_escape_ablation": {
+    "correlations": {
+      "equal_liquid": 0.3573458852205746,
+      "inverse_vol_trend": 0.4368729135935548,
+      "persistent_low_vol": 0.37599461890940594
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.2893542972036824,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "clustering_escape_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.2596161298367548,
+      "inverse_vol_trend": 0.32902097305844547,
+      "persistent_low_vol": 0.27490329214443504
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.2759915281815298,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "clustering_escape_w42": {
+    "correlations": {
+      "equal_liquid": 0.35067627777711186,
+      "inverse_vol_trend": 0.3531614805504631,
+      "persistent_low_vol": 0.3535103096408501
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.3589087969342057,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "clustering_escape_w63": {
+    "correlations": {
+      "equal_liquid": 0.23926126471876513,
+      "inverse_vol_trend": 0.30888529847664026,
+      "persistent_low_vol": 0.2631081325557696
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.9127700066733675,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "clustering_escape_w84": {
+    "correlations": {
+      "equal_liquid": 0.239676838087239,
+      "inverse_vol_trend": 0.3043110698479325,
+      "persistent_low_vol": 0.24021463563749737
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.204981984610844,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "factor_loading_escape_ablation": {
+    "correlations": {
+      "equal_liquid": 0.37542401092707955,
+      "inverse_vol_trend": 0.47432539141030866,
+      "persistent_low_vol": 0.39801843092950767
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.6142475347971823,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "factor_loading_escape_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.30711504656722044,
+      "inverse_vol_trend": 0.3787497518382166,
+      "persistent_low_vol": 0.31551006209440624
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.6687463005711304,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "factor_loading_escape_w42": {
+    "correlations": {
+      "equal_liquid": 0.3197016870583512,
+      "inverse_vol_trend": 0.36207766239894035,
+      "persistent_low_vol": 0.327972674960031
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 2.2409925475200594,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "factor_loading_escape_w63": {
+    "correlations": {
+      "equal_liquid": 0.3214807238083986,
+      "inverse_vol_trend": 0.4310998310464616,
+      "persistent_low_vol": 0.37441074812235353
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 2.2056949835372706,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "factor_loading_escape_w84": {
+    "correlations": {
+      "equal_liquid": 0.23590643648053083,
+      "inverse_vol_trend": 0.30274433427932357,
+      "persistent_low_vol": 0.25531320189904705
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.15447099671371067,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "neighbor_identity_churn_ablation": {
+    "correlations": {
+      "equal_liquid": 0.736486769619449,
+      "inverse_vol_trend": 0.6003788996473829,
+      "persistent_low_vol": 0.7257800820353172
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.8510056215224436,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "neighbor_identity_churn_falsifier": {
+    "correlations": {
+      "equal_liquid": 0.7141519095444427,
+      "inverse_vol_trend": 0.5535806344688822,
+      "persistent_low_vol": 0.7077319816739551
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.21646123687008528,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "neighbor_identity_churn_w42": {
+    "correlations": {
+      "equal_liquid": 0.7893882818420543,
+      "inverse_vol_trend": 0.6178539895936932,
+      "persistent_low_vol": 0.7807986714556631
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.2430301479363027,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "neighbor_identity_churn_w63": {
+    "correlations": {
+      "equal_liquid": 0.7102351595434437,
+      "inverse_vol_trend": 0.5874744983309086,
+      "persistent_low_vol": 0.7020623690542962
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.1180267717454726,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "neighbor_identity_churn_w84": {
+    "correlations": {
+      "equal_liquid": 0.6621291480717707,
+      "inverse_vol_trend": 0.5849663611243485,
+      "persistent_low_vol": 0.6541605717387574
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.12391144517851158,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  }
+}

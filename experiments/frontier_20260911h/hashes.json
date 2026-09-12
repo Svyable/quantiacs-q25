@@ -1,0 +1,8 @@
+{
+  "clustering_escape": "61a829e77ec250578b2d4465f512084f78b628e9a335a33eae31bcbb4447a89e",
+  "factor_loading_escape": "698163d3b74ec0063e712b2e221498ca29002d22b42b2879b2970da6632d0f71",
+  "neighbor_identity_churn": "386412f0049b53f9b488b873ec1a776db4c2170531659ff05b8145b426ab0c5c",
+  "spectral_gap_cash": "d182eb31a266d17c29f7ee381a259b9c133746b41ff64b79e88f96eb4f8dd447",
+  "bridge_betweenness": "019b216cc9fde66a46d01379765a700ba98b6314b1d2039133aaccdbfba0cba0",
+  "failed_recovery_count": "8c6d7b08d4b7fe529f7016346c3ab8b57537e51e6f2b71bbc32bfa9091e86352"
+}

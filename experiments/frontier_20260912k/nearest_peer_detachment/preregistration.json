@@ -1,0 +1,53 @@
+{
+  "ablation": "current low strongest-peer correlation under the same detachment-breadth state",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260912k_nearest_peer_detachment.py",
+  "contamination_notes": "Frontier-A through Frontier-J development evidence is already observed. Frontier-K is repeated development research, not a fresh holdout. The 2023-2024 fold is already SPENT from preregistered topology-migration forward validation and is excluded from K selection and mutation.",
+  "cost_hypothesis": "weekly rebalance, sparse top-five books, cash on absent state, and persistent eligibility exits should limit unnecessary turnover; fixed cost ladder evaluated without post-result retuning",
+  "created_utc": "2026-09-12T14:05:00+00:00",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260912k_nearest_peer_detachment",
+  "failure_mode": "single-edge noise dominates or duplicates positive-edge shedding/topology migration",
+  "falsifier": "rotate asset-level detachment across currently eligible identities while preserving the cross-sectional breadth state",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "nearest_peer_detachment",
+  "nearest_incumbent": "Frontier-H neighbor_identity_churn / Frontier-B topology_migration",
+  "novelty_axes_changed": [
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "local-topology satellite",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "prior_preregistration": "experiments/frontier_20260912j/nearest_peer_detachment/preregistration.json",
+  "prior_preregistration_sha256": "928b3e1102f8a03654a88da7a431854094ac74de8570401fd645251611eba1f5",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; persistent immediate strict-liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Activates the unmeasured Frontier-J reserve before any Frontier-K return look. K strengthens the state definition to a predeclared eligible cross-sectional detachment-breadth condition so it differs from mean-correlation fragmentation.",
+  "source_urls": [
+    "https://doi.org/10.1016/j.econmod.2020.11.013"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if matched ablation or destructive falsifier matches/beats canonical parent, or if every valid base cell is below fixed 1.0 development floor; do not invert or retune after observing failure",
+  "thesis": "When a majority-style cross-sectional breadth of eligible assets is losing its single strongest residual peer, positive-trend names with the largest local detachment capture a local network regime distinct from mean-centrality migration.",
+  "timing": "completed daily bars only; trailing windows and fixed historical lags; no 2023+ selection",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1 for signal graph/cohort and weights; no hand-picked symbols",
+  "validation": "2023-2024 is SPENT and diagnostic-only for Frontier-K; 2025+ diagnostic/live evidence never drives mutation"
+}

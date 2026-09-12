@@ -1,0 +1,24 @@
+{
+  "campaign": "frontier_20260912k",
+  "frozen_before_measurement": true,
+  "activation_type": "PREEXISTING_UNMEASURED_RESERVES",
+  "note": "No Frontier-K market-performance return was observed before these exact activation preregistrations, paths, grids, controls and evidence boundaries were committed. The hypotheses descend from older unmeasured Frontier-I/J reserves; 2023-2024 is already spent and excluded from selection.",
+  "preregistration_sha256": {
+    "nearest_peer_detachment": "d37f326642b9c3cfe8f9ab82614cb3e3cf50d687fcef57c1d748ef4ce68f3c45",
+    "subspace_rotation_opportunity": "438b2260c713f8e3c01ce6ee02f6fe25064336c197ec5ff37ce5e12e59fcd2aa",
+    "cohort_residual_divergence": "9b95e58d47c288ee9beaac384553f72033ea351f79971ca31a8bee27a166c144"
+  },
+  "prior_reserve_sha256": {
+    "nearest_peer_detachment": "928b3e1102f8a03654a88da7a431854094ac74de8570401fd645251611eba1f5",
+    "subspace_rotation_opportunity": "e49fdc7d3a2e683bc3684a5f715305046d9839cf1b1e96b35ff564b281130c9d",
+    "cohort_residual_divergence": "ab8868ca75e1d6225dd68322589fe8f82260b1f81cbd580f3e584dc60e134bd6"
+  },
+  "strategy_paths": [
+    "strategies/generated/frontier_20260912k_nearest_peer_detachment.py",
+    "strategies/generated/frontier_20260912k_subspace_rotation_opportunity.py",
+    "strategies/generated/frontier_20260912k_cohort_residual_divergence.py"
+  ],
+  "selection_folds": ["research", "dev"],
+  "spent_forward_fold": "2023-01-01/2024-12-31",
+  "automatic_promotion": false
+}

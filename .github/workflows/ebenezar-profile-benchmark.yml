@@ -1,0 +1,94 @@
+name: ebenezar-profile-benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/ebenezar_20260912_*.py'
+      - 'experiments/ebenezar_20260912/**'
+      - 'research/benchmark.py'
+      - 'research/iteration.py'
+      - 'tests/**'
+      - '.github/workflows/ebenezar-profile-benchmark.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-profile-screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      CAMPAIGN: ebenezar_20260912
+      MANIFEST: experiments/ebenezar_20260912/manifest.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Quantiacs toolbox and tests
+        run: python -m pip install -r requirements.txt pytest
+
+      - name: Run repository software, provenance and causality tests
+        run: python -m pytest -q tests
+
+      - name: Compile translated strategies
+        run: python -m compileall -q strategies/generated/ebenezar_20260912_*.py
+
+      - name: Verify frozen preregistrations and source hashes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from research.iteration import load_manifest
+          from research.preregister import sha256_file
+
+          root = Path('.')
+          dest = root / 'experiments/ebenezar_20260912'
+          manifest = load_manifest(dest / 'manifest.json')
+          freeze = json.loads((dest / 'implementation_freeze.json').read_text())
+          assert freeze['frozen_before_measurement'] is True
+          assert freeze['activation_type'] == 'USER_DIRECTED_PROFILE_TRANSLATION'
+          assert manifest['selection_folds'] == ['research', 'dev']
+          assert len(manifest['candidates']) == 7
+          for slug, digest in freeze['preregistration_sha256'].items():
+              assert sha256_file(dest / slug / 'preregistration.json') == digest
+          print('Ebenezar profile freeze verified')
+          PY
+
+      - name: Run exact Quantiacs development screen
+        run: |
+          python -m research.iteration \
+            --manifest "$MANIFEST" \
+            --output "results/$CAMPAIGN" \
+            --budget 10
+
+      - name: Print exact evidence
+        if: always()
+        run: |
+          RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          echo "RESULT_DIR=$RESULT_DIR"
+          test -n "$RESULT_DIR"
+          cat "$RESULT_DIR/report.md" || true
+          python - "$RESULT_DIR" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          root = Path(sys.argv[1])
+          for name in ('rankings.json','residual_diagnostics.json'):
+              path = root / name
+              if path.exists():
+                  print(f'\n=== {name} ===')
+                  print(json.dumps(json.loads(path.read_text()), indent=2, sort_keys=True))
+          PY
+
+      - name: Preserve exact measured evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.CAMPAIGN }}-measured-${{ github.run_id }}
+          path: results/${{ env.CAMPAIGN }}/
+          if-no-files-found: warn

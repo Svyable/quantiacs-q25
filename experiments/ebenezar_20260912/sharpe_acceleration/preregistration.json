@@ -10,12 +10,24 @@
   "experiment_id": "ebenezar_20260912_sharpe_acceleration",
   "failure_mode": "Sharpe acceleration is a noisy re-expression of short momentum and is cost-fragile",
   "falsifier": "trade decelerating rather than accelerating short Sharpe",
-  "folds_allowed_for_selection": ["research", "dev"],
-  "grid": {"window": [3]},
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      3
+    ]
+  },
   "mechanism": "sharpe_acceleration_refinement",
   "nearest_incumbent": "short_sharpe_vol_ratio / trend-quality family",
-  "novelty_axes_changed": ["transform", "timing_or_state_condition"],
-  "params": {"window": 3},
+  "novelty_axes_changed": [
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "window": 3
+  },
   "portfolio_role": "profile-translation refinement; novelty unproven",
   "primitive": "Quantiacs daily crypto OHLCV and historical is_liquid only",
   "promotion_gates": "configs/promotion_gates.yaml",
@@ -23,7 +35,9 @@
   "selection": "automatic cross-sectional thresholds only; no asset symbols or manual identities",
   "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst drawdown, lower turnover, id",
   "source_notes": "Derived from user-supplied Q25 leaderboard/profile family patterns; parameters frozen before repository measurement.",
-  "source_urls": ["https://quantiacs.com/leaderboard/25"],
+  "source_urls": [
+    "https://quantiacs.com/leaderboard/25"
+  ],
   "status": "IMPLEMENTED_PENDING_EVIDENCE",
   "stop_rule": "screen only; no parameter repair after results. Fail if causal/integrity checks fail or development evidence is weak. Do not claim independent alpha without separate controls/originality work.",
   "thesis": "Improvement in 3-day Sharpe relative to a 14-day Sharpe baseline identifies accelerating quality rather than merely high level quality.",

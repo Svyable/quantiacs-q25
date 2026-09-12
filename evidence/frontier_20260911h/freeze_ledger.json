@@ -1,0 +1,53 @@
+[
+  {
+    "best_score": 0.38490967313939567,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "clustering_escape_ablation",
+      "clustering_escape_falsifier"
+    ],
+    "family": "clustering_escape",
+    "family_rank": 2,
+    "invalid_cells": [],
+    "median_score": -0.06520127305361431,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  },
+  {
+    "best_score": 0.4005493237235294,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "factor_loading_escape_ablation",
+      "factor_loading_escape_falsifier"
+    ],
+    "family": "factor_loading_escape",
+    "family_rank": 3,
+    "invalid_cells": [],
+    "median_score": -0.09577687144594386,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  },
+  {
+    "best_score": 0.34132942708450786,
+    "completed_cells": 5,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 5,
+    "failed_controls": [
+      "neighbor_identity_churn_ablation",
+      "neighbor_identity_churn_falsifier"
+    ],
+    "family": "neighbor_identity_churn",
+    "family_rank": 1,
+    "invalid_cells": [],
+    "median_score": 0.3201907448841703,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  }
+]

@@ -1,0 +1,213 @@
+{
+  "campaign": "frontier_20260911h",
+  "candidates": [
+    {
+      "id": "clustering_escape_w42",
+      "family": "clustering_escape",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_clustering_escape.py",
+      "parent_id": "clustering_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/clustering_escape/preregistration.json",
+      "preregistration_sha256": "61a829e77ec250578b2d4465f512084f78b628e9a335a33eae31bcbb4447a89e"
+    },
+    {
+      "id": "clustering_escape_w63",
+      "family": "clustering_escape",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_clustering_escape.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911h/clustering_escape/preregistration.json",
+      "preregistration_sha256": "61a829e77ec250578b2d4465f512084f78b628e9a335a33eae31bcbb4447a89e"
+    },
+    {
+      "id": "clustering_escape_w84",
+      "family": "clustering_escape",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_clustering_escape.py",
+      "parent_id": "clustering_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/clustering_escape/preregistration.json",
+      "preregistration_sha256": "61a829e77ec250578b2d4465f512084f78b628e9a335a33eae31bcbb4447a89e"
+    },
+    {
+      "id": "clustering_escape_ablation",
+      "family": "clustering_escape",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_clustering_escape.py",
+      "parent_id": "clustering_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/clustering_escape/preregistration.json",
+      "preregistration_sha256": "61a829e77ec250578b2d4465f512084f78b628e9a335a33eae31bcbb4447a89e"
+    },
+    {
+      "id": "clustering_escape_falsifier",
+      "family": "clustering_escape",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_clustering_escape.py",
+      "parent_id": "clustering_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/clustering_escape/preregistration.json",
+      "preregistration_sha256": "61a829e77ec250578b2d4465f512084f78b628e9a335a33eae31bcbb4447a89e"
+    },
+    {
+      "id": "factor_loading_escape_w42",
+      "family": "factor_loading_escape",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_factor_loading_escape.py",
+      "parent_id": "factor_loading_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/factor_loading_escape/preregistration.json",
+      "preregistration_sha256": "698163d3b74ec0063e712b2e221498ca29002d22b42b2879b2970da6632d0f71"
+    },
+    {
+      "id": "factor_loading_escape_w63",
+      "family": "factor_loading_escape",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_factor_loading_escape.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911h/factor_loading_escape/preregistration.json",
+      "preregistration_sha256": "698163d3b74ec0063e712b2e221498ca29002d22b42b2879b2970da6632d0f71"
+    },
+    {
+      "id": "factor_loading_escape_w84",
+      "family": "factor_loading_escape",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_factor_loading_escape.py",
+      "parent_id": "factor_loading_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/factor_loading_escape/preregistration.json",
+      "preregistration_sha256": "698163d3b74ec0063e712b2e221498ca29002d22b42b2879b2970da6632d0f71"
+    },
+    {
+      "id": "factor_loading_escape_ablation",
+      "family": "factor_loading_escape",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_factor_loading_escape.py",
+      "parent_id": "factor_loading_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/factor_loading_escape/preregistration.json",
+      "preregistration_sha256": "698163d3b74ec0063e712b2e221498ca29002d22b42b2879b2970da6632d0f71"
+    },
+    {
+      "id": "factor_loading_escape_falsifier",
+      "family": "factor_loading_escape",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_factor_loading_escape.py",
+      "parent_id": "factor_loading_escape_w63",
+      "preregistration": "experiments/frontier_20260911h/factor_loading_escape/preregistration.json",
+      "preregistration_sha256": "698163d3b74ec0063e712b2e221498ca29002d22b42b2879b2970da6632d0f71"
+    },
+    {
+      "id": "neighbor_identity_churn_w42",
+      "family": "neighbor_identity_churn",
+      "mode": "base",
+      "params": {
+        "window": 42,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_neighbor_identity_churn.py",
+      "parent_id": "neighbor_identity_churn_w63",
+      "preregistration": "experiments/frontier_20260911h/neighbor_identity_churn/preregistration.json",
+      "preregistration_sha256": "386412f0049b53f9b488b873ec1a776db4c2170531659ff05b8145b426ab0c5c"
+    },
+    {
+      "id": "neighbor_identity_churn_w63",
+      "family": "neighbor_identity_churn",
+      "mode": "base",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_neighbor_identity_churn.py",
+      "parent_id": null,
+      "preregistration": "experiments/frontier_20260911h/neighbor_identity_churn/preregistration.json",
+      "preregistration_sha256": "386412f0049b53f9b488b873ec1a776db4c2170531659ff05b8145b426ab0c5c"
+    },
+    {
+      "id": "neighbor_identity_churn_w84",
+      "family": "neighbor_identity_churn",
+      "mode": "base",
+      "params": {
+        "window": 84,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_neighbor_identity_churn.py",
+      "parent_id": "neighbor_identity_churn_w63",
+      "preregistration": "experiments/frontier_20260911h/neighbor_identity_churn/preregistration.json",
+      "preregistration_sha256": "386412f0049b53f9b488b873ec1a776db4c2170531659ff05b8145b426ab0c5c"
+    },
+    {
+      "id": "neighbor_identity_churn_ablation",
+      "family": "neighbor_identity_churn",
+      "mode": "ablation",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_neighbor_identity_churn.py",
+      "parent_id": "neighbor_identity_churn_w63",
+      "preregistration": "experiments/frontier_20260911h/neighbor_identity_churn/preregistration.json",
+      "preregistration_sha256": "386412f0049b53f9b488b873ec1a776db4c2170531659ff05b8145b426ab0c5c"
+    },
+    {
+      "id": "neighbor_identity_churn_falsifier",
+      "family": "neighbor_identity_churn",
+      "mode": "falsifier",
+      "params": {
+        "window": 63,
+        "top_k": 5
+      },
+      "path": "strategies/generated/frontier_20260911h_neighbor_identity_churn.py",
+      "parent_id": "neighbor_identity_churn_w63",
+      "preregistration": "experiments/frontier_20260911h/neighbor_identity_churn/preregistration.json",
+      "preregistration_sha256": "386412f0049b53f9b488b873ec1a776db4c2170531659ff05b8145b426ab0c5c"
+    }
+  ],
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "max_unique_candidates": 15,
+  "automatic_promotion": false,
+  "protected_live_start": "2026-10-01",
+  "classification_note": "Three discovery hypotheses on the topology seam: Onnela clustering escape, leading residual-factor loading escape, and residual neighbor-set identity churn."
+}

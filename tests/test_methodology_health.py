@@ -21,12 +21,12 @@ def test_latest_evidence_and_full_matrix_tier_are_distinct():
     latest = payload["latest_evidence"]
     health = payload["surface_health"]
 
-    assert latest["campaign"] == "frontier_20260912l"
+    assert latest["campaign"] == "frontier_20260912m"
     assert latest["kind"] == "summary_only"
     assert latest["decision"] == "PROMOTE_ZERO"
     assert latest["evidence_stage"] == "DEVELOPMENT_ONLY"
     assert health["latest_full_matrix_campaign"] == "frontier_20260912k"
-    assert health["measured_campaigns_since_full_matrix"] == 1
+    assert health["measured_campaigns_since_full_matrix"] == 2
     assert health["summary_only_latest"] is True
     assert health["research_matrix_mentions_latest"] is False
     assert health["index_uses_generated_health"] is True
@@ -41,15 +41,15 @@ def test_latest_campaign_rank_is_local_and_exposes_control_margins():
     assert policy["weighted_megascore"] is False
     assert policy["robust_floor"] == 1.0
     assert [row["family"] for row in rows] == [
-        "dollar_volume_share_migration",
-        "permutation_entropy_contraction",
-        "relative_value_convergence",
+        "vol_curve_recompression",
+        "slope_dispersion_opportunity",
+        "relative_vol_rank_relief",
     ]
     assert all(row["guardrail_pass"] is False for row in rows)
     assert all(row["falsification_complete"] is True for row in rows)
-    assert [row["control_supported"] for row in rows] == [True, False, False]
-    assert rows[0]["central_control_margin"] == 0.6139429070897866 - 0.28099760489191
-    assert rows[1]["central_control_margin"] == -0.04611193356512377 - 0.1659142023333896
+    assert [row["control_supported"] for row in rows] == [False, False, False]
+    assert rows[0]["central_control_margin"] == -0.5354937578646062 - 0.20702277361049765
+    assert rows[1]["central_control_margin"] == -0.1980717789517871 - 0.21001352170084853
 
 
 def test_forward_validation_supersedes_stale_development_survivor_claim():
@@ -76,20 +76,15 @@ def test_recursive_learning_vector_and_measurement_queue_are_explicit():
     assert loop["policy"]["aggregate_score"] == "forbidden"
     assert loop["policy"]["optimization_target"] is False
     assert latest["falsification_coverage"] == {"count": 3, "total": 3, "rate": 1.0}
-    assert latest["causal_support"]["count"] == 1
+    assert latest["causal_support"]["count"] == 0
     assert latest["economic_survival"]["count"] == 0
     assert latest["promotion_ready"]["count"] == 0
     assert latest["decision_resolution"]["count"] == 3
-    assert queue["count"] == 2
-    assert queue["next_campaign"]["campaign"] == "frontier_20260912m"
-    assert [row["campaign"] for row in queue["campaigns"]] == [
-        "frontier_20260912m",
-        "frontier_20260913m",
-    ]
+    assert queue["count"] == 1
+    assert queue["next_campaign"]["campaign"] == "frontier_20260913m"
+    assert [row["campaign"] for row in queue["campaigns"]] == ["frontier_20260913m"]
     assert queue["next_campaign"]["automatic_promotion"] is False
     assert queue["next_campaign"]["selection_folds"] == ["research", "dev"]
-    assert queue["campaigns"][1]["automatic_promotion"] is False
-    assert queue["campaigns"][1]["selection_folds"] == ["research", "dev"]
 
 
 def test_homepage_is_bound_to_generated_health_packet():

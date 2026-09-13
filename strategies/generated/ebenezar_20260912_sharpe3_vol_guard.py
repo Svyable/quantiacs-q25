@@ -33,11 +33,17 @@ def _returns(close):
 
 
 def _sma(x, n, min_periods=None):
-    return x.rolling(time=n, min_periods=n if min_periods is None else min_periods).mean()
+    m = n if min_periods is None else min_periods
+    if x.sizes["time"] < m:
+        return xr.full_like(x, np.nan, dtype=float)
+    return x.rolling(time=min(n, x.sizes["time"]), min_periods=m).mean()
 
 
 def _std(x, n, min_periods=None):
-    return x.rolling(time=n, min_periods=max(2, n // 2) if min_periods is None else min_periods).std()
+    m = max(2, n // 2) if min_periods is None else min_periods
+    if x.sizes["time"] < m:
+        return xr.full_like(x, np.nan, dtype=float)
+    return x.rolling(time=min(n, x.sizes["time"]), min_periods=m).std()
 
 
 def _liquid_cs_mean(x, liquid):

@@ -1,0 +1,11 @@
+{
+  "artifact_digest": "sha256:87396b2d8ba174df29f05806ceb5221e3457672d44a45f7253720028003e1298",
+  "artifact_id": 10309964229,
+  "artifact_name": "frontier_20260912l-measured-34733083803",
+  "campaign": "frontier_20260912l",
+  "measured_head_sha": "f1f236cdb83222be74be19c6244b2ac546781710",
+  "result_run_id": "f7e9719f4d3b7ff63322",
+  "source": "github_actions",
+  "status": "OBSERVED_DEVELOPMENT_PACKET",
+  "workflow_run_id": 34733083803
+}

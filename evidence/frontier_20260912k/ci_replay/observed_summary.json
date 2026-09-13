@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "campaign": "frontier_20260912k",
+  "status": "CI_REPLAY_DEVELOPMENT_ONLY",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "workflow_run": 34716313017,
+  "artifact_id": 10304184100,
+  "artifact_digest": "sha256:59e1ddfa9d8cdc71003b5e3a8330adb4c1e9660704ef6909773b7182a052645e",
+  "measured_head_sha": "39df18f8364b8ee6b4d43c2b6aeeb0b714c833ee",
+  "access_mode": "public_default",
+  "manifest_sha256": "1cc60ec86a3e2cb792847f7deb8799d0bbe2f52c15e997f39b77f768c105dabd",
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "python": "3.11.16",
+  "families": [
+    {"family": "nearest_peer_detachment", "best_base_id": "nearest_peer_detachment_w63", "best_robust_sharpe": 0.7820101586330442, "central_id": "nearest_peer_detachment_w63", "central_robust_sharpe": 0.7820101586330442, "ablation_robust_sharpe": 0.7008911577469794, "falsifier_robust_sharpe": 0.6991778205190383, "decision_code": "KILL_WEAK_ALPHA"},
+    {"family": "subspace_rotation_opportunity", "best_base_id": "subspace_rotation_opportunity_w42", "best_robust_sharpe": 0.3536037609450054, "central_id": "subspace_rotation_opportunity_w63", "central_robust_sharpe": 0.33164385750764164, "ablation_robust_sharpe": 0.005789401861555808, "falsifier_robust_sharpe": 0.4149816847256116, "decision_code": "FALSIFIED_DEVELOPMENT"},
+    {"family": "cohort_residual_divergence", "best_base_id": "cohort_residual_divergence_w63", "best_robust_sharpe": 0.13054312505938928, "central_id": "cohort_residual_divergence_w63", "central_robust_sharpe": 0.13054312505938928, "ablation_robust_sharpe": 0.2408598549957126, "falsifier_robust_sharpe": -0.06265276336392797, "decision_code": "FALSIFIED_DEVELOPMENT"}
+  ]
+}

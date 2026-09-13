@@ -101,6 +101,18 @@ The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are
 
 ## Current read-through
 
+Frontier-L (`experiments/frontier_20260912l/pm_report.md`) measured three
+preregistered non-graph families with the exact public/default harness on the
+reused 2016–2022 development surface; all 18 cells completed and 2023–2024
+remained excluded because it is spent. Dollar-volume share migration is
+`KILL_WEAK_ALPHA`: the central 42-day parent scores 0.614 and beats its ablation
+(0.281) and identity-rotation falsifier (-0.201), but every base window misses
+the fixed 1.0 floor. Permutation-entropy contraction and relative-value
+convergence are `FALSIFIED_DEVELOPMENT`. Promote zero. Do not retune, invert or
+grid-rescue these families. Canonical summary/context/diagnostics and the
+observed 18-row matrix snapshot are in `evidence/frontier_20260912l/`; the raw
+return streams remain anchored by the recorded GitHub Actions artifact digest.
+
 Frontier-K (`experiments/frontier_20260912k/pm_report.md`) measured three
 previously unmeasured reserves. All 18 exact local cells completed on 2016–2022;
 2023–2024 was excluded because it is spent. Nearest-peer detachment is

@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "available_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "requested_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "status": "COMPLETE"
+  },
+  "dollar_volume_share_migration_ablation": {
+    "correlations": {"equal_liquid": 0.9426320184341903, "inverse_vol_trend": 0.743552915723932, "persistent_low_vol": 0.9196767039171996},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.018965822365933246,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "dollar_volume_share_migration_falsifier": {
+    "correlations": {"equal_liquid": 0.7646167923023967, "inverse_vol_trend": 0.7258896053774524, "persistent_low_vol": 0.7749122971669293},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.8640345763886594,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "dollar_volume_share_migration_w21": {
+    "correlations": {"equal_liquid": 0.8511685468317911, "inverse_vol_trend": 0.7856650938672995, "persistent_low_vol": 0.8467053950614154},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.29184220669790767,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "dollar_volume_share_migration_w42": {
+    "correlations": {"equal_liquid": 0.8423849750358989, "inverse_vol_trend": 0.7866527263761034, "persistent_low_vol": 0.8492136329796032},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.542691112007983,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "dollar_volume_share_migration_w63": {
+    "correlations": {"equal_liquid": 0.8289409058776995, "inverse_vol_trend": 0.745095147512645, "persistent_low_vol": 0.8254449165440879},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.15786517904297254,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "permutation_entropy_contraction_ablation": {
+    "correlations": {"equal_liquid": 0.9569742166401186, "inverse_vol_trend": 0.7822934881333142, "persistent_low_vol": 0.9346835606828225},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.5759812130747475,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "permutation_entropy_contraction_falsifier": {
+    "correlations": {"equal_liquid": 0.8381025364001299, "inverse_vol_trend": 0.6808225799163621, "persistent_low_vol": 0.8068659788909507},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.4693162218329855,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "permutation_entropy_contraction_w126": {
+    "correlations": {"equal_liquid": 0.8400023012631264, "inverse_vol_trend": 0.6965311121101981, "persistent_low_vol": 0.8267951173110311},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.7456086691002206,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "permutation_entropy_contraction_w63": {
+    "correlations": {"equal_liquid": 0.8243717928894405, "inverse_vol_trend": 0.7194827146455451, "persistent_low_vol": 0.8109736966736105},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.5833113575671439,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "permutation_entropy_contraction_w84": {
+    "correlations": {"equal_liquid": 0.84725618439966, "inverse_vol_trend": 0.7242341115453316, "persistent_low_vol": 0.8207729945886112},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.45830673041461467,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "relative_value_convergence_ablation": {
+    "correlations": {"equal_liquid": 0.9656092413850956, "inverse_vol_trend": 0.7251702778169087, "persistent_low_vol": 0.9310237483797279},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.7919733137420832,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "relative_value_convergence_falsifier": {
+    "correlations": {"equal_liquid": 0.7853036774103067, "inverse_vol_trend": 0.6172069006851489, "persistent_low_vol": 0.7587928807878093},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.4078695667954975,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "relative_value_convergence_w21": {
+    "correlations": {"equal_liquid": 0.5865737527677751, "inverse_vol_trend": 0.42474713305801043, "persistent_low_vol": 0.5745404518210554},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 0.7635710302926079,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "relative_value_convergence_w42": {
+    "correlations": {"equal_liquid": 0.5623844359213238, "inverse_vol_trend": 0.3826968536225716, "persistent_low_vol": 0.5401189824510111},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": 1.1291149489792018,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "relative_value_convergence_w63": {
+    "correlations": {"equal_liquid": 0.5677841655890632, "inverse_vol_trend": 0.34432732290227513, "persistent_low_vol": 0.538173265804384},
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -0.01755929816600622,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  }
+}

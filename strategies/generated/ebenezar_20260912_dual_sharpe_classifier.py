@@ -18,8 +18,16 @@ def _close_liquid(data):
     return close, xr.where((liq0==1)&np.isfinite(close)&(close>0),1.0,0.0)
 def _returns(close):
     r=close/close.shift(time=1)-1.0; return xr.where(np.isfinite(r),r,0.0)
-def _sma(x,n,min_periods=None): return x.rolling(time=n,min_periods=n if min_periods is None else min_periods).mean()
-def _std(x,n,min_periods=None): return x.rolling(time=n,min_periods=max(2,n//2) if min_periods is None else min_periods).std()
+def _sma(x,n,min_periods=None):
+    m=n if min_periods is None else min_periods
+    if x.sizes["time"]<m: return xr.full_like(x,np.nan,dtype=float)
+    with xr.set_options(use_bottleneck=False):
+        return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).mean()
+def _std(x,n,min_periods=None):
+    m=max(2,n//2) if min_periods is None else min_periods
+    if x.sizes["time"]<m: return xr.full_like(x,np.nan,dtype=float)
+    with xr.set_options(use_bottleneck=False):
+        return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).std()
 def _liquid_cs_mean(x,liquid):
     n=liquid.sum("asset"); return xr.where(n>0,(xr.where(np.isfinite(x),x,0.0)*liquid).sum("asset")/n,0.0)
 def _allocate(raw,liquid):

@@ -9,6 +9,7 @@ COMPETITION_TYPE = "crypto_daily_long"
 LOOKBACK_DAYS = 365
 NAME_CAP = 0.25
 FAMILY = "volume_share_entropy_state"
+PREREGISTRATION_SHA256 = "6dea6d241fa326dffff5d0b76401b1d55d070bb8e775fe951a9edf7e2ef159b4"
 PARAMS = {"window": 42, "top_k": 5}
 MIGRATION_LAG = 21
 TREND_DAYS = 21

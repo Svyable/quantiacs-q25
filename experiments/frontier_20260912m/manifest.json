@@ -1,0 +1,163 @@
+{
+  "automatic_promotion": false,
+  "campaign": "frontier_20260912m",
+  "candidates": [
+    {
+      "family": "volume_share_entropy_state",
+      "id": "volume_share_entropy_state_w21",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 21},
+      "parent_id": "volume_share_entropy_state_w42",
+      "path": "strategies/generated/frontier_20260912m_volume_share_entropy_state.py",
+      "preregistration": "experiments/frontier_20260912m/volume_share_entropy_state/preregistration.json",
+      "preregistration_sha256": "a7cf0bfb6b118e5791780d91d59cf64376bb26487a02ba580c7f5f7767188a41"
+    },
+    {
+      "family": "volume_share_entropy_state",
+      "id": "volume_share_entropy_state_w42",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 42},
+      "parent_id": null,
+      "path": "strategies/generated/frontier_20260912m_volume_share_entropy_state.py",
+      "preregistration": "experiments/frontier_20260912m/volume_share_entropy_state/preregistration.json",
+      "preregistration_sha256": "a7cf0bfb6b118e5791780d91d59cf64376bb26487a02ba580c7f5f7767188a41"
+    },
+    {
+      "family": "volume_share_entropy_state",
+      "id": "volume_share_entropy_state_w63",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 63},
+      "parent_id": "volume_share_entropy_state_w42",
+      "path": "strategies/generated/frontier_20260912m_volume_share_entropy_state.py",
+      "preregistration": "experiments/frontier_20260912m/volume_share_entropy_state/preregistration.json",
+      "preregistration_sha256": "a7cf0bfb6b118e5791780d91d59cf64376bb26487a02ba580c7f5f7767188a41"
+    },
+    {
+      "family": "volume_share_entropy_state",
+      "id": "volume_share_entropy_state_ablation",
+      "mode": "ablation",
+      "params": {"top_k": 5, "window": 42},
+      "parent_id": "volume_share_entropy_state_w42",
+      "path": "strategies/generated/frontier_20260912m_volume_share_entropy_state.py",
+      "preregistration": "experiments/frontier_20260912m/volume_share_entropy_state/preregistration.json",
+      "preregistration_sha256": "a7cf0bfb6b118e5791780d91d59cf64376bb26487a02ba580c7f5f7767188a41"
+    },
+    {
+      "family": "volume_share_entropy_state",
+      "id": "volume_share_entropy_state_falsifier",
+      "mode": "falsifier",
+      "params": {"top_k": 5, "window": 42},
+      "parent_id": "volume_share_entropy_state_w42",
+      "path": "strategies/generated/frontier_20260912m_volume_share_entropy_state.py",
+      "preregistration": "experiments/frontier_20260912m/volume_share_entropy_state/preregistration.json",
+      "preregistration_sha256": "a7cf0bfb6b118e5791780d91d59cf64376bb26487a02ba580c7f5f7767188a41"
+    },
+    {
+      "family": "dispersion_curvature",
+      "id": "dispersion_curvature_w21",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 21},
+      "parent_id": "dispersion_curvature_w42",
+      "path": "strategies/generated/frontier_20260912m_dispersion_curvature.py",
+      "preregistration": "experiments/frontier_20260912m/dispersion_curvature/preregistration.json",
+      "preregistration_sha256": "1dd3b968f077dad63644fc5b9aa49abef5b046f17c49ba5faf464a84e31b5657"
+    },
+    {
+      "family": "dispersion_curvature",
+      "id": "dispersion_curvature_w42",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 42},
+      "parent_id": null,
+      "path": "strategies/generated/frontier_20260912m_dispersion_curvature.py",
+      "preregistration": "experiments/frontier_20260912m/dispersion_curvature/preregistration.json",
+      "preregistration_sha256": "1dd3b968f077dad63644fc5b9aa49abef5b046f17c49ba5faf464a84e31b5657"
+    },
+    {
+      "family": "dispersion_curvature",
+      "id": "dispersion_curvature_w63",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 63},
+      "parent_id": "dispersion_curvature_w42",
+      "path": "strategies/generated/frontier_20260912m_dispersion_curvature.py",
+      "preregistration": "experiments/frontier_20260912m/dispersion_curvature/preregistration.json",
+      "preregistration_sha256": "1dd3b968f077dad63644fc5b9aa49abef5b046f17c49ba5faf464a84e31b5657"
+    },
+    {
+      "family": "dispersion_curvature",
+      "id": "dispersion_curvature_ablation",
+      "mode": "ablation",
+      "params": {"top_k": 5, "window": 42},
+      "parent_id": "dispersion_curvature_w42",
+      "path": "strategies/generated/frontier_20260912m_dispersion_curvature.py",
+      "preregistration": "experiments/frontier_20260912m/dispersion_curvature/preregistration.json",
+      "preregistration_sha256": "1dd3b968f077dad63644fc5b9aa49abef5b046f17c49ba5faf464a84e31b5657"
+    },
+    {
+      "family": "dispersion_curvature",
+      "id": "dispersion_curvature_falsifier",
+      "mode": "falsifier",
+      "params": {"top_k": 5, "window": 42},
+      "parent_id": "dispersion_curvature_w42",
+      "path": "strategies/generated/frontier_20260912m_dispersion_curvature.py",
+      "preregistration": "experiments/frontier_20260912m/dispersion_curvature/preregistration.json",
+      "preregistration_sha256": "1dd3b968f077dad63644fc5b9aa49abef5b046f17c49ba5faf464a84e31b5657"
+    },
+    {
+      "family": "entropy_disagreement_cash",
+      "id": "entropy_disagreement_cash_w63",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 63},
+      "parent_id": "entropy_disagreement_cash_w84",
+      "path": "strategies/generated/frontier_20260912m_entropy_disagreement_cash.py",
+      "preregistration": "experiments/frontier_20260912m/entropy_disagreement_cash/preregistration.json",
+      "preregistration_sha256": "6df3b5736500bff180e1d9275d2eb79fdef05c345695d4dab6e30e9c1dd8320b"
+    },
+    {
+      "family": "entropy_disagreement_cash",
+      "id": "entropy_disagreement_cash_w84",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 84},
+      "parent_id": null,
+      "path": "strategies/generated/frontier_20260912m_entropy_disagreement_cash.py",
+      "preregistration": "experiments/frontier_20260912m/entropy_disagreement_cash/preregistration.json",
+      "preregistration_sha256": "6df3b5736500bff180e1d9275d2eb79fdef05c345695d4dab6e30e9c1dd8320b"
+    },
+    {
+      "family": "entropy_disagreement_cash",
+      "id": "entropy_disagreement_cash_w126",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 126},
+      "parent_id": "entropy_disagreement_cash_w84",
+      "path": "strategies/generated/frontier_20260912m_entropy_disagreement_cash.py",
+      "preregistration": "experiments/frontier_20260912m/entropy_disagreement_cash/preregistration.json",
+      "preregistration_sha256": "6df3b5736500bff180e1d9275d2eb79fdef05c345695d4dab6e30e9c1dd8320b"
+    },
+    {
+      "family": "entropy_disagreement_cash",
+      "id": "entropy_disagreement_cash_ablation",
+      "mode": "ablation",
+      "params": {"top_k": 5, "window": 84},
+      "parent_id": "entropy_disagreement_cash_w84",
+      "path": "strategies/generated/frontier_20260912m_entropy_disagreement_cash.py",
+      "preregistration": "experiments/frontier_20260912m/entropy_disagreement_cash/preregistration.json",
+      "preregistration_sha256": "6df3b5736500bff180e1d9275d2eb79fdef05c345695d4dab6e30e9c1dd8320b"
+    },
+    {
+      "family": "entropy_disagreement_cash",
+      "id": "entropy_disagreement_cash_falsifier",
+      "mode": "falsifier",
+      "params": {"top_k": 5, "window": 84},
+      "parent_id": "entropy_disagreement_cash_w84",
+      "path": "strategies/generated/frontier_20260912m_entropy_disagreement_cash.py",
+      "preregistration": "experiments/frontier_20260912m/entropy_disagreement_cash/preregistration.json",
+      "preregistration_sha256": "6df3b5736500bff180e1d9275d2eb79fdef05c345695d4dab6e30e9c1dd8320b"
+    }
+  ],
+  "classification_note": "Frontier-M activates three unmeasured Frontier-L reserve hypotheses after Frontier-L promoted zero. The hypotheses and grids predate their own M returns; M does not tune or rescue failed L formulas. 2023-2024 is spent and excluded.",
+  "controls": ["equal_liquid", "inverse_vol_trend", "persistent_low_vol"],
+  "max_unique_candidates": 15,
+  "prior_development_evidence": ["frontier_20260910", "frontier_20260910b", "frontier_20260910c", "frontier_20260910d", "frontier_20260911e", "frontier_20260911f", "frontier_20260911g", "frontier_20260911h", "frontier_20260912i", "frontier_20260912j", "frontier_20260912k", "frontier_20260912l"],
+  "protected_live_start": "2026-10-01",
+  "selection_folds": ["research", "dev"],
+  "spent_validation_evidence": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
+}

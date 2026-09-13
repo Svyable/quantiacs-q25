@@ -2,6 +2,7 @@
 
 Experiment: frontier_20260913n_elasticity_rank_migration
 Preregistration: experiments/frontier_20260913n/elasticity_rank_migration/preregistration.json
+Preregistration SHA256: d14ae2b2721412b1f7ae631ef83233bb74d1d7eff352072bbe1daafe455e0bb5
 
 The signal compares bounded cross-sectional rank of positive range-normalized
 price displacement with the rank of activity required to produce it, then trades

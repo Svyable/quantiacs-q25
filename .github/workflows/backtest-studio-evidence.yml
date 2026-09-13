@@ -1,0 +1,83 @@
+name: backtest-studio-evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      strategy_path:
+        description: Repository path to a Python strategy exposing strategy(data)
+        required: true
+        type: string
+      start_date:
+        description: Q25 evaluation start
+        required: true
+        default: '2016-01-01'
+        type: string
+      end_date:
+        description: Optional evaluation end (YYYY-MM-DD)
+        required: false
+        type: string
+      slippage_factor:
+        description: ATR-linked transaction-cost factor
+        required: true
+        default: '0.04'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  export-backtest-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install frozen research dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Export official Quantiacs strategy and Crypto10 statistics
+        shell: bash
+        run: |
+          args=(
+            --strategy "${{ inputs.strategy_path }}"
+            --output-dir backtest-evidence
+            --start-date "${{ inputs.start_date }}"
+            --slippage-factor "${{ inputs.slippage_factor }}"
+            --source-commit "$GITHUB_SHA"
+          )
+          if [[ -n "${{ inputs.end_date }}" ]]; then
+            args+=(--end-date "${{ inputs.end_date }}")
+          fi
+          python scripts/export_q25_backtest.py "${args[@]}"
+
+      - name: Verify evidence packet
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('backtest-evidence')
+          manifest = json.loads((root / 'manifest.json').read_text())
+          packet = json.loads((root / 'backtest_dashboard.json').read_text())
+          assert manifest['competition_type'] == 'crypto_daily_long'
+          assert manifest['benchmark'] == 'CRYPTO10'
+          assert packet['status'] == 'available'
+          assert packet['series']
+          assert packet['source']['commit'] == manifest['source_commit']
+          print('backtest evidence packet verified')
+          PY
+
+      - name: Upload Backtest Studio evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: q25-backtest-studio-${{ github.run_id }}
+          path: backtest-evidence/
+          if-no-files-found: error
+          retention-days: 30

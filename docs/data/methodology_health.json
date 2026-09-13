@@ -162,9 +162,31 @@
             "dev"
           ],
           "source_path": "experiments/frontier_20260912m/manifest.json"
+        },
+        {
+          "automatic_promotion": false,
+          "campaign": "frontier_20260913m",
+          "candidate_count": 15,
+          "classification_note": "Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.",
+          "families": [
+            "dispersion_curvature",
+            "entropy_disagreement_cash",
+            "volume_share_entropy_state"
+          ],
+          "family_count": 3,
+          "modes": {
+            "ablation": 3,
+            "base": 9,
+            "falsifier": 3
+          },
+          "selection_folds": [
+            "research",
+            "dev"
+          ],
+          "source_path": "experiments/frontier_20260913m/manifest.json"
         }
       ],
-      "count": 1,
+      "count": 2,
       "next_campaign": {
         "automatic_promotion": false,
         "campaign": "frontier_20260912m",

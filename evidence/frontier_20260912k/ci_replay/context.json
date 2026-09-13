@@ -1,0 +1,24 @@
+{
+  "costs": [0.0, 0.04, 0.08, 0.12],
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "folds": [
+    {"end": "2020-12-31", "id": "research", "start": "2016-01-01", "status": "OBSERVED_REUSED", "use": "hypothesis / feature search; repeatedly observed development surface"},
+    {"end": "2022-12-31", "id": "dev", "start": "2021-01-01", "status": "OBSERVED_REUSED", "use": "parameter development; repeatedly observed development surface"}
+  ],
+  "manifest_sha256": "1cc60ec86a3e2cb792847f7deb8799d0bbe2f52c15e997f39b77f768c105dabd",
+  "numpy": "2.2.6",
+  "pandas": "2.2.3",
+  "python": "3.11.16",
+  "quantiacs_access_mode": "public_default",
+  "schema_version": 2,
+  "source_hashes": {
+    "configs/promotion_gates.yaml": "2cdcd7568a3f1b01b20da283d6dc719c790a1193bac24771a2af7c03986ec586",
+    "research/benchmark.py": "93e0abcdcc90620bd9b8f7080900ebc1a50e1ec9f1380cb8cbfc2262c474e4f2",
+    "research/iteration.py": "8be5ad0130eefb872a0cce8d16348a2b62ce8d73330dcf0e9747ae73483dce66",
+    "strategies/generated/frontier_20260912k_cohort_residual_divergence.py": "9e6f43f4e6b5a91bfda35fe325a999199dceef1c3321cee874320298eab45560",
+    "strategies/generated/frontier_20260912k_nearest_peer_detachment.py": "20d5ee329fcc5eef5c44e881eb24de000a3437ebc7840a22dac44467786db647",
+    "strategies/generated/frontier_20260912k_subspace_rotation_opportunity.py": "d0336b9336cac50aa3be5ea1453fc407dcc4e2511e5ebd8385b35a680cd446f4"
+  },
+  "status": "DEVELOPMENT_ONLY",
+  "toolbox_stats_sha256": "8cdaf120de844db91ddb01bbce510f2201f55b18223765c2ba5110bfb2f08b54"
+}

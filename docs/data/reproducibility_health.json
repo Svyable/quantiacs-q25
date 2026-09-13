@@ -1,0 +1,79 @@
+{
+  "campaign": "frontier_20260912k",
+  "context": {
+    "access_mode_match": true,
+    "benchmark_source_hash_match": false,
+    "ci_replay": {
+      "artifact_digest": "sha256:59e1ddfa9d8cdc71003b5e3a8330adb4c1e9660704ef6909773b7182a052645e",
+      "artifact_id": 10304184100,
+      "benchmark_sha256": "93e0abcdcc90620bd9b8f7080900ebc1a50e1ec9f1380cb8cbfc2262c474e4f2",
+      "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+      "python": "3.11.16",
+      "workflow_run": 34716313017
+    },
+    "cost_policy_match": true,
+    "data_hash_match": false,
+    "fold_policy_match": true,
+    "iteration_source_hash_match": true,
+    "local": {
+      "benchmark_sha256": "8fbe3f5e463a97f5e0fe697e044a35d3fb49e234c69e1d1d0d05e75f3b40c825",
+      "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+      "python": "3.13.9"
+    },
+    "manifest_hash_match": true,
+    "strategy_source_hashes_match": true,
+    "toolbox_stats_hash_match": true
+  },
+  "families": [
+    {
+      "best_base_local": "cohort_residual_divergence_w63",
+      "best_base_match": true,
+      "best_base_replay": "cohort_residual_divergence_w63",
+      "central_id_match": true,
+      "decision_local": "FALSIFIED_DEVELOPMENT",
+      "decision_match": true,
+      "decision_replay": "FALSIFIED_DEVELOPMENT",
+      "family": "cohort_residual_divergence",
+      "max_abs_metric_delta": 4.317134177922455e-09,
+      "present_in_both": true
+    },
+    {
+      "best_base_local": "nearest_peer_detachment_w63",
+      "best_base_match": true,
+      "best_base_replay": "nearest_peer_detachment_w63",
+      "central_id_match": true,
+      "decision_local": "KILL_WEAK_ALPHA",
+      "decision_match": true,
+      "decision_replay": "KILL_WEAK_ALPHA",
+      "family": "nearest_peer_detachment",
+      "max_abs_metric_delta": 5.13603803931062e-09,
+      "present_in_both": true
+    },
+    {
+      "best_base_local": "subspace_rotation_opportunity_w42",
+      "best_base_match": true,
+      "best_base_replay": "subspace_rotation_opportunity_w42",
+      "central_id_match": true,
+      "decision_local": "FALSIFIED_DEVELOPMENT",
+      "decision_match": true,
+      "decision_replay": "FALSIFIED_DEVELOPMENT",
+      "family": "subspace_rotation_opportunity",
+      "max_abs_metric_delta": 6.156399279255709e-09,
+      "present_in_both": true
+    }
+  ],
+  "policy": {
+    "context_drift_is_visible": true,
+    "decision_drift_is_ci_failure": true,
+    "mix_metrics_across_contexts": false
+  },
+  "schema_version": 1,
+  "status": "DECISION_STABLE_CONTEXT_DRIFT",
+  "summary": {
+    "decision_stable_count": 3,
+    "families_compared": 3,
+    "families_present_in_both": 3,
+    "identity_stable_count": 3,
+    "max_abs_summary_metric_delta": 6.156399279255709e-09
+  }
+}

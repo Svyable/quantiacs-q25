@@ -1,0 +1,11 @@
+{
+  "automatic_promotion": false,
+  "budget": 18,
+  "campaign": "frontier_20260913n",
+  "controls": "central parent must beat both preregistered ablation and falsifier; otherwise freeze family",
+  "costs": [0.0, 0.04, 0.08, 0.12],
+  "development_floor_sharpe": 1.0,
+  "selection_folds": ["research", "dev"],
+  "selection_objective": "minimum Sharpe across research/dev at 4/8/12% ATR-linked costs",
+  "validation_boundary": "2023-2024 SPENT_DO_NOT_MUTATE; 2025+ and live excluded from mutation"
+}

@@ -1,0 +1,29 @@
+{
+  "activation_type": "PREEXISTING_UNMEASURED_RESERVES",
+  "campaign": "frontier_20260912m",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "notes": "Frontier-M activates three Frontier-L reserves whose hypotheses and grids predate their own M return streams. Frontier-L outcomes are already observed, but no M market return was inspected before this freeze. No automatic substitution, inversion, parameter rescue, or 2023+ mutation is allowed.",
+  "preregistration_sha256": {
+    "dispersion_curvature": "1dd3b968f077dad63644fc5b9aa49abef5b046f17c49ba5faf464a84e31b5657",
+    "entropy_disagreement_cash": "6df3b5736500bff180e1d9275d2eb79fdef05c345695d4dab6e30e9c1dd8320b",
+    "volume_share_entropy_state": "a7cf0bfb6b118e5791780d91d59cf64376bb26487a02ba580c7f5f7767188a41"
+  },
+  "prior_preregistration_paths": {
+    "dispersion_curvature": "experiments/frontier_20260912l/dispersion_curvature/preregistration.json",
+    "entropy_disagreement_cash": "experiments/frontier_20260912l/entropy_disagreement_cash/preregistration.json",
+    "volume_share_entropy_state": "experiments/frontier_20260912l/volume_share_entropy_state/preregistration.json"
+  },
+  "prior_preregistration_sha256": {
+    "dispersion_curvature": "0190a407eb2ecd9babb9af5b29348cb1ce54ebda8a60aa9fe6bc561f154f101e",
+    "entropy_disagreement_cash": "14d83b5552f1f592cc0a6577708909e57ab6b4a79769202c4421157b35672fb6",
+    "volume_share_entropy_state": "d8daeac8ba195ddf026bb9f487e35cceb6bd5e878939bcc5edbc4b2554f4f126"
+  },
+  "selection_folds": ["research", "dev"],
+  "source_sha256": {
+    "dispersion_curvature": "bfa53525f477c9efc1a9b3e1630a72e494584ea65b7a1b24b3f698c947f9ed39",
+    "entropy_disagreement_cash": "21c29a1fcf339298330f56334868ca8f3ceceae838cf3643e2e59d449cb810b5",
+    "volume_share_entropy_state": "bc517d4220f2db1bcebec5e2b768c65cb96da336baa81bcee5209468f9474dcd"
+  },
+  "spent_validation": "2023-2024 SPENT_DO_NOT_MUTATE"
+}

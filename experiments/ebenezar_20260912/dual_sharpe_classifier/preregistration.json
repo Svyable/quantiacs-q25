@@ -1,0 +1,48 @@
+{
+  "ablation": "replace the six-vote rule with positive 7-day Sharpe only",
+  "allocation": "positive-score normalization, hard 25% single-name cap, unused gross remains cash",
+  "cash_rule": "no positive qualified score means cash; cap-induced unused gross is cash",
+  "code_path": "strategies/generated/ebenezar_20260912_dual_sharpe_classifier.py",
+  "contamination_notes": "User-directed translation of already-observed public Q25 profile motifs. This is a family-refinement screen, not a fresh novelty campaign; 2023+ is excluded from selection.",
+  "cost_hypothesis": "a four-of-six vote threshold plus three-day persistence should trade less often than raw short Sharpe",
+  "created_utc": "2026-09-12T18:40:00+00:00",
+  "data_admissibility": "OHLCV_AND_HISTORICAL_IS_LIQUID_ONLY",
+  "experiment_id": "ebenezar_20260912_dual_sharpe_classifier",
+  "failure_mode": "vote aggregation adds no deployable information beyond the underlying trend factors",
+  "falsifier": "invert the short-versus-medium Sharpe acceleration vote",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      7
+    ]
+  },
+  "mechanism": "generic_classifier_ta_refinement",
+  "nearest_incumbent": "generic_classifier_ta / V10 trend-quality lineage",
+  "novelty_axes_changed": [
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "window": 7
+  },
+  "portfolio_role": "classifier-profile control; explicitly crowded family",
+  "primitive": "Quantiacs daily crypto OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "daily score update with predeclared persistence smoothing; no calendar exclusions",
+  "selection": "automatic cross-sectional thresholds only; no asset symbols or manual identities",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst drawdown, lower turnover, id",
+  "source_notes": "Derived from user-supplied Q25 leaderboard/profile family patterns; parameters frozen before repository measurement.",
+  "source_urls": [
+    "https://quantiacs.com/leaderboard/25"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "screen only; no parameter repair after results. Fail if causal/integrity checks fail or development evidence is weak. Do not claim independent alpha without separate controls/originality work.",
+  "thesis": "Agreement among short, weekly and medium return-quality states can reject weak trades without fitting a statistical classifier.",
+  "timing": "completed daily bars only; trailing windows; no future shifts",
+  "track": "robustness_family_refinement",
+  "universe": "historical is_liquid == 1 for scores and weights; no hand-picked symbols",
+  "validation": "2023+ excluded from this screen; participant-specific correlation remains PENDING"
+}

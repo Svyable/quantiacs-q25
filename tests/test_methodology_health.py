@@ -72,6 +72,7 @@ def test_recursive_learning_vector_and_measurement_queue_are_explicit():
     loop = payload["learning_loop"]
     latest = loop["latest_campaign"]
     queue = loop["measurement_queue"]
+    campaigns = queue["campaigns"]
 
     assert loop["policy"]["aggregate_score"] == "forbidden"
     assert loop["policy"]["optimization_target"] is False
@@ -80,16 +81,19 @@ def test_recursive_learning_vector_and_measurement_queue_are_explicit():
     assert latest["economic_survival"]["count"] == 0
     assert latest["promotion_ready"]["count"] == 0
     assert latest["decision_resolution"]["count"] == 3
-    assert queue["count"] == 2
-    assert queue["next_campaign"]["campaign"] == "frontier_20260912m"
-    assert [row["campaign"] for row in queue["campaigns"]] == [
-        "frontier_20260912m",
-        "frontier_20260913m",
-    ]
-    assert queue["next_campaign"]["automatic_promotion"] is False
-    assert queue["next_campaign"]["selection_folds"] == ["research", "dev"]
-    assert queue["campaigns"][1]["automatic_promotion"] is False
-    assert queue["campaigns"][1]["selection_folds"] == ["research", "dev"]
+
+    # Queue size and membership evolve whenever a new preregistered campaign is
+    # committed. Test the renderer contract rather than hard-coding the current
+    # number of future campaigns.
+    assert queue["count"] == len(campaigns)
+    assert campaigns == sorted(campaigns, key=lambda row: row["campaign"])
+    assert len({row["campaign"] for row in campaigns}) == len(campaigns)
+    assert queue["next_campaign"] == (campaigns[0] if campaigns else None)
+    assert "frontier_20260912n" in {row["campaign"] for row in campaigns}
+    assert all(row["candidate_count"] > 0 for row in campaigns)
+    assert all(row["family_count"] > 0 for row in campaigns)
+    assert all(row["automatic_promotion"] is False for row in campaigns)
+    assert all(row["selection_folds"] == ["research", "dev"] for row in campaigns)
 
 
 def test_homepage_is_bound_to_generated_health_packet():

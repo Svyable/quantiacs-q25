@@ -39,7 +39,7 @@ The earlier development leader **`topology_migration_w84`** reported robust-deve
 
 ## Measurement queue
 
-The committed measurement frontier is ahead of the evidence frontier by **1 preregistered campaign(s)**.
+The committed measurement frontier is ahead of the evidence frontier by **2 preregistered campaign(s)**.
 
 Next frozen campaign: **`frontier_20260912l`** — 15 candidate/control cells across 3 families; automatic promotion is `False`.
 

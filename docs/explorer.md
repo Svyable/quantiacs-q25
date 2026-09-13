@@ -1,137 +1,28 @@
 ---
-title: Q25 Strategy Explorer
-description: Interactive, evidence-aware analysis of every measured Q25 strategy cell, campaign, family, control and validation result committed to the research matrix.
+title: Q25 Causal Research Lab
+description: Interactive evidence lab for Q25 strategy families, controls, stability, and promotion triage.
 ---
-
-<link rel="stylesheet" href="{{ '/assets/css/explorer.css' | relative_url }}">
-
-<div class="qx-shell" data-matrix-explorer data-source="{{ '/data/strategy_matrix.json' | relative_url }}">
-  <section class="qx-hero">
-    <div>
-      <div class="qx-eyebrow">Q25 / evidence matrix explorer</div>
-      <h1>Every measured strategy.<br><span>Every metric. No cherry-picking.</span></h1>
-      <p>Explore the committed Q25 research matrix across campaigns, mechanism families, base strategies, ablations, falsifiers and controls. The charts below are generated in your browser from the repository’s machine-readable evidence—not from hand-entered headline numbers.</p>
-      <div class="qx-actions">
-        <a class="qx-button qx-button-primary" href="{{ '/' | relative_url }}">Research lab</a>
-        <a class="qx-button" href="{{ '/backtest/' | relative_url }}">Backtest studio</a>
-        <a class="qx-button" href="{{ '/data/strategy_matrix.json' | relative_url }}">Raw matrix JSON</a>
-        <a class="qx-button" href="https://github.com/Svyable/quantiacs-q25">Repository ↗</a>
-      </div>
-    </div>
-    <aside class="qx-rule-card">
-      <strong>Read the lanes correctly</strong>
-      <p>Development evidence, forward validation, historical-core evidence and implementation health stay separate. A high development Sharpe is not a contest result, and an implementation failure is not a zero-return strategy.</p>
-      <div class="qx-rule-row"><span>Q25 eligibility floor</span><b>IS Sharpe &gt; 1.0</b></div>
-      <div class="qx-rule-row"><span>Portfolio</span><b>long-only / liquid top 10</b></div>
-      <div class="qx-rule-row"><span>Contest rank</span><b>out-of-sample Sharpe</b></div>
-    </aside>
-  </section>
-
-  <section class="qx-kpis" aria-label="filtered strategy metrics">
-    <article><span>Rows in view</span><strong data-kpi="rows">—</strong><small data-kpi-detail="rows">loading matrix</small></article>
-    <article><span>Families</span><strong data-kpi="families">—</strong><small data-kpi-detail="families">unique mechanism labels</small></article>
-    <article><span>Complete evidence</span><strong data-kpi="complete">—</strong><small data-kpi-detail="complete">status = COMPLETE</small></article>
-    <article><span>Best dev SR @ cost</span><strong data-kpi="best-dev">—</strong><small data-kpi-detail="best-dev">best observed dev_sharpe_12</small></article>
-    <article><span>Above 1.0 floor</span><strong data-kpi="above-floor">—</strong><small data-kpi-detail="above-floor">development cells only</small></article>
-    <article><span>Campaigns / lanes</span><strong data-kpi="campaigns">—</strong><small data-kpi-detail="campaigns">distinct evidence contexts</small></article>
-  </section>
-
-  <section class="qx-panel qx-controls-panel">
-    <div class="qx-panel-head">
-      <div><span class="qx-kicker">Slice the evidence</span><h2>Filter before you rank</h2></div>
-      <div class="qx-filter-count" data-filter-count>Loading…</div>
-    </div>
-    <div class="qx-controls">
-      <label class="qx-search"><span>Search</span><input type="search" data-filter="search" placeholder="strategy, family, campaign…" autocomplete="off"></label>
-      <label><span>Campaign / lane</span><select data-filter="campaign"><option value="">All</option></select></label>
-      <label><span>Family</span><select data-filter="family"><option value="">All</option></select></label>
-      <label><span>Mode</span><select data-filter="mode"><option value="">All</option></select></label>
-      <label><span>Status</span><select data-filter="status"><option value="">All</option></select></label>
-      <label><span>Evidence lane</span><select data-filter="lane"><option value="">All</option></select></label>
-      <label class="qx-check"><input type="checkbox" data-filter="base-only"><span>Base strategies only</span></label>
-      <button class="qx-button qx-button-small" type="button" data-reset>Reset</button>
-      <button class="qx-button qx-button-small" type="button" data-export>Export filtered CSV</button>
-    </div>
-  </section>
-
-  <section class="qx-grid qx-grid-main">
-    <article class="qx-panel qx-chart-panel">
-      <div class="qx-panel-head qx-panel-head-wrap">
-        <div><span class="qx-kicker">Cross-metric map</span><h2>What are you paying for the Sharpe?</h2></div>
-        <div class="qx-metric-selectors">
-          <label><span>X</span><select data-axis="x"></select></label>
-          <label><span>Y</span><select data-axis="y"></select></label>
-        </div>
-      </div>
-      <p class="qx-subtle">Each point is a committed strategy/result row. Hover for exact values; click a point to inspect all available metrics and evidence metadata.</p>
-      <div class="qx-chart-shell">
-        <svg data-chart="scatter" role="img" aria-label="interactive strategy metric scatter plot"></svg>
-        <div class="qx-tooltip" data-tooltip hidden></div>
-        <div class="qx-chart-empty" data-chart-empty hidden>No rows in the current filter have both selected metrics.</div>
-      </div>
-      <div class="qx-legend"><span class="base">base</span><span class="control">control</span><span class="ablation">ablation</span><span class="falsifier">falsifier</span><span class="other">other</span></div>
-    </article>
-
-    <aside class="qx-panel qx-inspector" data-inspector>
-      <div class="qx-panel-head"><div><span class="qx-kicker">Selected row</span><h2 data-inspect="id">Click a point or row</h2></div></div>
-      <div class="qx-inspector-meta" data-inspect="meta">The inspector preserves the row’s exact evidence lane and metric names.</div>
-      <div class="qx-inspector-grid" data-inspect="metrics"></div>
-      <div class="qx-inspector-extra" data-inspect="extra"></div>
-    </aside>
-  </section>
-
-  <section class="qx-grid qx-grid-secondary">
-    <article class="qx-panel">
-      <div class="qx-panel-head"><div><span class="qx-kicker">Campaign frontier</span><h2>Best observed metric by context</h2></div><span class="qx-badge" data-campaign-metric-label>dev_sharpe_12</span></div>
-      <div class="qx-bar-chart" data-chart="campaign-bars"></div>
-    </article>
-    <article class="qx-panel">
-      <div class="qx-panel-head"><div><span class="qx-kicker">Decision ledger</span><h2>Family adjudication</h2></div></div>
-      <div class="qx-family-board" data-family-board></div>
-    </article>
-  </section>
-
-  <section class="qx-panel qx-table-panel">
-    <div class="qx-panel-head qx-panel-head-wrap">
-      <div><span class="qx-kicker">Strategy ledger</span><h2>Sortable committed results</h2></div>
-      <p class="qx-subtle">Click any column header to sort. Click a row to inspect every available metric. Nulls stay null.</p>
-    </div>
-    <div class="qx-table-wrap">
-      <table class="qx-table">
-        <thead>
-          <tr>
-            <th data-sort="id">Strategy</th>
-            <th data-sort="campaign">Campaign / context</th>
-            <th data-sort="family">Family</th>
-            <th data-sort="mode">Mode</th>
-            <th data-sort="status">Status</th>
-            <th data-sort="dev_sharpe_12">Dev SR 12</th>
-            <th data-sort="research_sharpe_12">Research SR 12</th>
-            <th data-sort="dev_cagr_12">Dev CAGR 12</th>
-            <th data-sort="dev_sortino_12">Dev Sortino</th>
-            <th data-sort="worst_drawdown_12">Worst DD</th>
-            <th data-sort="mean_turnover_12">Turnover</th>
-            <th data-sort="selection_score">Selection</th>
-          </tr>
-        </thead>
-        <tbody data-table-body><tr><td colspan="12">Loading committed evidence…</td></tr></tbody>
-      </table>
-    </div>
-    <div class="qx-table-footer"><span data-table-summary>—</span><div><button type="button" class="qx-button qx-button-small" data-page="prev">Previous</button><span data-page-label>—</span><button type="button" class="qx-button qx-button-small" data-page="next">Next</button></div></div>
-  </section>
-
-  <section class="qx-panel qx-method-note">
-    <div><span class="qx-kicker">Evidence discipline</span><h2>Metrics are not interchangeable evidence.</h2></div>
-    <p>This explorer intentionally exposes research/dev metrics, failure states, controls and campaign context together while keeping their labels intact. It does not recast development results as forward validation, does not turn missing values into zeroes, and does not promote strategies merely because a chart point looks attractive.</p>
-    <div class="qx-actions">
-      <a class="qx-button" href="{{ '/EVIDENCE_MODEL.html' | relative_url }}">Evidence model</a>
-      <a class="qx-button" href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Research matrix</a>
-      <a class="qx-button" href="{{ '/RESEARCH_METHOD.html' | relative_url }}">Research method</a>
-      <a class="qx-button" href="{{ '/METHODOLOGY_HEALTH.html' | relative_url }}">Methodology health</a>
-    </div>
-  </section>
-
-  <div class="qx-footnote">Source: <code>docs/data/strategy_matrix.json</code>. The browser computes every view from committed repository data at page load.</div>
+<link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/lab-base.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/lab-evidence.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/lab-inspector.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/lab-responsive.css' | relative_url }}">
+<div class="qt-shell ql-shell" data-q25-lab data-source="{{ '/data/strategy_matrix.json' | relative_url }}">
+<header class="qt-topbar"><a class="qt-brand" href="{{ '/' | relative_url }}"><span class="qt-brand-mark">Q25</span><span>CAUSAL LAB</span></a><nav class="qt-nav"><a href="{{ '/' | relative_url }}">Terminal</a><a class="is-active" href="{{ '/explorer.html' | relative_url }}">Causal Lab</a><a href="{{ '/backtest/' | relative_url }}">Backtest</a><a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Matrix</a><a href="{{ '/METHODOLOGY_HEALTH.html' | relative_url }}">Methodology</a></nav><div class="qt-feed"><span class="qt-feed-dot"></span><span data-lab-state>LOADING MATRIX</span></div></header>
+<section class="ql-hero"><div><div class="qt-overline">STRATEGY EXPLORER / FALSIFICATION / STABILITY</div><h1>Why did it survive?<br><span>Why did it die?</span></h1><p>Interrogate committed results through economics and evidence: destructive controls, research→development decay, cost sensitivity, repeated family cells and adjudication.</p></div><aside class="ql-contract"><div><span>SCREEN</span><strong>IS SR &gt; 1.0</strong><small>necessary, not sufficient</small></div><div><span>MECHANISM</span><strong>BASE vs CONTROL</strong><small>metric slice, not verdict</small></div><div><span>DECISION</span><strong>FAMILY VERDICT</strong><small>authoritative adjudication</small></div><div><span>RULE</span><strong>MISSING ≠ ZERO</strong><small>unknown stays unknown</small></div></aside></section>
+<section class="ql-kpis"><article><span>Rows in view</span><strong data-kpi="rows">—</strong><small>current filters</small></article><article><span>Base cells</span><strong data-kpi="bases">—</strong><small>mode = base</small></article><article><span>Matched families</span><strong data-kpi="matched">—</strong><small>base + destructive control</small></article><article><span>Positive SR12 margins</span><strong data-kpi="positive">—</strong><small>descriptive slice</small></article><article><span>Dev SR12 ≥ 1</span><strong data-kpi="floor">—</strong><small>economic screen</small></article><article><span>CONTINUE families</span><strong data-kpi="continue">—</strong><small>formal survivors</small></article><article><span>Median dev decay</span><strong data-kpi="decay">—</strong><small>dev − research SR12</small></article></section>
+<section class="qt-section ql-command"><div class="qt-section-heading"><div><span class="qt-kicker">EVIDENCE SLICE</span><h2>Filter before interpreting</h2></div><div class="qt-result-count" data-filter-count>Loading…</div></div><div class="ql-controls"><label class="ql-search"><span>SEARCH</span><input type="search" data-filter="search" placeholder="strategy, family, campaign, verdict…"></label><label><span>CAMPAIGN</span><select data-filter="campaign"><option value="">All</option></select></label><label><span>FAMILY</span><select data-filter="family"><option value="">All</option></select></label><label><span>MODE</span><select data-filter="mode"><option value="">All</option></select></label><label><span>STATUS</span><select data-filter="status"><option value="">All</option></select></label><label class="ql-toggle"><input type="checkbox" data-filter="base-only"><span>BASE ONLY</span></label><label class="ql-toggle"><input type="checkbox" data-filter="matched-only"><span>MATCHED ONLY</span></label><button class="qt-reset" data-action="reset">RESET</button><button class="qt-reset" data-action="export">EXPORT CSV</button></div></section>
+<section class="qt-section ql-grid ql-grid-primary"><article class="qt-panel"><div class="qt-panel-head"><div><span class="qt-kicker">MATCHED DESTRUCTIVE CONTROL</span><h2>Control-pressure lab</h2></div><span class="qt-badge">DEV SR12</span></div><p class="qt-panel-note">Best observed Dev-SR12 base versus strongest same-family destructive challenger. This descriptive slice never overrides the preregistered family decision.</p><div class="ql-causal-summary" data-causal-summary></div><div class="ql-causal-board" data-causal-board></div></article><article class="qt-panel"><div class="qt-panel-head"><div><span class="qt-kicker">NOT A SUBMISSION CLAIM</span><h2>Why-it-dies triage</h2></div></div><p class="qt-panel-note">Economic floor, Dev-SR12 control margin, evidence completeness and formal CONTINUE status. Unknown stays unknown.</p><div class="ql-triage" data-triage></div></article></section>
+<section class="qt-section"><article class="qt-panel"><div class="qt-panel-head ql-wrap-head"><div><span class="qt-kicker">REPEATED PREREGISTERED CELLS</span><h2>Parameter / cell stability</h2></div><label class="ql-inline-select"><span>METRIC</span><select data-stability-metric></select></label></div><p class="qt-panel-note">Repeated base cells side by side. Color encodes magnitude only—not quality or a tuning recommendation.</p><div class="ql-heat-legend"><span>lower magnitude</span><i></i><span>higher magnitude</span></div><div class="ql-stability" data-stability></div></article></section>
+<section class="qt-section ql-grid ql-grid-analysis"><article class="qt-panel"><div class="qt-panel-head ql-wrap-head"><div><span class="qt-kicker">CROSS-METRIC MAP</span><h2>Economics × evidence</h2></div><div class="ql-axis-picks"><label><span>X</span><select data-axis="x"></select></label><label><span>Y</span><select data-axis="y"></select></label></div></div><p class="qt-panel-note">Committed metrics plus derived control margin, development decay and cost drag. Click any point for exact evidence.</p><div class="qt-chart-shell ql-chart-shell"><svg class="qt-chart" data-chart="scatter"></svg><div class="qt-tooltip" data-tooltip hidden></div><div class="ql-empty" data-chart-empty hidden>No rows expose both metrics.</div></div><div class="qt-legend"><span><i class="base"></i>base</span><span><i class="control"></i>control / ablation / falsifier</span><span><i class="other"></i>other</span></div></article><aside class="qt-panel ql-inspector" data-inspector><div class="qt-panel-head"><div><span class="qt-kicker">ROW INSPECTOR</span><h2 data-inspect="title">Select a point or row</h2></div></div><div data-inspect="body" class="ql-inspector-empty">Exact row economics, derived fields, strongest matched challenger and family adjudication appear here.</div></aside></section>
+<section class="qt-section"><article class="qt-panel"><div class="qt-panel-head ql-wrap-head"><div><span class="qt-kicker">FULL COMMITTED LEDGER</span><h2>Every row, with derived evidence fields</h2></div><div class="ql-ledger-tools"><label><span>SORT</span><select data-sort-select><option value="dev_sharpe_12">Dev SR12 ↓</option><option value="__causalMargin">Control margin ↓</option><option value="__devDecay">Dev decay ↓</option><option value="__costDrag">Cost drag ↓</option><option value="mean_turnover_12">Turnover ↑</option><option value="worst_drawdown_12">Worst drawdown ↓</option></select></label><button data-action="show-more">SHOW MORE</button></div></div><div class="qt-ledger-wrap"><table class="qt-ledger ql-ledger"><thead><tr><th>#</th><th>Strategy / family</th><th>Campaign</th><th>Mode</th><th>Family decision</th><th>Dev SR12</th><th>Research SR12</th><th>Dev decay</th><th>Control margin</th><th>Cost drag</th><th>Turnover</th><th>Worst DD</th><th>Evidence</th></tr></thead><tbody data-ledger-body><tr><td colspan="13">Loading…</td></tr></tbody></table></div><div class="qt-ledger-footer"><span data-ledger-caption>—</span><span>Derived fields are computed in-browser from committed data.</span></div></article></section>
+<section class="qt-section ql-method-strip"><div><span class="qt-kicker">EVIDENCE MODEL</span><strong>Strategy quality ≠ evidence quality ≠ implementation health.</strong></div><div class="ql-method-links"><a href="{{ '/EVIDENCE_MODEL.html' | relative_url }}">Evidence model</a><a href="{{ '/RESEARCH_METHOD.html' | relative_url }}">Research method</a><a href="{{ '/REPRODUCIBILITY_HEALTH.html' | relative_url }}">Reproducibility</a><a href="{{ '/data/strategy_matrix.json' | relative_url }}">Raw matrix</a></div></section>
 </div>
-
-<script src="{{ '/assets/js/matrix-explorer.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-core.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-kpi.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-causal.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-stability.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-scatter.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-inspector.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-ledger.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lab-app.js' | relative_url }}" defer></script>

@@ -2,6 +2,7 @@
 
 Experiment: frontier_20260913n_directional_elasticity_asymmetry
 Preregistration: experiments/frontier_20260913n/directional_elasticity_asymmetry/preregistration.json
+Preregistration SHA256: af6830832a7e2bfb563075a3789a27250be17a7145782264a98c13630a6e2339
 
 The signal asks whether positive daily bars reprice more efficiently than
 negative bars after discounting by relative activity. It is a self-asset daily

@@ -1,330 +1,165 @@
 ---
-title: Q25 Quantitative Research Lab
-description: Evidence-aware crypto alpha research for Quantiacs Q25 — causal mechanisms, measured development packets, forward validation, and an auditable strategy stack.
+title: Q25 Research Terminal
+description: Evidence-aware quantitative research terminal for the Quantiacs Q25 Crypto Top-10 contest.
 ---
 
-<div class="q25-shell" data-q25-dashboard>
-  <section class="q25-hero q25-hero-v2">
-    <div class="q25-hero-grid">
-      <div>
-        <div class="q25-eyebrow">Q25 / recursive crypto research lab</div>
-        <h1>Build mechanisms.<br><span>Try to kill them.</span></h1>
-        <p class="q25-lede">A live control surface for causal crypto-alpha research. We preregister mechanisms, run exact Quantiacs evaluation, attack them with matched controls, preserve the failures, and let newer evidence rewrite the story.</p>
-        <div class="q25-actions">
-          <a class="q25-button q25-button-primary" href="{{ '/backtest/' | relative_url }}">Backtest studio</a>
-          <a class="q25-button" href="METHODOLOGY_HEALTH.html">Methodology health</a>
-          <a class="q25-button" href="RESEARCH_MATRIX.html">Research matrix</a>
-          <a class="q25-button" href="STRATEGY_ATLAS.html">Strategy atlas</a>
-          <a class="q25-button" href="https://github.com/Svyable/quantiacs-q25">Repository ↗</a>
-        </div>
+<link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}">
+
+<div class="qt-shell" data-q25-terminal data-matrix-source="{{ '/data/strategy_matrix.json' | relative_url }}" data-method-source="{{ '/data/methodology_health.json' | relative_url }}">
+  <header class="qt-topbar">
+    <a class="qt-brand" href="{{ '/' | relative_url }}" aria-label="Q25 terminal home"><span class="qt-brand-mark">Q25</span><span>RESEARCH TERMINAL</span></a>
+    <nav class="qt-nav" aria-label="Research surfaces">
+      <a href="{{ '/explorer.html' | relative_url }}">Explorer</a>
+      <a href="{{ '/backtest/' | relative_url }}">Backtest</a>
+      <a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Matrix</a>
+      <a href="{{ '/METHODOLOGY_HEALTH.html' | relative_url }}">Methodology</a>
+      <a href="https://github.com/Svyable/quantiacs-q25">GitHub ↗</a>
+    </nav>
+    <div class="qt-feed"><span class="qt-feed-dot"></span><span data-terminal-state>LOADING MATRIX</span></div>
+  </header>
+
+  <section class="qt-hero">
+    <div class="qt-hero-copy">
+      <div class="qt-overline">CRYPTO TOP-10 · LONG ONLY · EVIDENCE BEFORE NARRATIVE</div>
+      <h1>Find what survives.<br><span>Expose what only looked good.</span></h1>
+      <p>One terminal for the committed Q25 research record: development economics, research-to-dev decay, transaction-cost fragility, destructive controls, family adjudication, evidence completeness and frozen failures. Missing evidence stays missing.</p>
+      <div class="qt-hero-actions">
+        <a class="qt-primary" href="#leaderboard">Open live leaderboard</a>
+        <a href="{{ '/explorer.html' | relative_url }}">Deep matrix explorer</a>
+        <a href="{{ '/EVIDENCE_MODEL.html' | relative_url }}">Evidence contract</a>
       </div>
-      <aside class="q25-live-panel" aria-label="live evidence pulse">
-        <div class="q25-live-head"><span class="q25-live-dot"></span> committed evidence</div>
-        <div class="q25-live-campaign" data-bind="latest-campaign">loading…</div>
-        <div class="q25-live-decision" data-bind="latest-decision">reading methodology health</div>
-        <div class="q25-live-rule"></div>
-        <div class="q25-live-row"><span>validation</span><strong data-bind="validation-state">loading…</strong></div>
-        <div class="q25-live-row"><span>queue</span><strong data-bind="queue-state">loading…</strong></div>
-        <div class="q25-live-row"><span>optimization</span><strong>vector, never mega-score</strong></div>
-      </aside>
     </div>
-    <div class="q25-status-row" aria-label="research status">
-      <span class="q25-pill" data-bind="evidence-tier">evidence: loading…</span>
-      <span class="q25-pill" data-bind="validation-state">validation: loading…</span>
-      <span class="q25-pill" data-bind="queue-state">queue: loading…</span>
+    <div class="qt-hero-terminal" aria-label="live terminal summary">
+      <div class="qt-terminal-head"><span>MARKET / RESEARCH PULSE</span><span data-asof>matrix commit</span></div>
+      <div class="qt-terminal-grid">
+        <div><span>ROWS</span><strong data-kpi="rows">—</strong></div>
+        <div><span>BASE CELLS</span><strong data-kpi="bases">—</strong></div>
+        <div><span>DEV SR12 ≥ 1</span><strong data-kpi="floor">—</strong></div>
+        <div><span>SURVIVING FAMILIES</span><strong data-kpi="survivors">—</strong></div>
+        <div><span>COMPLETE EVIDENCE</span><strong data-kpi="complete">—</strong></div>
+        <div><span>CAMPAIGNS</span><strong data-kpi="campaigns">—</strong></div>
+      </div>
+      <div class="qt-terminal-callout">
+        <span>BEST MEASURED DEV SR12</span>
+        <strong data-kpi="best">—</strong>
+        <small data-kpi-detail="best">No row selected yet</small>
+      </div>
     </div>
   </section>
 
-  <section class="q25-section q25-section-tight">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">Five feedback channels, zero mega-score</div>
-        <h2>The frontier is allowed to say “nothing survives.”</h2>
-      </div>
-      <p>The five campaign-level channels—falsification, causal support, economics, promotion readiness and decision resolution—sit inside a wider evidence-depth, validation and queue state. The loop rewards resolved uncertainty, not a permanently rising backtest headline.</p>
+  <section class="qt-rulebar" aria-label="contest contract">
+    <div><span>UNIVERSE</span><strong>Crypto Top 10</strong></div>
+    <div><span>DIRECTION</span><strong>Long only</strong></div>
+    <div><span>SUBMISSION FLOOR</span><strong>IS Sharpe &gt; 1.0</strong></div>
+    <div><span>RANKING</span><strong>Contest OOS Sharpe</strong></div>
+    <div><span>RESEARCH RULE</span><strong>Controls can kill a pretty backtest</strong></div>
+  </section>
+
+  <section class="qt-section qt-command" aria-label="matrix filters">
+    <div class="qt-section-heading">
+      <div><span class="qt-kicker">CONTROL SURFACE</span><h2>Interrogate the matrix</h2></div>
+      <div class="qt-result-count" data-filter-count>— rows</div>
     </div>
-    <div class="q25-metric-grid">
-      <article class="q25-card q25-metric-card q25-metric-card-featured">
-        <span class="q25-metric-label">Latest measured</span>
-        <strong class="q25-metric-value" data-bind="latest-campaign">—</strong>
-        <small data-bind="latest-decision">loading committed evidence</small>
-      </article>
-      <article class="q25-card q25-metric-card">
-        <span class="q25-metric-label">Falsification coverage</span>
-        <strong class="q25-metric-value" data-bind="falsification-ratio">—</strong>
-        <div class="q25-progress" aria-hidden="true"><span data-bar="falsification"></span></div>
-        <small>central + ablation + destructive falsifier</small>
-      </article>
-      <article class="q25-card q25-metric-card">
-        <span class="q25-metric-label">Causal support</span>
-        <strong class="q25-metric-value" data-bind="causal-ratio">—</strong>
-        <div class="q25-progress" aria-hidden="true"><span data-bar="causal"></span></div>
-        <small>central parent beats both controls</small>
-      </article>
-      <article class="q25-card q25-metric-card">
-        <span class="q25-metric-label">Economic survival</span>
-        <strong class="q25-metric-value" data-bind="economic-ratio">—</strong>
-        <div class="q25-progress" aria-hidden="true"><span data-bar="economic"></span></div>
-        <small>best base clears robust SR ≥ 1.0</small>
-      </article>
-      <article class="q25-card q25-metric-card">
-        <span class="q25-metric-label">Promotion-ready</span>
-        <strong class="q25-metric-value" data-bind="promotion-ratio">—</strong>
-        <div class="q25-progress" aria-hidden="true"><span data-bar="promotion"></span></div>
-        <small>economics ∩ causal support; still pre-validation</small>
-      </article>
-      <article class="q25-card q25-metric-card">
-        <span class="q25-metric-label">Evidence depth debt</span>
-        <strong class="q25-metric-value" data-bind="matrix-lag">—</strong>
-        <small data-bind="matrix-lag-detail">campaigns since full matrix</small>
-      </article>
+    <div class="qt-controls">
+      <label class="qt-search"><span>SEARCH</span><input data-filter="search" type="search" placeholder="strategy, family, campaign…" autocomplete="off"></label>
+      <label><span>CAMPAIGN</span><select data-filter="campaign"><option value="">All</option></select></label>
+      <label><span>FAMILY</span><select data-filter="family"><option value="">All</option></select></label>
+      <label><span>MODE</span><select data-filter="mode"><option value="">All</option></select></label>
+      <label><span>STATUS</span><select data-filter="status"><option value="">All</option></select></label>
+      <button type="button" class="qt-reset" data-action="reset">RESET</button>
     </div>
   </section>
 
-  <section class="q25-section">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">Strategy radar</div>
-        <h2>Four research lanes, one evidence discipline</h2>
+  <section class="qt-section qt-grid-2 qt-analysis-row">
+    <article class="qt-panel qt-panel-chart">
+      <div class="qt-panel-head">
+        <div><span class="qt-kicker">EVIDENCE STABILITY</span><h2>Research → development</h2></div>
+        <div class="qt-legend"><span><i class="base"></i>base</span><span><i class="control"></i>control</span><span><i class="other"></i>other</span></div>
       </div>
-      <p>The lab is not one model. It is a portfolio of mechanism classes plus controls that tell us when a “new” idea is really an old neighborhood in different clothes.</p>
-    </div>
-    <div class="q25-radar-grid">
-      <article class="q25-radar-card q25-radar-core">
-        <div class="q25-radar-num">01</div>
-        <span class="q25-card-label">Historical mechanism core</span>
-        <h3>V10 · V11 · C165 · V12</h3>
-        <p>Residual/factor structure, event propagation, consensus-risk efficiency and signed volume diffusion. Useful priors and originality anchors—not current platform claims.</p>
-        <div class="q25-chip-row"><span>factor/residual</span><span>events</span><span>network flow</span><span>risk routing</span></div>
-      </article>
-      <article class="q25-radar-card">
-        <div class="q25-radar-num">02</div>
-        <span class="q25-card-label">Frontier-K / structural geometry</span>
-        <h3>Detachment · rotation · cohort divergence</h3>
-        <p>Tests whether residual-network geometry or cohort separation creates identity-specific deployment opportunity. Nearest-peer detachment showed causal direction, but not enough economics.</p>
-        <div class="q25-chip-row"><span>peer graph</span><span>eigenspace</span><span>residual cohort</span></div>
-      </article>
-      <article class="q25-radar-card q25-radar-accent">
-        <div class="q25-radar-num">03</div>
-        <span class="q25-card-label">Frontier-L / non-graph objects</span>
-        <h3>Capital migration · entropy · convergence</h3>
-        <p>Dollar-volume share migration is causally supported but economically weak. Permutation-entropy contraction and relative-value convergence were falsified at their frozen central cells.</p>
-        <div class="q25-chip-row"><span>capital share</span><span>sequence complexity</span><span>dispersion</span></div>
-      </article>
-      <article class="q25-radar-card">
-        <div class="q25-radar-num">04</div>
-        <span class="q25-card-label">Ebenezar / refinement controls</span>
-        <h3>Seven profile translations</h3>
-        <p>Sharpe/volatility, trend, classifier, residual and pullback variants translated into the exact evaluator. Classified as robustness-family refinements—not seven independent discoveries.</p>
-        <div class="q25-chip-row"><span>Sharpe</span><span>volatility</span><span>trend</span><span>classifier</span></div>
-      </article>
-    </div>
+      <p class="qt-panel-note">Each point compares the same row’s research SR@12% with development SR@12%. The diagonal is stability—not a promotion threshold.</p>
+      <div class="qt-chart-shell"><svg class="qt-chart" data-chart="stability" role="img" aria-label="Research versus development Sharpe scatter"></svg><div class="qt-tooltip" data-tooltip hidden></div></div>
+    </article>
+
+    <article class="qt-panel qt-screening">
+      <div class="qt-panel-head"><div><span class="qt-kicker">SCREENING FUNNEL</span><h2>Where candidates disappear</h2></div></div>
+      <p class="qt-panel-note">This is a descriptive screen, not a submission claim. Family adjudication remains separate from strategy economics and evidence depth.</p>
+      <div class="qt-funnel" data-funnel></div>
+      <div class="qt-warning" data-funnel-note>Loading family decisions…</div>
+    </article>
   </section>
 
-  <section class="q25-section q25-snapshot-section">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">September 12 measured snapshot</div>
-        <h2>Recent mechanisms and what killed them</h2>
+  <section class="qt-section qt-grid-2 qt-analysis-row">
+    <article class="qt-panel">
+      <div class="qt-panel-head">
+        <div><span class="qt-kicker">COST FRAGILITY</span><h2>Sharpe lost at the 12% cost rung</h2></div>
+        <span class="qt-badge">DEV SR0 − DEV SR12</span>
       </div>
-      <p>These are frozen development reads, not live forecasts. “Supported” means the central mechanism beat its matched controls; it does not mean the economics passed.</p>
-    </div>
-    <div class="q25-snapshot-grid">
-      <article class="q25-snapshot-card q25-snapshot-lead">
-        <div class="q25-snapshot-top"><span>Frontier-K</span><strong>0.782</strong></div>
-        <h3>Nearest-peer detachment</h3>
-        <p>63-day parent beat both the static-isolation ablation and identity-rotation falsifier.</p>
-        <div class="q25-verdict q25-verdict-warn">KILL_WEAK_ALPHA</div>
-        <small>Causal direction: yes · robust floor: no</small>
-      </article>
-      <article class="q25-snapshot-card">
-        <div class="q25-snapshot-top"><span>Frontier-K</span><strong>0.354</strong></div>
-        <h3>Subspace rotation</h3>
-        <p>Shuffled residual-trend labels under the same state beat the central parent.</p>
-        <div class="q25-verdict q25-verdict-bad">FALSIFIED</div>
-        <small>The state did not earn an identity-specific book.</small>
-      </article>
-      <article class="q25-snapshot-card">
-        <div class="q25-snapshot-top"><span>Frontier-L</span><strong>0.614</strong></div>
-        <h3>Dollar-volume share migration</h3>
-        <p>The strongest recent non-graph family; central 42-day parent beat both controls.</p>
-        <div class="q25-verdict q25-verdict-warn">KILL_WEAK_ALPHA</div>
-        <small>Causal support: yes · economics: insufficient</small>
-      </article>
-      <article class="q25-snapshot-card">
-        <div class="q25-snapshot-top"><span>Frontier-L</span><strong>0.401</strong></div>
-        <h3>Permutation entropy</h3>
-        <p>The best window did not rescue the preregistered central mechanism; controls won there.</p>
-        <div class="q25-verdict q25-verdict-bad">FALSIFIED</div>
-        <small>No inversion or parameter rescue after the look.</small>
-      </article>
-      <article class="q25-snapshot-card">
-        <div class="q25-snapshot-top"><span>Frontier-L</span><strong>0.182</strong></div>
-        <h3>Relative-value convergence</h3>
-        <p>The unconditional laggard ablation slightly beat the frozen central parent.</p>
-        <div class="q25-verdict q25-verdict-bad">FALSIFIED</div>
-        <small>Observed direction stays frozen.</small>
-      </article>
-      <article class="q25-snapshot-card q25-snapshot-dark">
-        <div class="q25-snapshot-top"><span>Forward gate</span><strong>0.314</strong></div>
-        <h3>Topology migration</h3>
-        <p>The former development leader failed its frozen 2023–2024 forward test at 12% ATR-linked cost.</p>
-        <div class="q25-verdict q25-verdict-bad">FAIL_FORWARD_GATE</div>
-        <small>Spent fold. No rescue tuning.</small>
-      </article>
-    </div>
+      <p class="qt-panel-note">Largest measured cost drag among the current filtered rows. Missing cost pairs are excluded rather than imputed.</p>
+      <div class="qt-bars" data-chart="cost-drag"></div>
+    </article>
+
+    <article class="qt-panel">
+      <div class="qt-panel-head"><div><span class="qt-kicker">ECONOMIC EFFICIENCY</span><h2>Sharpe vs turnover Pareto frontier</h2></div><span class="qt-badge">BASE CELLS</span></div>
+      <p class="qt-panel-note">Descriptive Pareto set: higher development SR@12% and lower turnover. It does not override controls, validation, or implementation health.</p>
+      <div class="qt-chart-shell qt-chart-short"><svg class="qt-chart" data-chart="pareto" role="img" aria-label="Sharpe versus turnover Pareto chart"></svg></div>
+    </article>
   </section>
 
-  <section class="q25-section q25-ebenezar-section">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">New refinement lane</div>
-        <h2>Ebenezar profiles are now executable controls</h2>
+  <section class="qt-section" id="leaderboard">
+    <div class="qt-section-heading">
+      <div><span class="qt-kicker">LIVE STRATEGY LEDGER</span><h2>Every measured row, with the failure modes beside the headline</h2></div>
+      <div class="qt-ledger-tools">
+        <label><span>SORT</span><select data-sort-select>
+          <option value="dev_sharpe_12">Dev SR12</option>
+          <option value="research_sharpe_12">Research SR12</option>
+          <option value="stability">Research→Dev stability</option>
+          <option value="cost_drag">Lowest cost drag</option>
+          <option value="mean_turnover_12">Lowest turnover</option>
+          <option value="worst_drawdown_12">Best drawdown</option>
+          <option value="selection_score">Selection score</option>
+        </select></label>
+        <button type="button" data-action="export">EXPORT CSV</button>
       </div>
-      <p>Seven translated strategies are frozen into the same evaluator. They broaden robustness testing without pretending crowded Sharpe/trend/reversion neighborhoods are novel alpha.</p>
     </div>
-    <div class="q25-profile-cloud">
-      <span>sharpe3_vol_guard</span>
-      <span>sharpe7_vol2</span>
-      <span>dual_sharpe_classifier</span>
-      <span>sharpe_acceleration</span>
-      <span>residual_sharpe</span>
-      <span>lattice_consensus</span>
-      <span>sharpe_pullback_reentry</span>
-    </div>
-    <div class="q25-callout">
-      <strong>No automatic promotion.</strong>
-      <span>A strong profile cell would still need matched destructive controls, historical-core residual/originality work, validation policy, full-IS eligibility, hosted multipass and participant-specific uniqueness/correlation clearance.</span>
-      <a href="https://github.com/Svyable/quantiacs-q25/tree/main/experiments/ebenezar_20260912">Open frozen campaign ↗</a>
-    </div>
-  </section>
-
-  <section class="q25-section">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">Latest campaign</div>
-        <h2>Economics beside destructive controls</h2>
-      </div>
-      <p>This table is live from the generated methodology-health packet. Ranking is local to one comparable campaign; causal margin is central parent minus the stronger matched control.</p>
-    </div>
-    <div class="q25-table-wrap">
-      <table class="q25-table">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Family</th>
-            <th>Best robust SR</th>
-            <th>Floor margin</th>
-            <th>Causal margin</th>
-            <th>Support</th>
-            <th>Decision</th>
-          </tr>
-        </thead>
-        <tbody data-bind="triage-body">
-          <tr><td colspan="7">Loading generated methodology health…</td></tr>
-        </tbody>
+    <div class="qt-ledger-wrap">
+      <table class="qt-ledger">
+        <thead><tr><th>#</th><th>Strategy</th><th>Campaign</th><th>Mode</th><th>Family decision</th><th>Dev SR12</th><th>Research SR12</th><th>Δ Dev−Research</th><th>Cost drag</th><th>Turnover</th><th>Worst DD</th><th>Evidence</th></tr></thead>
+        <tbody data-ledger-body><tr><td colspan="12">Loading matrix…</td></tr></tbody>
       </table>
     </div>
+    <div class="qt-ledger-footer"><span data-ledger-caption>—</span><button type="button" data-action="show-more">SHOW MORE</button></div>
   </section>
 
-  <section class="q25-section">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">Self-correction</div>
-        <h2>Development claims do not outrank later validation</h2>
-      </div>
-    </div>
-    <div class="q25-two-col">
-      <article class="q25-card q25-feature-card">
-        <span class="q25-card-label">Former development leader</span>
-        <h3 data-bind="leader-id">—</h3>
-        <div class="q25-feature-stat"><span>Development robust SR</span><strong data-bind="leader-dev-sr">—</strong></div>
-        <div class="q25-feature-stat"><span>Forward SR @ 12% cost</span><strong data-bind="leader-forward-sr">—</strong></div>
-        <div class="q25-feature-stat"><span>Forward decision</span><strong data-bind="leader-forward-decision">—</strong></div>
-        <p class="q25-card-note" data-bind="leader-note">Loading validation reconciliation…</p>
-      </article>
-
-      <article class="q25-card q25-feature-card q25-card-accent">
-        <span class="q25-card-label">Measurement frontier</span>
-        <h3 data-bind="queue-campaign">—</h3>
-        <div class="q25-feature-stat"><span>Frozen cells</span><strong data-bind="queue-candidates">—</strong></div>
-        <div class="q25-feature-stat"><span>Families</span><strong data-bind="queue-families">—</strong></div>
-        <div class="q25-feature-stat"><span>Committed measurement</span><strong data-bind="queue-measured">—</strong></div>
-        <p class="q25-card-note" data-bind="queue-note">Loading preregistration queue…</p>
-      </article>
-    </div>
+  <section class="qt-section qt-grid-2 qt-analysis-row">
+    <article class="qt-panel">
+      <div class="qt-panel-head"><div><span class="qt-kicker">FAMILY ADJUDICATION</span><h2>Mechanisms, not filenames</h2></div></div>
+      <div class="qt-decision-summary" data-decision-summary></div>
+      <div class="qt-family-board" data-family-board></div>
+    </article>
+    <article class="qt-panel">
+      <div class="qt-panel-head"><div><span class="qt-kicker">CAMPAIGN TAPE</span><h2>Best measured base cell by campaign</h2></div></div>
+      <p class="qt-panel-note">Campaign bars show economics only. A high bar can still belong to a falsified family.</p>
+      <div class="qt-campaign-tape" data-campaign-tape></div>
+    </article>
   </section>
 
-  <section class="q25-section q25-loop-section">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">Recursive research loop</div>
-        <h2>Increase information per look, not looks per idea</h2>
-      </div>
-      <p>The loop is designed to make future agents harder to fool. Every pass should reduce ambiguity about mechanisms, not merely add candidates.</p>
-    </div>
-    <div class="q25-loop">
-      <div><span>01</span><strong>Map</strong><small>nearest incumbent + novelty axes</small></div>
-      <div><span>02</span><strong>Preregister</strong><small>freeze mechanism, grid, controls</small></div>
-      <div><span>03</span><strong>Audit</strong><small>causality, liquidity, cleaner, replay</small></div>
-      <div><span>04</span><strong>Measure</strong><small>same folds + same cost ladder</small></div>
-      <div><span>05</span><strong>Destroy</strong><small>ablation + mechanism falsifier</small></div>
-      <div><span>06</span><strong>Validate</strong><small>frozen chronology, no rescue tuning</small></div>
-      <div><span>07</span><strong>Rewrite</strong><small>new evidence supersedes old narrative</small></div>
+  <section class="qt-section qt-inspector" data-inspector>
+    <div class="qt-inspector-empty"><span class="qt-kicker">ROW INSPECTOR</span><h2>Click a ledger row or chart point.</h2><p>The inspector keeps economics, evidence provenance and family adjudication visible together without collapsing them into one score.</p></div>
+  </section>
+
+  <section class="qt-section qt-principles">
+    <div><span class="qt-kicker">THREE AXES</span><h2>What this terminal refuses to collapse</h2></div>
+    <div class="qt-principle-grid">
+      <article><strong>01</strong><h3>Strategy quality</h3><p>Sharpe, CAGR, Sortino, Calmar, drawdown, turnover, cost sensitivity and residual contribution where measured.</p></article>
+      <article><strong>02</strong><h3>Evidence quality</h3><p>Development, validation, diagnostic and authenticated evidence are distinct. A good dev result is not validation.</p></article>
+      <article><strong>03</strong><h3>Implementation health</h3><p>Causality, liquid-only constraints, cleaner parity, bounded replay and runtime stay separate from economic outcomes.</p></article>
     </div>
   </section>
 
-  <section class="q25-section q25-section-muted">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">Evidence lanes</div>
-        <h2>Keep incompatible evidence separate</h2>
-      </div>
-    </div>
-    <div class="q25-three-col">
-      <article class="q25-card">
-        <h3>Development</h3>
-        <p>Research/dev folds, configured cost ladder, destructive controls and implementation integrity. Useful for selection pressure; never a production claim.</p>
-      </article>
-      <article class="q25-card">
-        <h3>Forward validation</h3>
-        <p>Frozen candidate, frozen fold, no parameter switching after observation. Later validation is allowed to invalidate the development story.</p>
-      </article>
-      <article class="q25-card">
-        <h3>Authenticated preclear</h3>
-        <p>Participant-bound correlation and submission checks stay separate from public research evidence and are never inferred from local diagnostics.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="q25-section q25-links-section">
-    <div class="q25-section-head">
-      <div>
-        <div class="q25-kicker">Source of truth</div>
-        <h2>Drill into the evidence, not the decoration</h2>
-      </div>
-    </div>
-    <div class="q25-link-grid">
-      <a href="{{ '/backtest/' | relative_url }}"><strong>Backtest Studio</strong><span>equity, Crypto10, drawdown, risk, score and seasonality</span></a>
-      <a href="METHODOLOGY_HEALTH.html"><strong>Methodology Health</strong><span>generated recursive telemetry + validation reconciliation</span></a>
-      <a href="REPRODUCIBILITY_HEALTH.html"><strong>Reproducibility Health</strong><span>replay decision stability + context drift</span></a>
-      <a href="RESEARCH_MATRIX.html"><strong>Research Matrix</strong><span>comparable evidence lanes and campaign packets</span></a>
-      <a href="EVIDENCE_MODEL.html"><strong>Evidence Model</strong><span>strategy quality ≠ evidence quality ≠ implementation health</span></a>
-      <a href="RESEARCH_METHOD.html"><strong>Research Method</strong><span>chronology, costs, controls and promotion boundaries</span></a>
-      <a href="TESTING_PYRAMID.html"><strong>Testing Pyramid</strong><span>static → unit → prefix → replay → exact evaluation</span></a>
-      <a href="STRATEGY_GENERATION_PLAYBOOK.html"><strong>Agent Playbook</strong><span>24 hypotheses → 6 preregistrations → ≤3 implementations</span></a>
-      <a href="https://github.com/Svyable/quantiacs-q25/blob/main/README.md"><strong>README / Lab Map ↗</strong><span>current strategy map, historical core and reproducible commands</span></a>
-    </div>
-  </section>
-
-  <div class="q25-footnote">
-    <strong>Machine-readable:</strong>
-    <a href="data/methodology_health.json">methodology_health.json</a> ·
-    <a href="data/reproducibility_health.json">reproducibility_health.json</a> ·
-    <a href="data/strategy_matrix.json">strategy_matrix.json</a> ·
-    <a href="data/backtest_dashboard.json">backtest_dashboard.json</a>.
-    Missing evidence stays missing; replay contexts stay separate; the homepage progressively enhances from generated health JSON and never invents results.
-  </div>
+  <footer class="qt-footer">
+    <div><strong>Q25 Research Terminal</strong><span>Public evidence surface for Svyable/quantiacs-q25.</span></div>
+    <div class="qt-footer-links"><a href="{{ '/explorer.html' | relative_url }}">Explorer</a><a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Research Matrix</a><a href="{{ '/STRATEGY_ATLAS.html' | relative_url }}">Strategy Atlas</a><a href="{{ '/REPRODUCIBILITY_HEALTH.html' | relative_url }}">Reproducibility</a></div>
+  </footer>
 </div>
 
-<script src="assets/js/dashboard.js" defer></script>
+<script src="{{ '/assets/js/terminal.js' | relative_url }}" defer></script>

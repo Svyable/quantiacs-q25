@@ -107,7 +107,9 @@ def test_recursive_learning_vector_and_measurement_queue_follow_manifests():
 
 def test_homepage_is_bound_to_generated_health_packet():
     text = INDEX.read_text()
-    assert "data-q25-dashboard" in text
+    assert "data-q25-terminal" in text
+    assert "data-method-source" in text
     assert "data/methodology_health.json" in text
-    assert "assets/js/dashboard.js" in text
-    assert "zero mega-score" in text.lower()
+    assert "data-matrix-source" in text
+    assert "data/strategy_matrix.json" in text
+    assert "assets/js/terminal.js" in text

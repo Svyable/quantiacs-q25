@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "unavailable",
+  "generated_at": null,
+  "period": {"start": null, "end": null},
+  "source": {
+    "label": "No committed backtest time-series packet",
+    "path": null,
+    "commit": null,
+    "note": "Run scripts/build_backtest_dashboard.py against an exported Quantiacs stats CSV. Missing evidence is intentionally not imputed."
+  },
+  "metrics": {},
+  "live_model": {},
+  "series": [],
+  "monthly_returns": []
+}

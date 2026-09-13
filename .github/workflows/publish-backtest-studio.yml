@@ -1,0 +1,129 @@
+name: publish-backtest-studio
+
+on:
+  workflow_dispatch:
+    inputs:
+      strategy_path:
+        description: Repository path to the frozen Python strategy to publish
+        required: true
+        type: string
+      start_date:
+        description: Q25 evaluation start
+        required: true
+        default: '2016-01-01'
+        type: string
+      end_date:
+        description: Optional evaluation end (YYYY-MM-DD)
+        required: false
+        type: string
+      slippage_factor:
+        description: ATR-linked transaction-cost factor
+        required: true
+        default: '0.04'
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  publish-evidence-pr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      GH_TOKEN: ${{ github.token }}
+      Q25_STRATEGY_PATH: ${{ inputs.strategy_path }}
+      Q25_START_DATE: ${{ inputs.start_date }}
+      Q25_END_DATE: ${{ inputs.end_date }}
+      Q25_SLIPPAGE_FACTOR: ${{ inputs.slippage_factor }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install frozen research dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Export official Quantiacs strategy and Crypto10 evidence
+        shell: bash
+        run: |
+          args=(
+            --strategy "$Q25_STRATEGY_PATH"
+            --output-dir backtest-publish
+            --start-date "$Q25_START_DATE"
+            --slippage-factor "$Q25_SLIPPAGE_FACTOR"
+            --source-commit "$GITHUB_SHA"
+          )
+          if [[ -n "$Q25_END_DATE" ]]; then
+            args+=(--end-date "$Q25_END_DATE")
+          fi
+          python scripts/export_q25_backtest.py "${args[@]}"
+
+      - name: Verify generated evidence before publication
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path('backtest-publish')
+          manifest = json.loads((root / 'manifest.json').read_text())
+          packet = json.loads((root / 'backtest_dashboard.json').read_text())
+          assert manifest['competition_type'] == 'crypto_daily_long'
+          assert manifest['quantiacs_output_check'] == 'passed'
+          assert manifest['benchmark'] == 'CRYPTO10'
+          assert packet['status'] == 'available'
+          assert len(packet['series']) > 1
+          assert packet['source']['commit'] == manifest['source_commit']
+          assert packet['period']['start'] >= os.environ['Q25_START_DATE']
+          print('publishable Backtest Studio evidence verified')
+          PY
+
+      - name: Stage only the public evidence packet
+        run: |
+          cp backtest-publish/backtest_dashboard.json docs/data/backtest_dashboard.json
+          cp backtest-publish/manifest.json docs/data/backtest_manifest.json
+          git diff -- docs/data/backtest_dashboard.json docs/data/backtest_manifest.json
+
+      - name: Open data-only publication PR
+        shell: bash
+        run: |
+          branch="automation/backtest-studio-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add docs/data/backtest_dashboard.json docs/data/backtest_manifest.json
+          git commit -m "Publish Backtest Studio evidence for $Q25_STRATEGY_PATH"
+          git push origin "$branch"
+          body_file="$(mktemp)"
+          printf '%s\n' \
+            "Generated from official Quantiacs data by publish-backtest-studio run ${GITHUB_RUN_ID}." \
+            "" \
+            "The PR changes only the public Backtest Studio evidence packet and provenance manifest." \
+            "Quantiacs output validation: passed" \
+            "Strategy: $Q25_STRATEGY_PATH" \
+            "Evaluation start: $Q25_START_DATE" \
+            "Slippage factor: $Q25_SLIPPAGE_FACTOR" \
+            "" \
+            "Normal repository CI remains authoritative before merge." > "$body_file"
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "Publish Backtest Studio: $Q25_STRATEGY_PATH" \
+            --body-file "$body_file"
+
+      - name: Upload publication evidence bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: q25-backtest-publication-${{ github.run_id }}
+          path: backtest-publish/
+          if-no-files-found: error
+          retention-days: 30

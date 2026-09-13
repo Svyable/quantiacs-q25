@@ -1,0 +1,51 @@
+{
+  "ablation": "replace falling impact with low current residual-price-impact rank under the same residual-trend gate",
+  "allocation": "Monday fixed slots min(0.25, 1/K); unused slots cash; strict ineligibility exits persist until next scheduled rebalance",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260913n_impact_decay_persistence.py",
+  "contamination_notes": "A-M development evidence and the spent 2023-2024 topology forward fold are already observed. Frontier-N is repeated development research, not a fresh holdout. 2023-2024 remains closed.",
+  "cost_hypothesis": "weekly fixed-slot portfolios should keep turnover bounded; exact ATR-linked ladder is frozen at 0/4/8/12%",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260913n_impact_decay_persistence",
+  "failure_mode": "falling impact is only a liquidity-level effect or duplicates dollar-volume share migration",
+  "falsifier": "rotate impact-decay assignments across currently eligible assets while preserving each date's score distribution",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      21,
+      42,
+      63
+    ]
+  },
+  "mechanism": "impact_decay_persistence",
+  "nearest_incumbent": "dollar-volume share migration / price elasticity; distinct object is change in residual displacement per unit activity share",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 42
+  },
+  "portfolio_role": "liquidity-deepening continuation satellite",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "falling residual absolute price displacement per unit eligible-universe dollar-volume share with positive residual trend; top-K deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "New daily-bar impact dynamic, not a parameter rescue of Frontier-L share migration.",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if falsifier or ablation matches/beats canonical base or if every valid base cell is below the fixed 1.0 robust-development floor; do not grid-rescue after failure",
+  "thesis": "Positive-trend assets whose residual price displacement requires progressively more activity may be entering a deeper-liquidity continuation state rather than an exhaustion state.",
+  "timing": "completed daily bars only; toolbox owns execution lag; all rolling state is causal and <=365 days",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 is SPENT_DO_NOT_MUTATE and excluded from Frontier-N selection; 2025+ and live never drive mutation"
+}

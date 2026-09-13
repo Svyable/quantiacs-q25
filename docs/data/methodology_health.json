@@ -165,6 +165,26 @@
         },
         {
           "automatic_promotion": false,
+          "campaign": "frontier_20260912n",
+          "candidate_count": 5,
+          "classification_note": "Frontier-N is a preregistered OHLCV-only online-forecast-surprise campaign. It directly tests whether causal forecast innovations carry continuation information beyond ordinary market-residual momentum; 2023-2024 is spent and excluded.",
+          "families": [
+            "online_ar_surprise_persistence"
+          ],
+          "family_count": 1,
+          "modes": {
+            "ablation": 1,
+            "base": 3,
+            "falsifier": 1
+          },
+          "selection_folds": [
+            "research",
+            "dev"
+          ],
+          "source_path": "experiments/frontier_20260912n/manifest.json"
+        },
+        {
+          "automatic_promotion": false,
           "campaign": "frontier_20260913m",
           "candidate_count": 15,
           "classification_note": "Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.",
@@ -186,7 +206,7 @@
           "source_path": "experiments/frontier_20260913m/manifest.json"
         }
       ],
-      "count": 2,
+      "count": 3,
       "next_campaign": {
         "automatic_promotion": false,
         "campaign": "frontier_20260912m",

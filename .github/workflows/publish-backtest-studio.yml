@@ -33,6 +33,10 @@ jobs:
     env:
       API_KEY: default
       GH_TOKEN: ${{ github.token }}
+      Q25_STRATEGY_PATH: ${{ inputs.strategy_path }}
+      Q25_START_DATE: ${{ inputs.start_date }}
+      Q25_END_DATE: ${{ inputs.end_date }}
+      Q25_SLIPPAGE_FACTOR: ${{ inputs.slippage_factor }}
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
@@ -52,14 +56,14 @@ jobs:
         shell: bash
         run: |
           args=(
-            --strategy "${{ inputs.strategy_path }}"
+            --strategy "$Q25_STRATEGY_PATH"
             --output-dir backtest-publish
-            --start-date "${{ inputs.start_date }}"
-            --slippage-factor "${{ inputs.slippage_factor }}"
+            --start-date "$Q25_START_DATE"
+            --slippage-factor "$Q25_SLIPPAGE_FACTOR"
             --source-commit "$GITHUB_SHA"
           )
-          if [[ -n "${{ inputs.end_date }}" ]]; then
-            args+=(--end-date "${{ inputs.end_date }}")
+          if [[ -n "$Q25_END_DATE" ]]; then
+            args+=(--end-date "$Q25_END_DATE")
           fi
           python scripts/export_q25_backtest.py "${args[@]}"
 
@@ -67,6 +71,7 @@ jobs:
         run: |
           python - <<'PY'
           import json
+          import os
           from pathlib import Path
 
           root = Path('backtest-publish')
@@ -77,7 +82,7 @@ jobs:
           assert packet['status'] == 'available'
           assert len(packet['series']) > 1
           assert packet['source']['commit'] == manifest['source_commit']
-          assert packet['period']['start'] >= '${{ inputs.start_date }}'
+          assert packet['period']['start'] >= os.environ['Q25_START_DATE']
           print('publishable Backtest Studio evidence verified')
           PY
 
@@ -95,13 +100,23 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$branch"
           git add docs/data/backtest_dashboard.json docs/data/backtest_manifest.json
-          git commit -m "Publish Backtest Studio evidence for ${{ inputs.strategy_path }}"
+          git commit -m "Publish Backtest Studio evidence for $Q25_STRATEGY_PATH"
           git push origin "$branch"
+          body_file="$(mktemp)"
+          printf '%s\n' \
+            "Generated from official Quantiacs data by publish-backtest-studio run ${GITHUB_RUN_ID}." \
+            "" \
+            "The PR changes only the public Backtest Studio evidence packet and provenance manifest." \
+            "Strategy: $Q25_STRATEGY_PATH" \
+            "Evaluation start: $Q25_START_DATE" \
+            "Slippage factor: $Q25_SLIPPAGE_FACTOR" \
+            "" \
+            "Normal repository CI remains authoritative before merge." > "$body_file"
           gh pr create \
             --base main \
             --head "$branch" \
-            --title "Publish Backtest Studio: ${{ inputs.strategy_path }}" \
-            --body "Generated from official Quantiacs data by \`publish-backtest-studio\` run ${GITHUB_RUN_ID}. The PR changes only the public Backtest Studio evidence packet and provenance manifest. Strategy: \`${{ inputs.strategy_path }}\`; evaluation start: \`${{ inputs.start_date }}\`; slippage factor: \`${{ inputs.slippage_factor }}\`. Normal repository CI remains authoritative before merge."
+            --title "Publish Backtest Studio: $Q25_STRATEGY_PATH" \
+            --body-file "$body_file"
 
       - name: Upload publication evidence bundle
         uses: actions/upload-artifact@v4

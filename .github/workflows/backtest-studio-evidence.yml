@@ -71,6 +71,7 @@ jobs:
           manifest = json.loads((root / 'manifest.json').read_text())
           packet = json.loads((root / 'backtest_dashboard.json').read_text())
           assert manifest['competition_type'] == 'crypto_daily_long'
+          assert manifest['quantiacs_output_check'] == 'passed'
           assert manifest['benchmark'] == 'CRYPTO10'
           assert packet['status'] == 'available'
           assert packet['series']

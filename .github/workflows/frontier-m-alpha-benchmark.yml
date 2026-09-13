@@ -9,6 +9,9 @@ on:
       - 'research/benchmark.py'
       - 'research/iteration.py'
       - 'tests/**'
+      - 'docs/METHODOLOGY_HEALTH.md'
+      - 'docs/data/methodology_health.json'
+      - 'scripts/build_methodology_health.py'
       - '.github/workflows/frontier-m-alpha-benchmark.yml'
   workflow_dispatch:
 
@@ -30,6 +33,16 @@ jobs:
           python-version: '3.11'
       - name: Install Quantiacs toolbox and tests
         run: python -m pip install -r requirements.txt pytest
+      - name: Regenerate methodology health for queued Frontier-M
+        run: python scripts/build_methodology_health.py
+      - name: Preserve generated health telemetry
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontier-m-methodology-health-${{ github.run_id }}
+          path: |
+            docs/data/methodology_health.json
+            docs/METHODOLOGY_HEALTH.md
+          if-no-files-found: error
       - name: Run full software, provenance and causality suite
         run: python -m pytest -q tests
       - name: Verify generated dashboard is canonical before measurement

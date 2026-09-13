@@ -1,0 +1,32 @@
+@media (max-width:1180px) {
+  .ql-kpis { grid-template-columns:repeat(4,1fr); }
+  .ql-controls { grid-template-columns:1fr 1fr 1fr; }
+  .ql-grid-primary,.ql-grid-analysis { grid-template-columns:1fr; }
+  .ql-causal-board,.ql-triage { max-height:none; }
+  .ql-hero { grid-template-columns:1fr; }
+  .ql-contract { max-width:680px; }
+  .ql-inspector { order:-1; }
+}
+@media (max-width:760px) {
+  .qt-topbar { padding:0 16px; height:auto; min-height:62px; grid-template-columns:auto auto; }
+  .qt-nav { display:none; }
+  .qt-feed { justify-self:end; }
+  .ql-hero { padding:40px 18px 22px; }
+  .ql-hero h1 { font-size:48px; }
+  .ql-contract { grid-template-columns:1fr; }
+  .ql-contract div { border-right:0!important; }
+  .ql-contract div:nth-last-child(-n+2) { border-bottom:1px solid var(--qt-line); }
+  .ql-contract div:last-child { border-bottom:0; }
+  .ql-kpis { padding:0 18px; grid-template-columns:repeat(2,1fr); }
+  .qt-section { padding-left:18px; padding-right:18px; }
+  .ql-controls { grid-template-columns:1fr 1fr; }
+  .ql-search { grid-column:1/-1; }
+  .ql-causal-row { grid-template-columns:minmax(150px,1fr) 62px 62px; }
+  .ql-margin-track,.ql-causal-decision { display:none; }
+  .ql-triage-head,.ql-triage-row { grid-template-columns:minmax(150px,1fr) repeat(4,34px) 42px; }
+  .ql-wrap-head { align-items:flex-start; flex-direction:column; }
+  .ql-axis-picks { width:100%; }
+  .ql-axis-picks label { flex:1; }
+  .ql-axis-picks select { min-width:0; width:100%; }
+  .ql-method-strip { align-items:flex-start; flex-direction:column; }
+}

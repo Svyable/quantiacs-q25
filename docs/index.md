@@ -38,10 +38,10 @@ description: Evidence-aware crypto alpha research for Quantiacs Q25 — causal m
   <section class="q25-section q25-section-tight">
     <div class="q25-section-head">
       <div>
-        <div class="q25-kicker">State of the lab</div>
+        <div class="q25-kicker">Five feedback channels, zero mega-score</div>
         <h2>The frontier is allowed to say “nothing survives.”</h2>
       </div>
-      <p>That is a feature. The current loop rewards resolved uncertainty, causal discrimination and honest failure—not a permanently rising backtest headline.</p>
+      <p>The five campaign-level channels—falsification, causal support, economics, promotion readiness and decision resolution—sit inside a wider evidence-depth, validation and queue state. The loop rewards resolved uncertainty, not a permanently rising backtest headline.</p>
     </div>
     <div class="q25-metric-grid">
       <article class="q25-card q25-metric-card q25-metric-card-featured">

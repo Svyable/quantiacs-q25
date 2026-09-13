@@ -80,8 +80,15 @@ def test_recursive_learning_vector_and_measurement_queue_are_explicit():
     assert latest["economic_survival"]["count"] == 0
     assert latest["promotion_ready"]["count"] == 0
     assert latest["decision_resolution"]["count"] == 3
-    assert queue["count"] == 0
-    assert queue["next_campaign"] is None
+    assert queue["count"] == 1
+    assert queue["next_campaign"]["campaign"] == "frontier_20260912l"
+    assert queue["next_campaign"]["candidate_count"] == 15
+    assert queue["next_campaign"]["family_count"] == 3
+    assert queue["next_campaign"]["families"] == [
+        "dollar_volume_share_migration",
+        "permutation_entropy_contraction",
+        "relative_value_convergence",
+    ]
 
 
 def test_homepage_is_bound_to_generated_health_packet():

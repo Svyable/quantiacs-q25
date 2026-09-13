@@ -140,9 +140,53 @@
       }
     },
     "measurement_queue": {
-      "campaigns": [],
-      "count": 0,
-      "next_campaign": null
+      "campaigns": [
+        {
+          "automatic_promotion": false,
+          "campaign": "frontier_20260912l",
+          "candidate_count": 15,
+          "classification_note": "Frontier-L pivots away from failed residual-correlation graph mining into distributional sequence structure, cross-sectional activity-share migration, and regime-conditioned relative value. 2023-2024 is spent and excluded.",
+          "families": [
+            "dollar_volume_share_migration",
+            "permutation_entropy_contraction",
+            "relative_value_convergence"
+          ],
+          "family_count": 3,
+          "modes": {
+            "ablation": 3,
+            "base": 9,
+            "falsifier": 3
+          },
+          "selection_folds": [
+            "research",
+            "dev"
+          ],
+          "source_path": "experiments/frontier_20260912l/manifest.json"
+        }
+      ],
+      "count": 1,
+      "next_campaign": {
+        "automatic_promotion": false,
+        "campaign": "frontier_20260912l",
+        "candidate_count": 15,
+        "classification_note": "Frontier-L pivots away from failed residual-correlation graph mining into distributional sequence structure, cross-sectional activity-share migration, and regime-conditioned relative value. 2023-2024 is spent and excluded.",
+        "families": [
+          "dollar_volume_share_migration",
+          "permutation_entropy_contraction",
+          "relative_value_convergence"
+        ],
+        "family_count": 3,
+        "modes": {
+          "ablation": 3,
+          "base": 9,
+          "falsifier": 3
+        },
+        "selection_folds": [
+          "research",
+          "dev"
+        ],
+        "source_path": "experiments/frontier_20260912l/manifest.json"
+      }
     },
     "policy": {
       "aggregate_score": "forbidden",

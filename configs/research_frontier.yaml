@@ -8,7 +8,7 @@
 # configs/external_research_leads.yaml and docs/EXTERNAL_RESEARCH_LEADS.md.
 # Do not infer edge from priority alone.
 
-as_of: "2026-09-11"
+as_of: "2026-09-12"
 external_research_ref: "configs/external_research_leads.yaml"
 
 novelty_axes:
@@ -25,6 +25,15 @@ novelty_rule: >-
   weight, rebalance day, or risk scaler is not sufficient evidence of novelty.
 
 occupied_or_crowded:
+  - family: "dollar_volume_share_migration"
+    incumbents: [frontier_20260912l_dollar_volume_share_migration]
+    note: "FROZEN / KILL_WEAK_ALPHA: central 42-day base robust SR 0.614 beats level ablation 0.281 and identity-rotation falsifier -0.201, but every preregistered base window misses the 1.0 floor. Causal support without economic survival; no grid rescue."
+  - family: "permutation_entropy_contraction"
+    incumbents: [frontier_20260912l_permutation_entropy_contraction]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: best base robust SR 0.401; central 84-day contraction -0.046 loses to entropy-level ablation 0.166 and identity-rotation falsifier 0.132. Do not invert or retune after observation."
+  - family: "relative_value_convergence"
+    incumbents: [frontier_20260912l_relative_value_convergence]
+    note: "FROZEN / FALSIFIED_DEVELOPMENT: best base robust SR 0.182; central dispersion-contraction parent -0.024 loses to unconditional laggard ablation -0.015. Do not parameter-rescue or invert the state after observation."
   - family: "nearest_peer_detachment"
     incumbents: [frontier_20260912k_nearest_peer_detachment]
     note: "FROZEN / KILL_WEAK_ALPHA: best base robust SR 0.782 beats ablation 0.701 and falsifier 0.699; every window misses the 1.0 floor. Causal support without economic survival. No grid rescue."

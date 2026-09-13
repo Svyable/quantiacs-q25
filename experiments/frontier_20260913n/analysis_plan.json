@@ -1,0 +1,13 @@
+{
+  "campaign": "frontier_20260913n",
+  "budget": 18,
+  "selection_folds": ["research", "dev"],
+  "cost_ladder": [0.0, 0.04, 0.08, 0.12],
+  "implemented": ["absorption_release_pressure", "elasticity_rank_migration", "directional_elasticity_asymmetry"],
+  "decision_rule": "Within each family, central parent must beat matched ablation and falsifier; at least one base window must clear robust development Sharpe >= 1.0. Otherwise freeze. No inversion, grid rescue, validation reopening, or control promotion.",
+  "ranking_rule": "Within this campaign only: guardrail-valid families first, then best robust development score, deterministic family id tie-break. No cross-campaign scalar rank.",
+  "purpose": "Test daily-bar price/activity elasticity and absorption-release objects that differ materially from graph, volatility-term-structure, Sharpe-profile, and plain trend families.",
+  "preexisting_unobserved_queue": ["frontier_20260913m"],
+  "validation_boundary": "2023-2024 already spent; 2025+ and live excluded.",
+  "automatic_promotion": false
+}

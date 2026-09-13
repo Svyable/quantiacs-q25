@@ -8,12 +8,15 @@ on:
       - 'experiments/frontier_20260913m/**'
       - 'research/benchmark.py'
       - 'research/iteration.py'
-      - 'tests/**'
       - 'docs/METHODOLOGY_HEALTH.md'
       - 'docs/data/methodology_health.json'
       - 'scripts/build_methodology_health.py'
       - '.github/workflows/frontier-m-reserve-alpha-benchmark.yml'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -69,13 +72,14 @@ jobs:
           print('Frontier-M reserve pre-return freeze verified')
           PY
       - name: Run exact Frontier-M reserve development campaign
+        id: measure
         run: |
           python -m research.iteration \
             --manifest "$MANIFEST" \
             --output "results/$CAMPAIGN" \
             --budget 18
       - name: Print Frontier-M reserve evidence
-        if: always()
+        if: ${{ always() && steps.measure.outcome == 'success' }}
         run: |
           RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
           echo "RESULT_DIR=$RESULT_DIR"
@@ -92,9 +96,9 @@ jobs:
                   print(json.dumps(json.loads(path.read_text()), indent=2, sort_keys=True))
           PY
       - name: Preserve measured Frontier-M reserve evidence
-        if: always()
+        if: ${{ always() && steps.measure.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.CAMPAIGN }}-measured-${{ github.run_id }}
           path: results/${{ env.CAMPAIGN }}/
-          if-no-files-found: warn
+          if-no-files-found: error

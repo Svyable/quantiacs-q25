@@ -80,11 +80,16 @@ def test_recursive_learning_vector_and_measurement_queue_are_explicit():
     assert latest["economic_survival"]["count"] == 0
     assert latest["promotion_ready"]["count"] == 0
     assert latest["decision_resolution"]["count"] == 3
-    assert queue["count"] == 1
+    assert queue["count"] == 2
     assert queue["next_campaign"]["campaign"] == "frontier_20260912m"
-    assert [row["campaign"] for row in queue["campaigns"]] == ["frontier_20260912m"]
+    assert [row["campaign"] for row in queue["campaigns"]] == [
+        "frontier_20260912m",
+        "frontier_20260913m",
+    ]
     assert queue["next_campaign"]["automatic_promotion"] is False
     assert queue["next_campaign"]["selection_folds"] == ["research", "dev"]
+    assert queue["campaigns"][1]["automatic_promotion"] is False
+    assert queue["campaigns"][1]["selection_folds"] == ["research", "dev"]
 
 
 def test_homepage_is_bound_to_generated_health_packet():

@@ -1,0 +1,22 @@
+{
+  "campaign": "frontier_20260913m",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "activation_type": "PREEXISTING_UNMEASURED_RESERVES",
+  "selection_folds": ["research", "dev"],
+  "validation_boundary": "2023-2024 SPENT_DO_NOT_MUTATE; 2025+ diagnostic/live excluded",
+  "cost_ladder": [0.0, 0.04, 0.08, 0.12],
+  "automatic_promotion": false,
+  "preregistration_sha256": {
+    "volume_share_entropy_state": "6dea6d241fa326dffff5d0b76401b1d55d070bb8e775fe951a9edf7e2ef159b4",
+    "dispersion_curvature": "954ebac335624445758c383e86d6cdd623ab7eecbe6e7a743ff20467867ce4b0",
+    "entropy_disagreement_cash": "0099277375cd53423468d150e39c1fe8871a8afb968e9c3960b8d67ad2f23429"
+  },
+  "strategy_sha256": {
+    "volume_share_entropy_state": "10b4711784f4feaf1f47e7d26ed5daf88ebad8a7540f29aaf115d20684385606",
+    "dispersion_curvature": "6d7605f29c7ff2d6f237d93de76180823506812e18a5635ebbbab7be150673d0",
+    "entropy_disagreement_cash": "91bbb612bc7b11a55999958a996b273b6ff34cffe79fe27a8878ab5da305c1a5"
+  },
+  "mutation_after_observation": "forbidden",
+  "note": "Operational definitions and formulas were frozen before any Frontier-M return measurement. A pre-measurement schema-compatibility amendment added code_path plus embedded preregistration-hash metadata; formulas, grids, controls, and state definitions remain unchanged."
+}

@@ -62,6 +62,19 @@ permalink: /backtest/
     </footer>
   </section>
 
+  <section class="bt-panel" style="margin-bottom:1.1rem">
+    <header class="bt-panel-head"><div><span class="bt-kicker">Daily stat inspector</span><h2 data-bind="snapshot-date">Select a date</h2></div><span class="bt-muted">drag through the full evidence path</span></header>
+    <input type="range" min="0" max="0" value="0" step="1" data-snapshot-range aria-label="Backtest date inspector" style="width:100%;accent-color:var(--bt-cyan)">
+    <div class="bt-kpis" style="margin:1rem 0 0">
+      <article><span>Sharpe</span><strong data-snapshot="sharpe">—</strong><small>cumulative</small></article>
+      <article><span>Mean return</span><strong data-snapshot="mean_return">—</strong><small>annualized</small></article>
+      <article><span>Volatility</span><strong data-snapshot="volatility">—</strong><small>annualized</small></article>
+      <article><span>Drawdown</span><strong data-snapshot="drawdown">—</strong><small>underwater</small></article>
+      <article><span>Turnover</span><strong data-snapshot="turnover">—</strong><small>average</small></article>
+      <article><span>Assets / bias</span><strong data-snapshot="exposure">—</strong><small>daily exposure</small></article>
+    </div>
+  </section>
+
   <section class="bt-grid-two">
     <article class="bt-panel">
       <header class="bt-panel-head"><div><span class="bt-kicker">Underwater</span><h2>Drawdown depth</h2></div><strong class="bt-inline-stat" data-bind="worst-dd">—</strong></header>

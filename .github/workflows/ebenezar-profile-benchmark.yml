@@ -8,9 +8,12 @@ on:
       - 'experiments/ebenezar_20260912/**'
       - 'research/benchmark.py'
       - 'research/iteration.py'
-      - 'tests/**'
       - '.github/workflows/ebenezar-profile-benchmark.yml'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

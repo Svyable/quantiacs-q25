@@ -6,264 +6,32 @@
     "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
     "robust_development_sharpe": 1.376,
     "state": "FAILED_FORWARD_GATE",
-    "validation": {
-      "campaign": "frontier_20260910b",
-      "decision": "FAIL_FORWARD_GATE",
-      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
-      "family": "topology_migration",
-      "fold_status": "SPENT_DO_NOT_MUTATE",
-      "selected_development_candidate": "topology_migration_w84",
-      "selected_development_robust_sharpe": 1.376132031691156,
-      "selected_forward_sharpe_12": 0.314,
-      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
-      "validation_fold": {
-        "end": "2024-12-31",
-        "start": "2023-01-01"
-      }
-    }
+    "validation": {"campaign":"frontier_20260910b","decision":"FAIL_FORWARD_GATE","evidence_stage":"PREREGISTERED_FORWARD_OBSERVED","family":"topology_migration","fold_status":"SPENT_DO_NOT_MUTATE","selected_development_candidate":"topology_migration_w84","selected_development_robust_sharpe":1.376132031691156,"selected_forward_sharpe_12":0.314,"source_path":"evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json","validation_fold":{"end":"2024-12-31","start":"2023-01-01"}}
   },
-  "forward_validation": [
-    {
-      "campaign": "frontier_20260910b",
-      "decision": "FAIL_FORWARD_GATE",
-      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
-      "family": "topology_migration",
-      "fold_status": "SPENT_DO_NOT_MUTATE",
-      "selected_development_candidate": "topology_migration_w84",
-      "selected_development_robust_sharpe": 1.376132031691156,
-      "selected_forward_sharpe_12": 0.314,
-      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
-      "validation_fold": {
-        "end": "2024-12-31",
-        "start": "2023-01-01"
-      }
-    }
-  ],
+  "forward_validation": [{"campaign":"frontier_20260910b","decision":"FAIL_FORWARD_GATE","evidence_stage":"PREREGISTERED_FORWARD_OBSERVED","family":"topology_migration","fold_status":"SPENT_DO_NOT_MUTATE","selected_development_candidate":"topology_migration_w84","selected_development_robust_sharpe":1.376132031691156,"selected_forward_sharpe_12":0.314,"source_path":"evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json","validation_fold":{"end":"2024-12-31","start":"2023-01-01"}}],
   "latest_evidence": {
-    "campaign": "frontier_20260912l",
+    "campaign": "frontier_20260912m",
     "decision": "PROMOTE_ZERO",
     "evidence_stage": "DEVELOPMENT_ONLY",
     "family_count": 3,
     "family_triage": [
-      {
-        "ablation_robust_sharpe": 0.28099760489191,
-        "best_base_id": "dollar_volume_share_migration_w42",
-        "best_robust_sharpe": 0.6139429070897866,
-        "campaign_rank": 1,
-        "central_control_margin": 0.3329453021978766,
-        "central_id": "dollar_volume_share_migration_w42",
-        "central_robust_sharpe": 0.6139429070897866,
-        "control_ceiling": 0.28099760489191,
-        "control_supported": true,
-        "decision_code": "KILL_WEAK_ALPHA",
-        "falsification_complete": true,
-        "falsifier_robust_sharpe": -0.2008591416405153,
-        "family": "dollar_volume_share_migration",
-        "floor_margin": -0.3860570929102134,
-        "guardrail_pass": false
-      },
-      {
-        "ablation_robust_sharpe": 0.1659142023333896,
-        "best_base_id": "permutation_entropy_contraction_w126",
-        "best_robust_sharpe": 0.4011851200484395,
-        "campaign_rank": 2,
-        "central_control_margin": -0.21202613589851338,
-        "central_id": "permutation_entropy_contraction_w84",
-        "central_robust_sharpe": -0.04611193356512377,
-        "control_ceiling": 0.1659142023333896,
-        "control_supported": false,
-        "decision_code": "FALSIFIED_DEVELOPMENT",
-        "falsification_complete": true,
-        "falsifier_robust_sharpe": 0.13220409394792143,
-        "family": "permutation_entropy_contraction",
-        "floor_margin": -0.5988148799515605,
-        "guardrail_pass": false
-      },
-      {
-        "ablation_robust_sharpe": -0.014684556846498423,
-        "best_base_id": "relative_value_convergence_w63",
-        "best_robust_sharpe": 0.18155675032943677,
-        "campaign_rank": 3,
-        "central_control_margin": -0.008902771865795788,
-        "central_id": "relative_value_convergence_w42",
-        "central_robust_sharpe": -0.02358732871229421,
-        "control_ceiling": -0.014684556846498423,
-        "control_supported": false,
-        "decision_code": "FALSIFIED_DEVELOPMENT",
-        "falsification_complete": true,
-        "falsifier_robust_sharpe": -0.47110083991664164,
-        "family": "relative_value_convergence",
-        "floor_margin": -0.8184432496705633,
-        "guardrail_pass": false
-      }
+      {"ablation_robust_sharpe":9.228126194716202e-05,"best_base_id":"vol_curve_recompression_w63","best_robust_sharpe":0.3066733416732465,"campaign_rank":1,"central_control_margin":-0.7425165314751039,"central_id":"vol_curve_recompression_w84","central_robust_sharpe":-0.5354937578646062,"control_ceiling":0.20702277361049765,"control_supported":false,"decision_code":"FALSIFIED_DEVELOPMENT","falsification_complete":true,"falsifier_robust_sharpe":0.20702277361049765,"family":"vol_curve_recompression","floor_margin":-0.6933266583267534,"guardrail_pass":false},
+      {"ablation_robust_sharpe":0.21001352170084853,"best_base_id":"slope_dispersion_opportunity_w84","best_robust_sharpe":0.06698489665610868,"campaign_rank":2,"central_control_margin":-0.4080853006526356,"central_id":"slope_dispersion_opportunity_w63","central_robust_sharpe":-0.1980717789517871,"control_ceiling":0.21001352170084853,"control_supported":false,"decision_code":"FALSIFIED_DEVELOPMENT","falsification_complete":true,"falsifier_robust_sharpe":-0.2094595663639839,"family":"slope_dispersion_opportunity","floor_margin":-0.9330151033438914,"guardrail_pass":false},
+      {"ablation_robust_sharpe":0.5592259674010199,"best_base_id":"relative_vol_rank_relief_w84","best_robust_sharpe":-0.09620637040556103,"campaign_rank":3,"central_control_margin":-0.655432337806581,"central_id":"relative_vol_rank_relief_w84","central_robust_sharpe":-0.09620637040556103,"control_ceiling":0.5592259674010199,"control_supported":false,"decision_code":"FALSIFIED_DEVELOPMENT","falsification_complete":true,"falsifier_robust_sharpe":0.1802631947820711,"family":"relative_vol_rank_relief","floor_margin":-1.0962063704055611,"guardrail_pass":false}
     ],
-    "interpretation": "Frontier-L measured three preregistered non-graph families on the reused 2016-2022 development surface. Dollar-volume share migration is the strongest new base family at robust Sharpe 0.614 and its central 42-day parent beats both matched controls, but every base window remains below the fixed 1.0 development floor (KILL_WEAK_ALPHA). Permutation-entropy contraction and relative-value convergence are FALSIFIED_DEVELOPMENT by their preregistered destructive controls/ablations. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
+    "interpretation": "Frontier-M measured three preregistered volatility-term-structure families on the reused 2016-2022 development surface. Vol-curve recompression is the strongest base family at robust Sharpe 0.307, but its central 84-day parent is negative and loses to both matched controls. Relative-vol-rank relief and slope-dispersion opportunity also lose their preregistered controls. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
     "kind": "summary_only",
-    "next_boundary": "Do not retune Frontier-L. Dollar-volume share migration has causal support but insufficient economics; preserve it as a frozen weak-alpha result. Do not invert or parameter-rescue permutation entropy or relative-value convergence. Keep 2023-2024 closed. Next research should open a genuinely new object or bring the frozen historical V10/C165/V12 implementations through the current harness for comparable controls."
+    "next_boundary": "Do not retune Frontier-M volatility-term-structure formulas. Preserve the completed negative result, measure the already-frozen frontier_20260913m reserve campaign unchanged, then move research to genuinely different OHLCV objects such as daily-bar pressure, estimator disagreement, or price-impact dynamics rather than another volatility-curve rescue."
   },
   "learning_loop": {
-    "evidence_depth": {
-      "latest_full_matrix_campaign": "frontier_20260912k",
-      "latest_kind": "summary_only",
-      "measured_campaigns_since_full_matrix": 1,
-      "summary_only_latest": true
-    },
-    "latest_campaign": {
-      "best_floor_margin": -0.3860570929102134,
-      "best_robust_sharpe": 0.6139429070897866,
-      "causal_support": {
-        "count": 1,
-        "rate": 0.3333333333333333,
-        "total": 3
-      },
-      "decision_resolution": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
-      "economic_survival": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
-      "falsification_coverage": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
-      "families_measured": 3,
-      "median_central_control_margin": -0.008902771865795788,
-      "promotion_ready": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      }
-    },
-    "measurement_queue": {
-      "campaigns": [
-        {
-          "automatic_promotion": false,
-          "campaign": "frontier_20260912m",
-          "candidate_count": 15,
-          "classification_note": "Frontier-M is a preregistered OHLCV-only volatility-term-structure campaign. It pivots away from failed short-horizon Sharpe refinements and avoids simple inverse-vol or static low-vol claims; 2023-2024 is spent and excluded.",
-          "families": [
-            "relative_vol_rank_relief",
-            "slope_dispersion_opportunity",
-            "vol_curve_recompression"
-          ],
-          "family_count": 3,
-          "modes": {
-            "ablation": 3,
-            "base": 9,
-            "falsifier": 3
-          },
-          "selection_folds": [
-            "research",
-            "dev"
-          ],
-          "source_path": "experiments/frontier_20260912m/manifest.json"
-        },
-        {
-          "automatic_promotion": false,
-          "campaign": "frontier_20260913m",
-          "candidate_count": 15,
-          "classification_note": "Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.",
-          "families": [
-            "dispersion_curvature",
-            "entropy_disagreement_cash",
-            "volume_share_entropy_state"
-          ],
-          "family_count": 3,
-          "modes": {
-            "ablation": 3,
-            "base": 9,
-            "falsifier": 3
-          },
-          "selection_folds": [
-            "research",
-            "dev"
-          ],
-          "source_path": "experiments/frontier_20260913m/manifest.json"
-        }
-      ],
-      "count": 2,
-      "next_campaign": {
-        "automatic_promotion": false,
-        "campaign": "frontier_20260912m",
-        "candidate_count": 15,
-        "classification_note": "Frontier-M is a preregistered OHLCV-only volatility-term-structure campaign. It pivots away from failed short-horizon Sharpe refinements and avoids simple inverse-vol or static low-vol claims; 2023-2024 is spent and excluded.",
-        "families": [
-          "relative_vol_rank_relief",
-          "slope_dispersion_opportunity",
-          "vol_curve_recompression"
-        ],
-        "family_count": 3,
-        "modes": {
-          "ablation": 3,
-          "base": 9,
-          "falsifier": 3
-        },
-        "selection_folds": [
-          "research",
-          "dev"
-        ],
-        "source_path": "experiments/frontier_20260912m/manifest.json"
-      }
-    },
-    "policy": {
-      "aggregate_score": "forbidden",
-      "optimization_target": false,
-      "purpose": "diagnostic feedback vector for the research loop"
-    },
-    "validation_feedback": {
-      "active_after_validation": false,
-      "development_leader": "topology_migration_w84",
-      "forward_gate_decision": "FAIL_FORWARD_GATE",
-      "forward_sharpe_12": 0.314,
-      "guidance_superseded_by_newer_validation": false,
-      "state": "FAILED_FORWARD_GATE"
-    }
+    "evidence_depth": {"latest_full_matrix_campaign":"frontier_20260912k","latest_kind":"summary_only","measured_campaigns_since_full_matrix":2,"summary_only_latest":true},
+    "latest_campaign": {"best_floor_margin":-0.6933266583267534,"best_robust_sharpe":0.3066733416732465,"causal_support":{"count":0,"rate":0.0,"total":3},"decision_resolution":{"count":3,"rate":1.0,"total":3},"economic_survival":{"count":0,"rate":0.0,"total":3},"falsification_coverage":{"count":3,"rate":1.0,"total":3},"families_measured":3,"median_central_control_margin":-0.655432337806581,"promotion_ready":{"count":0,"rate":0.0,"total":3}},
+    "measurement_queue": {"campaigns":[{"automatic_promotion":false,"campaign":"frontier_20260913m","candidate_count":15,"classification_note":"Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.","families":["dispersion_curvature","entropy_disagreement_cash","volume_share_entropy_state"],"family_count":3,"modes":{"ablation":3,"base":9,"falsifier":3},"selection_folds":["research","dev"],"source_path":"experiments/frontier_20260913m/manifest.json"}],"count":1,"next_campaign":{"automatic_promotion":false,"campaign":"frontier_20260913m","candidate_count":15,"classification_note":"Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.","families":["dispersion_curvature","entropy_disagreement_cash","volume_share_entropy_state"],"family_count":3,"modes":{"ablation":3,"base":9,"falsifier":3},"selection_folds":["research","dev"],"source_path":"experiments/frontier_20260913m/manifest.json"}},
+    "policy": {"aggregate_score":"forbidden","optimization_target":false,"purpose":"diagnostic feedback vector for the research loop"},
+    "validation_feedback": {"active_after_validation":false,"development_leader":"topology_migration_w84","forward_gate_decision":"FAIL_FORWARD_GATE","forward_sharpe_12":0.314,"guidance_superseded_by_newer_validation":false,"state":"FAILED_FORWARD_GATE"}
   },
-  "ranking_policy": {
-    "cross_campaign_ranking": "forbidden",
-    "missing_metrics": "remain missing; never imputed from related strategies",
-    "robust_floor": 1.0,
-    "weighted_megascore": false,
-    "within_campaign_order": [
-      "guardrail_pass descending",
-      "best_robust_sharpe descending",
-      "family name deterministic tie-break"
-    ]
-  },
+  "ranking_policy": {"cross_campaign_ranking":"forbidden","missing_metrics":"remain missing; never imputed from related strategies","robust_floor":1.0,"weighted_megascore":false,"within_campaign_order":["guardrail_pass descending","best_robust_sharpe descending","family name deterministic tie-break"]},
   "schema_version": 2,
-  "surface_health": {
-    "index_mentions_latest": false,
-    "index_uses_generated_health": true,
-    "latest_full_matrix_campaign": "frontier_20260912k",
-    "measured_campaigns_since_full_matrix": 1,
-    "research_matrix_mentions_latest": false,
-    "summary_only_latest": true
-  },
-  "surviving_development_seam": {
-    "active_after_validation": false,
-    "id": "topology_migration_w84",
-    "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
-    "robust_development_sharpe": 1.376,
-    "state": "FAILED_FORWARD_GATE",
-    "validation": {
-      "campaign": "frontier_20260910b",
-      "decision": "FAIL_FORWARD_GATE",
-      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
-      "family": "topology_migration",
-      "fold_status": "SPENT_DO_NOT_MUTATE",
-      "selected_development_candidate": "topology_migration_w84",
-      "selected_development_robust_sharpe": 1.376132031691156,
-      "selected_forward_sharpe_12": 0.314,
-      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
-      "validation_fold": {
-        "end": "2024-12-31",
-        "start": "2023-01-01"
-      }
-    }
-  }
+  "surface_health": {"index_mentions_latest":false,"index_uses_generated_health":true,"latest_full_matrix_campaign":"frontier_20260912k","measured_campaigns_since_full_matrix":2,"research_matrix_mentions_latest":false,"summary_only_latest":true},
+  "surviving_development_seam": {"active_after_validation":false,"id":"topology_migration_w84","note":"Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.","robust_development_sharpe":1.376,"state":"FAILED_FORWARD_GATE","validation":{"campaign":"frontier_20260910b","decision":"FAIL_FORWARD_GATE","evidence_stage":"PREREGISTERED_FORWARD_OBSERVED","family":"topology_migration","fold_status":"SPENT_DO_NOT_MUTATE","selected_development_candidate":"topology_migration_w84","selected_development_robust_sharpe":1.376132031691156,"selected_forward_sharpe_12":0.314,"source_path":"evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json","validation_fold":{"end":"2024-12-31","start":"2023-01-01"}}}
 }

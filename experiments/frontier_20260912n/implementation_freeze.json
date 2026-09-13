@@ -1,0 +1,15 @@
+{
+  "activation_type": "NEW_PREREGISTERED_FRONTIER",
+  "campaign": "frontier_20260912n",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "preregistration_sha256": {
+    "online_ar_surprise_persistence": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062"
+  },
+  "freeze_note": "One implemented family, three preregistered fit windows, one raw-residual ablation and one identity-rotation falsifier. No Frontier-N market-return result may be used to mutate formulas, signs, windows, persistence horizon, allocation or controls.",
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "validation_boundary": "2023-2024 is spent; 2025+ and live are protected from mutation."
+}

@@ -5,13 +5,16 @@
   if (!root) return;
 
   const bind = (name, value) => {
-    const node = root.querySelector(`[data-bind="${name}"]`);
-    if (node && value !== undefined && value !== null) node.textContent = value;
+    if (value === undefined || value === null) return;
+    root.querySelectorAll(`[data-bind="${name}"]`).forEach((node) => {
+      node.textContent = value;
+    });
   };
 
   const state = (name, value) => {
-    const node = root.querySelector(`[data-bind="${name}"]`);
-    if (node) node.dataset.state = value;
+    root.querySelectorAll(`[data-bind="${name}"]`).forEach((node) => {
+      node.dataset.state = value;
+    });
   };
 
   const ratioText = (metric) => {

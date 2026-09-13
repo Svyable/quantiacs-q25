@@ -40,77 +40,77 @@
     }
   ],
   "latest_evidence": {
-    "campaign": "frontier_20260912k",
+    "campaign": "frontier_20260912l",
     "decision": "PROMOTE_ZERO",
     "evidence_stage": "DEVELOPMENT_ONLY",
     "family_count": 3,
     "family_triage": [
       {
-        "ablation_robust_sharpe": 0.7008911597193725,
-        "best_base_id": "nearest_peer_detachment_w63",
-        "best_robust_sharpe": 0.7820101586330442,
+        "ablation_robust_sharpe": 0.28099760489191,
+        "best_base_id": "dollar_volume_share_migration_w42",
+        "best_robust_sharpe": 0.6139429070897866,
         "campaign_rank": 1,
-        "central_control_margin": 0.08111899891367169,
-        "central_id": "nearest_peer_detachment_w63",
-        "central_robust_sharpe": 0.7820101586330442,
-        "control_ceiling": 0.7008911597193725,
+        "central_control_margin": 0.3329453021978766,
+        "central_id": "dollar_volume_share_migration_w42",
+        "central_robust_sharpe": 0.6139429070897866,
+        "control_ceiling": 0.28099760489191,
         "control_supported": true,
         "decision_code": "KILL_WEAK_ALPHA",
         "falsification_complete": true,
-        "falsifier_robust_sharpe": 0.6991778256550764,
-        "family": "nearest_peer_detachment",
-        "floor_margin": -0.21798984136695576,
+        "falsifier_robust_sharpe": -0.2008591416405153,
+        "family": "dollar_volume_share_migration",
+        "floor_margin": -0.3860570929102134,
         "guardrail_pass": false
       },
       {
-        "ablation_robust_sharpe": 0.005789402862028664,
-        "best_base_id": "subspace_rotation_opportunity_w42",
-        "best_robust_sharpe": 0.3536037651085109,
+        "ablation_robust_sharpe": 0.1659142023333896,
+        "best_base_id": "permutation_entropy_contraction_w126",
+        "best_robust_sharpe": 0.4011851200484395,
         "campaign_rank": 2,
-        "central_control_margin": -0.08333783122920768,
-        "central_id": "subspace_rotation_opportunity_w63",
-        "central_robust_sharpe": 0.3316438596528032,
-        "control_ceiling": 0.41498169088201087,
+        "central_control_margin": -0.21202613589851338,
+        "central_id": "permutation_entropy_contraction_w84",
+        "central_robust_sharpe": -0.04611193356512377,
+        "control_ceiling": 0.1659142023333896,
         "control_supported": false,
         "decision_code": "FALSIFIED_DEVELOPMENT",
         "falsification_complete": true,
-        "falsifier_robust_sharpe": 0.41498169088201087,
-        "family": "subspace_rotation_opportunity",
-        "floor_margin": -0.6463962348914891,
+        "falsifier_robust_sharpe": 0.13220409394792143,
+        "family": "permutation_entropy_contraction",
+        "floor_margin": -0.5988148799515605,
         "guardrail_pass": false
       },
       {
-        "ablation_robust_sharpe": 0.24085985331973997,
-        "best_base_id": "cohort_residual_divergence_w63",
-        "best_robust_sharpe": 0.1305431207422551,
+        "ablation_robust_sharpe": -0.014684556846498423,
+        "best_base_id": "relative_value_convergence_w63",
+        "best_robust_sharpe": 0.18155675032943677,
         "campaign_rank": 3,
-        "central_control_margin": -0.11031673257748487,
-        "central_id": "cohort_residual_divergence_w63",
-        "central_robust_sharpe": 0.1305431207422551,
-        "control_ceiling": 0.24085985331973997,
+        "central_control_margin": -0.008902771865795788,
+        "central_id": "relative_value_convergence_w42",
+        "central_robust_sharpe": -0.02358732871229421,
+        "control_ceiling": -0.014684556846498423,
         "control_supported": false,
         "decision_code": "FALSIFIED_DEVELOPMENT",
         "falsification_complete": true,
-        "falsifier_robust_sharpe": -0.06265276384666421,
-        "family": "cohort_residual_divergence",
-        "floor_margin": -0.8694568792577448,
+        "falsifier_robust_sharpe": -0.47110083991664164,
+        "family": "relative_value_convergence",
+        "floor_margin": -0.8184432496705633,
         "guardrail_pass": false
       }
     ],
-    "interpretation": "Frontier-K measured three previously unmeasured reserves on the reused 2016-2022 development surface. Nearest-peer detachment is the strongest base at robust Sharpe 0.782 and beats both matched controls, but every window misses the 1.0 floor (KILL_WEAK_ALPHA). Subspace rotation and cohort residual divergence are FALSIFIED_DEVELOPMENT. Do not grid-rescue. 2023-2024 remains spent and was excluded. Topology_migration_w84 already failed its frozen forward gate (0.314); this campaign does not restore it.",
-    "kind": "matrix_and_summary",
-    "next_boundary": "Do not retune Frontier-K. Nearest-peer detachment is directionally supported and below the 1.0 floor. Do not invert subspace rotation or promote the cohort ablation. Do not reopen the spent 2023-2024 fold. Next look: a new object, or executable V10/C165/V12 controls in this harness."
+    "interpretation": "Frontier-L measured three preregistered non-graph families on the reused 2016-2022 development surface. Dollar-volume share migration is the strongest new base family at robust Sharpe 0.614 and its central 42-day parent beats both matched controls, but every base window remains below the fixed 1.0 development floor (KILL_WEAK_ALPHA). Permutation-entropy contraction and relative-value convergence are FALSIFIED_DEVELOPMENT by their preregistered destructive controls/ablations. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
+    "kind": "summary_only",
+    "next_boundary": "Do not retune Frontier-L. Dollar-volume share migration has causal support but insufficient economics; preserve it as a frozen weak-alpha result. Do not invert or parameter-rescue permutation entropy or relative-value convergence. Keep 2023-2024 closed. Next research should open a genuinely new object or bring the frozen historical V10/C165/V12 implementations through the current harness for comparable controls."
   },
   "learning_loop": {
     "evidence_depth": {
       "latest_full_matrix_campaign": "frontier_20260912k",
-      "latest_kind": "matrix_and_summary",
-      "measured_campaigns_since_full_matrix": 0,
-      "summary_only_latest": false
+      "latest_kind": "summary_only",
+      "measured_campaigns_since_full_matrix": 1,
+      "summary_only_latest": true
     },
     "latest_campaign": {
-      "best_floor_margin": -0.21798984136695576,
-      "best_robust_sharpe": 0.7820101586330442,
+      "best_floor_margin": -0.3860570929102134,
+      "best_robust_sharpe": 0.6139429070897866,
       "causal_support": {
         "count": 1,
         "rate": 0.3333333333333333,
@@ -132,7 +132,7 @@
         "total": 3
       },
       "families_measured": 3,
-      "median_central_control_margin": -0.08333783122920768,
+      "median_central_control_margin": -0.008902771865795788,
       "promotion_ready": {
         "count": 0,
         "rate": 0.0,
@@ -140,75 +140,9 @@
       }
     },
     "measurement_queue": {
-      "campaigns": [
-        {
-          "automatic_promotion": false,
-          "campaign": "frontier_20260912l",
-          "candidate_count": 15,
-          "classification_note": "Frontier-L pivots away from failed residual-correlation graph mining into distributional sequence structure, cross-sectional activity-share migration, and regime-conditioned relative value. 2023-2024 is spent and excluded.",
-          "families": [
-            "dollar_volume_share_migration",
-            "permutation_entropy_contraction",
-            "relative_value_convergence"
-          ],
-          "family_count": 3,
-          "modes": {
-            "ablation": 3,
-            "base": 9,
-            "falsifier": 3
-          },
-          "selection_folds": [
-            "research",
-            "dev"
-          ],
-          "source_path": "experiments/frontier_20260912l/manifest.json"
-        },
-        {
-          "automatic_promotion": false,
-          "campaign": "frontier_20260912m",
-          "candidate_count": 15,
-          "classification_note": "Frontier-M is a preregistered OHLCV-only volatility-term-structure campaign. It pivots away from failed short-horizon Sharpe refinements and avoids simple inverse-vol or static low-vol claims; 2023-2024 is spent and excluded.",
-          "families": [
-            "relative_vol_rank_relief",
-            "slope_dispersion_opportunity",
-            "vol_curve_recompression"
-          ],
-          "family_count": 3,
-          "modes": {
-            "ablation": 3,
-            "base": 9,
-            "falsifier": 3
-          },
-          "selection_folds": [
-            "research",
-            "dev"
-          ],
-          "source_path": "experiments/frontier_20260912m/manifest.json"
-        }
-      ],
-      "count": 2,
-      "next_campaign": {
-        "automatic_promotion": false,
-        "campaign": "frontier_20260912l",
-        "candidate_count": 15,
-        "classification_note": "Frontier-L pivots away from failed residual-correlation graph mining into distributional sequence structure, cross-sectional activity-share migration, and regime-conditioned relative value. 2023-2024 is spent and excluded.",
-        "families": [
-          "dollar_volume_share_migration",
-          "permutation_entropy_contraction",
-          "relative_value_convergence"
-        ],
-        "family_count": 3,
-        "modes": {
-          "ablation": 3,
-          "base": 9,
-          "falsifier": 3
-        },
-        "selection_folds": [
-          "research",
-          "dev"
-        ],
-        "source_path": "experiments/frontier_20260912l/manifest.json"
-      }
+      "campaigns": [],
+      "count": 0,
+      "next_campaign": null
     },
     "policy": {
       "aggregate_score": "forbidden",
@@ -240,9 +174,9 @@
     "index_mentions_latest": false,
     "index_uses_generated_health": true,
     "latest_full_matrix_campaign": "frontier_20260912k",
-    "measured_campaigns_since_full_matrix": 0,
-    "research_matrix_mentions_latest": true,
-    "summary_only_latest": false
+    "measured_campaigns_since_full_matrix": 1,
+    "research_matrix_mentions_latest": false,
+    "summary_only_latest": true
   },
   "surviving_development_seam": {
     "active_after_validation": false,

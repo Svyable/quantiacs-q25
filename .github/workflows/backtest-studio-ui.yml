@@ -1,0 +1,80 @@
+name: backtest-studio-ui
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/backtest.md'
+      - 'docs/assets/css/backtest.css'
+      - 'docs/assets/js/backtest.js'
+      - 'docs/data/backtest_dashboard.json'
+      - 'scripts/build_backtest_dashboard.py'
+      - 'scripts/export_q25_backtest.py'
+      - 'tests/test_backtest_dashboard.py'
+      - 'tests/test_export_q25_backtest.py'
+      - '.github/workflows/backtest-studio-evidence.yml'
+      - '.github/workflows/backtest-studio-ui.yml'
+      - '.github/workflows/publish-backtest-studio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-backtest-studio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install focused test dependencies
+        run: python -m pip install pytest pyyaml
+
+      - name: Compile backtest evidence scripts
+        run: python -m py_compile scripts/build_backtest_dashboard.py scripts/export_q25_backtest.py
+
+      - name: Parse Backtest Studio JavaScript
+        run: node --check docs/assets/js/backtest.js
+
+      - name: Parse Backtest Studio workflow YAML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          paths = [
+              Path('.github/workflows/backtest-studio-evidence.yml'),
+              Path('.github/workflows/backtest-studio-ui.yml'),
+              Path('.github/workflows/publish-backtest-studio.yml'),
+          ]
+          for path in paths:
+              parsed = yaml.safe_load(path.read_text())
+              assert isinstance(parsed, dict) and parsed.get('name'), path
+              assert 'jobs' in parsed, path
+              print(f'parsed {path}')
+          PY
+
+      - name: Run Backtest Studio tests
+        run: python -m pytest -q tests/test_backtest_dashboard.py tests/test_export_q25_backtest.py
+
+      - name: Validate checked-in empty evidence packet
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          packet = json.loads(Path('docs/data/backtest_dashboard.json').read_text())
+          assert packet['status'] == 'unavailable'
+          assert packet['series'] == []
+          assert packet['monthly_returns'] == []
+          print('checked-in Backtest Studio packet is safely empty')
+          PY

@@ -51,7 +51,7 @@ permalink: /backtest/
       <div class="bt-tooltip" data-tooltip hidden></div>
       <div class="bt-empty" data-empty hidden>
         <strong>No committed time-series packet yet.</strong>
-        <span>Run <code>python scripts/build_backtest_dashboard.py --input &lt;stats.csv&gt;</code> and commit the generated JSON. The page will populate without changing its markup.</span>
+        <span>Run <code>python scripts/export_q25_backtest.py --strategy &lt;candidate.py&gt; --output-dir results/backtest/&lt;candidate&gt;</code>, then publish the generated dashboard packet. The page will populate without changing its markup.</span>
       </div>
     </div>
     <footer class="bt-chart-footer">
@@ -95,6 +95,12 @@ permalink: /backtest/
       <p class="bt-evidence-note" data-bind="evidence-note">Loading packet provenance…</p>
       <div class="bt-provenance"><span>source</span><code data-bind="source-path">—</code><span>commit</span><code data-bind="source-commit">—</code></div>
     </article>
+  </section>
+
+  <section class="bt-panel" style="margin-top:1.1rem">
+    <header class="bt-panel-head"><div><span class="bt-kicker">Evidence pipeline</span><h2>One strategy in, reproducible visual packet out</h2></div></header>
+    <p class="bt-evidence-note">The exporter loads official Quantiacs crypto data, runs the selected repository strategy, applies the <code>crypto_daily_long</code> cleaner, recomputes CRYPTO10, writes both complete <code>calc_stat</code> time series, records the strategy SHA-256 and commit, and builds the JSON consumed by this page.</p>
+    <div class="bt-provenance"><span>local / CI</span><code>python scripts/export_q25_backtest.py --strategy strategies/generated/&lt;candidate&gt;.py --output-dir results/backtest/&lt;candidate&gt;</code><span>Actions</span><code>backtest-studio-evidence</code></div>
   </section>
 
   <div class="bt-footnote">This is a visualization layer, not a second backtester. It renders committed strategy statistics and does not infer missing performance. Q25 eligibility, correlation, submission and live-period results remain separate evidence lanes.</div>

@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -27,6 +31,9 @@ jobs:
 
       - name: Compile Python research surface
         run: python -m compileall -q factory research scripts strategies
+
+      - name: Validate canonical JSON integrity
+        run: python scripts/check_json_integrity.py evidence experiments docs/data
 
       - name: Run repository static-audit self test
         run: python research/static_audit.py

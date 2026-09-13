@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "campaign": "frontier_20260912m",
+  "receipt_status": "MEASURED_ARTIFACT_NOT_CANONICAL_EVIDENCE",
+  "decision": "PROMOTE_ZERO_FREEZE_ALL",
+  "families": [
+    {"family":"vol_curve_recompression","best_base_id":"vol_curve_recompression_w63","best_robust_sharpe":0.3066733416732465,"central_id":"vol_curve_recompression_w84","central_robust_sharpe":-0.5354937578646062,"ablation_robust_sharpe":0.00009228126194716202,"falsifier_robust_sharpe":0.20702277361049765,"decision_code":"FALSIFIED_DEVELOPMENT"},
+    {"family":"relative_vol_rank_relief","best_base_id":"relative_vol_rank_relief_w84","best_robust_sharpe":-0.09620637040556103,"central_id":"relative_vol_rank_relief_w84","central_robust_sharpe":-0.09620637040556103,"ablation_robust_sharpe":0.5592259674010199,"falsifier_robust_sharpe":0.1802631947820711,"decision_code":"FALSIFIED_DEVELOPMENT"},
+    {"family":"slope_dispersion_opportunity","best_base_id":"slope_dispersion_opportunity_w84","best_robust_sharpe":0.06698489665610868,"central_id":"slope_dispersion_opportunity_w63","central_robust_sharpe":-0.1980717789517871,"ablation_robust_sharpe":0.21001352170084853,"falsifier_robust_sharpe":-0.2094595663639839,"decision_code":"FALSIFIED_DEVELOPMENT"}
+  ],
+  "source":{"workflow_run_id":34736196639,"artifact_id":10310778596,"artifact_digest":"sha256:527ac421a753249c39006e5e7fb21dff3c69be7253325955a791c98fdd912396","measured_head_sha":"142f76adddd185f10091fe9fddab0c77b7f388c0","data_sha256":"bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58","manifest_sha256":"b056fe4eb326631bc6ce23b8a932bc38dc029f8740896fd9a62a4ab609c865b6"},
+  "claim_limit":"Receipt records a successful frozen development benchmark. Until canonical evidence/frontier_20260912m is committed, it must not replace methodology-health evidence."
+}

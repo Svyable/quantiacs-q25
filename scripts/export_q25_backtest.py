@@ -3,6 +3,7 @@
 
 This script is deliberately boring about provenance: it loads only Quantiacs data,
 imports one repository strategy, applies the official crypto_daily_long cleaner,
+requires the official qnt.output.check validator to accept the evaluation weights,
 computes the strategy and CRYPTO10 statistics with qnt.stats.calc_stat, writes both
 full time-series CSV files, and then builds the Backtest Studio JSON packet.
 
@@ -29,6 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "build_backtest_dashboard.py"
+COMPETITION_TYPE = "crypto_daily_long"
 
 
 def sha256_file(path: Path) -> str:
@@ -56,6 +58,11 @@ def import_callable(path: Path, function_name: str):
     return fn
 
 
+def validate_weights(output_module, weights, data) -> None:
+    """Require Quantiacs' own competition-output validator to accept weights."""
+    output_module.check(weights, data, COMPETITION_TYPE)
+
+
 def write_stat_csv(stat, path: Path) -> None:
     frame = stat.to_pandas()
     frame.index.name = "time"
@@ -75,10 +82,14 @@ def run(args: argparse.Namespace) -> dict[str, str]:
     # Warm-up begins before the official 2016-01-01 in-sample boundary by default.
     data = qndata.cryptodaily_load_data(min_date=args.min_date)
     raw_weights = strategy(data)
-    weights = qnout.clean(raw_weights, data, "crypto_daily_long")
+    weights = qnout.clean(raw_weights, data, COMPETITION_TYPE)
 
     end = args.end_date or None
     evaluation_weights = weights.sel(time=slice(args.start_date, end))
+    # A dashboard packet is publication evidence, so visualizable performance is
+    # downstream of the same output validator used in official Quantiacs examples.
+    validate_weights(qnout, evaluation_weights, data)
+
     strategy_stat = qnstats.calc_stat(
         data,
         evaluation_weights,
@@ -117,7 +128,7 @@ def run(args: argparse.Namespace) -> dict[str, str]:
         "--source-label", "Official Quantiacs Q25 single-pass export",
         "--source-path", source_path,
         "--note",
-        "Strategy and CRYPTO10 were recomputed from official Quantiacs data; the dashboard is a rendering layer, not a second backtester.",
+        "Strategy weights passed qnt.output.check and strategy/CRYPTO10 statistics were recomputed from official Quantiacs data; the dashboard is a rendering layer, not a second backtester.",
     ]
     if commit:
         command += ["--source-commit", commit]
@@ -129,7 +140,8 @@ def run(args: argparse.Namespace) -> dict[str, str]:
         "strategy_path": source_path,
         "strategy_sha256": sha256_file(strategy_path),
         "strategy_function": args.function,
-        "competition_type": "crypto_daily_long",
+        "competition_type": COMPETITION_TYPE,
+        "quantiacs_output_check": "passed",
         "benchmark": "CRYPTO10",
         "data_min_date": args.min_date,
         "evaluation_start": args.start_date,

@@ -52,7 +52,7 @@ Until measured evidence is committed, this is a queue item—not a result. The u
 This ordering is valid **only inside the latest measured campaign**. Controls are shown beside economics so a high number cannot hide a broken causal story.
 
 | Rank | Family | Best base | Robust SR | Floor margin | Central | Control ceiling | Causal margin | Support | Decision |
-|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+|---:|---|---|---:|---:|---:|---:|---:|---|
 | 1 | `vol_curve_recompression` | `vol_curve_recompression_w63` | 0.307 | -0.693 | -0.535 | 0.207 | -0.743 | FAIL | `FALSIFIED_DEVELOPMENT` |
 | 2 | `slope_dispersion_opportunity` | `slope_dispersion_opportunity_w84` | 0.067 | -0.933 | -0.198 | 0.210 | -0.408 | FAIL | `FALSIFIED_DEVELOPMENT` |
 | 3 | `relative_vol_rank_relief` | `relative_vol_rank_relief_w84` | -0.096 | -1.096 | -0.096 | 0.559 | -0.655 | FAIL | `FALSIFIED_DEVELOPMENT` |

@@ -88,4 +88,7 @@ def test_homepage_is_bound_to_generated_health_packet():
     assert "data-q25-dashboard" in text
     assert "data/methodology_health.json" in text
     assert "assets/js/dashboard.js" in text
-    assert "Five feedback channels, zero mega-score" in text
+    assert 'data-bind="latest-campaign"' in text
+    assert 'data-bind="promotion-ratio"' in text
+    assert 'data-bind="triage-body"' in text
+    assert "mega-score" in text

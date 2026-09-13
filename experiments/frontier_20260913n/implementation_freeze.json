@@ -1,0 +1,27 @@
+{
+  "activation_type": "NEW_PREREGISTERED_FRONTIER",
+  "campaign": "frontier_20260913n",
+  "created_utc": "2026-09-13T04:30:00Z",
+  "frozen_before_measurement": true,
+  "implemented_families": ["wick_rejection_pressure", "range_close_disagreement", "impact_decay_persistence"],
+  "known_before_freeze": {
+    "frontier_20260912m_best_base_robust_sharpe": 0.3066733416732465,
+    "frontier_20260912m_workflow_run": 34736196639,
+    "topology_forward_sharpe_12": 0.314
+  },
+  "market_returns_observed_before_freeze": false,
+  "note": "Frontier-M exact results and the spent topology forward gate were observed before this freeze. No Frontier-N market return was observed before freeze.",
+  "preregistration_sha256": {
+    "impact_decay_persistence": "05346beec4383c1cfd16264287c88b52e4dc5f04b905a6dccb8ea3775e236f87",
+    "range_close_disagreement": "e347f223530bc1d4a7408e75bc2fd253191447a2b6c6d50724ddb9777c317651",
+    "wick_rejection_pressure": "24cb05a6b1df1ce4f68a267e75d9171cfcd67b7da16912670be5b087ea442521"
+  },
+  "reserve_families": ["body_range_efficiency", "wick_volume_disagreement", "range_impact_convexity"],
+  "reserve_preregistration_sha256": {
+    "body_range_efficiency": "284fd9d336980ec1a4883dee572ed61cd7d8d8cde7f2d7c13d4cbd0a19dd8203",
+    "range_impact_convexity": "a2b3d9bb97eb0992bc2070d3edecb421e49d7ce5c8fa960f8a1032738733a673",
+    "wick_volume_disagreement": "0e73b593dbb5ea19c79227a45ddd131e590e1009a9098764b0faa4ceb8d2d57f"
+  },
+  "selection_folds": ["research", "dev"],
+  "spent_validation": "2023-2024 SPENT_DO_NOT_MUTATE"
+}

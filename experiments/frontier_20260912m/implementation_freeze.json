@@ -1,0 +1,30 @@
+{
+  "activation_type": "NEW_PREREGISTERED_FRONTIER",
+  "campaign": "frontier_20260912m",
+  "created_utc": "2026-09-13T03:00:00Z",
+  "frozen_before_measurement": true,
+  "implemented_families": [
+    "vol_curve_recompression",
+    "relative_vol_rank_relief",
+    "slope_dispersion_opportunity"
+  ],
+  "market_returns_observed_before_freeze": false,
+  "note": "No Frontier-M market return was observed before this freeze. Any family failing controls or the 1.0 robust-development floor freezes without grid rescue.",
+  "preregistration_sha256": {
+    "vol_curve_recompression": "d812077856542446b574acc3225fc1a7e9094fb3cca8246e730b18fc81089472",
+    "relative_vol_rank_relief": "2f0c57ae861e7b7f58c9c38119b343f37cdcb06a6fe0ae18496d2366ca6170d7",
+    "slope_dispersion_opportunity": "1a06b36543ef9a6987f674a474e362c2e974e17e676bc19ee1ac29e4fe8e7c20"
+  },
+  "reserve_families": [
+    "compression_age",
+    "vol_of_vol_relief",
+    "term_structure_rank_migration"
+  ],
+  "reserve_preregistration_sha256": {
+    "compression_age": "9bf5b98319a078555eac9dee4e4293bebd953b209863cb1d70443618239cce4f",
+    "vol_of_vol_relief": "f3c3aa3ac6ed385c89a39d98abe22005658213be200ea724552c3328eff82186",
+    "term_structure_rank_migration": "8ed24d7f26e7a86083755a8f1af0e48d4664168f87e275d21b5e081c0f6d8db8"
+  },
+  "selection_folds": ["research", "dev"],
+  "spent_validation": "2023-2024 SPENT_DO_NOT_MUTATE"
+}

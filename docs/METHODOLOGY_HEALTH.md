@@ -39,7 +39,13 @@ The earlier development leader **`topology_migration_w84`** reported robust-deve
 
 ## Measurement queue
 
-No preregistered campaign is currently ahead of the committed measurement frontier.
+The committed measurement frontier is ahead of the evidence frontier by **1 preregistered campaign(s)**.
+
+Next frozen campaign: **`frontier_20260912m`** — 15 candidate/control cells across 3 families; automatic promotion is `False`.
+
+Frontier-M is a preregistered OHLCV-only volatility-term-structure campaign. It pivots away from failed short-horizon Sharpe refinements and avoids simple inverse-vol or static low-vol claims; 2023-2024 is spent and excluded.
+
+Until measured evidence is committed, this is a queue item—not a result. The useful recursive action is to measure or ingest the frozen packet unchanged, not mutate it because the dashboard is empty.
 
 ## Latest-campaign family triage
 

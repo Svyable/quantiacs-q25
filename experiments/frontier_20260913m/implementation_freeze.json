@@ -1,0 +1,22 @@
+{
+  "campaign": "frontier_20260913m",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "activation_type": "PREEXISTING_UNMEASURED_RESERVES",
+  "selection_folds": ["research", "dev"],
+  "validation_boundary": "2023-2024 SPENT_DO_NOT_MUTATE; 2025+ diagnostic/live excluded",
+  "cost_ladder": [0.0, 0.04, 0.08, 0.12],
+  "automatic_promotion": false,
+  "preregistration_sha256": {
+    "volume_share_entropy_state": "80f6f805f227d35462891e551953640619a2d198b004b682736d3f77c062fffa",
+    "dispersion_curvature": "e2f324f11f10d802119427d091b1ed44c1ff4a41e17bcb72adaa0e78a4a68f2d",
+    "entropy_disagreement_cash": "8774e1b990474ac09c8f9d1e890a6e393b758dbab0cec00b351e8de07b6b480e"
+  },
+  "strategy_sha256": {
+    "volume_share_entropy_state": "38393adec08a733ad2225ee8b9e32a6992bd92670572200fe42a8a5ffadf78f2",
+    "dispersion_curvature": "fba9e53d5f21963a8a793e924483f0997774d3a52b348f4476a069d7d3d9a269",
+    "entropy_disagreement_cash": "3894ae78e3890d1bdb911d44e83860b802a0a5792934d36ca7850bede8a9f87c"
+  },
+  "mutation_after_observation": "forbidden",
+  "note": "These operational definitions were committed only after the older reserve preregistrations and before any Frontier-M return measurement. Frontier-L results do not alter M formulas, grids, controls, or state definitions."
+}

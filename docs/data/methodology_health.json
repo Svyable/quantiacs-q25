@@ -162,9 +162,31 @@
             "dev"
           ],
           "source_path": "experiments/frontier_20260912l/manifest.json"
+        },
+        {
+          "automatic_promotion": false,
+          "campaign": "frontier_20260912m",
+          "candidate_count": 15,
+          "classification_note": "Frontier-M is a preregistered OHLCV-only volatility-term-structure campaign. It pivots away from failed short-horizon Sharpe refinements and avoids simple inverse-vol or static low-vol claims; 2023-2024 is spent and excluded.",
+          "families": [
+            "relative_vol_rank_relief",
+            "slope_dispersion_opportunity",
+            "vol_curve_recompression"
+          ],
+          "family_count": 3,
+          "modes": {
+            "ablation": 3,
+            "base": 9,
+            "falsifier": 3
+          },
+          "selection_folds": [
+            "research",
+            "dev"
+          ],
+          "source_path": "experiments/frontier_20260912m/manifest.json"
         }
       ],
-      "count": 1,
+      "count": 2,
       "next_campaign": {
         "automatic_promotion": false,
         "campaign": "frontier_20260912l",

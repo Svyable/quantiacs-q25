@@ -1,0 +1,50 @@
+{
+  "ablation": "raw close-to-close trend only",
+  "allocation": "Monday fixed slots min(0.25, 1/K); unused slots cash; strict ineligibility exits persist until next scheduled rebalance",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": null,
+  "contamination_notes": "A-M development evidence and the spent 2023-2024 topology forward fold are already observed. Frontier-N is repeated development research, not a fresh holdout. 2023-2024 remains closed.",
+  "cost_hypothesis": "weekly fixed-slot portfolios should keep turnover bounded; exact ATR-linked ladder is frozen at 0/4/8/12%",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260913n_body_range_efficiency",
+  "failure_mode": "mechanism duplicates an occupied family or fails its destructive controls",
+  "falsifier": "rotate body-efficiency assignments across eligible assets",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      21,
+      42,
+      63
+    ]
+  },
+  "mechanism": "body_range_efficiency",
+  "nearest_incumbent": "range acceptance escape",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 42
+  },
+  "portfolio_role": "reserve only; no automatic substitution",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "positive score, top-K deterministic label tie breaks if separately activated",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Reserve frozen with Frontier-N before any Frontier-N return is observed.",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "PREREGISTERED_NOT_IMPLEMENTED",
+  "stop_rule": "freeze if falsifier or ablation matches/beats canonical base or if every valid base cell is below the fixed 1.0 robust-development floor; do not grid-rescue after failure",
+  "thesis": "The fraction of the daily high-low range converted into directional candle body, conditioned on residual trend, may separate efficient continuation from noisy range expansion.",
+  "timing": "completed daily bars only; toolbox owns execution lag; all rolling state is causal and <=365 days",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 is SPENT_DO_NOT_MUTATE and excluded from Frontier-N selection; 2025+ and live never drive mutation"
+}

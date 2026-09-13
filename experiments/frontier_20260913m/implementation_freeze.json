@@ -13,10 +13,10 @@
     "entropy_disagreement_cash": "0099277375cd53423468d150e39c1fe8871a8afb968e9c3960b8d67ad2f23429"
   },
   "strategy_sha256": {
-    "volume_share_entropy_state": "38393adec08a733ad2225ee8b9e32a6992bd92670572200fe42a8a5ffadf78f2",
-    "dispersion_curvature": "fba9e53d5f21963a8a793e924483f0997774d3a52b348f4476a069d7d3d9a269",
-    "entropy_disagreement_cash": "3894ae78e3890d1bdb911d44e83860b802a0a5792934d36ca7850bede8a9f87c"
+    "volume_share_entropy_state": "10b4711784f4feaf1f47e7d26ed5daf88ebad8a7540f29aaf115d20684385606",
+    "dispersion_curvature": "6d7605f29c7ff2d6f237d93de76180823506812e18a5635ebbbab7be150673d0",
+    "entropy_disagreement_cash": "91bbb612bc7b11a55999958a996b273b6ff34cffe79fe27a8878ab5da305c1a5"
   },
   "mutation_after_observation": "forbidden",
-  "note": "These operational definitions were committed only after the older reserve preregistrations and before any Frontier-M return measurement. Frontier-L results do not alter M formulas, grids, controls, or state definitions."
+  "note": "Operational definitions and formulas were frozen before any Frontier-M return measurement. A pre-measurement schema-compatibility amendment added code_path plus embedded preregistration-hash metadata; formulas, grids, controls, and state definitions remain unchanged."
 }

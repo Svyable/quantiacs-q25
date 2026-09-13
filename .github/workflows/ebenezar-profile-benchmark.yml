@@ -63,6 +63,8 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import numpy as np
+          import xarray as xr
           import qnt.data as qndata
           from research.benchmark import check_causality, load_module, policy
           from research.iteration import load_manifest
@@ -72,19 +74,39 @@ jobs:
           folds, _ = policy()
           data = qndata.cryptodaily_load_data(min_date='2015-01-01', max_date=folds[-1]['end'])
           data = data.sel(time=slice('2015-01-01', folds[-1]['end']))
+          cuts = sorted(set(np.linspace(min(20, data.sizes['time'] - 1), data.sizes['time'] - 1, 7, dtype=int)))
           for candidate in manifest['candidates']:
               module = load_module(root / candidate['path'])
               fn = lambda d, m=module, c=candidate: m.strategy(d, c['params'], c['mode'])
+              weights = fn(data)
               try:
-                  weights = fn(data)
                   result = check_causality(fn, data, weights)
                   print(candidate['id'], 'PASS', result, 'coords=', list(weights.coords))
               except Exception as exc:
+                  print(candidate['id'], 'FAIL', type(exc).__name__, repr(str(exc)), 'coords=', list(weights.coords))
+                  for i in cuts:
+                      prefix = data.isel(time=slice(0, i + 1))
+                      got = fn(prefix)
+                      delta = np.abs(got.values - weights.isel(time=slice(0, i + 1)).values)
+                      maximum = float(np.nanmax(delta))
+                      if maximum > 1e-10:
+                          row, col = np.unravel_index(np.nanargmax(delta), delta.shape)
+                          print(
+                              candidate['id'], 'FIRST_DIVERGENT_CHECKPOINT', i,
+                              'max_abs=', maximum,
+                              'time=', str(prefix.time.values[row]),
+                              'asset=', str(prefix.asset.values[col]),
+                              'prefix_weight=', float(got.values[row, col]),
+                              'full_weight=', float(weights.values[row, col]),
+                          )
+                          break
                   try:
-                      coords = list(weights.coords)
-                  except Exception:
-                      coords = []
-                  print(candidate['id'], 'FAIL', type(exc).__name__, repr(str(exc)), 'coords=', coords)
+                      with xr.set_options(use_bottleneck=False):
+                          stable_full = fn(data)
+                          stable = check_causality(fn, data, stable_full)
+                      print(candidate['id'], 'NO_BOTTLENECK_PASS', stable)
+                  except Exception as stable_exc:
+                      print(candidate['id'], 'NO_BOTTLENECK_FAIL', type(stable_exc).__name__, repr(str(stable_exc)))
           PY
 
       - name: Run exact Quantiacs development screen

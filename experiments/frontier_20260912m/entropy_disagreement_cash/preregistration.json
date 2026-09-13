@@ -1,0 +1,50 @@
+{
+  "ablation": "remove disagreement cash gate",
+  "allocation": "fixed slots min(0.25, 1/K); unused slots cash",
+  "cash_rule": "no positive qualified score or inactive global state means cash",
+  "code_path": "strategies/generated/frontier_20260912m_entropy_disagreement_cash.py",
+  "contamination_notes": "Frontier-A through Frontier-L development evidence is already observed. Frontier-M activates an older unmeasured Frontier-L reserve; M is repeated development research, not a fresh holdout. 2023-2024 is SPENT_DO_NOT_MUTATE and excluded.",
+  "cost_hypothesis": "weekly rebalance, sparse top-five fixed slots, cash on absent state, and persistent eligibility exits should limit unnecessary turnover; fixed cost ladder is evaluated without post-result retuning",
+  "created_utc": "2026-09-13T02:30:00+00:00",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260912m_entropy_disagreement_cash",
+  "failure_mode": "the gate merely times generic trend or entropy disagreement has no stable relation to opportunity density",
+  "falsifier": "hold risk when entropy disagreement is below its trailing median",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      63,
+      84,
+      126
+    ]
+  },
+  "mechanism": "entropy_disagreement_cash",
+  "nearest_incumbent": "opportunity_density / Frontier-L permutation_entropy_contraction",
+  "novelty_axes_changed": [
+    "timing_or_state_condition",
+    "portfolio_construction"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 84
+  },
+  "portfolio_role": "opportunity-density cash gate",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "prior_preregistration": "experiments/frontier_20260912l/entropy_disagreement_cash/preregistration.json",
+  "prior_preregistration_sha256": "14d83b5552f1f592cc0a6577708909e57ab6b4a79769202c4421157b35672fb6",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; persistent immediate strict-liquidity loss exits",
+  "selection": "positive scores, top-K, deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Activates a Frontier-L reserve that was preregistered before Frontier-L returns. Frontier-L measured evidence informed only the decision to open a separate reserve campaign, not this hypothesis or its grid.",
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if matched ablation or destructive falsifier matches/beats canonical parent, or if every valid base cell is below fixed 1.0 development floor; do not invert, retune or substitute after observing failure",
+  "thesis": "Cross-sectional disagreement in residual sequence entropy defines opportunity density: hold positive residual-trend names only when entropy disagreement is unusually high and otherwise remain in cash.",
+  "timing": "completed daily residual returns; Monday entropy disagreement compared only with prior Monday states",
+  "track": "novel_alpha_reserve_activation",
+  "universe": "historical is_liquid == 1 for signal state and weights; no hand-picked symbols",
+  "validation": "2023-2024 is SPENT_DO_NOT_MUTATE and excluded from Frontier-M; 2025+ diagnostic/live evidence never drives mutation"
+}

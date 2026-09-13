@@ -1,0 +1,17 @@
+{
+  "campaign": "frontier_20260912n",
+  "repairs": [
+    {
+      "stage": "premeasurement_ci",
+      "trigger_run": 34738396447,
+      "failure_type": "METHODOLOGY_HEALTH_TELEMETRY_DRIFT",
+      "root_cause": "Adding the frozen Frontier-N manifest correctly expanded the generated measurement queue from two campaigns to three, while checked-in methodology-health artifacts and one test still hard-coded the prior queue size.",
+      "repair": "Regenerated methodology-health JSON/Markdown and replaced exact queue-size/list assertions with renderer invariants for count consistency, deterministic ordering, uniqueness, no automatic promotion and research/dev selection folds.",
+      "economic_change": false,
+      "parameter_change": false,
+      "signal_change": false,
+      "market_metrics_observed_before_repair": false,
+      "note": "Frontier-N strategy, preregistration hash, windows, persistence rule, controls and allocation were unchanged. The failed run stopped in pytest before market measurement."
+    }
+  ]
+}

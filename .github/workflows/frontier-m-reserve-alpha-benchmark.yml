@@ -1,0 +1,100 @@
+name: frontier-m-reserve-alpha-benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/frontier_20260913m_*.py'
+      - 'experiments/frontier_20260913m/**'
+      - 'research/benchmark.py'
+      - 'research/iteration.py'
+      - 'tests/**'
+      - 'docs/METHODOLOGY_HEALTH.md'
+      - 'docs/data/methodology_health.json'
+      - 'scripts/build_methodology_health.py'
+      - '.github/workflows/frontier-m-reserve-alpha-benchmark.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  measured-reserve-campaign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      CAMPAIGN: frontier_20260913m
+      MANIFEST: experiments/frontier_20260913m/manifest.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Quantiacs toolbox and tests
+        run: python -m pip install -r requirements.txt pytest
+      - name: Regenerate methodology health for queued Frontier-M reserve campaign
+        run: python scripts/build_methodology_health.py
+      - name: Preserve generated health telemetry
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontier-m-reserve-methodology-health-${{ github.run_id }}
+          path: |
+            docs/data/methodology_health.json
+            docs/METHODOLOGY_HEALTH.md
+          if-no-files-found: error
+      - name: Run full software, provenance and causality suite
+        run: python -m pytest -q tests
+      - name: Verify generated dashboard is canonical before measurement
+        run: python scripts/build_research_dashboard.py --check
+      - name: Prove Frontier-M reserve freeze before market measurement
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from research.iteration import load_manifest
+          from research.preregister import sha256_file
+          root = Path('experiments/frontier_20260913m')
+          manifest = load_manifest(root / 'manifest.json')
+          freeze = json.loads((root / 'implementation_freeze.json').read_text())
+          assert freeze['frozen_before_measurement'] is True
+          assert freeze['market_returns_observed_before_freeze'] is False
+          assert freeze['activation_type'] == 'PREEXISTING_UNMEASURED_RESERVES'
+          assert manifest['selection_folds'] == ['research', 'dev']
+          assert len(manifest['candidates']) == 15
+          for family, digest in freeze['preregistration_sha256'].items():
+              assert sha256_file(root / family / 'preregistration.json') == digest
+          for family, digest in freeze['strategy_sha256'].items():
+              assert sha256_file(Path('strategies/generated') / f'frontier_20260913m_{family}.py') == digest
+          print('Frontier-M reserve pre-return freeze verified')
+          PY
+      - name: Run exact Frontier-M reserve development campaign
+        run: |
+          python -m research.iteration \
+            --manifest "$MANIFEST" \
+            --output "results/$CAMPAIGN" \
+            --budget 18
+      - name: Print Frontier-M reserve evidence
+        if: always()
+        run: |
+          RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          echo "RESULT_DIR=$RESULT_DIR"
+          test -n "$RESULT_DIR"
+          cat "$RESULT_DIR/report.md" || true
+          python - "$RESULT_DIR" <<'PY'
+          import json, sys
+          from pathlib import Path
+          root = Path(sys.argv[1])
+          for name in ('rankings.json','family_decisions.json','residual_diagnostics.json'):
+              path = root / name
+              if path.exists():
+                  print(f'\n=== {name} ===')
+                  print(json.dumps(json.loads(path.read_text()), indent=2, sort_keys=True))
+          PY
+      - name: Preserve measured Frontier-M reserve evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.CAMPAIGN }}-measured-${{ github.run_id }}
+          path: results/${{ env.CAMPAIGN }}/
+          if-no-files-found: warn

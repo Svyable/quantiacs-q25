@@ -1,0 +1,11 @@
+{
+  "budget": 18,
+  "campaign": "frontier_20260912m",
+  "cost_ladder": [0.0, 0.04, 0.08, 0.12],
+  "decision_rule": "Central parent must beat matched ablation and falsifier; at least one base window must clear robust development Sharpe >=1.0. Otherwise freeze family. No validation reopening, no post-result inversion, and no parameter-grid rescue.",
+  "implemented": ["vol_curve_recompression", "relative_vol_rank_relief", "slope_dispersion_opportunity"],
+  "preregistered_reserves": ["compression_age", "vol_of_vol_relief", "term_structure_rank_migration"],
+  "purpose": "Test three volatility-term-structure mechanisms using only causal Q25 OHLCV/is_liquid after the Ebenezar refinement screen froze all seven short-Sharpe translations.",
+  "selection_folds": ["research", "dev"],
+  "validation_boundary": "2023-2024 already spent; 2025+ and live excluded."
+}

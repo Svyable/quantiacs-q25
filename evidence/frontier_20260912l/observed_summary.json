@@ -1,0 +1,157 @@
+{
+  "access_mode": "public_default",
+  "campaign": "frontier_20260912l",
+  "current_new_alpha_leader": {
+    "id": "topology_migration_w84",
+    "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
+    "robust_development_sharpe": 1.376,
+    "state": "FAILED_FORWARD_GATE"
+  },
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "decision": "PROMOTE_ZERO",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "families": [
+    {
+      "ablation_robust_sharpe": 0.28099760489191,
+      "best_base_id": "dollar_volume_share_migration_w42",
+      "best_robust_sharpe": 0.6139429070897866,
+      "central_id": "dollar_volume_share_migration_w42",
+      "central_robust_sharpe": 0.6139429070897866,
+      "decision_code": "KILL_WEAK_ALPHA",
+      "falsifier_robust_sharpe": -0.2008591416405153,
+      "family": "dollar_volume_share_migration"
+    },
+    {
+      "ablation_robust_sharpe": 0.1659142023333896,
+      "best_base_id": "permutation_entropy_contraction_w126",
+      "best_robust_sharpe": 0.4011851200484395,
+      "central_id": "permutation_entropy_contraction_w84",
+      "central_robust_sharpe": -0.04611193356512377,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": 0.13220409394792143,
+      "family": "permutation_entropy_contraction"
+    },
+    {
+      "ablation_robust_sharpe": -0.014684556846498423,
+      "best_base_id": "relative_value_convergence_w63",
+      "best_robust_sharpe": 0.18155675032943677,
+      "central_id": "relative_value_convergence_w42",
+      "central_robust_sharpe": -0.02358732871229421,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": -0.47110083991664164,
+      "family": "relative_value_convergence"
+    }
+  ],
+  "family_decisions": [
+    {
+      "best_score": 0.6139429070897866,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "KILL_WEAK_ALPHA",
+      "declared_cells": 5,
+      "failed_controls": [],
+      "family": "dollar_volume_share_migration",
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": 0.44341728551066273,
+      "pending_cells": [],
+      "reason": "every valid base cell is below predefined development floor Sharpe 1.0"
+    },
+    {
+      "best_score": 0.4011851200484395,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "permutation_entropy_contraction_ablation",
+        "permutation_entropy_contraction_falsifier"
+      ],
+      "family": "permutation_entropy_contraction",
+      "family_rank": 2,
+      "invalid_cells": [],
+      "median_score": 0.24130890002937883,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    },
+    {
+      "best_score": 0.18155675032943677,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "relative_value_convergence_ablation"
+      ],
+      "family": "relative_value_convergence",
+      "family_rank": 3,
+      "invalid_cells": [],
+      "median_score": -0.02358732871229421,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "interpretation": "Frontier-L measured three preregistered non-graph families on the reused 2016-2022 development surface. Dollar-volume share migration is the strongest new base family at robust Sharpe 0.614 and its central 42-day parent beats both matched controls, but every base window remains below the fixed 1.0 development floor (KILL_WEAK_ALPHA). Permutation-entropy contraction and relative-value convergence are FALSIFIED_DEVELOPMENT by their preregistered destructive controls/ablations. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
+  "live_data_used": false,
+  "manifest_sha256": "b3a457c38c88dbafa30cf5d9303525aedc0bb646543f46988d729fb88b3533b6",
+  "measured_head_sha": "f1f236cdb83222be74be19c6244b2ac546781710",
+  "measurement_source": {
+    "artifact_digest": "sha256:87396b2d8ba174df29f05806ceb5221e3457672d44a45f7253720028003e1298",
+    "artifact_id": 10309964229,
+    "provider": "github_actions",
+    "workflow_run_id": 34733083803
+  },
+  "next_boundary": "Do not retune Frontier-L. Dollar-volume share migration has causal support but insufficient economics; preserve it as a frozen weak-alpha result. Do not invert or parameter-rescue permutation entropy or relative-value convergence. Keep 2023-2024 closed. Next research should open a genuinely new object or bring the frozen historical V10/C165/V12 implementations through the current harness for comparable controls.",
+  "notable_base_cells": {
+    "dollar_volume_share_migration_w21": {
+      "dev_sharpe_12": 0.44341728551066273,
+      "research_sharpe_12": 1.4175756836600582,
+      "robust_sharpe": 0.44341728551066273
+    },
+    "dollar_volume_share_migration_w42": {
+      "dev_sharpe_12": 0.6139429070897866,
+      "research_sharpe_12": 1.4027979543781914,
+      "robust_sharpe": 0.6139429070897866
+    },
+    "dollar_volume_share_migration_w63": {
+      "dev_sharpe_12": 0.18537523404498327,
+      "research_sharpe_12": 1.1820896594197752,
+      "robust_sharpe": 0.18537523404498327
+    },
+    "permutation_entropy_contraction_w126": {
+      "dev_sharpe_12": 0.4011851200484395,
+      "research_sharpe_12": 0.9919195520817414,
+      "robust_sharpe": 0.4011851200484395
+    },
+    "permutation_entropy_contraction_w63": {
+      "dev_sharpe_12": 0.24130890002937883,
+      "research_sharpe_12": 0.8979191591826813,
+      "robust_sharpe": 0.24130890002937883
+    },
+    "permutation_entropy_contraction_w84": {
+      "dev_sharpe_12": -0.04611193356512377,
+      "research_sharpe_12": 1.207624158566836,
+      "robust_sharpe": -0.04611193356512377
+    },
+    "relative_value_convergence_w21": {
+      "dev_sharpe_12": -0.3965975005841145,
+      "research_sharpe_12": -0.0758800105725354,
+      "robust_sharpe": -0.3965975005841145
+    },
+    "relative_value_convergence_w42": {
+      "dev_sharpe_12": 0.2308889711104716,
+      "research_sharpe_12": -0.02358732871229421,
+      "robust_sharpe": -0.02358732871229421
+    },
+    "relative_value_convergence_w63": {
+      "dev_sharpe_12": 0.18155675032943677,
+      "research_sharpe_12": 0.685547457674716,
+      "robust_sharpe": 0.18155675032943677
+    }
+  },
+  "python": "3.11.16",
+  "run_id": "f7e9719f4d3b7ff63322",
+  "selection_end": "2022-12-31",
+  "spent_validation_fold_excluded": "2023-01-01/2024-12-31",
+  "status": "MEASURED_DEVELOPMENT_ONLY"
+}

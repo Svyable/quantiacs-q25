@@ -9,9 +9,12 @@ on:
       - 'research/benchmark.py'
       - 'research/iteration.py'
       - 'scripts/check_campaign_replay.py'
-      - 'tests/**'
       - '.github/workflows/frontier-k-alpha-benchmark.yml'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -61,6 +64,7 @@ jobs:
           PY
 
       - name: Run exact Frontier-K development campaign
+        id: measure
         run: |
           python -m research.iteration \
             --manifest "$MANIFEST" \
@@ -68,6 +72,7 @@ jobs:
             --budget 18
 
       - name: Reconcile fresh run with canonical Frontier-K evidence
+        if: ${{ steps.measure.outcome == 'success' }}
         run: |
           RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
           test -n "$RESULT_DIR"
@@ -77,7 +82,7 @@ jobs:
             --json-out "$RESULT_DIR/replay_reconciliation.json"
 
       - name: Print Frontier-K evidence
-        if: always()
+        if: ${{ always() && steps.measure.outcome == 'success' }}
         run: |
           RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
           echo "RESULT_DIR=$RESULT_DIR"
@@ -96,9 +101,9 @@ jobs:
           PY
 
       - name: Preserve measured Frontier-K evidence
-        if: always()
+        if: ${{ always() && steps.measure.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.CAMPAIGN }}-measured-${{ github.run_id }}
           path: results/${{ env.CAMPAIGN }}/
-          if-no-files-found: warn
+          if-no-files-found: error

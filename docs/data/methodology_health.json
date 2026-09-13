@@ -16,61 +16,188 @@
       "selected_development_robust_sharpe": 1.376132031691156,
       "selected_forward_sharpe_12": 0.314,
       "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
-      "validation_fold": {"end": "2024-12-31", "start": "2023-01-01"}
+      "validation_fold": {
+        "end": "2024-12-31",
+        "start": "2023-01-01"
+      }
     }
   },
-  "forward_validation": [{
-    "campaign": "frontier_20260910b",
-    "decision": "FAIL_FORWARD_GATE",
-    "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
-    "family": "topology_migration",
-    "fold_status": "SPENT_DO_NOT_MUTATE",
-    "selected_development_candidate": "topology_migration_w84",
-    "selected_development_robust_sharpe": 1.376132031691156,
-    "selected_forward_sharpe_12": 0.314,
-    "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
-    "validation_fold": {"end": "2024-12-31", "start": "2023-01-01"}
-  }],
+  "forward_validation": [
+    {
+      "campaign": "frontier_20260910b",
+      "decision": "FAIL_FORWARD_GATE",
+      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
+      "family": "topology_migration",
+      "fold_status": "SPENT_DO_NOT_MUTATE",
+      "selected_development_candidate": "topology_migration_w84",
+      "selected_development_robust_sharpe": 1.376132031691156,
+      "selected_forward_sharpe_12": 0.314,
+      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
+      "validation_fold": {
+        "end": "2024-12-31",
+        "start": "2023-01-01"
+      }
+    }
+  ],
   "latest_evidence": {
     "campaign": "frontier_20260912l",
     "decision": "PROMOTE_ZERO",
     "evidence_stage": "DEVELOPMENT_ONLY",
     "family_count": 3,
     "family_triage": [
-      {"ablation_robust_sharpe": 0.28099760489191, "best_base_id": "dollar_volume_share_migration_w42", "best_robust_sharpe": 0.6139429070897866, "campaign_rank": 1, "central_control_margin": 0.3329453021978766, "central_id": "dollar_volume_share_migration_w42", "central_robust_sharpe": 0.6139429070897866, "control_ceiling": 0.28099760489191, "control_supported": true, "decision_code": "KILL_WEAK_ALPHA", "falsification_complete": true, "falsifier_robust_sharpe": -0.2008591416405153, "family": "dollar_volume_share_migration", "floor_margin": -0.3860570929102134, "guardrail_pass": false},
-      {"ablation_robust_sharpe": 0.1659142023333896, "best_base_id": "permutation_entropy_contraction_w126", "best_robust_sharpe": 0.4011851200484395, "campaign_rank": 2, "central_control_margin": -0.21202613589851338, "central_id": "permutation_entropy_contraction_w84", "central_robust_sharpe": -0.04611193356512377, "control_ceiling": 0.1659142023333896, "control_supported": false, "decision_code": "FALSIFIED_DEVELOPMENT", "falsification_complete": true, "falsifier_robust_sharpe": 0.13220409394792143, "family": "permutation_entropy_contraction", "floor_margin": -0.5988148799515605, "guardrail_pass": false},
-      {"ablation_robust_sharpe": -0.014684556846498423, "best_base_id": "relative_value_convergence_w63", "best_robust_sharpe": 0.18155675032943677, "campaign_rank": 3, "central_control_margin": -0.008902771865795788, "central_id": "relative_value_convergence_w42", "central_robust_sharpe": -0.02358732871229421, "control_ceiling": -0.014684556846498423, "control_supported": false, "decision_code": "FALSIFIED_DEVELOPMENT", "falsification_complete": true, "falsifier_robust_sharpe": -0.47110083991664164, "family": "relative_value_convergence", "floor_margin": -0.8184432496705633, "guardrail_pass": false}
+      {
+        "ablation_robust_sharpe": 0.28099760489191,
+        "best_base_id": "dollar_volume_share_migration_w42",
+        "best_robust_sharpe": 0.6139429070897866,
+        "campaign_rank": 1,
+        "central_control_margin": 0.3329453021978766,
+        "central_id": "dollar_volume_share_migration_w42",
+        "central_robust_sharpe": 0.6139429070897866,
+        "control_ceiling": 0.28099760489191,
+        "control_supported": true,
+        "decision_code": "KILL_WEAK_ALPHA",
+        "falsification_complete": true,
+        "falsifier_robust_sharpe": -0.2008591416405153,
+        "family": "dollar_volume_share_migration",
+        "floor_margin": -0.3860570929102134,
+        "guardrail_pass": false
+      },
+      {
+        "ablation_robust_sharpe": 0.1659142023333896,
+        "best_base_id": "permutation_entropy_contraction_w126",
+        "best_robust_sharpe": 0.4011851200484395,
+        "campaign_rank": 2,
+        "central_control_margin": -0.21202613589851338,
+        "central_id": "permutation_entropy_contraction_w84",
+        "central_robust_sharpe": -0.04611193356512377,
+        "control_ceiling": 0.1659142023333896,
+        "control_supported": false,
+        "decision_code": "FALSIFIED_DEVELOPMENT",
+        "falsification_complete": true,
+        "falsifier_robust_sharpe": 0.13220409394792143,
+        "family": "permutation_entropy_contraction",
+        "floor_margin": -0.5988148799515605,
+        "guardrail_pass": false
+      },
+      {
+        "ablation_robust_sharpe": -0.014684556846498423,
+        "best_base_id": "relative_value_convergence_w63",
+        "best_robust_sharpe": 0.18155675032943677,
+        "campaign_rank": 3,
+        "central_control_margin": -0.008902771865795788,
+        "central_id": "relative_value_convergence_w42",
+        "central_robust_sharpe": -0.02358732871229421,
+        "control_ceiling": -0.014684556846498423,
+        "control_supported": false,
+        "decision_code": "FALSIFIED_DEVELOPMENT",
+        "falsification_complete": true,
+        "falsifier_robust_sharpe": -0.47110083991664164,
+        "family": "relative_value_convergence",
+        "floor_margin": -0.8184432496705633,
+        "guardrail_pass": false
+      }
     ],
     "interpretation": "Frontier-L measured three preregistered non-graph families on the reused 2016-2022 development surface. Dollar-volume share migration is the strongest new base family at robust Sharpe 0.614 and its central 42-day parent beats both matched controls, but every base window remains below the fixed 1.0 development floor (KILL_WEAK_ALPHA). Permutation-entropy contraction and relative-value convergence are FALSIFIED_DEVELOPMENT by their preregistered destructive controls/ablations. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
     "kind": "summary_only",
     "next_boundary": "Do not retune Frontier-L. Dollar-volume share migration has causal support but insufficient economics; preserve it as a frozen weak-alpha result. Do not invert or parameter-rescue permutation entropy or relative-value convergence. Keep 2023-2024 closed. Next research should open a genuinely new object or bring the frozen historical V10/C165/V12 implementations through the current harness for comparable controls."
   },
   "learning_loop": {
-    "evidence_depth": {"latest_full_matrix_campaign": "frontier_20260912k", "latest_kind": "summary_only", "measured_campaigns_since_full_matrix": 1, "summary_only_latest": true},
+    "evidence_depth": {
+      "latest_full_matrix_campaign": "frontier_20260912k",
+      "latest_kind": "summary_only",
+      "measured_campaigns_since_full_matrix": 1,
+      "summary_only_latest": true
+    },
     "latest_campaign": {
       "best_floor_margin": -0.3860570929102134,
       "best_robust_sharpe": 0.6139429070897866,
-      "causal_support": {"count": 1, "rate": 0.3333333333333333, "total": 3},
-      "decision_resolution": {"count": 3, "rate": 1.0, "total": 3},
-      "economic_survival": {"count": 0, "rate": 0.0, "total": 3},
-      "falsification_coverage": {"count": 3, "rate": 1.0, "total": 3},
+      "causal_support": {
+        "count": 1,
+        "rate": 0.3333333333333333,
+        "total": 3
+      },
+      "decision_resolution": {
+        "count": 3,
+        "rate": 1.0,
+        "total": 3
+      },
+      "economic_survival": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 3
+      },
+      "falsification_coverage": {
+        "count": 3,
+        "rate": 1.0,
+        "total": 3
+      },
       "families_measured": 3,
       "median_central_control_margin": -0.008902771865795788,
-      "promotion_ready": {"count": 0, "rate": 0.0, "total": 3}
+      "promotion_ready": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 3
+      }
     },
-    "measurement_queue": {"campaigns": [], "count": 0, "next_campaign": null},
-    "policy": {"aggregate_score": "forbidden", "optimization_target": false, "purpose": "diagnostic feedback vector for the research loop"},
-    "validation_feedback": {"active_after_validation": false, "development_leader": "topology_migration_w84", "forward_gate_decision": "FAIL_FORWARD_GATE", "forward_sharpe_12": 0.314, "guidance_superseded_by_newer_validation": false, "state": "FAILED_FORWARD_GATE"}
+    "measurement_queue": {
+      "campaigns": [],
+      "count": 0,
+      "next_campaign": null
+    },
+    "policy": {
+      "aggregate_score": "forbidden",
+      "optimization_target": false,
+      "purpose": "diagnostic feedback vector for the research loop"
+    },
+    "validation_feedback": {
+      "active_after_validation": false,
+      "development_leader": "topology_migration_w84",
+      "forward_gate_decision": "FAIL_FORWARD_GATE",
+      "forward_sharpe_12": 0.314,
+      "guidance_superseded_by_newer_validation": false,
+      "state": "FAILED_FORWARD_GATE"
+    }
   },
-  "ranking_policy": {"cross_campaign_ranking": "forbidden", "missing_metrics": "remain missing; never imputed from related strategies", "robust_floor": 1.0, "weighted_megascore": false, "within_campaign_order": ["guardrail_pass descending", "best_robust_sharpe descending", "family name deterministic tie-break"]},
+  "ranking_policy": {
+    "cross_campaign_ranking": "forbidden",
+    "missing_metrics": "remain missing; never imputed from related strategies",
+    "robust_floor": 1.0,
+    "weighted_megascore": false,
+    "within_campaign_order": [
+      "guardrail_pass descending",
+      "best_robust_sharpe descending",
+      "family name deterministic tie-break"
+    ]
+  },
   "schema_version": 2,
-  "surface_health": {"index_mentions_latest": false, "index_uses_generated_health": true, "latest_full_matrix_campaign": "frontier_20260912k", "measured_campaigns_since_full_matrix": 1, "research_matrix_mentions_latest": false, "summary_only_latest": true},
+  "surface_health": {
+    "index_mentions_latest": false,
+    "index_uses_generated_health": true,
+    "latest_full_matrix_campaign": "frontier_20260912k",
+    "measured_campaigns_since_full_matrix": 1,
+    "research_matrix_mentions_latest": false,
+    "summary_only_latest": true
+  },
   "surviving_development_seam": {
     "active_after_validation": false,
     "id": "topology_migration_w84",
     "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
     "robust_development_sharpe": 1.376,
     "state": "FAILED_FORWARD_GATE",
-    "validation": {"campaign": "frontier_20260910b", "decision": "FAIL_FORWARD_GATE", "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED", "family": "topology_migration", "fold_status": "SPENT_DO_NOT_MUTATE", "selected_development_candidate": "topology_migration_w84", "selected_development_robust_sharpe": 1.376132031691156, "selected_forward_sharpe_12": 0.314, "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json", "validation_fold": {"end": "2024-12-31", "start": "2023-01-01"}}
+    "validation": {
+      "campaign": "frontier_20260910b",
+      "decision": "FAIL_FORWARD_GATE",
+      "evidence_stage": "PREREGISTERED_FORWARD_OBSERVED",
+      "family": "topology_migration",
+      "fold_status": "SPENT_DO_NOT_MUTATE",
+      "selected_development_candidate": "topology_migration_w84",
+      "selected_development_robust_sharpe": 1.376132031691156,
+      "selected_forward_sharpe_12": 0.314,
+      "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json",
+      "validation_fold": {
+        "end": "2024-12-31",
+        "start": "2023-01-01"
+      }
+    }
   }
 }

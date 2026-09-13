@@ -1,0 +1,15 @@
+{
+  "campaign": "frontier_20260912n",
+  "question": "Do persistent positive errors from a tiny causal per-asset AR(1) model predict cross-sectional continuation beyond raw market-residual momentum?",
+  "primary_family": "online_ar_surprise_persistence",
+  "selection_objective": "minimum research/dev Sharpe across 4%, 8% and 12% ATR-linked slippage",
+  "measurement_budget": 8,
+  "measurement_sequence": [
+    "3 repository controls",
+    "3 preregistered base windows",
+    "central raw-residual ablation",
+    "central identity-rotation falsifier"
+  ],
+  "adjudication": "CONTINUE only if valid base evidence clears the fixed 1.0 development floor and the central base is not matched/beaten by either destructive control. Otherwise freeze without rescue.",
+  "validation": "No 2023-2024 mutation; no 2025+ or live mutation."
+}

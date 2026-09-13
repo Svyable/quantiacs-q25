@@ -10,9 +10,12 @@ on:
       - 'experiments/frontier_20260910b/topology_rank_stability/preregistration.sha256'
       - 'research/benchmark.py'
       - 'research/iteration.py'
-      - 'tests/**'
       - '.github/workflows/topology-rank-stability-benchmark.yml'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

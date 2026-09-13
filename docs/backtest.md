@@ -1,6 +1,6 @@
 ---
 title: Q25 Backtest Studio
-description: Interactive, evidence-aware Q25 backtest diagnostics for strategy equity, Crypto10 benchmark, relative score, drawdown, rolling risk, and monthly returns.
+description: Interactive, evidence-aware Q25 backtest diagnostics for strategy equity, Crypto10 benchmark, relative score, drawdown, risk, Sharpe, and monthly returns.
 permalink: /backtest/
 ---
 
@@ -11,7 +11,7 @@ permalink: /backtest/
     <div>
       <div class="q25-eyebrow">Q25 / evidence-aware backtest studio</div>
       <h1>See the strategy the way a research desk should.</h1>
-      <p>Interactive equity, Crypto10 benchmark, relative score, underwater drawdown, rolling risk, and monthly return diagnostics. Every displayed number is read from a committed backtest packet; missing evidence remains visibly missing.</p>
+      <p>Interactive equity, Crypto10 benchmark, relative score, underwater drawdown, volatility, Sharpe path, and monthly return diagnostics. Every displayed number is read from a committed backtest packet; missing evidence remains visibly missing.</p>
     </div>
     <div class="bt-hero-meta">
       <span class="bt-state" data-bind="status">loading</span>
@@ -43,7 +43,9 @@ permalink: /backtest/
         <button type="button" class="is-active" data-view="equity">Equity</button>
         <button type="button" data-view="score">Relative score</button>
         <button type="button" data-view="drawdown">Drawdown</button>
-        <button type="button" data-view="volatility">Rolling vol</button>
+        <button type="button" data-view="volatility">Volatility</button>
+        <button type="button" data-view="sharpe">Sharpe</button>
+        <button type="button" data-view="mean_return">Mean return</button>
       </div>
     </header>
     <div class="bt-chart-shell">
@@ -66,9 +68,9 @@ permalink: /backtest/
       <svg class="bt-mini-chart" data-chart="drawdown" role="img" aria-label="Strategy drawdown chart"></svg>
     </article>
     <article class="bt-panel bt-scorecard">
-      <header class="bt-panel-head"><div><span class="bt-kicker">Q25 live model</span><h2>Volatility-normalized relative score</h2></div></header>
+      <header class="bt-panel-head"><div><span class="bt-kicker">Q25 relative model</span><h2>Volatility-normalized relative score</h2></div></header>
       <div class="bt-score-number" data-bind="relative-score">—</div>
-      <p>Strategy equity divided by <code>max(Crypto10 equity, 1)</code> after applying the committed live-period scaling assumptions.</p>
+      <p>Strategy equity divided by <code>max(Crypto10 equity, 1)</code> after applying the packet's 10%-volatility normalization. This is a simulation on the displayed evidence period, not a claim of live contest performance.</p>
       <dl>
         <div><dt>Strategy 10% vol scale</dt><dd data-bind="strategy-scale">—</dd></div>
         <div><dt>Crypto10 10% vol scale</dt><dd data-bind="benchmark-scale">—</dd></div>

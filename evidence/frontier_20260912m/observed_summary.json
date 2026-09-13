@@ -1,0 +1,115 @@
+{
+  "access_mode": "public_default",
+  "campaign": "frontier_20260912m",
+  "current_new_alpha_leader": {
+    "id": "topology_migration_w84",
+    "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
+    "robust_development_sharpe": 1.376,
+    "state": "FAILED_FORWARD_GATE"
+  },
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "decision": "PROMOTE_ZERO",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "families": [
+    {
+      "ablation_robust_sharpe": 9.228126194716202e-05,
+      "best_base_id": "vol_curve_recompression_w63",
+      "best_robust_sharpe": 0.3066733416732465,
+      "central_id": "vol_curve_recompression_w84",
+      "central_robust_sharpe": -0.5354937578646062,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": 0.20702277361049765,
+      "family": "vol_curve_recompression"
+    },
+    {
+      "ablation_robust_sharpe": 0.5592259674010199,
+      "best_base_id": "relative_vol_rank_relief_w84",
+      "best_robust_sharpe": -0.09620637040556103,
+      "central_id": "relative_vol_rank_relief_w84",
+      "central_robust_sharpe": -0.09620637040556103,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": 0.1802631947820711,
+      "family": "relative_vol_rank_relief"
+    },
+    {
+      "ablation_robust_sharpe": 0.21001352170084853,
+      "best_base_id": "slope_dispersion_opportunity_w84",
+      "best_robust_sharpe": 0.06698489665610868,
+      "central_id": "slope_dispersion_opportunity_w63",
+      "central_robust_sharpe": -0.1980717789517871,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": -0.2094595663639839,
+      "family": "slope_dispersion_opportunity"
+    }
+  ],
+  "family_decisions": [
+    {
+      "best_score": -0.09620637040556103,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": ["relative_vol_rank_relief_ablation", "relative_vol_rank_relief_falsifier"],
+      "family": "relative_vol_rank_relief",
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": -0.10989391783845696,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    },
+    {
+      "best_score": 0.06698489665610868,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": ["slope_dispersion_opportunity_ablation"],
+      "family": "slope_dispersion_opportunity",
+      "family_rank": 2,
+      "invalid_cells": [],
+      "median_score": -0.1980717789517871,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    },
+    {
+      "best_score": 0.3066733416732465,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": ["vol_curve_recompression_ablation", "vol_curve_recompression_falsifier"],
+      "family": "vol_curve_recompression",
+      "family_rank": 3,
+      "invalid_cells": [],
+      "median_score": -0.5354937578646062,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "interpretation": "Frontier-M measured three preregistered volatility-term-structure families on the reused 2016-2022 development surface. Vol-curve recompression is the strongest base family at robust Sharpe 0.307, but its central 84-day parent is negative and loses to both matched controls. Relative-vol-rank relief and slope-dispersion opportunity also lose their preregistered controls. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
+  "live_data_used": false,
+  "manifest_sha256": "b056fe4eb326631bc6ce23b8a932bc38dc029f8740896fd9a62a4ab609c865b6",
+  "measured_head_sha": "142f76adddd185f10091fe9fddab0c77b7f388c0",
+  "measurement_source": {
+    "artifact_digest": "sha256:527ac421a753249c39006e5e7fb21dff3c69be7253325955a791c98fdd912396",
+    "artifact_id": 10310778596,
+    "provider": "github_actions",
+    "workflow_run_id": 34736196639
+  },
+  "next_boundary": "Do not retune Frontier-M volatility-term-structure formulas. Preserve the completed negative result, measure the already-frozen frontier_20260913m reserve campaign unchanged, then move research to genuinely different OHLCV objects such as daily-bar pressure, estimator disagreement, or price-impact dynamics rather than another volatility-curve rescue.",
+  "notable_base_cells": {
+    "relative_vol_rank_relief_w126": {"dev_sharpe_12": -0.24095144253762393, "research_sharpe_12": 0.48773577847946703, "robust_sharpe": -0.24095144253762393},
+    "relative_vol_rank_relief_w63": {"dev_sharpe_12": -0.10989391783845696, "research_sharpe_12": 0.2972915216341181, "robust_sharpe": -0.10989391783845696},
+    "relative_vol_rank_relief_w84": {"dev_sharpe_12": -0.09620637040556103, "research_sharpe_12": 0.5270861414187363, "robust_sharpe": -0.09620637040556103},
+    "slope_dispersion_opportunity_w42": {"dev_sharpe_12": -1.0308694336598878, "research_sharpe_12": 0.8642450979838419, "robust_sharpe": -1.0308694336598878},
+    "slope_dispersion_opportunity_w63": {"dev_sharpe_12": -0.1980717789517871, "research_sharpe_12": 0.4532250934867312, "robust_sharpe": -0.1980717789517871},
+    "slope_dispersion_opportunity_w84": {"dev_sharpe_12": 0.06698489665610868, "research_sharpe_12": 0.1164914126430353, "robust_sharpe": 0.06698489665610868},
+    "vol_curve_recompression_w126": {"dev_sharpe_12": -0.9622942632988624, "research_sharpe_12": 0.21605239509166693, "robust_sharpe": -0.9622942632988624},
+    "vol_curve_recompression_w63": {"dev_sharpe_12": 0.3066733416732465, "research_sharpe_12": 0.6716574787278023, "robust_sharpe": 0.3066733416732465},
+    "vol_curve_recompression_w84": {"dev_sharpe_12": -0.5354937578646062, "research_sharpe_12": 0.05196757322457441, "robust_sharpe": -0.5354937578646062}
+  },
+  "python": "3.11.16",
+  "selection_end": "2022-12-31",
+  "spent_validation_fold_excluded": "2023-01-01/2024-12-31",
+  "status": "MEASURED_DEVELOPMENT_ONLY"
+}

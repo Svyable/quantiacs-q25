@@ -6,11 +6,11 @@
 
 | Check | State |
 |---|---|
-| Latest measured campaign | `frontier_20260912l` |
+| Latest measured campaign | `frontier_20260912m` |
 | Latest evidence tier | `summary_only` |
 | Latest campaign decision | `PROMOTE_ZERO` |
 | Latest full matrix packet | `frontier_20260912k` |
-| Measured campaigns since full matrix | **1** |
+| Measured campaigns since full matrix | **2** |
 | Homepage bound to generated health JSON | **yes** |
 | Detailed research matrix includes latest | **no — evidence-depth gap is explicit** |
 
@@ -21,12 +21,12 @@ These metrics are a **vector, not a score**. They are intended to make the next 
 | Feedback channel | Latest state | What it means |
 |---|---:|---|
 | Falsification coverage | **3/3 (100%)** | families with central + ablation + destructive falsifier measurements |
-| Causal support | **1/3 (33%)** | central parent beats both matched destructive controls |
+| Causal support | **0/3 (0%)** | central parent beats both matched destructive controls |
 | Economic survival | **0/3 (0%)** | best base clears the fixed robust-development floor |
 | Promotion-ready intersection | **0/3 (0%)** | clears the floor **and** survives controls; still not validation |
 | Decision resolution | **3/3 (100%)** | measured families ended with an explicit decision code |
-| Best floor margin | **-0.386** | best latest-family robust SR minus the fixed 1.0 floor |
-| Median central-vs-control margin | **-0.009** | positive is causal support; negative means a control matched/beat the parent |
+| Best floor margin | **-0.693** | best latest-family robust SR minus the fixed 1.0 floor |
+| Median central-vs-control margin | **-0.655** | positive is causal support; negative means a control matched/beat the parent |
 
 ## Validation correction
 
@@ -39,11 +39,11 @@ The earlier development leader **`topology_migration_w84`** reported robust-deve
 
 ## Measurement queue
 
-The committed measurement frontier is ahead of the evidence frontier by **2 preregistered campaign(s)**.
+The committed measurement frontier is ahead of the evidence frontier by **1 preregistered campaign(s)**.
 
-Next frozen campaign: **`frontier_20260912m`** — 15 candidate/control cells across 3 families; automatic promotion is `False`.
+Next frozen campaign: **`frontier_20260913m`** — 15 candidate/control cells across 3 families; automatic promotion is `False`.
 
-Frontier-M is a preregistered OHLCV-only volatility-term-structure campaign. It pivots away from failed short-horizon Sharpe refinements and avoids simple inverse-vol or static low-vol claims; 2023-2024 is spent and excluded.
+Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.
 
 Until measured evidence is committed, this is a queue item—not a result. The useful recursive action is to measure or ingest the frozen packet unchanged, not mutate it because the dashboard is empty.
 
@@ -53,9 +53,9 @@ This ordering is valid **only inside the latest measured campaign**. Controls ar
 
 | Rank | Family | Best base | Robust SR | Floor margin | Central | Control ceiling | Causal margin | Support | Decision |
 |---:|---|---|---:|---:|---:|---:|---:|---:|---|
-| 1 | `dollar_volume_share_migration` | `dollar_volume_share_migration_w42` | 0.614 | -0.386 | 0.614 | 0.281 | 0.333 | PASS | `KILL_WEAK_ALPHA` |
-| 2 | `permutation_entropy_contraction` | `permutation_entropy_contraction_w126` | 0.401 | -0.599 | -0.046 | 0.166 | -0.212 | FAIL | `FALSIFIED_DEVELOPMENT` |
-| 3 | `relative_value_convergence` | `relative_value_convergence_w63` | 0.182 | -0.818 | -0.024 | -0.015 | -0.009 | FAIL | `FALSIFIED_DEVELOPMENT` |
+| 1 | `vol_curve_recompression` | `vol_curve_recompression_w63` | 0.307 | -0.693 | -0.535 | 0.207 | -0.743 | FAIL | `FALSIFIED_DEVELOPMENT` |
+| 2 | `slope_dispersion_opportunity` | `slope_dispersion_opportunity_w84` | 0.067 | -0.933 | -0.198 | 0.210 | -0.408 | FAIL | `FALSIFIED_DEVELOPMENT` |
+| 3 | `relative_vol_rank_relief` | `relative_vol_rank_relief_w84` | -0.096 | -1.096 | -0.096 | 0.559 | -0.655 | FAIL | `FALSIFIED_DEVELOPMENT` |
 
 ## Dogfood checks
 
@@ -67,4 +67,4 @@ This ordering is valid **only inside the latest measured campaign**. Controls ar
 
 ## Latest measured interpretation
 
-Frontier-L measured three preregistered non-graph families on the reused 2016-2022 development surface. Dollar-volume share migration is the strongest new base family at robust Sharpe 0.614 and its central 42-day parent beats both matched controls, but every base window remains below the fixed 1.0 development floor (KILL_WEAK_ALPHA). Permutation-entropy contraction and relative-value convergence are FALSIFIED_DEVELOPMENT by their preregistered destructive controls/ablations. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.
+Frontier-M measured three preregistered volatility-term-structure families on the reused 2016-2022 development surface. Vol-curve recompression is the strongest base family at robust Sharpe 0.307, but its central 84-day parent is negative and loses to both matched controls. Relative-vol-rank relief and slope-dispersion opportunity also lose their preregistered controls. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.

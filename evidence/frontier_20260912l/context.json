@@ -1,0 +1,41 @@
+{
+  "costs": [
+    0.0,
+    0.04,
+    0.08,
+    0.12
+  ],
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "folds": [
+    {
+      "end": "2020-12-31",
+      "id": "research",
+      "start": "2016-01-01",
+      "status": "OBSERVED_REUSED",
+      "use": "hypothesis / feature search; repeatedly observed development surface"
+    },
+    {
+      "end": "2022-12-31",
+      "id": "dev",
+      "start": "2021-01-01",
+      "status": "OBSERVED_REUSED",
+      "use": "parameter development; repeatedly observed development surface"
+    }
+  ],
+  "manifest_sha256": "b3a457c38c88dbafa30cf5d9303525aedc0bb646543f46988d729fb88b3533b6",
+  "numpy": "2.2.6",
+  "pandas": "2.2.3",
+  "python": "3.11.16",
+  "quantiacs_access_mode": "public_default",
+  "schema_version": 2,
+  "source_hashes": {
+    "configs/promotion_gates.yaml": "2cdcd7568a3f1b01b20da283d6dc719c790a1193bac24771a2af7c03986ec586",
+    "research/benchmark.py": "93e0abcdcc90620bd9b8f7080900ebc1a50e1ec9f1380cb8cbfc2262c474e4f2",
+    "research/iteration.py": "8be5ad0130eefb872a0cce8d16348a2b62ce8d73330dcf0e9747ae73483dce66",
+    "strategies/generated/frontier_20260912l_dollar_volume_share_migration.py": "28c0e95b9eac5680e3249d65664d8b4f93e2905fdb1eb1c802549785e4fb9012",
+    "strategies/generated/frontier_20260912l_permutation_entropy_contraction.py": "1f64a402927c8780eb22ba470974e3c689ffa3f3cdf6a97ec4b0d59e641ee70f",
+    "strategies/generated/frontier_20260912l_relative_value_convergence.py": "7dfcb290d59ed84dfe2afef9bea819c17fcc49be28155d1855297fc3a34f54a5"
+  },
+  "status": "DEVELOPMENT_ONLY",
+  "toolbox_stats_sha256": "8cdaf120de844db91ddb01bbce510f2201f55b18223765c2ba5110bfb2f08b54"
+}

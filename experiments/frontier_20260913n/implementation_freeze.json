@@ -1,0 +1,36 @@
+{
+  "campaign": "frontier_20260913n",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "activation_type": "NEW_PREREGISTERED_FRONTIER",
+  "frozen_utc": "2026-09-13T04:31:00Z",
+  "idea_slate_git_blob_sha1": "68fe151321efcc9cb11082ee2700196387cdbd09",
+  "manifest_git_blob_sha1": "5a87ef5e37d74e6694dad954c22bd0f264ed92c6",
+  "preregistration_sha256": {
+    "absorption_release_pressure": "d7024e619c9d9607bcb4075ebd845e764d2940ab7480a6309953a8531d96bae8",
+    "elasticity_rank_migration": "d14ae2b2721412b1f7ae631ef83233bb74d1d7eff352072bbe1daafe455e0bb5",
+    "directional_elasticity_asymmetry": "af6830832a7e2bfb563075a3789a27250be17a7145782264a98c13630a6e2339"
+  },
+  "preregistration_git_blob_sha1": {
+    "absorption_release_pressure": "a3da8eb1174b18ae9f8f7a4f372fe9efe8f2b998",
+    "elasticity_rank_migration": "ca6fa9b5d86e96d0088be85cb5683e28d2234e94",
+    "directional_elasticity_asymmetry": "48f7e8dabd51944a1b06e25d32b92c6cfa7dfa4a"
+  },
+  "strategy_git_blob_sha1": {
+    "absorption_release_pressure": "f63b2dd38f8cc9916070e84499217f87c7938317",
+    "elasticity_rank_migration": "33d2278539edb8d5c875bdac6db55f8475164909",
+    "directional_elasticity_asymmetry": "d00ccbd8b2c7890c1a4ace36cb75fb09b1fac1f9"
+  },
+  "candidate_count": 15,
+  "families": ["absorption_release_pressure", "elasticity_rank_migration", "directional_elasticity_asymmetry"],
+  "selection_folds": ["research", "dev"],
+  "cost_ladder": [0.0, 0.04, 0.08, 0.12],
+  "controls": ["equal_liquid", "inverse_vol_trend", "persistent_low_vol"],
+  "portfolio_contract": {"top_k": 5, "slot_weight": 0.2, "name_cap": 0.25, "rebalance": "Monday", "cash_allowed": true, "immediate_liquidity_exit": true},
+  "mutation_after_observation": "FORBIDDEN",
+  "automatic_promotion": false,
+  "spent_validation_fold": "2023-01-01/2024-12-31",
+  "protected_live_start": "2026-10-01",
+  "preexisting_unobserved_queue_at_freeze": ["frontier_20260913m"],
+  "claim_limit": "Implemented and frozen before Frontier-N market measurement. No performance claim."
+}

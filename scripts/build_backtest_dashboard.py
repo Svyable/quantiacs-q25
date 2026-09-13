@@ -136,6 +136,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             "score": score,
             "drawdown": finite(row.get("underwater")),
             "rolling_volatility": finite(row.get("volatility")),
+            "sharpe": finite(row.get("sharpe_ratio")),
+            "mean_return": finite(row.get("mean_return")),
+            "turnover": finite(row.get("avg_turnover")),
         })
     if not series:
         raise ValueError("No finite equity observations found in input CSV")

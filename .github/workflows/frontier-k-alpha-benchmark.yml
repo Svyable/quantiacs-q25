@@ -9,9 +9,12 @@ on:
       - 'research/benchmark.py'
       - 'research/iteration.py'
       - 'scripts/check_campaign_replay.py'
-      - 'tests/**'
       - '.github/workflows/frontier-k-alpha-benchmark.yml'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

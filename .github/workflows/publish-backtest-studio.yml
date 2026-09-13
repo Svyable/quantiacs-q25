@@ -78,6 +78,7 @@ jobs:
           manifest = json.loads((root / 'manifest.json').read_text())
           packet = json.loads((root / 'backtest_dashboard.json').read_text())
           assert manifest['competition_type'] == 'crypto_daily_long'
+          assert manifest['quantiacs_output_check'] == 'passed'
           assert manifest['benchmark'] == 'CRYPTO10'
           assert packet['status'] == 'available'
           assert len(packet['series']) > 1
@@ -107,6 +108,7 @@ jobs:
             "Generated from official Quantiacs data by publish-backtest-studio run ${GITHUB_RUN_ID}." \
             "" \
             "The PR changes only the public Backtest Studio evidence packet and provenance manifest." \
+            "Quantiacs output validation: passed" \
             "Strategy: $Q25_STRATEGY_PATH" \
             "Evaluation start: $Q25_START_DATE" \
             "Slippage factor: $Q25_SLIPPAGE_FACTOR" \

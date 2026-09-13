@@ -12,7 +12,9 @@ on:
       - 'scripts/export_q25_backtest.py'
       - 'tests/test_backtest_dashboard.py'
       - 'tests/test_export_q25_backtest.py'
+      - '.github/workflows/backtest-studio-evidence.yml'
       - '.github/workflows/backtest-studio-ui.yml'
+      - '.github/workflows/publish-backtest-studio.yml'
   workflow_dispatch:
 
 permissions:
@@ -35,14 +37,32 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install focused test dependency
-        run: python -m pip install pytest
+      - name: Install focused test dependencies
+        run: python -m pip install pytest pyyaml
 
       - name: Compile backtest evidence scripts
         run: python -m py_compile scripts/build_backtest_dashboard.py scripts/export_q25_backtest.py
 
       - name: Parse Backtest Studio JavaScript
         run: node --check docs/assets/js/backtest.js
+
+      - name: Parse Backtest Studio workflow YAML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          paths = [
+              Path('.github/workflows/backtest-studio-evidence.yml'),
+              Path('.github/workflows/backtest-studio-ui.yml'),
+              Path('.github/workflows/publish-backtest-studio.yml'),
+          ]
+          for path in paths:
+              parsed = yaml.safe_load(path.read_text())
+              assert isinstance(parsed, dict) and parsed.get('name'), path
+              assert 'jobs' in parsed, path
+              print(f'parsed {path}')
+          PY
 
       - name: Run Backtest Studio tests
         run: python -m pytest -q tests/test_backtest_dashboard.py tests/test_export_q25_backtest.py

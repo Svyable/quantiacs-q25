@@ -78,3 +78,16 @@ def test_live_replay_gate_fails_decision_drift(tmp_path):
     payload = compare("frontier_20260912k", tmp_path)
     assert payload["status"] == "DECISION_DRIFT"
     assert payload["hard_failure"] is True
+
+
+def test_live_replay_gate_fails_when_canonical_central_cell_disappears(tmp_path):
+    path = _write_ci_replay_matrix(tmp_path)
+    matrix = json.loads(path.read_text())
+    canonical = json.loads((ROOT / "evidence/frontier_20260912k/observed_summary.json").read_text())
+    central_id = canonical["families"][0]["central_id"]
+    matrix["candidates"] = [row for row in matrix["candidates"] if row["id"] != central_id]
+    path.write_text(json.dumps(matrix))
+    payload = compare("frontier_20260912k", tmp_path)
+    assert payload["status"] == "DECISION_DRIFT"
+    assert payload["hard_failure"] is True
+    assert any(row["central_id_match"] is False for row in payload["families"])

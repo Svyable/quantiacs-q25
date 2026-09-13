@@ -51,7 +51,7 @@ def _summary_from_matrix(matrix: dict[str, Any], canonical: dict[str, Any]) -> d
             "family": family,
             "best_base_id": best.get("id") if best else None,
             "best_robust_sharpe": best.get("selection_score") if best else None,
-            "central_id": expected.get("central_id"),
+            "central_id": central.get("id") if central else None,
             "central_robust_sharpe": central.get("selection_score") if central else None,
             "ablation_robust_sharpe": ablations[0].get("selection_score") if len(ablations) == 1 else None,
             "falsifier_robust_sharpe": falsifiers[0].get("selection_score") if len(falsifiers) == 1 else None,

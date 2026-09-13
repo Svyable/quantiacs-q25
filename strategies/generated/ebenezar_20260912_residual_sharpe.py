@@ -13,8 +13,12 @@ COMPETITION_TYPE="crypto_daily_long"; LOOKBACK_DAYS=365; NAME_CAP=0.25; EPS=1e-1
 
 def _base(data):
     c=data.sel(field="close").transpose("time","asset").astype(float); z=data.sel(field="is_liquid").transpose("time","asset"); l=xr.where((z==1)&np.isfinite(c)&(c>0),1.0,0.0); r=c/c.shift(time=1)-1.0; r=xr.where(np.isfinite(r),r,0.0); return c,l,r
-def _sma(x,n,m): return x.rolling(time=n,min_periods=m).mean()
-def _std(x,n,m): return x.rolling(time=n,min_periods=m).std()
+def _sma(x,n,m):
+    if x.sizes["time"]<m: return xr.full_like(x,np.nan,dtype=float)
+    return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).mean()
+def _std(x,n,m):
+    if x.sizes["time"]<m: return xr.full_like(x,np.nan,dtype=float)
+    return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).std()
 def _mean(x,l):
     n=l.sum("asset"); return xr.where(n>0,(xr.where(np.isfinite(x),x,0.0)*l).sum("asset")/n,0.0)
 def _sd(x,l):

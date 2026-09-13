@@ -1,0 +1,25 @@
+{
+  "activation_type": "USER_DIRECTED_PROFILE_TRANSLATION",
+  "campaign": "ebenezar_20260912",
+  "created_utc": "2026-09-12T18:40:00+00:00",
+  "frozen_before_measurement": true,
+  "notes": "No economic metrics observed for these repo-integrated translations before this freeze. Existing public leaderboard profile numbers are contaminated inspiration only and are not imported as evidence.",
+  "preregistration_sha256": {
+    "dual_sharpe_classifier": "63d6e18b215401c8ac9adb730879a6ef9490aad7cb57b6605798eeabfadd8a0b",
+    "lattice_consensus": "e838918ae7c19e118ca51cfaa3c49f1aad686c48eba04731344367ea6b217860",
+    "residual_sharpe": "c0cdffae445bd8e2f564da27df262b5f1e9939b10fc2a5d4681bfe3699aff82b",
+    "sharpe3_vol_guard": "0c12aa833752bdf58026752e72c87076c5b13131f0f9337dc34d058175461bc1",
+    "sharpe7_vol2": "53641b0fe2964ac3ef4de7ed0227ae22f37f3041cc40fa6abef1a1437bc625d7",
+    "sharpe_acceleration": "35078edff67b24625a71e559d23cc8f12e9685a401a1c6675992762b09bd7c0a",
+    "sharpe_pullback_reentry": "643de7d1bf8607de00d790d56d7c73e551dedd859984ecf10135e1996b38e2b6"
+  },
+  "strategy_paths": [
+    "strategies/generated/ebenezar_20260912_sharpe3_vol_guard.py",
+    "strategies/generated/ebenezar_20260912_sharpe7_vol2.py",
+    "strategies/generated/ebenezar_20260912_dual_sharpe_classifier.py",
+    "strategies/generated/ebenezar_20260912_sharpe_acceleration.py",
+    "strategies/generated/ebenezar_20260912_residual_sharpe.py",
+    "strategies/generated/ebenezar_20260912_lattice_consensus.py",
+    "strategies/generated/ebenezar_20260912_sharpe_pullback_reentry.py"
+  ]
+}

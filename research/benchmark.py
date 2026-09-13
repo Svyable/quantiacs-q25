@@ -123,14 +123,20 @@ def check_causality(fn, data, full=None, checkpoints=7):
     maximum = 0.0
     for i in cuts:
         prefix = data.isel(time=slice(0, i + 1))
-        got = fn(prefix)
+        # Bottleneck rejects rolling windows larger than a short prefix even
+        # though xarray's native rolling implementation has the intended
+        # min_periods semantics. Prefix causality is about information flow,
+        # not backend-specific warmup behavior, so use the native path here.
+        with xr.set_options(use_bottleneck=False):
+            got = fn(prefix)
         check_weights(got, prefix)
         difference = np.max(np.abs(got.values - full.isel(time=slice(0, i + 1)).values))
         if not np.isfinite(difference) or difference > 1e-10:
             raise ValueError(f"prefix causality failed at {i}: {difference}")
         maximum = max(maximum, float(difference))
         if i >= 365:
-            replay = fn(data.isel(time=slice(i - 364, i + 1))).isel(time=-1)
+            with xr.set_options(use_bottleneck=False):
+                replay = fn(data.isel(time=slice(i - 364, i + 1))).isel(time=-1)
             try:
                 np.testing.assert_allclose(replay.values, full.isel(time=i).values, atol=1e-10, rtol=0)
             except AssertionError as e:

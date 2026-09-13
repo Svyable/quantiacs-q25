@@ -9,6 +9,7 @@ COMPETITION_TYPE = "crypto_daily_long"
 LOOKBACK_DAYS = 365
 NAME_CAP = 0.25
 FAMILY = "dispersion_curvature"
+PREREGISTRATION_SHA256 = "954ebac335624445758c383e86d6cdd623ab7eecbe6e7a743ff20467867ce4b0"
 PARAMS = {"window": 42, "top_k": 5}
 STATE_LAG = 7
 

@@ -48,6 +48,9 @@ def test_builder_emits_q25_scaled_score_from_daily_returns(tmp_path: Path) -> No
     assert packet["period"] == {"start": "2026-01-01", "end": "2026-01-02"}
     assert packet["metrics"]["sharpe"] == 1.3
     assert packet["metrics"]["observations"] == 2
+    assert packet["series"][-1]["sharpe"] == 1.3
+    assert packet["series"][-1]["mean_return"] == 0.19
+    assert packet["series"][-1]["turnover"] == 0.05
     assert packet["live_model"]["strategy_scale"] == 0.1 / 0.14
     assert packet["live_model"]["benchmark_scale"] == 0.1 / 0.19
     assert packet["live_model"]["relative_score"] is not None

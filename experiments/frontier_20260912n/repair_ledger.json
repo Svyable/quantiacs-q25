@@ -12,6 +12,18 @@
       "signal_change": false,
       "market_metrics_observed_before_repair": false,
       "note": "Frontier-N strategy, preregistration hash, windows, persistence rule, controls and allocation were unchanged. The failed run stopped in pytest before market measurement."
+    },
+    {
+      "stage": "premeasurement_ci",
+      "trigger_run": 34738808466,
+      "failure_type": "STALE_HOMEPAGE_BINDING_ASSERTION",
+      "root_cause": "Main advanced to the Q25 Research Terminal homepage while the methodology-health test still asserted markers from the retired dashboard DOM and JavaScript bundle.",
+      "repair": "Updated the homepage binding assertion to the current terminal contract: data-q25-terminal, data-method-source, methodology_health.json and assets/js/terminal.js.",
+      "economic_change": false,
+      "parameter_change": false,
+      "signal_change": false,
+      "market_metrics_observed_before_repair": false,
+      "note": "The run completed 461 tests successfully and stopped at this UI-contract assertion before Frontier-N market measurement. No alpha code or preregistered research choice changed."
     }
   ]
 }

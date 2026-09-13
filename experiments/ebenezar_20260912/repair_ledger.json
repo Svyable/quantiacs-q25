@@ -21,6 +21,26 @@
       "signal_change": false,
       "candidate_metrics_observed_before_repair": false,
       "verification": "added a deterministic synthetic regression test that checks exact time/asset coordinates, 25% cap, gross<=1, prefix causality and 365-day bounded replay for all seven strategies"
+    },
+    {
+      "run_id": 34712570758,
+      "stage": "causality",
+      "status_before": "FAILED_INTEGRITY",
+      "affected_candidates": [
+        "ebenezar_sharpe3_vol_guard",
+        "ebenezar_sharpe7_vol2",
+        "ebenezar_dual_sharpe_classifier",
+        "ebenezar_residual_sharpe",
+        "ebenezar_lattice_consensus",
+        "ebenezar_sharpe_pullback_reentry"
+      ],
+      "root_cause": "the causality harness intentionally supplies a 21-row initial prefix; xarray rejects rolling windows larger than the supplied dimension even when min_periods is already satisfiable, unlike the intended trailing-window semantics",
+      "repair": "for rolling mean/std/max helpers, return all-NaN while available rows are below min_periods; otherwise use min(frozen_window, available_rows) as the xarray window. Full-history values and frozen min_periods are unchanged",
+      "economic_change": false,
+      "parameter_change": false,
+      "signal_change": false,
+      "candidate_metrics_observed_before_repair": false,
+      "verification": "the existing all-seven synthetic causality regression includes the same 21-row prefix checkpoint; the dedicated profile workflow also reruns exact Quantiacs prefix and 365-day bounded-replay checks"
     }
   ]
 }

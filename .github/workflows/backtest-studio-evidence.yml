@@ -31,6 +31,10 @@ jobs:
     timeout-minutes: 120
     env:
       API_KEY: default
+      Q25_STRATEGY_PATH: ${{ inputs.strategy_path }}
+      Q25_START_DATE: ${{ inputs.start_date }}
+      Q25_END_DATE: ${{ inputs.end_date }}
+      Q25_SLIPPAGE_FACTOR: ${{ inputs.slippage_factor }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,14 +51,14 @@ jobs:
         shell: bash
         run: |
           args=(
-            --strategy "${{ inputs.strategy_path }}"
+            --strategy "$Q25_STRATEGY_PATH"
             --output-dir backtest-evidence
-            --start-date "${{ inputs.start_date }}"
-            --slippage-factor "${{ inputs.slippage_factor }}"
+            --start-date "$Q25_START_DATE"
+            --slippage-factor "$Q25_SLIPPAGE_FACTOR"
             --source-commit "$GITHUB_SHA"
           )
-          if [[ -n "${{ inputs.end_date }}" ]]; then
-            args+=(--end-date "${{ inputs.end_date }}")
+          if [[ -n "$Q25_END_DATE" ]]; then
+            args+=(--end-date "$Q25_END_DATE")
           fi
           python scripts/export_q25_backtest.py "${args[@]}"
 

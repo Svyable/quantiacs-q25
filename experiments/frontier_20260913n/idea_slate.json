@@ -1,0 +1,33 @@
+{
+  "campaign": "frontier_20260913n",
+  "ideation_count": 24,
+  "implement_count": 3,
+  "preregister_count": 6,
+  "ideas": [
+    {"id":"wick_rejection_pressure","area":"candle_pressure","decision":"IMPLEMENT","hypothesis":"Persistent lower-wick rejection and high close location on meaningful activity signal demand absorption.","priority_score":12,"performance_seen_before_score":false},
+    {"id":"body_range_efficiency","area":"candle_pressure","decision":"PREREGISTER_RESERVE","hypothesis":"Directional candle body as a share of daily range identifies efficient continuation.","priority_score":12,"performance_seen_before_score":false},
+    {"id":"upper_wick_exhaustion","area":"candle_pressure","decision":"IDEA_ONLY","hypothesis":"Persistent upper-wick rejection during positive trend signals fragile leadership.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"close_location_acceleration","area":"candle_pressure","decision":"IDEA_ONLY","hypothesis":"Acceleration in rolling close-location value predicts continuation.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"gap_body_confirmation","area":"candle_pressure","decision":"IDEA_ONLY","hypothesis":"Open-to-close body confirms prior close migration without overnight reversal.","priority_score":10,"performance_seen_before_score":false},
+    {"id":"range_rejection_asymmetry","area":"candle_pressure","decision":"IDEA_ONLY","hypothesis":"Downside rejection grows while upside rejection contracts.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"range_close_disagreement","area":"estimator_disagreement","decision":"IMPLEMENT","hypothesis":"Close-to-close residual volatility outruns Parkinson range volatility during positive residual trend.","priority_score":12,"performance_seen_before_score":false},
+    {"id":"wick_volume_disagreement","area":"estimator_disagreement","decision":"PREREGISTER_RESERVE","hypothesis":"Wick direction disagrees with activity-share migration before trend leadership.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"garman_klass_close_gap","area":"estimator_disagreement","decision":"IDEA_ONLY","hypothesis":"Garman-Klass and close-to-close volatility ranks diverge persistently.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"range_body_disagreement","area":"estimator_disagreement","decision":"IDEA_ONLY","hypothesis":"High-low range expands while directional body efficiency improves.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"overnight_intraday_disagreement","area":"estimator_disagreement","decision":"IDEA_ONLY","hypothesis":"Open gap and intraday body disagree in a persistent asset-specific way.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"close_range_rank_migration","area":"estimator_disagreement","decision":"IDEA_ONLY","hypothesis":"Cross-sectional rank of close volatility rises while range-vol rank falls.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"impact_decay_persistence","area":"liquidity_impact","decision":"IMPLEMENT","hypothesis":"Residual price displacement per unit activity share falls while residual trend stays positive.","priority_score":12,"performance_seen_before_score":false},
+    {"id":"range_impact_convexity","area":"liquidity_impact","decision":"PREREGISTER_RESERVE","hypothesis":"Nonlinear high-low range per unit activity share distinguishes robust expansion from fragile impact.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"signed_impact_asymmetry","area":"liquidity_impact","decision":"IDEA_ONLY","hypothesis":"Up-move and down-move impact per activity share diverge.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"impact_rank_migration","area":"liquidity_impact","decision":"IDEA_ONLY","hypothesis":"Cross-sectional impact rank improves faster than activity-share rank.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"impact_shock_recovery","area":"liquidity_impact","decision":"IDEA_ONLY","hypothesis":"Impact spikes then normalizes before positive residual trend resumes.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"activity_absorption_persistence","area":"liquidity_impact","decision":"IDEA_ONLY","hypothesis":"High activity with muted residual displacement persists across weeks.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"microstructure_breadth","area":"microstructure_state","decision":"IDEA_ONLY","hypothesis":"Breadth of positive rejection-pressure assets gates concentration.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"pressure_dispersion","area":"microstructure_state","decision":"IDEA_ONLY","hypothesis":"Cross-sectional dispersion of daily-bar pressure defines opportunity density.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"impact_dispersion_contraction","area":"microstructure_state","decision":"IDEA_ONLY","hypothesis":"Cross-sectional impact dispersion contracts before broad continuation.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"wick_state_turnover","area":"microstructure_state","decision":"IDEA_ONLY","hypothesis":"Turnover in the top rejection-pressure cohort forecasts persistence.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"range_efficiency_breadth","area":"microstructure_state","decision":"IDEA_ONLY","hypothesis":"Breadth of efficient-range closes predicts when sparse selection has edge.","priority_score":11,"performance_seen_before_score":false},
+    {"id":"pressure_impact_disagreement","area":"microstructure_state","decision":"IDEA_ONLY","hypothesis":"Demand-pressure rank improves while price-impact rank worsens, indicating crowding risk.","priority_score":11,"performance_seen_before_score":false}
+  ],
+  "score_basis": "Frozen after A-M development evidence plus spent topology forward validation; no Frontier-N return observed."
+}

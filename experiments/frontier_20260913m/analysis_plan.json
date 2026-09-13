@@ -1,0 +1,10 @@
+{
+  "budget": 18,
+  "campaign": "frontier_20260913m",
+  "cost_ladder": [0.0, 0.04, 0.08, 0.12],
+  "decision_rule": "Central parent must beat matched ablation and falsifier; at least one base window must clear robust development Sharpe >=1.0. Otherwise freeze family. No rescue tuning, inversion, or validation reopening.",
+  "implemented": ["volume_share_entropy_state", "dispersion_curvature", "entropy_disagreement_cash"],
+  "purpose": "Measure three preexisting Frontier-L reserves under a fresh implementation freeze without using spent validation data.",
+  "selection_folds": ["research", "dev"],
+  "validation_boundary": "2023-2024 already spent; 2025+ and live excluded."
+}

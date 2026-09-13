@@ -10,6 +10,7 @@ COMPETITION_TYPE = "crypto_daily_long"
 LOOKBACK_DAYS = 365
 NAME_CAP = 0.25
 FAMILY = "entropy_disagreement_cash"
+PREREGISTRATION_SHA256 = "0099277375cd53423468d150e39c1fe8871a8afb968e9c3960b8d67ad2f23429"
 PARAMS = {"window": 84, "top_k": 5}
 TREND_DAYS = 21
 ORDER = 3

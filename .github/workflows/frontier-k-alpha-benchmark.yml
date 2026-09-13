@@ -8,6 +8,7 @@ on:
       - 'experiments/frontier_20260912k/**'
       - 'research/benchmark.py'
       - 'research/iteration.py'
+      - 'scripts/check_campaign_replay.py'
       - 'tests/**'
       - '.github/workflows/frontier-k-alpha-benchmark.yml'
   workflow_dispatch:
@@ -66,6 +67,15 @@ jobs:
             --output "results/$CAMPAIGN" \
             --budget 18
 
+      - name: Reconcile fresh run with canonical Frontier-K evidence
+        run: |
+          RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          test -n "$RESULT_DIR"
+          python scripts/check_campaign_replay.py \
+            --campaign "$CAMPAIGN" \
+            --result-dir "$RESULT_DIR" \
+            --json-out "$RESULT_DIR/replay_reconciliation.json"
+
       - name: Print Frontier-K evidence
         if: always()
         run: |
@@ -78,7 +88,7 @@ jobs:
           import sys
           from pathlib import Path
           root = Path(sys.argv[1])
-          for name in ('rankings.json','family_decisions.json','residual_diagnostics.json'):
+          for name in ('rankings.json','family_decisions.json','residual_diagnostics.json','replay_reconciliation.json'):
               path = root / name
               if path.exists():
                   print(f'\n=== {name} ===')

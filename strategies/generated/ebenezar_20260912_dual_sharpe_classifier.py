@@ -21,11 +21,13 @@ def _returns(close):
 def _sma(x,n,min_periods=None):
     m=n if min_periods is None else min_periods
     if x.sizes["time"]<m: return xr.full_like(x,np.nan,dtype=float)
-    return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).mean()
+    with xr.set_options(use_bottleneck=False):
+        return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).mean()
 def _std(x,n,min_periods=None):
     m=max(2,n//2) if min_periods is None else min_periods
     if x.sizes["time"]<m: return xr.full_like(x,np.nan,dtype=float)
-    return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).std()
+    with xr.set_options(use_bottleneck=False):
+        return x.rolling(time=min(n,x.sizes["time"]),min_periods=m).std()
 def _liquid_cs_mean(x,liquid):
     n=liquid.sum("asset"); return xr.where(n>0,(xr.where(np.isfinite(x),x,0.0)*liquid).sum("asset")/n,0.0)
 def _allocate(raw,liquid):

@@ -2,6 +2,7 @@
 
 Experiment: frontier_20260913n_absorption_release_pressure
 Preregistration: experiments/frontier_20260913n/absorption_release_pressure/preregistration.json
+Preregistration SHA256: d7024e619c9d9607bcb4075ebd845e764d2940ab7480a6309953a8531d96bae8
 
 Daily OHLCV-only mechanism: persistent positive close-location / activity-share
 pressure with muted close-to-open displacement is treated as absorption. A

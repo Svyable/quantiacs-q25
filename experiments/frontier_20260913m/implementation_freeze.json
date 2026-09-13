@@ -8,9 +8,9 @@
   "cost_ladder": [0.0, 0.04, 0.08, 0.12],
   "automatic_promotion": false,
   "preregistration_sha256": {
-    "volume_share_entropy_state": "80f6f805f227d35462891e551953640619a2d198b004b682736d3f77c062fffa",
-    "dispersion_curvature": "e2f324f11f10d802119427d091b1ed44c1ff4a41e17bcb72adaa0e78a4a68f2d",
-    "entropy_disagreement_cash": "8774e1b990474ac09c8f9d1e890a6e393b758dbab0cec00b351e8de07b6b480e"
+    "volume_share_entropy_state": "6dea6d241fa326dffff5d0b76401b1d55d070bb8e775fe951a9edf7e2ef159b4",
+    "dispersion_curvature": "954ebac335624445758c383e86d6cdd623ab7eecbe6e7a743ff20467867ce4b0",
+    "entropy_disagreement_cash": "0099277375cd53423468d150e39c1fe8871a8afb968e9c3960b8d67ad2f23429"
   },
   "strategy_sha256": {
     "volume_share_entropy_state": "38393adec08a733ad2225ee8b9e32a6992bd92670572200fe42a8a5ffadf78f2",

@@ -8,9 +8,12 @@ on:
       - 'experiments/frontier_20260912m/**'
       - 'research/benchmark.py'
       - 'research/iteration.py'
-      - 'tests/**'
       - '.github/workflows/frontier-m-alpha-benchmark.yml'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -62,6 +65,7 @@ jobs:
           PY
 
       - name: Run exact Frontier-M development campaign
+        id: measure
         run: |
           python -m research.iteration \
             --manifest "$MANIFEST" \
@@ -69,7 +73,7 @@ jobs:
             --budget 18
 
       - name: Print Frontier-M evidence
-        if: always()
+        if: ${{ always() && steps.measure.outcome == 'success' }}
         run: |
           RESULT_DIR="$(find "results/$CAMPAIGN" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
           echo "RESULT_DIR=$RESULT_DIR"
@@ -88,9 +92,9 @@ jobs:
           PY
 
       - name: Preserve measured Frontier-M evidence
-        if: always()
+        if: ${{ always() && steps.measure.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.CAMPAIGN }}-measured-${{ github.run_id }}
           path: results/${{ env.CAMPAIGN }}/
-          if-no-files-found: warn
+          if-no-files-found: error

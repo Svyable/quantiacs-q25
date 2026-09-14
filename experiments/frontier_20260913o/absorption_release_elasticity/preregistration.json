@@ -1,0 +1,48 @@
+{
+  "ablation": "remove dollar-volume pressure from stored absorption while preserving the same displacement normalization, release confirmation, rebalance schedule and allocation",
+  "allocation": "Monday fixed slots min(0.25, 1/K); unused slots cash; strict ineligibility exits persist until next scheduled rebalance",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260913o_absorption_release_elasticity.py",
+  "contamination_notes": "Frontier A-M development evidence and the Ebenezar profile campaign are already observed. Frontier-N is concurrently unmeasured/open and is not used to set Frontier-O parameters. 2023-2024 is spent.",
+  "cost_hypothesis": "weekly fixed-slot portfolios should keep turnover bounded; exact ATR-linked ladder is frozen at 0/4/8/12%",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260913o_absorption_release_elasticity",
+  "failure_mode": "the apparent absorption/release effect is only ordinary positive residual momentum or low-displacement ranking, and the price-volume pairing adds no useful information",
+  "falsifier": "rotate abnormal dollar-volume pressure across currently eligible assets on each date before constructing stored absorption, preserving each date's cross-sectional pressure distribution",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "absorption_release_elasticity",
+  "nearest_incumbent": "downside_impact_relief and V12 abnormal-volume diffusion; distinct object is same-asset displacement per abnormal dollar-volume pressure followed by a preregistered release state, not a directed cross-asset diffusion network or generic downside impact relief",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "price-volume absorption/release satellite",
+  "primitive": "Quantiacs daily close, volume and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "top-K positive stored-absorption times positive release-efficiency score; stored absorption is the prior 5 completed bars of abnormal dollar-volume pressure discounted by normalized absolute market-residual displacement",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Priority-1 price_volume_elasticity frontier from configs/research_frontier.yaml; no Frontier-O market return observed before preregistration.",
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if the pressure-rotation falsifier or no-volume ablation matches/beats the canonical base or if every valid base cell is below the fixed 1.0 robust-development floor; do not grid-rescue after failure",
+  "thesis": "If a liquid crypto asset repeatedly absorbs abnormal same-asset dollar-volume with unusually little market-residual displacement, then a later positive efficient displacement may reveal release of stored demand and continue beyond ordinary residual momentum.",
+  "timing": "completed daily bars only; toolbox owns execution lag; rolling baselines are causal and <=365 days; stored absorption is shifted one bar before release scoring",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 is SPENT_DO_NOT_MUTATE and excluded from Frontier-O selection; 2025+ and live never drive mutation"
+}

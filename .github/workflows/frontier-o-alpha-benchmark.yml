@@ -48,6 +48,18 @@ jobs:
             docs/METHODOLOGY_HEALTH.md
           if-no-files-found: error
 
+      - name: Regenerate research control plane for queued Frontier-O campaign
+        run: python scripts/build_research_control_plane.py
+
+      - name: Preserve generated research control plane
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontier-o-research-control-plane-${{ github.run_id }}
+          path: |
+            docs/data/research_control_plane.json
+            docs/RESEARCH_CONTROL_PLANE.md
+          if-no-files-found: error
+
       - name: Run full software, provenance and causality suite
         run: python -m pytest -q tests
 

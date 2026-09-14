@@ -1,0 +1,19 @@
+{
+  "candidate_count": 7,
+  "comparators": [
+    "helios_static",
+    "helios_misassigned_skill",
+    "helios_diagonal_risk",
+    "helios_no_cost_gate"
+  ],
+  "created_utc": "2026-09-14T02:06:26.915125+00:00",
+  "development_only": true,
+  "mechanism_diagnostics": {
+    "block": 21,
+    "draws": 500,
+    "seed": 7
+  },
+  "primary_parent": "helios_w126",
+  "source_file": "Pasted text.txt",
+  "source_sha256": "631712efd2057106c8a1f50962a449ffc64af79fbdf937ccd081cf367be5518f"
+}

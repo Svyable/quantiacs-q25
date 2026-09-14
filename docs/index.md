@@ -11,6 +11,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
     <nav class="qt-nav" aria-label="Research surfaces">
       <a href="{{ '/explorer.html' | relative_url }}">Explorer</a>
       <a href="{{ '/backtest/' | relative_url }}">Backtest</a>
+      <a href="{{ '/cookbook.html' | relative_url }}">Cookbook</a>
       <a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Matrix</a>
       <a href="{{ '/METHODOLOGY_HEALTH.html' | relative_url }}">Methodology</a>
       <a href="https://github.com/Svyable/quantiacs-q25">GitHub ↗</a>
@@ -25,6 +26,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
       <p>One terminal for the committed Q25 research record: development economics, research-to-dev decay, transaction-cost fragility, destructive controls, family adjudication, evidence completeness and frozen failures. Missing evidence stays missing.</p>
       <div class="qt-hero-actions">
         <a class="qt-primary" href="#leaderboard">Open live leaderboard</a>
+        <a href="{{ '/cookbook.html' | relative_url }}">Q25 contest cookbook</a>
         <a href="{{ '/explorer.html' | relative_url }}">Deep matrix explorer</a>
         <a href="{{ '/EVIDENCE_MODEL.html' | relative_url }}">Evidence contract</a>
       </div>
@@ -52,6 +54,8 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
     <div><span>DIRECTION</span><strong>Long only</strong></div>
     <div><span>SUBMISSION FLOOR</span><strong>IS Sharpe &gt; 1.0</strong></div>
     <div><span>RANKING</span><strong>Contest OOS Sharpe</strong></div>
+    <div><span>POSITION-CHANGE COST</span><strong>4% × ATR(14)</strong></div>
+    <div><span>LIVE PAYOUT</span><strong>Crypto10 relative · 10% vol scale</strong></div>
     <div><span>RESEARCH RULE</span><strong>Controls can kill a pretty backtest</strong></div>
   </section>
 
@@ -158,7 +162,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
 
   <footer class="qt-footer">
     <div><strong>Q25 Research Terminal</strong><span>Public evidence surface for Svyable/quantiacs-q25.</span></div>
-    <div class="qt-footer-links"><a href="{{ '/explorer.html' | relative_url }}">Explorer</a><a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Research Matrix</a><a href="{{ '/STRATEGY_ATLAS.html' | relative_url }}">Strategy Atlas</a><a href="{{ '/REPRODUCIBILITY_HEALTH.html' | relative_url }}">Reproducibility</a></div>
+    <div class="qt-footer-links"><a href="{{ '/cookbook.html' | relative_url }}">Cookbook</a><a href="{{ '/explorer.html' | relative_url }}">Explorer</a><a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Research Matrix</a><a href="{{ '/STRATEGY_ATLAS.html' | relative_url }}">Strategy Atlas</a><a href="{{ '/REPRODUCIBILITY_HEALTH.html' | relative_url }}">Reproducibility</a></div>
   </footer>
 </div>
 

@@ -1,0 +1,100 @@
+{
+  "automatic_promotion": false,
+  "campaign": "frontier_20260912n",
+  "candidates": [
+    {
+      "family": "online_ar_surprise_persistence",
+      "id": "online_ar_surprise_persistence_w63",
+      "mode": "base",
+      "params": {
+        "top_k": 5,
+        "window": 63
+      },
+      "parent_id": "online_ar_surprise_persistence_w84",
+      "path": "strategies/generated/frontier_20260912n_online_ar_surprise_persistence.py",
+      "preregistration": "experiments/frontier_20260912n/online_ar_surprise_persistence/preregistration.json",
+      "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062"
+    },
+    {
+      "family": "online_ar_surprise_persistence",
+      "id": "online_ar_surprise_persistence_w84",
+      "mode": "base",
+      "params": {
+        "top_k": 5,
+        "window": 84
+      },
+      "parent_id": null,
+      "path": "strategies/generated/frontier_20260912n_online_ar_surprise_persistence.py",
+      "preregistration": "experiments/frontier_20260912n/online_ar_surprise_persistence/preregistration.json",
+      "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062"
+    },
+    {
+      "family": "online_ar_surprise_persistence",
+      "id": "online_ar_surprise_persistence_w126",
+      "mode": "base",
+      "params": {
+        "top_k": 5,
+        "window": 126
+      },
+      "parent_id": "online_ar_surprise_persistence_w84",
+      "path": "strategies/generated/frontier_20260912n_online_ar_surprise_persistence.py",
+      "preregistration": "experiments/frontier_20260912n/online_ar_surprise_persistence/preregistration.json",
+      "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062"
+    },
+    {
+      "family": "online_ar_surprise_persistence",
+      "id": "online_ar_surprise_persistence_ablation",
+      "mode": "ablation",
+      "params": {
+        "top_k": 5,
+        "window": 84
+      },
+      "parent_id": "online_ar_surprise_persistence_w84",
+      "path": "strategies/generated/frontier_20260912n_online_ar_surprise_persistence.py",
+      "preregistration": "experiments/frontier_20260912n/online_ar_surprise_persistence/preregistration.json",
+      "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062"
+    },
+    {
+      "family": "online_ar_surprise_persistence",
+      "id": "online_ar_surprise_persistence_falsifier",
+      "mode": "falsifier",
+      "params": {
+        "top_k": 5,
+        "window": 84
+      },
+      "parent_id": "online_ar_surprise_persistence_w84",
+      "path": "strategies/generated/frontier_20260912n_online_ar_surprise_persistence.py",
+      "preregistration": "experiments/frontier_20260912n/online_ar_surprise_persistence/preregistration.json",
+      "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062"
+    }
+  ],
+  "classification_note": "Frontier-N is a preregistered OHLCV-only online-forecast-surprise campaign. It directly tests whether causal forecast innovations carry continuation information beyond ordinary market-residual momentum; 2023-2024 is spent and excluded.",
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "max_unique_candidates": 5,
+  "prior_development_evidence": [
+    "frontier_20260910",
+    "frontier_20260910b",
+    "frontier_20260910c",
+    "frontier_20260910d",
+    "frontier_20260911e",
+    "frontier_20260911f",
+    "frontier_20260911g",
+    "frontier_20260911h",
+    "frontier_20260912i",
+    "frontier_20260912j",
+    "frontier_20260912k",
+    "frontier_20260912l",
+    "frontier_20260912m",
+    "ebenezar_20260912"
+  ],
+  "protected_live_start": "2026-10-01",
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "spent_validation_evidence": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
+}

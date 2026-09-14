@@ -1,0 +1,47 @@
+{
+  "ablation": "replace standardized online-AR forecast surprise with standardized raw market-residual return while preserving the same 5-day persistence rule, rebalance schedule and allocation",
+  "allocation": "Monday fixed slots min(0.25, 1/K); unused slots cash; strict ineligibility exits persist until next scheduled rebalance",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260912n_online_ar_surprise_persistence.py",
+  "contamination_notes": "Frontier A-M development evidence and the Ebenezar profile campaign are already observed. Frontier-N is repeated development research, not a fresh holdout. 2023-2024 is spent.",
+  "cost_hypothesis": "weekly fixed-slot portfolios should keep turnover bounded; exact ATR-linked ladder is frozen at 0/4/8/12%",
+  "data_admissibility": "OHLCV_ONLY_VERIFIED_Q25_PRIMITIVES",
+  "experiment_id": "frontier_20260912n_online_ar_surprise_persistence",
+  "failure_mode": "the forecast-error signal collapses to ordinary residual momentum because the tiny causal AR forecast adds no economically useful information",
+  "falsifier": "rotate standardized forecast surprises across currently eligible assets on each date before persistence aggregation, preserving each date's cross-sectional surprise distribution",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      63,
+      84,
+      126
+    ]
+  },
+  "mechanism": "online_ar_surprise_persistence",
+  "nearest_incumbent": "residual_momentum lineage; distinct object is realized error from a lagged, rolling, per-asset AR(1) forecast with an explicit multi-day surprise-persistence state",
+  "novelty_axes_changed": [
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 84
+  },
+  "portfolio_role": "forecast-innovation continuation satellite",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "positive 5-day sum of standardized forecast surprise with at least 3 positive surprise days; top-K deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Priority-1 online_forecast_surprise frontier from configs/research_frontier.yaml; no Frontier-N market return observed before preregistration.",
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if falsifier or raw-residual ablation matches/beats canonical base or if every valid base cell is below the fixed 1.0 robust-development floor; do not grid-rescue after failure",
+  "thesis": "If a liquid crypto asset repeatedly realizes positive market-residual returns above what its own causal AR(1) dynamics predicted, that sequence may represent under-assimilated idiosyncratic information rather than ordinary residual momentum.",
+  "timing": "completed daily bars only; toolbox owns execution lag; AR coefficients are estimated from target/predictor pairs ending at t-1 and all rolling state is causal and <=365 days",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 is SPENT_DO_NOT_MUTATE and excluded from Frontier-N selection; 2025+ and live never drive mutation"
+}

@@ -1,0 +1,105 @@
+{
+  "analysis_plan_sha256": "f92851eacab6b20e24555b705db3c701a1e449111d5c2407ff005fdbdc192743",
+  "campaign": "helios_20260914",
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "diagnostics_source_sha256": "0916a491f07a4d68cef7247b40d93e2360a019029357a13856a589e8fa86a9e9",
+  "pairs": [
+    {
+      "allocation": {
+        "changed_day_fraction": 0.4603011635865845,
+        "changed_days": 1345,
+        "max_cell_difference": 0.22046593734201603,
+        "mean_absolute_gross_difference": 0.018724188961394477,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "helios_static",
+      "parent": "helios_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": 0.01544494751942706,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.014020520088259627,
+          0.044095511267846915
+        ],
+        "replicates": 500,
+        "seed": 7,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.48220396988364134,
+        "changed_days": 1409,
+        "max_cell_difference": 0.25,
+        "mean_absolute_gross_difference": 0.030886661087113618,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "helios_misassigned_skill",
+      "parent": "helios_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": -0.0069591770508534295,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.047699029369241495,
+          0.029002951199002376
+        ],
+        "replicates": 500,
+        "seed": 7,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.5571526351813826,
+        "changed_days": 1628,
+        "max_cell_difference": 0.11412422048744691,
+        "mean_absolute_gross_difference": 0.05502710526008553,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "helios_diagonal_risk",
+      "parent": "helios_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": -0.05611823407223494,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.21803360154626483,
+          0.10155428558912388
+        ],
+        "replicates": 500,
+        "seed": 7,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "allocation": {
+        "changed_day_fraction": 0.22861054072553047,
+        "changed_days": 668,
+        "max_cell_difference": 0.24469184785894665,
+        "mean_absolute_gross_difference": 0.023939259997977077,
+        "status": "DISTINCT_TARGETS"
+      },
+      "control": "helios_no_cost_gate",
+      "parent": "helios_w126",
+      "return_uncertainty": {
+        "annualized_mean_difference": -0.007048533358128296,
+        "block_days": 21,
+        "observations": 730,
+        "percentile_95_interval": [
+          -0.05032323565646814,
+          0.03946956370321206
+        ],
+        "replicates": 500,
+        "seed": 7,
+        "selection_adjusted": false,
+        "status": "DEVELOPMENT_DIAGNOSTIC_ONLY"
+      }
+    }
+  ],
+  "script_sha256": "112918789c52329357600911259eda8af1d1db02a7cd589a36621dd9165cea53"
+}

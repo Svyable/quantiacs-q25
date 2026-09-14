@@ -1,0 +1,11 @@
+{
+  "created_utc": "2026-09-14T02:12:31.198891+00:00",
+  "sha256": {
+    "experiments/helios_20260914/analysis_plan.json": "8f6c2cfe2659aaf15c92e2736968af70592c396cc8300edb5215a19ce2ed6c06",
+    "experiments/helios_20260914/manifest.json": "920b8c66b9720f3f485f470852e1502432e0ac8dfb53ce1a23d17f778706ff50",
+    "strategies/generated/q25_helios_causal.py": "062422bd365410cf0374ffe157d743617002514675e816a88ae2e6b19f79d024"
+  },
+  "stage": "IMPLEMENTATION_FROZEN_BEFORE_EXACT_RETURNS",
+  "synthetic_verification": "17 tests passed; no economic claims from synthetic data",
+  "toolbox_commit": "9e5274c5ce102a66debc799fd2a2300969fb90f6"
+}

@@ -268,3 +268,26 @@ Exact local measurements; no automatic promotion or cross-campaign ranking.
 | subspace_rotation_opportunity | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
 
 [Evidence packet](../evidence/frontier_20260912k/report.md) · [Research report](../experiments/frontier_20260912k/pm_report.md)
+
+## helios_20260914: separate development campaign
+
+Exact local measurements; no automatic promotion or cross-campaign ranking.
+
+| Candidate | Mode | Worst fold/cost SR | Worst DD @12% | Status |
+|---|---|---:|---:|---|
+| `persistent_low_vol` | control | 0.641 | -93.3% | COMPLETE |
+| `helios_w189` | base | 0.320 | -35.3% | COMPLETE |
+| `helios_misassigned_skill` | falsifier | 0.302 | -35.0% | COMPLETE |
+| `helios_no_cost_gate` | ablation | 0.294 | -36.9% | COMPLETE |
+| `helios_w126` | base | 0.271 | -35.4% | COMPLETE |
+| `equal_liquid` | control | 0.270 | -93.6% | COMPLETE |
+| `helios_diagonal_risk` | ablation | 0.263 | -46.4% | COMPLETE |
+| `helios_w63` | base | 0.210 | -37.2% | COMPLETE |
+| `helios_static` | ablation | 0.175 | -38.5% | COMPLETE |
+| `inverse_vol_trend` | control | 0.053 | -87.1% | COMPLETE |
+
+| Family | Decision | Reason |
+|---|---|---|
+| helios_factor_refinement | FALSIFIED_DEVELOPMENT | destructive control/ablation matches or beats its valid parent |
+
+[Evidence packet](../evidence/helios_20260914/report.md) · [Research report](../experiments/helios_20260914/pm_report.md)

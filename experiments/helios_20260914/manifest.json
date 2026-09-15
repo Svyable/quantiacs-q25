@@ -1,0 +1,123 @@
+{
+  "automatic_promotion": false,
+  "campaign": "helios_20260914",
+  "candidates": [
+    {
+      "family": "helios_factor_refinement",
+      "id": "helios_w63",
+      "mode": "base",
+      "params": {
+        "cost_gate": true,
+        "risk_model": "structured",
+        "top_k": 6,
+        "window": 63
+      },
+      "parent_id": null,
+      "path": "strategies/generated/q25_helios_causal.py",
+      "preregistration": "experiments/helios_20260914/factor_learning/preregistration.json",
+      "preregistration_sha256": "2750dba67cce799732131b39ae606e42ef6d5d8e3a8a373b45a85832805e8cdf"
+    },
+    {
+      "family": "helios_factor_refinement",
+      "id": "helios_w126",
+      "mode": "base",
+      "params": {
+        "cost_gate": true,
+        "risk_model": "structured",
+        "top_k": 6,
+        "window": 126
+      },
+      "parent_id": null,
+      "path": "strategies/generated/q25_helios_causal.py",
+      "preregistration": "experiments/helios_20260914/factor_learning/preregistration.json",
+      "preregistration_sha256": "2750dba67cce799732131b39ae606e42ef6d5d8e3a8a373b45a85832805e8cdf"
+    },
+    {
+      "family": "helios_factor_refinement",
+      "id": "helios_w189",
+      "mode": "base",
+      "params": {
+        "cost_gate": true,
+        "risk_model": "structured",
+        "top_k": 6,
+        "window": 189
+      },
+      "parent_id": null,
+      "path": "strategies/generated/q25_helios_causal.py",
+      "preregistration": "experiments/helios_20260914/factor_learning/preregistration.json",
+      "preregistration_sha256": "2750dba67cce799732131b39ae606e42ef6d5d8e3a8a373b45a85832805e8cdf"
+    },
+    {
+      "family": "helios_factor_refinement",
+      "id": "helios_static",
+      "mode": "ablation",
+      "params": {
+        "cost_gate": true,
+        "risk_model": "structured",
+        "top_k": 6,
+        "window": 126
+      },
+      "parent_id": "helios_w126",
+      "path": "strategies/generated/q25_helios_causal.py",
+      "preregistration": "experiments/helios_20260914/factor_learning/preregistration.json",
+      "preregistration_sha256": "2750dba67cce799732131b39ae606e42ef6d5d8e3a8a373b45a85832805e8cdf"
+    },
+    {
+      "family": "helios_factor_refinement",
+      "id": "helios_misassigned_skill",
+      "mode": "falsifier",
+      "params": {
+        "cost_gate": true,
+        "risk_model": "structured",
+        "top_k": 6,
+        "window": 126
+      },
+      "parent_id": "helios_w126",
+      "path": "strategies/generated/q25_helios_causal.py",
+      "preregistration": "experiments/helios_20260914/factor_learning/preregistration.json",
+      "preregistration_sha256": "2750dba67cce799732131b39ae606e42ef6d5d8e3a8a373b45a85832805e8cdf"
+    },
+    {
+      "family": "helios_factor_refinement",
+      "id": "helios_diagonal_risk",
+      "mode": "ablation",
+      "params": {
+        "cost_gate": true,
+        "risk_model": "diagonal",
+        "top_k": 6,
+        "window": 126
+      },
+      "parent_id": "helios_w126",
+      "path": "strategies/generated/q25_helios_causal.py",
+      "preregistration": "experiments/helios_20260914/diagonal_risk/preregistration.json",
+      "preregistration_sha256": "44cbf098c0fdb76e5acfeef76598e729dd6470cb121cc09683ca71f9808d7dd9"
+    },
+    {
+      "family": "helios_factor_refinement",
+      "id": "helios_no_cost_gate",
+      "mode": "ablation",
+      "params": {
+        "cost_gate": false,
+        "risk_model": "structured",
+        "top_k": 6,
+        "window": 126
+      },
+      "parent_id": "helios_w126",
+      "path": "strategies/generated/q25_helios_causal.py",
+      "preregistration": "experiments/helios_20260914/no_cost_gate/preregistration.json",
+      "preregistration_sha256": "a8b8fe9311d6a478983773e94e0d12e6f45381e88b825ecaa460e110a29e1a6b"
+    }
+  ],
+  "classification_note": "Focused translation of user-supplied VIPER-HELIOS v22 engineering primitives, not an independent-alpha discovery campaign.",
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "max_unique_candidates": 7,
+  "protected_live_start": "2026-10-01",
+  "selection_folds": [
+    "research",
+    "dev"
+  ]
+}

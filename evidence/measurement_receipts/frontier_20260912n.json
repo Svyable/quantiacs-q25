@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "campaign": "frontier_20260912n",
+  "receipt_status": "MEASURED_ARTIFACT_NOT_CANONICAL_EVIDENCE",
+  "review_classification": {
+    "track": "family_refinement",
+    "nearest_incumbent": "strategies/generated/frontier_20260910_forecast_surprise.py",
+    "reason": "The incumbent already uses causal rolling AR(1) market-residual forecast errors. Scaling, coefficient clipping and a persistence gate do not establish independent-alpha novelty; the original preregistration is preserved."
+  },
+  "decision": "PROMOTE_ZERO_FREEZE_ALL",
+  "families": [
+    {
+      "family": "online_ar_surprise_persistence",
+      "best_base_id": "online_ar_surprise_persistence_w63",
+      "best_robust_sharpe": -0.6762538381461807,
+      "central_id": "online_ar_surprise_persistence_w84",
+      "central_robust_sharpe": -0.7804839986712356,
+      "ablation_robust_sharpe": -1.0014138563663737,
+      "falsifier_robust_sharpe": -0.5198808068985818,
+      "best_score": -0.6762538381461807,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "online_ar_surprise_persistence_falsifier"
+      ],
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": -0.7804839986712356,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "cells": [
+    {
+      "id": "persistent_low_vol",
+      "family": "control",
+      "mode": "control",
+      "status": "COMPLETE",
+      "selection_score": 0.6409384685319315
+    },
+    {
+      "id": "equal_liquid",
+      "family": "control",
+      "mode": "control",
+      "status": "COMPLETE",
+      "selection_score": 0.269984551336056
+    },
+    {
+      "id": "inverse_vol_trend",
+      "family": "control",
+      "mode": "control",
+      "status": "COMPLETE",
+      "selection_score": 0.05259549376910685
+    },
+    {
+      "id": "online_ar_surprise_persistence_falsifier",
+      "family": "online_ar_surprise_persistence",
+      "mode": "falsifier",
+      "status": "COMPLETE",
+      "selection_score": -0.5198808068985818
+    },
+    {
+      "id": "online_ar_surprise_persistence_w63",
+      "family": "online_ar_surprise_persistence",
+      "mode": "base",
+      "status": "COMPLETE",
+      "selection_score": -0.6762538381461807
+    },
+    {
+      "id": "online_ar_surprise_persistence_w84",
+      "family": "online_ar_surprise_persistence",
+      "mode": "base",
+      "status": "COMPLETE",
+      "selection_score": -0.7804839986712356
+    },
+    {
+      "id": "online_ar_surprise_persistence_ablation",
+      "family": "online_ar_surprise_persistence",
+      "mode": "ablation",
+      "status": "COMPLETE",
+      "selection_score": -1.0014138563663737
+    },
+    {
+      "id": "online_ar_surprise_persistence_w126",
+      "family": "online_ar_surprise_persistence",
+      "mode": "base",
+      "status": "COMPLETE",
+      "selection_score": -1.3055578227063749
+    }
+  ],
+  "source": {
+    "workflow_run_id": 34739055893,
+    "workflow_job_id": 103675523436,
+    "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/34739055893",
+    "artifact_id": 10312282018,
+    "artifact_name": "frontier_20260912n-measured-34739055893",
+    "artifact_digest": "sha256:34c23478a12c38a33910ffdb9ec0e779c34afe27138598f33bf02505b9779890",
+    "measured_head_sha": "af79783bc34b0c3163f4bf48d52c386d1d81a5fd",
+    "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062",
+    "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+    "manifest_sha256": "8facf4836ecb469cd8f41d141f5296bbbdc462c6b4dc39c64f9cc54519f0552f",
+    "verification_basis": "Rankings and context read from the first successful workflow job log; artifact identity and digest checked against GitHub metadata."
+  },
+  "context": {
+    "costs": [
+      0,
+      0.04,
+      0.08,
+      0.12
+    ],
+    "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+    "folds": [
+      {
+        "end": "2020-12-31",
+        "id": "research",
+        "start": "2016-01-01",
+        "status": "OBSERVED_REUSED",
+        "use": "hypothesis / feature search; repeatedly observed development surface"
+      },
+      {
+        "end": "2022-12-31",
+        "id": "dev",
+        "start": "2021-01-01",
+        "status": "OBSERVED_REUSED",
+        "use": "parameter development; repeatedly observed development surface"
+      }
+    ],
+    "manifest_sha256": "8facf4836ecb469cd8f41d141f5296bbbdc462c6b4dc39c64f9cc54519f0552f",
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "python": "3.11.16",
+    "quantiacs_access_mode": "public_default",
+    "schema_version": 2,
+    "source_hashes": {
+      "configs/promotion_gates.yaml": "2cdcd7568a3f1b01b20da283d6dc719c790a1193bac24771a2af7c03986ec586",
+      "research/benchmark.py": "93e0abcdcc90620bd9b8f7080900ebc1a50e1ec9f1380cb8cbfc2262c474e4f2",
+      "research/iteration.py": "8be5ad0130eefb872a0cce8d16348a2b62ce8d73330dcf0e9747ae73483dce66",
+      "strategies/generated/frontier_20260912n_online_ar_surprise_persistence.py": "313e4363e3d44367287699837b17d0b3a531e4f723a527b9b5c40177c11ec35d"
+    },
+    "status": "DEVELOPMENT_ONLY",
+    "toolbox_stats_sha256": "8cdaf120de844db91ddb01bbce510f2201f55b18223765c2ba5110bfb2f08b54"
+  },
+  "claim_limit": "First frozen public/default development measurement only. All five preregistered cells and three baselines completed. Only the identity-rotation falsifier beat the central parent; the raw-residual ablation did not. Preserve the source, parameters and controls. Canonical packet ingestion remains pending; this receipt must not replace methodology-health evidence or authorize promotion."
+}

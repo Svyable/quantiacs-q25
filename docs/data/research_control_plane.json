@@ -53,6 +53,12 @@
     ],
     "next_actions": [
       {
+        "action": "INGEST_MEASURED_EVIDENCE",
+        "campaign": "frontier_20260912n",
+        "priority": 1,
+        "why": "A successful benchmark receipt exists but canonical observed evidence is not committed."
+      },
+      {
         "action": "DISAMBIGUATE_FRONTIER_LABELS",
         "campaign": null,
         "priority": 2,
@@ -71,7 +77,7 @@
         "why": "Latest committed campaign is not represented by a full canonical matrix packet."
       }
     ],
-    "pending_canonical_ingest_count": 0,
+    "pending_canonical_ingest_count": 1,
     "unmeasured_queue_count": 1
   },
   "failed_forward_stack": [
@@ -90,7 +96,7 @@
       "id": "V10",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.309,
-      "name": "V10 multi-factor ensemble — Pareto",
+      "name": "V10 multi-factor ensemble \u2014 Pareto",
       "rank": 1,
       "role": "primary legacy core",
       "status": "prepare_precheck",
@@ -102,7 +108,7 @@
       "id": "V11_balanced",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.2311,
-      "name": "V11 new-only event ensemble — Balanced",
+      "name": "V11 new-only event ensemble \u2014 Balanced",
       "rank": 2,
       "role": "orthogonal event / lifecycle core",
       "status": "prepare_precheck",
@@ -126,7 +132,7 @@
       "id": "V12",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.3386,
-      "name": "V12 signed volume diffusion — 50/50 bridge",
+      "name": "V12 signed volume diffusion \u2014 50/50 bridge",
       "rank": 4,
       "role": "structural volume/return network core",
       "status": "prepare_precheck_exact_official_gate_required",
@@ -138,7 +144,7 @@
       "id": "CoCrash126",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.1438,
-      "name": "Co-crash shelter — base 126D",
+      "name": "Co-crash shelter \u2014 base 126D",
       "rank": 5,
       "role": "defensive crash-comovement sleeve",
       "status": "prepare_precheck",
@@ -186,7 +192,7 @@
       "id": "Trend_hit126",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.2484,
-      "name": "126D positive-return consistency — five names",
+      "name": "126D positive-return consistency \u2014 five names",
       "rank": 9,
       "role": "persistent trend reserve",
       "status": "conditional_reserve",
@@ -207,6 +213,30 @@
     }
   ],
   "measurement_queue": [
+    {
+      "automatic_promotion": false,
+      "campaign": "frontier_20260912n",
+      "candidate_count": 5,
+      "classification_note": "Frontier-N is a preregistered OHLCV-only online-forecast-surprise campaign. It directly tests whether causal forecast innovations carry continuation information beyond ordinary market-residual momentum; 2023-2024 is spent and excluded.",
+      "families": [
+        "online_ar_surprise_persistence"
+      ],
+      "family_count": 1,
+      "frontier_label": "Frontier-N",
+      "measured_decision": "PROMOTE_ZERO_FREEZE_ALL",
+      "measurement_receipt": "evidence/measurement_receipts/frontier_20260912n.json",
+      "measurement_state": "MEASURED_AWAITING_CANONICAL_INGEST",
+      "modes": {
+        "ablation": 1,
+        "base": 3,
+        "falsifier": 1
+      },
+      "selection_folds": [
+        "research",
+        "dev"
+      ],
+      "source_path": "experiments/frontier_20260912n/manifest.json"
+    },
     {
       "automatic_promotion": false,
       "campaign": "frontier_20260913m",
@@ -279,6 +309,50 @@
       },
       "source_path": "evidence/measurement_receipts/frontier_20260912m.json",
       "status": "CANONICAL_INGESTED"
+    },
+    {
+      "campaign": "frontier_20260912n",
+      "decision": "PROMOTE_ZERO_FREEZE_ALL",
+      "families": [
+        {
+          "ablation_robust_sharpe": -1.0014138563663737,
+          "best_base_id": "online_ar_surprise_persistence_w63",
+          "best_robust_sharpe": -0.6762538381461807,
+          "best_score": -0.6762538381461807,
+          "central_id": "online_ar_surprise_persistence_w84",
+          "central_robust_sharpe": -0.7804839986712356,
+          "completed_cells": 5,
+          "decision": "FREEZE",
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "declared_cells": 5,
+          "failed_controls": [
+            "online_ar_surprise_persistence_falsifier"
+          ],
+          "falsifier_robust_sharpe": -0.5198808068985818,
+          "family": "online_ar_surprise_persistence",
+          "family_rank": 1,
+          "invalid_cells": [],
+          "median_score": -0.7804839986712356,
+          "pending_cells": [],
+          "reason": "destructive control/ablation matches or beats its valid parent"
+        }
+      ],
+      "frontier_label": "Frontier-N",
+      "source": {
+        "artifact_digest": "sha256:34c23478a12c38a33910ffdb9ec0e779c34afe27138598f33bf02505b9779890",
+        "artifact_id": 10312282018,
+        "artifact_name": "frontier_20260912n-measured-34739055893",
+        "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+        "manifest_sha256": "8facf4836ecb469cd8f41d141f5296bbbdc462c6b4dc39c64f9cc54519f0552f",
+        "measured_head_sha": "af79783bc34b0c3163f4bf48d52c386d1d81a5fd",
+        "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062",
+        "verification_basis": "Rankings and context read from the first successful workflow job log; artifact identity and digest checked against GitHub metadata.",
+        "workflow_job_id": 103675523436,
+        "workflow_run_id": 34739055893,
+        "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/34739055893"
+      },
+      "source_path": "evidence/measurement_receipts/frontier_20260912n.json",
+      "status": "MEASURED_AWAITING_CANONICAL_INGEST"
     }
   ],
   "policy": {

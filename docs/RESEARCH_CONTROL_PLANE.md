@@ -38,13 +38,15 @@ Frozen roster order is preserved from its dated evidence. It is not cross-ranked
 
 | Campaign UID | Display label | State | Families | Cells | Measured decision |
 |---|---|---|---:|---:|---|
+| `frontier_20260912n` | Frontier-N | MEASURED_AWAITING_CANONICAL_INGEST | 1 | 5 | PROMOTE_ZERO_FREEZE_ALL |
 | `frontier_20260913m` | Frontier-M | FROZEN_UNMEASURED_OR_UNRECEIPTED | 3 | 15 | — |
 
 ## Dogfood diagnostics
 
-Pending canonical evidence ingestion: **0**. Frozen/unreceipted campaigns: **1**.
+Pending canonical evidence ingestion: **1**. Frozen/unreceipted campaigns: **1**.
 
 - **WARN Frontier-M collision:** `frontier_20260912m`, `frontier_20260913m`. Display full campaign UID; do not rename historical evidence.
+- **P1 INGEST_MEASURED_EVIDENCE** `frontier_20260912n`: A successful benchmark receipt exists but canonical observed evidence is not committed.
 - **P2 DISAMBIGUATE_FRONTIER_LABELS**: Multiple campaign IDs map to the same human Frontier label; preserve historical IDs but display full campaign UID.
 - **P3 MEASURE_FROZEN_CAMPAIGN** `frontier_20260913m`: Frozen manifest is ahead of canonical evidence and has no committed measurement receipt.
 - **P4 DEEPEN_MATRIX_EVIDENCE** `frontier_20260912m`: Latest committed campaign is not represented by a full canonical matrix packet.

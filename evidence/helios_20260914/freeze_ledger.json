@@ -1,0 +1,19 @@
+[
+  {
+    "best_score": 0.3202788654884396,
+    "completed_cells": 7,
+    "decision": "FREEZE",
+    "decision_code": "FALSIFIED_DEVELOPMENT",
+    "declared_cells": 7,
+    "failed_controls": [
+      "helios_misassigned_skill",
+      "helios_no_cost_gate"
+    ],
+    "family": "helios_factor_refinement",
+    "family_rank": 1,
+    "invalid_cells": [],
+    "median_score": 0.2712134037410744,
+    "pending_cells": [],
+    "reason": "destructive control/ablation matches or beats its valid parent"
+  }
+]

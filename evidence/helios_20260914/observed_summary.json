@@ -1,0 +1,19 @@
+{
+  "campaign": "helios_20260914",
+  "classification": "user_directed_family_refinement",
+  "completed_cells": 10,
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "decision": "PROMOTE_ZERO",
+  "decision_code": "FALSIFIED_DEVELOPMENT",
+  "evidence_stage": "DEVELOPMENT_OBSERVED",
+  "exact_current_is_eligibility": "NOT_RUN",
+  "hosted_multipass": "NOT_RUN",
+  "invalid_cells": 0,
+  "manifest_sha256": "920b8c66b9720f3f485f470852e1502432e0ac8dfb53ce1a23d17f778706ff50",
+  "participant_uniqueness": "NOT_RUN",
+  "quantiacs_access_mode": "public_default",
+  "reason": "Misassigned-skill and no-cost-hurdle controls beat the central parent; every base is below the predefined robust development floor. No retuning.",
+  "source_sha256": "062422bd365410cf0374ffe157d743617002514675e816a88ae2e6b19f79d024",
+  "submission": "NOT_RUN",
+  "toolbox_commit": "9e5274c5ce102a66debc799fd2a2300969fb90f6"
+}

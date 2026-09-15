@@ -1,0 +1,10 @@
+{
+  "campaign": "helios_20260914",
+  "note": "Schema adapter for existing analyze_mechanism_controls.py; identical preregistered settings, no new research choice.",
+  "original_plan_sha256": "8f6c2cfe2659aaf15c92e2736968af70592c396cc8300edb5215a19ce2ed6c06",
+  "secondary_diagnostics": {
+    "block_days": 21,
+    "bootstrap_replicates": 500,
+    "seed": 7
+  }
+}

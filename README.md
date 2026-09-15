@@ -12,6 +12,17 @@ This repository is the research-and-validation stack for the **Quantiacs Q25 Cry
 
 ## State of the lab — 2026-09-12
 
+**2026-09-14 update — HELIOS refinement:** the attached VIPER–HELIOS v22 inspired
+a [self-contained factor-learning/risk-budget strategy](strategies/generated/q25_helios_causal.py)
+and a frozen comparison with three base windows, four ablations/falsifiers and
+three baselines. All ten objects completed exact Quantiacs evaluation.
+Best robust development Sharpe: **0.320**; existing low-vol control: **0.641**.
+Misassigned learned weights and removal of the ATR hurdle beat the central
+parent: **`FALSIFIED_DEVELOPMENT`, promote zero**. See the
+[implementation, reference audit and evidence](docs/HELIOS_REFINEMENT.md).
+This is an engineering refinement of the existing factor lineage; no new
+independent alpha or contest qualification is claimed.
+
 The current research frontier is more interesting than a leaderboard because the loop is now explicitly self-correcting.
 
 | Surface | Current state | What it means |

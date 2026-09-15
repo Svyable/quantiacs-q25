@@ -1,0 +1,18 @@
+{
+  "campaign": "frontier_20260913o",
+  "repairs": [
+    {
+      "stage": "premeasurement_ci",
+      "trigger_run": 34798945444,
+      "failure_type": "RESEARCH_CONTROL_PLANE_ARTIFACT_DRIFT",
+      "root_cause": "Adding the frozen Frontier-O manifest correctly added a second unmeasured campaign to the generated research control plane, while the checked-in control-plane JSON and Markdown still reflected the pre-Frontier-O queue.",
+      "repair": "Regenerate the research control plane after methodology health and before pytest, preserve the generated artifacts, and commit the canonical generated JSON/Markdown without changing the Frontier-O strategy or preregistration.",
+      "economic_change": false,
+      "parameter_change": false,
+      "signal_change": false,
+      "market_metrics_observed_before_repair": false,
+      "verification": "Run 34798945444 reached 468 passing tests and one generated-artifact equality failure; the exact market measurement step was skipped.",
+      "note": "Frontier-O formulas, signs, 42/63/84 window grid, 5-day absorption state, 3-day release state, controls, allocation and preregistration hash remain unchanged."
+    }
+  ]
+}

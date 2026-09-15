@@ -1,0 +1,18 @@
+{
+  "campaign": "frontier_20260913o",
+  "ideation_count": 10,
+  "implemented": "absorption_release_elasticity",
+  "performance_seen_before_score": false,
+  "ideas": [
+    {"id":"absorption_release_elasticity","decision":"IMPLEMENT","hypothesis":"Persistent abnormal dollar-volume absorption followed by efficient positive residual release predicts leadership.","novelty_axes":["information_primitive","transform","timing_or_state_condition"]},
+    {"id":"absorption_without_release","decision":"IDEA_ONLY","hypothesis":"Persistent low-displacement high-volume absorption alone predicts continuation.","novelty_axes":["information_primitive","transform"]},
+    {"id":"release_without_absorption","decision":"IDEA_ONLY","hypothesis":"Positive displacement efficiency alone predicts continuation.","novelty_axes":["transform","timing_or_state_condition"]},
+    {"id":"elasticity_reversal","decision":"IDEA_ONLY","hypothesis":"Extreme positive displacement per unit flow mean-reverts.","novelty_axes":["information_primitive","transform"]},
+    {"id":"absorption_age","decision":"IDEA_ONLY","hypothesis":"Older unresolved absorption stocks have different release probability.","novelty_axes":["transform","timing_or_state_condition"]},
+    {"id":"elasticity_rank_migration","decision":"IDEA_ONLY","hypothesis":"Rising cross-sectional elasticity rank predicts leadership.","novelty_axes":["transform","portfolio_construction"]},
+    {"id":"range_absorption","decision":"IDEA_ONLY","hypothesis":"High-low range compression under volume pressure predicts release.","novelty_axes":["information_primitive","transform"]},
+    {"id":"close_location_release","decision":"IDEA_ONLY","hypothesis":"Absorption followed by strong close-location geometry improves release quality.","novelty_axes":["information_primitive","timing_or_state_condition"]},
+    {"id":"flow_pressure_breadth","decision":"IDEA_ONLY","hypothesis":"Cross-sectional breadth of abnormal pressure controls deployment.","novelty_axes":["information_primitive","portfolio_construction"]},
+    {"id":"elasticity_dispersion_state","decision":"IDEA_ONLY","hypothesis":"Cross-sectional dispersion of elasticity is an opportunity-density state.","novelty_axes":["transform","timing_or_state_condition"]}
+  ]
+}

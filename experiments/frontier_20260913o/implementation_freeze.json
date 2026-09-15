@@ -1,0 +1,12 @@
+{
+  "activation_type": "NEW_PREREGISTERED_FRONTIER",
+  "campaign": "frontier_20260913o",
+  "freeze_note": "One implemented family, three preregistered baseline windows, one no-volume ablation and one eligible-identity pressure-rotation falsifier. No Frontier-O market-return result may be used to mutate formulas, signs, windows, absorption/release horizons, allocation or controls.",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "preregistration_sha256": {
+    "absorption_release_elasticity": "51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847"
+  },
+  "selection_folds": ["research", "dev"],
+  "validation_boundary": "2023-2024 is spent; 2025+ and live are protected from mutation."
+}

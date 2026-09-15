@@ -78,7 +78,7 @@
     "latest_kind": "summary_only",
     "latest_measured_campaign": "frontier_20260912m",
     "measured_campaigns_since_full_matrix": 2,
-    "measurement_queue_count": 1,
+    "measurement_queue_count": 2,
     "next_queued_campaign": "frontier_20260913m",
     "summary_only_latest": true
   },

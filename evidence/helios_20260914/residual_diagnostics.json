@@ -1,0 +1,92 @@
+{
+  "_meta": {
+    "available_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "requested_controls": [
+      "equal_liquid",
+      "inverse_vol_trend",
+      "persistent_low_vol"
+    ],
+    "status": "COMPLETE"
+  },
+  "helios_diagonal_risk": {
+    "correlations": {
+      "equal_liquid": 0.5920121969504749,
+      "inverse_vol_trend": 0.793879577332804,
+      "persistent_low_vol": 0.6256201374345911
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -1.836122879743895,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "helios_misassigned_skill": {
+    "correlations": {
+      "equal_liquid": 0.5942617879986982,
+      "inverse_vol_trend": 0.7940323313543353,
+      "persistent_low_vol": 0.6223057412259809
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -2.6661760046440857,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "helios_no_cost_gate": {
+    "correlations": {
+      "equal_liquid": 0.5955350461846222,
+      "inverse_vol_trend": 0.7975213844720691,
+      "persistent_low_vol": 0.6331738473816632
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -2.796344884149147,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "helios_static": {
+    "correlations": {
+      "equal_liquid": 0.5862259388106985,
+      "inverse_vol_trend": 0.7838063989266817,
+      "persistent_low_vol": 0.6215960381026289
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -2.8338597556657574,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "helios_w126": {
+    "correlations": {
+      "equal_liquid": 0.5911154659682226,
+      "inverse_vol_trend": 0.7906229674776529,
+      "persistent_low_vol": 0.6242356595011839
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -2.855565386336608,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "helios_w189": {
+    "correlations": {
+      "equal_liquid": 0.5862852259800534,
+      "inverse_vol_trend": 0.7846490883293484,
+      "persistent_low_vol": 0.6215322453654413
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -2.838753921460366,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  },
+  "helios_w63": {
+    "correlations": {
+      "equal_liquid": 0.5870494029631855,
+      "inverse_vol_trend": 0.7849914313805458,
+      "persistent_low_vol": 0.621945174701282
+    },
+    "historical_core_comparison": "PENDING: historical V10/V11/V12 return streams absent",
+    "observations": 730,
+    "residual_sharpe": -2.809137014303484,
+    "status": "LOCAL_CONTROL_DIAGNOSTIC_ONLY"
+  }
+}

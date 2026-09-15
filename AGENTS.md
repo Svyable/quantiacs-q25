@@ -101,6 +101,15 @@ The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are
 
 ## Current read-through
 
+HELIOS (`experiments/helios_20260914/pm_report.md`) is a user-directed
+VIPER–HELIOS v22 family refinement, not independent-alpha discovery. All seven
+preregistered cells and three controls completed exact 2016–2022 evaluation.
+Best base robust SR was 0.320; central 0.271 lost to misassigned factor-skill
+weights (0.302) and no-ATR-hurdle control (0.294). `FALSIFIED_DEVELOPMENT`;
+promote zero. Preserve the formulas and window grid. Prefix/365-day replay
+passed; the reference report's custom P&L and expanding learner require a
+separate audit. See `docs/HELIOS_REFINEMENT.md` and its exact evidence packet.
+
 Frontier-L (`experiments/frontier_20260912l/pm_report.md`) measured three
 preregistered non-graph families with the exact public/default harness on the
 reused 2016–2022 development surface; all 18 cells completed and 2023–2024

@@ -1,0 +1,94 @@
+{
+  "ablation": "Uniform static factor priors. Secondary controls remove covariance off-diagonals or ATR admission hurdle while preserving learned factors.",
+  "allocation": "Conviction-weighted risk budgets from 63-day exponentially weighted covariance shrunk 50% to single-factor target. Normalize then cap each name at 25% without redistribution. Scale down to 40% annualized volatility times breadth/drawdown regime.",
+  "cash_rule": "Unfilled caps, weak signal and missing history remain cash. No leverage or minimum gross.",
+  "classification": "user_directed_family_refinement",
+  "code_path": "strategies/generated/q25_helios_causal.py",
+  "contamination_notes": "Reference contains many tuned versions and unverified trial Sharpes. 2016-2022 reused development; 2023-2024 spent; 2025+ diagnostic; live untouched.",
+  "cost_hypothesis": "Weekly updates and ATR hurdle reduce marginal expensive entries. Hurdle is a scale proxy, not calibrated expected P&L; official stats decide net economics.",
+  "created_utc": "2026-09-14T02:06:26+00:00",
+  "data_admissibility": "OHLCV_ONLY",
+  "experiment_id": "helios_20260914_factor_refinement",
+  "factor_definitions": {
+    "flow": "21-day close-location-weighted volume / volume",
+    "low_risk": "negative 63-day realized volatility",
+    "momentum": "mean volatility-normalized 21/63/126-day log returns",
+    "quality": "63-day directional path efficiency minus downside semideviation / volatility"
+  },
+  "failure_mode": "Noisy IC, redundant factors, delayed exits or unnecessary complexity; controls preserve apparent edge.",
+  "falsifier": "Rotate learned factor-weight assignments by one factor, preserving their distribution and all other machinery.",
+  "fixed_constants": {
+    "atr_window": 14,
+    "cost_atr_fraction": 0.04,
+    "ew_decay": 0.97,
+    "factor_horizons": [
+      21,
+      63,
+      126
+    ],
+    "label_horizons": [
+      5,
+      21
+    ],
+    "label_weights": [
+      0.5,
+      0.5
+    ],
+    "learning_blend": 0.35,
+    "max_gross": 1.0,
+    "name_cap": 0.25,
+    "risk_window": 63,
+    "round_trip_cost_multiplier": 2.0,
+    "skill_prior_observations": 12,
+    "structured_covariance_share": 0.5,
+    "target_vol": 0.4
+  },
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      63,
+      126,
+      189
+    ]
+  },
+  "initial_free_parameters": [
+    "window",
+    "top_k"
+  ],
+  "mechanism": "matured_factor_skill_risk_budget",
+  "nearest_incumbent": "V10 / factor balance / VIPER-HELIOS engineering library. Frontier-F failed expert/cash allocator remains frozen.",
+  "novelty_axes_changed": [
+    "transform",
+    "portfolio_construction"
+  ],
+  "novelty_note": "Engineering refinement of an occupied factor lineage; no new raw information or independent-alpha claim.",
+  "params": {
+    "cost_gate": true,
+    "risk_model": "structured",
+    "top_k": 6,
+    "window": 126
+  },
+  "portfolio_role": "Factor-family alternative requiring future incumbent/residual evidence.",
+  "primitive": "Sponsor OHLCV and historical is_liquid only.",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Monday targets; eligibility exits remain closed until next Monday. Intraweek gross can only fall with risk ceiling. No recursive state outside weekly interval.",
+  "scope": "Focused translation of user-supplied VIPER-HELIOS v22 engineering primitives, not an independent-alpha discovery campaign.",
+  "selection": "Positive factor score and close above 126-day mean; vol-scaled conviction exceeds round-trip ATR proxy; top six using sorted-label ties.",
+  "selection_objective": "Minimum research/dev Sharpe at 4/8/12 percent ATR; no retuning after observation.",
+  "source_notes": "Fresh implementation; no imported performance claims or tuned v22 parameters.",
+  "source_sha256": "631712efd2057106c8a1f50962a449ffc64af79fbdf937ccd081cf367be5518f",
+  "source_urls": [
+    "https://quantiacs.com/documentation/en/examples/q24_crypto_guide.html"
+  ],
+  "status": "PREREGISTERED_BEFORE_IMPLEMENTATION_AND_RETURNS",
+  "stop_rule": "Freeze if ANY matched comparator matches/beats central parent; kill weak if all three bases below 1.0. No automatic promotion or grid rescue.",
+  "thesis": "Conservative factor-skill learning on completed nonoverlapping horizons improves a fixed factor book after costs; covariance risk budgeting and ATR-aware admission retain usable exposure.",
+  "timing": "Completed bar t generates target t; official evaluator applies execution lag once. Labels end by t-1; no negative shifts or external loaders inside strategy.",
+  "track": "robustness",
+  "transform": "Centered ranks; residualize flow/quality/low-risk against momentum. Pair source-day ranks with completed 5/21-day returns. Separate nonoverlapping calendar phase per horizon. Rolling IC mean, uncertainty and count shrink toward uniform priors. Shift learned coefficients one additional day.",
+  "universe": "Historical is_liquid == 1; positive finite OHLCV; 126 consecutive valid closing returns before admission. Missing liquidity disallows holdings.",
+  "validation": "No new validation window opened."
+}

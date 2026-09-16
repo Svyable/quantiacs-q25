@@ -1,0 +1,20 @@
+{
+  "experiment_id": "omni_stock_turbulence_20260915",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "activation_type": "USER_DIRECTED_CROSS_ASSET_RISK_OVERLAY",
+  "classification": "ALLOCATOR_EXPERIMENT_NOT_INDEPENDENT_ALPHA",
+  "preregistration_sha256": "cdfb7e2addac2859b153bf7f42dda868a19973caff9090eb48f1197ddb5518bc",
+  "strategy_sha256": "c1a01bde026213ef61ef4554c35e1f76079b5d4414f3d1d302c58d32a001e786",
+  "strategy_path": "strategies/generated/omni_stock_turbulence_ic_overlay.py",
+  "local_synthetic_checks": {
+    "python_compile": "PASS",
+    "long_only": "PASS",
+    "name_cap_0_25": "PASS",
+    "gross_cap_1_0": "PASS",
+    "prefix_invariance": "PASS",
+    "prefix_max_abs_error": 0.0
+  },
+  "market_measurement_status": "BLOCKED_LOCAL_INFRA_PENDING_GITHUB_ACTIONS",
+  "notes": "The sandbox had no outbound DNS/network access to GitHub or Quantiacs. Synthetic checks used deterministic generated xarray data only and are not performance evidence."
+}

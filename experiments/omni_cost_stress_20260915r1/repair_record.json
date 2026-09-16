@@ -1,0 +1,14 @@
+{
+  "experiment_id": "omni_cost_stress_20260915r1",
+  "parent_script": "research/omni_cost_stress.py",
+  "repair_class": "IMPLEMENTATION_ONLY_PRE_MARKET",
+  "failed_workflow_run": 35054891650,
+  "failed_stage": "module import before any market data load",
+  "market_data_loaded_before_failure": false,
+  "economic_results_observed_before_repair": false,
+  "change": "add repository root to sys.path before executing the frozen cost-stress script",
+  "candidate_set_changed": false,
+  "folds_changed": false,
+  "cost_ladder_changed": false,
+  "formula_changed": false
+}

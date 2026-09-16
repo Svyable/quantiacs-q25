@@ -1,0 +1,41 @@
+name: tmp-generate-recursive-artifacts
+
+on:
+  push:
+    branches:
+      - chatgpt/ingest-frontier-n-recursive
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install renderer dependency
+        run: python -m pip install --disable-pip-version-check pyyaml
+      - name: Regenerate recursive evidence surfaces
+        run: |
+          python scripts/build_methodology_health.py
+          python scripts/build_research_control_plane.py
+          python scripts/build_recursive_learning.py
+          python scripts/build_learning_router.py
+      - name: Upload generated surfaces
+        uses: actions/upload-artifact@v4
+        with:
+          name: recursive-surfaces
+          path: |
+            docs/data/methodology_health.json
+            docs/METHODOLOGY_HEALTH.md
+            docs/data/research_control_plane.json
+            docs/RESEARCH_CONTROL_PLANE.md
+            docs/data/recursive_learning.json
+            docs/RECURSIVE_LEARNING.md
+            docs/data/learning_router.json
+            docs/LEARNING_ROUTER.md
+          if-no-files-found: error

@@ -39,11 +39,11 @@ The earlier development leader **`topology_migration_w84`** reported robust-deve
 
 ## Measurement queue
 
-The committed measurement frontier is ahead of the evidence frontier by **2 preregistered campaign(s)**.
+The committed measurement frontier is ahead of the evidence frontier by **3 preregistered campaign(s)**.
 
-Next frozen campaign: **`frontier_20260913m`** — 15 candidate/control cells across 3 families; automatic promotion is `False`.
+Next frozen campaign: **`frontier_20260912n`** — 5 candidate/control cells across 1 families; automatic promotion is `False`.
 
-Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.
+Frontier-N is a preregistered OHLCV-only online-forecast-surprise campaign. It directly tests whether causal forecast innovations carry continuation information beyond ordinary market-residual momentum; 2023-2024 is spent and excluded.
 
 Until measured evidence is committed, this is a queue item—not a result. The useful recursive action is to measure or ingest the frozen packet unchanged, not mutate it because the dashboard is empty.
 

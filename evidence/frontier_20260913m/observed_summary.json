@@ -1,0 +1,65 @@
+{
+  "access_mode": "public_default",
+  "campaign": "frontier_20260913m",
+  "decision": "PROMOTE_ZERO",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "families": [
+    {
+      "family": "volume_share_entropy_state",
+      "best_base_id": "volume_share_entropy_state_w42",
+      "best_robust_sharpe": -0.0067628700954069235,
+      "central_id": "volume_share_entropy_state_w42",
+      "central_robust_sharpe": -0.0067628700954069235,
+      "ablation_robust_sharpe": 0.6139429083570899,
+      "falsifier_robust_sharpe": 0.5787309309361168,
+      "decision_code": "FALSIFIED_DEVELOPMENT"
+    },
+    {
+      "family": "entropy_disagreement_cash",
+      "best_base_id": "entropy_disagreement_cash_w63",
+      "best_robust_sharpe": -0.10876054820845124,
+      "central_id": "entropy_disagreement_cash_w84",
+      "central_robust_sharpe": -0.3460842603406987,
+      "ablation_robust_sharpe": 0.20777440623877497,
+      "falsifier_robust_sharpe": 0.3054464583731151,
+      "decision_code": "FALSIFIED_DEVELOPMENT"
+    },
+    {
+      "family": "dispersion_curvature",
+      "best_base_id": "dispersion_curvature_w21",
+      "best_robust_sharpe": -0.255097080691675,
+      "central_id": "dispersion_curvature_w42",
+      "central_robust_sharpe": -0.45755558426967147,
+      "ablation_robust_sharpe": -0.03399827004169004,
+      "falsifier_robust_sharpe": -0.6531296520133818,
+      "decision_code": "FALSIFIED_DEVELOPMENT"
+    }
+  ],
+  "family_decisions": [
+    {"family":"volume_share_entropy_state","family_rank":1,"decision":"FREEZE","decision_code":"FALSIFIED_DEVELOPMENT","best_score":-0.0067628700954069235,"completed_cells":5,"declared_cells":5,"failed_controls":["volume_share_entropy_state_ablation","volume_share_entropy_state_falsifier"],"invalid_cells":[],"pending_cells":[],"median_score":-0.06206043340276875,"reason":"destructive control/ablation matches or beats its valid parent"},
+    {"family":"entropy_disagreement_cash","family_rank":2,"decision":"FREEZE","decision_code":"FALSIFIED_DEVELOPMENT","best_score":-0.10876054820845124,"completed_cells":5,"declared_cells":5,"failed_controls":["entropy_disagreement_cash_ablation","entropy_disagreement_cash_falsifier"],"invalid_cells":[],"pending_cells":[],"median_score":-0.3455756945731106,"reason":"destructive control/ablation matches or beats its valid parent"},
+    {"family":"dispersion_curvature","family_rank":3,"decision":"FREEZE","decision_code":"FALSIFIED_DEVELOPMENT","best_score":-0.255097080691675,"completed_cells":5,"declared_cells":5,"failed_controls":["dispersion_curvature_ablation"],"invalid_cells":[],"pending_cells":[],"median_score":-0.45755558426967147,"reason":"destructive control/ablation matches or beats its valid parent"}
+  ],
+  "interpretation": "Frontier-M reserve measured all fifteen preregistered reserve cells plus the three repository baselines on the reused 2016-2022 development surface. None of the nine base variants survived economically. Volume-share entropy state was strongest at w42 but still slightly negative in development (-0.007 robust Sharpe), while its ablation (0.614) and falsifier (0.579) strongly beat the parent. Entropy-disagreement cash had a best base of -0.109 and both controls were positive. Dispersion curvature had a best base of -0.255 and its ablation beat the central parent. Promote zero and freeze all three reserve families; do not grid-rescue. 2023-2024 remains spent and was excluded.",
+  "live_data_used": false,
+  "manifest_sha256": "5bba3cb80d9978e6e9330506fb8fd67fc99d2d788a6c3adb54616b300aa3cc02",
+  "measured_head_sha": "6cead2a1e8e9ebbaff3b8986277860dfe4441be6",
+  "measurement_source": {
+    "artifact_digest": "sha256:f320e21b3602fbe60e8a8b425cdf5bf369092a7f1932af11ad03a9fde8a48b4b",
+    "artifact_id": 10458908020,
+    "provider": "github_actions",
+    "workflow_job_id": 104892214516,
+    "workflow_run_id": 35125138316
+  },
+  "next_boundary": "Do not retune Frontier-M reserves. Preserve the three negative/falsified families and move to a materially different information object. Liquidity-transition hysteresis is the next admissible frontier candidate because it uses historical eligibility memory rather than another volatility, entropy, forecast-surprise, topology or price-impact rescue.",
+  "notable_base_cells": {
+    "volume_share_entropy_state_w42": {"research_sharpe_12":0.6841518564394764,"dev_sharpe_12":-0.0067628700954069235,"robust_sharpe":-0.0067628700954069235},
+    "entropy_disagreement_cash_w63": {"research_sharpe_12":0.690844993878511,"dev_sharpe_12":-0.10876054820845124,"robust_sharpe":-0.10876054820845124},
+    "dispersion_curvature_w21": {"research_sharpe_12":0.512142662114929,"dev_sharpe_12":-0.255097080691675,"robust_sharpe":-0.255097080691675}
+  },
+  "python": "3.11.16",
+  "selection_end": "2022-12-31",
+  "source_receipt": "evidence/measurement_receipts/frontier_20260913m.json",
+  "spent_validation_fold_excluded": "2023-01-01/2024-12-31",
+  "status": "MEASURED_DEVELOPMENT_ONLY"
+}

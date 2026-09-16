@@ -1,0 +1,73 @@
+{
+  "access_mode": "public_default",
+  "campaign": "frontier_20260913o",
+  "current_new_alpha_leader": {
+    "id": "topology_migration_w84",
+    "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
+    "robust_development_sharpe": 1.376,
+    "state": "FAILED_FORWARD_GATE"
+  },
+  "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+  "decision": "PROMOTE_ZERO",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "families": [
+    {
+      "ablation_robust_sharpe": -0.286140394577933,
+      "best_base_id": "absorption_release_elasticity_w42",
+      "best_robust_sharpe": 0.17143182354314906,
+      "central_id": "absorption_release_elasticity_w63",
+      "central_robust_sharpe": -0.17656885764972863,
+      "decision_code": "KILL_WEAK_ALPHA",
+      "falsifier_robust_sharpe": -0.6734425376983243,
+      "family": "absorption_release_elasticity"
+    }
+  ],
+  "family_decisions": [
+    {
+      "best_score": 0.17143182354314906,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "KILL_WEAK_ALPHA",
+      "declared_cells": 5,
+      "failed_controls": [],
+      "family": "absorption_release_elasticity",
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": -0.11875911172528072,
+      "pending_cells": [],
+      "reason": "every valid base cell is below predefined development floor Sharpe 1.0"
+    }
+  ],
+  "interpretation": "Frontier-O measured the preregistered same-asset abnormal-dollar-volume absorption followed by positive release-efficiency mechanism on the reused 2016-2022 development surface. Research-fold stress Sharpe was strong for all three base windows (1.983 / 1.581 / 1.439 at 12% ATR-linked cost), but none translated to the fixed development floor: w42 was best at 0.171, w63 was -0.177 and w84 was -0.119. The central 63-day parent still beat both its no-volume ablation (-0.286) and identity-rotation falsifier (-0.673), so the interaction has causal support under the preregistered destructive controls but no economic survival. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
+  "live_data_used": false,
+  "manifest_sha256": "fc306f714f6fd3e70f4f068dbf822fbd5b612e2f81696268b642abaadb23b706",
+  "measured_head_sha": "6cead2a1e8e9ebbaff3b8986277860dfe4441be6",
+  "measurement_source": {
+    "artifact_digest": "sha256:7fde1d1bd2c898fc2bdf6c645637eeaf3bda952e24ad8c4258f9097727ee9205",
+    "artifact_id": 10458917654,
+    "provider": "github_actions",
+    "workflow_job_id": 104892214039,
+    "workflow_run_id": 35125138255
+  },
+  "next_boundary": "Do not retune Frontier-O price-volume elasticity. Preserve the causal-support / weak-economics result, finish measuring and ingesting the already-frozen frontier_20260913m reserve campaign, then move to a materially different OHLCV information object such as liquidity-transition hysteresis rather than another price-impact rescue.",
+  "notable_base_cells": {
+    "absorption_release_elasticity_w42": {"dev_sharpe_12":0.17143182354314906,"research_sharpe_12":1.9832785894175584,"robust_sharpe":0.17143182354314906},
+    "absorption_release_elasticity_w63": {"dev_sharpe_12":-0.17656885764972863,"research_sharpe_12":1.5805825609618211,"robust_sharpe":-0.17656885764972863},
+    "absorption_release_elasticity_w84": {"dev_sharpe_12":-0.11875911172528072,"research_sharpe_12":1.4392104528904335,"robust_sharpe":-0.11875911172528072}
+  },
+  "python": "3.11.16",
+  "residual_diagnostics": {
+    "absorption_release_elasticity_w42": {"corr_equal_liquid":0.7197437577725253,"corr_inverse_vol_trend":0.7740690463851111,"corr_persistent_low_vol":0.7245298603137577,"residual_sharpe":-1.5843501049701287},
+    "absorption_release_elasticity_w63": {"corr_equal_liquid":0.7766738399104706,"corr_inverse_vol_trend":0.8514655557295662,"corr_persistent_low_vol":0.7762627347427327,"residual_sharpe":-1.3250075918721091},
+    "absorption_release_elasticity_w84": {"corr_equal_liquid":0.7830707283634774,"corr_inverse_vol_trend":0.8624364587002523,"corr_persistent_low_vol":0.7850105187301596,"residual_sharpe":-0.8906914895540679}
+  },
+  "review_classification": {
+    "nearest_incumbent": "downside_impact_relief / V12 abnormal-volume diffusion",
+    "reason": "The tested object changes both information pairing and state transition: same-asset abnormal-dollar-volume absorption is stored before a distinct release-efficiency trigger. It is not the cross-asset directed diffusion object or the prior downside-impact-relief transform.",
+    "track": "novel_alpha"
+  },
+  "selection_end": "2022-12-31",
+  "source_receipt": "evidence/measurement_receipts/frontier_20260913o.json",
+  "spent_validation_fold_excluded": "2023-01-01/2024-12-31",
+  "status": "MEASURED_DEVELOPMENT_ONLY"
+}

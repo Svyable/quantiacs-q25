@@ -1,0 +1,82 @@
+{
+  "access_mode": "public_default",
+  "campaign": "frontier_20260912n",
+  "current_new_alpha_leader": {
+    "id": "topology_migration_w84",
+    "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
+    "robust_development_sharpe": 1.376,
+    "state": "FAILED_FORWARD_GATE"
+  },
+  "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+  "decision": "PROMOTE_ZERO",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "families": [
+    {
+      "ablation_robust_sharpe": -1.0014138563663737,
+      "best_base_id": "online_ar_surprise_persistence_w63",
+      "best_robust_sharpe": -0.6762538381461807,
+      "central_id": "online_ar_surprise_persistence_w84",
+      "central_robust_sharpe": -0.7804839986712356,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": -0.5198808068985818,
+      "family": "online_ar_surprise_persistence"
+    }
+  ],
+  "family_decisions": [
+    {
+      "best_score": -0.6762538381461807,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "online_ar_surprise_persistence_falsifier"
+      ],
+      "family": "online_ar_surprise_persistence",
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": -0.7804839986712356,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "interpretation": "Frontier-N completed all five preregistered family cells plus the three repository baselines on the reused 2016-2022 development surface. All three base windows had research Sharpe just above 1 at 12% ATR-linked cost but translated to negative development Sharpe. The best base was w63 at robust Sharpe -0.676, while the identity-rotation falsifier was less negative at -0.520 and therefore falsified the parent mechanism. Promote zero, freeze the family, and do not grid-rescue. Review also classifies this as a refinement of the existing forecast-surprise lineage rather than independent-alpha novelty. 2023-2024 remains spent and was excluded.",
+  "live_data_used": false,
+  "manifest_sha256": "8facf4836ecb469cd8f41d141f5296bbbdc462c6b4dc39c64f9cc54519f0552f",
+  "measured_head_sha": "af79783bc34b0c3163f4bf48d52c386d1d81a5fd",
+  "measurement_source": {
+    "artifact_digest": "sha256:34c23478a12c38a33910ffdb9ec0e779c34afe27138598f33bf02505b9779890",
+    "artifact_id": 10312282018,
+    "provider": "github_actions",
+    "workflow_job_id": 103675523436,
+    "workflow_run_id": 34739055893
+  },
+  "next_boundary": "Do not retune Frontier-N. Preserve the negative forecast-surprise result, measure the already-frozen frontier_20260913m reserve campaign and frontier_20260913o price-volume elasticity campaign unchanged, then open a genuinely different object class rather than another forecast-surprise rescue.",
+  "notable_base_cells": {
+    "online_ar_surprise_persistence_w126": {
+      "dev_sharpe_12": -1.3055578227063749,
+      "research_sharpe_12": 1.0322549786009798,
+      "robust_sharpe": -1.3055578227063749
+    },
+    "online_ar_surprise_persistence_w63": {
+      "dev_sharpe_12": -0.6762538381461807,
+      "research_sharpe_12": 1.052370593463772,
+      "robust_sharpe": -0.6762538381461807
+    },
+    "online_ar_surprise_persistence_w84": {
+      "dev_sharpe_12": -0.7804839986712356,
+      "research_sharpe_12": 1.0259721108345512,
+      "robust_sharpe": -0.7804839986712356
+    }
+  },
+  "python": "3.11.16",
+  "review_classification": {
+    "nearest_incumbent": "strategies/generated/frontier_20260910_forecast_surprise.py",
+    "reason": "The incumbent already uses causal rolling AR(1) market-residual forecast errors. Scaling, coefficient clipping and a persistence gate do not establish independent-alpha novelty; the original preregistration is preserved.",
+    "track": "family_refinement"
+  },
+  "selection_end": "2022-12-31",
+  "source_receipt": "evidence/measurement_receipts/frontier_20260912n.json",
+  "spent_validation_fold_excluded": "2023-01-01/2024-12-31",
+  "status": "MEASURED_DEVELOPMENT_ONLY"
+}

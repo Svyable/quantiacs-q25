@@ -1,0 +1,63 @@
+{
+  "automatic_promotion": false,
+  "campaign": "frontier_20260913o",
+  "candidates": [
+    {
+      "family": "absorption_release_elasticity",
+      "id": "absorption_release_elasticity_w42",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 42},
+      "parent_id": "absorption_release_elasticity_w63",
+      "path": "strategies/generated/frontier_20260913o_absorption_release_elasticity.py",
+      "preregistration": "experiments/frontier_20260913o/absorption_release_elasticity/preregistration.json",
+      "preregistration_sha256": "51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847"
+    },
+    {
+      "family": "absorption_release_elasticity",
+      "id": "absorption_release_elasticity_w63",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 63},
+      "parent_id": null,
+      "path": "strategies/generated/frontier_20260913o_absorption_release_elasticity.py",
+      "preregistration": "experiments/frontier_20260913o/absorption_release_elasticity/preregistration.json",
+      "preregistration_sha256": "51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847"
+    },
+    {
+      "family": "absorption_release_elasticity",
+      "id": "absorption_release_elasticity_w84",
+      "mode": "base",
+      "params": {"top_k": 5, "window": 84},
+      "parent_id": "absorption_release_elasticity_w63",
+      "path": "strategies/generated/frontier_20260913o_absorption_release_elasticity.py",
+      "preregistration": "experiments/frontier_20260913o/absorption_release_elasticity/preregistration.json",
+      "preregistration_sha256": "51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847"
+    },
+    {
+      "family": "absorption_release_elasticity",
+      "id": "absorption_release_elasticity_ablation",
+      "mode": "ablation",
+      "params": {"top_k": 5, "window": 63},
+      "parent_id": "absorption_release_elasticity_w63",
+      "path": "strategies/generated/frontier_20260913o_absorption_release_elasticity.py",
+      "preregistration": "experiments/frontier_20260913o/absorption_release_elasticity/preregistration.json",
+      "preregistration_sha256": "51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847"
+    },
+    {
+      "family": "absorption_release_elasticity",
+      "id": "absorption_release_elasticity_falsifier",
+      "mode": "falsifier",
+      "params": {"top_k": 5, "window": 63},
+      "parent_id": "absorption_release_elasticity_w63",
+      "path": "strategies/generated/frontier_20260913o_absorption_release_elasticity.py",
+      "preregistration": "experiments/frontier_20260913o/absorption_release_elasticity/preregistration.json",
+      "preregistration_sha256": "51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847"
+    }
+  ],
+  "classification_note": "Frontier-O is a preregistered OHLCV-only price-volume elasticity campaign. It tests same-asset abnormal-dollar-volume absorption followed by efficient positive release; 2023-2024 is spent and excluded.",
+  "controls": ["equal_liquid", "inverse_vol_trend", "persistent_low_vol"],
+  "max_unique_candidates": 5,
+  "prior_development_evidence": ["frontier_20260912m", "frontier_20260913m"],
+  "protected_live_start": "2026-10-01",
+  "selection_folds": ["research", "dev"],
+  "spent_validation_evidence": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
+}

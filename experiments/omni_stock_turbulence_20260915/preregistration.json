@@ -1,0 +1,88 @@
+{
+  "ablation": "Force IC health to one so the stock turbulence overlay always acts; this tests whether abstention/health gating contributes rather than the raw risk score alone.",
+  "activation_type": "USER_DIRECTED_CROSS_ASSET_RISK_OVERLAY",
+  "allocation_rule": "Inverse blended realized-risk/ATR allocation with 25% name cap; stock overlay multiplies portfolio gross only and never changes coin ranks.",
+  "cash_rule": "Unused capped allocation and all overlay de-risking remain cash.",
+  "chronological_folds_reference": "configs/chronological_folds.yaml",
+  "classification": "ALLOCATOR_EXPERIMENT_NOT_INDEPENDENT_ALPHA",
+  "contamination_notes": "User-directed allocator hypothesis. No strategy return metrics were inspected before this preregistration. Public Quantiacs documentation and the repository's frozen historical family map were inspected for admissibility/novelty only. The local sandbox could not reach GitHub/Quantiacs, so no market measurement occurred before the freeze.",
+  "cost_hypothesis": "Risk reduction should be persistent enough to survive contest costs because name rotation/re-risk is weekly; unscheduled changes are de-risk-only and require a >=15 percentage-point gross reduction.",
+  "cost_ladder_reference": "configs/cost_ladder.yaml",
+  "created_utc": "2026-09-16T03:40:00Z",
+  "data": {
+    "admissibility_basis": [
+      "Q25 official rules require Sponsor-provided data only.",
+      "Quantiacs documentation provides S&P 500 data through qnt.data and documents multi-dataset backtests using external sponsor datasets as indicators.",
+      "A Q25-specific hosted precheck is still required before submission because generic platform availability is not treated as final contest clearance."
+    ],
+    "q25_cross_dataset_admissibility": "PROVISIONAL_HOSTED_PRECLEAR_REQUIRED",
+    "risk_dataset": "qndata.stocks.load_spx_data",
+    "sponsor_data_only": true,
+    "trade_dataset": "qndata.cryptodaily_load_data"
+  },
+  "decision_time_availability": "Stock EOD state is carried forward to the crypto daily calendar. IC at date t correlates stock risk_on from t-1 fresh stock sessions with crypto return realized at t; no future-return series or negative shift is used.",
+  "evidence_status": "PENDING_MEASUREMENT",
+  "expected_failure_modes": [
+    "equity-to-crypto risk transmission is unstable or vanishes after 2022",
+    "IC health is too sparse/slow and abstains most of the time",
+    "raw turbulence helps but IC gating adds no value",
+    "immediate risk cuts create enough ATR-linked turnover to erase protection",
+    "stock-close/crypto-daily timestamp semantics make same-date use inadmissible in hosted evaluation",
+    "cross-dataset Q25 use is rejected despite both datasets being sponsor-provided"
+  ],
+  "experiment_id": "omni_stock_turbulence_20260915",
+  "falsifier": "Invert the stock turbulence direction while preserving the same IC-health, consensus and execution machinery; if the inverted overlay matches or beats the parent, the risk-direction story is falsified.",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "frozen_nonselection_constants": {
+    "fisher_full_health_z": 2.0,
+    "large_immediate_risk_cut": 0.15,
+    "name_cap": 0.25,
+    "top_k": 5
+  },
+  "initial_free_parameters": {
+    "ic_windows_calendar_days": [
+      252,
+      504
+    ],
+    "risk_floor": 0.25,
+    "stock_normalization_sessions": 504
+  },
+  "mechanism": "Sponsor-provided S&P 500 systemic turbulence state with causal online IC-health abstention, applied only as a gross-exposure overlay to an automatic crypto cross-sectional parent.",
+  "modes": [
+    "base",
+    "ungated",
+    "inverted",
+    "gated"
+  ],
+  "nearest_incumbent": "C165 / market_consensus_risk_timing",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "timing_or_state_condition"
+  ],
+  "novelty_note": "Unlike C165's crypto-internal market-consensus timing, this experiment uses dynamic S&P 500 constituent state as the primitive and refuses to act unless a fully realized rolling IC remains positive and statistically supported across two horizons. Portfolio construction is intentionally an overlay, so this is not claimed as independent alpha.",
+  "portfolio_role_if_it_works": "Cross-asset crash/turbulence warning layer that reduces gross during externally observed systemic stress while abstaining when predictive IC is weak.",
+  "promotion_gates_reference": "configs/promotion_gates.yaml",
+  "rebalance_rule": "Crypto name rotation and re-risk on Mondays or liquidity-universe changes; immediate de-risk only when desired gross is at least 15 percentage points below held gross.",
+  "research_cadence_note": "The repository's 24->6->3 cadence is for fresh independent-alpha discovery. This is a user-directed allocator experiment against a named mechanism, so it is preregistered directly with parent, ablation and directional falsifier rather than marketed as a new independent alpha family.",
+  "risk_state": {
+    "aggregation": "component median; confidence = clip(1 - 2 * median absolute component disagreement, 0, 1)",
+    "components": [
+      "volatility_term_structure",
+      "covariance_commonality",
+      "downside_breadth",
+      "drawdown_pressure",
+      "dispersion_shock"
+    ],
+    "ic_health": "fast and slow rolling Pearson IC of lagged fresh stock risk_on vs already-realized crypto market return, Fisher-z transformed; health is the minimum of the two positive z-strengths and reaches 1 at z>=2 on both windows",
+    "normalization": "trailing 504-session median/IQR robust score into [0,1]",
+    "sizing": "scale = exp(log(0.25) * health * consensus * turbulence)"
+  },
+  "selection_rule": "Equal-weighted rank ensemble of residual momentum, path-efficient trend, low downside volatility and positive-return hit rate; select automatic top five positive scores.",
+  "strategy_code_path": "strategies/generated/omni_stock_turbulence_ic_overlay.py",
+  "thesis": "When equity systemic stress rises coherently across volatility term structure, covariance commonality, downside breadth, drawdown, and dispersion, subsequent crypto market returns should deteriorate often enough to justify de-risking, but only while the stock-state/crypto-return information coefficient is currently healthy on both fast and slow windows.",
+  "track": "allocator_experiment",
+  "universe_rule": "Crypto weights only on contemporaneous is_liquid names with observed positive close; no hard-coded crypto symbols. Stock state uses contemporaneous S&P 500 is_liquid membership."
+}

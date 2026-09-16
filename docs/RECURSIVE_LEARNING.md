@@ -48,7 +48,7 @@ Median forward−development Sharpe delta: **-1.062**.
 - Latest measured campaign: `frontier_20260912m`.
 - Latest full matrix: `frontier_20260912k`.
 - Measured campaigns since full matrix: **2**.
-- Frozen measurement queue: **2**; next `frontier_20260912n`.
+- Frozen measurement queue: **2**; next `frontier_20260913m`.
 
 ## State tags
 

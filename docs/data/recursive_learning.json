@@ -4,42 +4,18 @@
       "best_floor_margin": -0.21798984136695576,
       "best_robust_sharpe": 0.7820101586330442,
       "campaign": "frontier_20260912k",
-      "control_support": {
-        "count": 1,
-        "rate": 0.3333333333333333,
-        "total": 3
-      },
+      "control_support": {"count": 1, "rate": 0.3333333333333333, "total": 3},
       "control_supported_but_weak_count": 1,
       "decision": "PROMOTE_ZERO",
-      "decision_resolution": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
-      "economic_survival": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
+      "decision_resolution": {"count": 3, "rate": 1.0, "total": 3},
+      "economic_survival": {"count": 0, "rate": 0.0, "total": 3},
       "evidence_stage": "DEVELOPMENT_ONLY",
-      "falsification_coverage": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
+      "falsification_coverage": {"count": 3, "rate": 1.0, "total": 3},
       "falsified_by_controls_count": 2,
       "family_count": 3,
-      "family_names": [
-        "nearest_peer_detachment",
-        "subspace_rotation_opportunity",
-        "cohort_residual_divergence"
-      ],
+      "family_names": ["nearest_peer_detachment", "subspace_rotation_opportunity", "cohort_residual_divergence"],
       "median_central_control_margin": -0.08333783122920768,
-      "promotion_ready": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
+      "promotion_ready": {"count": 0, "rate": 0.0, "total": 3},
       "research_to_dev": {
         "base_cells_compared": 9,
         "median_dev_minus_research_sharpe_12": -0.7833212586740981,
@@ -52,42 +28,18 @@
       "best_floor_margin": -0.3860570929102134,
       "best_robust_sharpe": 0.6139429070897866,
       "campaign": "frontier_20260912l",
-      "control_support": {
-        "count": 1,
-        "rate": 0.3333333333333333,
-        "total": 3
-      },
+      "control_support": {"count": 1, "rate": 0.3333333333333333, "total": 3},
       "control_supported_but_weak_count": 1,
       "decision": "PROMOTE_ZERO",
-      "decision_resolution": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
-      "economic_survival": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
+      "decision_resolution": {"count": 3, "rate": 1.0, "total": 3},
+      "economic_survival": {"count": 0, "rate": 0.0, "total": 3},
       "evidence_stage": "DEVELOPMENT_ONLY",
-      "falsification_coverage": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
+      "falsification_coverage": {"count": 3, "rate": 1.0, "total": 3},
       "falsified_by_controls_count": 2,
       "family_count": 3,
-      "family_names": [
-        "dollar_volume_share_migration",
-        "permutation_entropy_contraction",
-        "relative_value_convergence"
-      ],
+      "family_names": ["dollar_volume_share_migration", "permutation_entropy_contraction", "relative_value_convergence"],
       "median_central_control_margin": -0.008902771865795788,
-      "promotion_ready": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
+      "promotion_ready": {"count": 0, "rate": 0.0, "total": 3},
       "research_to_dev": {
         "base_cells_compared": 9,
         "median_dev_minus_research_sharpe_12": -0.6566102591533025,
@@ -100,42 +52,18 @@
       "best_floor_margin": -0.6933266583267534,
       "best_robust_sharpe": 0.3066733416732465,
       "campaign": "frontier_20260912m",
-      "control_support": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
+      "control_support": {"count": 0, "rate": 0.0, "total": 3},
       "control_supported_but_weak_count": 0,
       "decision": "PROMOTE_ZERO",
-      "decision_resolution": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
-      "economic_survival": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
+      "decision_resolution": {"count": 3, "rate": 1.0, "total": 3},
+      "economic_survival": {"count": 0, "rate": 0.0, "total": 3},
       "evidence_stage": "DEVELOPMENT_ONLY",
-      "falsification_coverage": {
-        "count": 3,
-        "rate": 1.0,
-        "total": 3
-      },
+      "falsification_coverage": {"count": 3, "rate": 1.0, "total": 3},
       "falsified_by_controls_count": 3,
       "family_count": 3,
-      "family_names": [
-        "vol_curve_recompression",
-        "relative_vol_rank_relief",
-        "slope_dispersion_opportunity"
-      ],
+      "family_names": ["vol_curve_recompression", "relative_vol_rank_relief", "slope_dispersion_opportunity"],
       "median_central_control_margin": -0.655432337806581,
-      "promotion_ready": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
-      },
+      "promotion_ready": {"count": 0, "rate": 0.0, "total": 3},
       "research_to_dev": {
         "base_cells_compared": 9,
         "median_dev_minus_research_sharpe_12": -0.6232925118242973,
@@ -151,35 +79,15 @@
     "latest_measured_campaign": "frontier_20260912m",
     "measured_campaigns_since_full_matrix": 2,
     "measurement_queue_count": 2,
-    "next_queued_campaign": "frontier_20260912n",
+    "next_queued_campaign": "frontier_20260913m",
     "summary_only_latest": true
   },
   "next_actions": [
-    {
-      "action": "MEASURE_FROZEN_QUEUE_FIRST",
-      "priority": 1,
-      "why": "A preregistered campaign is already frozen. Measure it unchanged before mutating hypotheses from newer diagnostics."
-    },
-    {
-      "action": "DEEPEN_CANONICAL_MATRIX_EVIDENCE",
-      "priority": 2,
-      "why": "The measurement frontier is ahead of the latest full matrix; deepen evidence before the public surface drifts further."
-    },
-    {
-      "action": "TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC",
-      "priority": 3,
-      "why": "Recent base cells have a negative pooled median Dev\u2212Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."
-    },
-    {
-      "action": "CALIBRATE_DEVELOPMENT_CONFIDENCE",
-      "priority": 4,
-      "why": "Observed frozen forward validation retained only part of the development Sharpe. Keep development hits explicitly provisional."
-    },
-    {
-      "action": "OPEN_DIFFERENT_OBJECT_CLASS_AFTER_QUEUE",
-      "priority": 5,
-      "why": "Recent best robust economics contracted across campaigns and no family reached the causal+economic intersection. After the frozen queue is measured, prefer a genuinely different alpha object over parameter rescue."
-    }
+    {"action": "MEASURE_FROZEN_QUEUE_FIRST", "priority": 1, "why": "A preregistered campaign is already frozen. Measure it unchanged before mutating hypotheses from newer diagnostics."},
+    {"action": "DEEPEN_CANONICAL_MATRIX_EVIDENCE", "priority": 2, "why": "The measurement frontier is ahead of the latest full matrix; deepen evidence before the public surface drifts further."},
+    {"action": "TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC", "priority": 3, "why": "Recent base cells have a negative pooled median Dev−Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."},
+    {"action": "CALIBRATE_DEVELOPMENT_CONFIDENCE", "priority": 4, "why": "Observed frozen forward validation retained only part of the development Sharpe. Keep development hits explicitly provisional."},
+    {"action": "OPEN_DIFFERENT_OBJECT_CLASS_AFTER_QUEUE", "priority": 5, "why": "Recent best robust economics contracted across campaigns and no family reached the causal+economic intersection. After the frozen queue is measured, prefer a genuinely different alpha object over parameter rescue."}
   ],
   "policy": {
     "aggregate_score": "FORBIDDEN",
@@ -191,22 +99,10 @@
   },
   "recent_window": {
     "campaign_count": 3,
-    "control_support": {
-      "count": 2,
-      "rate": 0.2222222222222222,
-      "total": 9
-    },
+    "control_support": {"count": 2, "rate": 0.2222222222222222, "total": 9},
     "control_supported_but_weak_count": 2,
-    "decision_resolution": {
-      "count": 9,
-      "rate": 1.0,
-      "total": 9
-    },
-    "economic_survival": {
-      "count": 0,
-      "rate": 0.0,
-      "total": 9
-    },
+    "decision_resolution": {"count": 9, "rate": 1.0, "total": 9},
+    "economic_survival": {"count": 0, "rate": 0.0, "total": 9},
     "exact_family_name_novelty": {
       "distinct_family_names": 9,
       "family_instances": 9,
@@ -214,18 +110,10 @@
       "repeated_name_count": 0,
       "repeated_name_rate": 0.0
     },
-    "falsification_coverage": {
-      "count": 9,
-      "rate": 1.0,
-      "total": 9
-    },
+    "falsification_coverage": {"count": 9, "rate": 1.0, "total": 9},
     "falsified_by_controls_count": 7,
     "family_count": 9,
-    "promotion_ready": {
-      "count": 0,
-      "rate": 0.0,
-      "total": 9
-    },
+    "promotion_ready": {"count": 0, "rate": 0.0, "total": 9},
     "research_to_dev": {
       "base_cells_compared": 27,
       "nonnegative_gap_count": 3,
@@ -249,18 +137,9 @@
       "first": 0.7820101586330442,
       "latest": 0.3066733416732465,
       "values": [
-        {
-          "campaign": "frontier_20260912k",
-          "value": 0.7820101586330442
-        },
-        {
-          "campaign": "frontier_20260912l",
-          "value": 0.6139429070897866
-        },
-        {
-          "campaign": "frontier_20260912m",
-          "value": 0.3066733416732465
-        }
+        {"campaign": "frontier_20260912k", "value": 0.7820101586330442},
+        {"campaign": "frontier_20260912l", "value": 0.6139429070897866},
+        {"campaign": "frontier_20260912m", "value": 0.3066733416732465}
       ]
     },
     "control_support_rate": {
@@ -269,18 +148,9 @@
       "first": 0.3333333333333333,
       "latest": 0.0,
       "values": [
-        {
-          "campaign": "frontier_20260912k",
-          "value": 0.3333333333333333
-        },
-        {
-          "campaign": "frontier_20260912l",
-          "value": 0.3333333333333333
-        },
-        {
-          "campaign": "frontier_20260912m",
-          "value": 0.0
-        }
+        {"campaign": "frontier_20260912k", "value": 0.3333333333333333},
+        {"campaign": "frontier_20260912l", "value": 0.3333333333333333},
+        {"campaign": "frontier_20260912m", "value": 0.0}
       ]
     },
     "median_central_control_margin": {
@@ -289,18 +159,9 @@
       "first": -0.08333783122920768,
       "latest": -0.655432337806581,
       "values": [
-        {
-          "campaign": "frontier_20260912k",
-          "value": -0.08333783122920768
-        },
-        {
-          "campaign": "frontier_20260912l",
-          "value": -0.008902771865795788
-        },
-        {
-          "campaign": "frontier_20260912m",
-          "value": -0.655432337806581
-        }
+        {"campaign": "frontier_20260912k", "value": -0.08333783122920768},
+        {"campaign": "frontier_20260912l", "value": -0.008902771865795788},
+        {"campaign": "frontier_20260912m", "value": -0.655432337806581}
       ]
     },
     "median_dev_minus_research_sharpe_12": {
@@ -309,18 +170,9 @@
       "first": -0.7833212586740981,
       "latest": -0.6232925118242973,
       "values": [
-        {
-          "campaign": "frontier_20260912k",
-          "value": -0.7833212586740981
-        },
-        {
-          "campaign": "frontier_20260912l",
-          "value": -0.6566102591533025
-        },
-        {
-          "campaign": "frontier_20260912m",
-          "value": -0.6232925118242973
-        }
+        {"campaign": "frontier_20260912k", "value": -0.7833212586740981},
+        {"campaign": "frontier_20260912l", "value": -0.6566102591533025},
+        {"campaign": "frontier_20260912m", "value": -0.6232925118242973}
       ]
     }
   },
@@ -344,9 +196,5 @@
     "observed_gate_count": 1,
     "passed_gate_count": 0
   },
-  "window_campaigns": [
-    "frontier_20260912k",
-    "frontier_20260912l",
-    "frontier_20260912m"
-  ]
+  "window_campaigns": ["frontier_20260912k", "frontier_20260912l", "frontier_20260912m"]
 }

@@ -8,9 +8,16 @@ on:
       - 'experiments/frontier_20260913m/**'
       - 'research/benchmark.py'
       - 'research/iteration.py'
+      - 'evidence/frontier_20260912n/**'
       - 'docs/METHODOLOGY_HEALTH.md'
       - 'docs/data/methodology_health.json'
+      - 'docs/RESEARCH_CONTROL_PLANE.md'
+      - 'docs/data/research_control_plane.json'
+      - 'docs/RECURSIVE_LEARNING.md'
+      - 'docs/data/recursive_learning.json'
       - 'scripts/build_methodology_health.py'
+      - 'scripts/build_research_control_plane.py'
+      - 'scripts/build_recursive_learning.py'
       - '.github/workflows/frontier-m-reserve-alpha-benchmark.yml'
   workflow_dispatch:
 
@@ -36,15 +43,22 @@ jobs:
           python-version: '3.11'
       - name: Install Quantiacs toolbox and tests
         run: python -m pip install -r requirements.txt pytest
-      - name: Regenerate methodology health for queued Frontier-M reserve campaign
-        run: python scripts/build_methodology_health.py
-      - name: Preserve generated health telemetry
+      - name: Regenerate evidence-derived research telemetry
+        run: |
+          python scripts/build_methodology_health.py
+          python scripts/build_research_control_plane.py
+          python scripts/build_recursive_learning.py
+      - name: Preserve generated research telemetry
         uses: actions/upload-artifact@v4
         with:
-          name: frontier-m-reserve-methodology-health-${{ github.run_id }}
+          name: frontier-m-reserve-research-telemetry-${{ github.run_id }}
           path: |
             docs/data/methodology_health.json
             docs/METHODOLOGY_HEALTH.md
+            docs/data/research_control_plane.json
+            docs/RESEARCH_CONTROL_PLANE.md
+            docs/data/recursive_learning.json
+            docs/RECURSIVE_LEARNING.md
           if-no-files-found: error
       - name: Run full software, provenance and causality suite
         run: python -m pytest -q tests

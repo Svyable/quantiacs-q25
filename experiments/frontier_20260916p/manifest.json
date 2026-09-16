@@ -1,0 +1,103 @@
+{
+  "automatic_promotion": false,
+  "campaign": "frontier_20260916p",
+  "candidates": [
+    {
+      "family": "liquidity_requalification_hysteresis",
+      "id": "liquidity_requalification_hysteresis_w42",
+      "mode": "base",
+      "params": {
+        "top_k": 5,
+        "window": 42
+      },
+      "parent_id": "liquidity_requalification_hysteresis_w63",
+      "path": "strategies/generated/frontier_20260916p_liquidity_requalification_hysteresis.py",
+      "preregistration": "experiments/frontier_20260916p/liquidity_requalification_hysteresis/preregistration.json",
+      "preregistration_sha256": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf"
+    },
+    {
+      "family": "liquidity_requalification_hysteresis",
+      "id": "liquidity_requalification_hysteresis_w63",
+      "mode": "base",
+      "params": {
+        "top_k": 5,
+        "window": 63
+      },
+      "parent_id": null,
+      "path": "strategies/generated/frontier_20260916p_liquidity_requalification_hysteresis.py",
+      "preregistration": "experiments/frontier_20260916p/liquidity_requalification_hysteresis/preregistration.json",
+      "preregistration_sha256": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf"
+    },
+    {
+      "family": "liquidity_requalification_hysteresis",
+      "id": "liquidity_requalification_hysteresis_w84",
+      "mode": "base",
+      "params": {
+        "top_k": 5,
+        "window": 84
+      },
+      "parent_id": "liquidity_requalification_hysteresis_w63",
+      "path": "strategies/generated/frontier_20260916p_liquidity_requalification_hysteresis.py",
+      "preregistration": "experiments/frontier_20260916p/liquidity_requalification_hysteresis/preregistration.json",
+      "preregistration_sha256": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf"
+    },
+    {
+      "family": "liquidity_requalification_hysteresis",
+      "id": "liquidity_requalification_hysteresis_ablation",
+      "mode": "ablation",
+      "params": {
+        "top_k": 5,
+        "window": 63
+      },
+      "parent_id": "liquidity_requalification_hysteresis_w63",
+      "path": "strategies/generated/frontier_20260916p_liquidity_requalification_hysteresis.py",
+      "preregistration": "experiments/frontier_20260916p/liquidity_requalification_hysteresis/preregistration.json",
+      "preregistration_sha256": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf"
+    },
+    {
+      "family": "liquidity_requalification_hysteresis",
+      "id": "liquidity_requalification_hysteresis_falsifier",
+      "mode": "falsifier",
+      "params": {
+        "top_k": 5,
+        "window": 63
+      },
+      "parent_id": "liquidity_requalification_hysteresis_w63",
+      "path": "strategies/generated/frontier_20260916p_liquidity_requalification_hysteresis.py",
+      "preregistration": "experiments/frontier_20260916p/liquidity_requalification_hysteresis/preregistration.json",
+      "preregistration_sha256": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf"
+    }
+  ],
+  "classification_note": "Frontier-P is a preregistered priority-1 liquidity-transition-hysteresis campaign. It tests historical eligibility persistence, requalification gap and transition stability rather than a simple entry/new-asset lifecycle event. 2023-2024 is spent and excluded.",
+  "controls": [
+    "equal_liquid",
+    "inverse_vol_trend",
+    "persistent_low_vol"
+  ],
+  "max_unique_candidates": 5,
+  "prior_development_evidence": [
+    "frontier_20260910",
+    "frontier_20260910b",
+    "frontier_20260910c",
+    "frontier_20260910d",
+    "frontier_20260911e",
+    "frontier_20260911f",
+    "frontier_20260911g",
+    "frontier_20260911h",
+    "frontier_20260912i",
+    "frontier_20260912j",
+    "frontier_20260912k",
+    "frontier_20260912l",
+    "frontier_20260912m",
+    "frontier_20260912n",
+    "frontier_20260913m",
+    "frontier_20260913o",
+    "ebenezar_20260912"
+  ],
+  "protected_live_start": "2026-10-01",
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "spent_validation_evidence": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
+}

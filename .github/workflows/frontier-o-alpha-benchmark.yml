@@ -10,12 +10,10 @@ on:
       - 'research/benchmark.py'
       - 'research/iteration.py'
       - 'evidence/frontier_20260912n/**'
-      - 'docs/METHODOLOGY_HEALTH.md'
-      - 'docs/data/methodology_health.json'
-      - 'docs/RESEARCH_CONTROL_PLANE.md'
-      - 'docs/data/research_control_plane.json'
-      - 'docs/RECURSIVE_LEARNING.md'
-      - 'docs/data/recursive_learning.json'
+      - 'evidence/frontier_20260913m/**'
+      - 'evidence/frontier_20260913o/**'
+      - 'evidence/measurement_receipts/frontier_20260913m.json'
+      - 'evidence/measurement_receipts/frontier_20260913o.json'
       - 'scripts/build_methodology_health.py'
       - 'scripts/build_research_control_plane.py'
       - 'scripts/build_recursive_learning.py'
@@ -107,17 +105,6 @@ jobs:
           echo "RESULT_DIR=$RESULT_DIR"
           test -n "$RESULT_DIR"
           cat "$RESULT_DIR/report.md" || true
-          python - "$RESULT_DIR" <<'PY'
-          import json
-          import sys
-          from pathlib import Path
-          root = Path(sys.argv[1])
-          for name in ('rankings.json','family_decisions.json','residual_diagnostics.json'):
-              path = root / name
-              if path.exists():
-                  print(f'\n=== {name} ===')
-                  print(json.dumps(json.loads(path.read_text()), indent=2, sort_keys=True))
-          PY
 
       - name: Preserve measured Frontier-O evidence
         if: ${{ always() && steps.measure.outcome == 'success' }}

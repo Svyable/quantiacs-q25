@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 import xarray as xr
 
 
@@ -13,6 +15,8 @@ spec = importlib.util.spec_from_file_location("omni_frontier", PATH)
 assert spec is not None and spec.loader is not None
 mod = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mod)
+
+REPAIR_RECORD = Path("experiments/omni_cross_asset_frontier_20260915r1/repair_record.json")
 
 
 def _panel(seed: int = 4, periods: int = 900, assets: int = 24) -> xr.DataArray:
@@ -39,21 +43,28 @@ def _crypto(seed: int = 7, start: str = "2013-01-01", periods: int = 1500, asset
     return xr.DataArray(values, dims=("field", "time", "asset"), coords={"field":["close","is_liquid"], "time":dates, "asset":[f"C{i:02d}" for i in range(assets)]})
 
 
-def test_tail_and_fragility_are_bounded_and_prefix_invariant():
-    stocks = _panel()
-    end = pd.Timestamp(stocks.time.values[820])
-    full_ctx = mod._stock_context(stocks)
-    cut = stocks.sel(time=slice(None, end))
-    cut_ctx = mod._stock_context(cut)
+def test_frozen_wave1_preserves_documented_pre_market_dtype_failure():
+    """The original freeze is evidence; the executable repair lives in R1.
 
-    for fn in (mod._tail_dependence, mod._fragility_recovery):
-        full = fn(full_ctx)
-        short = fn(cut_ctx)
-        for key in ("primary", "ablation", "inverted"):
-            assert short[key].dropna().between(0.0, 1.0).all()
-            left = float(full[key].loc[end])
-            right = float(short[key].loc[end])
-            assert np.isclose(left, right, atol=1e-12, rtol=0.0, equal_nan=True)
+    Do not silently rewrite this source snapshot after observing the synthetic
+    dtype failure.  The dedicated R1 test module proves the formula-identical
+    numeric-coercion repair is bounded and prefix invariant.
+    """
+    record = json.loads(REPAIR_RECORD.read_text())
+    assert record["repair_class"] == "IMPLEMENTATION_ONLY_PRE_MARKET"
+    assert record["market_returns_observed_for_wave1_before_repair"] is False
+    assert record["formula_changed"] is False
+    assert record["parameter_changed"] is False
+    assert record["window_changed"] is False
+    assert record["threshold_changed"] is False
+    assert record["selection_rule_changed"] is False
+    assert record["portfolio_rule_changed"] is False
+    assert "object-dtype" in record["failure"]
+
+    stocks = _panel()
+    ctx = mod._stock_context(stocks)
+    with pytest.raises(TypeError):
+        mod._tail_dependence(ctx)
 
 
 def test_online_ridge_uses_only_realized_labels():

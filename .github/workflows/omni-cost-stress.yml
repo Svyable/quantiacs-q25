@@ -1,0 +1,37 @@
+name: omni-cost-stress
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/omni_cost_stress.py'
+      - '.github/workflows/omni-cost-stress.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-cost-stress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Quantiacs toolbox
+        run: python -m pip install -r requirements.txt
+      - name: Run exact cleaner and ATR cost ladder
+        run: |
+          mkdir -p results/omni_cost_stress
+          python research/omni_cost_stress.py --output results/omni_cost_stress/summary.json
+      - name: Preserve exact cost evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: omni-cost-stress-${{ github.run_id }}
+          path: results/omni_cost_stress/
+          if-no-files-found: warn

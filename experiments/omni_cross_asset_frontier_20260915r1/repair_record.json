@@ -1,0 +1,20 @@
+{
+  "experiment_id": "omni_cross_asset_frontier_20260915r1",
+  "parent_experiment": "omni_cross_asset_frontier_20260915",
+  "repair_class": "IMPLEMENTATION_ONLY_PRE_MARKET",
+  "market_returns_observed_for_wave1_before_repair": false,
+  "failed_workflow_run": 35054026699,
+  "failed_stage": "synthetic causality and constraint tests",
+  "failure": "object-dtype pandas Series reached numpy.tanh in robust normalization",
+  "change": "force robust normalization source/z and numpy input to float",
+  "formula_changed": false,
+  "parameter_changed": false,
+  "window_changed": false,
+  "threshold_changed": false,
+  "selection_rule_changed": false,
+  "portfolio_rule_changed": false,
+  "preregistration_git_blob_sha": "9d8e6cea9eb19786278e9431897a5c7197d91347",
+  "original_strategy_git_blob_sha": "f45762710d23766fc13939380f46900546325d97",
+  "repair_wrapper_git_blob_sha": "369874544b34284174f48744486133326aeba14d",
+  "selection_cutoff": "2022-12-31"
+}

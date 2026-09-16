@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign": "frontier_20260913m",
+  "receipt_status": "MEASURED_ARTIFACT_CANONICAL_INGESTED_IN_SAME_PR",
+  "decision": "PROMOTE_ZERO_FREEZE_ALL",
+  "families": [
+    {
+      "family": "volume_share_entropy_state",
+      "best_base_id": "volume_share_entropy_state_w42",
+      "best_robust_sharpe": -0.0067628700954069235,
+      "central_id": "volume_share_entropy_state_w42",
+      "central_robust_sharpe": -0.0067628700954069235,
+      "ablation_robust_sharpe": 0.6139429083570899,
+      "falsifier_robust_sharpe": 0.5787309309361168,
+      "decision_code": "FALSIFIED_DEVELOPMENT"
+    },
+    {
+      "family": "entropy_disagreement_cash",
+      "best_base_id": "entropy_disagreement_cash_w63",
+      "best_robust_sharpe": -0.10876054820845124,
+      "central_id": "entropy_disagreement_cash_w84",
+      "central_robust_sharpe": -0.3460842603406987,
+      "ablation_robust_sharpe": 0.20777440623877497,
+      "falsifier_robust_sharpe": 0.3054464583731151,
+      "decision_code": "FALSIFIED_DEVELOPMENT"
+    },
+    {
+      "family": "dispersion_curvature",
+      "best_base_id": "dispersion_curvature_w21",
+      "best_robust_sharpe": -0.255097080691675,
+      "central_id": "dispersion_curvature_w42",
+      "central_robust_sharpe": -0.45755558426967147,
+      "ablation_robust_sharpe": -0.03399827004169004,
+      "falsifier_robust_sharpe": -0.6531296520133818,
+      "decision_code": "FALSIFIED_DEVELOPMENT"
+    }
+  ],
+  "source": {
+    "workflow_run_id": 35125138316,
+    "workflow_job_id": 104892214516,
+    "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/35125138316",
+    "artifact_id": 10458908020,
+    "artifact_name": "frontier_20260913m-measured-35125138316",
+    "artifact_digest": "sha256:f320e21b3602fbe60e8a8b425cdf5bf369092a7f1932af11ad03a9fde8a48b4b",
+    "measured_head_sha": "6cead2a1e8e9ebbaff3b8986277860dfe4441be6",
+    "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+    "manifest_sha256": "5bba3cb80d9978e6e9330506fb8fd67fc99d2d788a6c3adb54616b300aa3cc02",
+    "verification_basis": "All 509 repository tests, dashboard freshness, frozen source/preregistration hash proofs, three controls and all fifteen reserve cells completed in the successful GitHub Actions measurement lane."
+  },
+  "claim_limit": "Frozen public/default development measurement only. All three reserve families were economically falsified by matched destructive controls and/or weak base economics. Preserve the preregistered sources; do not rescue the grids."
+}

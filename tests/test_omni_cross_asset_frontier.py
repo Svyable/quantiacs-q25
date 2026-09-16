@@ -10,11 +10,17 @@ import pytest
 import xarray as xr
 
 
-PATH = Path("strategies/generated/omni_cross_asset_frontier.py")
-spec = importlib.util.spec_from_file_location("omni_frontier", PATH)
-assert spec is not None and spec.loader is not None
-mod = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(mod)
+FROZEN_PATH = Path("strategies/generated/omni_cross_asset_frontier.py")
+frozen_spec = importlib.util.spec_from_file_location("omni_frontier_frozen", FROZEN_PATH)
+assert frozen_spec is not None and frozen_spec.loader is not None
+frozen_mod = importlib.util.module_from_spec(frozen_spec)
+frozen_spec.loader.exec_module(frozen_mod)
+
+REPAIRED_PATH = Path("strategies/generated/omni_cross_asset_frontier_r1.py")
+repaired_spec = importlib.util.spec_from_file_location("omni_frontier_repaired", REPAIRED_PATH)
+assert repaired_spec is not None and repaired_spec.loader is not None
+mod = importlib.util.module_from_spec(repaired_spec)
+repaired_spec.loader.exec_module(mod)
 
 REPAIR_RECORD = Path("experiments/omni_cross_asset_frontier_20260915r1/repair_record.json")
 
@@ -44,12 +50,7 @@ def _crypto(seed: int = 7, start: str = "2013-01-01", periods: int = 1500, asset
 
 
 def test_frozen_wave1_preserves_documented_pre_market_dtype_failure():
-    """The original freeze is evidence; the executable repair lives in R1.
-
-    Do not silently rewrite this source snapshot after observing the synthetic
-    dtype failure.  The dedicated R1 test module proves the formula-identical
-    numeric-coercion repair is bounded and prefix invariant.
-    """
+    """Keep the original freeze immutable and prove why R1 exists."""
     record = json.loads(REPAIR_RECORD.read_text())
     assert record["repair_class"] == "IMPLEMENTATION_ONLY_PRE_MARKET"
     assert record["market_returns_observed_for_wave1_before_repair"] is False
@@ -62,21 +63,35 @@ def test_frozen_wave1_preserves_documented_pre_market_dtype_failure():
     assert "object-dtype" in record["failure"]
 
     stocks = _panel()
-    ctx = mod._stock_context(stocks)
+    ctx = frozen_mod._stock_context(stocks)
     with pytest.raises(TypeError):
-        mod._tail_dependence(ctx)
+        frozen_mod._tail_dependence(ctx)
 
 
-def test_online_ridge_uses_only_realized_labels():
+def test_repaired_tail_and_fragility_are_bounded_and_prefix_invariant():
+    stocks = _panel()
+    end = pd.Timestamp(stocks.time.values[820])
+    full_ctx = mod._stock_context(stocks)
+    cut_ctx = mod._stock_context(stocks.sel(time=slice(None, end)))
+    for fn in (mod._tail_dependence, mod._fragility_recovery):
+        full = fn(full_ctx)
+        short = fn(cut_ctx)
+        for key in ("primary", "ablation", "inverted"):
+            assert short[key].dropna().between(0.0, 1.0).all()
+            left = float(full[key].loc[end])
+            right = float(short[key].loc[end])
+            assert np.isclose(left, right, atol=1e-12, rtol=0.0, equal_nan=True)
+
+
+def test_online_ridge_uses_only_realized_labels_after_repair():
     stocks = _panel(periods=850)
     crypto = _crypto(periods=1500)
     end = pd.Timestamp(stocks.time.values[800])
-    full_ctx = mod._stock_context(stocks)
-    full = mod._online_ridge(full_ctx, crypto)
-
-    cut_stocks = stocks.sel(time=slice(None, end))
-    cut_crypto = crypto.sel(time=slice(None, end))
-    cut = mod._online_ridge(mod._stock_context(cut_stocks), cut_crypto)
+    full = mod._online_ridge(mod._stock_context(stocks), crypto)
+    cut = mod._online_ridge(
+        mod._stock_context(stocks.sel(time=slice(None, end))),
+        crypto.sel(time=slice(None, end)),
+    )
 
     for key in ("primary", "ablation", "inverted"):
         left = float(full[key].loc[end])
@@ -85,7 +100,7 @@ def test_online_ridge_uses_only_realized_labels():
         assert 0.0 <= right <= 1.0
 
 
-def test_risk_scaling_never_adds_exposure():
+def test_risk_scaling_never_adds_exposure_after_repair():
     dates = pd.date_range("2020-01-01", periods=10, freq="D")
     assets = ["A", "B", "C", "D"]
     base = xr.DataArray(np.full((10, 4), 0.25), dims=("time", "asset"), coords={"time":dates, "asset":assets})

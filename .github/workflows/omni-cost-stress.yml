@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - 'research/omni_cost_stress.py'
+      - 'research/omni_cost_stress_r1.py'
+      - 'experiments/omni_cost_stress_20260915r1/**'
+      - 'evidence/omni_cross_asset_frontier_20260915/**'
       - '.github/workflows/omni-cost-stress.yml'
   workflow_dispatch:
 
@@ -12,26 +15,38 @@ permissions:
   contents: read
 
 jobs:
-  exact-cost-stress:
+  verify-superseded-cost-stress:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
-    env:
-      API_KEY: default
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install Quantiacs toolbox
-        run: python -m pip install -r requirements.txt
-      - name: Run exact cleaner and ATR cost ladder
+
+      - name: Verify pre-market import-only repair and observed successor
         run: |
-          mkdir -p results/omni_cost_stress
-          python research/omni_cost_stress.py --output results/omni_cost_stress/summary.json
-      - name: Preserve exact cost evidence
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: omni-cost-stress-${{ github.run_id }}
-          path: results/omni_cost_stress/
-          if-no-files-found: warn
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+
+          repair = json.loads(Path('experiments/omni_cost_stress_20260915r1/repair_record.json').read_text())
+          assert repair['repair_class'] == 'IMPLEMENTATION_ONLY_PRE_MARKET'
+          assert repair['market_data_loaded_before_failure'] is False
+          assert repair['economic_results_observed_before_repair'] is False
+          assert repair['candidate_set_changed'] is False
+          assert repair['folds_changed'] is False
+          assert repair['cost_ladder_changed'] is False
+          assert repair['formula_changed'] is False
+          actual = subprocess.check_output(['git', 'hash-object', 'research/omni_cost_stress_r1.py'], text=True).strip()
+          assert actual == repair['repair_wrapper_git_blob_sha'], (actual, repair['repair_wrapper_git_blob_sha'])
+
+          packet = json.loads(Path('evidence/omni_cross_asset_frontier_20260915/provenance.json').read_text())
+          diagnostics = {row['id']: row for row in packet['post_observation_diagnostics']}
+          observed = diagnostics['cost_stress_r1']
+          assert observed['workflow_run_id'] == 35055186635
+          assert observed['artifact_id'] == 10430214074
+          assert observed['status'] == 'POST_OBSERVATION_EXACT_COST_ROBUSTNESS_ONLY'
+          assert observed['may_drive_current_strategy_selection'] is False
+          print('original import failure is preserved; repaired cost-stress evidence is recorded without re-running obsolete code')
+          PY

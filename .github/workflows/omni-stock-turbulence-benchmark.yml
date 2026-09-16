@@ -1,0 +1,76 @@
+name: omni-stock-turbulence-benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/omni_stock_turbulence_ic_overlay.py'
+      - 'experiments/omni_stock_turbulence_20260915/**'
+      - 'tests/test_omni_stock_turbulence.py'
+      - '.github/workflows/omni-stock-turbulence-benchmark.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  measure-omni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      EXPERIMENT: omni_stock_turbulence_20260915
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Quantiacs toolbox and tests
+        run: python -m pip install -r requirements.txt pytest
+
+      - name: Verify pre-return implementation freeze
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('experiments/omni_stock_turbulence_20260915')
+          freeze = json.loads((root / 'implementation_freeze.json').read_text())
+          prereg = root / 'preregistration.json'
+          strategy = Path(freeze['strategy_path'])
+
+          def sha256(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          assert freeze['frozen_before_measurement'] is True
+          assert freeze['market_returns_observed_before_freeze'] is False
+          assert sha256(prereg) == freeze['preregistration_sha256']
+          assert sha256(strategy) == freeze['strategy_sha256']
+          print('OMNI freeze verified before market measurement')
+          PY
+
+      - name: Run synthetic causality and constraint tests
+        run: python -m pytest -q tests/test_omni_stock_turbulence.py
+
+      - name: Measure base, ablation, falsifier and gated candidate
+        id: measure
+        run: |
+          mkdir -p "results/$EXPERIMENT"
+          python strategies/generated/omni_stock_turbulence_ic_overlay.py \
+            --research \
+            --output "results/$EXPERIMENT/summary.json"
+          cat "results/$EXPERIMENT/summary.json"
+
+      - name: Preserve OMNI evidence
+        if: ${{ always() && steps.measure.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.EXPERIMENT }}-measured-${{ github.run_id }}
+          path: results/${{ env.EXPERIMENT }}/
+          if-no-files-found: error

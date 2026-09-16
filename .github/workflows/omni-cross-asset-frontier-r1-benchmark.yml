@@ -1,0 +1,72 @@
+name: omni-cross-asset-frontier-r1-benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/omni_cross_asset_frontier_r1.py'
+      - 'strategies/generated/omni_cross_asset_frontier_r2.py'
+      - 'tests/test_omni_cross_asset_frontier_r1.py'
+      - 'experiments/omni_cross_asset_frontier_20260915r1/**'
+      - 'experiments/omni_cross_asset_frontier_20260915r2/**'
+      - 'evidence/omni_cross_asset_frontier_20260915/**'
+      - '.github/workflows/omni-cross-asset-frontier-r1-benchmark.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify-frontier-r1-lineage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install synthetic-test dependencies
+        run: python -m pip install -r requirements.txt pytest
+
+      - name: Verify pre-market R1 implementation repair
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          r = json.loads(Path('experiments/omni_cross_asset_frontier_20260915r1/repair_record.json').read_text())
+          assert r['market_returns_observed_for_wave1_before_repair'] is False
+          assert r['formula_changed'] is False and r['parameter_changed'] is False
+          assert r['selection_rule_changed'] is False and r['portfolio_rule_changed'] is False
+          actual = subprocess.check_output(['git', 'hash-object', 'strategies/generated/omni_cross_asset_frontier_r1.py'], text=True).strip()
+          assert actual == r['repair_wrapper_git_blob_sha'], (actual, r['repair_wrapper_git_blob_sha'])
+          print('pre-market implementation-only R1 repair verified')
+          PY
+
+      - name: Run unchanged repaired causal tests
+        run: python -m pytest -q tests/test_omni_cross_asset_frontier_r1.py
+
+      - name: Verify post-measurement reporting repair and evidence
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          r2 = json.loads(Path('experiments/omni_cross_asset_frontier_20260915r2/reporting_repair.json').read_text())
+          assert r2['market_returns_observed_before_repair'] is True
+          assert r2['failed_stage'] == 'final evidence payload construction after all 20 candidates were evaluated'
+          assert r2['economic_results_changed'] is False
+          assert r2['formula_changed'] is False and r2['parameter_changed'] is False
+          actual = subprocess.check_output(['git', 'hash-object', 'strategies/generated/omni_cross_asset_frontier_r2.py'], text=True).strip()
+          assert actual == r2['reporting_wrapper_git_blob_sha']
+
+          packet = json.loads(Path('evidence/omni_cross_asset_frontier_20260915/provenance.json').read_text())
+          summary = json.loads(Path('evidence/omni_cross_asset_frontier_20260915/wave1_observed_summary.json').read_text())
+          wave1 = {row['id']: row for row in packet['selection_driving_packets']}['wave1_r2']
+          assert wave1['artifact_digest'] == 'sha256:953b9bf6f637275db5985f7443eba7f1ab11631876f959c6d7a8ee263ae72904'
+          assert wave1['source_summary_sha256'] == summary['source_artifact_summary_sha256']
+          print('R1 measurement is superseded only for reporting by R2; committed economics preserved without remeasurement')
+          PY

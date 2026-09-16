@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "omni_cross_asset_frontier_20260915",
+  "evidence": "OBSERVED_LOCAL_PUBLIC_DEFAULT",
+  "selection_cutoff": "2022-12-31",
+  "post_2022_is_diagnostic_only": true,
+  "candidate_count": 20,
+  "reporting_repair": "omni_cross_asset_frontier_20260915r2",
+  "source_artifact_summary_sha256": "178cabea0c85e8175431bd5f67d65cac9f28c96f5596ad517189c2f27aa72bf7",
+  "family_decisions": {
+    "fragility_recovery": {
+      "ndx": {
+        "ablation_selection_sharpe": 0.6733396290318135,
+        "base_selection_sharpe": 1.1762823711634507,
+        "complexity_earned": true,
+        "direction_supported": true,
+        "inverted_selection_sharpe": 1.1186348455944333,
+        "primary_selection_sharpe": 1.2408715961805874
+      },
+      "spx": {
+        "ablation_selection_sharpe": 0.8034250303638586,
+        "base_selection_sharpe": 1.1762823711634507,
+        "complexity_earned": true,
+        "direction_supported": true,
+        "inverted_selection_sharpe": 1.0305864651556358,
+        "primary_selection_sharpe": 1.3036557354729212
+      }
+    },
+    "online_ridge": {
+      "ndx": {
+        "ablation_selection_sharpe": 1.1958316065583507,
+        "base_selection_sharpe": 1.1762823711634507,
+        "complexity_earned": true,
+        "direction_supported": true,
+        "inverted_selection_sharpe": 1.1113060252712879,
+        "primary_selection_sharpe": 1.237883852059502
+      },
+      "spx": {
+        "ablation_selection_sharpe": 1.206771230143246,
+        "base_selection_sharpe": 1.1762823711634507,
+        "complexity_earned": false,
+        "direction_supported": true,
+        "inverted_selection_sharpe": 1.1232269996934992,
+        "primary_selection_sharpe": 1.206375342824872
+      }
+    },
+    "tail_dependence": {
+      "ndx": {
+        "ablation_selection_sharpe": 1.0433122336802554,
+        "base_selection_sharpe": 1.1762823711634507,
+        "complexity_earned": true,
+        "direction_supported": true,
+        "inverted_selection_sharpe": 0.7718079179041174,
+        "primary_selection_sharpe": 1.2752833937048285
+      },
+      "spx": {
+        "ablation_selection_sharpe": 1.0829073043858917,
+        "base_selection_sharpe": 1.1762823711634507,
+        "complexity_earned": true,
+        "direction_supported": true,
+        "inverted_selection_sharpe": 0.729200146158923,
+        "primary_selection_sharpe": 1.3335648918042646
+      }
+    }
+  }
+}

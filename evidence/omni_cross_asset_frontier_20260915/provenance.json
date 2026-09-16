@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "research_program": "omni_cross_asset_frontier_20260915",
+  "measured_head_sha": "53c345c9ada242c7d9900725a4dc9bef81986b58",
+  "selection_policy": {
+    "selection_cutoff": "2022-12-31",
+    "spent_validation_fold": "2023-01-01/2024-12-31",
+    "post_2022_is_diagnostic_only": true,
+    "post_observation_diagnostics_may_drive_current_selection": false,
+    "post_result_parameter_rescue": false
+  },
+  "repair_lineage": [
+    {
+      "experiment": "omni_cross_asset_frontier_20260915",
+      "state": "FROZEN_ORIGINAL_RETAINED_AS_PROVENANCE",
+      "failure": "object-dtype robust normalization failed synthetic pre-market test before wave-1 returns were observed"
+    },
+    {
+      "experiment": "omni_cross_asset_frontier_20260915r1",
+      "repair_class": "IMPLEMENTATION_ONLY_PRE_MARKET",
+      "formula_changed": false,
+      "parameter_changed": false,
+      "market_returns_observed_before_repair": false,
+      "wrapper_git_blob_sha": "369874544b34284174f48744486133326aeba14d"
+    },
+    {
+      "experiment": "omni_cross_asset_frontier_20260915r2",
+      "repair_class": "REPORTING_ONLY_POST_MEASUREMENT",
+      "economic_results_changed": false,
+      "formula_changed": false,
+      "parameter_changed": false,
+      "market_returns_observed_before_repair": true,
+      "wrapper_git_blob_sha": "8b6f4eee2ffe67b81df30d5d383750691d6e1aeb"
+    }
+  ],
+  "selection_driving_packets": [
+    {
+      "id": "wave1_r2",
+      "decision_summary_path": "evidence/omni_cross_asset_frontier_20260915/wave1_observed_summary.json",
+      "workflow_run_id": 35055186575,
+      "artifact_id": 10430526852,
+      "artifact_name": "omni_cross_asset_frontier_20260915r2-measured-35055186575",
+      "artifact_digest": "sha256:953b9bf6f637275db5985f7443eba7f1ab11631876f959c6d7a8ee263ae72904",
+      "source_summary_sha256": "178cabea0c85e8175431bd5f67d65cac9f28c96f5596ad517189c2f27aa72bf7",
+      "status": "OBSERVED_REPORTED_AFTER_REPORTING_ONLY_REPAIR"
+    },
+    {
+      "id": "wave2_r1",
+      "decision_summary_path": "evidence/omni_cross_asset_frontier_20260915/wave2_observed_summary.json",
+      "workflow_run_id": 35055186581,
+      "artifact_id": 10430806842,
+      "artifact_name": "omni_cross_asset_wave2_20260915r1-measured-35055186581",
+      "artifact_digest": "sha256:ddbda96ae7aa6f898cadfa6520ab8d8054c206fe1d7595d509c3775d47327f16",
+      "source_summary_sha256": "65aab9f3e2d1a433d31ebc31c75099f76c045095c1ae04d073b8a8a70512d3d5",
+      "status": "OBSERVED_PREIMPLEMENTED_WAVE2",
+      "implemented_before_wave1_returns_observed": true
+    }
+  ],
+  "post_observation_diagnostics": [
+    {
+      "id": "cost_stress_r1",
+      "workflow_run_id": 35055186635,
+      "artifact_id": 10430214074,
+      "artifact_name": "omni-cost-stress-r1-35055186635",
+      "artifact_digest": "sha256:0514144072728a7c268e4f29e09b1b70e6ed3ce38ab4b56c4d0959fd5d9675b7",
+      "source_summary_sha256": "2256928fac23b8148c9233396b63b4d8389dd2467a77d4536774748fe4a6ca3a",
+      "status": "POST_OBSERVATION_EXACT_COST_ROBUSTNESS_ONLY",
+      "may_drive_current_strategy_selection": false,
+      "ranking_by_worst_research_dev_cost_sharpe": [
+        [0.8373050341137968, "commonality_ndx"],
+        [0.8000825764704125, "commonality_spx"],
+        [0.6781232667557486, "volterm_spx"],
+        [0.6563848800933304, "volterm_ndx"],
+        [0.6464865566565932, "omni_v1_ungated_spx"],
+        [0.6296263415431907, "base"],
+        [0.5683190973515401, "tail_spx"],
+        [0.5658260061365282, "tail_ndx"]
+      ]
+    },
+    {
+      "id": "timing_robustness",
+      "workflow_run_id": 35055186608,
+      "artifact_id": 10430970782,
+      "artifact_name": "omni-timing-robustness-35055186608",
+      "artifact_digest": "sha256:00d553cce798652e08b425c9306a660ea3d6c03f77e20e46aa1ffc71b6939d1a",
+      "source_summary_sha256": "f5c8c6be54f03272a2991cc2c12ba1a7661a3134f1722d88c6596dca7b221996",
+      "status": "POST_OBSERVATION_DESTRUCTIVE_ROBUSTNESS_ONLY",
+      "may_drive_current_strategy_selection": false,
+      "current_beats_all_stale": {
+        "parent_spx_commonality": true,
+        "parent_ndx_commonality": true,
+        "equal_liquid_spx_commonality": true,
+        "equal_liquid_ndx_commonality": true
+      }
+    },
+    {
+      "id": "cross_asset_diagnostics",
+      "workflow_run_id": 35055186579,
+      "artifact_id": 10429963205,
+      "artifact_name": "omni-cross-asset-diagnostics-35055186579",
+      "artifact_digest": "sha256:b53445daa71f4fcd2d35a8da35ef24762f102f7373cabb3e73dad42bb39fc47b",
+      "source_summary_sha256": "9b1842a53640947e98a81d2c264e14490d581c281563aaaa650d3251841303d7",
+      "status": "POST_OBSERVATION_EXPLANATORY_ONLY",
+      "may_drive_current_strategy_selection": false
+    }
+  ]
+}

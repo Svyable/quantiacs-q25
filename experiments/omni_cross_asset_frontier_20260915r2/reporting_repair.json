@@ -1,0 +1,20 @@
+{
+  "experiment_id": "omni_cross_asset_frontier_20260915r2",
+  "parent_experiment": "omni_cross_asset_frontier_20260915r1",
+  "repair_class": "REPORTING_ONLY_POST_MEASUREMENT",
+  "market_returns_observed_before_repair": true,
+  "failed_workflow_run": 35054298814,
+  "failed_stage": "final evidence payload construction after all 20 candidates were evaluated",
+  "failure": "lowercase JSON literal true referenced as a Python name in metadata",
+  "economic_results_changed": false,
+  "formula_changed": false,
+  "parameter_changed": false,
+  "window_changed": false,
+  "threshold_changed": false,
+  "selection_rule_changed": false,
+  "portfolio_rule_changed": false,
+  "repair": "bind the frozen module global name true to Python True so the final payload serializes",
+  "reporting_wrapper_git_blob_sha": "8b6f4eee2ffe67b81df30d5d383750691d6e1aeb",
+  "selection_cutoff": "2022-12-31",
+  "note": "This rerun may reproduce already-observed economics solely to persist a machine-readable summary. It is not an independent research look and cannot justify parameter changes."
+}

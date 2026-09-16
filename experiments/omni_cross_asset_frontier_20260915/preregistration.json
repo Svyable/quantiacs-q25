@@ -1,0 +1,116 @@
+{
+  "experiment_id": "omni_cross_asset_frontier_20260915",
+  "created_utc": "2026-09-16T04:12:00Z",
+  "track": "robustness_mechanism_attribution",
+  "parent_observation": {
+    "experiment": "omni_stock_turbulence_20260915",
+    "observed_local_public_default": true,
+    "base_sharpe_full_is": 1.1867400954372802,
+    "ungated_sharpe_full_is": 1.313867505088746,
+    "gated_sharpe_full_is": 1.2253829098671911,
+    "inverted_sharpe_full_is": 1.2006109338125632,
+    "interpretation_before_new_measurement": "Stock-state risk scaling is worth mechanism attribution; dual-horizon IC gating did not earn its complexity because ungated beat gated."
+  },
+  "data": {
+    "crypto": "qndata.cryptodaily_load_data; output universe remains contemporaneous is_liquid only",
+    "stock_panels": ["qndata.stocks.load_spx_data", "qndata.stocks.load_ndx_data"],
+    "stock_membership": "use each panel's historical is_liquid field; no static ticker list",
+    "admissibility": "PROVISIONAL_HOSTED_PRECLEAR_REQUIRED",
+    "no_external_strategy_data": true
+  },
+  "portfolio": {
+    "parent": "unchanged crypto parent from omni_stock_turbulence_ic_overlay_v1",
+    "stock_role": "global gross exposure only; never selects coin identity",
+    "long_only": true,
+    "crypto_liquid_only": true,
+    "name_cap": 0.25,
+    "gross_cap": 1.0,
+    "cash_allowed": true,
+    "gross_floor": 0.25,
+    "gross_mapping": "exp(log(0.25) * risk_score), where risk_score is clipped to [0,1]"
+  },
+  "selection_policy": {
+    "research_fold": ["2016-01-01", "2020-12-31"],
+    "dev_fold": ["2021-01-01", "2022-12-31"],
+    "selection_surface_end": "2022-12-31",
+    "validation_2023_2024": "SPENT_DIAGNOSTIC_ONLY",
+    "diagnostic_2025_plus": "CONTAMINATED_DIAGNOSTIC_ONLY",
+    "live_2026_10_01_to_2027_01_31": "UNTOUCHED"
+  },
+  "families": [
+    {
+      "id": "tail_dependence",
+      "wave": 1,
+      "thesis": "Broad, synchronized downside equity tails represent systemic risk appetite contraction that should lower crypto gross.",
+      "primitive": "historical constituent standardized returns and historical membership",
+      "transform": "median of robust scores for downside-tail breadth, downside commonality, and tail-breadth acceleration",
+      "params": {"asset_vol":63,"tail_z":-1.5,"accel_fast":5,"accel_slow":63},
+      "ablation": "tail breadth level only",
+      "falsifier": "invert composite risk score",
+      "panels": ["spx","ndx"]
+    },
+    {
+      "id": "fragility_recovery",
+      "wave": 1,
+      "thesis": "Deteriorating equity participation, failed rebound after shocks, and correlation snapback reveal fragile risk appetite before outright trend collapse.",
+      "primitive": "historical constituent returns, breadth and equal-weight panel return",
+      "transform": "median robust score of breadth-price divergence, failed-recovery pressure and short-minus-long commonality",
+      "params": {"trend_window":63,"shock_quantile_window":252,"commonality_fast":21,"commonality_slow":126},
+      "ablation": "breadth-price divergence only",
+      "falsifier": "invert composite risk score",
+      "panels": ["spx","ndx"]
+    },
+    {
+      "id": "online_ridge",
+      "wave": 1,
+      "thesis": "A tiny causal rolling linear model can combine stock states into a next-session crypto-market return forecast more effectively than a fixed hand-weighted composite.",
+      "primitive": "six stock-panel state features with crypto market return used only as fully realized rolling training label",
+      "transform": "504-session rolling ridge regression trained through t-1 labels realized by t; negative standardized forecast maps to risk",
+      "params": {"train_window":504,"min_train":252,"ridge_lambda":10.0},
+      "ablation": "univariate stock equal-weight market return predictor under same rolling ridge machinery",
+      "falsifier": "invert the sign of forecast-derived risk",
+      "panels": ["spx","ndx"]
+    },
+    {
+      "id": "correlation_acceleration",
+      "wave": 2,
+      "thesis": "The change in equity commonality is a more causal systemic transition object than its level.",
+      "primitive": "historical constituent standardized returns",
+      "transform": "short-versus-long commonality acceleration with dispersion-collapse interaction",
+      "params": {"fast":21,"slow":126,"norm":504},
+      "ablation": "commonality level only",
+      "falsifier": "invert acceleration direction",
+      "panels": ["spx","ndx"]
+    },
+    {
+      "id": "vol_surface_curvature",
+      "wave": 2,
+      "thesis": "Equity realized-volatility curve curvature and vol-of-vol acceleration contain transition information beyond a single fast/slow ratio.",
+      "primitive": "equal-weight constituent return and constituent realized vol",
+      "transform": "10/21/63/126-day curve curvature plus vol-of-vol and cross-sectional vol spread",
+      "params": {"curve":[10,21,63,126],"norm":504},
+      "ablation": "plain 21/126 volatility ratio",
+      "falsifier": "invert curvature direction",
+      "panels": ["spx","ndx"]
+    },
+    {
+      "id": "panel_disagreement",
+      "wave": 2,
+      "thesis": "Divergence and lead-lag between independently measured S&P and Nasdaq systemic states is itself a risk-appetite transition signal.",
+      "primitive": "independently computed historical S&P and Nasdaq stock-panel states",
+      "transform": "absolute disagreement and fixed directional lead-lag alternatives",
+      "params": {"lead_lag":5,"norm":504},
+      "ablation": "mean of two panel risk states",
+      "falsifier": "swap lead direction",
+      "panels": ["spx_and_ndx"]
+    }
+  ],
+  "promotion_logic": [
+    "Do not use 2023-2024 or 2025+ to tune or rescue a family.",
+    "A wave-1 primary must improve the 2016-2022 development Sharpe versus the unchanged parent and beat its destructive inverted control to support the claimed direction.",
+    "If the ablation matches or beats the composite on 2016-2022, complexity is not earned.",
+    "Panel agreement is supporting evidence; a result that works only on one panel is treated as fragile unless the mechanism explicitly predicts panel specificity.",
+    "Full-period Sharpe > 1 remains only the contest eligibility check, not sufficient promotion evidence.",
+    "No post-result parameter expansion within this experiment."
+  ]
+}

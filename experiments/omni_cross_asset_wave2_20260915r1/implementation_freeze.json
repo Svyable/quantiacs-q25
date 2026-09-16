@@ -1,0 +1,13 @@
+{
+  "experiment_id": "omni_cross_asset_wave2_20260915r1",
+  "preregistration_git_blob_sha": "9d8e6cea9eb19786278e9431897a5c7197d91347",
+  "implemented_before_wave1_family_returns_observed": true,
+  "wave2_market_returns_observed_before_freeze": false,
+  "original_wave2_source_git_blob_sha": "88da94658ffd205525cc5ff310bf413f10d3c79c",
+  "repair_wrapper_git_blob_sha": "78482553dea2f085782e45bedd5135bde1025209",
+  "repair": "syntax-only correction of Python True literal in evidence metadata; formulas unchanged",
+  "formula_changed_by_repair": false,
+  "implemented_families": ["correlation_acceleration", "vol_surface_curvature", "panel_disagreement"],
+  "selection_cutoff": "2022-12-31",
+  "spent_periods_not_for_selection": ["2023-01-01/2024-12-31", "2025-01-01/latest"]
+}

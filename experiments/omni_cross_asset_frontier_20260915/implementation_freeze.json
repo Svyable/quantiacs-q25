@@ -1,0 +1,17 @@
+{
+  "experiment_id": "omni_cross_asset_frontier_20260915",
+  "frozen_before_measurement": true,
+  "new_family_returns_observed_before_freeze": false,
+  "parent_omni_results_observed": true,
+  "activation_type": "PREREGISTERED_ROBUSTNESS_ATTRIBUTION",
+  "preregistration_path": "experiments/omni_cross_asset_frontier_20260915/preregistration.json",
+  "preregistration_git_blob_sha": "9d8e6cea9eb19786278e9431897a5c7197d91347",
+  "strategy_path": "strategies/generated/omni_cross_asset_frontier.py",
+  "strategy_git_blob_sha": "f45762710d23766fc13939380f46900546325d97",
+  "parent_strategy_commit": "08af0f38f98985103e197c775d70439d415ef639",
+  "implemented_wave": 1,
+  "implemented_families": ["tail_dependence", "fragility_recovery", "online_ridge"],
+  "reserved_unimplemented_families": ["correlation_acceleration", "vol_surface_curvature", "panel_disagreement"],
+  "selection_cutoff": "2022-12-31",
+  "note": "Git blob hashes are content-addressed freeze identifiers. Do not alter formulas after measurement without creating a new experiment identity."
+}

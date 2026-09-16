@@ -1,0 +1,139 @@
+{
+  "belief_updates": [
+    {
+      "evidence": "2/9 recent families beat matched destructive controls.",
+      "id": "causal_yield",
+      "state": "LOW_POSITIVE_YIELD",
+      "uncertainty": "Development-only evidence; control support is not forward validation."
+    },
+    {
+      "evidence": "0/9 recent families clear the fixed robust-development floor.",
+      "id": "economic_yield",
+      "state": "NO_RECENT_SURVIVORS",
+      "uncertainty": "The recent window is bounded and is not a claim about all historical strategies."
+    },
+    {
+      "evidence": "Median Dev−Research SR@12 is -0.651; 3/27 comparable cells held or improved.",
+      "id": "selection_transfer",
+      "state": "RESEARCH_OPTIMISM_OBSERVED",
+      "uncertainty": "This describes the recent comparable cells, not a universal shrinkage coefficient."
+    },
+    {
+      "evidence": "1/1 observed frozen forward gates failed; retention 22.8%.",
+      "id": "forward_translation",
+      "state": "ONE_OBSERVED_FAILURE",
+      "uncertainty": "A single forward event is a calibration warning, not a population estimate."
+    },
+    {
+      "evidence": "Measured evidence exists but the canonical evidence frontier has not absorbed it yet.",
+      "id": "evidence_freshness",
+      "state": "CANONICAL_INGEST_BOTTLENECK",
+      "uncertainty": "Pipeline state is derived from committed repository artifacts only."
+    }
+  ],
+  "pipeline": {
+    "bottleneck": {
+      "campaigns": [
+        "frontier_20260912n"
+      ],
+      "count": 1,
+      "reason": "Measured evidence exists but the canonical evidence frontier has not absorbed it yet.",
+      "stage": "CANONICAL_INGEST"
+    },
+    "canonical_latest": {
+      "campaign": "frontier_20260912m",
+      "decision": "PROMOTE_ZERO",
+      "kind": "summary_only"
+    },
+    "failed_forward_count": 1,
+    "frozen_unmeasured": [
+      {
+        "campaign": "frontier_20260913m",
+        "family_count": 3
+      },
+      {
+        "campaign": "frontier_20260913o",
+        "family_count": 1
+      }
+    ],
+    "operational_actions": [
+      {
+        "action": "INGEST_MEASURED_EVIDENCE",
+        "campaign": "frontier_20260912n",
+        "priority": 1,
+        "why": "A successful benchmark receipt exists but canonical observed evidence is not committed."
+      },
+      {
+        "action": "MEASURE_FROZEN_CAMPAIGN",
+        "campaign": "frontier_20260913m",
+        "priority": 3,
+        "why": "Frozen manifest is ahead of canonical evidence and has no committed measurement receipt."
+      },
+      {
+        "action": "MEASURE_FROZEN_CAMPAIGN",
+        "campaign": "frontier_20260913o",
+        "priority": 3,
+        "why": "Frozen manifest is ahead of canonical evidence and has no committed measurement receipt."
+      },
+      {
+        "action": "DEEPEN_MATRIX_EVIDENCE",
+        "campaign": "frontier_20260912m",
+        "priority": 4,
+        "why": "Latest committed campaign is not represented by a full canonical matrix packet."
+      }
+    ],
+    "pending_canonical_ingest": [
+      {
+        "campaign": "frontier_20260912n",
+        "family_count": 1,
+        "measured_decision": "PROMOTE_ZERO_FREEZE_ALL"
+      }
+    ],
+    "surface_debt": {
+      "latest_full_matrix_campaign": "frontier_20260912k",
+      "measured_campaigns_since_full_matrix": 2,
+      "research_matrix_mentions_latest": false,
+      "summary_only_latest": true
+    }
+  },
+  "policy": {
+    "aggregate_score": "FORBIDDEN",
+    "optimization_target": false,
+    "purpose": "route research work by evidence stage and belief uncertainty",
+    "strategy_ranking": "OUT_OF_SCOPE"
+  },
+  "router": {
+    "current_state_backlog": [
+      {
+        "action": "MEASURE_FROZEN_CAMPAIGN",
+        "campaign": "frontier_20260913m",
+        "priority": 3,
+        "why": "Frozen manifest is ahead of canonical evidence and has no committed measurement receipt."
+      },
+      {
+        "action": "MEASURE_FROZEN_CAMPAIGN",
+        "campaign": "frontier_20260913o",
+        "priority": 3,
+        "why": "Frozen manifest is ahead of canonical evidence and has no committed measurement receipt."
+      },
+      {
+        "action": "DEEPEN_MATRIX_EVIDENCE",
+        "campaign": "frontier_20260912m",
+        "priority": 4,
+        "why": "Latest committed campaign is not represented by a full canonical matrix packet."
+      }
+    ],
+    "mutation_guardrail": "Never retune a frozen or measured campaign to answer diagnostics produced by its own returns.",
+    "new_hypothesis_budget": {
+      "state": "BLOCKED_BY_EXISTING_EVIDENCE_WORK",
+      "why": "Finish higher-priority ingestion / measurement / evidence-depth work before opening another mutable campaign."
+    },
+    "next_action": {
+      "action": "INGEST_MEASURED_EVIDENCE",
+      "campaign": "frontier_20260912n",
+      "priority": 1,
+      "why": "A successful benchmark receipt exists but canonical observed evidence is not committed."
+    }
+  },
+  "schema_version": 1
+}

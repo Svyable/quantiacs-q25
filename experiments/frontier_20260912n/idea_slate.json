@@ -1,0 +1,68 @@
+{
+  "campaign": "frontier_20260912n",
+  "ideation_count": 10,
+  "implemented": "online_ar_surprise_persistence",
+  "performance_seen_before_score": false,
+  "ideas": [
+    {
+      "id": "online_ar_surprise_persistence",
+      "decision": "IMPLEMENT",
+      "hypothesis": "Repeated positive one-step AR forecast errors continue cross-sectionally.",
+      "novelty_axes": ["transform", "timing_or_state_condition"]
+    },
+    {
+      "id": "online_ar_surprise_reversal",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Extreme one-step AR forecast errors mean-revert.",
+      "novelty_axes": ["transform", "timing_or_state_condition"]
+    },
+    {
+      "id": "forecast_bias_drift",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Slowly rising signed forecast bias predicts continuation.",
+      "novelty_axes": ["transform", "timing_or_state_condition"]
+    },
+    {
+      "id": "forecast_calibration_decay",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Increasing absolute forecast error is an uncertainty/cash state.",
+      "novelty_axes": ["transform", "timing_or_state_condition"]
+    },
+    {
+      "id": "surprise_half_life",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Longer persistence of same-sign forecast errors identifies under-assimilated information.",
+      "novelty_axes": ["transform", "timing_or_state_condition"]
+    },
+    {
+      "id": "surprise_rank_migration",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Fast upward migration in surprise rank predicts near-term leadership.",
+      "novelty_axes": ["transform", "portfolio_construction"]
+    },
+    {
+      "id": "surprise_breadth",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Cross-sectional breadth of positive surprises controls gross deployment.",
+      "novelty_axes": ["transform", "timing_or_state_condition"]
+    },
+    {
+      "id": "forecast_sign_asymmetry",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Positive and negative forecast errors have different continuation response.",
+      "novelty_axes": ["transform", "timing_or_state_condition"]
+    },
+    {
+      "id": "range_conditioned_surprise",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Forecast errors occurring with efficient close-location geometry are more persistent.",
+      "novelty_axes": ["information_primitive", "transform"]
+    },
+    {
+      "id": "volume_conditioned_surprise",
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Forecast errors with abnormal dollar-volume confirmation are more persistent.",
+      "novelty_axes": ["information_primitive", "transform"]
+    }
+  ]
+}

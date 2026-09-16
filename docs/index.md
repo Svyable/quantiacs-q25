@@ -10,6 +10,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
     <a class="qt-brand" href="{{ '/' | relative_url }}" aria-label="Q25 terminal home"><span class="qt-brand-mark">Q25</span><span>RESEARCH TERMINAL</span></a>
     <nav class="qt-nav" aria-label="Research surfaces">
       <a href="{{ '/explorer.html' | relative_url }}">Explorer</a>
+      <a href="{{ '/insights.html' | relative_url }}">Insights</a>
       <a href="{{ '/control-plane.html' | relative_url }}">Control Plane</a>
       <a href="{{ '/backtest/' | relative_url }}">Backtest</a>
       <a href="{{ '/cookbook.html' | relative_url }}">Cookbook</a>
@@ -27,6 +28,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
       <p>One terminal for the committed Q25 research record: development economics, research-to-dev decay, transaction-cost fragility, destructive controls, family adjudication, evidence completeness and frozen failures. Missing evidence stays missing.</p>
       <div class="qt-hero-actions">
         <a class="qt-primary" href="#leaderboard">Open live leaderboard</a>
+        <a href="{{ '/insights.html' | relative_url }}">Pareto &amp; attribution workbench</a>
         <a href="{{ '/control-plane.html' | relative_url }}">Research control plane</a>
         <a href="{{ '/cookbook.html' | relative_url }}">Q25 contest cookbook</a>
         <a href="{{ '/explorer.html' | relative_url }}">Deep matrix explorer</a>
@@ -164,7 +166,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
 
   <footer class="qt-footer">
     <div><strong>Q25 Research Terminal</strong><span>Public evidence surface for Svyable/quantiacs-q25.</span></div>
-    <div class="qt-footer-links"><a href="{{ '/control-plane.html' | relative_url }}">Control Plane</a><a href="{{ '/cookbook.html' | relative_url }}">Cookbook</a><a href="{{ '/explorer.html' | relative_url }}">Explorer</a><a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Research Matrix</a><a href="{{ '/STRATEGY_ATLAS.html' | relative_url }}">Strategy Atlas</a><a href="{{ '/REPRODUCIBILITY_HEALTH.html' | relative_url }}">Reproducibility</a></div>
+    <div class="qt-footer-links"><a href="{{ '/insights.html' | relative_url }}">Insights</a><a href="{{ '/control-plane.html' | relative_url }}">Control Plane</a><a href="{{ '/cookbook.html' | relative_url }}">Cookbook</a><a href="{{ '/explorer.html' | relative_url }}">Explorer</a><a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Research Matrix</a><a href="{{ '/STRATEGY_ATLAS.html' | relative_url }}">Strategy Atlas</a><a href="{{ '/REPRODUCIBILITY_HEALTH.html' | relative_url }}">Reproducibility</a></div>
   </footer>
 </div>
 

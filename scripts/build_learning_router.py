@@ -104,6 +104,9 @@ def build_markdown(payload: dict[str, Any]) -> str:
         for action in r["current_state_backlog"]:
             campaign=f" `{action.get('campaign')}`" if action.get("campaign") else ""
             lines.append(f"- `{action.get('action')}`{campaign} — {action.get('why')}")
+    else:
+        lines.append("")
+        lines.append("Current-state backlog: none. Recompute after the next evidence transition.")
     budget=r["new_hypothesis_budget"]
     lines += ["",f"New-hypothesis budget: **{budget['state']}** — {budget['why']}","",f"Mutation guardrail: **{r['mutation_guardrail']}**",""]
     return "\n".join(lines)

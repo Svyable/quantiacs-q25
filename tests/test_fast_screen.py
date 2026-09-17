@@ -21,20 +21,36 @@ def test_archive_correlations_recovers_identity_and_inverse():
     assert abs(c[2]) < 0.15
 
 
+def test_archive_correlations_are_pairwise_complete_with_missing_values():
+    rng = np.random.default_rng(8)
+    x = rng.normal(0.001, 0.02, size=500)
+    archive = np.column_stack([x.copy(), -x.copy(), rng.normal(size=500)])
+    candidate = x.copy()
+    candidate[::11] = np.nan
+    archive[::7, 0] = np.nan
+    archive[::13, 1] = np.nan
+    c = archive_correlations(candidate, archive)
+    assert c[0] > 0.999999
+    assert c[1] < -0.999999
+    assert abs(c[2]) < 0.15
+
+
 def test_basic_metrics_are_sane():
     r = np.array([0.01, -0.005, 0.007, -0.002, 0.004] * 100)
     assert annualized_sharpe(r) > 0
     assert -1.0 < max_drawdown(r) <= 0.0
 
 
-def test_residual_sharpe_removes_linear_core_exposure():
+def test_residual_sharpe_removes_linear_core_exposure_but_preserves_alpha():
     rng = np.random.default_rng(9)
     core = rng.normal(0.001, 0.02, size=600)
     alpha = rng.normal(0.0008, 0.01, size=600)
     candidate = 0.8 * core + alpha
     rs = residual_sharpe(candidate, core)
+    expected = annualized_sharpe(alpha)
     assert np.isfinite(rs)
     assert rs > 0
+    assert abs(rs - expected) < 0.20
 
 
 def test_evaluate_candidate_can_pass_relaxed_gate():

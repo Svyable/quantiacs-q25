@@ -1,0 +1,6 @@
+{
+  "frozen_source_sha256": "8f1349b304ceef26d563a96a067175281eaae1015846f44e40296278fb207d21",
+  "delivered_source_sha256": "9c8cc84ccbf469de23388fedc74e4434cbcff5b8e56e3048917e9b7c47bfaec5",
+  "same_ast_excluding_module_docstring": true,
+  "changes": "Formatting plus dependency and research-status documentation only."
+}

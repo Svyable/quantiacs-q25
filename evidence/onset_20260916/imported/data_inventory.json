@@ -1,0 +1,58 @@
+[
+  {
+    "metric": "nvt",
+    "observations": 4389,
+    "earliest": "2010-10-09",
+    "latest": "2022-10-14",
+    "usable_for_new_experiment": false
+  },
+  {
+    "metric": "difficulty",
+    "observations": 6455,
+    "earliest": "2009-01-03",
+    "latest": "2026-09-15",
+    "usable_for_new_experiment": true
+  },
+  {
+    "metric": "estimated-transaction-volume",
+    "observations": 5841,
+    "earliest": "2010-08-28",
+    "latest": "2026-09-15",
+    "usable_for_new_experiment": true
+  },
+  {
+    "metric": "mvrv",
+    "observations": 4389,
+    "earliest": "2010-10-09",
+    "latest": "2022-10-14",
+    "usable_for_new_experiment": false
+  },
+  {
+    "metric": "miners-revenue",
+    "observations": 6444,
+    "earliest": "2009-01-17",
+    "latest": "2026-09-15",
+    "usable_for_new_experiment": true
+  },
+  {
+    "metric": "hash-rate",
+    "observations": 6455,
+    "earliest": "2009-01-03",
+    "latest": "2026-09-15",
+    "usable_for_new_experiment": true
+  },
+  {
+    "metric": "n-unique-addresses",
+    "observations": 6429,
+    "earliest": "2009-01-03",
+    "latest": "2026-09-15",
+    "usable_for_new_experiment": true
+  },
+  {
+    "metric": "n-transactions",
+    "observations": 6441,
+    "earliest": "2009-01-17",
+    "latest": "2026-09-15",
+    "usable_for_new_experiment": true
+  }
+]

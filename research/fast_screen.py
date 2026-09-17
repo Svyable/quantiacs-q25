@@ -1,17 +1,16 @@
 """Fast, deterministic screening primitives for deadline-scale Q25 research.
 
-This module intentionally avoids Quantiacs/xarray strategy execution.  It accepts
-already-computed daily candidate returns and a frozen return archive, then applies
-cheap metrics/correlation gates before any candidate earns an exact replay.
+This module intentionally avoids Quantiacs/xarray strategy execution. It accepts
+already-computed daily candidate returns and frozen incumbent return matrices,
+then applies cheap metrics/correlation gates before a candidate earns exact replay.
 
-The fast screen is NOT submission evidence.  Finalists must be reproduced by the
-exact strategy implementation, full cost model, causality checks, multipass and
-hosted uniqueness checks.
+Fast screening is triage only. Finalists still require the exact strategy, full
+cost accounting, causality/prefix checks, multipass, and hosted uniqueness checks.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, asdict
-from typing import Iterable, Mapping, Sequence
+from dataclasses import asdict, dataclass
+from typing import Iterable, Sequence
 
 import numpy as np
 
@@ -19,8 +18,7 @@ TRADING_DAYS = 365.25
 
 
 def _as_1d(x: Sequence[float]) -> np.ndarray:
-    a = np.asarray(x, dtype=np.float64).reshape(-1)
-    return a
+    return np.asarray(x, dtype=np.float64).reshape(-1)
 
 
 def _finite(x: np.ndarray) -> np.ndarray:
@@ -39,51 +37,54 @@ def annualized_sharpe(r: Sequence[float], annualization: float = TRADING_DAYS) -
 
 def max_drawdown(r: Sequence[float]) -> float:
     x = np.nan_to_num(_as_1d(r), nan=0.0, posinf=0.0, neginf=0.0)
-    wealth = np.cumprod(1.0 + x)
-    if wealth.size == 0:
+    if x.size == 0:
         return float("nan")
+    wealth = np.cumprod(1.0 + x)
     peaks = np.maximum.accumulate(wealth)
     dd = wealth / np.where(peaks > 0, peaks, np.nan) - 1.0
     return float(np.nanmin(dd))
 
 
-def _standardize_cols(x: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Return standardized columns and validity mask; NaNs are zero after centering.
-
-    Correlation is intended for aligned return matrices with common date masks.
-    The caller should construct archive windows consistently before using this.
-    """
-    x = np.asarray(x, dtype=np.float64)
-    if x.ndim == 1:
-        x = x[:, None]
-    finite = np.isfinite(x)
-    count = finite.sum(axis=0)
-    sums = np.where(finite, x, 0.0).sum(axis=0)
-    means = np.divide(sums, count, out=np.zeros_like(sums), where=count > 0)
-    centered = np.where(finite, x - means, 0.0)
-    ss = (centered * centered).sum(axis=0)
-    scale = np.sqrt(ss)
-    valid = (count >= 2) & np.isfinite(scale) & (scale > 0)
-    z = np.zeros_like(centered)
-    z[:, valid] = centered[:, valid] / scale[valid]
-    return z, valid
-
-
 def archive_correlations(candidate_returns: Sequence[float], archive_returns: np.ndarray) -> np.ndarray:
-    """Fast candidate-vs-archive correlations by normalized matrix multiply.
+    """Pairwise-complete candidate-vs-archive correlations.
 
-    archive_returns shape: (time, strategies).  Input dates must already align.
+    ``archive_returns`` has shape ``(time, strategies)``. Each archive column is
+    correlated using only dates on which both candidate and that column are finite.
+    The implementation is vectorized over strategies, so this remains cheap for a
+    large frozen archive while avoiding bias from mismatched NaN masks.
     """
     c = _as_1d(candidate_returns)
     a = np.asarray(archive_returns, dtype=np.float64)
     if a.ndim != 2 or a.shape[0] != c.size:
         raise ValueError("archive_returns must have shape (len(candidate_returns), n_strategies)")
-    cz, cvalid = _standardize_cols(c)
-    az, avalid = _standardize_cols(a)
-    out = np.full(a.shape[1], np.nan, dtype=np.float64)
-    if cvalid[0]:
-        out[avalid] = cz[:, 0] @ az[:, avalid]
-    return out
+
+    cf = np.isfinite(c)
+    af = np.isfinite(a)
+    mask = af & cf[:, None]
+    n = mask.sum(axis=0).astype(np.float64)
+
+    c0 = np.where(cf, c, 0.0)
+    a0 = np.where(af, a, 0.0)
+    m = mask.astype(np.float64)
+
+    sx = c0 @ m
+    sy = (a0 * cf[:, None]).sum(axis=0)
+    sxx = (c0 * c0) @ m
+    syy = ((a0 * a0) * cf[:, None]).sum(axis=0)
+    sxy = c0 @ a0
+
+    valid = n >= 2
+    cov = np.full(a.shape[1], np.nan, dtype=np.float64)
+    varx = np.full_like(cov, np.nan)
+    vary = np.full_like(cov, np.nan)
+    cov[valid] = sxy[valid] - sx[valid] * sy[valid] / n[valid]
+    varx[valid] = sxx[valid] - sx[valid] * sx[valid] / n[valid]
+    vary[valid] = syy[valid] - sy[valid] * sy[valid] / n[valid]
+    denom = np.sqrt(np.maximum(varx, 0.0) * np.maximum(vary, 0.0))
+    out = np.full_like(cov, np.nan)
+    good = valid & np.isfinite(denom) & (denom > 0)
+    out[good] = cov[good] / denom[good]
+    return np.clip(out, -1.0, 1.0)
 
 
 def max_abs_archive_corr(candidate_returns: Sequence[float], archive_returns: np.ndarray) -> float:
@@ -94,7 +95,13 @@ def max_abs_archive_corr(candidate_returns: Sequence[float], archive_returns: np
 
 
 def residual_sharpe(candidate_returns: Sequence[float], core_returns: np.ndarray) -> float:
-    """Sharpe of candidate residual after OLS on a core return matrix + intercept."""
+    """Annualized factor-adjusted alpha divided by residual volatility.
+
+    A plain OLS residual has zero sample mean when an intercept is fitted, so its
+    Sharpe is mechanically ~0. We instead fit ``y = alpha + X beta + epsilon``
+    and return the Sharpe of ``alpha + epsilon``. This preserves estimated alpha
+    while removing contemporaneous linear core exposure.
+    """
     y = _as_1d(candidate_returns)
     x = np.asarray(core_returns, dtype=np.float64)
     if x.ndim == 1:
@@ -107,8 +114,10 @@ def residual_sharpe(candidate_returns: Sequence[float], core_returns: np.ndarray
     yy = y[mask]
     xx = np.column_stack([np.ones(mask.sum()), x[mask]])
     beta, *_ = np.linalg.lstsq(xx, yy, rcond=None)
+    alpha = float(beta[0])
     resid = yy - xx @ beta
-    return annualized_sharpe(resid)
+    adjusted = resid + alpha
+    return annualized_sharpe(adjusted)
 
 
 @dataclass(frozen=True)
@@ -167,7 +176,6 @@ def evaluate_candidate(
     delayed_sr = annualized_sharpe(delayed_returns)
     retention = delayed_sr / sr if np.isfinite(sr) and sr > 0 else float("nan")
 
-    failures: list[str] = []
     checks = [
         (np.isfinite(sr) and sr >= thresholds.full_sharpe_min, "full_sharpe"),
         (np.isfinite(stress_sr) and stress_sr >= thresholds.stressed_sharpe_min, "stressed_sharpe"),
@@ -177,8 +185,7 @@ def evaluate_candidate(
         (np.isfinite(recent_corr) and recent_corr <= thresholds.archive_corr_recent_max, "archive_corr_recent"),
         (np.isfinite(retention) and retention >= thresholds.delay_retention_min, "delay_retention"),
     ]
-    failures.extend(name for ok, name in checks if not ok)
-
+    failures = tuple(name for ok, name in checks if not ok)
     return ScreenResult(
         full_sharpe=sr,
         stressed_sharpe=stress_sr,
@@ -189,33 +196,29 @@ def evaluate_candidate(
         delayed_sharpe=delayed_sr,
         delay_retention=retention,
         passed=not failures,
-        failures=tuple(failures),
+        failures=failures,
     )
 
 
 def pareto_mask(values: np.ndarray, maximize: Sequence[bool]) -> np.ndarray:
-    """Return nondominated rows for a dense metric matrix.
-
-    NaN rows are rejected.  Small O(n^2) implementation is deliberate: this is
-    used only after cheap gates, where candidate count is expected to be modest.
-    """
+    """Return nondominated rows for a dense metric matrix."""
     v = np.asarray(values, dtype=np.float64)
     if v.ndim != 2:
         raise ValueError("values must be 2D")
-    maximize = np.asarray(maximize, dtype=bool)
-    if maximize.size != v.shape[1]:
+    maximize_arr = np.asarray(maximize, dtype=bool)
+    if maximize_arr.size != v.shape[1]:
         raise ValueError("maximize length must equal number of columns")
     ok = np.isfinite(v).all(axis=1)
     w = v.copy()
-    w[:, ~maximize] *= -1.0
+    w[:, ~maximize_arr] *= -1.0
     keep = ok.copy()
     idx = np.flatnonzero(ok)
     for i in idx:
         if not keep[i]:
             continue
-        dominated_by_any = np.any(
+        dominated = np.any(
             np.all(w[idx] >= w[i], axis=1) & np.any(w[idx] > w[i], axis=1)
         )
-        if dominated_by_any:
+        if dominated:
             keep[i] = False
     return keep

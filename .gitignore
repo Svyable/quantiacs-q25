@@ -89,3 +89,6 @@ data-cache/
 !experiments/frontier_20260912k/**/preregistration.json
 !experiments/frontier_20260912k/**/preregistration.sha256
 !experiments/frontier_20260912k/pm_report.md
+
+# Frozen ONSET import and declared allocator research.
+!strategies/generated/q25_onset.py

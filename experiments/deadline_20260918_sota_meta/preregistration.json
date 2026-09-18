@@ -1,0 +1,23 @@
+{
+  "experiment_id": "deadline_20260918_sota_meta_measurement",
+  "created": "2026-09-18",
+  "status": "FROZEN_EXISTING_SOURCE_BEFORE_CURRENT_MEASUREMENT",
+  "candidate": {
+    "id": "q25_sota_meta_ensemble_v1",
+    "source": "strategies/q25_sota_meta_ensemble.py",
+    "source_blob_sha_on_main": "757c9515747bd884a1f5c1d4b1c5259af803e75c",
+    "formula_changes_for_this_experiment": false
+  },
+  "measurement": {
+    "method": "Quantiacs multipass",
+    "lookback_period": 900,
+    "start_date": "2016-01-01",
+    "check_correlation": false,
+    "cost_ladder_fraction_atr": [0.0,0.04,0.08,0.12]
+  },
+  "evidence_policy": {
+    "retune_after_observation": false,
+    "promotion_requires_sharpe_0_04_gt_1": true,
+    "promotion_requires_additional_mechanical_and_uniqueness_checks": true
+  }
+}

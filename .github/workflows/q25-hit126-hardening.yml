@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.11'}
       - run: python -m pip install -r requirements.txt
-      - run: python research/hit126_hardening.py | tee hit126_controls.txt
+      - name: Run destructive controls\n        shell: bash\n        run: |\n          set -o pipefail\n          python -m research.hit126_hardening | tee hit126_controls.txt
       - uses: actions/upload-artifact@v4
         with:
           name: q25-hit126-controls-${{ github.run_id }}

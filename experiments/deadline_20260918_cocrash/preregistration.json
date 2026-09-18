@@ -1,0 +1,42 @@
+{
+  "experiment_id": "deadline_20260918_cocrash",
+  "created": "2026-09-18",
+  "track": "submission_hardening",
+  "status": "FROZEN_BEFORE_CURRENT_DATA_MEASUREMENT",
+  "candidate": {
+    "id": "q25_deadline_cocrash_shelter_v1",
+    "source": "strategies/generated/q25_deadline_cocrash_shelter.py",
+    "mechanism": "rank liquid assets by low trailing crash beta/correlation to the equal-weight liquid crypto market during stress observations; inverse-risk size the four safest names; weekly rebalance; reduce gross to 0.35 only when both 63-day market momentum is negative and 126-day breadth is below 40%",
+    "parameters": {
+      "crash_threshold_window": 252,
+      "crash_quantile": 0.20,
+      "crash_window": 126,
+      "min_stress_obs": 20,
+      "risk_window": 63,
+      "market_trend_window": 63,
+      "breadth_window": 126,
+      "top_k": 4,
+      "name_cap": 0.30,
+      "panic_gross": 0.35,
+      "normal_gross": 1.0,
+      "rebalance": "Monday"
+    }
+  },
+  "evidence_policy": {
+    "historical_cocrash_metrics_transfer_to_this_source": false,
+    "retune_after_observing_this_run": false,
+    "selection_period_start": "2016-01-01",
+    "primary_cost_fraction_atr": 0.04,
+    "stress_costs_fraction_atr": [0.08, 0.12],
+    "contest_hard_is_sharpe": ">1.0",
+    "promotion_requires_prefix_causality": true,
+    "promotion_requires_long_liquid_only": true,
+    "promotion_requires_current_quantiacs_measurement": true,
+    "hosted_account_correlation_check": "PENDING"
+  },
+  "planned_destructive_controls_if_base_survives": [
+    "reverse the co-crash ranking while preserving sizing and schedule",
+    "replace stress-conditioned beta/correlation with unconditional beta/correlation",
+    "remove the market panic gross gate"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "experiment_id": "deadline_20260918_residual_dispersion",
+  "candidate_id": "q25_deadline_residual_dispersion_v1",
+  "observed_at_utc": "2026-09-18T13:33:58Z",
+  "evidence_stage": "CURRENT_PUBLIC_QUANTIACS_SINGLE_PASS",
+  "quantiacs_access_mode": "public_default",
+  "workflow_run_id": 35350890136,
+  "workflow_job_id": 105618488780,
+  "artifact_id": 10549553627,
+  "artifact_sha256": "7f1f784c9828029578a9a68eb1ae0e55a74c2f3e5c608c96300881eb34038857",
+  "mechanical_integrity": "PASS",
+  "metrics": {
+    "0.00": {"sharpe_ratio": 0.9334364744318793, "equity": 74.65328477388373, "max_drawdown": -0.792924713063289, "avg_turnover": 0.05896423353397011},
+    "0.04": {"sharpe_ratio": 0.8496126461720014, "equity": 40.91939131772636, "max_drawdown": -0.8160168443544826, "avg_turnover": 0.059016407646706695},
+    "0.08": {"sharpe_ratio": 0.7654869431065373, "equity": 22.40278607543199, "max_drawdown": -0.8373699299809488, "avg_turnover": 0.05907008854855523},
+    "0.12": {"sharpe_ratio": 0.6810694436119099, "equity": 12.246414766741555, "max_drawdown": -0.8690565612574277, "avg_turnover": 0.05912587090801507}
+  },
+  "decision": "FAIL_CONTEST_GATE",
+  "reason": "Current public/default Quantiacs in-sample Sharpe at 0.04 ATR slippage is 0.8496126461720014, below the required >1.0 gate. Preserve frozen source; no post-observation retuning.",
+  "post_observation_mutation_allowed": false,
+  "hosted_account_correlation_precheck": "NOT_RUN_NOT_ELIGIBLE_TO_ADVANCE"
+}

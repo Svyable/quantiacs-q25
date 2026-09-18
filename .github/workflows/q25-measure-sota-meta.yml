@@ -27,7 +27,10 @@ jobs:
         run: |
           test "$(git rev-parse HEAD:strategies/q25_sota_meta_ensemble.py)" = "757c9515747bd884a1f5c1d4b1c5259af803e75c"
       - name: Measure frozen source multipass
-        run: python research/measure_sota_meta.py | tee sota_meta_measurement.txt
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.measure_sota_meta | tee sota_meta_measurement.txt
       - uses: actions/upload-artifact@v4
         with:
           name: q25-sota-meta-${{ github.run_id }}

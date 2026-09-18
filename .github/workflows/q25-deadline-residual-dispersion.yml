@@ -1,0 +1,66 @@
+name: q25-deadline-residual-dispersion
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/q25_deadline_residual_dispersion.py'
+      - 'tests/test_q25_deadline_residual_dispersion.py'
+      - 'experiments/deadline_20260918_residual_dispersion/**'
+      - '.github/workflows/q25-deadline-residual-dispersion.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  mechanical-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt pytest
+      - name: Run frozen candidate mechanics
+        run: python -m pytest -q tests/test_q25_deadline_residual_dispersion.py
+
+  exact-public-quantiacs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+      Q25_WRITE: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Quantiacs toolbox
+        run: python -m pip install -r requirements.txt
+      - name: Verify freeze predates measurement
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path('experiments/deadline_20260918_residual_dispersion/preregistration.json').read_text())
+          assert p['status'] == 'FROZEN_BEFORE_CURRENT_DATA_MEASUREMENT'
+          assert p['evidence_policy']['retune_after_observing_this_run'] is False
+          assert p['evidence_policy']['historical_residual_dispersion_metrics_transfer_to_this_source'] is False
+          print('freeze verified')
+          PY
+      - name: Run exact current-data single-pass cost ladder
+        run: |
+          python strategies/generated/q25_deadline_residual_dispersion.py | tee residual_dispersion_current_data_report.txt
+      - name: Preserve measurement log
+        uses: actions/upload-artifact@v4
+        with:
+          name: q25-deadline-residual-dispersion-${{ github.run_id }}
+          path: residual_dispersion_current_data_report.txt
+          if-no-files-found: error

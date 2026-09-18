@@ -79,3 +79,24 @@ jobs:
           name: q25-lattice-parity-${{ github.run_id }}
           path: lattice_parity.txt
           if-no-files-found: error
+
+  full-history-multipass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Measure frozen lattice source in official multipass form
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.measure_lattice_consensus_multipass | tee lattice_multipass_measurement.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-lattice-full-multipass-${{ github.run_id }}
+          path: lattice_multipass_measurement.txt
+          if-no-files-found: error

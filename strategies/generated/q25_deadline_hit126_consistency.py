@@ -95,7 +95,15 @@ def compute_weights(data: xr.DataArray) -> xr.DataArray:
     for dt in dates[rebalance.to_numpy()]:
         s = score.loc[dt].replace([np.inf, -np.inf], np.nan)
         valid = tradable.loc[dt].fillna(False) & s.notna() & (s > 0.0)
-        rank = s.where(valid).rank(ascending=False, method="first")
+        # hit-rate scores are discrete and ties are common. Canonicalize the
+        # coordinate order before method="first" so a caller's asset ordering
+        # cannot change the portfolio. This is an implementation-integrity fix,
+        # not an economic ranking input or a hand-picked asset rule.
+        canonical = sorted(s.index.astype(str))
+        s_c = s.reindex(canonical)
+        valid_c = valid.reindex(canonical)
+        rank_c = s_c.where(valid_c).rank(ascending=False, method="first")
+        rank = rank_c.reindex(s.index)
         selected = valid & (rank <= TOP_K)
         if not bool(selected.any()):
             target.loc[dt] = 0.0

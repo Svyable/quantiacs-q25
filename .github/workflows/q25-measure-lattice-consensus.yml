@@ -37,3 +37,45 @@ jobs:
           name: q25-lattice-consensus-${{ github.run_id }}
           path: lattice_consensus_measurement.txt
           if-no-files-found: error
+
+  destructive-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Run frozen lattice controls
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.lattice_consensus_hardening | tee lattice_controls.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-lattice-controls-${{ github.run_id }}
+          path: lattice_controls.txt
+          if-no-files-found: error
+
+  multipass-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Compare frozen lattice single and multipass
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.lattice_consensus_multipass_parity | tee lattice_parity.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-lattice-parity-${{ github.run_id }}
+          path: lattice_parity.txt
+          if-no-files-found: error

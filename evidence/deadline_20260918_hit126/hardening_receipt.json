@@ -1,0 +1,37 @@
+{
+  "candidate_id": "q25_deadline_hit126_consistency_v1",
+  "status": "SUBMISSION_CANDIDATE_PENDING_ACCOUNT_CORRELATION",
+  "current_public_quantiacs": {
+    "cost_0_04_sharpe": 1.2070262357924226,
+    "cost_0_08_sharpe": 1.1340248127926296,
+    "cost_0_12_sharpe": 1.0608579983671456,
+    "cost_0_04_max_drawdown": -0.750154390434873,
+    "cost_0_04_avg_turnover": 0.05420760175216707
+  },
+  "destructive_controls_at_cost_0_04": {
+    "base_sharpe": 1.2070262357924226,
+    "displacement_only_sharpe": 1.1043031815853495,
+    "no_displacement_confirmation_sharpe": 0.9748016504481657,
+    "negative_hit_rate_sharpe": 0.3160493647604964,
+    "workflow_run_id": 35351962887,
+    "artifact_id": 10550080940,
+    "artifact_sha256": "a11a87306e10def9cf20977627a053e0873631f626eb826fc9d31867c3743d91"
+  },
+  "single_vs_multipass_parity": {
+    "status": "PASS",
+    "period_start": "2026-06-01",
+    "common_days": 109,
+    "max_abs_weight_difference": 1.5543122344752192e-15,
+    "singlepass_compute_seconds": 3.5319007489999876,
+    "multipass_wall_seconds": 30.847996592000015,
+    "workflow_run_id": 35351962887,
+    "artifact_id": 10550510747,
+    "artifact_sha256": "11444ea9c766d9e37df0290b5974ec86e1d990bb3adfb690c98eecda98753305"
+  },
+  "latest_measurement_artifact": {
+    "artifact_id": 10551070029,
+    "artifact_sha256": "07b1d7b0155cec32e01464719067668a789c76df9394c4127096651567cb17ed"
+  },
+  "decision": "PACKAGE_SINGLE_PASS",
+  "remaining_blocker": "Run the account-bound Quantiacs correlation/uniqueness check on the exact submission artifact. Do not change strategy parameters after this evidence."
+}

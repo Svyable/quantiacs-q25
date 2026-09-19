@@ -64,6 +64,19 @@ def _weights(candidate: str):
         m=_load("submissions/q25_hit126_consistency_singlepass.py","hit126_submission")
         data=qndata.cryptodaily_load_data(min_date="2015-01-01")
         return m.compute_weights(data)
+    if candidate=="sharpe3":
+        m=_load("submissions/q25_sharpe3_vol_guard_multipass.py","sharpe3_submission")
+        result=qnbt.backtest(
+            competition_type=m.COMPETITION_TYPE,
+            load_data=m.load_data,
+            lookback_period=m.LOOKBACK_DAYS,
+            start_date=START,
+            strategy=lambda d: m.strategy(d,{"window":3},"base),
+            analyze=False,
+            build_plots=False,
+            check_correlation=False,
+        )
+        return result[0] if isinstance(result,tuple) else result
     raise ValueError(candidate)
 
 
@@ -119,7 +132,7 @@ def main():
 
     report={
         "candidate":candidate,
-        "mode":{"lattice":"multipass_365","sota":"multipass_900","hit126":"singlepass_parity_proven"}[candidate],
+        "mode":{"lattice":"multipass_365","sota":"multipass_900","hit126":"singlepass_parity_proven","sharpe3":"multipass_365"}[candidate],
         "cost_fraction_atr":COST,
         "calendar_years":years,
         "stability":{

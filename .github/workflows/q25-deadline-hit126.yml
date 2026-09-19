@@ -1,0 +1,101 @@
+name: q25-deadline-hit126
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/q25_deadline_hit126_consistency.py'
+      - 'tests/test_q25_deadline_hit126_consistency.py'
+      - 'experiments/deadline_20260918_hit126/**'
+      - '.github/workflows/q25-deadline-hit126.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  mechanical-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - run: python -m pytest -q tests/test_q25_deadline_hit126_consistency.py tests/test_q25_hit126_submission.py
+
+  exact-public-quantiacs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+      Q25_WRITE: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Verify freeze
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('experiments/deadline_20260918_hit126/preregistration.json').read_text())
+          assert p['status']=='FROZEN_BEFORE_CURRENT_DATA_MEASUREMENT'
+          assert p['evidence_policy']['retune_after_observing_this_run'] is False
+          assert p['evidence_policy']['historical_trend_hit126_metrics_transfer_to_this_source'] is False
+          print('freeze verified')
+          PY
+      - name: Measure
+        run: python strategies/generated/q25_deadline_hit126_consistency.py | tee hit126_current_data_report.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-deadline-hit126-${{ github.run_id }}
+          path: hit126_current_data_report.txt
+          if-no-files-found: error
+
+  destructive-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Run preregistered mechanism controls
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.hit126_hardening | tee hit126_controls.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-hit126-controls-${{ github.run_id }}
+          path: hit126_controls.txt
+          if-no-files-found: error
+
+  multipass-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Compare real-data single and multipass weights
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.hit126_multipass_parity | tee hit126_parity.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-hit126-parity-${{ github.run_id }}
+          path: hit126_parity.txt
+          if-no-files-found: error

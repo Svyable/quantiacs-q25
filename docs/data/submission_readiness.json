@@ -9,7 +9,7 @@
   },
   "summary": {
     "candidate_count": 3,
-    "packaged_count": 2,
+    "packaged_count": 3,
     "full_history_floor_pass_count": 3,
     "frozen_forward_observed_count": 1,
     "public_smoke_clear_count": 2,
@@ -132,9 +132,9 @@
       "id": "ebenezar_20260912_lattice_consensus",
       "label": "Lattice Consensus",
       "production_artifact": "submissions/q25_lattice_consensus_multipass.py",
-      "artifact_present": false,
+      "artifact_present": true,
       "source_blob_sha": "954279e111f289170bf8e5fbddc1a0501415864b",
-      "stage": "QUALIFIED_SOURCE_NOT_PACKAGED",
+      "stage": "PROMOTED_PENDING_FORWARD_AND_ACCOUNT_BOUND_CORRELATION",
       "full_history": {
         "workflow_run_id": 35352648840,
         "sharpe_4pct_atr": 1.4599472400842526,
@@ -159,7 +159,8 @@
         "account_bound_clearance": false
       },
       "blockers": [
-        "PACKAGE_EXACT_MULTIPASS_ARTIFACT"
+        "FROZEN_FORWARD_CONFIDENCE_NOT_MEASURED",
+        "ACCOUNT_BOUND_UNIQUENESS_CORRELATION"
       ],
       "receipt_path": "evidence/deadline_20260918_lattice_consensus/hardening_receipt.json"
     }

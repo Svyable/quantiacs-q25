@@ -9,7 +9,7 @@ on:
         type: choice
         options:
           - sharpe7
-          - sota
+          - sota\n          - topology_blend
 
 permissions:
   contents: read

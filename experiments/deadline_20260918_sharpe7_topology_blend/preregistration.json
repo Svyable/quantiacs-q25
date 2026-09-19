@@ -1,0 +1,36 @@
+{
+  "experiment_id": "deadline_20260918_sharpe7_topology_equal_blend",
+  "created": "2026-09-18",
+  "status": "FROZEN_BEFORE_BLEND_MEASUREMENT_AND_BEFORE_CURRENT_TOPOLOGY_FULL_HISTORY_RESULT",
+  "candidate": {
+    "id": "q25_sharpe7_topology_equal_blend_v1",
+    "members": [
+      {
+        "source": "strategies/generated/ebenezar_20260912_sharpe7_vol2.py",
+        "source_blob_sha": "cd2876aa22f81bad5ecc71637689e5cbe513c8f3",
+        "weight": 0.5,
+        "params": {"window": 7},
+        "mode": "base"
+      },
+      {
+        "source": "strategies/generated/frontier_20260910b_topology_migration.py",
+        "source_blob_sha": "13aeb0ba3f35f284ced79cc62247d6d293a2a657",
+        "weight": 0.5,
+        "params": {"window": 84, "top_k": 5},
+        "mode": "base"
+      }
+    ],
+    "blend_rule": "arithmetic average of latest member weights; no renormalization",
+    "lookback_days": 365,
+    "name_cap_upper_bound": 0.25,
+    "max_union_names": 10
+  },
+  "research_status": "POST_SELECTION_SYNTHESIS; topology member selected from prior development evidence, not current full-history result",
+  "measurement": {
+    "mode": "full_history_quantiacs_multipass",
+    "start_date": "2016-01-01",
+    "cost_fraction_atr": [0.0, 0.04, 0.08, 0.10, 0.12]
+  },
+  "weight_search": false,
+  "retune_after_observation": false
+}

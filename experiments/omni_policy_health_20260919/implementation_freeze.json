@@ -1,0 +1,22 @@
+{
+  "experiment_id": "omni_policy_health_20260919",
+  "frozen_before_market_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "branch": "research/omni-policy-health-20260919",
+  "preregistration_blob_sha": "9bd14feeb8d08a0b42412cc583899f4ab9cb78d0",
+  "strategy_blob_sha": "5378bff268ab31ea35bd9f6f287d7ea1befdae5e",
+  "test_blob_sha": "edd70933a1cae7dfbd0ed741faa59b77637e9a65",
+  "pre_market_gate": {
+    "carrier_parity": "PENDING_CI",
+    "causality": "PENDING_CI",
+    "long_only_and_caps": "PENDING_CI",
+    "weekly_choice_semantics": "PENDING_CI",
+    "rule": "market measurement step is ordered after all software gates and cannot run if any gate fails"
+  },
+  "measurement_policy": {
+    "selection_cutoff": "2022-12-31",
+    "costs_atr": [0.04, 0.08, 0.12],
+    "post_2022_is_diagnostic_only": true,
+    "no_post_result_parameter_rescue": true
+  }
+}

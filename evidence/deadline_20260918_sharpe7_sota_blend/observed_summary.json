@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "candidate": "q25_sharpe7_sota_equal_blend_v1",
+  "evaluation": "full_history_multipass",
+  "workflow_run_id": 35412794810,
+  "workflow_job_id": 105815571118,
+  "artifact_id": 10574986914,
+  "blend": "0.5_sharpe7_plus_0.5_sota",
+  "cost_ladder": {
+    "0.00": {
+      "avg_turnover": 0.09046426958873505,
+      "max_drawdown": -0.6096867065709436,
+      "sharpe_ratio": 1.9161966033174882
+    },
+    "0.04": {
+      "avg_turnover": 0.09048978742861609,
+      "max_drawdown": -0.6437911261637304,
+      "sharpe_ratio": 1.7280833559657092
+    },
+    "0.08": {
+      "avg_turnover": 0.09051603786562218,
+      "max_drawdown": -0.6749804130061074,
+      "sharpe_ratio": 1.5393777476893025
+    },
+    "0.10": {
+      "avg_turnover": 0.09052933032884174,
+      "max_drawdown": -0.6895595024016041,
+      "sharpe_ratio": 1.4448248799107968
+    },
+    "0.12": {
+      "avg_turnover": 0.09054270175198426,
+      "max_drawdown": -0.703500265470003,
+      "sharpe_ratio": 1.3501507100578312
+    }
+  },
+  "claim_limit": "Post-selection fixed blend measured on full history. No blend-weight search. This is not forward validation."
+}

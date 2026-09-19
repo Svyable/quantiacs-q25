@@ -1,0 +1,40 @@
+name: q25-sharpe3-hardening
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/sharpe3_vol_guard_hardening.py'
+      - 'submissions/q25_sharpe3_vol_guard_multipass.py'
+      - '.github/workflows/q25-sharpe3-hardening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  multipass-controls:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [base, no_confirmation_gates, plain_3d_momentum, no_inverse_vol]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      MODE: ${{ matrix.mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Run full-multipass hardening control
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.sharpe3_vol_guard_hardening | tee "sharpe3_${MODE}.txt"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-sharpe3-${{ matrix.mode }}-${{ github.run_id }}
+          path: sharpe3_*.txt
+          if-no-files-found: error

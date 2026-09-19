@@ -1,0 +1,75 @@
+version: 1
+as_of: "2026-09-16"
+purpose: "Deadline-scale Q25 research campaign with frozen promotion gates and explicit compute budgets."
+
+freeze_policy:
+  immutable_after_first_observed_campaign_result: true
+  forbid_threshold_changes_from_candidate_results: true
+  forbid_holdout_tuning: true
+  forbid_failed_family_grid_rescue: true
+  note: "Changes after the first scored campaign require a new versioned config and may not retroactively rescore prior candidates."
+
+promotion_gates:
+  full_sharpe_min: 1.15
+  stressed_cost_atr_fraction: 0.12
+  stressed_sharpe_min: 0.70
+  worst_pre2025_fold_sharpe_min: 0.20
+  max_drawdown_abs_max: 0.50
+  archive_max_abs_corr_pre2025: 0.45
+  archive_max_abs_corr_recent: 0.50
+  one_day_delay_sharpe_retention_min: 0.70
+  prefix_causality_required: true
+  liquid_only_required: true
+  long_only_required: true
+  exact_replay_required_for_finalists: true
+  hosted_uniqueness_required_for_submission: true
+
+novelty_gate:
+  minimum_novelty_axes_vs_nearest_incumbent: 2
+  near_clone_return_corr: 0.80
+  allow_near_clone_if_replacing_incumbent: true
+  require_residual_value_for_coexistence: true
+
+campaign:
+  total_ideation_budget: 400
+  preregister_budget: 80
+  fast_screen_budget: 80
+  exact_replay_budget: 12
+  finalist_budget: 6
+  hosted_validation_budget: 4
+  max_initial_free_parameters_per_hypothesis: 3
+  stop_family_after_consecutive_structural_failures: 3
+
+family_allocation:
+  online_forecast_surprise: 80
+  forecast_disagreement_state: 40
+  correlation_topology_change: 60
+  assimilation_delay_dynamics: 40
+  liquidity_transition_hysteresis: 40
+  volatility_term_structure: 40
+  tail_dependence_state: 30
+  price_volume_elasticity: 30
+  range_volume_geometry: 20
+  shock_recovery_surface: 10
+  cross_sectional_response_convexity: 10
+
+selection:
+  method: "pareto_then_cluster"
+  pareto_metrics:
+    - full_sharpe
+    - worst_pre2025_fold_sharpe
+    - stressed_sharpe_12pct_atr
+    - residual_sharpe_vs_roster
+    - max_drawdown
+    - archive_max_abs_corr
+  cluster_on_daily_return_abs_corr: 0.80
+  max_representatives_per_cluster: 2
+
+calendar:
+  infrastructure_freeze: "2026-09-17"
+  wide_discovery_end: "2026-09-23"
+  exact_replay_end: "2026-09-25"
+  stress_and_reproduction_end: "2026-09-27"
+  hosted_validation: "2026-09-28"
+  source_freeze: "2026-09-29"
+  submission_deadline: "2026-09-30"

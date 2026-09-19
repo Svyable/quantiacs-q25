@@ -1,0 +1,63 @@
+name: research-scale-screen
+
+on:
+  workflow_dispatch:
+    inputs:
+      shard_count:
+        description: "Number of deterministic hypothesis shards"
+        required: false
+        default: "8"
+  pull_request:
+    paths:
+      - "research/fast_screen.py"
+      - "tests/test_fast_screen.py"
+      - "configs/research_scale_20260916.yaml"
+      - ".github/workflows/research-scale-screen.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-scale-screen-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check numpy==2.2.6 pytest pyyaml
+      - run: python -m pytest -q tests/test_fast_screen.py
+
+  shard-smoke:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check numpy==2.2.6 pyyaml
+      - name: Validate deterministic family assignment
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import yaml
+
+          cfg = yaml.safe_load(Path("configs/research_scale_20260916.yaml").read_text())
+          families = list(cfg["family_allocation"].items())
+          shard = int(os.environ["SHARD"])
+          assigned = [(name, budget) for i, (name, budget) in enumerate(families) if i % 8 == shard]
+          print({"shard": shard, "assigned": assigned})
+          assert sum(b for _, b in families) == cfg["campaign"]["total_ideation_budget"]
+          PY

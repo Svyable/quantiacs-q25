@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "deadline_20260918_sharpe7_forward_validation",
+  "candidate": "ebenezar_20260912_sharpe7_vol2",
+  "source_blob_sha": "cd2876aa22f81bad5ecc71637689e5cbe513c8f3",
+  "workflow_run_id": 35413240254,
+  "workflow_job_id": 105816824994,
+  "last_market_date": "2026-09-17",
+  "protected_live_start": "2026-10-01",
+  "validation_2023_2024": {
+    "0.04": {
+      "avg_turnover": 0.13229713697197568,
+      "equity": 2.5812725850411207,
+      "max_drawdown": -0.31546717441687355,
+      "sharpe_ratio": 1.498726808896898,
+      "volatility": 0.35888040744734767
+    },
+    "0.10": {
+      "avg_turnover": 0.1323632437968096,
+      "equity": 1.9019311810773263,
+      "max_drawdown": -0.35084179317873443,
+      "sharpe_ratio": 1.0753687017901394,
+      "volatility": 0.3579652089093517
+    }
+  },
+  "diagnostic_2025_pre_live": {
+    "0.04": {
+      "avg_turnover": 0.10581859341374611,
+      "equity": 1.3208023933386372,
+      "max_drawdown": -0.16339139311717632,
+      "sharpe_ratio": 0.7680805122625286,
+      "volatility": 0.25258447942099566
+    },
+    "0.10": {
+      "avg_turnover": 0.10586080644855267,
+      "equity": 1.1020795082481674,
+      "max_drawdown": -0.18281174851461468,
+      "sharpe_ratio": 0.3494361839350667,
+      "volatility": 0.2525758345464954
+    }
+  },
+  "calendar_years_at_0_04": {
+    "2023": {
+      "avg_turnover": 0.13487969253711704,
+      "equity": 1.2937129680594979,
+      "max_drawdown": -0.29868976365775124,
+      "sharpe_ratio": 0.9833988868828525,
+      "volatility": 0.31114727946282944
+    },
+    "2024": {
+      "avg_turnover": 0.13002322308803396,
+      "equity": 1.9852245822149899,
+      "max_drawdown": -0.31546717441687366,
+      "sharpe_ratio": 1.9078322884377101,
+      "volatility": 0.4004972715734339
+    },
+    "2025": {
+      "avg_turnover": 0.09592026294608287,
+      "equity": 1.122950418608781,
+      "max_drawdown": -0.12739067776399315,
+      "sharpe_ratio": 0.6192644749175459,
+      "volatility": 0.22958778203049054
+    },
+    "2026": {
+      "avg_turnover": 0.12124583174005664,
+      "equity": 1.1763091591551817,
+      "max_drawdown": -0.16339139311717665,
+      "sharpe_ratio": 0.9476165386398293,
+      "volatility": 0.2816591134130667
+    }
+  },
+  "last_365_days_at_0_04": {
+    "start": "2025-09-18",
+    "end": "2026-09-17",
+    "stats": {
+      "avg_turnover": 0.09781218950508483,
+      "equity": 1.1534577389652052,
+      "max_drawdown": -0.16339139311717754,
+      "sharpe_ratio": 0.6801884875081512,
+      "volatility": 0.25807980396076535
+    }
+  },
+  "interpretation": "The frozen 2023-2024 validation clears Sharpe 1 at both 4% and 10% ATR costs. The later 2025-pre-live diagnostic is weaker and remains diagnostic only; no parameter mutation is permitted."
+}

@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        candidate: [lattice, sota, hit126, sharpe3]
+        candidate: [lattice, sota, hit126, sharpe3, sharpe7]
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:

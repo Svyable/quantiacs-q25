@@ -1,6 +1,6 @@
 # Frontier-P — liquidity requalification hysteresis
 
-Status: **IMPLEMENTED / UNMEASURED**. This campaign is preregistered development research, not a promoted Q25 strategy.
+Status: **MEASURED / FROZEN / FALSIFIED_DEVELOPMENT**. This campaign is development research, not a promoted Q25 strategy.
 
 ## Question
 
@@ -18,4 +18,17 @@ The exact repository controls and 0/4/8/12% ATR-linked cost ladder apply. Select
 
 Preregistration SHA256: `c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf`.
 
-No Frontier-P return metric was observed before the implementation freeze.
+## Observed development result
+
+The first exact Quantiacs measurement completed successfully under the frozen source and preregistration.
+
+- best base: `w84` robust Sharpe **-1.354**
+- central `w63`: robust Sharpe **-1.432**
+- `w42`: robust Sharpe **-1.719**
+- no-history ablation: robust Sharpe **-0.175**
+- rotated-state falsifier: robust Sharpe **-0.998**
+- family decision: **FALSIFIED_DEVELOPMENT / FREEZE**
+
+Both destructive controls beat the central parent, and every base misses the fixed 1.0 development floor. Preserve the negative result; do not invert, retune or grid-rescue the family.
+
+Canonical measurement receipt: `evidence/measurement_receipts/frontier_20260916p.json`.

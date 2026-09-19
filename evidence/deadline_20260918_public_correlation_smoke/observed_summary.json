@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 35413350910,
+  "participant_id": 0,
+  "candidates": {
+    "sharpe7": {
+      "result": "Ok. This strategy does not correlate with other strategies.",
+      "workflow_job_id": 105817132457
+    },
+    "sota": {
+      "result": "Ok. This strategy does not correlate with other strategies.",
+      "workflow_job_id": 105817132325
+    }
+  },
+  "claim_limit": "Public/default correlation smoke only. PARTICIPANT_ID=0 is not account-bound official uniqueness clearance."
+}

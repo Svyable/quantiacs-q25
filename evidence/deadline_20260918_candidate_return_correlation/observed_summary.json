@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 35412751019,
+  "workflow_job_id": 105818930023,
+  "common_days": 3913,
+  "cost_context": "contest-cost exported return streams from frozen deadline candidates",
+  "candidates": [
+    "hit126",
+    "lattice",
+    "residual",
+    "sharpe3",
+    "sharpe7",
+    "sota"
+  ],
+  "pearson_correlation": {
+    "hit126": {
+      "hit126": 1,
+      "lattice": 0.650606,
+      "residual": 0.566601,
+      "sharpe3": 0.476565,
+      "sharpe7": 0.536507,
+      "sota": 0.753218
+    },
+    "lattice": {
+      "hit126": 0.650606,
+      "lattice": 1,
+      "residual": 0.875959,
+      "sharpe3": 0.784441,
+      "sharpe7": 0.884309,
+      "sota": 0.814262
+    },
+    "residual": {
+      "hit126": 0.566601,
+      "lattice": 0.875959,
+      "residual": 1,
+      "sharpe3": 0.871443,
+      "sharpe7": 0.892071,
+      "sota": 0.726453
+    },
+    "sharpe3": {
+      "hit126": 0.476565,
+      "lattice": 0.784441,
+      "residual": 0.871443,
+      "sharpe3": 1,
+      "sharpe7": 0.830217,
+      "sota": 0.660983
+    },
+    "sharpe7": {
+      "hit126": 0.536507,
+      "lattice": 0.884309,
+      "residual": 0.892071,
+      "sharpe3": 0.830217,
+      "sharpe7": 1,
+      "sota": 0.719715
+    },
+    "sota": {
+      "hit126": 0.753218,
+      "lattice": 0.814262,
+      "residual": 0.726453,
+      "sharpe3": 0.660983,
+      "sharpe7": 0.719715,
+      "sota": 1
+    }
+  },
+  "lowest_abs_pairwise": [
+    {
+      "a": "hit126",
+      "b": "sharpe3",
+      "correlation": 0.47656477577713696
+    },
+    {
+      "a": "hit126",
+      "b": "sharpe7",
+      "correlation": 0.536506714060842
+    },
+    {
+      "a": "hit126",
+      "b": "residual",
+      "correlation": 0.5666012771289293
+    },
+    {
+      "a": "hit126",
+      "b": "lattice",
+      "correlation": 0.650606001704421
+    },
+    {
+      "a": "sharpe3",
+      "b": "sota",
+      "correlation": 0.6609828188253778
+    }
+  ],
+  "max_abs_pairwise": {
+    "a": "residual",
+    "b": "sharpe7",
+    "correlation": 0.8920711588035746
+  },
+  "claim_limit": "Internal candidate-return correlation only. This is not the Quantiacs participant/account-bound uniqueness gate and should not be treated as such."
+}

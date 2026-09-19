@@ -1,0 +1,38 @@
+name: q25-validate-sharpe7-topology-blend-forward
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-forward-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Verify frozen blend and member source blobs
+        run: |
+          test "$(git rev-parse HEAD:research/measure_sharpe7_topology_blend.py)" = "cd987190e971e6b09ad2514fd1baa237ff8a2879"
+          test "$(git rev-parse HEAD:strategies/generated/ebenezar_20260912_sharpe7_vol2.py)" = "cd2876aa22f81bad5ecc71637689e5cbe513c8f3"
+          test "$(git rev-parse HEAD:strategies/generated/frontier_20260910b_topology_migration.py)" = "13aeb0ba3f35f284ced79cc62247d6d293a2a657"
+      - name: Open frozen blend forward validation once
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.validate_sharpe7_topology_blend_forward | tee sharpe7_topology_forward_validation.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-sharpe7-topology-forward-validation-${{ github.run_id }}
+          path: sharpe7_topology_forward_validation.txt
+          if-no-files-found: error

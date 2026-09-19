@@ -1,0 +1,47 @@
+{
+  "experiment_id": "omni_policy_health_20260919",
+  "workflow_run_id": 35462260922,
+  "artifact_id": 10589931833,
+  "artifact_sha256": "7777a061b5c39620d16c21a55930482853a41050265ffa8fa1d0dcf8d6eeb55b",
+  "measured_strategy_blob_sha": "5378bff268ab31ea35bd9f6f287d7ea1befdae5e",
+  "selection_2016_2022_sharpe": {
+    "base": {"0.04": 2.100449057028788, "0.08": 1.89047, "0.12": 1.679349},
+    "always_static": {"0.04": 2.162257557951459, "0.08": 1.94613, "0.12": 1.728884},
+    "fast_only": {"0.04": 2.0614381546515017, "0.08": 1.839799, "0.12": 1.616964},
+    "slow_only": {"0.04": 2.0176747998498628, "0.08": 1.81125, "0.12": 1.603751},
+    "inverted_dual": {"0.04": 2.0749065081584326, "0.08": 1.870786, "0.12": 1.6654},
+    "dual": {"0.04": 2.0239854271350195, "0.08": 1.809682, "0.12": 1.594214}
+  },
+  "preregistered_falsifiers_at_0_04": {
+    "dual_beats_base": false,
+    "dual_beats_inverted": false,
+    "dual_beats_always_static": false,
+    "dual_beats_fast_only": false,
+    "dual_beats_slow_only": true
+  },
+  "diagnostic_only_0_04": {
+    "spent_validation_2023_2024": {
+      "base": 1.498727,
+      "always_static": 1.43723,
+      "fast_only": 1.380671,
+      "slow_only": 1.64449,
+      "inverted_dual": 1.359129,
+      "dual": 1.55484
+    },
+    "diagnostic_2025_plus": {
+      "base": 0.850251,
+      "always_static": 0.792982,
+      "fast_only": 0.728463,
+      "slow_only": 0.623535,
+      "inverted_dual": 0.913692,
+      "dual": 0.645253
+    }
+  },
+  "decision": {
+    "fixed_static_stock_overlay": "SUPPORTED_ON_SELECTION versus base across all cost levels",
+    "dual_horizon_policy_health": "REJECTED",
+    "fast_or_slow_trailing_sharpe_health": "NOT_SUPPORTED",
+    "interpretation": "lagged policy-performance gating does not preserve the overlay's historical benefit and is not a useful abstention mechanism in this form",
+    "parameter_rescue": "PROHIBITED"
+  }
+}

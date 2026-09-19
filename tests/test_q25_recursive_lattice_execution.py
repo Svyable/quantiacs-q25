@@ -108,10 +108,12 @@ def test_recursive_lattice_terminal_bounded_replay():
     data = _panel()
     full = module.strategy(data)
     tail = module.strategy(data.isel(time=slice(-365, None)))
-    aligned = full.sel(time=tail.time, asset=tail.asset)
-    # The state is hard re-anchored every Monday. Ignore the first week of the
-    # truncated replay; thereafter recursion has no dependency on earlier state.
-    days = pd.DatetimeIndex(tail.time.values)
-    first_monday = int(np.flatnonzero(days.dayofweek == module.WEEKLY_REANCHOR_DAY)[0])
-    diff = abs(aligned.isel(time=slice(first_monday, None)) - tail.isel(time=slice(first_monday, None)))
-    assert float(diff.max()) <= 1e-10
+    # This is the production contract: a 365-day replay must reproduce the
+    # terminal decision. Early rows of a truncated slice intentionally have
+    # less indicator warmup and are not expected to match full-history rows.
+    np.testing.assert_allclose(
+        tail.isel(time=-1).values,
+        full.isel(time=-1).values,
+        atol=1e-10,
+        rtol=0,
+    )

@@ -1,0 +1,32 @@
+{
+  "candidate_id": "q25_sota_meta_ensemble_v1",
+  "production_artifact": "submissions/q25_sota_meta_ensemble_multipass.py",
+  "status": "QUALIFIED_SUBMISSION_CANDIDATE_PENDING_ACCOUNT_BOUND_CORRELATION",
+  "source_blob_sha": "757c9515747bd884a1f5c1d4b1c5259af803e75c",
+  "production_mode": {
+    "type": "quantiacs_multipass",
+    "lookback_days": 900,
+    "start_date": "2016-01-01"
+  },
+  "authoritative_full_history_measurement": {
+    "workflow_run_id": 35351671178,
+    "artifact_id": 10550806271,
+    "artifact_sha256": "34836296fb9d3de0ceb6b18a7d2a1a43f661f0ebecf0a7e2ca1ad564a9edddff",
+    "cost_0_00": {"sharpe_ratio": 1.4860778326505215},
+    "cost_0_04": {
+      "sharpe_ratio": 1.3474336829231446,
+      "max_drawdown": -0.7422685465609342,
+      "avg_turnover": 0.07003419542821161,
+      "volatility": 0.4744378705884216
+    },
+    "cost_0_08": {"sharpe_ratio": 1.208563191353069},
+    "cost_0_12": {"sharpe_ratio": 1.0695170328439247}
+  },
+  "interpretation": {
+    "contest_4pct_gate": "PASS",
+    "12pct_atr_stress": "PASS",
+    "formula_changes_for_measurement": false,
+    "retune_after_observation": false
+  },
+  "remaining_blocker": "Run account-bound correlation/uniqueness check on this exact artifact."
+}

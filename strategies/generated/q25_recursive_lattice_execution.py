@@ -47,6 +47,7 @@ ENTRY_SUPPORT = 4.0          # inherited lattice admission rule
 RETENTION_SUPPORT = 3.0      # diagnostic control only; not used by central strategy
 ATR_DEADBAND_MULT = 0.50     # resize threshold = multiplier * ATR(14)%
 WEEKLY_REANCHOR_DAY = 0      # Monday, pandas convention
+EXECUTION_NUMERIC_DECIMALS = 10  # implementation determinism, not an economic knob
 
 
 def _base(data: xr.DataArray):
@@ -76,9 +77,14 @@ def _max(x: xr.DataArray, n: int, min_periods: int):
 
 
 def _mean(x: xr.DataArray, liquid: xr.DataArray):
-    n = liquid.sum("asset")
-    safe = xr.where(np.isfinite(x), x, 0.0)
-    return xr.where(n > 0, (safe * liquid).sum("asset") / n, 0.0)
+    # Canonical reduction order prevents floating-point threshold changes when
+    # Quantiacs presents the same eligible assets in a different coordinate order.
+    ordered_assets = np.sort(np.asarray(x.asset.values).astype(str))
+    x_ordered = x.sel(asset=ordered_assets)
+    liquid_ordered = liquid.sel(asset=ordered_assets)
+    n = liquid_ordered.sum("asset")
+    safe = xr.where(np.isfinite(x_ordered), x_ordered, 0.0)
+    return xr.where(n > 0, (safe * liquid_ordered).sum("asset") / n, 0.0)
 
 
 def _true_range_pct(data: xr.DataArray, close: xr.DataArray):
@@ -165,10 +171,14 @@ def _recursive_execute(
     atr_pct = atr_pct.transpose("time", "asset")
 
     tvals = pd.DatetimeIndex(target.time.values)
-    desired = np.asarray(target.values, dtype=float)
+    desired = np.round(
+        np.asarray(target.values, dtype=float), EXECUTION_NUMERIC_DECIMALS
+    )
     supp = np.asarray(support.values, dtype=float)
     liq = np.asarray(liquid.values, dtype=float) > 0.0
-    atr = np.asarray(atr_pct.values, dtype=float)
+    atr = np.round(
+        np.asarray(atr_pct.values, dtype=float), EXECUTION_NUMERIC_DECIMALS
+    )
     out = np.zeros_like(desired, dtype=float)
 
     current = np.zeros(desired.shape[1], dtype=float)
@@ -218,7 +228,10 @@ def _recursive_execute(
 
 
 def strategy(data: xr.DataArray):
-    target, support, liquid, atr_pct = _signal_state(data)
+    # Native rolling is forced so prefix checks and production do not diverge
+    # across optional bottleneck backends at a discontinuous no-trade boundary.
+    with xr.set_options(use_bottleneck=False):
+        target, support, liquid, atr_pct = _signal_state(data)
     return _recursive_execute(
         target, support, liquid, atr_pct, use_hysteresis=False, atr_aware=True
     )
@@ -226,7 +239,8 @@ def strategy(data: xr.DataArray):
 
 def control_weights(data: xr.DataArray, mode: str):
     """Predeclared controls for research only; strategy() remains the contest artifact."""
-    target, support, liquid, atr_pct = _signal_state(data)
+    with xr.set_options(use_bottleneck=False):
+        target, support, liquid, atr_pct = _signal_state(data)
     if mode == "base_lattice":
         return target
     if mode == "fixed_deadband":

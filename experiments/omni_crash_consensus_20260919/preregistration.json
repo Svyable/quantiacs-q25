@@ -1,0 +1,81 @@
+{
+  "experiment_id": "omni_crash_consensus_20260919",
+  "strategy_id": "q25_omni_crash_consensus_sharpe7_v1",
+  "frozen_before_market_measurement": true,
+  "market_returns_observed_for_this_candidate_before_freeze": false,
+  "classification": "allocator_experiment",
+  "research_question": "Can sparse cross-asset crash consensus preserve the useful stock-risk signal while avoiding continuous de-risking during ordinary equity stress?",
+  "lineage": {
+    "riskcast_result": "fixed static stock-risk overlay improved 2016-2022 Sharpe across 4/8/12% ATR costs; forecast-MSE health failed",
+    "policy_health_result": "trailing policy-Sharpe health failed; no parameters from either failed gate are retuned here",
+    "new_axis": "state conjunction / sparse activation"
+  },
+  "carrier": {
+    "name": "ebenezar_20260912_sharpe7_vol2",
+    "frozen_formula": true
+  },
+  "stock_experts": [
+    "spx_tail_dependence",
+    "ndx_tail_dependence",
+    "spx_21_126_realized_vol_term",
+    "ndx_21_126_realized_vol_term"
+  ],
+  "stock_vote": {
+    "definition": "expert robust-unit score > 0.5",
+    "interpretation": "above the expert's causal rolling median after IQR normalization",
+    "majority": "at least 3 of 4",
+    "unanimous": "4 of 4",
+    "no_threshold_search": true
+  },
+  "crypto_fragility": {
+    "market_return": "equal-weight log return of contemporaneous liquid crypto universe",
+    "trend_condition": "21-day cumulative market log return < 0",
+    "volatility_condition": "21-day realized volatility > 126-day realized volatility",
+    "fragile": "trend_condition AND volatility_condition",
+    "parameters_are_structural_controls_not_fit": true
+  },
+  "sizing": {
+    "stock_risk_magnitude": "median of four stock expert robust-unit scores",
+    "risk_floor": 0.35,
+    "scale": "exp(log(0.35) * activation)",
+    "immediate_cut_band": 0.10,
+    "ordinary_re_risk": "Monday",
+    "source": "same frozen sizing law as RiskCast static policy"
+  },
+  "modes": {
+    "base": "frozen Sharpe7 only",
+    "always_static": "continuous median stock-risk overlay",
+    "stock_majority": "stock majority activation without crypto confirmation",
+    "stock_unanimous": "all four stock experts must be above median",
+    "crypto_only": "full risk activation when crypto fragility alone is true",
+    "cross_unanimous": "all four stock experts above median AND crypto fragility",
+    "inverted_cross": "crypto fragility AND at most one stock expert above median; use calmness magnitude",
+    "cross_majority": "candidate: at least 3 of 4 stock experts above median AND crypto fragility"
+  },
+  "falsifiers": [
+    "cross_majority must beat base at 4% ATR in both research_2016_2020 and dev_2021_2022",
+    "cross_majority must beat inverted_cross on pooled 2016-2022 selection Sharpe at 4% ATR",
+    "cross_majority should beat stock_majority for crypto confirmation to earn complexity",
+    "cross_majority should beat crypto_only for stock information to add incremental value",
+    "pooled 2016-2022 improvement must survive 8% and 12% ATR cost stress",
+    "no post-result vote threshold, momentum horizon, volatility horizon, floor, or rebalance rescue"
+  ],
+  "evaluation": {
+    "research": "2016-01-01 through 2020-12-31",
+    "dev": "2021-01-01 through 2022-12-31",
+    "selection": "2016-01-01 through 2022-12-31",
+    "spent_validation_diagnostic_only": "2023-01-01 through 2024-12-31",
+    "post_2024_diagnostic_only": "2025-01-01 onward",
+    "costs_atr": [0.04, 0.08, 0.12],
+    "primary_metric": "Sharpe ratio",
+    "secondary": ["max_drawdown", "volatility", "mean_return", "avg_turnover"]
+  },
+  "constraints": {
+    "long_only": true,
+    "per_name_cap": 0.25,
+    "gross_cap": 1.0,
+    "stock_data_selects_crypto_identity": false,
+    "data": "Quantiacs-provided crypto and historical constituent stock data only",
+    "cross_dataset_admissibility": "hosted/preclear required"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "candidate_id": "q25_sharpe7_topology_equal_blend_v1",
+  "production_artifact": "submissions/q25_sharpe7_topology_blend_multipass.py",
+  "evidence_stage": "PRODUCTION_ARTIFACT_HARDENING",
+  "formula_changed": false,
+  "claim_limit": "This hardening proves implementation parity and current full-history production behavior. It is not fresh validation: topology_migration_w84 previously failed its frozen 2023-2024 forward gate, and the public/default correlation smoke is not participant/account-bound uniqueness clearance.",
+  "pull_request": 99,
+  "merge_commit_sha": "92b2aa5e19561213a9a2a6d483e422f984075484",
+  "measured_head_sha": "817b606278a176e593c0197c0984e8b47738cd86",
+  "parity_and_admissibility": {
+    "workflow_run_id": 35461835766,
+    "job_id": 105946971515,
+    "status": "PASS",
+    "checks": [
+      "frozen source blob verification",
+      "exact synthetic weight parity against frozen member composition",
+      "long-only and liquid-only admissibility",
+      "gross <= 1 and name <= 0.25",
+      "asset-order invariance",
+      "self-contained source audit"
+    ]
+  },
+  "production_multipass": {
+    "workflow_run_id": 35461835766,
+    "job_id": 105946971576,
+    "artifact_id": 10590351137,
+    "artifact_name": "q25-sharpe7-topology-production-35461835766",
+    "quantiacs_access_mode": "public_default",
+    "cost_ladder": {
+      "0.00": {"sharpe_ratio": 2.1745835260183, "equity": 4657.410021689739, "max_drawdown": -0.31669812318342117, "avg_turnover": 0.08357919402757649},
+      "0.04": {"sharpe_ratio": 1.9667425146593656, "equity": 1902.524076393579, "max_drawdown": -0.322011923966544, "avg_turnover": 0.08360652868135451},
+      "0.08": {"sharpe_ratio": 1.7577518355716437, "equity": 776.3942037317391, "max_drawdown": -0.3434133029579205, "avg_turnover": 0.08363448551375054},
+      "0.10": {"sharpe_ratio": 1.6528737767574169, "equity": 495.78065397078336, "max_drawdown": -0.3863412975742021, "avg_turnover": 0.0836486687676452},
+      "0.12": {"sharpe_ratio": 1.5477681075191934, "equity": 316.5066434746928, "max_drawdown": -0.42647918684716957, "avg_turnover": 0.08366299032855849}
+    }
+  },
+  "public_correlation_smoke": {
+    "workflow_run_id": 35461835818,
+    "job_id": 105946971865,
+    "artifact_id": 10589896731,
+    "artifact_name": "q25-public-correlation-sharpe7_topology-35461835818",
+    "participant_id": 0,
+    "result_text": "Ok. This strategy does not correlate with other strategies.",
+    "status": "PASS_PUBLIC_DEFAULT_ONLY",
+    "account_bound_uniqueness": "PENDING"
+  },
+  "known_member_forward_failure": {
+    "member": "topology_migration_w84",
+    "2023_2024_sharpe_at_0_04": 0.647,
+    "2023_2024_sharpe_at_0_12": 0.314,
+    "status": "FAILED_FROZEN_FORWARD_GATE"
+  },
+  "interpretation": {
+    "production_artifact_parity": "PASS",
+    "full_history_4pct_gate": "PASS",
+    "10pct_atr_stress": "PASS",
+    "12pct_atr_stress": "PASS",
+    "public_correlation_smoke": "PASS",
+    "fresh_validation": "NO",
+    "retune_after_observation": false
+  }
+}

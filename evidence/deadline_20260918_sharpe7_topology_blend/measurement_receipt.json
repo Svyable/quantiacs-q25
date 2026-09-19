@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "candidate_id": "q25_sharpe7_topology_equal_blend_v1",
+  "blend": "0.5_sharpe7_plus_0.5_topology_w84",
+  "evidence_stage": "POST_SELECTION_FIXED_SYNTHESIS_FULL_HISTORY_MULTIPASS",
+  "claim_limit": "The topology member previously failed its frozen 2023-2024 forward gate. This full-history blend measurement cannot erase that failure or serve as fresh validation.",
+  "workflow": {
+    "run_id": 35412904104,
+    "job_id": 105815873608,
+    "measured_head_sha": "53b8616eaae68593af32acbdec74009509c887bb",
+    "artifact_id": 10575321416,
+    "artifact_name": "q25-sharpe7-topology-blend-35412904104",
+    "artifact_sha256": "c34ca47af9ae97d77da219909e4e7e89aba36baebf507d3e75e9cfb579e0efff",
+    "quantiacs_access_mode": "public_default"
+  },
+  "cost_ladder": {
+    "0.00": {"sharpe_ratio": 2.169906299290465, "equity": 4556.173922158631, "max_drawdown": -0.31669812318342117, "avg_turnover": 0.08352248455443034, "volatility": 0.3980147595241278},
+    "0.04": {"sharpe_ratio": 1.962107687666862, "equity": 1861.982751078589, "max_drawdown": -0.322011923966544, "avg_turnover": 0.0835498060454514, "volatility": 0.3974530634122783},
+    "0.08": {"sharpe_ratio": 1.7531616336764797, "equity": 760.18196335983, "max_drawdown": -0.3434133029579205, "avg_turnover": 0.08357774985326293, "volatility": 0.3970003322559356},
+    "0.10": {"sharpe_ratio": 1.648306726061599, "equity": 485.53415661786244, "max_drawdown": -0.3863412975742021, "avg_turnover": 0.08359192663939154, "volatility": 0.39681507295740454},
+    "0.12": {"sharpe_ratio": 1.5432247678264144, "equity": 310.03305850026896, "max_drawdown": -0.42647918684716957, "avg_turnover": 0.08360624176266421, "volatility": 0.3966572641273645}
+  },
+  "known_member_forward_failure": {
+    "member": "topology_migration_w84",
+    "2023_2024_sharpe_at_0_04": 0.647,
+    "2023_2024_sharpe_at_0_12": 0.314,
+    "status": "FAILED_FROZEN_FORWARD_GATE"
+  },
+  "interpretation": {
+    "full_history_4pct_gate": "PASS",
+    "10pct_atr_stress": "PASS",
+    "12pct_atr_stress": "PASS",
+    "promotion_status": "NOT_PROMOTED_FROM_THIS_MEASUREMENT",
+    "retune_after_observation": false
+  }
+}

@@ -1,12 +1,6 @@
 name: q25-validate-sharpe7-topology-blend-forward
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'experiments/deadline_20260919_sharpe7_topology_validation/**'
-      - 'research/validate_sharpe7_topology_blend_forward.py'
-      - '.github/workflows/q25-validate-sharpe7-topology-blend-forward.yml'
   workflow_dispatch:
 
 concurrency:

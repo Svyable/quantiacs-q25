@@ -1,0 +1,25 @@
+{
+  "experiment_id":"omni_crash_consensus_20260919",
+  "frozen_before_market_measurement":true,
+  "market_returns_observed_before_freeze":false,
+  "branch":"research/omni-crash-consensus-20260919",
+  "preregistration_blob_sha":"9f951d6f9ae2982d9099d64d64fae45d492a3768",
+  "strategy_blob_sha":"db13e7448b250a31e8d583fedf25e23c166ca639",
+  "test_blob_sha":"30e152fdc256afd89d4444abc1f3a24e524310af",
+  "pre_market_gate":{
+    "compile":"PENDING_CI",
+    "carrier_parity":"PENDING_CI",
+    "constraints":"PENDING_CI",
+    "prefix_causality":"PENDING_CI",
+    "control_distinctness":"PENDING_CI",
+    "rule":"market measurement cannot execute unless all prior steps pass"
+  },
+  "measurement_policy":{
+    "research":"2016-01-01/2020-12-31",
+    "dev":"2021-01-01/2022-12-31",
+    "selection_cutoff":"2022-12-31",
+    "costs_atr":[0.04,0.08,0.12],
+    "post_2022_is_diagnostic_only":true,
+    "no_post_result_parameter_rescue":true
+  }
+}

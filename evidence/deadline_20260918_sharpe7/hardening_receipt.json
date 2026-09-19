@@ -1,0 +1,74 @@
+{
+  "candidate_id": "ebenezar_20260912_sharpe7_vol2",
+  "production_artifact": "submissions/q25_sharpe7_vol2_multipass.py",
+  "status": "LEADING_SUBMISSION_CANDIDATE_PENDING_ACCOUNT_BOUND_CORRELATION",
+  "source_blob_sha": "cd2876aa22f81bad5ecc71637689e5cbe513c8f3",
+  "production_mode": {
+    "type": "quantiacs_multipass",
+    "lookback_days": 365,
+    "start_date": "2016-01-01",
+    "params": {"window": 7},
+    "mode": "base"
+  },
+  "authoritative_full_history_measurement": {
+    "workflow_run_id": 35412192593,
+    "cost_0_00": {
+      "sharpe_ratio": 2.048526160769919,
+      "max_drawdown": -0.4993930323465009
+    },
+    "cost_0_04": {
+      "sharpe_ratio": 1.8335983243269883,
+      "max_drawdown": -0.5792069736117098,
+      "avg_turnover": 0.11848975824486747,
+      "volatility": 0.5345985089278601
+    },
+    "cost_0_08": {
+      "sharpe_ratio": 1.617397172849238,
+      "max_drawdown": -0.6463577283727534
+    },
+    "cost_0_12": {
+      "sharpe_ratio": 1.4000622619317117,
+      "max_drawdown": -0.7039012821677215
+    }
+  },
+  "hardening_replication": {
+    "workflow_run_id": 35412408374,
+    "base_artifact_id": 10574830379,
+    "base_artifact_sha256": "d1521b2cbd52fcfe7531e7eb4891fa3ee42bda7a619856b4e02df943b452acce",
+    "cost_ladder": {
+      "0.00": {"sharpe_ratio": 2.0479869382546703},
+      "0.04": {"sharpe_ratio": 1.8331205146522358},
+      "0.08": {"sharpe_ratio": 1.6169821690917578},
+      "0.10": {"sharpe_ratio": 1.5084800622178798},
+      "0.12": {"sharpe_ratio": 1.3997113420480491}
+    },
+    "destructive_controls_at_0_04": {
+      "base": 1.8331205146522358,
+      "no_inverse_vol": 1.8039004172365414,
+      "plain_7d_momentum": 1.6691913877182691,
+      "no_confirmation_gates": 1.236286329298355
+    },
+    "control_artifacts": {
+      "no_inverse_vol": {
+        "artifact_id": 10575100127,
+        "sha256": "8abe59906b5a7a03447e9ba9efee4ffa07ef2d55f147ce428fa84a905fa871e8"
+      },
+      "plain_7d_momentum": {
+        "artifact_id": 10573768962,
+        "sha256": "c33c510e1ba33e98b4ca9d2a7cd9363363a317f761af65d96fabf45a6a3303ec"
+      },
+      "no_confirmation_gates": {
+        "artifact_id": 10574604782,
+        "sha256": "358ae8cb3804eb0404dc2bbc90ff75fc1dd6c1289ab398e57f6d1897f150856c"
+      }
+    }
+  },
+  "interpretation": {
+    "contest_4pct_gate": "PASS",
+    "sponsor_possible_10pct_atr_fee_stress": "PASS",
+    "12pct_atr_stress": "PASS",
+    "mechanism_controls": "BASE_BEATS_ALL_PREDECLARED_DESTRUCTIVE_CONTROLS",
+    "retune_after_observation": false
+  },
+  "remaining_blocker": "Run account-bound qnt.output/qnt.stats correlation check on this exact artifact before final contest selection."
+}

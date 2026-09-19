@@ -90,3 +90,11 @@ def test_sharpe3_submission_is_exact_frozen_source_copy():
     ).read_text() == (
         ROOT/"strategies/generated/ebenezar_20260912_sharpe3_vol_guard.py"
     ).read_text()
+
+
+def test_sharpe7_submission_is_exact_frozen_source_copy():
+    assert (
+        ROOT/"submissions/q25_sharpe7_vol2_multipass.py"
+    ).read_text() == (
+        ROOT/"strategies/generated/ebenezar_20260912_sharpe7_vol2.py"
+    ).read_text()

@@ -1,0 +1,89 @@
+name: omni-riskcast-experts
+
+on:
+  pull_request:
+    paths:
+      - "strategies/generated/q25_omni_riskcast_sharpe7.py"
+      - "experiments/omni_riskcast_experts_20260919/**"
+      - "tests/test_omni_riskcast.py"
+      - ".github/workflows/omni-riskcast-experts.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: omni-riskcast-experts-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Quantiacs toolbox and tests
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install pytest
+
+      - name: Verify pre-market implementation freeze
+        run: |
+          test "$(git rev-parse HEAD:experiments/omni_riskcast_experts_20260919/preregistration.json)" = "a85e66301f2e6613dc6c1adf1cc2bd5dd61cf5c3"
+          test "$(git rev-parse HEAD:strategies/generated/q25_omni_riskcast_sharpe7.py)" = "6d0871477b72d4e4688160b60b3e54db0ec5dfc1"
+          test "$(git rev-parse HEAD:tests/test_omni_riskcast.py)" = "128b4e7067e7253f5e0aaa6e06018bf79336e3ac"
+          python - <<'PY'
+          import json
+          p=json.load(open("experiments/omni_riskcast_experts_20260919/preregistration.json"))
+          f=json.load(open("experiments/omni_riskcast_experts_20260919/implementation_freeze.json"))
+          assert p["frozen_before_market_measurement"] is True
+          assert p["market_returns_observed_for_this_candidate_before_freeze"] is False
+          assert f["market_returns_observed_before_freeze"] is False
+          PY
+
+      - name: Causality constraints and carrier parity
+        run: python -m pytest -q tests/test_omni_riskcast.py
+
+      - name: Measure frozen candidate and destructive controls
+        run: |
+          mkdir -p results/omni_riskcast_experts_20260919
+          python strategies/generated/q25_omni_riskcast_sharpe7.py             --research             --output results/omni_riskcast_experts_20260919/summary.json
+
+      - name: Print preregistered decision table
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("results/omni_riskcast_experts_20260919/summary.json"))
+          modes=p["modes"]
+          print("\n=== 2016-2022 Sharpe by ATR cost ===")
+          for m in ("base","static_median","dynamic_ungated","inverted","dynamic"):
+              row=modes[m]["selection_2016_2022"]
+              print(m, {c: round(row[c]["sharpe_ratio"],6) for c in ("0.04","0.08","0.12")})
+          b=modes["base"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          d=modes["dynamic"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          inv=modes["inverted"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          ung=modes["dynamic_ungated"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          sta=modes["static_median"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          print("\n=== preregistered falsifiers @ 4% ATR ===")
+          print("overlay_beats_base", d>b, d, b)
+          print("direction_beats_inverted", d>inv, d, inv)
+          print("health_beats_ungated", d>ung, d, ung)
+          print("dma_beats_static", d>sta, d, sta)
+          print("\n=== diagnostic-only later windows @ 4% ATR ===")
+          for fold in ("spent_validation_2023_2024","diagnostic_2025_plus","full_2016_plus"):
+              print(fold, {m: round(modes[m][fold]["0.04"]["sharpe_ratio"],6) for m in modes})
+          PY
+
+      - name: Preserve evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: omni-riskcast-experts-${{ github.run_id }}
+          path: results/omni_riskcast_experts_20260919/
+          if-no-files-found: error

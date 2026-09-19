@@ -1,0 +1,37 @@
+name: q25-frontier-topology-w84
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/deadline_20260918_topology_w84/**'
+      - 'research/measure_topology_migration_w84.py'
+      - '.github/workflows/q25-frontier-topology-w84.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  authoritative-multipass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Verify frozen source blob
+        run: test "$(git rev-parse HEAD:strategies/generated/frontier_20260910b_topology_migration.py)" = "13aeb0ba3f35f284ced79cc62247d6d293a2a657"
+      - name: Measure frozen w84 cell
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.measure_topology_migration_w84 | tee topology_w84.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-topology-w84-${{ github.run_id }}
+          path: topology_w84.txt
+          if-no-files-found: error

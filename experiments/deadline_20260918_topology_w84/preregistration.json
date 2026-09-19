@@ -1,0 +1,25 @@
+{
+  "experiment_id": "deadline_20260918_topology_migration_w84",
+  "created": "2026-09-18",
+  "status": "FROZEN_EXISTING_CELL_BEFORE_CURRENT_FULL_HISTORY_MEASUREMENT",
+  "candidate": {
+    "source": "strategies/generated/frontier_20260910b_topology_migration.py",
+    "source_blob_sha": "13aeb0ba3f35f284ced79cc62247d6d293a2a657",
+    "params": {"window":84,"top_k":5},
+    "mode": "base",
+    "formula_changes": false
+  },
+  "prior_development_evidence": {
+    "robust_worst_fold_cost_sharpe": 1.376,
+    "research_12pct_sharpe": 1.376,
+    "dev_12pct_sharpe": 1.863,
+    "status": "DEVELOPMENT_ONLY_NOT_CURRENT_SUBMISSION_METRIC"
+  },
+  "measurement": {
+    "mode": "full_history_quantiacs_multipass",
+    "start_date": "2016-01-01",
+    "lookback_days": 365,
+    "cost_fraction_atr": [0.0,0.04,0.08,0.10,0.12]
+  },
+  "retune_after_observation": false
+}

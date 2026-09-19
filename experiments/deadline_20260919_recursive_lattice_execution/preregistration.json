@@ -1,0 +1,59 @@
+{
+  "experiment_id": "deadline_20260919_recursive_lattice_execution",
+  "created": "2026-09-19",
+  "status": "FROZEN_BEFORE_PUBLIC_DEFAULT_ECONOMIC_MEASUREMENT",
+  "track": "robustness",
+  "candidate": {
+    "id": "q25_recursive_lattice_execution_v1",
+    "source": "strategies/generated/q25_recursive_lattice_execution.py",
+    "source_blob_sha_on_branch": "544d7e52465699d723e3194340fa4394394b24db",
+    "nearest_incumbent": "ebenezar_20260912_lattice_consensus",
+    "classification": "execution_aware_family_refinement",
+    "independent_alpha_claim": false
+  },
+  "hypothesis": {
+    "primary": "A bounded ATR-aware no-trade state can preserve the frozen lattice-consensus signal while reducing position-size changes that are small relative to the contest ATR-linked transaction-cost scale.",
+    "signal_formula_changed_from_family": false,
+    "central_execution": {
+      "entry_support": 4.0,
+      "atr_deadband_multiplier": 0.5,
+      "weekly_reanchor_day": "Monday",
+      "liquidity_exits": "immediate",
+      "signal_exits": "immediate",
+      "hysteresis": false
+    },
+    "expected_failure_mode": "The no-trade band suppresses useful reallocations or simply reproduces the same economics after weekly re-anchoring.",
+    "cost_hypothesis": "Average turnover should fall versus the exact base-lattice control, with graceful Sharpe retention across the 0.04/0.08/0.12 ATR cost ladder."
+  },
+  "controls": {
+    "base_lattice": "Remove the recursive execution guard entirely while preserving the signal family.",
+    "fixed_deadband": "Replace the asset-specific ATR threshold with a fixed 2.5 percentage-point weight threshold, destroying the proposed ATR-cost pairing.",
+    "hysteresis_atr": "Diagnostic only: add a 3/5 retention threshold. Synthetic mechanics indicated this can increase turnover, so it is explicitly not the central candidate and cannot be selected after economic observation."
+  },
+  "selection_rule": {
+    "central_predeclared": true,
+    "no_control_promotion": true,
+    "no_parameter_grid": true,
+    "retune_after_observation": false,
+    "promotion_requires_full_history_multipass_sharpe_0_04_gt_1": true,
+    "promotion_requires_turnover_below_base_lattice": true,
+    "promotion_requires_no_material_sharpe_degradation_vs_base_lattice_at_0_04": true,
+    "promotion_requires_account_bound_uniqueness_check": true
+  },
+  "evidence_policy": {
+    "research_2016_2020": "observed_reused",
+    "development_2021_2022": "observed_reused",
+    "validation_2023_2024": "spent_do_not_mutate",
+    "diagnostic_2025_plus": "non_selection",
+    "live_2026_10_01_2027_01_31": "untouched",
+    "first_economic_measurement_owner": "pull_request_ci_after_this_preregistration_commit",
+    "formula_changes_after_first_economic_observation": false
+  },
+  "pre_economic_mechanics": {
+    "synthetic_only": true,
+    "central_turnover_direction_vs_base": "lower_on_fixed_seed_synthetic_panel",
+    "prefix_invariance": "observed_on_fixed_seed_synthetic_panel",
+    "asset_order_invariance": "observed_on_fixed_seed_synthetic_panel",
+    "note": "These are mechanics checks only, not market-performance evidence."
+  }
+}

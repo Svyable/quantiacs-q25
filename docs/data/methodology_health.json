@@ -40,191 +40,75 @@
     }
   ],
   "latest_evidence": {
-    "campaign": "frontier_20260912m",
+    "campaign": "frontier_20260913o",
     "decision": "PROMOTE_ZERO",
     "evidence_stage": "DEVELOPMENT_ONLY",
-    "family_count": 3,
+    "family_count": 1,
     "family_triage": [
       {
-        "ablation_robust_sharpe": 9.228126194716202e-05,
-        "best_base_id": "vol_curve_recompression_w63",
-        "best_robust_sharpe": 0.3066733416732465,
+        "ablation_robust_sharpe": -0.286140394577933,
+        "best_base_id": "absorption_release_elasticity_w42",
+        "best_robust_sharpe": 0.17143182354314906,
         "campaign_rank": 1,
-        "central_control_margin": -0.7425165314751039,
-        "central_id": "vol_curve_recompression_w84",
-        "central_robust_sharpe": -0.5354937578646062,
-        "control_ceiling": 0.20702277361049765,
-        "control_supported": false,
-        "decision_code": "FALSIFIED_DEVELOPMENT",
+        "central_control_margin": 0.10957153692820437,
+        "central_id": "absorption_release_elasticity_w63",
+        "central_robust_sharpe": -0.17656885764972863,
+        "control_ceiling": -0.286140394577933,
+        "control_supported": true,
+        "decision_code": "KILL_WEAK_ALPHA",
         "falsification_complete": true,
-        "falsifier_robust_sharpe": 0.20702277361049765,
-        "family": "vol_curve_recompression",
-        "floor_margin": -0.6933266583267534,
-        "guardrail_pass": false
-      },
-      {
-        "ablation_robust_sharpe": 0.21001352170084853,
-        "best_base_id": "slope_dispersion_opportunity_w84",
-        "best_robust_sharpe": 0.06698489665610868,
-        "campaign_rank": 2,
-        "central_control_margin": -0.4080853006526356,
-        "central_id": "slope_dispersion_opportunity_w63",
-        "central_robust_sharpe": -0.1980717789517871,
-        "control_ceiling": 0.21001352170084853,
-        "control_supported": false,
-        "decision_code": "FALSIFIED_DEVELOPMENT",
-        "falsification_complete": true,
-        "falsifier_robust_sharpe": -0.2094595663639839,
-        "family": "slope_dispersion_opportunity",
-        "floor_margin": -0.9330151033438914,
-        "guardrail_pass": false
-      },
-      {
-        "ablation_robust_sharpe": 0.5592259674010199,
-        "best_base_id": "relative_vol_rank_relief_w84",
-        "best_robust_sharpe": -0.09620637040556103,
-        "campaign_rank": 3,
-        "central_control_margin": -0.655432337806581,
-        "central_id": "relative_vol_rank_relief_w84",
-        "central_robust_sharpe": -0.09620637040556103,
-        "control_ceiling": 0.5592259674010199,
-        "control_supported": false,
-        "decision_code": "FALSIFIED_DEVELOPMENT",
-        "falsification_complete": true,
-        "falsifier_robust_sharpe": 0.1802631947820711,
-        "family": "relative_vol_rank_relief",
-        "floor_margin": -1.0962063704055611,
+        "falsifier_robust_sharpe": -0.6734425376983243,
+        "family": "absorption_release_elasticity",
+        "floor_margin": -0.8285681764568509,
         "guardrail_pass": false
       }
     ],
-    "interpretation": "Frontier-M measured three preregistered volatility-term-structure families on the reused 2016-2022 development surface. Vol-curve recompression is the strongest base family at robust Sharpe 0.307, but its central 84-day parent is negative and loses to both matched controls. Relative-vol-rank relief and slope-dispersion opportunity also lose their preregistered controls. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
+    "interpretation": "Frontier-O measured the preregistered same-asset abnormal-dollar-volume absorption followed by positive release-efficiency mechanism on the reused 2016-2022 development surface. Research-fold stress Sharpe was strong for all three base windows (1.983 / 1.581 / 1.439 at 12% ATR-linked cost), but none translated to the fixed development floor: w42 was best at 0.171, w63 was -0.177 and w84 was -0.119. The central 63-day parent still beat both its no-volume ablation (-0.286) and identity-rotation falsifier (-0.673), so the interaction has causal support under the preregistered destructive controls but no economic survival. Promote zero. Do not grid-rescue. 2023-2024 remains spent and was excluded.",
     "kind": "summary_only",
-    "next_boundary": "Do not retune Frontier-M volatility-term-structure formulas. Preserve the completed negative result, measure the already-frozen frontier_20260913m reserve campaign unchanged, then move research to genuinely different OHLCV objects such as daily-bar pressure, estimator disagreement, or price-impact dynamics rather than another volatility-curve rescue."
+    "next_boundary": "Do not retune Frontier-O price-volume elasticity. Preserve the causal-support / weak-economics result, finish measuring and ingesting the already-frozen frontier_20260913m reserve campaign, then move to a materially different OHLCV information object such as liquidity-transition hysteresis rather than another price-impact rescue."
   },
   "learning_loop": {
     "evidence_depth": {
       "latest_full_matrix_campaign": "frontier_20260912k",
       "latest_kind": "summary_only",
-      "measured_campaigns_since_full_matrix": 2,
+      "measured_campaigns_since_full_matrix": 5,
       "summary_only_latest": true
     },
     "latest_campaign": {
-      "best_floor_margin": -0.6933266583267534,
-      "best_robust_sharpe": 0.3066733416732465,
+      "best_floor_margin": -0.8285681764568509,
+      "best_robust_sharpe": 0.17143182354314906,
       "causal_support": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 3
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
       },
       "decision_resolution": {
-        "count": 3,
+        "count": 1,
         "rate": 1.0,
-        "total": 3
+        "total": 1
       },
       "economic_survival": {
         "count": 0,
         "rate": 0.0,
-        "total": 3
+        "total": 1
       },
       "falsification_coverage": {
-        "count": 3,
+        "count": 1,
         "rate": 1.0,
-        "total": 3
+        "total": 1
       },
-      "families_measured": 3,
-      "median_central_control_margin": -0.655432337806581,
+      "families_measured": 1,
+      "median_central_control_margin": 0.10957153692820437,
       "promotion_ready": {
         "count": 0,
         "rate": 0.0,
-        "total": 3
+        "total": 1
       }
     },
     "measurement_queue": {
-      "campaigns": [
-        {
-          "automatic_promotion": false,
-          "campaign": "frontier_20260912n",
-          "candidate_count": 5,
-          "classification_note": "Frontier-N is a preregistered OHLCV-only online-forecast-surprise campaign. It directly tests whether causal forecast innovations carry continuation information beyond ordinary market-residual momentum; 2023-2024 is spent and excluded.",
-          "families": [
-            "online_ar_surprise_persistence"
-          ],
-          "family_count": 1,
-          "modes": {
-            "ablation": 1,
-            "base": 3,
-            "falsifier": 1
-          },
-          "selection_folds": [
-            "research",
-            "dev"
-          ],
-          "source_path": "experiments/frontier_20260912n/manifest.json"
-        },
-        {
-          "automatic_promotion": false,
-          "campaign": "frontier_20260913m",
-          "candidate_count": 15,
-          "classification_note": "Activates three Frontier-L reserves preregistered before their own return streams. Frontier-M is development-only; 2023-2024 is spent and excluded.",
-          "families": [
-            "dispersion_curvature",
-            "entropy_disagreement_cash",
-            "volume_share_entropy_state"
-          ],
-          "family_count": 3,
-          "modes": {
-            "ablation": 3,
-            "base": 9,
-            "falsifier": 3
-          },
-          "selection_folds": [
-            "research",
-            "dev"
-          ],
-          "source_path": "experiments/frontier_20260913m/manifest.json"
-        },
-        {
-          "automatic_promotion": false,
-          "campaign": "frontier_20260913o",
-          "candidate_count": 5,
-          "classification_note": "Frontier-O is a preregistered OHLCV-only price-volume elasticity campaign. It tests same-asset abnormal-dollar-volume absorption followed by efficient positive release; 2023-2024 is spent and excluded.",
-          "families": [
-            "absorption_release_elasticity"
-          ],
-          "family_count": 1,
-          "modes": {
-            "ablation": 1,
-            "base": 3,
-            "falsifier": 1
-          },
-          "selection_folds": [
-            "research",
-            "dev"
-          ],
-          "source_path": "experiments/frontier_20260913o/manifest.json"
-        }
-      ],
-      "count": 3,
-      "next_campaign": {
-        "automatic_promotion": false,
-        "campaign": "frontier_20260912n",
-        "candidate_count": 5,
-        "classification_note": "Frontier-N is a preregistered OHLCV-only online-forecast-surprise campaign. It directly tests whether causal forecast innovations carry continuation information beyond ordinary market-residual momentum; 2023-2024 is spent and excluded.",
-        "families": [
-          "online_ar_surprise_persistence"
-        ],
-        "family_count": 1,
-        "modes": {
-          "ablation": 1,
-          "base": 3,
-          "falsifier": 1
-        },
-        "selection_folds": [
-          "research",
-          "dev"
-        ],
-        "source_path": "experiments/frontier_20260912n/manifest.json"
-      }
+      "campaigns": [],
+      "count": 0,
+      "next_campaign": null
     },
     "policy": {
       "aggregate_score": "forbidden",
@@ -256,7 +140,7 @@
     "index_mentions_latest": false,
     "index_uses_generated_health": true,
     "latest_full_matrix_campaign": "frontier_20260912k",
-    "measured_campaigns_since_full_matrix": 2,
+    "measured_campaigns_since_full_matrix": 5,
     "research_matrix_mentions_latest": false,
     "summary_only_latest": true
   },

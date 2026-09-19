@@ -1,0 +1,96 @@
+name: omni-cross-asset-frontier-benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/omni_cross_asset_frontier.py'
+      - 'strategies/generated/omni_cross_asset_frontier_r1.py'
+      - 'strategies/generated/omni_cross_asset_frontier_r2.py'
+      - 'strategies/generated/omni_stock_turbulence_ic_overlay.py'
+      - 'experiments/omni_cross_asset_frontier_20260915/**'
+      - 'experiments/omni_cross_asset_frontier_20260915r1/**'
+      - 'experiments/omni_cross_asset_frontier_20260915r2/**'
+      - 'evidence/omni_cross_asset_frontier_20260915/**'
+      - 'tests/test_omni_cross_asset_frontier.py'
+      - 'tests/test_omni_cross_asset_frontier_r1.py'
+      - '.github/workflows/omni-cross-asset-frontier-benchmark.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify-frontier-lineage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install synthetic-test dependencies
+        run: python -m pip install -r requirements.txt pytest
+
+      - name: Verify frozen source and repair lineage
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          root = Path('experiments/omni_cross_asset_frontier_20260915')
+          freeze = json.loads((root / 'implementation_freeze.json').read_text())
+          assert freeze['frozen_before_measurement'] is True
+          assert freeze['new_family_returns_observed_before_freeze'] is False
+          for path_key, sha_key in (
+              ('preregistration_path', 'preregistration_git_blob_sha'),
+              ('strategy_path', 'strategy_git_blob_sha'),
+          ):
+              path = freeze[path_key]
+              actual = subprocess.check_output(['git', 'hash-object', path], text=True).strip()
+              assert actual == freeze[sha_key], (path, actual, freeze[sha_key])
+
+          r1 = json.loads(Path('experiments/omni_cross_asset_frontier_20260915r1/repair_record.json').read_text())
+          assert r1['market_returns_observed_for_wave1_before_repair'] is False
+          assert r1['formula_changed'] is False and r1['parameter_changed'] is False
+          assert r1['selection_rule_changed'] is False and r1['portfolio_rule_changed'] is False
+          r1_blob = subprocess.check_output(['git', 'hash-object', 'strategies/generated/omni_cross_asset_frontier_r1.py'], text=True).strip()
+          assert r1_blob == r1['repair_wrapper_git_blob_sha']
+
+          r2 = json.loads(Path('experiments/omni_cross_asset_frontier_20260915r2/reporting_repair.json').read_text())
+          assert r2['repair_class'] == 'REPORTING_ONLY_POST_MEASUREMENT'
+          assert r2['market_returns_observed_before_repair'] is True
+          assert r2['economic_results_changed'] is False
+          assert r2['formula_changed'] is False and r2['parameter_changed'] is False
+          r2_blob = subprocess.check_output(['git', 'hash-object', 'strategies/generated/omni_cross_asset_frontier_r2.py'], text=True).strip()
+          assert r2_blob == r2['reporting_wrapper_git_blob_sha']
+          print('original freeze and R1/R2 repair lineage verified')
+          PY
+
+      - name: Run repaired causal and constraint tests
+        run: python -m pytest -q tests/test_omni_cross_asset_frontier.py tests/test_omni_cross_asset_frontier_r1.py
+
+      - name: Verify committed wave-1 decision evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          packet = json.loads(Path('evidence/omni_cross_asset_frontier_20260915/provenance.json').read_text())
+          summary = json.loads(Path('evidence/omni_cross_asset_frontier_20260915/wave1_observed_summary.json').read_text())
+          assert packet['measured_head_sha'] == '53c345c9ada242c7d9900725a4dc9bef81986b58'
+          wave1 = {row['id']: row for row in packet['selection_driving_packets']}['wave1_r2']
+          assert wave1['workflow_run_id'] == 35055186575
+          assert wave1['artifact_id'] == 10430526852
+          assert wave1['source_summary_sha256'] == summary['source_artifact_summary_sha256']
+          assert summary['selection_cutoff'] == '2022-12-31'
+          assert summary['post_2022_is_diagnostic_only'] is True
+          assert summary['candidate_count'] == 20
+          assert summary['family_decisions']['online_ridge']['spx']['complexity_earned'] is False
+          print('wave-1 observed decision packet is committed; no market remeasurement required')
+          PY

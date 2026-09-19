@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "evidence_stage": "PUBLIC_DEFAULT_CORRELATION_SMOKE",
+  "claim_limit": "This is not participant/account-bound uniqueness clearance. CI used public/default access; final authenticated precheck remains required.",
+  "workflow": {"run_id": 35413350910, "measured_head_sha": "166f9ac07f409ed38db5f79dbb7d2bfe35202769", "quantiacs_access_mode": "public_default"},
+  "candidates": {
+    "sharpe7": {
+      "candidate_id": "ebenezar_20260912_sharpe7_vol2",
+      "production_artifact": "submissions/q25_sharpe7_vol2_multipass.py",
+      "job_id": 105817132457,
+      "result_text": "Ok. This strategy does not correlate with other strategies.",
+      "artifact_id": 10575595275,
+      "artifact_name": "q25-public-correlation-sharpe7-35413350910",
+      "artifact_sha256": "6acf0c58a0cb9ea70dc579926e6d552e9025feda3c68023b893a9fa149b83cb0"
+    },
+    "sota": {
+      "candidate_id": "q25_sota_meta_ensemble_v1",
+      "production_artifact": "submissions/q25_sota_meta_ensemble_multipass.py",
+      "job_id": 105817132325,
+      "result_text": "Ok. This strategy does not correlate with other strategies.",
+      "artifact_id": 10574807345,
+      "artifact_name": "q25-public-correlation-sota-35413350910",
+      "artifact_sha256": "c7d7917d8fb155c89e01ee5469a3a0783f4be0cb8673a8c2c81356e71113a247"
+    }
+  },
+  "interpretation": {"public_correlation_smoke": "PASS_FOR_BOTH", "account_bound_uniqueness": "PENDING", "retune_after_observation": false}
+}

@@ -1,0 +1,37 @@
+name: omni-timing-robustness
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/omni_timing_robustness.py'
+      - '.github/workflows/omni-timing-robustness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  timing-falsifiers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Quantiacs toolbox
+        run: python -m pip install -r requirements.txt
+      - name: Run carrier and stale-state falsifiers
+        run: |
+          mkdir -p results/omni_timing_robustness
+          python research/omni_timing_robustness.py --output results/omni_timing_robustness/summary.json
+      - name: Preserve robustness evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: omni-timing-robustness-${{ github.run_id }}
+          path: results/omni_timing_robustness/
+          if-no-files-found: warn

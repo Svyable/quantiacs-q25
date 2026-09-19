@@ -1,0 +1,17 @@
+{
+  "experiment_id": "deadline_20260918_lattice_consensus_measurement",
+  "created": "2026-09-18",
+  "status": "FROZEN_EXISTING_SOURCE_BEFORE_CURRENT_MEASUREMENT",
+  "candidate": {
+    "id": "ebenezar_20260912_lattice_consensus",
+    "source": "strategies/generated/ebenezar_20260912_lattice_consensus.py",
+    "source_blob_sha_on_main": "954279e111f289170bf8e5fbddc1a0501415864b",
+    "formula_changes_for_this_experiment": false
+  },
+  "evidence_policy": {
+    "existing_causality_test": "tests/test_ebenezar_profiles.py",
+    "retune_after_observation": false,
+    "promotion_requires_sharpe_0_04_gt_1": true,
+    "promotion_requires_account_bound_uniqueness_check": true
+  }
+}

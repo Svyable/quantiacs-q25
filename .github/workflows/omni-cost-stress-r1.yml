@@ -1,0 +1,51 @@
+name: omni-cost-stress-r1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/omni_cost_stress_r1.py'
+      - 'experiments/omni_cost_stress_20260915r1/**'
+      - '.github/workflows/omni-cost-stress-r1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-cost-stress-r1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Quantiacs toolbox
+        run: python -m pip install -r requirements.txt
+      - name: Verify pre-market import-only repair
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('experiments/omni_cost_stress_20260915r1/repair_record.json').read_text())
+          assert r['market_data_loaded_before_failure'] is False
+          assert r['economic_results_observed_before_repair'] is False
+          assert r['candidate_set_changed'] is False
+          assert r['folds_changed'] is False and r['cost_ladder_changed'] is False
+          assert r['formula_changed'] is False
+          print('cost-stress import-only repair verified')
+          PY
+      - name: Run unchanged exact cleaner and ATR cost ladder
+        run: |
+          mkdir -p results/omni_cost_stress_r1
+          python research/omni_cost_stress_r1.py --output results/omni_cost_stress_r1/summary.json
+      - name: Preserve exact cost evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: omni-cost-stress-r1-${{ github.run_id }}
+          path: results/omni_cost_stress_r1/
+          if-no-files-found: warn

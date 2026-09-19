@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "omni_cross_asset_wave2_20260915",
+  "evidence": "OBSERVED_LOCAL_PUBLIC_DEFAULT",
+  "selection_cutoff": "2022-12-31",
+  "post_2022_is_diagnostic_only": true,
+  "implemented_before_wave1_returns_observed": true,
+  "candidate_count": 16,
+  "source_artifact_summary_sha256": "65aab9f3e2d1a433d31ebc31c75099f76c045095c1ae04d073b8a8a70512d3d5",
+  "family_decisions": {
+    "correlation_acceleration": {
+      "ndx": {
+        "ablation_selection_sharpe": 1.823642998632261,
+        "base_selection_sharpe": 1.1762823711634505,
+        "complexity_earned": false,
+        "direction_supported": false,
+        "inverted_selection_sharpe": 1.231596800363672,
+        "primary_selection_sharpe": 1.1818084850878128
+      },
+      "spx": {
+        "ablation_selection_sharpe": 1.7494845581258776,
+        "base_selection_sharpe": 1.1762823711634505,
+        "complexity_earned": false,
+        "direction_supported": false,
+        "inverted_selection_sharpe": 1.3428395863058364,
+        "primary_selection_sharpe": 1.0613864798088213
+      }
+    },
+    "panel_disagreement": {
+      "dual": {
+        "ablation_selection_sharpe": 1.5956001509970235,
+        "base_selection_sharpe": 1.1762823711634505,
+        "complexity_earned": false,
+        "direction_supported": true,
+        "primary_selection_sharpe": 1.3963642532160756,
+        "swapped_lead_selection_sharpe": 1.3712704028265568
+      }
+    },
+    "vol_surface_curvature": {
+      "ndx": {
+        "ablation_selection_sharpe": 1.5896643113643627,
+        "base_selection_sharpe": 1.1762823711634505,
+        "complexity_earned": false,
+        "direction_supported": false,
+        "inverted_selection_sharpe": 1.7527802686162266,
+        "primary_selection_sharpe": 0.8695191523546192
+      },
+      "spx": {
+        "ablation_selection_sharpe": 1.559162763538936,
+        "base_selection_sharpe": 1.1762823711634505,
+        "complexity_earned": false,
+        "direction_supported": false,
+        "inverted_selection_sharpe": 1.5038900517760028,
+        "primary_selection_sharpe": 1.026210210985833
+      }
+    }
+  }
+}

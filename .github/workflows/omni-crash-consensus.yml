@@ -1,0 +1,97 @@
+name: omni-crash-consensus
+
+on:
+  pull_request:
+    paths:
+      - "strategies/generated/q25_omni_crash_consensus_sharpe7.py"
+      - "experiments/omni_crash_consensus_20260919/**"
+      - "tests/test_omni_crash_consensus.py"
+      - ".github/workflows/omni-crash-consensus.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: omni-crash-consensus-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Quantiacs toolbox and tests
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install pytest
+
+      - name: Verify pre-market freeze
+        run: |
+          test "$(git rev-parse HEAD:experiments/omni_crash_consensus_20260919/preregistration.json)" = "9f951d6f9ae2982d9099d64d64fae45d492a3768"
+          test "$(git rev-parse HEAD:strategies/generated/q25_omni_crash_consensus_sharpe7.py)" = "db13e7448b250a31e8d583fedf25e23c166ca639"
+          test "$(git rev-parse HEAD:tests/test_omni_crash_consensus.py)" = "30e152fdc256afd89d4444abc1f3a24e524310af"
+          python - <<'PY'
+          import json
+          p=json.load(open("experiments/omni_crash_consensus_20260919/preregistration.json"))
+          f=json.load(open("experiments/omni_crash_consensus_20260919/implementation_freeze.json"))
+          assert p["frozen_before_market_measurement"] is True
+          assert p["market_returns_observed_for_this_candidate_before_freeze"] is False
+          assert f["market_returns_observed_before_freeze"] is False
+          PY
+
+      - name: Compile candidate
+        run: python -m py_compile strategies/generated/q25_omni_crash_consensus_sharpe7.py
+
+      - name: Carrier parity constraints and causality
+        run: python -m pytest -q tests/test_omni_crash_consensus.py
+
+      - name: Measure frozen crash-consensus candidates
+        run: |
+          mkdir -p results/omni_crash_consensus_20260919
+          python strategies/generated/q25_omni_crash_consensus_sharpe7.py             --research             --output results/omni_crash_consensus_20260919/summary.json
+
+      - name: Print preregistered decision table
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("results/omni_crash_consensus_20260919/summary.json"))
+          m=p["modes"]
+          order=("base","always_static","stock_majority","stock_unanimous","crypto_only","cross_unanimous","inverted_cross","cross_majority")
+          for fold in ("research_2016_2020","dev_2021_2022","selection_2016_2022"):
+              print("\n===",fold,"Sharpe ===")
+              for mode in order:
+                  row=m[mode][fold]
+                  print(mode,{c:round(row[c]["sharpe_ratio"],6) for c in ("0.04","0.08","0.12")})
+          bR=m["base"]["research_2016_2020"]["0.04"]["sharpe_ratio"]
+          bD=m["base"]["dev_2021_2022"]["0.04"]["sharpe_ratio"]
+          cR=m["cross_majority"]["research_2016_2020"]["0.04"]["sharpe_ratio"]
+          cD=m["cross_majority"]["dev_2021_2022"]["0.04"]["sharpe_ratio"]
+          c=m["cross_majority"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          inv=m["inverted_cross"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          sm=m["stock_majority"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          co=m["crypto_only"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          print("\n=== preregistered falsifiers ===")
+          print("research_beats_base",cR>bR,cR,bR)
+          print("dev_beats_base",cD>bD,cD,bD)
+          print("direction_beats_inverted",c>inv,c,inv)
+          print("crypto_confirmation_beats_stock_only",c>sm,c,sm)
+          print("stock_info_beats_crypto_only",c>co,c,co)
+          print("\n=== diagnostic-only @4% ===")
+          for fold in ("spent_validation_2023_2024","diagnostic_2025_plus","full_2016_plus"):
+              print(fold,{mode:round(m[mode][fold]["0.04"]["sharpe_ratio"],6) for mode in order})
+          PY
+
+      - name: Preserve evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: omni-crash-consensus-${{ github.run_id }}
+          path: results/omni_crash_consensus_20260919/
+          if-no-files-found: error

@@ -10,7 +10,7 @@ on:
         options:
           - sharpe7
           - sota
-          - topology_blend
+          - sharpe7_topology
 
 permissions:
   contents: read

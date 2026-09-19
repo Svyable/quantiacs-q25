@@ -1,0 +1,19 @@
+{
+  "candidate_id": "q25_sota_meta_ensemble_v1",
+  "status": "QUALIFIED_MULTIPASS_PENDING_ACCOUNT_CORRELATION",
+  "source_blob_sha": "757c9515747bd884a1f5c1d4b1c5259af803e75c",
+  "authoritative_full_history_multipass": {
+    "workflow_run_id": 35351671178,
+    "artifact_id": 10550806271,
+    "artifact_sha256": "34836296fb9d3de0ceb6b18a7d2a1a43f661f0ebecf0a7e2ca1ad564a9edddff",
+    "cost_0_00_sharpe": 1.4860778326505215,
+    "cost_0_04_sharpe": 1.3474336829231446,
+    "cost_0_08_sharpe": 1.208563191353069,
+    "cost_0_12_sharpe": 1.0695170328439247,
+    "cost_0_04_max_drawdown": -0.7422685465609342,
+    "cost_0_04_avg_turnover": 0.07003419542821161,
+    "cost_0_04_volatility": 0.4744378705884216
+  },
+  "remaining_blocker": "participant/account-bound Quantiacs correlation uniqueness check on exact frozen multipass artifact",
+  "retune_after_observation": false
+}

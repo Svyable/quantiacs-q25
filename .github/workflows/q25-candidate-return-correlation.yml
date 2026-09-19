@@ -1,0 +1,90 @@
+name: q25-candidate-return-correlation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/export_candidate_returns.py'
+      - 'research/compare_submission_stability.py'
+      - 'submissions/**'
+      - '.github/workflows/q25-candidate-return-correlation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  returns:
+    strategy:
+      fail-fast: false
+      matrix:
+        candidate: [lattice, sota, hit126, sharpe3, sharpe7, residual]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      CANDIDATE: ${{ matrix.candidate }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Export contest-cost returns
+        run: python -m research.export_candidate_returns
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-returns-${{ matrix.candidate }}-${{ github.run_id }}
+          path: returns_${{ matrix.candidate }}.csv
+          if-no-files-found: error
+
+  correlation:
+    needs: returns
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: q25-returns-*
+          merge-multiple: true
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install pandas
+      - name: Compute pairwise return correlations
+        shell: bash
+        run: |
+          python - <<'PY' | tee candidate_correlations.txt
+          import glob, json
+          import pandas as pd
+          files=sorted(glob.glob("returns_*.csv"))
+          merged=None
+          for path in files:
+              df=pd.read_csv(path,parse_dates=["time"])
+              merged=df if merged is None else merged.merge(df,on="time",how="inner")
+          cols=[c for c in merged.columns if c!="time"]
+          corr=merged[cols].corr()
+          off=[]
+          for i,a in enumerate(cols):
+              for b in cols[i+1:]:
+                  off.append((abs(float(corr.loc[a,b])),a,b,float(corr.loc[a,b])))
+          off.sort(reverse=True)
+          report={
+              "common_days":int(len(merged)),
+              "candidates":cols,
+              "pearson_correlation":corr.round(6).to_dict(),
+              "max_abs_pairwise_correlation":{
+                  "abs_correlation":off[0][0],
+                  "candidate_a":off[0][1],
+                  "candidate_b":off[0][2],
+                  "correlation":off[0][3],
+              } if off else None,
+              "lowest_abs_pairwise_correlations":[
+                  {"a":a,"b":b,"correlation":v,"abs_correlation":x}
+                  for x,a,b,v in sorted(off)[:5]
+              ]
+          }
+          print(json.dumps(report,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-candidate-correlations-${{ github.run_id }}
+          path: candidate_correlations.txt
+          if-no-files-found: error

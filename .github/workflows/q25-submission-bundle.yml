@@ -1,0 +1,25 @@
+name: q25-submission-bundle
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'submissions/**'
+      - 'tests/test_submission_bundle.py'
+      - '.github/workflows/q25-submission-bundle.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - run: python -m pytest -q tests/test_submission_bundle.py
+      - run: python -m py_compile submissions/*.py

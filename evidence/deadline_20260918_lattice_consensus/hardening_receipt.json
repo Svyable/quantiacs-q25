@@ -1,0 +1,31 @@
+{
+  "candidate_id": "ebenezar_20260912_lattice_consensus",
+  "status": "QUALIFIED_MULTIPASS_PENDING_ACCOUNT_CORRELATION",
+  "source_blob_sha": "954279e111f289170bf8e5fbddc1a0501415864b",
+  "authoritative_full_history_multipass": {
+    "workflow_run_id": 35352648840,
+    "artifact_id": 10550252464,
+    "artifact_sha256": "e94295b67f6d3c1c76befc35df811850e7e2c5f891728e9c437efaddd2ae759e",
+    "cost_0_00_sharpe": 1.660960539958385,
+    "cost_0_04_sharpe": 1.4599472400842526,
+    "cost_0_08_sharpe": 1.2583918415838153,
+    "cost_0_12_sharpe": 1.0563554736989982,
+    "cost_0_04_max_drawdown": -0.7606950323014496,
+    "cost_0_04_avg_turnover": 0.13715665528342083
+  },
+  "single_pass_diagnostic": {
+    "single_pass_cost_0_04_sharpe": 1.4589018384360222,
+    "recent_single_vs_multipass_max_abs_weight_difference": 0.25,
+    "decision": "DO_NOT_USE_SINGLE_PASS; production mode is frozen 365-day Quantiacs multipass"
+  },
+  "destructive_controls_at_cost_0_04": {
+    "base_sharpe": 1.4589018384360222,
+    "consensus_membership_only_sharpe": 1.3700270796064165,
+    "no_consensus_threshold_sharpe": 1.3249553899093167,
+    "trend_only_sharpe": 1.2949045585668886,
+    "artifact_id": 10551151622,
+    "artifact_sha256": "c8ba58f48504f5b9c4fdd944c46eebf5fe28faac1555fd634e95a2cfe26b5a95"
+  },
+  "remaining_blocker": "participant/account-bound Quantiacs correlation uniqueness check on exact multipass artifact",
+  "retune_after_observation": false
+}

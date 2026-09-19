@@ -1,0 +1,18 @@
+{
+  "candidate_id": "ebenezar_20260912_lattice_consensus",
+  "hardening_status": "FROZEN_BEFORE_CONTROL_MEASUREMENT",
+  "base_observation": {
+    "cost_0_04_sharpe": 1.4589018384360222
+  },
+  "controls": [
+    "remove the support>=4 consensus threshold while preserving quality and risk sizing",
+    "keep support>=4 but remove quality weighting, leaving inverse-risk consensus membership",
+    "replace the multi-filter lattice with positive medium-term trend only"
+  ],
+  "parity": {
+    "method": "Quantiacs multipass versus frozen single pass",
+    "start_date": "2026-06-01",
+    "lookback_period_days": 365
+  },
+  "retune_base_after_controls": false
+}

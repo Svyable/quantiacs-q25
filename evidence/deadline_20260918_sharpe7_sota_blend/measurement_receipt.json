@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "candidate_id": "q25_sharpe7_sota_equal_blend_v1",
+  "blend": "0.5_sharpe7_plus_0.5_sota",
+  "evidence_stage": "POST_SELECTION_FIXED_SYNTHESIS_FULL_HISTORY_MULTIPASS",
+  "claim_limit": "This is a frozen post-selection synthesis measurement, not fresh independent validation and not participant-bound clearance.",
+  "workflow": {
+    "run_id": 35412794810,
+    "job_id": 105815571118,
+    "measured_head_sha": "7d140b72052225cbeca87030245c714f4102bd79",
+    "artifact_id": 10574986914,
+    "artifact_name": "q25-sharpe7-sota-blend-35412794810",
+    "artifact_sha256": "237505f8479eae45269301d94526accb42009364406fce03b2e9201b982a8d4e",
+    "quantiacs_access_mode": "public_default"
+  },
+  "cost_ladder": {
+    "0.00": {"sharpe_ratio": 1.9161966033174882, "equity": 4782.812408015454, "max_drawdown": -0.6096867065709436, "avg_turnover": 0.09046426958873505, "volatility": 0.46878744373418296},
+    "0.04": {"sharpe_ratio": 1.7280833559657092, "equity": 1852.0870904863102, "max_drawdown": -0.6437911261637304, "avg_turnover": 0.09048978742861609, "volatility": 0.468453706472071},
+    "0.08": {"sharpe_ratio": 1.5393777476893025, "equity": 716.4154227995315, "max_drawdown": -0.6749804130061074, "avg_turnover": 0.09051603786562218, "volatility": 0.4681864768246929},
+    "0.10": {"sharpe_ratio": 1.4448248799107968, "equity": 445.38263145276414, "max_drawdown": -0.6895595024016041, "avg_turnover": 0.09052933032884174, "volatility": 0.4680779381333624},
+    "0.12": {"sharpe_ratio": 1.3501507100578312, "equity": 276.80624707449056, "max_drawdown": -0.703500265470003, "avg_turnover": 0.09054270175198426, "volatility": 0.4679860104358652}
+  },
+  "interpretation": {
+    "contest_4pct_gate": "PASS",
+    "10pct_atr_stress": "PASS",
+    "12pct_atr_stress": "PASS",
+    "comparison_note": "Descriptive only: full-history 4pct Sharpe is below promoted Sharpe7 standalone and drawdown is larger; no promotion upgrade inferred.",
+    "retune_after_observation": false
+  }
+}

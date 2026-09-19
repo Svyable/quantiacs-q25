@@ -1,0 +1,75 @@
+{
+  "experiment_id": "omni_policy_health_20260919",
+  "strategy_id": "q25_omni_policy_health_sharpe7_v1",
+  "frozen_before_market_measurement": true,
+  "market_returns_observed_for_this_candidate_before_freeze": false,
+  "classification": "allocator_experiment",
+  "research_question": "Can an objective-aligned, causal policy-health gate preserve the historical Sharpe benefit of a fixed stock-risk overlay while abstaining when that overlay has stopped improving the crypto carrier?",
+  "parent_evidence": {
+    "riskcast_experiment": "omni_riskcast_experts_20260919",
+    "allowed_learning": "static stock-risk direction supported; forecast-MSE health rejected; no RiskCast parameter may be tuned here",
+    "forbidden": "no reuse of post-2022 diagnostics to set thresholds or windows"
+  },
+  "carrier": {
+    "name": "ebenezar_20260912_sharpe7_vol2",
+    "frozen_formula": true
+  },
+  "fixed_stock_overlay": {
+    "experts": [
+      "spx_tail_dependence",
+      "ndx_tail_dependence",
+      "spx_21_126_realized_vol_term",
+      "ndx_21_126_realized_vol_term"
+    ],
+    "aggregation": "cross-expert median",
+    "risk_floor": 0.35,
+    "scale_cut_band": 0.10,
+    "ordinary_re_risk": "Monday",
+    "source": "formula-identical static_median policy from frozen RiskCast experiment"
+  },
+  "policy_health": {
+    "hypothetical_return_definition": "sum of previous-day policy weights times current crypto close-to-close return",
+    "internal_cost_model": "none; cost-free realized policy utility proxy only",
+    "contest_costs_used_for_final_decision": [0.04, 0.08, 0.12],
+    "fast_window_days": 126,
+    "fast_min_days": 63,
+    "slow_window_days": 252,
+    "slow_min_days": 126,
+    "score": "annualized rolling Sharpe",
+    "update_schedule": "Monday only",
+    "dual_gate": "enable fixed stock overlay only when its fast and slow trailing Sharpe both exceed base fast and slow trailing Sharpe; otherwise use base",
+    "no_margin_threshold": true
+  },
+  "modes": {
+    "base": "frozen Sharpe7 only",
+    "always_static": "fixed stock-risk overlay always enabled",
+    "fast_only": "enable overlay when 126d overlay Sharpe exceeds 126d base Sharpe",
+    "slow_only": "enable overlay when 252d overlay Sharpe exceeds 252d base Sharpe",
+    "inverted_dual": "enable overlay only when its fast and slow Sharpe are both below base; destructive control",
+    "dual": "candidate: both fast and slow overlay Sharpe must exceed base"
+  },
+  "falsifiers": [
+    "dual must beat base on 2016-2022 selection Sharpe at 4% ATR cost",
+    "dual must beat inverted_dual to support policy-health direction",
+    "dual should beat always_static for the gate to earn complexity",
+    "dual should not depend on a single horizon: if fast_only or slow_only clearly dominates, dual confirmation has not earned complexity",
+    "no post-result threshold, window, risk-floor, expert-set, or rebalance-frequency rescue"
+  ],
+  "evaluation": {
+    "selection": "2016-01-01 through 2022-12-31",
+    "spent_validation_diagnostic_only": "2023-01-01 through 2024-12-31",
+    "post_2024_diagnostic_only": "2025-01-01 onward",
+    "costs_atr": [0.04, 0.08, 0.12],
+    "primary_metric": "Sharpe ratio",
+    "secondary": ["max_drawdown", "volatility", "mean_return", "avg_turnover"]
+  },
+  "constraints": {
+    "long_only": true,
+    "per_name_cap": 0.25,
+    "gross_cap": 1.0,
+    "crypto_selection_uses_stock_data": false,
+    "stock_role": "aggregate gross-risk sizing only",
+    "data": "Quantiacs-provided crypto and historical constituent stock data only",
+    "cross_dataset_admissibility": "hosted/preclear required before submission"
+  }
+}

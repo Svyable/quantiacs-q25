@@ -1,0 +1,40 @@
+name: q25-public-correlation-smoke
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'submissions/q25_sharpe7_topology_blend_multipass.py'
+      - 'research/public_correlation_smoke.py'
+      - '.github/workflows/q25-public-correlation-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        candidate: [sharpe7, sota, sharpe7_topology]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+      CANDIDATE: ${{ matrix.candidate }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Run public/default correlation smoke
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.public_correlation_smoke | tee "correlation_${CANDIDATE}.txt"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-public-correlation-${{ matrix.candidate }}-${{ github.run_id }}
+          path: correlation_*.txt
+          if-no-files-found: error

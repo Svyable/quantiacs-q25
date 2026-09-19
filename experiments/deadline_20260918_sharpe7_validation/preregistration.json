@@ -1,0 +1,24 @@
+{
+  "experiment_id": "deadline_20260918_sharpe7_forward_validation",
+  "created": "2026-09-18",
+  "status": "FROZEN_BEFORE_2023_PLUS_VALIDATION_LOOK",
+  "candidate": {
+    "source": "submissions/q25_sharpe7_vol2_multipass.py",
+    "source_blob_sha": "cd2876aa22f81bad5ecc71637689e5cbe513c8f3",
+    "params": {"window": 7},
+    "mode": "base",
+    "lookback_days": 365
+  },
+  "windows": {
+    "validation": ["2023-01-01", "2024-12-31"],
+    "diagnostic": ["2025-01-01", "CURRENT_PRELIVE_DATE"],
+    "calendar_years": [2023, 2024, 2025, 2026],
+    "protected_live_start": "2026-10-01"
+  },
+  "cost_fraction_atr": [0.04, 0.10],
+  "decision_policy": {
+    "no_parameter_or_formula_mutation_after_opening": true,
+    "use": "confidence/slate selection only",
+    "not_a_fresh_training_fold": true
+  }
+}

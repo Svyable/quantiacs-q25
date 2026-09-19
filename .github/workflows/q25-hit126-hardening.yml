@@ -1,0 +1,30 @@
+name: q25-hit126-hardening
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/hit126_hardening.py'
+      - '.github/workflows/q25-hit126-hardening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  destructive-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Run destructive controls\n        shell: bash\n        run: |\n          set -o pipefail\n          python -m research.hit126_hardening | tee hit126_controls.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-hit126-controls-${{ github.run_id }}
+          path: hit126_controls.txt
+          if-no-files-found: error

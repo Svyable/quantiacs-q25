@@ -1,0 +1,36 @@
+{
+  "experiment_id": "deadline_20260918_hit126",
+  "created": "2026-09-18",
+  "track": "submission_hardening",
+  "status": "FROZEN_BEFORE_CURRENT_DATA_MEASUREMENT",
+  "candidate": {
+    "id": "q25_deadline_hit126_consistency_v1",
+    "source": "strategies/generated/q25_deadline_hit126_consistency.py",
+    "mechanism": "rank liquid assets by 126-day positive-return frequency, require positive 126-day displacement, select five strongest names weekly, inverse-volatility size with a 25% cap",
+    "parameters": {
+      "hit_window": 126,
+      "hit_min": 84,
+      "displacement_window": 126,
+      "risk_window": 63,
+      "risk_min": 42,
+      "top_k": 5,
+      "name_cap": 0.25,
+      "rebalance": "Monday"
+    }
+  },
+  "evidence_policy": {
+    "historical_trend_hit126_metrics_transfer_to_this_source": false,
+    "retune_after_observing_this_run": false,
+    "selection_period_start": "2016-01-01",
+    "primary_cost_fraction_atr": 0.04,
+    "stress_costs_fraction_atr": [0.08, 0.12],
+    "contest_hard_is_sharpe": ">1.0",
+    "promotion_requires_current_quantiacs_measurement": true,
+    "hosted_account_correlation_check": "PENDING"
+  },
+  "planned_destructive_controls_if_base_survives": [
+    "remove hit-rate ranking and rank only by 126-day displacement",
+    "remove displacement sign confirmation",
+    "replace positive-hit rate with negative-hit rate"
+  ]
+}

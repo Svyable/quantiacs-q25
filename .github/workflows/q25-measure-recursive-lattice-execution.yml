@@ -1,0 +1,75 @@
+name: q25-measure-recursive-lattice-execution
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/q25_recursive_lattice_execution.py'
+      - 'experiments/deadline_20260919_recursive_lattice_execution/**'
+      - 'research/measure_recursive_lattice_execution.py'
+      - 'research/measure_recursive_lattice_execution_multipass.py'
+      - 'tests/test_q25_recursive_lattice_execution.py'
+      - '.github/workflows/q25-measure-recursive-lattice-execution.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-mechanics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - name: Verify frozen source and mechanics
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD:strategies/generated/q25_recursive_lattice_execution.py)" = "544d7e52465699d723e3194340fa4394394b24db"
+          python -m pytest -q tests/test_q25_recursive_lattice_execution.py
+
+  single-pass-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Measure central and frozen controls
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.measure_recursive_lattice_execution | tee recursive_lattice_single_pass.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-recursive-lattice-single-${{ github.run_id }}
+          path: recursive_lattice_single_pass.txt
+          if-no-files-found: error
+
+  full-history-multipass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Measure frozen central vs exact base in multipass
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.measure_recursive_lattice_execution_multipass | tee recursive_lattice_multipass.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-recursive-lattice-multipass-${{ github.run_id }}
+          path: recursive_lattice_multipass.txt
+          if-no-files-found: error

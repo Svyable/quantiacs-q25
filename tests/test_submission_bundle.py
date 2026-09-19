@@ -82,3 +82,11 @@ def test_hit126_prefix_causality():
     for cut in (250,350,430,510):
         latest=m.strategy(data.isel(time=slice(0,cut+1)))
         xr.testing.assert_allclose(latest,full.isel(time=cut,drop=True))
+
+
+def test_sharpe3_submission_is_exact_frozen_source_copy():
+    assert (
+        ROOT/"submissions/q25_sharpe3_vol_guard_multipass.py"
+    ).read_text() == (
+        ROOT/"strategies/generated/ebenezar_20260912_sharpe3_vol_guard.py"
+    ).read_text()

@@ -1,0 +1,94 @@
+name: omni-policy-health
+
+on:
+  pull_request:
+    paths:
+      - "strategies/generated/q25_omni_policy_health_sharpe7.py"
+      - "experiments/omni_policy_health_20260919/**"
+      - "tests/test_omni_policy_health.py"
+      - ".github/workflows/omni-policy-health.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: omni-policy-health-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Quantiacs toolbox and tests
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install pytest
+
+      - name: Verify pre-market freeze
+        run: |
+          test "$(git rev-parse HEAD:experiments/omni_policy_health_20260919/preregistration.json)" = "9bd14feeb8d08a0b42412cc583899f4ab9cb78d0"
+          test "$(git rev-parse HEAD:strategies/generated/q25_omni_policy_health_sharpe7.py)" = "5378bff268ab31ea35bd9f6f287d7ea1befdae5e"
+          test "$(git rev-parse HEAD:tests/test_omni_policy_health.py)" = "edd70933a1cae7dfbd0ed741faa59b77637e9a65"
+          python - <<'PY'
+          import json
+          p=json.load(open("experiments/omni_policy_health_20260919/preregistration.json"))
+          f=json.load(open("experiments/omni_policy_health_20260919/implementation_freeze.json"))
+          assert p["frozen_before_market_measurement"] is True
+          assert p["market_returns_observed_for_this_candidate_before_freeze"] is False
+          assert f["market_returns_observed_before_freeze"] is False
+          PY
+
+      - name: Compile candidate
+        run: python -m py_compile strategies/generated/q25_omni_policy_health_sharpe7.py
+
+      - name: Carrier parity constraints and causality
+        run: python -m pytest -q tests/test_omni_policy_health.py
+
+      - name: Measure frozen policy-health candidate and controls
+        run: |
+          mkdir -p results/omni_policy_health_20260919
+          python strategies/generated/q25_omni_policy_health_sharpe7.py             --research             --output results/omni_policy_health_20260919/summary.json
+
+      - name: Print preregistered decision table
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("results/omni_policy_health_20260919/summary.json"))
+          modes=p["modes"]
+          print("\n=== 2016-2022 Sharpe by ATR cost ===")
+          order=("base","always_static","fast_only","slow_only","inverted_dual","dual")
+          for m in order:
+              row=modes[m]["selection_2016_2022"]
+              print(m, {c: round(row[c]["sharpe_ratio"],6) for c in ("0.04","0.08","0.12")})
+          b=modes["base"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          a=modes["always_static"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          f=modes["fast_only"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          s=modes["slow_only"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          i=modes["inverted_dual"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          d=modes["dual"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          print("\n=== preregistered falsifiers @ 4% ATR ===")
+          print("dual_beats_base",d>b,d,b)
+          print("dual_beats_inverted",d>i,d,i)
+          print("dual_beats_always_static",d>a,d,a)
+          print("dual_vs_fast_slow",{"dual":d,"fast":f,"slow":s})
+          print("\n=== diagnostic-only later windows @ 4% ATR ===")
+          for fold in ("spent_validation_2023_2024","diagnostic_2025_plus","full_2016_plus"):
+              print(fold,{m:round(modes[m][fold]["0.04"]["sharpe_ratio"],6) for m in order})
+          PY
+
+      - name: Preserve evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: omni-policy-health-${{ github.run_id }}
+          path: results/omni_policy_health_20260919/
+          if-no-files-found: error

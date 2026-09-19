@@ -1,0 +1,54 @@
+name: q25-sharpe7-topology-hardening
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'submissions/q25_sharpe7_topology_blend_multipass.py'
+      - 'research/measure_sharpe7_topology_production.py'
+      - 'tests/test_q25_sharpe7_topology_blend_submission.py'
+      - 'experiments/deadline_20260918_sharpe7_topology_blend/**'
+      - '.github/workflows/q25-sharpe7-topology-hardening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity-and-admissibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - name: Verify frozen source blobs
+        run: |
+          test "$(git rev-parse HEAD:strategies/generated/ebenezar_20260912_sharpe7_vol2.py)" = "cd2876aa22f81bad5ecc71637689e5cbe513c8f3"
+          test "$(git rev-parse HEAD:strategies/generated/frontier_20260910b_topology_migration.py)" = "13aeb0ba3f35f284ced79cc62247d6d293a2a657"
+      - name: Run exact composition tests
+        run: python -m pytest -q tests/test_q25_sharpe7_topology_blend_submission.py
+
+  authoritative-production-multipass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Measure exact production artifact
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.measure_sharpe7_topology_production | tee sharpe7_topology_production.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-sharpe7-topology-production-${{ github.run_id }}
+          path: sharpe7_topology_production.txt
+          if-no-files-found: error

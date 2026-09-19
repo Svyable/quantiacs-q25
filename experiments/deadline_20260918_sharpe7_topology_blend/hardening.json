@@ -1,0 +1,28 @@
+{
+  "candidate": "q25_sharpe7_topology_equal_blend_v1",
+  "artifact": "submissions/q25_sharpe7_topology_blend_multipass.py",
+  "hardening_date": "2026-09-19",
+  "status": "PRODUCTION_ARTIFACT_ADDED_PENDING_PARITY_AND_CORRELATION_SMOKE",
+  "formula_changed": false,
+  "member_sources": {
+    "sharpe7": {
+      "path": "strategies/generated/ebenezar_20260912_sharpe7_vol2.py",
+      "blob_sha": "cd2876aa22f81bad5ecc71637689e5cbe513c8f3"
+    },
+    "topology_w84": {
+      "path": "strategies/generated/frontier_20260910b_topology_migration.py",
+      "blob_sha": "13aeb0ba3f35f284ced79cc62247d6d293a2a657"
+    }
+  },
+  "blend_rule": "0.5 * Sharpe7 latest weights + 0.5 * topology_w84 latest weights; no renormalization",
+  "required_checks": [
+    "synthetic exact-weight parity against frozen member composition",
+    "long-only / liquid-only / gross<=1 / name<=0.25",
+    "asset-order invariance",
+    "self-contained source audit",
+    "full-history production-artifact multipass cost ladder",
+    "public/default Quantiacs correlation smoke"
+  ],
+  "evidence_boundary": "Hardening does not create fresh validation. 2023-2024 remains spent; 2025+ remains diagnostic; live remains untouched.",
+  "account_bound_uniqueness": "PENDING"
+}

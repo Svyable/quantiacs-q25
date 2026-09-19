@@ -71,7 +71,33 @@ def _weights(candidate: str):
             load_data=m.load_data,
             lookback_period=m.LOOKBACK_DAYS,
             start_date=START,
-            strategy=lambda d: m.strategy(d,{"window":3},"base),
+            strategy=lambda d: m.strategy(d,{"window":3},"base"),
+            analyze=False,
+            build_plots=False,
+            check_correlation=False,
+        )
+        return result[0] if isinstance(result,tuple) else result
+    if candidate=="sharpe7":
+        m=_load("submissions/q25_sharpe7_vol2_multipass.py","sharpe7_submission")
+        result=qnbt.backtest(
+            competition_type=m.COMPETITION_TYPE,
+            load_data=m.load_data,
+            lookback_period=m.LOOKBACK_DAYS,
+            start_date=START,
+            strategy=lambda d: m.strategy(d,{"window":7},"base"),
+            analyze=False,
+            build_plots=False,
+            check_correlation=False,
+        )
+        return result[0] if isinstance(result,tuple) else result
+    if candidate=="residual":
+        m=_load("submissions/q25_residual_sharpe_multipass.py","residual_submission")
+        result=qnbt.backtest(
+            competition_type=m.COMPETITION_TYPE,
+            load_data=m.load_data,
+            lookback_period=m.LOOKBACK_DAYS,
+            start_date=START,
+            strategy=lambda d: m.strategy(d,{"window":7},"base"),
             analyze=False,
             build_plots=False,
             check_correlation=False,

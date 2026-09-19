@@ -44,6 +44,18 @@ def main():
             build_plots=False,
             check_correlation=False,
         )
+    elif CANDIDATE=="topology_blend":
+        m=importlib.import_module("submissions.q25_sharpe7_topology_equal_blend_multipass")
+        result=qnbt.backtest(
+            competition_type=m.COMPETITION_TYPE,
+            load_data=m.load_data,
+            lookback_period=m.LOOKBACK_DAYS,
+            start_date=START,
+            strategy=m.strategy,
+            analyze=False,
+            build_plots=False,
+            check_correlation=False,
+        )
     else:
         raise ValueError(CANDIDATE)
 

@@ -132,7 +132,7 @@ def main():
 
     report={
         "candidate":candidate,
-        "mode":{"lattice":"multipass_365","sota":"multipass_900","hit126":"singlepass_parity_proven","sharpe3":"multipass_365"}[candidate],
+        "mode":{"lattice":"multipass_365","sota":"multipass_900","hit126":"singlepass_parity_proven","sharpe3":"multipass_365","sharpe7":"multipass_365"}[candidate],
         "cost_fraction_atr":COST,
         "calendar_years":years,
         "stability":{

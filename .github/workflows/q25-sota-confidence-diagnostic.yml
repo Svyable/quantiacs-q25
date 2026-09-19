@@ -1,0 +1,38 @@
+name: q25-sota-confidence-diagnostic
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/deadline_20260919_sota_confidence/**'
+      - 'research/diagnose_sota_recent.py'
+      - '.github/workflows/q25-sota-confidence-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-confidence-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Verify promoted source is still exact
+        run: |
+          test "$(git rev-parse HEAD:submissions/q25_sota_meta_ensemble_multipass.py)" = "757c9515747bd884a1f5c1d4b1c5259af803e75c"
+      - name: Run frozen spent/recent confidence diagnostic
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.diagnose_sota_recent | tee sota_confidence_diagnostic.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-sota-confidence-diagnostic-${{ github.run_id }}
+          path: sota_confidence_diagnostic.txt
+          if-no-files-found: error

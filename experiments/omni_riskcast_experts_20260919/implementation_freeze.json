@@ -1,0 +1,29 @@
+{
+  "experiment_id": "omni_riskcast_experts_20260919",
+  "frozen_before_market_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "branch": "research/omni-riskcast-experts-20260919",
+  "preregistration_blob_sha": "a85e66301f2e6613dc6c1adf1cc2bd5dd61cf5c3",
+  "strategy_blob_sha": "6d0871477b72d4e4688160b60b3e54db0ec5dfc1",
+  "test_blob_sha": "128b4e7067e7253f5e0aaa6e06018bf79336e3ac",
+  "local_software_checks": {
+    "python_compile": "PASS",
+    "long_only": "PASS",
+    "name_cap_0_25": "PASS",
+    "gross_cap_1_0": "PASS",
+    "prefix_causality": {
+      "status": "PASS",
+      "cutpoints": [900, 1200, 1500, 1799],
+      "max_abs_error": 0.0
+    },
+    "zero_health_exact_abstention": "PASS",
+    "note": "synthetic/software checks only; no market-performance evidence"
+  },
+  "measurement_policy": {
+    "first_market_measurement_must_use_frozen_strategy_blob": true,
+    "costs_atr": [0.04, 0.08, 0.12],
+    "selection_cutoff": "2022-12-31",
+    "post_2022_is_diagnostic_only": true,
+    "no_post_result_parameter_rescue": true
+  }
+}

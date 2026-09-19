@@ -1,0 +1,25 @@
+{
+  "candidate_id": "ebenezar_20260912_lattice_consensus",
+  "production_artifact": "submissions/q25_lattice_consensus_multipass.py",
+  "status": "QUALIFIED_MULTIPASS_PENDING_ACCOUNT_CORRELATION",
+  "source_blob_sha": "954279e111f289170bf8e5fbddc1a0501415864b",
+  "production_mode": {
+    "type": "quantiacs_multipass",
+    "lookback_days": 365,
+    "start_date": "2016-01-01",
+    "params": {"window": 7},
+    "mode": "base",
+    "single_pass_allowed": false
+  },
+  "authoritative_evidence": "evidence/deadline_20260918_lattice_consensus/hardening_receipt.json",
+  "qualification": {
+    "cost_0_04_sharpe": 1.4599472400842526,
+    "cost_0_08_sharpe": 1.2583918415838153,
+    "cost_0_12_sharpe": 1.0563554736989982,
+    "base_beats_all_predeclared_destructive_controls_at_0_04": true,
+    "single_pass_route": "REJECTED_DUE_TO_WEIGHT_DIVERGENCE",
+    "required_route": "365_DAY_QUANTIACS_MULTIPASS"
+  },
+  "remaining_blocker": "participant/account-bound Quantiacs correlation uniqueness check on this exact production artifact",
+  "retune_after_observation": false
+}

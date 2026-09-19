@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'research/public_correlation_smoke.py'
+      - 'research/public_correlation_smoke.py'\n      - 'submissions/q25_sharpe7_topology_equal_blend_multipass.py'
       - '.github/workflows/q25-public-correlation-smoke.yml'
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        candidate: [sharpe7, sota]
+        candidate: [sharpe7, sota, topology_blend]
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:

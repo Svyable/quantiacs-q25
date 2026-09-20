@@ -6,6 +6,7 @@ on:
     paths:
       - 'submissions/q25_pareto_skyline_multipass.py'
       - 'research/measure_pareto_skyline_production.py'
+      - 'research/diagnose_pareto_multipass_divergence.py'
       - 'research/public_correlation_smoke_pareto.py'
       - 'tests/test_q25_pareto_submission.py'
       - 'experiments/pareto_skyline_20260919/production_hardening.json'
@@ -70,11 +71,37 @@ jobs:
           assert m["0.12"]["sharpe_ratio"] > 1.0, m["0.12"]
           PY
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: q25-pareto-production-${{ github.run_id }}
           path: |
             results/pareto_skyline_20260919/production_multipass.json
             pareto_production.log
+          if-no-files-found: error
+
+  parity-diagnostic:
+    needs: package-integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Localize full-history vs rolling-tail divergence
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.diagnose_pareto_multipass_divergence | tee pareto_parity_diagnostic.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: q25-pareto-parity-diagnostic-${{ github.run_id }}
+          path: |
+            results/pareto_skyline_20260919/parity_diagnostic.json
+            pareto_parity_diagnostic.log
           if-no-files-found: error
 
   public-correlation-smoke:

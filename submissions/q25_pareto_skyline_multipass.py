@@ -41,13 +41,37 @@ def _returns(close):
     return xr.where(np.isfinite(r), r, 0.0)
 
 
+def _rolling_values(x, n, m):
+    """Construct explicit trailing windows for prefix-length-invariant arithmetic."""
+    if x.sizes["time"] < m:
+        return None, None
+    width = min(n, x.sizes["time"])
+    values = x.rolling(time=width).construct("_window")
+    enough = values.count("_window") >= m
+    return values, enough
+
+
 def _sma(x, n, m):
+    values, enough = _rolling_values(x, n, m)
+    if values is None:
+        return xr.full_like(x, np.nan, dtype=float)
+    return values.mean("_window", skipna=True).where(enough)
+
+
+def _std(x, n, m):
+    values, enough = _rolling_values(x, n, m)
+    if values is None:
+        return xr.full_like(x, np.nan, dtype=float)
+    return values.std("_window", skipna=True, ddof=0).where(enough)
+
+
+def _sma_frozen(x, n, m):
     if x.sizes["time"] < m:
         return xr.full_like(x, np.nan, dtype=float)
     return x.rolling(time=min(n, x.sizes["time"]), min_periods=m).mean()
 
 
-def _std(x, n, m):
+def _std_frozen(x, n, m):
     if x.sizes["time"] < m:
         return xr.full_like(x, np.nan, dtype=float)
     return x.rolling(time=min(n, x.sizes["time"]), min_periods=m).std()
@@ -135,11 +159,11 @@ def _allocate_frozen(raw, liquid):
 def _features(data):
     close, liquid = _close_liquid(data)
     r = _returns(close)
-    mu7 = _sma(r, 7, 5)
-    vol14 = _std(r, 14, 7)
+    mu7 = _sma_frozen(r, 7, 5)
+    vol14 = _std_frozen(r, 14, 7)
     s7 = np.sqrt(365.0) * mu7 / (vol14 + EPS)
-    sma12 = _sma(close, 12, 8)
-    sma48 = _sma(close, 48, 24)
+    sma12 = _sma_frozen(close, 12, 8)
+    sma48 = _sma_frozen(close, 48, 24)
     trend = sma12 / (sma48 + EPS) - 1.0
     mom14 = close / close.shift(time=14) - 1.0
     peak30 = _max(close, 30, 15)
@@ -200,7 +224,7 @@ def _base_sharpe7(data):
     quality = xr.where(s7 > hurdle, s7 - hurdle, 0.0)
     gate = (sma12 > sma48) & (mom14 > 0.0) & (dd30 > -0.22) & (vol14 > 0.0)
     raw = xr.where(gate, (quality.clip(min=0.0) ** 1.25) / (vol14 + 0.015), 0.0) * liquid
-    raw = _sma(raw, 3, 1) * liquid
+    raw = _sma_frozen(raw, 3, 1) * liquid
     return _allocate_frozen(raw, liquid)
 
 

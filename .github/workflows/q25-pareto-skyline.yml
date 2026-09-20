@@ -1,0 +1,73 @@
+name: q25-pareto-skyline
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/q25_pareto_skyline.py'
+      - 'experiments/pareto_skyline_20260919/**'
+      - 'tests/test_q25_pareto_skyline.py'
+      - '.github/workflows/q25-pareto-skyline.yml'
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  mechanics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env: {API_KEY: default}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - run: |
+          test "$(git rev-parse HEAD:strategies/generated/q25_pareto_skyline.py)" = "04a3afd9b47525fd9a773455466a71494a393fc9"
+          python -m pytest -q tests/test_q25_pareto_skyline.py
+  benchmark:
+    needs: mechanics
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env: {API_KEY: default}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - run: |
+          set -o pipefail
+          python strategies/generated/q25_pareto_skyline.py --research --output results/pareto_skyline_20260919/summary.json | tee pareto_skyline.log
+      - name: Adjudicate frozen hypothesis
+        run: |
+          python - <<'PY'
+          import json
+          m=json.load(open("results/pareto_skyline_20260919/summary.json"))["modes"]
+          order=("base_sharpe7","no_pareto","frontier_only","pareto_le2","dominated_tail","pareto_le1")
+          for fold in ("research_2016_2020","dev_2021_2022","selection_2016_2022"):
+              print("\n===",fold,"===")
+              for mode in order:
+                  r=m[mode][fold]
+                  print(mode,{c:round(r[c]["sharpe_ratio"],6) for c in ("0.04","0.08","0.12")})
+          c=m["pareto_le1"]["selection_2016_2022"]; cs=c["0.04"]["sharpe_ratio"]
+          b=m["base_sharpe7"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          n=m["no_pareto"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          d=m["dominated_tail"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          print("\n=== falsifiers ===")
+          print("sharpe_gt_1",cs>1,cs)
+          print("cost_0p08_gt_1",c["0.08"]["sharpe_ratio"]>1,c["0.08"]["sharpe_ratio"])
+          print("beats_dominated_tail",cs>d,cs,d)
+          print("beats_no_pareto",cs>n,cs,n)
+          print("within_0p10_sharpe7",cs>=b-0.10,cs,b)
+          print("\n=== diagnostic-only @4% ===")
+          for fold in ("spent_validation_2023_2024","diagnostic_2025_plus","full_2016_plus"):
+              print(fold,{mode:round(m[mode][fold]["0.04"]["sharpe_ratio"],6) for mode in order})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-pareto-skyline-${{ github.run_id }}
+          path: |
+            results/pareto_skyline_20260919/summary.json
+            pareto_skyline.log
+          if-no-files-found: error

@@ -1,0 +1,35 @@
+{
+  "experiment_id": "pareto_skyline_20260919_repair1",
+  "created": "2026-09-19",
+  "status": "FROZEN_IMPLEMENTATION_REPAIR_BEFORE_VALID_ECONOMIC_EVIDENCE",
+  "parent_experiment": "pareto_skyline_20260919",
+  "invalid_parent_source_blob": "89457d7eb3b80113693cf946c933c7514c23966a",
+  "repaired_source": {
+    "path": "strategies/generated/q25_pareto_skyline.py",
+    "blob_sha": "2d5197e6182996b2c0fdc3d6233e8560d85edf0b",
+    "commit_sha": "9db0f94ce7b134c0d80a96a186dcdf670b25b31b"
+  },
+  "reason": {
+    "failure_stage": "synthetic_mechanics_ci",
+    "observed_failure": "asset-order invariance failed on 20 of 9000 synthetic weights; benchmark was skipped",
+    "economic_interpretation": "NONE: no market-performance measurement occurred for the parent blob"
+  },
+  "repair_scope": {
+    "economic_parameters_changed": false,
+    "feature_definitions_changed": false,
+    "pareto_rule_changed": false,
+    "gates_changed": false,
+    "score_formula_changed": false,
+    "changes": [
+      "canonicalize asset order before cross-sectional mean and variance reductions",
+      "canonicalize asset order before gross normalization",
+      "canonicalize pairwise dominance computation and restore original coordinate order"
+    ]
+  },
+  "selection_policy": {
+    "original_preregistration_remains_authoritative": true,
+    "retune_after_observation": false,
+    "control_promotion": false,
+    "repaired_source_requires_fresh_mechanics_gate_before_economic_measurement": true
+  }
+}

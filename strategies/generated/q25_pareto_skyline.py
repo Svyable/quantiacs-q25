@@ -104,6 +104,34 @@ def _allocate(raw, liquid):
     return w.transpose("time", "asset").fillna(0.0).reset_coords("field", drop=True)
 
 
+# Exact legacy reduction/allocation path used only by the frozen Sharpe7 control.
+# Keeping these separate preserves byte-for-formula numerical parity with the
+# promoted submission while the new Pareto family uses canonical reductions.
+def _mean_frozen(x, liquid):
+    safe = xr.where(np.isfinite(x), x, 0.0)
+    n = liquid.sum("asset")
+    return xr.where(n > 0, (safe * liquid).sum("asset") / n, 0.0)
+
+
+def _std_cs_frozen(x, liquid):
+    mean = _mean_frozen(x, liquid)
+    n = liquid.sum("asset")
+    var = xr.where(
+        n > 0,
+        (((xr.where(np.isfinite(x), x, 0.0) - mean) ** 2) * liquid).sum("asset") / n,
+        0.0,
+    )
+    return np.sqrt(xr.where(var > 0, var, 0.0))
+
+
+def _allocate_frozen(raw, liquid):
+    raw = xr.where(np.isfinite(raw) & (raw > 0), raw, 0.0) * liquid
+    gross = raw.sum("asset")
+    w = xr.where(gross > EPS, raw / gross, 0.0)
+    w = xr.where(w > NAME_CAP, NAME_CAP, w) * liquid
+    return w.transpose("time", "asset").fillna(0.0).reset_coords("field", drop=True)
+
+
 def _features(data):
     close, liquid = _close_liquid(data)
     r = _returns(close)
@@ -166,14 +194,14 @@ def _base_sharpe7(data):
     mom14 = close / close.shift(time=14) - 1.0
     peak30 = _max(close, 30, 15)
     dd30 = close / (peak30 + EPS) - 1.0
-    mean = _mean(s7, liquid)
-    sd = _std_cs(s7, liquid)
+    mean = _mean_frozen(s7, liquid)
+    sd = _std_cs_frozen(s7, liquid)
     hurdle = mean + 0.20 * sd
     quality = xr.where(s7 > hurdle, s7 - hurdle, 0.0)
     gate = (sma12 > sma48) & (mom14 > 0.0) & (dd30 > -0.22) & (vol14 > 0.0)
     raw = xr.where(gate, (quality.clip(min=0.0) ** 1.25) / (vol14 + 0.015), 0.0) * liquid
     raw = _sma(raw, 3, 1) * liquid
-    return _allocate(raw, liquid)
+    return _allocate_frozen(raw, liquid)
 
 
 def calculate_weights(data, mode="pareto_le1"):

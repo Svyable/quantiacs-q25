@@ -88,10 +88,16 @@ def main():
 
     date_diagnostics = {}
     for date in sorted({r["time"] for r in rows}):
+        dt = np.datetime64(date)
         prefix = data.sel(time=slice(None, date))
-        tail = prefix.isel(time=slice(max(0, prefix.sizes["time"] - s.LOOKBACK_DAYS), None))
-        w_full = s.strategy(prefix).isel(time=-1).sel(asset=common_asset)
-        w_tail = s.strategy(tail).isel(time=-1).sel(asset=common_asset)
+        # Match qnt.backtester.standard_window exactly: calendar-day lookback,
+        # inclusive at both ends. Do not approximate it as the last N rows.
+        tail = qnbt.standard_window(prefix, dt, s.LOOKBACK_DAYS)
+
+        w_full_all = s.strategy(prefix).sel(asset=common_asset)
+        w_tail_all = s.strategy(tail).sel(asset=common_asset)
+        w_full = w_full_all.sel(time=dt)
+        w_tail = w_tail_all.sel(time=dt)
         wd = np.abs(w_full.values - w_tail.values)
 
         ff = _last_features(prefix)
@@ -115,8 +121,25 @@ def main():
                     ),
                 }
 
+        path_start = dt - np.timedelta64(2, "D")
+        path_times = np.intersect1d(
+            w_full_all.sel(time=slice(path_start, dt)).time.values,
+            w_tail_all.sel(time=slice(path_start, dt)).time.values,
+        )
+        smoothing_path = []
+        for path_dt in path_times:
+            wf = w_full_all.sel(time=path_dt)
+            wt = w_tail_all.sel(time=path_dt)
+            pdiff = np.abs(wf.values - wt.values)
+            smoothing_path.append({
+                "time": _iso(path_dt),
+                "max_abs_diff": float(np.nanmax(pdiff)),
+                "nonzero_count_gt_1e12": int(np.sum(pdiff > TOL)),
+            })
+
         date_diagnostics[date] = {
             "tail_start": _iso(tail.time.values[0]),
+            "tail_observations": int(tail.sizes["time"]),
             "raw_weight_max_abs_diff_full_vs_tail": float(np.nanmax(wd)),
             "raw_weight_nonzero_count_gt_1e12": int(np.sum(wd > TOL)),
             "raw_differences": [
@@ -129,6 +152,7 @@ def main():
                 for i in np.where(wd > TOL)[0]
             ],
             "features_on_clean_diff_assets": feature_rows,
+            "three_day_smoothed_weight_path": smoothing_path,
         }
 
     out = {
@@ -136,6 +160,7 @@ def main():
         "submission_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
         "diagnostic_only": True,
         "runtime_seconds": runtime,
+        "backtester_window_semantics": "calendar_days_inclusive",
         "common_days": int(len(common_time)),
         "common_assets": int(len(common_asset)),
         "clean_diff_count_gt_1e12": int(len(rows)),

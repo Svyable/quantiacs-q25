@@ -1,0 +1,89 @@
+name: q25-constraint-descent
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/q25_constraint_descent.py'
+      - 'experiments/constraint_descent_20260919/**'
+      - 'tests/test_q25_constraint_descent.py'
+      - '.github/workflows/q25-constraint-descent.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-mechanics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - name: Verify frozen source and mechanics
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD:strategies/generated/q25_constraint_descent.py)" = "f7b5d0654b4b44f1c4b1ddffa48d298017422b32"
+          python -m pytest -q tests/test_q25_constraint_descent.py
+
+  benchmark:
+    needs: frozen-mechanics
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Measure frozen candidate and destructive controls
+        shell: bash
+        run: |
+          set -o pipefail
+          python strategies/generated/q25_constraint_descent.py --research --output results/constraint_descent_20260919/summary.json | tee constraint_descent.log
+      - name: Print preregistered falsifiers
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("results/constraint_descent_20260919/summary.json"))
+          m=p["modes"]
+          order=("base_sharpe7","forced_all","vote4","reverse_descent","anti_quality","descent")
+          for fold in ("research_2016_2020","dev_2021_2022","selection_2016_2022"):
+              print("\n===",fold,"Sharpe ===")
+              for mode in order:
+                  row=m[mode][fold]
+                  print(mode,{c:round(row[c]["sharpe_ratio"],6) for c in ("0.04","0.08","0.12")})
+          c=m["descent"]["selection_2016_2022"]
+          b=m["base_sharpe7"]["selection_2016_2022"]
+          forced=m["forced_all"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          anti=m["anti_quality"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          rev=m["reverse_descent"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          cs=c["0.04"]["sharpe_ratio"]
+          print("\n=== preregistered falsifiers ===")
+          print("sharpe_gt_1",cs>1.0,cs)
+          print("beats_anti_quality",cs>anti,cs,anti)
+          print("beats_forced_all",cs>forced,cs,forced)
+          print("within_0p05_of_sharpe7",cs>=b["0.04"]["sharpe_ratio"]-0.05,cs,b["0.04"]["sharpe_ratio"])
+          print("cost_0p08_gt_1",c["0.08"]["sharpe_ratio"]>1.0,c["0.08"]["sharpe_ratio"])
+          print("fixed_order_beats_reverse",cs>rev,cs,rev)
+          print("\n=== diagnostic-only @4% ===")
+          for fold in ("spent_validation_2023_2024","diagnostic_2025_plus","full_2016_plus"):
+              print(fold,{mode:round(m[mode][fold]["0.04"]["sharpe_ratio"],6) for mode in order})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-constraint-descent-${{ github.run_id }}
+          path: |
+            results/constraint_descent_20260919/summary.json
+            constraint_descent.log
+          if-no-files-found: error

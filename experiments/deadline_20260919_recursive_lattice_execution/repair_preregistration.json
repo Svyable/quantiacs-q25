@@ -1,0 +1,39 @@
+{
+  "experiment_id": "deadline_20260919_recursive_lattice_execution_repair1",
+  "created": "2026-09-19",
+  "status": "FROZEN_IMPLEMENTATION_REPAIR_BEFORE_VALID_ECONOMIC_EVIDENCE",
+  "parent_experiment": "deadline_20260919_recursive_lattice_execution",
+  "invalid_parent_source_blob": "544d7e52465699d723e3194340fa4394394b24db",
+  "repaired_source": {
+    "path": "strategies/generated/q25_recursive_lattice_execution.py",
+    "blob_sha": "60377718ce860bb54adc3d42543455742d443b23",
+    "commit_sha": "59092f6e463bed7e10e10300a117a906c885e2a2"
+  },
+  "reason": {
+    "failure_stage": "synthetic_mechanics_ci",
+    "observed_failures": [
+      "prefix causality failed",
+      "asset-order invariance failed",
+      "bounded replay test as written failed"
+    ],
+    "economic_interpretation": "NONE: parent return stream is invalid for promotion because implementation health failed."
+  },
+  "repair_scope": {
+    "economic_parameters_changed": false,
+    "signal_formula_changed": false,
+    "atr_deadband_multiplier_changed": false,
+    "weekly_reanchor_changed": false,
+    "changes": [
+      "force xarray native rolling inside strategy/control evaluation",
+      "canonicalize asset reduction order for cross-sectional means",
+      "round target and ATR execution inputs to 10 decimal places to prevent backend floating-point threshold bifurcation"
+    ]
+  },
+  "selection_policy": {
+    "parent_single_pass_metrics_may_not_drive_parameter_changes": true,
+    "retune_after_observation": false,
+    "control_promotion": false,
+    "repaired_source_requires_fresh_mechanics_gate_before_valid_performance_evidence": true,
+    "repaired_source_requires_full_history_multipass_for_adjudication": true
+  }
+}

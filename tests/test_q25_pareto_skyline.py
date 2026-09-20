@@ -52,3 +52,35 @@ def test_dominance_count_direction():
     counts,valid=S._dominance_count(liq,s,vol,trend,mom,dd)
     np.testing.assert_allclose(counts.values,[[0,1,2]])
     np.testing.assert_allclose(valid.values,[[1,1,1]])
+
+
+def test_bounded_replay_matches_full_history_exactly():
+    d = _panel(days=1400, assets=10, seed=47)
+    full = S.calculate_weights(d, "pareto_le1")
+    for cut in (500, 800, 1100, 1399):
+        dt = d.time.values[cut]
+        tail = d.sel(time=slice(dt - np.timedelta64(S.LOOKBACK_DAYS, "D"), dt))
+        got = S.calculate_weights(tail, "pareto_le1").sel(time=dt)
+        expected = full.sel(time=dt)
+        np.testing.assert_allclose(got.values, expected.values, atol=0.0, rtol=0.0)
+
+
+def test_local_rolling_arithmetic_is_prefix_length_invariant():
+    d = _panel(days=1400, assets=10, seed=53)
+    close, _ = S._close_liquid(d)
+    ret = S._returns(close)
+    dt = d.time.values[-1]
+    tail = d.sel(time=slice(dt - np.timedelta64(S.LOOKBACK_DAYS, "D"), dt))
+    tail_close, _ = S._close_liquid(tail)
+    tail_ret = S._returns(tail_close)
+
+    cases = (
+        (S._sma, ret, tail_ret, 7, 5),
+        (S._std, ret, tail_ret, 14, 7),
+        (S._sma, close, tail_close, 12, 8),
+        (S._sma, close, tail_close, 48, 24),
+    )
+    for fn, full_x, tail_x, n, m in cases:
+        expected = fn(full_x, n, m).sel(time=dt)
+        got = fn(tail_x, n, m).sel(time=dt)
+        np.testing.assert_allclose(got.values, expected.values, atol=0.0, rtol=0.0)

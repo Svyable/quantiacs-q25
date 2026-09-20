@@ -1,0 +1,101 @@
+name: q25-harden-pareto-skyline
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'submissions/q25_pareto_skyline_multipass.py'
+      - 'research/measure_pareto_skyline_production.py'
+      - 'research/public_correlation_smoke_pareto.py'
+      - 'tests/test_q25_pareto_submission.py'
+      - 'experiments/pareto_skyline_20260919/production_hardening.json'
+      - '.github/workflows/q25-harden-pareto-skyline.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  package-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - name: Verify byte-identical frozen package
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD:strategies/generated/q25_pareto_skyline.py)" = "04a3afd9b47525fd9a773455466a71494a393fc9"
+          test "$(git rev-parse HEAD:submissions/q25_pareto_skyline_multipass.py)" = "04a3afd9b47525fd9a773455466a71494a393fc9"
+          python -m pytest -q tests/test_q25_pareto_submission.py
+
+  production-multipass:
+    needs: package-integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Run exact production multipass validation
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.measure_pareto_skyline_production | tee pareto_production.log
+      - name: Enforce frozen production gates
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("results/pareto_skyline_20260919/production_multipass.json"))
+          q=p["parity"]
+          m=p["multipass_cost_ladder"]
+          print("parity",q)
+          print("multipass_cost_ladder",m)
+          assert q["max_abs_weight_diff"] <= 1e-12, q
+          assert q["nonzero_diff_count_gt_1e12"] == 0, q
+          assert m["0.04"]["sharpe_ratio"] > 1.0, m["0.04"]
+          assert m["0.08"]["sharpe_ratio"] > 1.0, m["0.08"]
+          assert m["0.12"]["sharpe_ratio"] > 1.0, m["0.12"]
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-pareto-production-${{ github.run_id }}
+          path: |
+            results/pareto_skyline_20260919/production_multipass.json
+            pareto_production.log
+          if-no-files-found: error
+
+  public-correlation-smoke:
+    needs: package-integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      API_KEY: default
+      PARTICIPANT_ID: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Run public/default correlation smoke
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m research.public_correlation_smoke_pareto | tee pareto_correlation.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-pareto-correlation-${{ github.run_id }}
+          path: pareto_correlation.txt
+          if-no-files-found: error

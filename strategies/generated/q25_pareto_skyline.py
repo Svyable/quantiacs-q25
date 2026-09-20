@@ -159,11 +159,11 @@ def _allocate_frozen(raw, liquid):
 def _features(data):
     close, liquid = _close_liquid(data)
     r = _returns(close)
-    mu7 = _sma_frozen(r, 7, 5)
-    vol14 = _std_frozen(r, 14, 7)
+    mu7 = _sma(r, 7, 5)
+    vol14 = _std(r, 14, 7)
     s7 = np.sqrt(365.0) * mu7 / (vol14 + EPS)
-    sma12 = _sma_frozen(close, 12, 8)
-    sma48 = _sma_frozen(close, 48, 24)
+    sma12 = _sma(close, 12, 8)
+    sma48 = _sma(close, 48, 24)
     trend = sma12 / (sma48 + EPS) - 1.0
     mom14 = close / close.shift(time=14) - 1.0
     peak30 = _max(close, 30, 15)
@@ -210,11 +210,11 @@ def _dominance_count(liquid, s7, vol14, trend, mom14, dd30):
 def _base_sharpe7(data):
     close, liquid = _close_liquid(data)
     r = _returns(close)
-    mu7 = _sma(r, 7, 5)
-    vol14 = _std(r, 14, 7)
+    mu7 = _sma_frozen(r, 7, 5)
+    vol14 = _std_frozen(r, 14, 7)
     s7 = np.sqrt(365.0) * mu7 / (vol14 + EPS)
-    sma12 = _sma(close, 12, 8)
-    sma48 = _sma(close, 48, 24)
+    sma12 = _sma_frozen(close, 12, 8)
+    sma48 = _sma_frozen(close, 48, 24)
     mom14 = close / close.shift(time=14) - 1.0
     peak30 = _max(close, 30, 15)
     dd30 = close / (peak30 + EPS) - 1.0

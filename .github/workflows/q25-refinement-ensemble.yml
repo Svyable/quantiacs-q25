@@ -1,0 +1,95 @@
+name: q25-refinement-ensemble
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/q25_refinement_ensemble.py'
+      - 'experiments/refinement_ensemble_20260920/**'
+      - 'tests/test_q25_refinement_ensemble.py'
+      - '.github/workflows/q25-refinement-ensemble.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-mechanics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - name: Verify frozen source and mechanics
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD:strategies/generated/q25_refinement_ensemble.py)" = "420c21130fbf2183bc5d495a780946acc4624b4e"
+          python -m pytest -q tests/test_q25_refinement_ensemble.py
+
+  benchmark:
+    needs: frozen-mechanics
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Measure frozen candidate and controls
+        shell: bash
+        run: |
+          set -o pipefail
+          python strategies/generated/q25_refinement_ensemble.py --research --output results/refinement_ensemble_20260920/summary.json | tee refinement_ensemble.log
+      - name: Print preregistered falsifiers
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("results/refinement_ensemble_20260920/summary.json"))
+          m=p["modes"]
+          order=("base_sharpe7","terminal","vote4","single_path","anti_quality","ensemble")
+          for fold in ("research_2016_2020","dev_2021_2022","selection_2016_2022"):
+              print("\n===",fold,"Sharpe ===")
+              for mode in order:
+                  row=m[mode][fold]
+                  print(mode,{c:round(row[c]["sharpe_ratio"],6) for c in ("0.04","0.08","0.12")})
+          c=m["ensemble"]["selection_2016_2022"]
+          b=m["base_sharpe7"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          terminal=m["terminal"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          single=m["single_path"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          anti=m["anti_quality"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          cs=c["0.04"]["sharpe_ratio"]
+          print("\n=== preregistered falsifiers ===")
+          print("sharpe_0p04_gt_1",cs>1.0,cs)
+          print("sharpe_0p08_gt_1",c["0.08"]["sharpe_ratio"]>1.0,c["0.08"]["sharpe_ratio"])
+          print("beats_terminal",cs>terminal,cs,terminal)
+          print("beats_single_path",cs>single,cs,single)
+          print("beats_anti_quality",cs>anti,cs,anti)
+          print("within_0p15_of_sharpe7",cs>=b-0.15,cs,b)
+          r=m["ensemble"]["research_2016_2020"]["0.04"]["sharpe_ratio"]
+          rt=m["terminal"]["research_2016_2020"]["0.04"]["sharpe_ratio"]
+          d=m["ensemble"]["dev_2021_2022"]["0.04"]["sharpe_ratio"]
+          dt=m["terminal"]["dev_2021_2022"]["0.04"]["sharpe_ratio"]
+          print("beats_terminal_research",r>rt,r,rt)
+          print("beats_terminal_dev",d>dt,d,dt)
+          print("\n=== diagnostic-only @4% ===")
+          for fold in ("spent_validation_2023_2024","diagnostic_2025_plus","full_2016_plus"):
+              print(fold,{mode:round(m[mode][fold]["0.04"]["sharpe_ratio"],6) for mode in order})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-refinement-ensemble-${{ github.run_id }}
+          path: |
+            results/refinement_ensemble_20260920/summary.json
+            refinement_ensemble.log
+          if-no-files-found: error

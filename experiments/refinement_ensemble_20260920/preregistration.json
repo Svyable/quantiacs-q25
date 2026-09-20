@@ -1,0 +1,56 @@
+{
+  "experiment_id": "refinement_ensemble_20260920",
+  "created": "2026-09-20",
+  "status": "FROZEN_BEFORE_PUBLIC_DEFAULT_ECONOMIC_MEASUREMENT",
+  "track": "new_mechanism",
+  "candidate": {
+    "id": "q25_refinement_ensemble_v1",
+    "source": "strategies/generated/q25_refinement_ensemble.py",
+    "source_blob_sha": "420c21130fbf2183bc5d495a780946acc4624b4e",
+    "data_scope": "Quantiacs cryptodaily OHLCV plus historical is_liquid only",
+    "long_only": true,
+    "manual_asset_selection": false,
+    "name_cap": 0.25
+  },
+  "hypothesis": {
+    "primary": "Averaging capped portfolios across multiple partial refinement states and two fixed causal paths can preserve information that terminal hard-gating discards, while reducing dependence on a single predicate order.",
+    "root_state": "cross-sectional 7-day Sharpe quality above mean + 0.20 sd",
+    "path_A": ["trend", "drawdown", "momentum", "volatility"],
+    "path_B": ["volatility", "momentum", "drawdown", "trend"],
+    "aggregation": "equal weight across the quality root plus four prefixes from each path; nine books total, then 3-day causal smoothing",
+    "terminal_predicates": {
+      "trend": "SMA12 > SMA48",
+      "drawdown": "30-day drawdown > -22%",
+      "momentum": "14-day momentum > 0",
+      "volatility": "vol14 > 0 and below 1.35 times liquid cross-sectional mean"
+    }
+  },
+  "controls": {
+    "base_sharpe7": "Exact promoted Sharpe7 Vol2 incumbent formula.",
+    "terminal": "Use only the fully refined terminal intersection from path A.",
+    "vote4": "Static 4-of-5 support gate using root plus four predicates.",
+    "single_path": "Average only the root plus path-A prefixes.",
+    "anti_quality": "Invert the quality root while retaining the ensemble machinery."
+  },
+  "selection_rule": {
+    "primary_period": "2016-01-01 through 2022-12-31",
+    "candidate_must_exceed_sharpe_1_at_cost_0_04": true,
+    "candidate_must_exceed_sharpe_1_at_cost_0_08": true,
+    "candidate_must_beat_terminal_at_cost_0_04": true,
+    "candidate_must_beat_single_path_at_cost_0_04": true,
+    "candidate_must_beat_anti_quality_at_cost_0_04": true,
+    "candidate_must_be_within_0p15_of_base_sharpe7_at_cost_0_04": true,
+    "multi_depth_value_must_repeat_in_research_and_dev": "ensemble Sharpe must exceed terminal Sharpe at 4% ATR cost in both 2016-2020 and 2021-2022",
+    "no_parameter_grid": true,
+    "retune_after_observation": false,
+    "control_promotion": false
+  },
+  "evidence_policy": {
+    "research_2016_2020": "selection_evidence",
+    "development_2021_2022": "selection_evidence",
+    "validation_2023_2024": "spent_diagnostic_only",
+    "diagnostic_2025_plus": "non_selection",
+    "live_2026_10_01_2027_01_31": "untouched",
+    "first_economic_measurement_owner": "pull_request_ci_after_preregistration"
+  }
+}

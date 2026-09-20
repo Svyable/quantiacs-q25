@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import os
 import time
+from pathlib import Path
 
 import numpy as np
 
@@ -86,6 +87,9 @@ def main():
         "multipass_cost_ladder": _ladder(data, multi_clean),
         "single_pass_cost_ladder": _ladder(data, single_clean),
     }
+    path = Path("results/pareto_skyline_20260919/production_multipass.json")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(out, indent=2, sort_keys=True) + "\n")
     print(json.dumps(out, indent=2, sort_keys=True))
 
 

@@ -9,6 +9,9 @@ on:
       - 'research/diagnose_pareto_multipass_divergence.py'
       - 'research/public_correlation_smoke_pareto.py'
       - 'tests/test_q25_pareto_submission.py'
+      - 'tests/test_q25_pareto_skyline.py'
+      - 'strategies/generated/q25_pareto_skyline.py'
+      - 'experiments/pareto_skyline_20260919/repair3_preregistration.json'
       - 'experiments/pareto_skyline_20260919/production_hardening.json'
       - '.github/workflows/q25-harden-pareto-skyline.yml'
   workflow_dispatch:
@@ -34,9 +37,9 @@ jobs:
       - name: Verify byte-identical frozen package
         shell: bash
         run: |
-          test "$(git rev-parse HEAD:strategies/generated/q25_pareto_skyline.py)" = "04a3afd9b47525fd9a773455466a71494a393fc9"
-          test "$(git rev-parse HEAD:submissions/q25_pareto_skyline_multipass.py)" = "04a3afd9b47525fd9a773455466a71494a393fc9"
-          python -m pytest -q tests/test_q25_pareto_submission.py
+          test "$(git rev-parse HEAD:strategies/generated/q25_pareto_skyline.py)" = "d829f1c78ec8b27a30eccbb8cee231d6d02e63fd"
+          test "$(git rev-parse HEAD:submissions/q25_pareto_skyline_multipass.py)" = "d829f1c78ec8b27a30eccbb8cee231d6d02e63fd"
+          python -m pytest -q tests/test_q25_pareto_submission.py tests/test_q25_pareto_skyline.py
 
   production-multipass:
     needs: package-integrity

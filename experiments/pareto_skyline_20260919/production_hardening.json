@@ -1,11 +1,12 @@
 {
   "experiment_id": "pareto_skyline_20260919_production_hardening",
   "created": "2026-09-19",
-  "status": "FROZEN_BEFORE_PRODUCTION_MULTIPASS_MEASUREMENT",
-  "research_source_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
+  "status": "FROZEN_AFTER_REPAIR3_BEFORE_PRODUCTION_REMEASUREMENT",
+  "research_source_blob": "d829f1c78ec8b27a30eccbb8cee231d6d02e63fd",
   "submission_path": "submissions/q25_pareto_skyline_multipass.py",
-  "submission_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
+  "submission_blob": "d829f1c78ec8b27a30eccbb8cee231d6d02e63fd",
   "packaging_drift": false,
+  "implementation_repair": "experiments/pareto_skyline_20260919/repair3_preregistration.json",
   "gates": {
     "submission_blob_must_equal_research_blob": true,
     "synthetic_submission_output_must_equal_research_output": true,

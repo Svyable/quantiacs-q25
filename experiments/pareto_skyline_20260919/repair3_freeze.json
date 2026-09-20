@@ -1,0 +1,40 @@
+{
+  "experiment_id": "pareto_skyline_20260919_repair3_freeze",
+  "created": "2026-09-20",
+  "status": "FROZEN_IMPLEMENTATION_REPAIR_BEFORE_FRESH_MEASUREMENT",
+  "preregistration": "experiments/pareto_skyline_20260919/repair3_preregistration.json",
+  "parent_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
+  "repaired_source": {
+    "research_path": "strategies/generated/q25_pareto_skyline.py",
+    "submission_path": "submissions/q25_pareto_skyline_multipass.py",
+    "blob_sha": "d829f1c78ec8b27a30eccbb8cee231d6d02e63fd",
+    "research_commit_sha": "e066739f44cf425ea8b04c0efe770d96a9353baf",
+    "submission_commit_sha": "8a90bf7a3737960d3bc2cf2f6efb76593dd0de25"
+  },
+  "repair": {
+    "candidate_change": "explicit trailing-window mean/std reductions for prefix-length-invariant floating-point arithmetic",
+    "frozen_control_change": "none; base_sharpe7 retains legacy rolling mean/std and allocation path",
+    "economic_parameters_changed": false,
+    "lookbacks_changed": false,
+    "thresholds_changed": false,
+    "pareto_rule_changed": false,
+    "allocation_changed": false
+  },
+  "required_fresh_gates": [
+    "static and synthetic mechanics",
+    "exact frozen Sharpe7 control parity",
+    "asset-order invariance",
+    "exact 365-calendar-day bounded replay",
+    "research/submission byte identity",
+    "production single-vs-multipass parity <= 1e-12",
+    "multipass Sharpe > 1.0 at 4%, 8%, and 12% ATR slippage",
+    "public/default correlation smoke"
+  ],
+  "selection_policy": {
+    "no_parameter_retuning": true,
+    "no_gate_relaxation": true,
+    "2023_2024_spent": true,
+    "2025_plus_diagnostic_only": true,
+    "participant_specific_correlation_still_account_bound": true
+  }
+}

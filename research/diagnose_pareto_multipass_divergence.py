@@ -157,7 +157,7 @@ def main():
 
     out = {
         "strategy_id": s.STRATEGY_ID,
-        "submission_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
+        "submission_blob": "d829f1c78ec8b27a30eccbb8cee231d6d02e63fd",
         "diagnostic_only": True,
         "runtime_seconds": runtime,
         "backtester_window_semantics": "calendar_days_inclusive",

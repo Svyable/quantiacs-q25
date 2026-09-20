@@ -59,28 +59,48 @@ def _max(x, n, m):
     return x.rolling(time=min(n, x.sizes["time"]), min_periods=m).max()
 
 
+def _canonical_assets(x):
+    return np.sort(np.asarray(x.asset.values).astype(str))
+
+
 def _mean(x, liquid):
-    safe = xr.where(np.isfinite(x), x, 0.0)
-    n = liquid.sum("asset")
-    return xr.where(n > 0, (safe * liquid).sum("asset") / n, 0.0)
+    assets = _canonical_assets(x)
+    xo = x.sel(asset=assets)
+    lo = liquid.sel(asset=assets)
+    safe = xr.where(np.isfinite(xo), xo, 0.0)
+    n = lo.sum("asset")
+    return xr.where(n > 0, (safe * lo).sum("asset") / n, 0.0)
 
 
 def _std_cs(x, liquid):
-    mean = _mean(x, liquid)
-    n = liquid.sum("asset")
+    assets = _canonical_assets(x)
+    xo = x.sel(asset=assets)
+    lo = liquid.sel(asset=assets)
+    mean = _mean(xo, lo)
+    n = lo.sum("asset")
+    safe = xr.where(np.isfinite(xo), xo, 0.0)
     var = xr.where(
         n > 0,
-        (((xr.where(np.isfinite(x), x, 0.0) - mean) ** 2) * liquid).sum("asset") / n,
+        (((safe - mean) ** 2) * lo).sum("asset") / n,
         0.0,
     )
     return np.sqrt(xr.where(var > 0, var, 0.0))
 
 
 def _allocate(raw, liquid):
-    raw = xr.where(np.isfinite(raw) & (raw > 0), raw, 0.0) * liquid
-    gross = raw.sum("asset")
-    w = xr.where(gross > EPS, raw / gross, 0.0)
-    w = xr.where(w > NAME_CAP, NAME_CAP, w) * liquid
+    original_assets = raw.asset.values
+    assets = _canonical_assets(raw)
+    ro = xr.where(
+        np.isfinite(raw.sel(asset=assets)) & (raw.sel(asset=assets) > 0),
+        raw.sel(asset=assets),
+        0.0,
+    )
+    lo = liquid.sel(asset=assets)
+    ro = ro * lo
+    gross = ro.sum("asset")
+    w = xr.where(gross > EPS, ro / gross, 0.0)
+    w = xr.where(w > NAME_CAP, NAME_CAP, w) * lo
+    w = w.sel(asset=original_assets)
     return w.transpose("time", "asset").fillna(0.0).reset_coords("field", drop=True)
 
 
@@ -100,28 +120,39 @@ def _features(data):
 
 
 def _dominance_count(liquid, s7, vol14, trend, mom14, dd30):
+    original_assets = liquid.asset.values
+    assets = _canonical_assets(liquid)
+    lo = liquid.sel(asset=assets)
     aligned = xr.concat(
-        [s7, trend, mom14, dd30, -vol14],
+        [
+            s7.sel(asset=assets),
+            trend.sel(asset=assets),
+            mom14.sel(asset=assets),
+            dd30.sel(asset=assets),
+            -vol14.sel(asset=assets),
+        ],
         dim="feature",
     ).transpose("time", "asset", "feature")
     vals = aligned.values.astype(float)
-    valid = ((liquid.values > 0) & np.isfinite(vals).all(axis=2))
+    valid = ((lo.values > 0) & np.isfinite(vals).all(axis=2))
     left = vals[:, :, None, :]
     right = vals[:, None, :, :]
     dom = (left >= right).all(axis=3) & (left > right).any(axis=3)
     dom &= valid[:, :, None] & valid[:, None, :]
     counts = dom.sum(axis=1).astype(float)
-    return xr.DataArray(
+    counts_da = xr.DataArray(
         counts,
         dims=("time", "asset"),
-        coords={"time": liquid.time.values, "asset": liquid.asset.values},
+        coords={"time": lo.time.values, "asset": assets},
         name="dominance_count",
-    ), xr.DataArray(
+    ).sel(asset=original_assets)
+    valid_da = xr.DataArray(
         valid.astype(float),
         dims=("time", "asset"),
-        coords={"time": liquid.time.values, "asset": liquid.asset.values},
+        coords={"time": lo.time.values, "asset": assets},
         name="valid_features",
-    )
+    ).sel(asset=original_assets)
+    return counts_da, valid_da
 
 
 def _base_sharpe7(data):

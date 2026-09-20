@@ -1,0 +1,26 @@
+{
+  "experiment_id": "pareto_skyline_20260919_production_hardening",
+  "created": "2026-09-19",
+  "status": "FROZEN_BEFORE_PRODUCTION_MULTIPASS_MEASUREMENT",
+  "research_source_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
+  "submission_path": "submissions/q25_pareto_skyline_multipass.py",
+  "submission_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
+  "packaging_drift": false,
+  "gates": {
+    "submission_blob_must_equal_research_blob": true,
+    "synthetic_submission_output_must_equal_research_output": true,
+    "production_multipass_max_abs_weight_diff_vs_single_pass_lte": 1e-12,
+    "production_multipass_sharpe_gt_1_at_cost_0_04": true,
+    "production_multipass_sharpe_gt_1_at_cost_0_08": true,
+    "production_multipass_sharpe_gt_1_at_cost_0_12": true,
+    "public_default_correlation_smoke_required": true,
+    "participant_account_bound_correlation_clearance_still_required": true
+  },
+  "policy": {
+    "formula_changes_allowed": false,
+    "parameter_changes_allowed": false,
+    "research_window_reopened": false,
+    "2023_2024_remains_spent": true,
+    "2025_plus_remains_non_selection": true
+  }
+}

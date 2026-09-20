@@ -24,7 +24,7 @@ jobs:
         with: {python-version: '3.11'}
       - run: python -m pip install -r requirements.txt pytest
       - run: |
-          test "$(git rev-parse HEAD:strategies/generated/q25_pareto_skyline.py)" = "04a3afd9b47525fd9a773455466a71494a393fc9"
+          test "$(git rev-parse HEAD:strategies/generated/q25_pareto_skyline.py)" = "d829f1c78ec8b27a30eccbb8cee231d6d02e63fd"
           python -m pytest -q tests/test_q25_pareto_skyline.py
   benchmark:
     needs: mechanics

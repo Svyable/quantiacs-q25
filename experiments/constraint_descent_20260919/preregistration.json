@@ -1,0 +1,49 @@
+{
+  "experiment_id": "constraint_descent_20260919",
+  "created": "2026-09-19",
+  "status": "FROZEN_BEFORE_PUBLIC_DEFAULT_ECONOMIC_MEASUREMENT",
+  "track": "new_mechanism",
+  "candidate": {
+    "id": "q25_constraint_descent_v1",
+    "source": "strategies/generated/q25_constraint_descent.py",
+    "source_blob_sha": "f7b5d0654b4b44f1c4b1ddffa48d298017422b32",
+    "data_scope": "Quantiacs cryptodaily OHLCV plus historical is_liquid only",
+    "long_only": true,
+    "manual_asset_selection": false,
+    "name_cap": 0.25
+  },
+  "hypothesis": {
+    "primary": "Sequentially refining the liquid candidate set while abstaining from any refinement that would leave fewer than three names can preserve high-quality relative-strength information without the brittleness of forcing all predicates or summing them into a fixed vote threshold.",
+    "structural_inspiration": "Finite-state monotone refinement plus abstention when a refinement over-prunes the candidate state; no learned LDT component and no transfer of formal soundness claims.",
+    "fixed_order": ["quality", "trend", "drawdown", "momentum", "volatility"],
+    "min_survivors": 3,
+    "score_formula": "exp(0.55*z_s7 + 0.25*z_trend + 0.20*z_mom14 - 0.15*z_vol14 + 0.15*z_dd30)/(vol14+0.02)"
+  },
+  "controls": {
+    "base_sharpe7": "Exact promoted Sharpe7 Vol2 formula copied byte-for-formula as the incumbent control.",
+    "forced_all": "Apply every predicate without abstention.",
+    "vote4": "Collapse the predicates into a static 4-of-5 vote gate.",
+    "reverse_descent": "Use the same abstaining descent but reverse the predicate order.",
+    "anti_quality": "Invert the first quality predicate while preserving the rest of the descent mechanics."
+  },
+  "selection_rule": {
+    "primary_period": "2016-01-01 through 2022-12-31",
+    "candidate_must_exceed_sharpe_1_at_cost_0_04": true,
+    "candidate_must_beat_anti_quality_at_cost_0_04": true,
+    "candidate_must_beat_forced_all_at_cost_0_04": true,
+    "candidate_must_not_be_materially_worse_than_base_sharpe7": "Sharpe delta must be >= -0.05 at 4% ATR cost on 2016-2022",
+    "cost_stress": "Candidate Sharpe must remain > 1.0 at 8% ATR cost on 2016-2022 to advance.",
+    "reverse_order": "If reverse_descent beats descent, the fixed-order mechanism claim is falsified; reverse_descent is not promoted from this experiment.",
+    "no_parameter_grid": true,
+    "retune_after_observation": false,
+    "control_promotion": false
+  },
+  "evidence_policy": {
+    "research_2016_2020": "selection_evidence",
+    "development_2021_2022": "selection_evidence",
+    "validation_2023_2024": "spent_diagnostic_only",
+    "diagnostic_2025_plus": "non_selection",
+    "live_2026_10_01_2027_01_31": "untouched",
+    "first_economic_measurement_owner": "pull_request_ci_after_preregistration"
+  }
+}

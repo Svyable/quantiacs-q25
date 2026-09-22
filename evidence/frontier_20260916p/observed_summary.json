@@ -1,0 +1,116 @@
+{
+  "access_mode": "public_default",
+  "campaign": "frontier_20260916p",
+  "current_new_alpha_leader": {
+    "id": "topology_migration_w84",
+    "note": "Development-only; frozen 2023-2024 forward gate FAILED at 0.314 SR@12%. Not a validated production candidate.",
+    "robust_development_sharpe": 1.376,
+    "state": "FAILED_FORWARD_GATE"
+  },
+  "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+  "decision": "PROMOTE_ZERO",
+  "evidence_stage": "DEVELOPMENT_ONLY",
+  "families": [
+    {
+      "ablation_robust_sharpe": -0.17490551272884503,
+      "best_base_id": "liquidity_requalification_hysteresis_w84",
+      "best_robust_sharpe": -1.3540726264496663,
+      "central_id": "liquidity_requalification_hysteresis_w63",
+      "central_robust_sharpe": -1.4321683159460632,
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "falsifier_robust_sharpe": -0.9978464781754903,
+      "family": "liquidity_requalification_hysteresis"
+    }
+  ],
+  "family_decisions": [
+    {
+      "best_score": -1.3540726264496663,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "liquidity_requalification_hysteresis_ablation",
+        "liquidity_requalification_hysteresis_falsifier"
+      ],
+      "family": "liquidity_requalification_hysteresis",
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": -1.4321683159460632,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "interpretation": "Frontier-P measured the preregistered historical-liquidity requalification-hysteresis mechanism on the reused 2016-2022 development surface. None of the three base windows survived development: research/dev SR@12% was -0.154/-1.719 for w42, 0.174/-1.432 for w63, and 0.751/-1.354 for w84. The central 63-day parent was also beaten by both preregistered destructive controls: the no-history ablation reached -0.175 and the rotated eligibility-state falsifier -0.998. The mechanism is therefore FALSIFIED_DEVELOPMENT, not merely weak. Promote zero. Do not invert, retune, grid-rescue, or reopen 2023-2024.",
+  "live_data_used": false,
+  "manifest_sha256": "25c9438ddd08f6c34f87fb75a70e1e43bfc1f567307eaaffebd72e548c0a85ea",
+  "measured_head_sha": "ad153e8441b476353a149a2944f471c8defcf67b",
+  "measurement_source": {
+    "artifact_digest": "sha256:5ffc519a0bd79005fe186067faa5e8ee3b4ed5b51552dc8db6a088c5ff749f78",
+    "artifact_id": 10460505568,
+    "provider": "github_actions",
+    "workflow_job_id": 104897468783,
+    "workflow_run_id": 35126723702
+  },
+  "next_boundary": "Do not retune Frontier-P liquidity hysteresis. Preserve the falsification and move the research budget to a materially different alpha object. The newer reconciliation rerun independently reproduced the same promote-zero outcome, so no rescue is warranted.",
+  "notable_base_cells": {
+    "liquidity_requalification_hysteresis_w42": {
+      "dev_sharpe_12": -1.7188851508786662,
+      "research_sharpe_12": -0.15383505128255695,
+      "robust_sharpe": -1.7188851508786662
+    },
+    "liquidity_requalification_hysteresis_w63": {
+      "dev_sharpe_12": -1.4321683159460632,
+      "research_sharpe_12": 0.173582295255297,
+      "robust_sharpe": -1.4321683159460632
+    },
+    "liquidity_requalification_hysteresis_w84": {
+      "dev_sharpe_12": -1.3540726264496663,
+      "research_sharpe_12": 0.7508551125954102,
+      "robust_sharpe": -1.3540726264496663
+    }
+  },
+  "python": "3.11.16",
+  "residual_diagnostics": {
+    "liquidity_requalification_hysteresis_w42": {
+      "corr_equal_liquid": 0.4496104120464391,
+      "corr_inverse_vol_trend": 0.43639548094151853,
+      "corr_persistent_low_vol": 0.4276816786355818,
+      "residual_sharpe": -0.5497255923562235
+    },
+    "liquidity_requalification_hysteresis_w63": {
+      "corr_equal_liquid": 0.5349118077518672,
+      "corr_inverse_vol_trend": 0.45466788312861806,
+      "corr_persistent_low_vol": 0.5150580616703013,
+      "residual_sharpe": -0.8520204706022247
+    },
+    "liquidity_requalification_hysteresis_w84": {
+      "corr_equal_liquid": 0.5580142570788877,
+      "corr_inverse_vol_trend": 0.4679223167203584,
+      "corr_persistent_low_vol": 0.5378364725739001,
+      "residual_sharpe": -1.5272740992099918
+    }
+  },
+  "review_classification": {
+    "nearest_incumbent": "V11_balanced event/lifecycle sleeve",
+    "reason": "The tested object is historical is_liquid requalification memory and churn rather than a simple positive-entry/new-asset age event. The eligibility-memory parent is directly tested against a no-history ablation and identity-rotated state falsifier.",
+    "track": "novel_alpha"
+  },
+  "selection_end": "2022-12-31",
+  "source_receipt": "evidence/measurement_receipts/frontier_20260916p.json",
+  "spent_validation_fold_excluded": "2023-01-01/2024-12-31",
+  "status": "MEASURED_DEVELOPMENT_ONLY",
+  "verification_rerun": {
+    "artifact_digest": "sha256:c24f7782b946e1df543f7b93684f4c5c5f65ad9d2d58aa09ec2d45f41a58f179",
+    "artifact_id": 10674397768,
+    "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+    "head_sha": "13e52adbae6b0cf2a96d4dc1dd54a26aa0491eec",
+    "outcome": "REPRODUCED_FALSIFICATION",
+    "workflow_job_id": 106597671495,
+    "workflow_run_id": 35680981461,
+    "w84_dev_sharpe_12": -1.3540726144550703,
+    "w63_dev_sharpe_12": -1.4321683169166288,
+    "ablation_dev_sharpe_12": -0.17490551286140707,
+    "falsifier_dev_sharpe_12": -0.9978464831884298
+  }
+}

@@ -275,7 +275,7 @@ def calculate_weights(data, mode="closure"):
     else:
         raise ValueError(f"unknown mode: {mode}")
 
-    raw = _sma(score * mask, 3, 1) * mask * liquid
+    raw = _sma(score * mask, 3, 1) * liquid
     return _allocate(raw, liquid)
 
 

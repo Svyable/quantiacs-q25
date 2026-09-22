@@ -1,0 +1,35 @@
+{
+  "experiment_id": "lattice_closure_20260921_repair2",
+  "created": "2026-09-21",
+  "status": "FROZEN_IMPLEMENTATION_REPAIR_BEFORE_VALID_ECONOMIC_EVIDENCE",
+  "parent_experiment": "lattice_closure_20260921_repair1",
+  "invalid_parent_source_blob": "fc6aaedf1976e95baaf31181f1862f99282acc92",
+  "repaired_source": {
+    "path": "strategies/generated/q25_dual_horizon_lattice_closure.py",
+    "blob_sha": "77552a563db0368ed38a1df24694c015df82e06e",
+    "commit_sha": "5ace779b593a1e01342c38f18e4ee464d5311734"
+  },
+  "reason": {
+    "failure_stage": "synthetic_frozen_control_parity",
+    "observed_failure": "base_pareto differed from the frozen incumbent on 1260/9000 synthetic cells (14%), max absolute difference 0.25.",
+    "localized_cause": "The new file multiplied by the survivor mask again after the 3-day causal smoothing pass, while the hardened Pareto incumbent smooths masked raw scores and then applies only liquidity before allocation.",
+    "benchmark_status": "SKIPPED",
+    "economic_interpretation": "NONE: benchmark never ran because the mechanics job failed first."
+  },
+  "repair_scope": {
+    "economic_parameters_changed": false,
+    "horizons_changed": false,
+    "pareto_rule_changed": false,
+    "root_gate_changed": false,
+    "resolver_changed": false,
+    "score_formula_changed": false,
+    "selection_gates_changed": false,
+    "change": "Remove only the post-smoothing survivor re-mask so every mode uses the incumbent causal smoothing/execution semantics."
+  },
+  "selection_policy": {
+    "original_preregistration_remains_authoritative": true,
+    "retune_after_observation": false,
+    "control_promotion": false,
+    "repaired_source_requires_fresh_mechanics_gate_before_any_economic_measurement": true
+  }
+}

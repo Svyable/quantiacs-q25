@@ -9,11 +9,11 @@ description: Lane-separated strategy stack, evidence frontier, measurement queue
 
 ## Canonical latest development campaign
 
-**frontier_20260913o** · PROMOTE_ZERO · evidence `summary_only`
+**frontier_20260916p** · PROMOTE_ZERO · evidence `summary_only`
 
 | Local rank | Family | Best base | Robust SR | Floor margin | Causal margin | Support | Decision |
 |---:|---|---|---:|---:|---:|---|---|
-| 1 | absorption_release_elasticity | `absorption_release_elasticity_w42` | 0.171 | -0.829 | 0.110 | PASS | KILL_WEAK_ALPHA |
+| 1 | liquidity_requalification_hysteresis | `liquidity_requalification_hysteresis_w84` | -1.354 | -2.354 | -1.257 | FAIL | FALSIFIED_DEVELOPMENT |
 
 ## Frozen historical stack
 
@@ -36,16 +36,15 @@ Frozen roster order is preserved from its dated evidence. It is not cross-ranked
 
 | Campaign UID | Display label | State | Families | Cells | Measured decision |
 |---|---|---|---:|---:|---|
-| `frontier_20260916p` | Frontier-P | MEASURED_AWAITING_CANONICAL_INGEST | 1 | 5 | PROMOTE_ZERO_FREEZE_ALL |
+| — | — | queue clear | 0 | 0 | — |
 
 ## Dogfood diagnostics
 
-Pending canonical evidence ingestion: **1**. Frozen/unreceipted campaigns: **0**.
+Pending canonical evidence ingestion: **0**. Frozen/unreceipted campaigns: **0**.
 
 - **WARN Frontier-M collision:** `frontier_20260912m`, `frontier_20260913m`. Display full campaign UID; do not rename historical evidence.
-- **P1 INGEST_MEASURED_EVIDENCE** `frontier_20260916p`: A successful benchmark receipt exists but canonical observed evidence is not committed.
 - **P2 DISAMBIGUATE_FRONTIER_LABELS**: Multiple campaign IDs map to the same human Frontier label; preserve historical IDs but display full campaign UID.
-- **P4 DEEPEN_MATRIX_EVIDENCE** `frontier_20260913o`: Latest committed campaign is not represented by a full canonical matrix packet.
+- **P4 DEEPEN_MATRIX_EVIDENCE** `frontier_20260916p`: Latest committed campaign is not represented by a full canonical matrix packet.
 
 ## Reproducibility context
 

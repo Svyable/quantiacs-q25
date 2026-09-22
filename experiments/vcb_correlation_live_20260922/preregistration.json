@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vcb_correlation_live_20260922",
+  "candidate": "q25_volatility_contraction_breakout_v1",
+  "status": "PREREGISTERED_UNMEASURED",
+  "parent_evidence": "experiments/vcb_hardening_20260922/economic_result.json",
+  "strategy_changes_allowed": false,
+  "parameter_changes_allowed": false,
+  "holdout_2023_plus_access_allowed": false,
+  "measurement_end": "2022-12-31",
+  "incumbent": "q25_deadline_hit126_consistency_v1",
+  "cost_atr_percent": 4,
+  "measurements": [
+    "daily_return_pearson_correlation_full_2016_2022",
+    "daily_return_pearson_correlation_development_2021_2022",
+    "candidate_ann_volatility",
+    "candidate_ann_return",
+    "candidate_sharpe",
+    "candidate_10pct_vol_scale",
+    "candidate_10pct_vol_normalized_return",
+    "incumbent_ann_volatility",
+    "incumbent_ann_return",
+    "incumbent_sharpe",
+    "incumbent_10pct_vol_normalized_return",
+    "equal_weight_blend_10pct_vol_normalized_return",
+    "equal_weight_blend_sharpe"
+  ],
+  "advancement_gates": {
+    "vcb_full_2016_2022_sharpe_gt": 1.0,
+    "vcb_development_2021_2022_sharpe_gt": 0.0,
+    "absolute_development_return_correlation_lt": 0.8,
+    "candidate_10pct_vol_normalized_return_gt": 0.0,
+    "no_holdout_loaded": true
+  },
+  "decision_rule": "ADVANCE_TO_HOLDOUT_AUTHORIZATION only if every gate passes. Otherwise preserve FALSIFIED_OR_REDUNDANT with no parameter rescue.",
+  "notes": "Correlation and normalized economics must use the same cleaned daily weights, official 4% ATR transaction-cost model, and identical 2016-01-01 start. No 2023+ data may be loaded by this experiment."
+}

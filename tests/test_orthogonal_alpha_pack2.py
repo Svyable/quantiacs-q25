@@ -13,6 +13,7 @@ def test_pack2_mechanics_order_prefix():
  d=fixture()
  for n in FILES:
   m=load(n); w=m.calculate_weights(d)
+  assert w.dims==("time","asset") and set(w.coords)=={"time","asset"}
   assert float(w.min())>=-1e-15 and float(w.max())<=.25+1e-12 and float(w.sum("asset").max())<=1+1e-12
   assert float(abs(w.sel(asset="A3",time=d.time[-12:])).max())==0
   xr.testing.assert_allclose(w,m.calculate_weights(d.sel(asset=d.asset.values[::-1])).sel(asset=d.asset.values),rtol=0,atol=1e-12)

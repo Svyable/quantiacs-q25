@@ -1,0 +1,34 @@
+{
+  "experiment_id": "lattice_closure_20260921_repair1",
+  "created": "2026-09-21",
+  "status": "FROZEN_IMPLEMENTATION_REPAIR_BEFORE_VALID_ECONOMIC_EVIDENCE",
+  "parent_experiment": "lattice_closure_20260921",
+  "invalid_parent_source_blob": "306b62a9e37306ece9861c4bf70d592a2bb670ba",
+  "repaired_source": {
+    "path": "strategies/generated/q25_dual_horizon_lattice_closure.py",
+    "blob_sha": "fc6aaedf1976e95baaf31181f1862f99282acc92",
+    "commit_sha": "bac9c56da217d355084ee7d49a1fc55ea53ec427"
+  },
+  "reason": {
+    "failure_stage": "synthetic_mechanics_ci",
+    "observed_failure": "Python SyntaxError at run_research line 360 caused by one-character transport corruption: result{fold_name] instead of result[fold_name].",
+    "benchmark_status": "SKIPPED",
+    "economic_interpretation": "NONE: no Quantiacs return measurement ran for the invalid parent blob."
+  },
+  "repair_scope": {
+    "economic_parameters_changed": false,
+    "feature_definitions_changed": false,
+    "horizons_changed": false,
+    "pareto_rule_changed": false,
+    "resolver_changed": false,
+    "score_formula_changed": false,
+    "selection_gates_changed": false,
+    "change": "Restore the missing '[' character so the GitHub source is byte-identical to the pre-upload locally tested source."
+  },
+  "selection_policy": {
+    "original_preregistration_remains_authoritative": true,
+    "retune_after_observation": false,
+    "control_promotion": false,
+    "repaired_source_requires_fresh_mechanics_gate_before_any_economic_measurement": true
+  }
+}

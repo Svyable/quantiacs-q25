@@ -1,0 +1,17 @@
+{
+ "experiment_id":"orthogonal_alpha_pack_2_20260922","status":"PREREGISTERED_UNMEASURED","competition":"crypto_daily_long",
+ "data":["close","is_liquid"],"universe":"Sponsor-provided liquid universe; no symbols or hand selection",
+ "candidates":[
+  {"id":"q25_volatility_contraction_breakout_v1","hypothesis":"Breakouts after idiosyncratic volatility contraction contain cleaner continuation than unconditional momentum.","parameters":{"vol_fast":14,"vol_slow":56,"breakout":28,"smooth":3}},
+  {"id":"q25_drawdown_recovery_v1","hypothesis":"Recovery within a still-positive medium trend after a moderate drawdown captures resilient demand rather than raw momentum.","parameters":{"trend":42,"recovery":7,"drawdown_window":42,"drawdown_band":[-0.22,-0.03],"smooth":3}},
+  {"id":"q25_cross_sectional_dispersion_v1","hypothesis":"Relative-strength alpha is stronger when contemporaneous cross-sectional return dispersion exceeds its trailing norm.","parameters":{"momentum":35,"dispersion_baseline":63,"gate_ratio_floor":0.8,"vol":28,"smooth":3}},
+  {"id":"q25_trend_consistency_v1","hypothesis":"Persistent distributed gains are more robust than equal-horizon momentum produced by isolated jumps.","parameters":{"weekly_step":7,"consistency_window":42,"momentum":42,"vol":28,"smooth":4}}
+ ],
+ "chronology":{"research":"2016-01-01/2020-12-31","development":"2021-01-01/2022-12-31","holdout":"2023-01-01/latest; unopened until research/development adjudication"},
+ "cost_atr_percent":[4,8,12],
+ "required_checks":["prefix_causality","asset_order_invariance","long_only","liquid_only","gross_weight","name_cap","bounded_replay","single_vs_multipass_parity","determinism"],
+ "required_metrics":["sharpe","return","max_drawdown","turnover","volatility","benchmark_relative","vol10_live_economics","regime_stability","incumbent_return_correlation"],
+ "destructive_controls":["signal_plus_1_day_lookahead_must_fail","cross_sectional_score_permutation","equal_weight_liquid_baseline"],
+ "advancement_gates":{"is_sharpe_4pct_gt":1.0,"development_sharpe_gt":0.0,"all_mechanics_checks_pass":true,"no_holdout_retuning":true},
+ "selection_rule":"Freeze all four before economic observation. No post-hoc grids or parameter rescue; preserve failures."
+}

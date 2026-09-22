@@ -8,7 +8,7 @@ def calculate_weights(data):
  resid=(mom-mean)*l; disp=np.sqrt(xr.where(n>0,((resid**2)*l).sum("asset")/n,0)); base=disp.rolling(time=63,min_periods=35).mean()
  gate=(disp/(base+EPS)-.8).clip(min=0,max=1); r=c/c.shift(time=1)-1; vol=r.rolling(time=28,min_periods=14).std()
  raw=resid.clip(min=0)/(vol+.012)*l*gate; raw=raw.rolling(time=3,min_periods=1).mean()*l
- g=raw.sum("asset"); w=xr.where(g>EPS,raw/g,0.); return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).transpose("time","asset")
+ g=raw.sum("asset"); w=xr.where(g>EPS,raw/g,0.); return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).clip(min=0).transpose("time","asset")
 def strategy(data): return calculate_weights(data)
 def load_data(period):
  import qnt.data as qndata

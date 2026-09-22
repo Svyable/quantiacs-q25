@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "strategy_ranking": "FORBIDDEN_ON_THIS_SURFACE",
+    "missing_evidence": "stays missing",
+    "public_smoke_is_account_clearance": false,
+    "forward_evidence_changes_confidence_not_formula": true,
+    "purpose": "submission operational readiness for exact frozen artifacts"
+  },
+  "summary": {
+    "candidate_count": 3,
+    "packaged_count": 3,
+    "full_history_floor_pass_count": 3,
+    "frozen_forward_observed_count": 1,
+    "public_smoke_clear_count": 2,
+    "account_bound_clear_count": 0
+  },
+  "candidates": [
+    {
+      "id": "ebenezar_20260912_sharpe7_vol2",
+      "label": "Sharpe7 Vol2",
+      "production_artifact": "submissions/q25_sharpe7_vol2_multipass.py",
+      "artifact_present": true,
+      "source_blob_sha": "cd2876aa22f81bad5ecc71637689e5cbe513c8f3",
+      "stage": "PROMOTED_FORWARD_PASS_PENDING_ACCOUNT_BOUND_CORRELATION",
+      "full_history": {
+        "workflow_run_id": 35412192593,
+        "sharpe_4pct_atr": 1.8335983243269882,
+        "sharpe_10pct_atr": 1.5084800622178798,
+        "sharpe_12pct_atr": 1.4000622619317118,
+        "contest_floor_4pct_pass": true,
+        "stress_10pct_pass": true,
+        "stress_12pct_pass": true
+      },
+      "forward_validation": {
+        "state": "FROZEN_FORWARD_OBSERVED",
+        "validation_window": [
+          "2023-01-01",
+          "2024-12-31"
+        ],
+        "sharpe_4pct_atr": 1.498726808896898,
+        "sharpe_10pct_atr": 1.0753687017901394,
+        "pass_4pct": true,
+        "pass_10pct": true,
+        "source_path": "evidence/submission_readiness/sharpe7_forward_validation.json",
+        "workflow_run_id": 35413240254,
+        "artifact_id": 10574871641,
+        "artifact_sha256": "5820a77625b4047f0b0f4e80597dc19b0eab2ee42a43ccc0b72831bf0555e584",
+        "protected_live_start": "2026-10-01",
+        "last_market_date": "2026-09-17",
+        "post_validation_diagnostic": {
+          "0.04": {
+            "sharpe_ratio": 0.7680805122625286,
+            "max_drawdown": -0.16339139311717632,
+            "avg_turnover": 0.10581859341374611,
+            "volatility": 0.25258447942099566,
+            "equity": 1.3208023933386372
+          },
+          "0.10": {
+            "sharpe_ratio": 0.3494361839350667,
+            "max_drawdown": -0.18281174851461468,
+            "avg_turnover": 0.10586080644855267,
+            "volatility": 0.2525758345464954,
+            "equity": 1.1020795082481674
+          }
+        },
+        "last_365_days_at_0_04": {
+          "start": "2025-09-18",
+          "end": "2026-09-17",
+          "sharpe_ratio": 0.6801884875081512,
+          "max_drawdown": -0.16339139311717754,
+          "avg_turnover": 0.09781218950508483
+        }
+      },
+      "public_correlation_smoke": {
+        "state": "PUBLIC_DEFAULT_CLEAR",
+        "message": "Ok. This strategy does not correlate with other strategies.",
+        "participant_id": "0",
+        "workflow_run_id": 35413350910,
+        "artifact_id": 10575595275,
+        "artifact_sha256": "6acf0c58a0cb9ea70dc579926e6d552e9025feda3c68023b893a9fa149b83cb0",
+        "account_bound_clearance": false,
+        "scope_note": "Public/default Quantiacs correlation smoke only. PARTICIPANT_ID=0 is not participant/account-bound uniqueness clearance."
+      },
+      "blockers": [
+        "ACCOUNT_BOUND_UNIQUENESS_CORRELATION"
+      ],
+      "receipt_path": "evidence/deadline_20260918_sharpe7/hardening_receipt.json"
+    },
+    {
+      "id": "q25_sota_meta_ensemble_v1",
+      "label": "SOTA Meta",
+      "production_artifact": "submissions/q25_sota_meta_ensemble_multipass.py",
+      "artifact_present": true,
+      "source_blob_sha": "757c9515747bd884a1f5c1d4b1c5259af803e75c",
+      "stage": "PROMOTED_PENDING_FORWARD_AND_ACCOUNT_BOUND_CORRELATION",
+      "full_history": {
+        "workflow_run_id": 35351671178,
+        "sharpe_4pct_atr": 1.3474336829231446,
+        "sharpe_10pct_atr": null,
+        "sharpe_12pct_atr": 1.0695170328439247,
+        "contest_floor_4pct_pass": true,
+        "stress_10pct_pass": null,
+        "stress_12pct_pass": true
+      },
+      "forward_validation": {
+        "state": "NOT_MEASURED",
+        "validation_window": null,
+        "sharpe_4pct_atr": null,
+        "sharpe_10pct_atr": null,
+        "pass_4pct": null,
+        "pass_10pct": null,
+        "source_path": null
+      },
+      "public_correlation_smoke": {
+        "state": "PUBLIC_DEFAULT_CLEAR",
+        "message": "Ok. This strategy does not correlate with other strategies.",
+        "participant_id": "0",
+        "workflow_run_id": 35413350910,
+        "artifact_id": 10574807345,
+        "artifact_sha256": "c7d7917d8fb155c89e01ee5469a3a0783f4be0cb8673a8c2c81356e71113a247",
+        "account_bound_clearance": false,
+        "scope_note": "Public/default Quantiacs correlation smoke only. PARTICIPANT_ID=0 is not participant/account-bound uniqueness clearance."
+      },
+      "blockers": [
+        "FROZEN_FORWARD_CONFIDENCE_NOT_MEASURED",
+        "ACCOUNT_BOUND_UNIQUENESS_CORRELATION"
+      ],
+      "receipt_path": "evidence/deadline_20260918_sota_meta/measurement_receipt.json"
+    },
+    {
+      "id": "ebenezar_20260912_lattice_consensus",
+      "label": "Lattice Consensus",
+      "production_artifact": "submissions/q25_lattice_consensus_multipass.py",
+      "artifact_present": true,
+      "source_blob_sha": "954279e111f289170bf8e5fbddc1a0501415864b",
+      "stage": "PROMOTED_PENDING_FORWARD_AND_ACCOUNT_BOUND_CORRELATION",
+      "full_history": {
+        "workflow_run_id": 35352648840,
+        "sharpe_4pct_atr": 1.4599472400842526,
+        "sharpe_10pct_atr": null,
+        "sharpe_12pct_atr": 1.0563554736989982,
+        "contest_floor_4pct_pass": true,
+        "stress_10pct_pass": null,
+        "stress_12pct_pass": true
+      },
+      "forward_validation": {
+        "state": "NOT_MEASURED",
+        "validation_window": null,
+        "sharpe_4pct_atr": null,
+        "sharpe_10pct_atr": null,
+        "pass_4pct": null,
+        "pass_10pct": null,
+        "source_path": null
+      },
+      "public_correlation_smoke": {
+        "state": "NOT_RUN",
+        "participant_id": null,
+        "account_bound_clearance": false
+      },
+      "blockers": [
+        "FROZEN_FORWARD_CONFIDENCE_NOT_MEASURED",
+        "ACCOUNT_BOUND_UNIQUENESS_CORRELATION"
+      ],
+      "receipt_path": "evidence/deadline_20260918_lattice_consensus/hardening_receipt.json"
+    }
+  ],
+  "hard_blocker": "Participant/account-bound uniqueness correlation must be run on the exact final artifact before treating public smoke as contest clearance."
+}

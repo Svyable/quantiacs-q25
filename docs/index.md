@@ -12,6 +12,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
       <a href="{{ '/explorer.html' | relative_url }}">Explorer</a>
       <a href="{{ '/insights.html' | relative_url }}">Insights</a>
       <a href="{{ '/control-plane.html' | relative_url }}">Control Plane</a>
+      <a href="{{ '/submissions.html' | relative_url }}">Submissions</a>
       <a href="{{ '/backtest/' | relative_url }}">Backtest</a>
       <a href="{{ '/cookbook.html' | relative_url }}">Cookbook</a>
       <a href="{{ '/RESEARCH_MATRIX.html' | relative_url }}">Matrix</a>
@@ -29,6 +30,7 @@ description: Evidence-aware quantitative research terminal for the Quantiacs Q25
       <div class="qt-hero-actions">
         <a class="qt-primary" href="#leaderboard">Open live leaderboard</a>
         <a href="{{ '/insights.html' | relative_url }}">Pareto &amp; attribution workbench</a>
+        <a href="{{ '/submissions.html' | relative_url }}">Submission readiness</a>
         <a href="{{ '/control-plane.html' | relative_url }}">Research control plane</a>
         <a href="{{ '/cookbook.html' | relative_url }}">Q25 contest cookbook</a>
         <a href="{{ '/explorer.html' | relative_url }}">Deep matrix explorer</a>

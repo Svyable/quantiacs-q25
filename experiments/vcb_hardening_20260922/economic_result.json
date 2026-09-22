@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "candidate": "q25_volatility_contraction_breakout_v1",
+  "stage": "HARDENING_DEVELOPMENT_ONLY",
+  "data": {"min_date":"2015-01-01","max_date":"2022-12-31","holdout_2023_plus_loaded":false,"sha256":"bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58"},
+  "mechanics": {"determinism":"PASS","bounded_prefix_replay":{"status":"PASS","checkpoints":13,"max_abs_difference":0.0}},
+  "research_2016_2020": {
+    "0.04":{"sharpe":2.1463556307757634,"mean_return":0.9256504357931574,"cagr":1.3085829047119684,"volatility":0.4312661063807944,"max_drawdown":-0.21717925449771047,"avg_turnover":0.08774419039173698},
+    "0.08":{"sharpe":1.9582552816243775,"mean_return":0.8427518106994051,"cagr":1.1259143576177122,"volatility":0.43035850259540237,"max_drawdown":-0.226696351775311,"avg_turnover":0.08779683315311822},
+    "0.12":{"sharpe":1.7684386209477212,"mean_return":0.759791115745953,"cagr":0.957382836129224,"volatility":0.42963951745114826,"max_drawdown":-0.26106318132676154,"avg_turnover":0.08784986276218862}
+  },
+  "development_2021_2022": {
+    "0.04":{"sharpe":1.2311246751447376,"mean_return":0.3490168201933379,"cagr":0.36216989862343074,"volatility":0.2834942936646978,"max_drawdown":-0.1807734704942915,"avg_turnover":0.08580282987027334},
+    "0.08":{"sharpe":0.944528330788065,"mean_return":0.26744182697236374,"cagr":0.2556088447785707,"volatility":0.28314854965676284,"max_drawdown":-0.19580637638426202,"avg_turnover":0.08585471879716008},
+    "0.12":{"sharpe":0.6564403499754753,"mean_return":0.18582322245292193,"cagr":0.1572225226512125,"volatility":0.28307708759808003,"max_drawdown":-0.2219312934589841,"avg_turnover":0.08590693224010536}
+  },
+  "destructive_control": {"type":"score_identity_permutation","development_4pct_sharpe":-0.24399672768611774,"research_4pct_sharpe":0.4241044716838662,"gate":"PASS"},
+  "cleaner_impact":{"status":"UNCHANGED","changed_cells":0,"changed_days":0,"raw_max_gross":1.0,"cleaned_max_gross":1.0},
+  "decision":"ADVANCE_TO_CORRELATION_AND_LIVE_ECONOMICS",
+  "source":{"workflow_run_id":35749979940,"artifact_id":10705355463,"artifact_sha256":"2ca1f9a2a7962db9948ac9799240e430e26a6a98f13815d6ece88791785d645c"}
+}

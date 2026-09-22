@@ -16,6 +16,7 @@ on:
       - 'scripts/build_methodology_health.py'
       - 'scripts/build_research_control_plane.py'
       - 'scripts/build_recursive_learning.py'
+      - 'scripts/build_learning_router.py'
       - '.github/workflows/frontier-p-alpha-benchmark.yml'
   workflow_dispatch:
 
@@ -48,6 +49,7 @@ jobs:
           python scripts/build_methodology_health.py
           python scripts/build_research_control_plane.py
           python scripts/build_recursive_learning.py
+          python scripts/build_learning_router.py
 
       - name: Preserve generated research telemetry
         uses: actions/upload-artifact@v4
@@ -60,6 +62,8 @@ jobs:
             docs/RESEARCH_CONTROL_PLANE.md
             docs/data/recursive_learning.json
             docs/RECURSIVE_LEARNING.md
+            docs/data/learning_router.json
+            docs/LEARNING_ROUTER.md
           if-no-files-found: error
 
       - name: Run full software, provenance and causality suite

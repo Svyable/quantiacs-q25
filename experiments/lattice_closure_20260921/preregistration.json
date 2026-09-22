@@ -1,0 +1,79 @@
+{
+  "experiment_id": "lattice_closure_20260921",
+  "created": "2026-09-21",
+  "status": "FROZEN_BEFORE_PUBLIC_DEFAULT_ECONOMIC_MEASUREMENT",
+  "track": "geometry_refinement",
+  "candidate": {
+    "id": "q25_dual_horizon_lattice_closure_v1",
+    "source": "strategies/generated/q25_dual_horizon_lattice_closure.py",
+    "source_blob_sha": "306b62a9e37306ece9861c4bf70d592a2bb670ba",
+    "nearest_incumbent": "q25_pareto_skyline_v1",
+    "classification": "pareto_geometry_family_refinement",
+    "independent_alpha_claim": false,
+    "data_scope": "Quantiacs cryptodaily OHLCV plus historical is_liquid only",
+    "long_only": true,
+    "manual_asset_selection": false,
+    "name_cap": 0.25,
+    "lookback_days": 365
+  },
+  "hypothesis": {
+    "primary": "A dual-horizon subset lattice can reduce fast-Pareto selection brittleness: descend to the fast/slow skyline intersection when it preserves cap-filling capacity, otherwise ascend to their union and finally to the broad root state rather than forcing an over-pruned book.",
+    "fast_geometry": "incumbent five-dimensional Pareto panel: Sharpe7/vol14, SMA12/48 trend, momentum14, drawdown30, inverse vol14",
+    "slow_geometry": "exactly doubled horizons: Sharpe14/vol28, SMA24/96 trend, momentum28, drawdown60, inverse vol28",
+    "lattice_states": {
+      "root": "broad incumbent positive-state gate with both horizon panels valid",
+      "fast": "root intersect fast Pareto <=1-dominator skyline",
+      "slow": "root intersect slow Pareto <=1-dominator skyline",
+      "meet": "fast intersect slow",
+      "join": "fast union slow"
+    },
+    "resolver": "Use meet if it preserves required capacity; else join; else root.",
+    "capacity_rule": "required survivors = min(root survivors, 4), where 4 is derived from the frozen 25% name cap and gross<=1 rather than tuned from returns.",
+    "score_formula": "Keep incumbent fast score unchanged: ((Sharpe7 - liquid mean Sharpe7 + 0.10*cross-sectional sd)+)^1.20 / (vol14 + 0.015), followed by causal 3-day smoothing and capped normalization.",
+    "expected_failure_mode": "The slow skyline adds no information beyond the fast geometry, or the conflict-aware ascent dilutes the useful fast Pareto filter and converges toward the root/no-Pareto control."
+  },
+  "controls": {
+    "base_pareto": "Exact frozen Pareto <=1 incumbent formula, including its original fast-only validity/warmup path.",
+    "root_only": "Destroy both skyline refinements and retain only the broad positive-state gate.",
+    "meet_only": "Force the fast/slow intersection even when it over-prunes cap-filling capacity.",
+    "join_only": "Always use the conservative fast/slow union, destroying the conflict-sensitive descent/ascent rule.",
+    "slow_only": "Use only the doubled-horizon skyline inside the shared root.",
+    "anti_slow": "Destructive direction control: retain fast-skyline names that are dominated by at least two peers in the slow geometry."
+  },
+  "selection_rule": {
+    "primary_period": "2016-01-01 through 2022-12-31",
+    "candidate_sharpe_gt_1_at_cost_0_04": true,
+    "candidate_sharpe_gt_1_at_cost_0_08": true,
+    "candidate_sharpe_gt_1_at_cost_0_12": true,
+    "candidate_must_beat_base_pareto_at_cost_0_04": true,
+    "candidate_must_beat_base_pareto_at_cost_0_08": true,
+    "candidate_must_beat_root_only_at_cost_0_04": true,
+    "candidate_must_beat_meet_only_at_cost_0_04": true,
+    "candidate_must_beat_anti_slow_at_cost_0_04": true,
+    "dev_2021_2022_candidate_must_beat_base_pareto_at_cost_0_04": true,
+    "research_2016_2020_candidate_max_not_trail_base_pareto_by_more_than_0_05_at_cost_0_04": true,
+    "no_parameter_grid": true,
+    "retune_after_observation": false,
+    "control_promotion": false,
+    "failed_gates_freeze_the_candidate": true
+  },
+  "evidence_policy": {
+    "research_2016_2020": "selection_evidence",
+    "development_2021_2022": "selection_evidence",
+    "validation_2023_2024": "spent_diagnostic_only",
+    "diagnostic_2025_plus": "non_selection",
+    "live_2026_10_01_2027_01_31": "untouched",
+    "first_economic_measurement_owner": "pull_request_ci_after_this_preregistration_and_source_freeze",
+    "formula_changes_after_first_economic_observation": false
+  },
+  "pre_economic_mechanics": {
+    "synthetic_only": true,
+    "prefix_causality": "PASS",
+    "asset_order_invariance": "PASS",
+    "terminal_365_day_bounded_replay": "PASS",
+    "lattice_meet_join_subset_relations": "PASS",
+    "resolver_meet_join_root_fallback": "PASS",
+    "admissibility_long_liquid_cap_gross": "PASS",
+    "note": "These are synthetic implementation checks only and contain no market-return evidence."
+  }
+}

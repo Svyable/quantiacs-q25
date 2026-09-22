@@ -1,0 +1,136 @@
+name: q25-lattice-closure
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'strategies/generated/q25_dual_horizon_lattice_closure.py'
+      - 'experiments/lattice_closure_20260921/**'
+      - 'tests/test_q25_dual_horizon_lattice_closure.py'
+      - '.github/workflows/q25-lattice-closure.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-mechanics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt pytest
+      - name: Verify frozen source and mechanics
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD:strategies/generated/q25_dual_horizon_lattice_closure.py)" = "306b62a9e37306ece9861c4bf70d592a2bb670ba"
+          python -m pytest -q tests/test_q25_dual_horizon_lattice_closure.py
+
+  benchmark:
+    needs: frozen-mechanics
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      API_KEY: default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install -r requirements.txt
+      - name: Measure frozen candidate and controls
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p results/lattice_closure_20260921
+          python strategies/generated/q25_dual_horizon_lattice_closure.py \
+            --research \
+            --output results/lattice_closure_20260921/summary.json \
+            | tee lattice_closure.log
+      - name: Adjudicate preregistered gates without blocking evidence preservation
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("results/lattice_closure_20260921/summary.json")
+          p = json.loads(path.read_text())
+          m = p["modes"]
+          order = (
+              "base_pareto",
+              "root_only",
+              "meet_only",
+              "join_only",
+              "slow_only",
+              "anti_slow",
+              "closure",
+          )
+          for fold in ("research_2016_2020", "dev_2021_2022", "selection_2016_2022"):
+              print("\n===", fold, "Sharpe ===")
+              for mode in order:
+                  row = m[mode][fold]
+                  print(mode, {c: round(row[c]["sharpe_ratio"], 6) for c in ("0.04", "0.08", "0.12")})
+
+          sel = m["closure"]["selection_2016_2022"]
+          c04 = sel["0.04"]["sharpe_ratio"]
+          c08 = sel["0.08"]["sharpe_ratio"]
+          c12 = sel["0.12"]["sharpe_ratio"]
+          b04 = m["base_pareto"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          b08 = m["base_pareto"]["selection_2016_2022"]["0.08"]["sharpe_ratio"]
+          root04 = m["root_only"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          meet04 = m["meet_only"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          anti04 = m["anti_slow"]["selection_2016_2022"]["0.04"]["sharpe_ratio"]
+          dev_c = m["closure"]["dev_2021_2022"]["0.04"]["sharpe_ratio"]
+          dev_b = m["base_pareto"]["dev_2021_2022"]["0.04"]["sharpe_ratio"]
+          res_c = m["closure"]["research_2016_2020"]["0.04"]["sharpe_ratio"]
+          res_b = m["base_pareto"]["research_2016_2020"]["0.04"]["sharpe_ratio"]
+
+          gates = {
+              "sharpe_0p04_gt_1": c04 > 1.0,
+              "sharpe_0p08_gt_1": c08 > 1.0,
+              "sharpe_0p12_gt_1": c12 > 1.0,
+              "beats_base_pareto_0p04": c04 > b04,
+              "beats_base_pareto_0p08": c08 > b08,
+              "beats_root_only_0p04": c04 > root04,
+              "beats_meet_only_0p04": c04 > meet04,
+              "beats_anti_slow_0p04": c04 > anti04,
+              "beats_base_in_dev_0p04": dev_c > dev_b,
+              "research_delta_vs_base_gte_minus_0p05": (res_c - res_b) >= -0.05,
+          }
+          status = "ADVANCE_TO_PRODUCTION_HARDENING" if all(gates.values()) else "FALSIFIED_DEVELOPMENT"
+          out = {
+              "experiment_id": p["experiment_id"],
+              "strategy_id": p["strategy_id"],
+              "status": status,
+              "gates": gates,
+              "selection_sharpe": {"0.04": c04, "0.08": c08, "0.12": c12},
+              "base_pareto_selection_sharpe": {"0.04": b04, "0.08": b08},
+              "dev_0p04": {"closure": dev_c, "base_pareto": dev_b},
+              "research_0p04": {"closure": res_c, "base_pareto": res_b},
+              "policy": "No post-observation retuning or control promotion.",
+          }
+          Path("results/lattice_closure_20260921/adjudication.json").write_text(
+              json.dumps(out, indent=2, sort_keys=True) + "\n"
+          )
+          print("\n=== preregistered adjudication ===")
+          print(json.dumps(out, indent=2, sort_keys=True))
+          print("\n=== diagnostic-only @4% ===")
+          for fold in ("spent_validation_2023_2024", "diagnostic_2025_plus", "full_2016_plus"):
+              print(fold, {mode: round(m[mode][fold]["0.04"]["sharpe_ratio"], 6) for mode in order})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: q25-lattice-closure-${{ github.run_id }}
+          path: |
+            results/lattice_closure_20260921/summary.json
+            results/lattice_closure_20260921/adjudication.json
+            lattice_closure.log
+          if-no-files-found: error

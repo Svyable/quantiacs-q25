@@ -13,6 +13,10 @@ on:
       - '.github/workflows/q25-pack2-development-screen.yml'
   workflow_dispatch:
 
+concurrency:
+  group: q25-pack2-development-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 

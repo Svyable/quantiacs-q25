@@ -1,21 +1,21 @@
 {
   "canonical_latest": {
-    "campaign": "frontier_20260913o",
+    "campaign": "frontier_20260916p",
     "decision": "PROMOTE_ZERO",
     "family_stack": [
       {
-        "best_base_id": "absorption_release_elasticity_w42",
-        "best_robust_sharpe": 0.17143182354314906,
+        "best_base_id": "liquidity_requalification_hysteresis_w84",
+        "best_robust_sharpe": -1.3540726264496663,
         "campaign_rank": 1,
-        "central_control_margin": 0.10957153692820437,
-        "control_supported": true,
-        "decision_code": "KILL_WEAK_ALPHA",
-        "family": "absorption_release_elasticity",
-        "floor_margin": -0.8285681764568509,
+        "central_control_margin": -1.2572628032172182,
+        "control_supported": false,
+        "decision_code": "FALSIFIED_DEVELOPMENT",
+        "family": "liquidity_requalification_hysteresis",
+        "floor_margin": -2.3540726264496663,
         "lane": "LATEST_CANONICAL_DEVELOPMENT_CAMPAIGN"
       }
     ],
-    "frontier_label": "Frontier-O",
+    "frontier_label": "Frontier-P",
     "kind": "summary_only"
   },
   "dogfood": {
@@ -31,12 +31,6 @@
     ],
     "next_actions": [
       {
-        "action": "INGEST_MEASURED_EVIDENCE",
-        "campaign": "frontier_20260916p",
-        "priority": 1,
-        "why": "A successful benchmark receipt exists but canonical observed evidence is not committed."
-      },
-      {
         "action": "DISAMBIGUATE_FRONTIER_LABELS",
         "campaign": null,
         "priority": 2,
@@ -44,12 +38,12 @@
       },
       {
         "action": "DEEPEN_MATRIX_EVIDENCE",
-        "campaign": "frontier_20260913o",
+        "campaign": "frontier_20260916p",
         "priority": 4,
         "why": "Latest committed campaign is not represented by a full canonical matrix packet."
       }
     ],
-    "pending_canonical_ingest_count": 1,
+    "pending_canonical_ingest_count": 0,
     "unmeasured_queue_count": 0
   },
   "failed_forward_stack": [
@@ -68,7 +62,7 @@
       "id": "V10",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.309,
-      "name": "V10 multi-factor ensemble \u2014 Pareto",
+      "name": "V10 multi-factor ensemble — Pareto",
       "rank": 1,
       "role": "primary legacy core",
       "status": "prepare_precheck",
@@ -80,7 +74,7 @@
       "id": "V11_balanced",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.2311,
-      "name": "V11 new-only event ensemble \u2014 Balanced",
+      "name": "V11 new-only event ensemble — Balanced",
       "rank": 2,
       "role": "orthogonal event / lifecycle core",
       "status": "prepare_precheck",
@@ -104,7 +98,7 @@
       "id": "V12",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.3386,
-      "name": "V12 signed volume diffusion \u2014 50/50 bridge",
+      "name": "V12 signed volume diffusion — 50/50 bridge",
       "rank": 4,
       "role": "structural volume/return network core",
       "status": "prepare_precheck_exact_official_gate_required",
@@ -116,7 +110,7 @@
       "id": "CoCrash126",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.1438,
-      "name": "Co-crash shelter \u2014 base 126D",
+      "name": "Co-crash shelter — base 126D",
       "rank": 5,
       "role": "defensive crash-comovement sleeve",
       "status": "prepare_precheck",
@@ -164,7 +158,7 @@
       "id": "Trend_hit126",
       "lane": "FROZEN_HISTORICAL_ROSTER",
       "max_drawdown": -0.2484,
-      "name": "126D positive-return consistency \u2014 five names",
+      "name": "126D positive-return consistency — five names",
       "rank": 9,
       "role": "persistent trend reserve",
       "status": "conditional_reserve",
@@ -184,32 +178,7 @@
       "stress_sharpe": 1.83
     }
   ],
-  "measurement_queue": [
-    {
-      "automatic_promotion": false,
-      "campaign": "frontier_20260916p",
-      "candidate_count": 5,
-      "classification_note": "Frontier-P is a preregistered priority-1 liquidity-transition-hysteresis campaign. It tests historical eligibility persistence, requalification gap and transition stability rather than a simple entry/new-asset lifecycle event. 2023-2024 is spent and excluded.",
-      "families": [
-        "liquidity_requalification_hysteresis"
-      ],
-      "family_count": 1,
-      "frontier_label": "Frontier-P",
-      "measured_decision": "PROMOTE_ZERO_FREEZE_ALL",
-      "measurement_receipt": "evidence/measurement_receipts/frontier_20260916p.json",
-      "measurement_state": "MEASURED_AWAITING_CANONICAL_INGEST",
-      "modes": {
-        "ablation": 1,
-        "base": 3,
-        "falsifier": 1
-      },
-      "selection_folds": [
-        "research",
-        "dev"
-      ],
-      "source_path": "experiments/frontier_20260916p/manifest.json"
-    }
-  ],
+  "measurement_queue": [],
   "measurement_receipts": [
     {
       "campaign": "frontier_20260912m",
@@ -438,7 +407,7 @@
         "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/35126723702"
       },
       "source_path": "evidence/measurement_receipts/frontier_20260916p.json",
-      "status": "MEASURED_AWAITING_CANONICAL_INGEST"
+      "status": "CANONICAL_INGESTED"
     }
   ],
   "policy": {
@@ -458,7 +427,7 @@
   "schema_version": 1,
   "surface_debt": {
     "latest_full_matrix_campaign": "frontier_20260912k",
-    "measured_campaigns_since_full_matrix": 5,
+    "measured_campaigns_since_full_matrix": 6,
     "research_matrix_mentions_latest": false,
     "summary_only_latest": true
   }

@@ -1,0 +1,169 @@
+{
+  "prefix": [
+    {
+      "date": "2017-11-16",
+      "max_weight_error": 0.0
+    },
+    {
+      "date": "2022-06-13",
+      "max_weight_error": 0.0
+    },
+    {
+      "date": "2026-09-14",
+      "max_weight_error": 0.0
+    }
+  ],
+  "bounded_replay": [
+    {
+      "date": "2017-11-16",
+      "max_weight_error": 0.0
+    },
+    {
+      "date": "2022-06-13",
+      "max_weight_error": 0.0
+    },
+    {
+      "date": "2026-09-14",
+      "max_weight_error": 0.0
+    }
+  ],
+  "constraints": {
+    "min_weight": 0.0,
+    "max_weight": 0.25,
+    "max_gross": 1.0,
+    "finite": true,
+    "nonliquid_dates": 0,
+    "cleaner_delta": 0.0
+  },
+  "official_last": {
+    "equity": 26.960007728074135,
+    "relative_return": 0.0,
+    "volatility": 0.30022626599103935,
+    "underwater": -0.32070892085429914,
+    "max_drawdown": -0.546183211344259,
+    "sharpe_ratio": 1.1738920435701417,
+    "mean_return": 0.3524332249176541,
+    "bias": 0.0,
+    "instruments": 35.0,
+    "avg_turnover": 0.043035370449653,
+    "avg_holding_time": 18.634620402208913
+  },
+  "official_sharpe_error": 3.774758283725532e-15,
+  "extra_day_execution_delay": {
+    "full": {
+      "days": 3911,
+      "sharpe": 1.111617633011472,
+      "cagr": 0.3419013690569348,
+      "max_drawdown": -0.5594033077650411,
+      "volatility": 0.3067848185715625,
+      "total_return": 22.363340251594874
+    },
+    "later": {
+      "days": 1354,
+      "sharpe": 0.6282824607862275,
+      "cagr": 0.1481805958488316,
+      "max_drawdown": -0.39507742026306847,
+      "volatility": 0.28345953041822464,
+      "total_return": 0.6696029046341245
+    },
+    "recent": {
+      "days": 623,
+      "sharpe": -0.8242974876001792,
+      "cagr": -0.18576660932544675,
+      "max_drawdown": -0.36127695171332674,
+      "volatility": 0.21971625549847887,
+      "total_return": -0.2958554289678268
+    }
+  },
+  "local_correlations": {
+    "full": {
+      "ONSET": {
+        "ONSET": 1.0,
+        "CRYPTO10": 0.6224432119994174,
+        "unforecasted_basket": 0.7515848378289675
+      },
+      "CRYPTO10": {
+        "ONSET": 0.6224432119994174,
+        "CRYPTO10": 1.0,
+        "unforecasted_basket": 0.841956682438575
+      },
+      "unforecasted_basket": {
+        "ONSET": 0.7515848378289675,
+        "CRYPTO10": 0.841956682438575,
+        "unforecasted_basket": 1.0
+      }
+    },
+    "later": {
+      "ONSET": {
+        "ONSET": 1.0,
+        "CRYPTO10": 0.6000315677190876,
+        "unforecasted_basket": 0.7238784792568717
+      },
+      "CRYPTO10": {
+        "ONSET": 0.6000315677190876,
+        "CRYPTO10": 1.0,
+        "unforecasted_basket": 0.9057453141501458
+      },
+      "unforecasted_basket": {
+        "ONSET": 0.7238784792568717,
+        "CRYPTO10": 0.9057453141501458,
+        "unforecasted_basket": 1.0
+      }
+    },
+    "recent": {
+      "ONSET": {
+        "ONSET": 1.0,
+        "CRYPTO10": 0.5221459592333603,
+        "unforecasted_basket": 0.6055276224458878
+      },
+      "CRYPTO10": {
+        "ONSET": 0.5221459592333603,
+        "CRYPTO10": 1.0,
+        "unforecasted_basket": 0.9322332042397948
+      },
+      "unforecasted_basket": {
+        "ONSET": 0.6055276224458878,
+        "CRYPTO10": 0.9322332042397948,
+        "unforecasted_basket": 1.0
+      }
+    }
+  },
+  "conditional_bootstrap_not_forecast": {
+    "full": {
+      "bootstrap_samples": 2000,
+      "block_days": 30,
+      "strategy_sharpe_95_interval": [
+        0.3601591107081727,
+        2.0057904497303842
+      ],
+      "sharpe_minus_unforecasted_95_interval": [
+        -0.5094306905103549,
+        0.3446483446423819
+      ]
+    },
+    "later": {
+      "bootstrap_samples": 2000,
+      "block_days": 30,
+      "strategy_sharpe_95_interval": [
+        -0.4910545574635194,
+        1.8665405615738566
+      ],
+      "sharpe_minus_unforecasted_95_interval": [
+        -1.0567381734653076,
+        0.46983552327332767
+      ]
+    },
+    "recent": {
+      "bootstrap_samples": 2000,
+      "block_days": 30,
+      "strategy_sharpe_95_interval": [
+        -1.6559941575135328,
+        0.42185722235896866
+      ],
+      "sharpe_minus_unforecasted_95_interval": [
+        -1.8526031788457311,
+        0.6143242968594427
+      ]
+    }
+  }
+}

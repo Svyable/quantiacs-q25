@@ -1,0 +1,7 @@
+numpy==2.2.6
+pandas==2.2.3
+xarray==2025.12.0
+scipy==1.17.0
+numba==0.61.2
+llvmlite==0.44.0
+git+https://github.com/quantiacs/toolbox.git@9e5274c5ce102a66debc799fd2a2300969fb90f6

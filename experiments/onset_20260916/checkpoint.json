@@ -1,0 +1,53 @@
+{
+  "decision": "REJECT_FOR_ADVANCEMENT",
+  "research_cutoff": "2026-09-15",
+  "new_data_not_examined_in_this_session_starts": "2026-09-16",
+  "primary": "chain",
+  "selected_after_results": false,
+  "trials": "2 candidate variants + 3 controls + 7-day lag stress; costs and execution stresses are diagnostics, not additional selected models",
+  "gates": {
+    "full_sharpe_gt_1": true,
+    "beats_price_and_mismatched_control_development": true,
+    "beats_price_and_mismatched_control_later": true,
+    "recent_double_cost_sharpe_positive": false
+  },
+  "additional_evidence": {
+    "underperforms_unforecasted_basket_full_and_later": true,
+    "recent_zero_cost_sharpe": -0.4533016041838181,
+    "bootstrap_alpha_advantage_established": false
+  },
+  "lessons": [
+    "Forecasting broad basket exposure from these six on-chain series has not established additive alpha.",
+    "The tiny development advantage over mismatched labels argues against treating 1.39 as a discovery.",
+    "Negative zero-cost recent returns mean transaction-cost tuning alone cannot repair this model.",
+    "Do not keep widening hyperparameters on the same exposed crypto history."
+  ],
+  "next_session": [
+    {
+      "priority": 1,
+      "hypothesis": "Cross-market risk conditions may provide information absent from the single-market feature sets.",
+      "condition": "Sponsor futures prices must load successfully and Q25 dataset eligibility must be confirmed.",
+      "test": "Freeze a small cross-market feature set; compare against the same price-only and constant-basket controls with matured labels and publication-safe alignment."
+    },
+    {
+      "priority": 2,
+      "hypothesis": "Cross-sectional relative-return prediction may be more useful than repeatedly forecasting broad market direction.",
+      "condition": "A materially new signal and a recorded preregistration before evaluating it.",
+      "test": "Measure rank information coefficient and incremental portfolio return versus the unforecasted basket before any complex allocator; include turnover and exposure-matched controls."
+    },
+    {
+      "priority": 3,
+      "hypothesis": "Any retained candidate must demonstrate prospective stability.",
+      "condition": "Accumulate observations strictly after this cutoff without inspecting them for strategy tuning.",
+      "test": "Report all predictions and paper-trade returns from the frozen version; do not repeatedly tune against the forward sample."
+    }
+  ],
+  "not_done": [
+    "Competition submission",
+    "Hosted Quantiacs correlation screening",
+    "Exhaustive daily multipass",
+    "Point-in-time vendor revision verification"
+  ],
+  "competition_sharpe_estimate": null,
+  "forecast_reason": "No demonstrated stable advantage; recent historical Sharpe is negative; history has already been reused."
+}

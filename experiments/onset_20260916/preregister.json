@@ -1,0 +1,29 @@
+{
+  "id": "ONSET_fresh_20260916",
+  "hypothesis": "Lagged network activity and miner economics add predictive value for future returns of a diversified liquid crypto basket beyond price-only state or unconditional exposure.",
+  "frozen_before_returns": true,
+  "data": "Six Quantiacs blockchain metrics current to2026-09-15; MVRV/NVT rejected as stale through2022; futures idea blocked by HTTP500.",
+  "primary": "chain",
+  "variants": [
+    "chain",
+    "combined"
+  ],
+  "controls": [
+    "price_control",
+    "shuffled_control",
+    "unforecasted_basket"
+  ],
+  "model": "Four rolling ridge models:365/1095day windows x7/21day mature outcomes; Monday refit; penalty.3; min75 training samples; everythirdcalendar day; modeldisagreementpenalty.25; rebalanceMonThu",
+  "publication_lag_days": 3,
+  "lag_stress_days": 7,
+  "costs": [
+    0.04,
+    0.08,
+    0.12
+  ],
+  "selection_window": "2016-2022",
+  "later_window": "2023-present reuseddiagnostic not pristineOOS",
+  "gate": "New information must improve over price-only and shuffled controls on development and later diagnostics; require full SR>1 and positive recent doublecostSR for advancement. Do not widen grid to rescue a failure.",
+  "known_limit": "Snapshot archives do not prove point-in-time publication or revision history. Three/seven-day lags are timing assumptions, not vintage certification.",
+  "source_sha256": "8f1349b304ceef26d563a96a067175281eaae1015846f44e40296278fb207d21"
+}

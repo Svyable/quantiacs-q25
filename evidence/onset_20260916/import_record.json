@@ -1,0 +1,15 @@
+{
+  "experiment_id": "onset_20260916",
+  "imported_utc": "2026-09-17",
+  "strategy_quality": "REJECT_FOR_ADVANCEMENT",
+  "evidence_quality": "DIAGNOSTIC_OBSERVED",
+  "implementation_health": "THREE_PREFIX_AND_BOUNDED_CHECKPOINTS_PASSED",
+  "canonical_harness_status": "NOT_YET_REMEASURED",
+  "q25_onchain_admissibility": "UNVERIFIED_FOR_Q25",
+  "hosted_correlation": "NOT_RUN",
+  "source_sha256": "9c8cc84ccbf469de23388fedc74e4434cbcff5b8e56e3048917e9b7c47bfaec5",
+  "toolbox_commit": "9e5274c5ce102a66debc799fd2a2300969fb90f6",
+  "access_mode": "public_default",
+  "source_note": "Verbatim previously measured strategy; original metrics are imported, not newly recomputed by this commit. Original development is 2016-2022 combined, not repository robust-fold scoring.",
+  "raw_data": "Not committed. Original snapshot hashes retained in imported/manifest.json; reproduce with sponsor loaders or original local snapshot archive."
+}

@@ -1,52 +1,6 @@
 {
   "campaigns": [
     {
-      "best_floor_margin": -1.6762538381461807,
-      "best_robust_sharpe": -0.6762538381461807,
-      "campaign": "frontier_20260912n",
-      "control_support": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 1
-      },
-      "control_supported_but_weak_count": 0,
-      "decision": "PROMOTE_ZERO",
-      "decision_resolution": {
-        "count": 1,
-        "rate": 1.0,
-        "total": 1
-      },
-      "economic_survival": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 1
-      },
-      "evidence_stage": "DEVELOPMENT_ONLY",
-      "falsification_coverage": {
-        "count": 1,
-        "rate": 1.0,
-        "total": 1
-      },
-      "falsified_by_controls_count": 1,
-      "family_count": 1,
-      "family_names": [
-        "online_ar_surprise_persistence"
-      ],
-      "median_central_control_margin": -0.2606031917726538,
-      "promotion_ready": {
-        "count": 0,
-        "rate": 0.0,
-        "total": 1
-      },
-      "research_to_dev": {
-        "base_cells_compared": 3,
-        "median_dev_minus_research_sharpe_12": -1.806456109505787,
-        "nonnegative_gap_count": 0,
-        "nonnegative_gap_rate": 0.0
-      },
-      "source_path": "evidence/frontier_20260912n/observed_summary.json"
-    },
-    {
       "best_floor_margin": -1.006762870095407,
       "best_robust_sharpe": -0.0067628700954069235,
       "campaign": "frontier_20260913m",
@@ -139,23 +93,64 @@
         "nonnegative_gap_rate": 0.0
       },
       "source_path": "evidence/frontier_20260913o/observed_summary.json"
+    },
+    {
+      "best_floor_margin": -2.3540726264496663,
+      "best_robust_sharpe": -1.3540726264496663,
+      "campaign": "frontier_20260916p",
+      "control_support": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
+      "control_supported_but_weak_count": 0,
+      "decision": "PROMOTE_ZERO",
+      "decision_resolution": {
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
+      },
+      "economic_survival": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
+      "evidence_stage": "DEVELOPMENT_ONLY",
+      "falsification_coverage": {
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
+      },
+      "falsified_by_controls_count": 1,
+      "family_count": 1,
+      "family_names": [
+        "liquidity_requalification_hysteresis"
+      ],
+      "median_central_control_margin": -1.2572628032172182,
+      "promotion_ready": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
+      "research_to_dev": {
+        "base_cells_compared": 3,
+        "median_dev_minus_research_sharpe_12": -1.6057506112013602,
+        "nonnegative_gap_count": 0,
+        "nonnegative_gap_rate": 0.0
+      },
+      "source_path": "evidence/frontier_20260916p/observed_summary.json"
     }
   ],
   "evidence_debt": {
     "latest_full_matrix_campaign": "frontier_20260912k",
     "latest_kind": "summary_only",
-    "latest_measured_campaign": "frontier_20260913o",
-    "measured_campaigns_since_full_matrix": 5,
-    "measurement_queue_count": 1,
-    "next_queued_campaign": "frontier_20260916p",
+    "latest_measured_campaign": "frontier_20260916p",
+    "measured_campaigns_since_full_matrix": 6,
+    "measurement_queue_count": 0,
+    "next_queued_campaign": null,
     "summary_only_latest": true
   },
   "next_actions": [
-    {
-      "action": "MEASURE_FROZEN_QUEUE_FIRST",
-      "priority": 1,
-      "why": "A preregistered campaign is already frozen. Measure it unchanged before mutating hypotheses from newer diagnostics."
-    },
     {
       "action": "DEEPEN_CANONICAL_MATRIX_EVIDENCE",
       "priority": 2,
@@ -164,7 +159,7 @@
     {
       "action": "TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC",
       "priority": 3,
-      "why": "Recent base cells have a negative pooled median Dev\u2212Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."
+      "why": "Recent base cells have a negative pooled median Dev−Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."
     },
     {
       "action": "CALIBRATE_DEVELOPMENT_CONFIDENCE",
@@ -221,7 +216,7 @@
       "base_cells_compared": 9,
       "nonnegative_gap_count": 0,
       "nonnegative_gap_rate": 0.0,
-      "pooled_median_dev_minus_research_sharpe_12": -1.7286244316099526
+      "pooled_median_dev_minus_research_sharpe_12": -1.5650500995961092
     }
   },
   "schema_version": 1,
@@ -233,15 +228,11 @@
   ],
   "trajectories": {
     "best_robust_sharpe": {
-      "delta_first_to_latest": 0.8476856616893298,
-      "direction": "UP",
-      "first": -0.6762538381461807,
-      "latest": 0.17143182354314906,
+      "delta_first_to_latest": -1.3473097563542593,
+      "direction": "MIXED",
+      "first": -0.0067628700954069235,
+      "latest": -1.3540726264496663,
       "values": [
-        {
-          "campaign": "frontier_20260912n",
-          "value": -0.6762538381461807
-        },
         {
           "campaign": "frontier_20260913m",
           "value": -0.0067628700954069235
@@ -249,19 +240,19 @@
         {
           "campaign": "frontier_20260913o",
           "value": 0.17143182354314906
+        },
+        {
+          "campaign": "frontier_20260916p",
+          "value": -1.3540726264496663
         }
       ]
     },
     "control_support_rate": {
-      "delta_first_to_latest": 1.0,
+      "delta_first_to_latest": 0.0,
       "direction": "MIXED",
       "first": 0.0,
-      "latest": 1.0,
+      "latest": 0.0,
       "values": [
-        {
-          "campaign": "frontier_20260912n",
-          "value": 0.0
-        },
         {
           "campaign": "frontier_20260913m",
           "value": 0.0
@@ -269,19 +260,19 @@
         {
           "campaign": "frontier_20260913o",
           "value": 1.0
+        },
+        {
+          "campaign": "frontier_20260916p",
+          "value": 0.0
         }
       ]
     },
     "median_central_control_margin": {
-      "delta_first_to_latest": 0.37017472870085816,
+      "delta_first_to_latest": -0.6365570247647214,
       "direction": "MIXED",
-      "first": -0.2606031917726538,
-      "latest": 0.10957153692820437,
+      "first": -0.6207057784524967,
+      "latest": -1.2572628032172182,
       "values": [
-        {
-          "campaign": "frontier_20260912n",
-          "value": -0.2606031917726538
-        },
         {
           "campaign": "frontier_20260913m",
           "value": -0.6207057784524967
@@ -289,19 +280,19 @@
         {
           "campaign": "frontier_20260913o",
           "value": 0.10957153692820437
+        },
+        {
+          "campaign": "frontier_20260916p",
+          "value": -1.2572628032172182
         }
       ]
     },
     "median_dev_minus_research_sharpe_12": {
-      "delta_first_to_latest": 0.04930469089423717,
+      "delta_first_to_latest": -0.8385108683947562,
       "direction": "MIXED",
-      "first": -1.806456109505787,
-      "latest": -1.7571514186115498,
+      "first": -0.767239742806604,
+      "latest": -1.6057506112013602,
       "values": [
-        {
-          "campaign": "frontier_20260912n",
-          "value": -1.806456109505787
-        },
         {
           "campaign": "frontier_20260913m",
           "value": -0.767239742806604
@@ -309,6 +300,10 @@
         {
           "campaign": "frontier_20260913o",
           "value": -1.7571514186115498
+        },
+        {
+          "campaign": "frontier_20260916p",
+          "value": -1.6057506112013602
         }
       ]
     }
@@ -334,8 +329,8 @@
     "passed_gate_count": 0
   },
   "window_campaigns": [
-    "frontier_20260912n",
     "frontier_20260913m",
-    "frontier_20260913o"
+    "frontier_20260913o",
+    "frontier_20260916p"
   ]
 }

@@ -159,7 +159,7 @@
     {
       "action": "TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC",
       "priority": 3,
-      "why": "Recent base cells have a negative pooled median Dev−Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."
+      "why": "Recent base cells have a negative pooled median Dev\u2212Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."
     },
     {
       "action": "CALIBRATE_DEVELOPMENT_CONFIDENCE",

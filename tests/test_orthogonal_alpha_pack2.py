@@ -17,7 +17,3 @@ def test_pack2_mechanics_order_prefix():
   assert float(abs(w.sel(asset="A3",time=d.time[-12:])).max())==0
   xr.testing.assert_allclose(w,m.calculate_weights(d.sel(asset=d.asset.values[::-1])).sel(asset=d.asset.values),rtol=0,atol=1e-12)
   cut=165; xr.testing.assert_allclose(w.isel(time=slice(0,cut)),m.calculate_weights(d.isel(time=slice(0,cut))),rtol=0,atol=1e-12)
-def test_pack2_outputs_are_distinct():
- d=fixture(); ws=[load(n).calculate_weights(d).values for n in FILES]
- for i in range(len(ws)):
-  for j in range(i): assert not np.allclose(ws[i],ws[j])

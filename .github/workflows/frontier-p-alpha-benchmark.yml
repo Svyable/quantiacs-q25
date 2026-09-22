@@ -11,6 +11,8 @@ on:
       - 'research/iteration.py'
       - 'evidence/frontier_20260913m/**'
       - 'evidence/frontier_20260913o/**'
+      - 'evidence/frontier_20260916p/**'
+      - 'evidence/measurement_receipts/frontier_20260916p.json'
       - 'scripts/build_methodology_health.py'
       - 'scripts/build_research_control_plane.py'
       - 'scripts/build_recursive_learning.py'

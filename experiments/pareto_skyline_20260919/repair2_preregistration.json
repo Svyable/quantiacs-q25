@@ -1,0 +1,30 @@
+{
+  "experiment_id": "pareto_skyline_20260919_repair2",
+  "created": "2026-09-19",
+  "status": "FROZEN_IMPLEMENTATION_REPAIR_BEFORE_VALID_ECONOMIC_EVIDENCE",
+  "parent_experiment": "pareto_skyline_20260919_repair1",
+  "invalid_parent_source_blob": "2d5197e6182996b2c0fdc3d6233e8560d85edf0b",
+  "repaired_source": {
+    "path": "strategies/generated/q25_pareto_skyline.py",
+    "blob_sha": "04a3afd9b47525fd9a773455466a71494a393fc9",
+    "commit_sha": "1025a03b8bee7951925bad2e3bd0cb62a82c497d"
+  },
+  "reason": {
+    "failure_stage": "synthetic_mechanics_ci",
+    "observed_failure": "exact promoted-Sharpe7 parity failed only at floating-point summation noise, max absolute difference 6.17481628e-14; asset-order invariance itself passed",
+    "economic_interpretation": "NONE: benchmark remained skipped"
+  },
+  "repair_scope": {
+    "candidate_economic_parameters_changed": false,
+    "candidate_feature_definitions_changed": false,
+    "candidate_pareto_rule_changed": false,
+    "candidate_score_formula_changed": false,
+    "change": "restore the legacy reduction and allocation path exclusively inside the frozen Sharpe7 control while retaining canonical reductions for the new Pareto family"
+  },
+  "selection_policy": {
+    "original_preregistration_remains_authoritative": true,
+    "retune_after_observation": false,
+    "control_promotion": false,
+    "repaired_source_requires_fresh_mechanics_gate_before_economic_measurement": true
+  }
+}

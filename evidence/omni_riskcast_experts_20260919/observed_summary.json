@@ -1,0 +1,52 @@
+{
+  "experiment_id": "omni_riskcast_experts_20260919",
+  "measured_strategy_blob_sha": "6d0871477b72d4e4688160b60b3e54db0ec5dfc1",
+  "workflow_run_id": 35461789517,
+  "artifact_id": 10590055963,
+  "artifact_sha256": "601f5d99b20ea59ea12a12a438e851c19556f67dc6e4996de6b80d129cf0df57",
+  "evidence_class": "OBSERVED_PUBLIC_DEFAULT_FROZEN",
+  "selection_2016_2022_sharpe": {
+    "base": {"0.04": 2.1024614590665225, "0.08": 1.891333, "0.12": 1.679043},
+    "static_median": {"0.04": 2.163848286228113, "0.08": 1.946812, "0.12": 1.728646},
+    "dynamic_ungated": {"0.04": 2.1688024798764776, "0.08": 1.952917, "0.12": 1.735911},
+    "inverted": {"0.04": 1.951771045635545, "0.08": 1.722791, "0.12": 1.492775},
+    "dynamic": {"0.04": 1.9894387731286656, "0.08": 1.759686, "0.12": 1.528914}
+  },
+  "preregistered_falsifiers_at_0_04": {
+    "dynamic_beats_base": false,
+    "dynamic_beats_inverted": true,
+    "dynamic_beats_dynamic_ungated": false,
+    "dynamic_beats_static_median": false
+  },
+  "diagnostic_only_sharpe_at_0_04": {
+    "spent_validation_2023_2024": {
+      "base": 1.606969,
+      "static_median": 1.523321,
+      "dynamic_ungated": 1.51461,
+      "inverted": 1.845651,
+      "dynamic": 1.752101
+    },
+    "diagnostic_2025_plus": {
+      "base": 0.912265,
+      "static_median": 0.849063,
+      "dynamic_ungated": 0.879049,
+      "inverted": 0.912265,
+      "dynamic": 0.912265
+    },
+    "full_2016_plus": {
+      "base": 1.874957,
+      "static_median": 1.904587,
+      "dynamic_ungated": 1.910375,
+      "inverted": 1.799162,
+      "dynamic": 1.815475
+    }
+  },
+  "decision": {
+    "stock_risk_signal": "SUPPORTED_ON_SELECTION: static and ungated dynamic overlays improve base across all preregistered costs",
+    "risk_direction": "SUPPORTED_ON_SELECTION: dynamic beats inverted",
+    "mse_health_gate": "REJECTED: candidate loses to base, ungated, and static on selection",
+    "dynamic_model_averaging_complexity": "NOT_EARNED: only marginally above static when ungated",
+    "post_2024_note": "health gate abstains exactly to base while ungated/static underperform; useful diagnostic but cannot rescue failed selection criterion",
+    "parameter_rescue": "PROHIBITED"
+  }
+}

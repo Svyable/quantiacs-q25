@@ -4,91 +4,338 @@
       "best_floor_margin": -1.6762538381461807,
       "best_robust_sharpe": -0.6762538381461807,
       "campaign": "frontier_20260912n",
-      "control_support": {"count":0,"rate":0.0,"total":1},
+      "control_support": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
       "control_supported_but_weak_count": 0,
       "decision": "PROMOTE_ZERO",
-      "decision_resolution": {"count":1,"rate":1.0,"total":1},
-      "economic_survival": {"count":0,"rate":0.0,"total":1},
+      "decision_resolution": {
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
+      },
+      "economic_survival": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
       "evidence_stage": "DEVELOPMENT_ONLY",
-      "falsification_coverage": {"count":1,"rate":1.0,"total":1},
+      "falsification_coverage": {
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
+      },
       "falsified_by_controls_count": 1,
       "family_count": 1,
-      "family_names": ["online_ar_surprise_persistence"],
+      "family_names": [
+        "online_ar_surprise_persistence"
+      ],
       "median_central_control_margin": -0.2606031917726538,
-      "promotion_ready": {"count":0,"rate":0.0,"total":1},
-      "research_to_dev": {"base_cells_compared":3,"median_dev_minus_research_sharpe_12":-1.806456109505787,"nonnegative_gap_count":0,"nonnegative_gap_rate":0.0},
+      "promotion_ready": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
+      "research_to_dev": {
+        "base_cells_compared": 3,
+        "median_dev_minus_research_sharpe_12": -1.806456109505787,
+        "nonnegative_gap_count": 0,
+        "nonnegative_gap_rate": 0.0
+      },
       "source_path": "evidence/frontier_20260912n/observed_summary.json"
     },
     {
       "best_floor_margin": -1.006762870095407,
       "best_robust_sharpe": -0.0067628700954069235,
       "campaign": "frontier_20260913m",
-      "control_support": {"count":0,"rate":0.0,"total":3},
+      "control_support": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 3
+      },
       "control_supported_but_weak_count": 0,
       "decision": "PROMOTE_ZERO",
-      "decision_resolution": {"count":3,"rate":1.0,"total":3},
-      "economic_survival": {"count":0,"rate":0.0,"total":3},
+      "decision_resolution": {
+        "count": 3,
+        "rate": 1.0,
+        "total": 3
+      },
+      "economic_survival": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 3
+      },
       "evidence_stage": "DEVELOPMENT_ONLY",
-      "falsification_coverage": {"count":3,"rate":1.0,"total":3},
+      "falsification_coverage": {
+        "count": 3,
+        "rate": 1.0,
+        "total": 3
+      },
       "falsified_by_controls_count": 3,
       "family_count": 3,
-      "family_names": ["volume_share_entropy_state","entropy_disagreement_cash","dispersion_curvature"],
+      "family_names": [
+        "volume_share_entropy_state",
+        "entropy_disagreement_cash",
+        "dispersion_curvature"
+      ],
       "median_central_control_margin": -0.6207057784524967,
-      "promotion_ready": {"count":0,"rate":0.0,"total":3},
-      "research_to_dev": {"base_cells_compared":3,"median_dev_minus_research_sharpe_12":-0.767239742806604,"nonnegative_gap_count":0,"nonnegative_gap_rate":0.0},
+      "promotion_ready": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 3
+      },
+      "research_to_dev": {
+        "base_cells_compared": 3,
+        "median_dev_minus_research_sharpe_12": -0.767239742806604,
+        "nonnegative_gap_count": 0,
+        "nonnegative_gap_rate": 0.0
+      },
       "source_path": "evidence/frontier_20260913m/observed_summary.json"
     },
     {
       "best_floor_margin": -0.8285681764568509,
       "best_robust_sharpe": 0.17143182354314906,
       "campaign": "frontier_20260913o",
-      "control_support": {"count":1,"rate":1.0,"total":1},
+      "control_support": {
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
+      },
       "control_supported_but_weak_count": 1,
       "decision": "PROMOTE_ZERO",
-      "decision_resolution": {"count":1,"rate":1.0,"total":1},
-      "economic_survival": {"count":0,"rate":0.0,"total":1},
+      "decision_resolution": {
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
+      },
+      "economic_survival": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
       "evidence_stage": "DEVELOPMENT_ONLY",
-      "falsification_coverage": {"count":1,"rate":1.0,"total":1},
+      "falsification_coverage": {
+        "count": 1,
+        "rate": 1.0,
+        "total": 1
+      },
       "falsified_by_controls_count": 0,
       "family_count": 1,
-      "family_names": ["absorption_release_elasticity"],
+      "family_names": [
+        "absorption_release_elasticity"
+      ],
       "median_central_control_margin": 0.10957153692820437,
-      "promotion_ready": {"count":0,"rate":0.0,"total":1},
-      "research_to_dev": {"base_cells_compared":3,"median_dev_minus_research_sharpe_12":-1.7571514186115498,"nonnegative_gap_count":0,"nonnegative_gap_rate":0.0},
+      "promotion_ready": {
+        "count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
+      "research_to_dev": {
+        "base_cells_compared": 3,
+        "median_dev_minus_research_sharpe_12": -1.7571514186115498,
+        "nonnegative_gap_count": 0,
+        "nonnegative_gap_rate": 0.0
+      },
       "source_path": "evidence/frontier_20260913o/observed_summary.json"
     }
   ],
-  "evidence_debt": {"latest_full_matrix_campaign":"frontier_20260912k","latest_kind":"summary_only","latest_measured_campaign":"frontier_20260913o","measured_campaigns_since_full_matrix":5,"measurement_queue_count":0,"next_queued_campaign":null,"summary_only_latest":true},
+  "evidence_debt": {
+    "latest_full_matrix_campaign": "frontier_20260912k",
+    "latest_kind": "summary_only",
+    "latest_measured_campaign": "frontier_20260913o",
+    "measured_campaigns_since_full_matrix": 5,
+    "measurement_queue_count": 1,
+    "next_queued_campaign": "frontier_20260916p",
+    "summary_only_latest": true
+  },
   "next_actions": [
-    {"action":"DEEPEN_CANONICAL_MATRIX_EVIDENCE","priority":2,"why":"The measurement frontier is ahead of the latest full matrix; deepen evidence before the public surface drifts further."},
-    {"action":"TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC","priority":3,"why":"Recent base cells have a negative pooled median Dev−Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."},
-    {"action":"CALIBRATE_DEVELOPMENT_CONFIDENCE","priority":4,"why":"Observed frozen forward validation retained only part of the development Sharpe. Keep development hits explicitly provisional."}
+    {
+      "action": "MEASURE_FROZEN_QUEUE_FIRST",
+      "priority": 1,
+      "why": "A preregistered campaign is already frozen. Measure it unchanged before mutating hypotheses from newer diagnostics."
+    },
+    {
+      "action": "DEEPEN_CANONICAL_MATRIX_EVIDENCE",
+      "priority": 2,
+      "why": "The measurement frontier is ahead of the latest full matrix; deepen evidence before the public surface drifts further."
+    },
+    {
+      "action": "TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC",
+      "priority": 3,
+      "why": "Recent base cells have a negative pooled median Dev\u2212Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders."
+    },
+    {
+      "action": "CALIBRATE_DEVELOPMENT_CONFIDENCE",
+      "priority": 4,
+      "why": "Observed frozen forward validation retained only part of the development Sharpe. Keep development hits explicitly provisional."
+    }
   ],
-  "policy": {"aggregate_score":"FORBIDDEN","cross_campaign_scalar_rank":"FORBIDDEN","missing_metrics":"remain missing; never imputed","optimization_target":false,"purpose":"recursive-learning diagnostics, not a strategy objective","window_rule":"latest 3 canonical development summaries with family evidence"},
+  "policy": {
+    "aggregate_score": "FORBIDDEN",
+    "cross_campaign_scalar_rank": "FORBIDDEN",
+    "missing_metrics": "remain missing; never imputed",
+    "optimization_target": false,
+    "purpose": "recursive-learning diagnostics, not a strategy objective",
+    "window_rule": "latest 3 canonical development summaries with family evidence"
+  },
   "recent_window": {
     "campaign_count": 3,
-    "control_support": {"count":1,"rate":0.2,"total":5},
+    "control_support": {
+      "count": 1,
+      "rate": 0.2,
+      "total": 5
+    },
     "control_supported_but_weak_count": 1,
-    "decision_resolution": {"count":5,"rate":1.0,"total":5},
-    "economic_survival": {"count":0,"rate":0.0,"total":5},
-    "exact_family_name_novelty": {"distinct_family_names":5,"family_instances":5,"interpretation":"Lexical family-name reuse only. This is a breadth proxy, not semantic originality or contest correlation evidence.","repeated_name_count":0,"repeated_name_rate":0.0},
-    "falsification_coverage": {"count":5,"rate":1.0,"total":5},
+    "decision_resolution": {
+      "count": 5,
+      "rate": 1.0,
+      "total": 5
+    },
+    "economic_survival": {
+      "count": 0,
+      "rate": 0.0,
+      "total": 5
+    },
+    "exact_family_name_novelty": {
+      "distinct_family_names": 5,
+      "family_instances": 5,
+      "interpretation": "Lexical family-name reuse only. This is a breadth proxy, not semantic originality or contest correlation evidence.",
+      "repeated_name_count": 0,
+      "repeated_name_rate": 0.0
+    },
+    "falsification_coverage": {
+      "count": 5,
+      "rate": 1.0,
+      "total": 5
+    },
     "falsified_by_controls_count": 4,
     "family_count": 5,
-    "promotion_ready": {"count":0,"rate":0.0,"total":5},
-    "research_to_dev": {"base_cells_compared":9,"nonnegative_gap_count":0,"nonnegative_gap_rate":0.0,"pooled_median_dev_minus_research_sharpe_12":-1.7286244316099526}
+    "promotion_ready": {
+      "count": 0,
+      "rate": 0.0,
+      "total": 5
+    },
+    "research_to_dev": {
+      "base_cells_compared": 9,
+      "nonnegative_gap_count": 0,
+      "nonnegative_gap_rate": 0.0,
+      "pooled_median_dev_minus_research_sharpe_12": -1.7286244316099526
+    }
   },
   "schema_version": 1,
-  "state_tags": ["FALSIFICATION_DISCIPLINE_STABLE","RESEARCH_TO_DEV_OPTIMISM_PERSISTS","PROMOTION_DROUGHT","FORWARD_TRANSLATION_WEAK"],
+  "state_tags": [
+    "FALSIFICATION_DISCIPLINE_STABLE",
+    "RESEARCH_TO_DEV_OPTIMISM_PERSISTS",
+    "PROMOTION_DROUGHT",
+    "FORWARD_TRANSLATION_WEAK"
+  ],
   "trajectories": {
-    "best_robust_sharpe": {"delta_first_to_latest":0.8476856616893298,"direction":"UP","first":-0.6762538381461807,"latest":0.17143182354314906,"values":[{"campaign":"frontier_20260912n","value":-0.6762538381461807},{"campaign":"frontier_20260913m","value":-0.0067628700954069235},{"campaign":"frontier_20260913o","value":0.17143182354314906}]},
-    "control_support_rate": {"delta_first_to_latest":1.0,"direction":"MIXED","first":0.0,"latest":1.0,"values":[{"campaign":"frontier_20260912n","value":0.0},{"campaign":"frontier_20260913m","value":0.0},{"campaign":"frontier_20260913o","value":1.0}]},
-    "median_central_control_margin": {"delta_first_to_latest":0.37017472870085816,"direction":"MIXED","first":-0.2606031917726538,"latest":0.10957153692820437,"values":[{"campaign":"frontier_20260912n","value":-0.2606031917726538},{"campaign":"frontier_20260913m","value":-0.6207057784524967},{"campaign":"frontier_20260913o","value":0.10957153692820437}]},
-    "median_dev_minus_research_sharpe_12": {"delta_first_to_latest":0.04930469089423717,"direction":"MIXED","first":-1.806456109505787,"latest":-1.7571514186115498,"values":[{"campaign":"frontier_20260912n","value":-1.806456109505787},{"campaign":"frontier_20260913m","value":-0.767239742806604},{"campaign":"frontier_20260913o","value":-1.7571514186115498}]}
+    "best_robust_sharpe": {
+      "delta_first_to_latest": 0.8476856616893298,
+      "direction": "UP",
+      "first": -0.6762538381461807,
+      "latest": 0.17143182354314906,
+      "values": [
+        {
+          "campaign": "frontier_20260912n",
+          "value": -0.6762538381461807
+        },
+        {
+          "campaign": "frontier_20260913m",
+          "value": -0.0067628700954069235
+        },
+        {
+          "campaign": "frontier_20260913o",
+          "value": 0.17143182354314906
+        }
+      ]
+    },
+    "control_support_rate": {
+      "delta_first_to_latest": 1.0,
+      "direction": "MIXED",
+      "first": 0.0,
+      "latest": 1.0,
+      "values": [
+        {
+          "campaign": "frontier_20260912n",
+          "value": 0.0
+        },
+        {
+          "campaign": "frontier_20260913m",
+          "value": 0.0
+        },
+        {
+          "campaign": "frontier_20260913o",
+          "value": 1.0
+        }
+      ]
+    },
+    "median_central_control_margin": {
+      "delta_first_to_latest": 0.37017472870085816,
+      "direction": "MIXED",
+      "first": -0.2606031917726538,
+      "latest": 0.10957153692820437,
+      "values": [
+        {
+          "campaign": "frontier_20260912n",
+          "value": -0.2606031917726538
+        },
+        {
+          "campaign": "frontier_20260913m",
+          "value": -0.6207057784524967
+        },
+        {
+          "campaign": "frontier_20260913o",
+          "value": 0.10957153692820437
+        }
+      ]
+    },
+    "median_dev_minus_research_sharpe_12": {
+      "delta_first_to_latest": 0.04930469089423717,
+      "direction": "MIXED",
+      "first": -1.806456109505787,
+      "latest": -1.7571514186115498,
+      "values": [
+        {
+          "campaign": "frontier_20260912n",
+          "value": -1.806456109505787
+        },
+        {
+          "campaign": "frontier_20260913m",
+          "value": -0.767239742806604
+        },
+        {
+          "campaign": "frontier_20260913o",
+          "value": -1.7571514186115498
+        }
+      ]
+    }
   },
   "validation_calibration": {
-    "events": [{"campaign":"frontier_20260910b","candidate":"topology_migration_w84","decision":"FAIL_FORWARD_GATE","development_robust_sharpe":1.376132031691156,"fold_status":"SPENT_DO_NOT_MUTATE","forward_sharpe_12":0.314,"retention_ratio":0.22817578020774587,"source_path":"evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"}],
-    "failed_gate_count":1,"failure_rate":1.0,"median_forward_minus_development_sharpe":-1.062132031691156,"median_forward_to_development_retention":0.22817578020774587,"observed_gate_count":1,"passed_gate_count":0
+    "events": [
+      {
+        "campaign": "frontier_20260910b",
+        "candidate": "topology_migration_w84",
+        "decision": "FAIL_FORWARD_GATE",
+        "development_robust_sharpe": 1.376132031691156,
+        "fold_status": "SPENT_DO_NOT_MUTATE",
+        "forward_sharpe_12": 0.314,
+        "retention_ratio": 0.22817578020774587,
+        "source_path": "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
+      }
+    ],
+    "failed_gate_count": 1,
+    "failure_rate": 1.0,
+    "median_forward_minus_development_sharpe": -1.062132031691156,
+    "median_forward_to_development_retention": 0.22817578020774587,
+    "observed_gate_count": 1,
+    "passed_gate_count": 0
   },
-  "window_campaigns": ["frontier_20260912n","frontier_20260913m","frontier_20260913o"]
+  "window_campaigns": [
+    "frontier_20260912n",
+    "frontier_20260913m",
+    "frontier_20260913o"
+  ]
 }

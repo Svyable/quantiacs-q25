@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "candidate": "q25_sharpe7_topology_equal_blend_v1",
+  "evaluation": "full_history_multipass",
+  "workflow_run_id": 35412904104,
+  "workflow_job_id": 105815873608,
+  "artifact_id": 10575321416,
+  "measurement_source_blob_sha": "cd987190e971e6b09ad2514fd1baa237ff8a2879",
+  "blend": "0.5_sharpe7_plus_0.5_topology_w84",
+  "cost_ladder": {
+    "0.00": {
+      "avg_turnover": 0.08352248455443034,
+      "max_drawdown": -0.31669812318342117,
+      "sharpe_ratio": 2.169906299290465
+    },
+    "0.04": {
+      "avg_turnover": 0.0835498060454514,
+      "max_drawdown": -0.322011923966544,
+      "sharpe_ratio": 1.962107687666862
+    },
+    "0.08": {
+      "avg_turnover": 0.08357774985326293,
+      "max_drawdown": -0.3434133029579205,
+      "sharpe_ratio": 1.7531616336764797
+    },
+    "0.10": {
+      "avg_turnover": 0.08359192663939154,
+      "max_drawdown": -0.3863412975742021,
+      "sharpe_ratio": 1.648306726061599
+    },
+    "0.12": {
+      "avg_turnover": 0.08360624176266421,
+      "max_drawdown": -0.42647918684716957,
+      "sharpe_ratio": 1.5432247678264144
+    }
+  },
+  "known_risk": "The topology_migration_w84 member previously failed its standalone frozen 2023-2024 forward gate. The blend therefore requires its own frozen forward validation before any submission confidence upgrade.",
+  "claim_limit": "Post-selection fixed blend measured on full history. No blend-weight search or member retuning. Not forward validation."
+}

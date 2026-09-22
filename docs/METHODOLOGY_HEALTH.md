@@ -39,7 +39,13 @@ The earlier development leader **`topology_migration_w84`** reported robust-deve
 
 ## Measurement queue
 
-No preregistered campaign is currently ahead of the committed measurement frontier.
+The committed measurement frontier is ahead of the evidence frontier by **1 preregistered campaign(s)**.
+
+Next frozen campaign: **`frontier_20260916p`** — 5 candidate/control cells across 1 families; automatic promotion is `False`.
+
+Frontier-P is a preregistered priority-1 liquidity-transition-hysteresis campaign. It tests historical eligibility persistence, requalification gap and transition stability rather than a simple entry/new-asset lifecycle event. 2023-2024 is spent and excluded.
+
+Until measured evidence is committed, this is a queue item—not a result. The useful recursive action is to measure or ingest the frozen packet unchanged, not mutate it because the dashboard is empty.
 
 ## Latest-campaign family triage
 

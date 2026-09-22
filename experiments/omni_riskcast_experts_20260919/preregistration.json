@@ -1,0 +1,84 @@
+{
+  "experiment_id": "omni_riskcast_experts_20260919",
+  "strategy_id": "q25_omni_riskcast_sharpe7_v1",
+  "frozen_before_market_measurement": true,
+  "market_returns_observed_for_this_candidate_before_freeze": false,
+  "research_question": "Can stock-market tail and realized-volatility state improve Q25 crypto risk-adjusted returns when used to forecast future crypto downside variance rather than next-day crypto return?",
+  "classification": "allocator_experiment",
+  "carrier": {
+    "name": "ebenezar_20260912_sharpe7_vol2",
+    "frozen_formula": true,
+    "reason": "current promoted crypto carrier; no carrier parameter may change in this experiment"
+  },
+  "information_set": {
+    "crypto": "Quantiacs cryptodaily OHLCV + historical is_liquid",
+    "stocks": ["Quantiacs historical S&P 500 constituents", "Quantiacs historical Nasdaq-100 constituents"],
+    "stock_role": "gross-risk sizing only; never crypto identity selection",
+    "cross_dataset_admissibility": "requires hosted/preclear before submission"
+  },
+  "forecast_target": {
+    "name": "five_day_future_crypto_downside_rms_relative_to_current_63d_downside_rms",
+    "horizon_days": 5,
+    "use": "loss scoring only after all five future returns are revealed",
+    "direction": "higher target means more future downside risk"
+  },
+  "experts": [
+    "spx_tail_dependence",
+    "ndx_tail_dependence",
+    "spx_21_126_realized_vol_term",
+    "ndx_21_126_realized_vol_term"
+  ],
+  "dynamic_aggregation": {
+    "method": "causal exponential model averaging on revealed squared forecast loss",
+    "expert_loss_window": 252,
+    "expert_loss_min": 126,
+    "eta": 4.0,
+    "no_negative_or_future_shift_in_predictor": true
+  },
+  "health_gate": {
+    "benchmark": "persistence forecast: future downside RMS equals current 63d downside RMS",
+    "loss_window": 126,
+    "loss_min": 63,
+    "activation": "relative MSE improvement over persistence",
+    "full_health_at_relative_improvement": 0.10,
+    "zero_or_negative_skill": "abstain; gross multiplier exactly 1"
+  },
+  "portfolio_overlay": {
+    "risk_floor": 0.35,
+    "gross_formula": "exp(log(0.35) * activation)",
+    "immediate_cut_band": 0.10,
+    "ordinary_re_risk": "Monday only",
+    "skill_zero_re_risk": "immediate exact abstention"
+  },
+  "modes": {
+    "base": "frozen Sharpe7 only",
+    "static_median": "median of four stock experts; no dynamic weighting or health gate",
+    "dynamic_ungated": "dynamic expert weighting; health forced to one",
+    "inverted": "dynamic expert risk direction inverted with same health",
+    "dynamic": "candidate: dynamic expert weighting plus forecast-skill abstention"
+  },
+  "falsifiers": [
+    "dynamic must beat base on selection evidence at 4% ATR cost to justify the overlay",
+    "dynamic must beat inverted to support the claimed risk direction",
+    "dynamic should beat or materially improve on dynamic_ungated for the health gate to earn complexity",
+    "if static_median matches or beats dynamic, dynamic model averaging has not earned complexity",
+    "no post-result parameter rescue or threshold grid search"
+  ],
+  "evaluation": {
+    "selection": "2016-01-01 through 2022-12-31",
+    "spent_validation_diagnostic_only": "2023-01-01 through 2024-12-31",
+    "post_2024_diagnostic_only": "2025-01-01 onward",
+    "costs_atr": [0.04, 0.08, 0.12],
+    "primary_metric": "Sharpe ratio",
+    "secondary": ["max drawdown", "volatility", "turnover", "mean return"]
+  },
+  "novelty_axes": [
+    "forecast target changes from return IC to future downside variance",
+    "online loss-weighted expert aggregation",
+    "forecast-skill abstention against persistence"
+  ],
+  "inspiration": {
+    "methods": ["HAR-style multi-horizon volatility state", "dynamic model averaging", "tail-risk connectedness"],
+    "claim": "methodological inspiration only; no claim that the cited literature validates this exact strategy"
+  }
+}

@@ -1,0 +1,91 @@
+version: 2
+as_of: "2026-09-17"
+supersedes_for_new_candidates: "configs/research_scale_20260916.yaml"
+purpose: "Deadline-scale Q25 research campaign v2: distinguish historical novelty from active-roster redundancy without retroactively rescoring v1 candidates."
+
+freeze_policy:
+  prior_campaign_results_immutable: true
+  applies_only_to_candidates_preregistered_after_v2: true
+  forbid_threshold_changes_from_candidate_results: true
+  forbid_holdout_tuning: true
+  forbid_failed_family_grid_rescue: true
+  note: >-
+    V1 remains frozen evidence. V2 changes the semantics of correlation because
+    archive novelty and roster coexistence answer different questions. It does
+    not retroactively convert any v1 failure into a pass.
+
+performance_gates:
+  full_sharpe_min: 1.15
+  stressed_cost_atr_fraction: 0.12
+  stressed_sharpe_min: 0.70
+  worst_pre2025_fold_sharpe_min: 0.20
+  max_drawdown_abs_max: 0.50
+  one_day_delay_sharpe_retention_min: 0.70
+  prefix_causality_required: true
+  liquid_only_required: true
+  long_only_required: true
+  exact_replay_required_for_finalists: true
+
+correlation_policy:
+  historical_archive:
+    role: "NOVELTY_DIAGNOSTIC"
+    near_clone_return_corr: 0.80
+    hard_promotion_gate: false
+    requirement: >-
+      Record nearest historical stream and correlation. A high value means the
+      mechanism is not new research; it does not by itself forbid a strategy
+      that is replacing, rather than coexisting with, that historical family.
+  active_roster:
+    role: "COEXISTENCE_GATE"
+    max_abs_corr_pre2025: 0.45
+    max_abs_corr_recent: 0.50
+    hard_promotion_gate: true
+    require_residual_value_for_coexistence: true
+  hosted_quantiacs:
+    role: "EXTERNAL_UNIQUENESS_GATE"
+    participant_specific_check_required: true
+    hard_submission_gate: true
+    note: "Local research cannot certify current Quantiacs submission-pool uniqueness."
+
+novelty_policy:
+  minimum_novelty_axes_vs_nearest_incumbent: 2
+  historical_near_clone_may_be_reaudited_as_replacement: true
+  historical_near_clone_may_not_be_claimed_as_new_alpha: true
+
+campaign:
+  total_ideation_budget: 400
+  preregister_budget: 80
+  fast_screen_budget: 80
+  exact_replay_budget: 12
+  finalist_budget: 6
+  hosted_validation_budget: 4
+  max_initial_free_parameters_per_hypothesis: 3
+  stop_family_after_consecutive_structural_failures: 3
+
+selection:
+  method: "performance_gate_then_active_roster_gate_then_pareto_cluster"
+  pareto_metrics:
+    - full_sharpe
+    - worst_pre2025_fold_sharpe
+    - stressed_sharpe_12pct_atr
+    - residual_sharpe_vs_active_roster
+    - max_drawdown
+    - active_roster_max_abs_corr
+  cluster_on_daily_return_abs_corr: 0.80
+  max_representatives_per_cluster: 2
+  archive_nearest_neighbor_reported_separately: true
+
+active_roster_baseline:
+  note: "Named for correlation evaluation only; inclusion is not a submission decision."
+  members:
+    - C165
+    - V12_signed_volume_diffusion
+    - V13_low_residual_skew
+
+calendar:
+  wide_discovery_end: "2026-09-23"
+  exact_replay_end: "2026-09-25"
+  stress_and_reproduction_end: "2026-09-27"
+  hosted_validation: "2026-09-28"
+  source_freeze: "2026-09-29"
+  submission_deadline: "2026-09-30"

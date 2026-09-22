@@ -1,0 +1,39 @@
+{
+  "experiment_id": "deadline_20260918_hit126",
+  "candidate_id": "q25_deadline_hit126_consistency_v1",
+  "observed_at_utc": "2026-09-18T13:37:43Z",
+  "evidence_stage": "CURRENT_PUBLIC_QUANTIACS_SINGLE_PASS_AFTER_INTEGRITY_REPAIR",
+  "quantiacs_access_mode": "public_default",
+  "workflow_run_id": 35351224774,
+  "workflow_job_id": 105619569104,
+  "artifact_id": 10549469433,
+  "artifact_sha256": "1d0c6b808a9c77f8e69ff18aeca843fdced0e609617210f2c4c401db6922969f",
+  "mechanical_integrity": "PASS",
+  "implementation_repair": {
+    "prior_run_id": 35351060423,
+    "prior_issue": "asset-order dependence on tied discrete hit-rate ranks",
+    "repair": "canonicalize asset coordinate order solely for deterministic method=first tie-breaking",
+    "economic_parameters_changed": false,
+    "prior_measurement_status": "INVALID_FOR_PROMOTION_DUE_TO_FAILED_INTEGRITY_TEST"
+  },
+  "cleaner": {
+    "liquidity": "PASS",
+    "missed_dates": "PASS",
+    "positive_positions": "PASS"
+  },
+  "metrics": {
+    "0.00": {"sharpe_ratio": 1.2798608074762365, "equity": 612.976131232356, "max_drawdown": -0.7232552586653169, "avg_turnover": 0.05418435671235688, "volatility": 0.6169003755558938},
+    "0.04": {"sharpe_ratio": 1.2070262357924226, "equity": 378.25032974146245, "max_drawdown": -0.750154390434873, "avg_turnover": 0.05420760175216707, "volatility": 0.616774815095116},
+    "0.08": {"sharpe_ratio": 1.1340248127926296, "equity": 233.28399986656254, "max_drawdown": -0.7765672719915451, "avg_turnover": 0.05423223000651332, "volatility": 0.6167275495091198},
+    "0.12": {"sharpe_ratio": 1.0608579983671456, "equity": 143.77497767716417, "max_drawdown": -0.8002508813227363, "avg_turnover": 0.054257665454413795, "volatility": 0.6167583728094781}
+  },
+  "decision": "ADVANCE_TO_HARDENING",
+  "reason": "Current public/default Quantiacs in-sample Sharpe at the contest 0.04 ATR slippage setting is >1.0 and remains >1.0 at 0.12 ATR stress; mechanical integrity passes. Severe drawdown requires additional hardening evidence before submission.",
+  "post_observation_parameter_retuning_allowed": false,
+  "next_required_checks": [
+    "single-pass versus multipass parity",
+    "mechanism-destructive controls",
+    "hosted/account-bound correlation uniqueness precheck",
+    "target-environment runtime and missed-date confirmation"
+  ]
+}

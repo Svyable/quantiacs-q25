@@ -1,0 +1,49 @@
+name: q25-account-bound-correlation
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate:
+        description: Exact promoted candidate to check
+        required: true
+        type: choice
+        options:
+          - sharpe7
+          - sota
+          - sharpe7_topology
+
+permissions:
+  contents: read
+
+jobs:
+  account-bound-correlation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CANDIDATE: ${{ inputs.candidate }}
+      PARTICIPANT_ID: ${{ secrets.QUANTIACS_PARTICIPANT_ID }}
+      QUANTIACS_API_KEY: ${{ secrets.QUANTIACS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Require real participant identity
+        shell: bash
+        run: |
+          if [ -z "$PARTICIPANT_ID" ] || [ "$PARTICIPANT_ID" = "0" ]; then
+            echo "::error::Set repository secret QUANTIACS_PARTICIPANT_ID to the real Quantiacs participant ID before using this workflow."
+            exit 1
+          fi
+      - run: python -m pip install -r requirements.txt
+      - name: Run exact account-bound correlation check
+        shell: bash
+        run: |
+          set -o pipefail
+          API_KEY="${QUANTIACS_API_KEY:-default}" \
+          python -m research.public_correlation_smoke | tee "account_correlation_${CANDIDATE}.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: q25-account-correlation-${{ inputs.candidate }}-${{ github.run_id }}
+          path: account_correlation_*.txt
+          if-no-files-found: warn

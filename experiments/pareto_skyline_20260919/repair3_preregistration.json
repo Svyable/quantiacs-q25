@@ -1,0 +1,45 @@
+{
+  "experiment_id": "pareto_skyline_20260919_repair3",
+  "created": "2026-09-20",
+  "status": "PREREGISTERED_IMPLEMENTATION_REPAIR_BEFORE_REMEASUREMENT",
+  "parent_experiment": "pareto_skyline_20260919_production_hardening",
+  "invalid_parent_source_blob": "04a3afd9b47525fd9a773455466a71494a393fc9",
+  "reason": {
+    "failure_stage": "production_multipass_parity",
+    "observed_failure": "current exact Quantiacs multipass and cleaned single-pass weights diverge above the frozen 1e-12 gate; the diagnostic localized the divergence to raw strategy output on sparse dates rather than qnout.clean",
+    "diagnostic_observation": "rolling mean/std feature values on affected dates differ only at floating-point noise scale across full-history and bounded-window evaluation, while strict Pareto comparisons can amplify those tiny differences into discrete skyline membership changes",
+    "economic_interpretation": "NONE: this is an implementation-health repair on already-contaminated diagnostic dates, not a return-driven strategy change"
+  },
+  "repair_hypothesis": {
+    "cause": "prefix-length-dependent floating-point accumulation inside rolling arithmetic",
+    "change": "replace rolling mean and rolling standard deviation with explicit fixed-window reductions whose value at t depends only on the values inside that exact trailing window",
+    "unchanged": [
+      "all lookback lengths",
+      "all min-period requirements",
+      "all feature definitions",
+      "Pareto dominance rule",
+      "positive-state gates",
+      "3-day smoothing horizon",
+      "allocation and 25% name cap",
+      "365-calendar-day production lookback",
+      "contest universe and data inputs"
+    ]
+  },
+  "repair_scope": {
+    "economic_parameters_changed": false,
+    "feature_definitions_changed": false,
+    "pareto_rule_changed": false,
+    "gates_changed": false,
+    "score_formula_changed": false,
+    "research_window_reopened": false,
+    "diagnostic_dates_used_only_to_localize_implementation_failure": true
+  },
+  "selection_policy": {
+    "original_preregistration_remains_authoritative": true,
+    "retune_after_observation": false,
+    "control_promotion": false,
+    "2023_2024_remains_spent": true,
+    "2025_plus_remains_non_selection": true,
+    "repaired_source_requires_fresh_static_unit_prefix_bounded_replay_and_exact_production_multipass_gates_before_any_economic interpretation": true
+  }
+}

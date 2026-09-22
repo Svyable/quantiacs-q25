@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "evidence_stage": "POST_SELECTION_PORTFOLIO_DIAGNOSTIC_ONLY",
+  "claim_limit": "These stability and return-correlation diagnostics compare already-frozen production-mode candidates. They do not authorize parameter changes, rescue failed candidates, or replace account-bound uniqueness checks.",
+  "workflow_provenance": {
+    "measured_head_sha": "2e3273db4738e13ec5f1f870e41f307c616aa540",
+    "stability_run_id": 35412750982,
+    "correlation_run_id": 35412751019,
+    "correlation_artifact_id": 10575381816,
+    "correlation_artifact_sha256": "ab82ad2279fdb20f5a3deaa52864997c6d7c012fae3600271af4bcc9b08669a8",
+    "quantiacs_access_mode": "public_default",
+    "cost_fraction_atr": 0.04
+  },
+  "production_mode_stability": {
+    "sharpe7": {
+      "mode": "multipass_365",
+      "last_365d_sharpe": 0.672341153191475,
+      "median_calendar_year_sharpe": 1.2661997591923857,
+      "positive_sharpe_year_fraction": 0.8181818181818182,
+      "rolling_365d_sharpe_q10": -0.3382174144730875,
+      "rolling_365d_sharpe_q90": 3.8447857948767576,
+      "worst_calendar_year_sharpe": -0.87680831547689,
+      "sharpe_2025": 0.6170913127478762,
+      "sharpe_2026_through_measurement": 0.9470726386253152,
+      "artifact_id": 10575332046,
+      "artifact_sha256": "66b90450615f28d36d18b326be6607f2ffb8e8bca86fd580ecd77836f7bbdda2"
+    },
+    "sota": {
+      "mode": "multipass_900",
+      "last_365d_sharpe": 0.1917124721006929,
+      "median_calendar_year_sharpe": 1.1439646876280352,
+      "positive_sharpe_year_fraction": 0.8181818181818182,
+      "rolling_365d_sharpe_q10": -0.9250954370890333,
+      "rolling_365d_sharpe_q90": 3.0193828625483468,
+      "worst_calendar_year_sharpe": -2.2145622919165704,
+      "sharpe_2025": 0.8256083324808956,
+      "sharpe_2026_through_measurement": 1.0863993909704726,
+      "artifact_id": 10575631248,
+      "artifact_sha256": "e52d18ba84c5fe5c5c792322682e369db31195e6eb792a48c9815fe4a3a000d4"
+    },
+    "lattice": {
+      "mode": "multipass_365",
+      "last_365d_sharpe": -0.3531457404813139,
+      "median_calendar_year_sharpe": 1.23893120780671,
+      "positive_sharpe_year_fraction": 0.7272727272727273,
+      "rolling_365d_sharpe_q10": -0.6825009657613277,
+      "rolling_365d_sharpe_q90": 3.5421894362901347,
+      "worst_calendar_year_sharpe": -1.3572753697365034,
+      "sharpe_2025": -0.3776789512616515,
+      "sharpe_2026_through_measurement": 0.21571048324106024,
+      "artifact_id": 10574857346,
+      "artifact_sha256": "86f9651c2e948d5b93692b87663c12b60b4459cb27988d7a8777114706ff40c7"
+    },
+    "hit126": {
+      "mode": "singlepass_parity_proven",
+      "last_365d_sharpe": 0.1934191710498993,
+      "median_calendar_year_sharpe": 1.1691882883087974,
+      "positive_sharpe_year_fraction": 0.7272727272727273,
+      "rolling_365d_sharpe_q10": -0.7278231314056742,
+      "rolling_365d_sharpe_q90": 3.048379724582249,
+      "worst_calendar_year_sharpe": -2.2800124391356187,
+      "sharpe_2025": -0.39046197124186305,
+      "sharpe_2026_through_measurement": 1.9937676313237314,
+      "artifact_id": 10575480697,
+      "artifact_sha256": "53ce81637de9fb6a328bc8259f249eccb95e973e6f8d78117ac5b97e24000255"
+    }
+  },
+  "pairwise_daily_return_correlation_at_0_04": {
+    "sharpe7__sota": 0.719715,
+    "sharpe7__lattice": 0.884309,
+    "sharpe7__hit126": 0.536507,
+    "sota__lattice": 0.814262,
+    "sota__hit126": 0.753218,
+    "lattice__hit126": 0.650606
+  },
+  "interpretation": {
+    "sharpe7": "strongest recent 365-day reading among these four in this diagnostic and materially lower overlap with hit126 than with lattice",
+    "lattice": "qualified full-history economics but weak recent diagnostic and high overlap with sharpe7",
+    "hit126": "lower full-history economics but comparatively low overlap with sharpe7; useful reserve/diversification lane",
+    "sota": "qualified lower-turnover alternative with moderate-to-high overlap and softer last-365 diagnostic than sharpe7",
+    "retune_after_observation": false
+  }
+}

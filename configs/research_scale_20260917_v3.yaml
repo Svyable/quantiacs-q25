@@ -1,0 +1,98 @@
+version: 3
+as_of: "2026-09-17"
+supersedes_for_new_promotion_decisions: "configs/research_scale_20260917_v2.yaml"
+purpose: "Separate research independence, internal family duplication, and Quantiacs submission uniqueness."
+
+change_basis:
+  class: "EXTERNAL_RULE_CLARIFICATION_NOT_CANDIDATE_TUNING"
+  note: >-
+    After v2 was written, current Quantiacs support material was checked. Public
+    support pages describe correlation-above-0.9 reports, and Quantiacs support
+    has stated a 90% correlation limit. Hosted participant-specific checking is
+    still authoritative. Therefore <=0.45 remains an independence target, not a
+    hard submission-roster gate.
+  sources:
+    - "https://quantiacs.com/community/user/support/posts"
+    - "https://quantiacs.com/community/user/antinomy"
+    - "https://quantiacs.com/community/topic/97/more-color-on-contest-rules/12"
+
+freeze_policy:
+  prior_campaign_results_immutable: true
+  forbid_threshold_changes_from_candidate_results: true
+  forbid_holdout_tuning: true
+  forbid_failed_family_grid_rescue: true
+
+performance_gates:
+  full_sharpe_min: 1.15
+  stressed_cost_atr_fraction: 0.12
+  stressed_sharpe_min: 0.70
+  worst_pre2025_fold_sharpe_min: 0.20
+  max_drawdown_abs_max: 0.50
+  one_day_delay_sharpe_retention_min: 0.70
+  prefix_causality_required: true
+  liquid_only_required: true
+  long_only_required: true
+  exact_replay_required_for_finalists: true
+
+correlation_policy:
+  historical_archive:
+    role: "NOVELTY_DIAGNOSTIC"
+    independent_alpha_target_max_abs_corr: 0.45
+    near_clone_return_corr: 0.80
+    hard_submission_gate: false
+  active_roster:
+    role: "PORTFOLIO_DIVERSIFICATION_DIAGNOSTIC"
+    independent_alpha_target_pre2025: 0.45
+    independent_alpha_target_recent: 0.50
+    submission_roster_preference_max_abs_corr: 0.80
+    hard_submission_gate: false
+    note: >-
+      Correlation above the independence target is allowed when the candidate is
+      otherwise strong and remains below the near-clone boundary. Treat such a
+      strategy as a related-but-distinct submission, replacement, or regime bet.
+  hosted_quantiacs:
+    role: "AUTHORITATIVE_EXTERNAL_UNIQUENESS_GATE"
+    public_reference_threshold: 0.90
+    participant_specific_check_required: true
+    hard_submission_gate: true
+    note: >-
+      Do not locally certify acceptance. The hosted check compares against the
+      platform submission pool and is authoritative at submission time.
+
+selection:
+  method: "performance_gate_then_exact_replay_then_cluster_then_hosted_check"
+  cluster_on_daily_return_abs_corr: 0.80
+  max_representatives_per_internal_cluster: 2
+  do_not_reject_solely_for_corr_below: 0.80
+  pareto_metrics:
+    - full_sharpe
+    - worst_pre2025_fold_sharpe
+    - stressed_sharpe_12pct_atr
+    - one_day_delay_retention
+    - max_drawdown
+    - recent_regime_diagnostic
+    - active_roster_max_abs_corr
+
+campaign:
+  total_ideation_budget: 400
+  preregister_budget: 80
+  fast_screen_budget: 80
+  exact_replay_budget: 12
+  finalist_budget: 6
+  hosted_validation_budget: 4
+  max_initial_free_parameters_per_hypothesis: 3
+
+active_roster_baseline:
+  note: "Correlation reference set only; not a final submission decision."
+  members:
+    - C165
+    - V12_signed_volume_diffusion
+    - V13_low_residual_skew
+
+calendar:
+  wide_discovery_end: "2026-09-23"
+  exact_replay_end: "2026-09-25"
+  stress_and_reproduction_end: "2026-09-27"
+  hosted_validation: "2026-09-28"
+  source_freeze: "2026-09-29"
+  submission_deadline: "2026-09-30"

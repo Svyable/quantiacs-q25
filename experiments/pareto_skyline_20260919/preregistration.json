@@ -1,0 +1,41 @@
+{
+  "experiment_id":"pareto_skyline_20260919",
+  "created":"2026-09-19",
+  "status":"FROZEN_BEFORE_PUBLIC_DEFAULT_ECONOMIC_MEASUREMENT",
+  "candidate":{
+    "id":"q25_pareto_skyline_v1",
+    "source":"strategies/generated/q25_pareto_skyline.py",
+    "source_blob_sha":"89457d7eb3b80113693cf946c933c7514c23966a",
+    "data_scope":"Quantiacs cryptodaily OHLCV plus historical is_liquid only",
+    "long_only":true,
+    "manual_asset_selection":false,
+    "name_cap":0.25
+  },
+  "hypothesis":{
+    "primary":"A scale-free Pareto skyline across risk-adjusted return, trend, momentum, drawdown resilience, and inverse volatility can isolate robust winners without collapsing heterogeneous information into one scalar score.",
+    "central":"keep assets dominated by at most one liquid peer, then apply broad positive-state gates",
+    "no_parameter_grid":true
+  },
+  "controls":{
+    "base_sharpe7":"exact promoted Sharpe7 Vol2",
+    "no_pareto":"same broad gates and quality score without skyline filtering",
+    "frontier_only":"strict nondominated frontier only",
+    "pareto_le2":"looser first three skyline layers",
+    "dominated_tail":"destructive direction control: require at least two dominators"
+  },
+  "selection_rule":{
+    "primary_period":"2016-01-01 through 2022-12-31",
+    "candidate_sharpe_gt_1_at_0_04":true,
+    "candidate_sharpe_gt_1_at_0_08":true,
+    "candidate_beats_dominated_tail":true,
+    "candidate_beats_no_pareto":true,
+    "candidate_within_0_10_of_sharpe7_at_0_04":true,
+    "frontier_and_le2_are_controls_not_rescue_candidates":true,
+    "retune_after_observation":false
+  },
+  "evidence_policy":{
+    "2023_2024":"spent_diagnostic_only",
+    "2025_plus":"non_selection",
+    "live_2026_10_01_2027_01_31":"untouched"
+  }
+}

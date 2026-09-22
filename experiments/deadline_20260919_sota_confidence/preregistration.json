@@ -1,0 +1,25 @@
+{
+  "experiment_id": "deadline_20260919_sota_confidence_diagnostic",
+  "created": "2026-09-19",
+  "status": "FROZEN_BEFORE_SPENT_AND_RECENT_DIAGNOSTIC_LOOK",
+  "candidate": {
+    "source": "submissions/q25_sota_meta_ensemble_multipass.py",
+    "source_blob_sha": "757c9515747bd884a1f5c1d4b1c5259af803e75c",
+    "lookback_days": 900,
+    "formula_changes": false
+  },
+  "windows": {
+    "spent_2023_2024": ["2023-01-01", "2024-12-31"],
+    "diagnostic": ["2025-01-01", "CURRENT_PRELIVE_DATE"],
+    "calendar_years": [2023, 2024, 2025, 2026],
+    "protected_live_start": "2026-10-01"
+  },
+  "cost_fraction_atr": [0.04, 0.10],
+  "decision_policy": {
+    "no_parameter_or_formula_mutation_after_opening": true,
+    "use": "confidence/slate selection only",
+    "2023_2024_is_globally_spent_not_fresh_validation": true,
+    "2025_plus_is_diagnostic_only": true,
+    "live_window_must_remain_untouched": true
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "deadline_20260919_sharpe7_topology_blend_forward_validation",
+  "candidate": "q25_sharpe7_topology_equal_blend_v1",
+  "measurement_source_blob_sha": "cd987190e971e6b09ad2514fd1baa237ff8a2879",
+  "workflow_run_id": 35461643323,
+  "workflow_job_id": 105946457244,
+  "artifact_id": 10590480329,
+  "artifact_sha256": "41f6b0fe4d8ab64530e088e19d5ecf55bcd484db64d5fa61458bc93df2cc4ffd",
+  "last_market_date": "2026-09-18",
+  "protected_live_start": "2026-10-01",
+  "validation_2023_2024": {
+    "0.04": {
+      "avg_turnover": 0.08409044464958905,
+      "equity": 1.8423036017537093,
+      "max_drawdown": -0.2609103075584318,
+      "sharpe_ratio": 1.3704678753356454,
+      "volatility": 0.24446775454033612
+    },
+    "0.10": {
+      "avg_turnover": 0.08411614716553382,
+      "equity": 1.5129172996091935,
+      "max_drawdown": -0.29355797131119454,
+      "sharpe_ratio": 0.9682884373290264,
+      "volatility": 0.2443489718246768
+    }
+  },
+  "diagnostic_2025_pre_live": {
+    "0.04": {
+      "avg_turnover": 0.07889327836123389,
+      "equity": 1.2132070551599619,
+      "max_drawdown": -0.17859055371118215,
+      "sharpe_ratio": 0.6466719705891748,
+      "volatility": 0.20715539475792827
+    },
+    "0.10": {
+      "avg_turnover": 0.07891808258284282,
+      "equity": 1.0551321529055842,
+      "max_drawdown": -0.19176674175223574,
+      "sharpe_ratio": 0.25369182883539654,
+      "volatility": 0.20720841600656884
+    }
+  },
+  "calendar_years_at_0_04": {
+    "2023": {
+      "avg_turnover": 0.0881076486653709,
+      "equity": 1.2558907219494555,
+      "max_drawdown": -0.2609103075584318,
+      "sharpe_ratio": 1.0283857884897503,
+      "volatility": 0.25254329390962826
+    },
+    "2024": {
+      "avg_turnover": 0.07994557713343141,
+      "equity": 1.4518598868435497,
+      "max_drawdown": -0.18542833409162174,
+      "sharpe_ratio": 1.694844529431314,
+      "volatility": 0.23589222374037172
+    },
+    "2025": {
+      "avg_turnover": 0.07509211154846493,
+      "equity": 1.0589597413043632,
+      "max_drawdown": -0.17859055371118215,
+      "sharpe_ratio": 0.372563257109653,
+      "volatility": 0.2158224025355539
+    },
+    "2026": {
+      "avg_turnover": 0.08496848765998162,
+      "equity": 1.1457166486971309,
+      "max_drawdown": -0.09901345327720656,
+      "sharpe_ratio": 1.0751860540574858,
+      "volatility": 0.19431448334885687
+    }
+  },
+  "last_365_days_at_0_04": {
+    "start": "2025-09-19",
+    "end": "2026-09-18",
+    "stats": {
+      "avg_turnover": 0.07843601545163613,
+      "equity": 1.0922619821035084,
+      "max_drawdown": -0.13594500928211406,
+      "sharpe_ratio": 0.5282855112040574,
+      "volatility": 0.20763736686831807
+    }
+  },
+  "interpretation": {
+    "contest_cost_4pct": "PASS_SR_GT_1",
+    "stress_10pct": "BELOW_1_BY_0.0317",
+    "risk_effect": "Protected-window drawdown and turnover are lower than frozen Sharpe7 alone, while Sharpe is modestly lower.",
+    "recent_diagnostic": "2025+ and last-365 Sharpe are weaker than frozen Sharpe7; diagnostic only.",
+    "decision": "QUALIFIED_DIVERSIFICATION_CANDIDATE_PENDING_ACCOUNT_BOUND_CORRELATION"
+  },
+  "claim_limit": "This is one-time protected forward evidence for the already-frozen 50/50 blend. No formula, member, parameter, or blend-weight mutation is permitted. The topology member's standalone forward failure remains part of provenance."
+}

@@ -31,7 +31,7 @@ jobs:
       - name: Verify frozen source and mechanics
         shell: bash
         run: |
-          test "$(git rev-parse HEAD:strategies/generated/q25_dual_horizon_lattice_closure.py)" = "306b62a9e37306ece9861c4bf70d592a2bb670ba"
+          test "$(git rev-parse HEAD:strategies/generated/q25_dual_horizon_lattice_closure.py)" = "fc6aaedf1976e95baaf31181f1862f99282acc92"
           python -m pytest -q tests/test_q25_dual_horizon_lattice_closure.py
 
   benchmark:

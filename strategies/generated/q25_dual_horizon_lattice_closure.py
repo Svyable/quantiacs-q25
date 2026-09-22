@@ -357,7 +357,7 @@ def run_research(output=None):
                     slippage_factor=cost,
                     points_per_year=365,
                 ).sel(time=slice(start, end))
-                result{fold_name][f"{cost:.2f}"] = _snapshot(stat)
+                result[fold_name][f"{cost:.2f}"] = _snapshot(stat)
         payload["modes"][mode] = result
         print(json.dumps({mode: result}, indent=2, sort_keys=True), flush=True)
 

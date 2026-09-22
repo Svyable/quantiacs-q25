@@ -8,7 +8,7 @@ def calculate_weights(data):
  mom=(c/c.shift(time=42)-1).clip(min=0); r=c/c.shift(time=1)-1; vol=r.rolling(time=28,min_periods=14).std()
  consistency=((pos-.5)*2).clip(min=0,max=1); raw=mom*consistency/(vol+.012)*l
  raw=raw.rolling(time=4,min_periods=1).mean()*l; g=raw.sum("asset"); w=xr.where(g>EPS,raw/g,0.)
- return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).transpose("time","asset")
+ return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).clip(min=0).transpose("time","asset")
 def strategy(data): return calculate_weights(data)
 def load_data(period):
  import qnt.data as qndata

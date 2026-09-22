@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vcb_holdout_20260922",
+  "status": "PREREGISTERED_HOLDOUT_UNOPENED",
+  "authorized_by_evidence": "experiments/vcb_correlation_live_20260922/evidence.json",
+  "candidate": "q25_volatility_contraction_breakout_v1",
+  "incumbent": "q25_deadline_hit126_consistency_v1",
+  "blend": {"vcb_weight": 0.5, "incumbent_weight": 0.5},
+  "cost_atr_percent": 4,
+  "evaluation": {"start": "2023-01-01", "end": "latest_available_at_run", "one_shot": true},
+  "frozen_before_holdout": true,
+  "prohibited": ["parameter_changes", "formula_changes", "asset_hand_picking", "date_switches", "holdout_retuning", "post_hoc_grid_search"],
+  "required_metrics": ["quantiacs_sharpe", "annualized_return", "annualized_volatility", "max_drawdown", "turnover", "vol10_normalized_return", "candidate_incumbent_return_correlation", "blend_sharpe", "blend_vol10_normalized_return"],
+  "required_comparisons": ["candidate_vs_incumbent", "candidate_vs_frozen_50_50_blend"],
+  "advancement_gates": {
+    "candidate_holdout_sharpe_gt_0": true,
+    "candidate_holdout_vol10_normalized_return_gt_0": true,
+    "candidate_full_2016_latest_sharpe_gt_1": true,
+    "no_holdout_retuning": true
+  },
+  "decision_rule": "ADVANCE only if every frozen gate passes. Otherwise preserve as HOLDOUT_FALSIFIED and do not rescue or retune this candidate on holdout evidence."
+}

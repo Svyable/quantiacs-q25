@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vcb_production_adapter_20260922",
+  "status": "PREREGISTERED",
+  "hypothesis": "The frozen holdout-qualified VCB mechanism can be wrapped as a contest-compatible single-pass submission without changing its economic weights, while preserving deterministic causal behavior and contest constraints.",
+  "candidate_module": "strategies.generated.q25_volatility_contraction_breakout",
+  "candidate_strategy_id": "q25_volatility_contraction_breakout_v1",
+  "source_holdout_evidence": "research/evidence/vcb_holdout_20260922.md",
+  "source_strategy_blob_sha": "3b8325e8c95976c91877dfc6adf4667f06ffc3cd",
+  "mechanism_frozen": true,
+  "parameters_frozen": true,
+  "blend_weight_frozen": 0.5,
+  "cost_atr_percent": 4,
+  "production_path": "single_pass",
+  "advancement_gates": {
+    "adapter_weights_exactly_match_frozen_candidate": true,
+    "bounded_prefix_replay_max_abs_diff_lte": 1e-12,
+    "asset_order_invariance_max_abs_diff_lte": 1e-12,
+    "deterministic_replay_max_abs_diff_lte": 0.0,
+    "long_only": true,
+    "name_cap_lte": 0.25,
+    "gross_weight_lte": 1.0,
+    "illiquid_weight_eq": 0.0,
+    "in_sample_2016_latest_sharpe_gt": 1.0,
+    "official_cost_atr_percent": 4,
+    "contest_check_correlation_enabled": true,
+    "no_post_holdout_retuning": true
+  },
+  "forbidden": [
+    "formula changes",
+    "parameter changes",
+    "asset hand-picking",
+    "date switches",
+    "post-hoc grids",
+    "changing the frozen 50/50 ensemble weight based on holdout results"
+  ],
+  "decision_rule": "ADVANCE only if every production-integrity gate passes; otherwise preserve the failure and do not promote the adapter."
+}

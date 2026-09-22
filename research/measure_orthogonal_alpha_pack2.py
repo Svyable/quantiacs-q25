@@ -78,7 +78,7 @@ def _score_identity_permutation(weights: xr.DataArray, data: xr.DataArray) -> xr
     liquid = data.sel(field="is_liquid").transpose("time", "asset")
     liquid = xr.where(np.isfinite(liquid) & (liquid == 1), 1.0, 0.0)
     permuted = weights.roll(asset=1, roll_coords=False) * liquid
-    return permuted.fillna(0.0).clip(min=0.0).transpose("time", "asset")
+    return permuted.fillna(0.0).clip(min=0.0).transpose("time", "asset").reset_coords(drop=True)
 
 
 def _lookahead_detector(data: xr.DataArray) -> dict:

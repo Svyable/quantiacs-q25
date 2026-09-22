@@ -1,0 +1,48 @@
+{
+  "ablation": "remove all historical is_liquid transition-memory state and rank only the same 7-day positive residual path-efficiency confirmation among currently eligible assets; preserve rebalance and allocation",
+  "allocation": "Monday fixed slots min(0.25, 1/K); unused slots cash; strict current ineligibility exits persist until next scheduled rebalance",
+  "cash_rule": "no positive qualified score means cash",
+  "code_path": "strategies/generated/frontier_20260916p_liquidity_requalification_hysteresis.py",
+  "contamination_notes": "All prior development evidence through Frontier-O is observed. Frontier-P is repeated development research, not a fresh holdout. 2023-2024 is spent.",
+  "cost_hypothesis": "weekly fixed-slot portfolios should bound turnover; exact ATR-linked ladder is frozen at 0/4/8/12%",
+  "data_admissibility": "OHLCV_AND_HISTORICAL_IS_LIQUID_ONLY",
+  "experiment_id": "frontier_20260916p_liquidity_requalification_hysteresis",
+  "failure_mode": "historical eligibility memory adds no incremental return information beyond ordinary current eligibility plus short residual path efficiency, or identity-rotated eligibility memory performs as well",
+  "falsifier": "rotate the complete eligibility-memory state across currently eligible assets on each date before pairing with each asset's own residual confirmation; preserve that date's state distribution",
+  "folds_allowed_for_selection": [
+    "research",
+    "dev"
+  ],
+  "grid": {
+    "window": [
+      42,
+      63,
+      84
+    ]
+  },
+  "mechanism": "liquidity_requalification_hysteresis",
+  "nearest_incumbent": "V11_balanced event_lifecycle_calendar_motif; Frontier-P differs by using the full historical eligibility-persistence path, requalification gap and churn/stabilization memory rather than a simple entry/new-asset event",
+  "novelty_axes_changed": [
+    "information_primitive",
+    "transform",
+    "timing_or_state_condition"
+  ],
+  "params": {
+    "top_k": 5,
+    "window": 63
+  },
+  "portfolio_role": "eligibility-memory cross-sectional satellite",
+  "primitive": "Quantiacs daily OHLCV and historical is_liquid only",
+  "promotion_gates": "configs/promotion_gates.yaml",
+  "rebalance": "Mondays; immediate strict-liquidity loss exits",
+  "selection": "among currently liquid assets, multiply positive eligibility-hysteresis state by positive 7-day market-residual path efficiency; rank positive scores top-K with deterministic label tie breaks",
+  "selection_objective": "minimum research/dev Sharpe across 0.04/0.08/0.12 ATR cost; then worst DD, lower turnover, id",
+  "source_notes": "Priority-1 liquidity_transition_hysteresis frontier from configs/research_frontier.yaml. Formula frozen only after Frontier-N, Frontier-M reserve and Frontier-O development evidence was observed and canonically recorded; no Frontier-P return was observed before preregistration.",
+  "status": "IMPLEMENTED_PENDING_EVIDENCE",
+  "stop_rule": "freeze if the no-transition ablation or eligibility-state identity rotation matches/beats the canonical parent, or if every valid base cell is below the fixed 1.0 robust-development floor; do not grid-rescue after failure",
+  "thesis": "A currently eligible asset whose recent eligibility persistence has improved sharply relative to its longer eligibility history, and whose requalification has remained stable rather than churning, may be undergoing durable market-access maturation. Pairing that eligibility-memory state with orderly positive residual price assimilation may identify a distinct cross-sectional state beyond simple entry age or current liquidity.",
+  "timing": "completed daily bars only; toolbox owns execution lag; eligibility state uses current membership only as the admissible universe and trailing transition history through the current completed bar; rolling state and capped run-age are causal and <=365 days",
+  "track": "novel_alpha",
+  "universe": "historical is_liquid == 1; no hand-picked symbols",
+  "validation": "2023-2024 is SPENT_DO_NOT_MUTATE and excluded from Frontier-P selection; 2025+ and live never drive mutation"
+}

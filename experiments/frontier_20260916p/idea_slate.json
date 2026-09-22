@@ -1,0 +1,99 @@
+{
+  "campaign": "frontier_20260916p",
+  "ideation_count": 10,
+  "implemented": "liquidity_requalification_hysteresis",
+  "ideas": [
+    {
+      "decision": "IMPLEMENT",
+      "hypothesis": "Recent eligibility persistence improving relative to longer eligibility memory, after stabilization, predicts stronger cross-sectional continuation.",
+      "id": "liquidity_requalification_hysteresis",
+      "novelty_axes": [
+        "information_primitive",
+        "transform",
+        "timing_or_state_condition"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Repeated eligibility flipping creates an exhaustion state whose stabilization may matter more than entry itself.",
+      "id": "eligibility_churn_exhaustion",
+      "novelty_axes": [
+        "information_primitive",
+        "timing_or_state_condition"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Re-entry after prior durable eligibility differs from first sustained entry because prior market-access memory persists.",
+      "id": "reentry_memory_asymmetry",
+      "novelty_axes": [
+        "information_primitive",
+        "transform"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Acceleration in eligibility persistence, not raw entry age, identifies maturation.",
+      "id": "eligibility_age_curvature",
+      "novelty_axes": [
+        "information_primitive",
+        "transform"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Cross-sectional breadth of stable requalifications may govern cash deployment.",
+      "id": "liquidity_state_breadth",
+      "novelty_axes": [
+        "information_primitive",
+        "portfolio_construction"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Eligibility improvement without price confirmation may mean temporary universe churn rather than durable access.",
+      "id": "eligibility_price_disagreement",
+      "novelty_axes": [
+        "information_primitive",
+        "transform"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Dispersion in eligibility-memory states identifies structural universe rotation.",
+      "id": "requalification_dispersion",
+      "novelty_axes": [
+        "information_primitive",
+        "timing_or_state_condition"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "A tiny causal survival model of continued eligibility may contain information beyond entry age.",
+      "id": "eligibility_survival_probability",
+      "novelty_axes": [
+        "information_primitive",
+        "transform"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Upward cross-sectional migration in eligibility memory may lead price leadership.",
+      "id": "liquidity_memory_rank_migration",
+      "novelty_axes": [
+        "information_primitive",
+        "transform"
+      ]
+    },
+    {
+      "decision": "IDEA_ONLY",
+      "hypothesis": "Aggregate requalification instability may be a cash/risk state rather than an asset selector.",
+      "id": "eligibility_hysteresis_cash",
+      "novelty_axes": [
+        "information_primitive",
+        "portfolio_construction"
+      ]
+    }
+  ],
+  "performance_seen_before_score": false
+}

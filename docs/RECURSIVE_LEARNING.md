@@ -48,7 +48,7 @@ Median forward−development Sharpe delta: **-1.062**.
 - Latest measured campaign: `frontier_20260913o`.
 - Latest full matrix: `frontier_20260912k`.
 - Measured campaigns since full matrix: **5**.
-- Frozen measurement queue: **0**; next `—`.
+- Frozen measurement queue: **1**; next `frontier_20260916p`.
 
 ## State tags
 
@@ -59,6 +59,7 @@ Median forward−development Sharpe delta: **-1.062**.
 
 ## Derived next actions
 
+- **P1 MEASURE_FROZEN_QUEUE_FIRST** — A preregistered campaign is already frozen. Measure it unchanged before mutating hypotheses from newer diagnostics.
 - **P2 DEEPEN_CANONICAL_MATRIX_EVIDENCE** — The measurement frontier is ahead of the latest full matrix; deepen evidence before the public surface drifts further.
 - **P3 TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC** — Recent base cells have a negative pooled median Dev−Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders.
 - **P4 CALIBRATE_DEVELOPMENT_CONFIDENCE** — Observed frozen forward validation retained only part of the development Sharpe. Keep development hits explicitly provisional.

@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "campaign": "frontier_20260916p",
+  "receipt_status": "MEASURED_ARTIFACT_CANONICAL_INGEST_PENDING_MERGE",
+  "review_classification": {
+    "track": "novel_alpha",
+    "nearest_incumbent": "V11_balanced event/lifecycle sleeve",
+    "reason": "The tested object is historical is_liquid requalification memory and churn rather than a simple positive-entry/new-asset age event. The eligibility-memory parent is directly tested against a no-history ablation and identity-rotated state falsifier."
+  },
+  "decision": "PROMOTE_ZERO_FREEZE_ALL",
+  "families": [
+    {
+      "family": "liquidity_requalification_hysteresis",
+      "best_base_id": "liquidity_requalification_hysteresis_w84",
+      "best_robust_sharpe": -1.3540726264496663,
+      "central_id": "liquidity_requalification_hysteresis_w63",
+      "central_robust_sharpe": -1.4321683159460632,
+      "ablation_robust_sharpe": -0.17490551272884503,
+      "falsifier_robust_sharpe": -0.9978464781754903,
+      "best_score": -1.3540726264496663,
+      "completed_cells": 5,
+      "decision": "FREEZE",
+      "decision_code": "FALSIFIED_DEVELOPMENT",
+      "declared_cells": 5,
+      "failed_controls": [
+        "liquidity_requalification_hysteresis_ablation",
+        "liquidity_requalification_hysteresis_falsifier"
+      ],
+      "family_rank": 1,
+      "invalid_cells": [],
+      "median_score": -1.4321683159460632,
+      "pending_cells": [],
+      "reason": "destructive control/ablation matches or beats its valid parent"
+    }
+  ],
+  "cells": [
+    {
+      "id": "persistent_low_vol",
+      "family": "control",
+      "mode": "control",
+      "status": "COMPLETE",
+      "selection_score": 0.6409384685319315
+    },
+    {
+      "id": "equal_liquid",
+      "family": "control",
+      "mode": "control",
+      "status": "COMPLETE",
+      "selection_score": 0.2699845517798879
+    },
+    {
+      "id": "inverse_vol_trend",
+      "family": "control",
+      "mode": "control",
+      "status": "COMPLETE",
+      "selection_score": 0.052595480957432744
+    },
+    {
+      "id": "liquidity_requalification_hysteresis_ablation",
+      "family": "liquidity_requalification_hysteresis",
+      "mode": "ablation",
+      "status": "COMPLETE",
+      "selection_score": -0.17490551272884503
+    },
+    {
+      "id": "liquidity_requalification_hysteresis_falsifier",
+      "family": "liquidity_requalification_hysteresis",
+      "mode": "falsifier",
+      "status": "COMPLETE",
+      "selection_score": -0.9978464781754903
+    },
+    {
+      "id": "liquidity_requalification_hysteresis_w84",
+      "family": "liquidity_requalification_hysteresis",
+      "mode": "base",
+      "status": "COMPLETE",
+      "selection_score": -1.3540726264496663
+    },
+    {
+      "id": "liquidity_requalification_hysteresis_w63",
+      "family": "liquidity_requalification_hysteresis",
+      "mode": "base",
+      "status": "COMPLETE",
+      "selection_score": -1.4321683159460632
+    },
+    {
+      "id": "liquidity_requalification_hysteresis_w42",
+      "family": "liquidity_requalification_hysteresis",
+      "mode": "base",
+      "status": "COMPLETE",
+      "selection_score": -1.7188851508786662
+    }
+  ],
+  "source": {
+    "workflow_run_id": 35126723702,
+    "workflow_job_id": 104897468783,
+    "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/35126723702",
+    "artifact_id": 10460505568,
+    "artifact_name": "frontier_20260916p-measured-35126723702",
+    "artifact_digest": "sha256:5ffc519a0bd79005fe186067faa5e8ee3b4ed5b51552dc8db6a088c5ff749f78",
+    "measured_head_sha": "ad153e8441b476353a149a2944f471c8defcf67b",
+    "preregistration_sha256": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf",
+    "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+    "manifest_sha256": "25c9438ddd08f6c34f87fb75a70e1e43bfc1f567307eaaffebd72e548c0a85ea",
+    "verification_basis": "The full repository software/provenance/causality suite, dashboard freshness, frozen preregistration/source hash proof, three controls and all five Frontier-P cells completed in the successful exact Quantiacs measurement lane."
+  },
+  "context": {
+    "costs": [
+      0,
+      0.04,
+      0.08,
+      0.12
+    ],
+    "folds": [
+      {
+        "start": "2016-01-01",
+        "end": "2020-12-31",
+        "id": "research",
+        "status": "OBSERVED_REUSED"
+      },
+      {
+        "start": "2021-01-01",
+        "end": "2022-12-31",
+        "id": "dev",
+        "status": "OBSERVED_REUSED"
+      }
+    ],
+    "quantiacs_access_mode": "public_default",
+    "status": "DEVELOPMENT_ONLY"
+  },
+  "claim_limit": "Frozen public/default development measurement only. Every base is below the 1.0 robust-development floor and the no-history ablation plus rotated-state falsifier both beat the central parent. Do not invert, retune, grid-rescue or promote this family."
+}

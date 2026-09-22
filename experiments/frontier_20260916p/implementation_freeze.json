@@ -1,0 +1,18 @@
+{
+  "activation_type": "NEW_PREREGISTERED_FRONTIER",
+  "campaign": "frontier_20260916p",
+  "freeze_note": "One implemented eligibility-memory family, three preregistered long-memory windows, one no-transition ablation and one eligible identity-rotation falsifier. No Frontier-P market-return result may mutate formulas, signs, windows, stabilization horizon, allocation or controls.",
+  "frozen_before_measurement": true,
+  "market_returns_observed_before_freeze": false,
+  "preregistration_sha256": {
+    "liquidity_requalification_hysteresis": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf"
+  },
+  "selection_folds": [
+    "research",
+    "dev"
+  ],
+  "strategy_sha256": {
+    "liquidity_requalification_hysteresis": "54d1151f999b80a9cd6f95f0482319f2768cba201e67e5f7426409104c548b7c"
+  },
+  "validation_boundary": "2023-2024 is spent; 2025+ and live are protected from mutation."
+}

@@ -31,6 +31,12 @@
     ],
     "next_actions": [
       {
+        "action": "INGEST_MEASURED_EVIDENCE",
+        "campaign": "frontier_20260916p",
+        "priority": 1,
+        "why": "A successful benchmark receipt exists but canonical observed evidence is not committed."
+      },
+      {
         "action": "DISAMBIGUATE_FRONTIER_LABELS",
         "campaign": null,
         "priority": 2,
@@ -43,7 +49,7 @@
         "why": "Latest committed campaign is not represented by a full canonical matrix packet."
       }
     ],
-    "pending_canonical_ingest_count": 0,
+    "pending_canonical_ingest_count": 1,
     "unmeasured_queue_count": 0
   },
   "failed_forward_stack": [
@@ -57,55 +63,403 @@
     }
   ],
   "frozen_historical_stack": [
-    {"full_sharpe":2.261,"id":"V10","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.309,"name":"V10 multi-factor ensemble — Pareto","rank":1,"role":"primary legacy core","status":"prepare_precheck","stress_atr_fraction":0.12,"stress_sharpe":1.965},
-    {"full_sharpe":1.261,"id":"V11_balanced","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.2311,"name":"V11 new-only event ensemble — Balanced","rank":2,"role":"orthogonal event / lifecycle core","status":"prepare_precheck","stress_atr_fraction":0.12,"stress_sharpe":0.899},
-    {"full_sharpe":1.23,"id":"C165","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.2145,"name":"C165 mobility / consensus risk","rank":3,"role":"risk-efficiency core","status":"prepare_precheck","stress_atr_fraction":0.12,"stress_sharpe":0.934},
-    {"full_sharpe":1.035,"id":"V12","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.3386,"name":"V12 signed volume diffusion — 50/50 bridge","rank":4,"role":"structural volume/return network core","status":"prepare_precheck_exact_official_gate_required","stress_atr_fraction":0.12,"stress_sharpe":0.75},
-    {"full_sharpe":1.772,"id":"CoCrash126","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.1438,"name":"Co-crash shelter — base 126D","rank":5,"role":"defensive crash-comovement sleeve","status":"prepare_precheck","stress_atr_fraction":0.12,"stress_sharpe":1.627},
-    {"full_sharpe":1.536,"id":"hrt_dispersion_switch","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.12,"name":"Residual dispersion switch","rank":6,"role":"sparse dispersion-conditioned residual sleeve","status":"prepare_precheck","stress_atr_fraction":0.08,"stress_sharpe":1.41},
-    {"full_sharpe":1.185,"id":"Breadth","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.2149,"name":"Breadth Thrust Switch","rank":7,"role":"market breadth acceleration timing","status":"prepare_precheck","stress_atr_fraction":0.08,"stress_sharpe":1.075},
-    {"full_sharpe":1.526,"id":"aqr_factor_balance","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.2472,"name":"Slow defensive factor balance","rank":8,"role":"multi-factor defensive balance","status":"prepare_precheck","stress_atr_fraction":0.08,"stress_sharpe":1.445},
-    {"full_sharpe":1.7,"id":"Trend_hit126","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.2484,"name":"126D positive-return consistency — five names","rank":9,"role":"persistent trend reserve","status":"conditional_reserve","stress_atr_fraction":0.12,"stress_sharpe":1.538},
-    {"full_sharpe":2.105,"id":"V5_latency","lane":"FROZEN_HISTORICAL_ROSTER","max_drawdown":-0.103,"name":"V5 latency ensemble","rank":10,"role":"low-risk alternative within the V10 family","status":"conditional_reserve_high_overlap_with_v10","stress_atr_fraction":0.12,"stress_sharpe":1.83}
+    {
+      "full_sharpe": 2.261,
+      "id": "V10",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.309,
+      "name": "V10 multi-factor ensemble \u2014 Pareto",
+      "rank": 1,
+      "role": "primary legacy core",
+      "status": "prepare_precheck",
+      "stress_atr_fraction": 0.12,
+      "stress_sharpe": 1.965
+    },
+    {
+      "full_sharpe": 1.261,
+      "id": "V11_balanced",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.2311,
+      "name": "V11 new-only event ensemble \u2014 Balanced",
+      "rank": 2,
+      "role": "orthogonal event / lifecycle core",
+      "status": "prepare_precheck",
+      "stress_atr_fraction": 0.12,
+      "stress_sharpe": 0.899
+    },
+    {
+      "full_sharpe": 1.23,
+      "id": "C165",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.2145,
+      "name": "C165 mobility / consensus risk",
+      "rank": 3,
+      "role": "risk-efficiency core",
+      "status": "prepare_precheck",
+      "stress_atr_fraction": 0.12,
+      "stress_sharpe": 0.934
+    },
+    {
+      "full_sharpe": 1.035,
+      "id": "V12",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.3386,
+      "name": "V12 signed volume diffusion \u2014 50/50 bridge",
+      "rank": 4,
+      "role": "structural volume/return network core",
+      "status": "prepare_precheck_exact_official_gate_required",
+      "stress_atr_fraction": 0.12,
+      "stress_sharpe": 0.75
+    },
+    {
+      "full_sharpe": 1.772,
+      "id": "CoCrash126",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.1438,
+      "name": "Co-crash shelter \u2014 base 126D",
+      "rank": 5,
+      "role": "defensive crash-comovement sleeve",
+      "status": "prepare_precheck",
+      "stress_atr_fraction": 0.12,
+      "stress_sharpe": 1.627
+    },
+    {
+      "full_sharpe": 1.536,
+      "id": "hrt_dispersion_switch",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.12,
+      "name": "Residual dispersion switch",
+      "rank": 6,
+      "role": "sparse dispersion-conditioned residual sleeve",
+      "status": "prepare_precheck",
+      "stress_atr_fraction": 0.08,
+      "stress_sharpe": 1.41
+    },
+    {
+      "full_sharpe": 1.185,
+      "id": "Breadth",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.2149,
+      "name": "Breadth Thrust Switch",
+      "rank": 7,
+      "role": "market breadth acceleration timing",
+      "status": "prepare_precheck",
+      "stress_atr_fraction": 0.08,
+      "stress_sharpe": 1.075
+    },
+    {
+      "full_sharpe": 1.526,
+      "id": "aqr_factor_balance",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.2472,
+      "name": "Slow defensive factor balance",
+      "rank": 8,
+      "role": "multi-factor defensive balance",
+      "status": "prepare_precheck",
+      "stress_atr_fraction": 0.08,
+      "stress_sharpe": 1.445
+    },
+    {
+      "full_sharpe": 1.7,
+      "id": "Trend_hit126",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.2484,
+      "name": "126D positive-return consistency \u2014 five names",
+      "rank": 9,
+      "role": "persistent trend reserve",
+      "status": "conditional_reserve",
+      "stress_atr_fraction": 0.12,
+      "stress_sharpe": 1.538
+    },
+    {
+      "full_sharpe": 2.105,
+      "id": "V5_latency",
+      "lane": "FROZEN_HISTORICAL_ROSTER",
+      "max_drawdown": -0.103,
+      "name": "V5 latency ensemble",
+      "rank": 10,
+      "role": "low-risk alternative within the V10 family",
+      "status": "conditional_reserve_high_overlap_with_v10",
+      "stress_atr_fraction": 0.12,
+      "stress_sharpe": 1.83
+    }
   ],
-  "measurement_queue": [],
+  "measurement_queue": [
+    {
+      "automatic_promotion": false,
+      "campaign": "frontier_20260916p",
+      "candidate_count": 5,
+      "classification_note": "Frontier-P is a preregistered priority-1 liquidity-transition-hysteresis campaign. It tests historical eligibility persistence, requalification gap and transition stability rather than a simple entry/new-asset lifecycle event. 2023-2024 is spent and excluded.",
+      "families": [
+        "liquidity_requalification_hysteresis"
+      ],
+      "family_count": 1,
+      "frontier_label": "Frontier-P",
+      "measured_decision": "PROMOTE_ZERO_FREEZE_ALL",
+      "measurement_receipt": "evidence/measurement_receipts/frontier_20260916p.json",
+      "measurement_state": "MEASURED_AWAITING_CANONICAL_INGEST",
+      "modes": {
+        "ablation": 1,
+        "base": 3,
+        "falsifier": 1
+      },
+      "selection_folds": [
+        "research",
+        "dev"
+      ],
+      "source_path": "experiments/frontier_20260916p/manifest.json"
+    }
+  ],
   "measurement_receipts": [
     {
       "campaign": "frontier_20260912m",
       "decision": "PROMOTE_ZERO_FREEZE_ALL",
       "families": [
-        {"ablation_robust_sharpe":9.228126194716202e-05,"best_base_id":"vol_curve_recompression_w63","best_robust_sharpe":0.3066733416732465,"central_id":"vol_curve_recompression_w84","central_robust_sharpe":-0.5354937578646062,"decision_code":"FALSIFIED_DEVELOPMENT","falsifier_robust_sharpe":0.20702277361049765,"family":"vol_curve_recompression"},
-        {"ablation_robust_sharpe":0.5592259674010199,"best_base_id":"relative_vol_rank_relief_w84","best_robust_sharpe":-0.09620637040556103,"central_id":"relative_vol_rank_relief_w84","central_robust_sharpe":-0.09620637040556103,"decision_code":"FALSIFIED_DEVELOPMENT","falsifier_robust_sharpe":0.1802631947820711,"family":"relative_vol_rank_relief"},
-        {"ablation_robust_sharpe":0.21001352170084853,"best_base_id":"slope_dispersion_opportunity_w84","best_robust_sharpe":0.06698489665610868,"central_id":"slope_dispersion_opportunity_w63","central_robust_sharpe":-0.1980717789517871,"decision_code":"FALSIFIED_DEVELOPMENT","falsifier_robust_sharpe":-0.2094595663639839,"family":"slope_dispersion_opportunity"}
+        {
+          "ablation_robust_sharpe": 9.228126194716202e-05,
+          "best_base_id": "vol_curve_recompression_w63",
+          "best_robust_sharpe": 0.3066733416732465,
+          "central_id": "vol_curve_recompression_w84",
+          "central_robust_sharpe": -0.5354937578646062,
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "falsifier_robust_sharpe": 0.20702277361049765,
+          "family": "vol_curve_recompression"
+        },
+        {
+          "ablation_robust_sharpe": 0.5592259674010199,
+          "best_base_id": "relative_vol_rank_relief_w84",
+          "best_robust_sharpe": -0.09620637040556103,
+          "central_id": "relative_vol_rank_relief_w84",
+          "central_robust_sharpe": -0.09620637040556103,
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "falsifier_robust_sharpe": 0.1802631947820711,
+          "family": "relative_vol_rank_relief"
+        },
+        {
+          "ablation_robust_sharpe": 0.21001352170084853,
+          "best_base_id": "slope_dispersion_opportunity_w84",
+          "best_robust_sharpe": 0.06698489665610868,
+          "central_id": "slope_dispersion_opportunity_w63",
+          "central_robust_sharpe": -0.1980717789517871,
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "falsifier_robust_sharpe": -0.2094595663639839,
+          "family": "slope_dispersion_opportunity"
+        }
       ],
-      "frontier_label":"Frontier-M",
-      "source":{"artifact_digest":"sha256:527ac421a753249c39006e5e7fb21dff3c69be7253325955a791c98fdd912396","artifact_id":10310778596,"data_sha256":"bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58","manifest_sha256":"b056fe4eb326631bc6ce23b8a932bc38dc029f8740896fd9a62a4ab609c865b6","measured_head_sha":"142f76adddd185f10091fe9fddab0c77b7f388c0","workflow_run_id":34736196639},
-      "source_path":"evidence/measurement_receipts/frontier_20260912m.json","status":"CANONICAL_INGESTED"
+      "frontier_label": "Frontier-M",
+      "source": {
+        "artifact_digest": "sha256:527ac421a753249c39006e5e7fb21dff3c69be7253325955a791c98fdd912396",
+        "artifact_id": 10310778596,
+        "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+        "manifest_sha256": "b056fe4eb326631bc6ce23b8a932bc38dc029f8740896fd9a62a4ab609c865b6",
+        "measured_head_sha": "142f76adddd185f10091fe9fddab0c77b7f388c0",
+        "workflow_run_id": 34736196639
+      },
+      "source_path": "evidence/measurement_receipts/frontier_20260912m.json",
+      "status": "CANONICAL_INGESTED"
     },
     {
-      "campaign":"frontier_20260912n","decision":"PROMOTE_ZERO_FREEZE_ALL",
-      "families":[{"ablation_robust_sharpe":-1.0014138563663737,"best_base_id":"online_ar_surprise_persistence_w63","best_robust_sharpe":-0.6762538381461807,"best_score":-0.6762538381461807,"central_id":"online_ar_surprise_persistence_w84","central_robust_sharpe":-0.7804839986712356,"completed_cells":5,"decision":"FREEZE","decision_code":"FALSIFIED_DEVELOPMENT","declared_cells":5,"failed_controls":["online_ar_surprise_persistence_falsifier"],"falsifier_robust_sharpe":-0.5198808068985818,"family":"online_ar_surprise_persistence","family_rank":1,"invalid_cells":[],"median_score":-0.7804839986712356,"pending_cells":[],"reason":"destructive control/ablation matches or beats its valid parent"}],
-      "frontier_label":"Frontier-N",
-      "source":{"artifact_digest":"sha256:34c23478a12c38a33910ffdb9ec0e779c34afe27138598f33bf02505b9779890","artifact_id":10312282018,"artifact_name":"frontier_20260912n-measured-34739055893","data_sha256":"bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58","manifest_sha256":"8facf4836ecb469cd8f41d141f5296bbbdc462c6b4dc39c64f9cc54519f0552f","measured_head_sha":"af79783bc34b0c3163f4bf48d52c386d1d81a5fd","preregistration_sha256":"a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062","verification_basis":"Rankings and context read from the first successful workflow job log; artifact identity and digest checked against GitHub metadata.","workflow_job_id":103675523436,"workflow_run_id":34739055893,"workflow_url":"https://github.com/Svyable/quantiacs-q25/actions/runs/34739055893"},
-      "source_path":"evidence/measurement_receipts/frontier_20260912n.json","status":"CANONICAL_INGESTED"
+      "campaign": "frontier_20260912n",
+      "decision": "PROMOTE_ZERO_FREEZE_ALL",
+      "families": [
+        {
+          "ablation_robust_sharpe": -1.0014138563663737,
+          "best_base_id": "online_ar_surprise_persistence_w63",
+          "best_robust_sharpe": -0.6762538381461807,
+          "best_score": -0.6762538381461807,
+          "central_id": "online_ar_surprise_persistence_w84",
+          "central_robust_sharpe": -0.7804839986712356,
+          "completed_cells": 5,
+          "decision": "FREEZE",
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "declared_cells": 5,
+          "failed_controls": [
+            "online_ar_surprise_persistence_falsifier"
+          ],
+          "falsifier_robust_sharpe": -0.5198808068985818,
+          "family": "online_ar_surprise_persistence",
+          "family_rank": 1,
+          "invalid_cells": [],
+          "median_score": -0.7804839986712356,
+          "pending_cells": [],
+          "reason": "destructive control/ablation matches or beats its valid parent"
+        }
+      ],
+      "frontier_label": "Frontier-N",
+      "source": {
+        "artifact_digest": "sha256:34c23478a12c38a33910ffdb9ec0e779c34afe27138598f33bf02505b9779890",
+        "artifact_id": 10312282018,
+        "artifact_name": "frontier_20260912n-measured-34739055893",
+        "data_sha256": "bc932fc6f016c2bc0fbf3f51bf6f59b48d895cd1ac7ed27602d63ecbfdc8bc58",
+        "manifest_sha256": "8facf4836ecb469cd8f41d141f5296bbbdc462c6b4dc39c64f9cc54519f0552f",
+        "measured_head_sha": "af79783bc34b0c3163f4bf48d52c386d1d81a5fd",
+        "preregistration_sha256": "a29d5e42055f5af420178bf6dd924453a48561bf25c349cfd68662b962d0b062",
+        "verification_basis": "Rankings and context read from the first successful workflow job log; artifact identity and digest checked against GitHub metadata.",
+        "workflow_job_id": 103675523436,
+        "workflow_run_id": 34739055893,
+        "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/34739055893"
+      },
+      "source_path": "evidence/measurement_receipts/frontier_20260912n.json",
+      "status": "CANONICAL_INGESTED"
     },
     {
-      "campaign":"frontier_20260913m","decision":"PROMOTE_ZERO_FREEZE_ALL",
-      "families":[{"ablation_robust_sharpe":0.6139429083570899,"best_base_id":"volume_share_entropy_state_w42","best_robust_sharpe":-0.0067628700954069235,"central_id":"volume_share_entropy_state_w42","central_robust_sharpe":-0.0067628700954069235,"decision_code":"FALSIFIED_DEVELOPMENT","falsifier_robust_sharpe":0.5787309309361168,"family":"volume_share_entropy_state"},{"ablation_robust_sharpe":0.20777440623877497,"best_base_id":"entropy_disagreement_cash_w63","best_robust_sharpe":-0.10876054820845124,"central_id":"entropy_disagreement_cash_w84","central_robust_sharpe":-0.3460842603406987,"decision_code":"FALSIFIED_DEVELOPMENT","falsifier_robust_sharpe":0.3054464583731151,"family":"entropy_disagreement_cash"},{"ablation_robust_sharpe":-0.03399827004169004,"best_base_id":"dispersion_curvature_w21","best_robust_sharpe":-0.255097080691675,"central_id":"dispersion_curvature_w42","central_robust_sharpe":-0.45755558426967147,"decision_code":"FALSIFIED_DEVELOPMENT","falsifier_robust_sharpe":-0.6531296520133818,"family":"dispersion_curvature"}],
-      "frontier_label":"Frontier-M",
-      "source":{"artifact_digest":"sha256:f320e21b3602fbe60e8a8b425cdf5bf369092a7f1932af11ad03a9fde8a48b4b","artifact_id":10458908020,"artifact_name":"frontier_20260913m-measured-35125138316","data_sha256":"8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09","manifest_sha256":"5bba3cb80d9978e6e9330506fb8fd67fc99d2d788a6c3adb54616b300aa3cc02","measured_head_sha":"6cead2a1e8e9ebbaff3b8986277860dfe4441be6","verification_basis":"All 509 repository tests, dashboard freshness, frozen source/preregistration hash proofs, three controls and all fifteen reserve cells completed in the successful GitHub Actions measurement lane.","workflow_job_id":104892214516,"workflow_run_id":35125138316,"workflow_url":"https://github.com/Svyable/quantiacs-q25/actions/runs/35125138316"},
-      "source_path":"evidence/measurement_receipts/frontier_20260913m.json","status":"CANONICAL_INGESTED"
+      "campaign": "frontier_20260913m",
+      "decision": "PROMOTE_ZERO_FREEZE_ALL",
+      "families": [
+        {
+          "ablation_robust_sharpe": 0.6139429083570899,
+          "best_base_id": "volume_share_entropy_state_w42",
+          "best_robust_sharpe": -0.0067628700954069235,
+          "central_id": "volume_share_entropy_state_w42",
+          "central_robust_sharpe": -0.0067628700954069235,
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "falsifier_robust_sharpe": 0.5787309309361168,
+          "family": "volume_share_entropy_state"
+        },
+        {
+          "ablation_robust_sharpe": 0.20777440623877497,
+          "best_base_id": "entropy_disagreement_cash_w63",
+          "best_robust_sharpe": -0.10876054820845124,
+          "central_id": "entropy_disagreement_cash_w84",
+          "central_robust_sharpe": -0.3460842603406987,
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "falsifier_robust_sharpe": 0.3054464583731151,
+          "family": "entropy_disagreement_cash"
+        },
+        {
+          "ablation_robust_sharpe": -0.03399827004169004,
+          "best_base_id": "dispersion_curvature_w21",
+          "best_robust_sharpe": -0.255097080691675,
+          "central_id": "dispersion_curvature_w42",
+          "central_robust_sharpe": -0.45755558426967147,
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "falsifier_robust_sharpe": -0.6531296520133818,
+          "family": "dispersion_curvature"
+        }
+      ],
+      "frontier_label": "Frontier-M",
+      "source": {
+        "artifact_digest": "sha256:f320e21b3602fbe60e8a8b425cdf5bf369092a7f1932af11ad03a9fde8a48b4b",
+        "artifact_id": 10458908020,
+        "artifact_name": "frontier_20260913m-measured-35125138316",
+        "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+        "manifest_sha256": "5bba3cb80d9978e6e9330506fb8fd67fc99d2d788a6c3adb54616b300aa3cc02",
+        "measured_head_sha": "6cead2a1e8e9ebbaff3b8986277860dfe4441be6",
+        "verification_basis": "All 509 repository tests, dashboard freshness, frozen source/preregistration hash proofs, three controls and all fifteen reserve cells completed in the successful GitHub Actions measurement lane.",
+        "workflow_job_id": 104892214516,
+        "workflow_run_id": 35125138316,
+        "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/35125138316"
+      },
+      "source_path": "evidence/measurement_receipts/frontier_20260913m.json",
+      "status": "CANONICAL_INGESTED"
     },
     {
-      "campaign":"frontier_20260913o","decision":"PROMOTE_ZERO_FREEZE_ALL",
-      "families":[{"ablation_robust_sharpe":-0.286140394577933,"best_base_id":"absorption_release_elasticity_w42","best_robust_sharpe":0.17143182354314906,"best_score":0.17143182354314906,"central_id":"absorption_release_elasticity_w63","central_robust_sharpe":-0.17656885764972863,"completed_cells":5,"decision":"FREEZE","decision_code":"KILL_WEAK_ALPHA","declared_cells":5,"failed_controls":[],"falsifier_robust_sharpe":-0.6734425376983243,"family":"absorption_release_elasticity","family_rank":1,"invalid_cells":[],"median_score":-0.11875911172528072,"pending_cells":[],"reason":"every valid base cell is below predefined development floor Sharpe 1.0"}],
-      "frontier_label":"Frontier-O",
-      "source":{"artifact_digest":"sha256:7fde1d1bd2c898fc2bdf6c645637eeaf3bda952e24ad8c4258f9097727ee9205","artifact_id":10458917654,"artifact_name":"frontier_20260913o-measured-35125138255","data_sha256":"8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09","manifest_sha256":"fc306f714f6fd3e70f4f068dbf822fbd5b612e2f81696268b642abaadb23b706","measured_head_sha":"6cead2a1e8e9ebbaff3b8986277860dfe4441be6","preregistration_sha256":"51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847","verification_basis":"All 509 repository tests, dashboard freshness, freeze hash proof and all eight campaign/control cells completed in the successful GitHub Actions measurement lane.","workflow_job_id":104892214039,"workflow_run_id":35125138255,"workflow_url":"https://github.com/Svyable/quantiacs-q25/actions/runs/35125138255"},
-      "source_path":"evidence/measurement_receipts/frontier_20260913o.json","status":"CANONICAL_INGESTED"
+      "campaign": "frontier_20260913o",
+      "decision": "PROMOTE_ZERO_FREEZE_ALL",
+      "families": [
+        {
+          "ablation_robust_sharpe": -0.286140394577933,
+          "best_base_id": "absorption_release_elasticity_w42",
+          "best_robust_sharpe": 0.17143182354314906,
+          "best_score": 0.17143182354314906,
+          "central_id": "absorption_release_elasticity_w63",
+          "central_robust_sharpe": -0.17656885764972863,
+          "completed_cells": 5,
+          "decision": "FREEZE",
+          "decision_code": "KILL_WEAK_ALPHA",
+          "declared_cells": 5,
+          "failed_controls": [],
+          "falsifier_robust_sharpe": -0.6734425376983243,
+          "family": "absorption_release_elasticity",
+          "family_rank": 1,
+          "invalid_cells": [],
+          "median_score": -0.11875911172528072,
+          "pending_cells": [],
+          "reason": "every valid base cell is below predefined development floor Sharpe 1.0"
+        }
+      ],
+      "frontier_label": "Frontier-O",
+      "source": {
+        "artifact_digest": "sha256:7fde1d1bd2c898fc2bdf6c645637eeaf3bda952e24ad8c4258f9097727ee9205",
+        "artifact_id": 10458917654,
+        "artifact_name": "frontier_20260913o-measured-35125138255",
+        "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+        "manifest_sha256": "fc306f714f6fd3e70f4f068dbf822fbd5b612e2f81696268b642abaadb23b706",
+        "measured_head_sha": "6cead2a1e8e9ebbaff3b8986277860dfe4441be6",
+        "preregistration_sha256": "51a2fede98155a65235f790baf1bb22b702dbe7a9d4a6de2cb119626863ce847",
+        "verification_basis": "All 509 repository tests, dashboard freshness, freeze hash proof and all eight campaign/control cells completed in the successful GitHub Actions measurement lane.",
+        "workflow_job_id": 104892214039,
+        "workflow_run_id": 35125138255,
+        "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/35125138255"
+      },
+      "source_path": "evidence/measurement_receipts/frontier_20260913o.json",
+      "status": "CANONICAL_INGESTED"
+    },
+    {
+      "campaign": "frontier_20260916p",
+      "decision": "PROMOTE_ZERO_FREEZE_ALL",
+      "families": [
+        {
+          "ablation_robust_sharpe": -0.17490551272884503,
+          "best_base_id": "liquidity_requalification_hysteresis_w84",
+          "best_robust_sharpe": -1.3540726264496663,
+          "best_score": -1.3540726264496663,
+          "central_id": "liquidity_requalification_hysteresis_w63",
+          "central_robust_sharpe": -1.4321683159460632,
+          "completed_cells": 5,
+          "decision": "FREEZE",
+          "decision_code": "FALSIFIED_DEVELOPMENT",
+          "declared_cells": 5,
+          "failed_controls": [
+            "liquidity_requalification_hysteresis_ablation",
+            "liquidity_requalification_hysteresis_falsifier"
+          ],
+          "falsifier_robust_sharpe": -0.9978464781754903,
+          "family": "liquidity_requalification_hysteresis",
+          "family_rank": 1,
+          "invalid_cells": [],
+          "median_score": -1.4321683159460632,
+          "pending_cells": [],
+          "reason": "destructive control/ablation matches or beats its valid parent"
+        }
+      ],
+      "frontier_label": "Frontier-P",
+      "source": {
+        "artifact_digest": "sha256:5ffc519a0bd79005fe186067faa5e8ee3b4ed5b51552dc8db6a088c5ff749f78",
+        "artifact_id": 10460505568,
+        "artifact_name": "frontier_20260916p-measured-35126723702",
+        "data_sha256": "8bf943c40074d4107cb63edda99a7b0b268ac8ed0080fcf6de04d871ad21cd09",
+        "manifest_sha256": "25c9438ddd08f6c34f87fb75a70e1e43bfc1f567307eaaffebd72e548c0a85ea",
+        "measured_head_sha": "ad153e8441b476353a149a2944f471c8defcf67b",
+        "preregistration_sha256": "c9557848eb0b1de6b4f29c59a343e0f2e77179b8b22aa6f0284315c5e9354ccf",
+        "verification_basis": "The full repository software/provenance/causality suite, dashboard freshness, frozen preregistration/source hash proof, three controls and all five Frontier-P cells completed in the successful exact Quantiacs measurement lane.",
+        "workflow_job_id": 104897468783,
+        "workflow_run_id": 35126723702,
+        "workflow_url": "https://github.com/Svyable/quantiacs-q25/actions/runs/35126723702"
+      },
+      "source_path": "evidence/measurement_receipts/frontier_20260916p.json",
+      "status": "MEASURED_AWAITING_CANONICAL_INGEST"
     }
   ],
-  "policy": {"cross_campaign_scalar_rank":"FORBIDDEN","display_rule":"show campaign UID whenever human Frontier labels collide","lane_order_is_not_quality_order":true,"missing_metrics":"remain missing","weighted_mega_score":false},
-  "reproducibility": {"campaign":"frontier_20260912k","decision_stable_count":3,"families_compared":3,"max_abs_summary_metric_delta":6.156399279255709e-09,"status":"DECISION_STABLE_CONTEXT_DRIFT"},
+  "policy": {
+    "cross_campaign_scalar_rank": "FORBIDDEN",
+    "display_rule": "show campaign UID whenever human Frontier labels collide",
+    "lane_order_is_not_quality_order": true,
+    "missing_metrics": "remain missing",
+    "weighted_mega_score": false
+  },
+  "reproducibility": {
+    "campaign": "frontier_20260912k",
+    "decision_stable_count": 3,
+    "families_compared": 3,
+    "max_abs_summary_metric_delta": 6.156399279255709e-09,
+    "status": "DECISION_STABLE_CONTEXT_DRIFT"
+  },
   "schema_version": 1,
-  "surface_debt": {"latest_full_matrix_campaign":"frontier_20260912k","measured_campaigns_since_full_matrix":5,"research_matrix_mentions_latest":false,"summary_only_latest":true}
+  "surface_debt": {
+    "latest_full_matrix_campaign": "frontier_20260912k",
+    "measured_campaigns_since_full_matrix": 5,
+    "research_matrix_mentions_latest": false,
+    "summary_only_latest": true
+  }
 }

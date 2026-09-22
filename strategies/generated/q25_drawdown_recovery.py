@@ -8,7 +8,7 @@ def calculate_weights(data):
  recovery=(c/c.shift(time=7)-1).clip(min=0); trend=(c/c.shift(time=42)-1).clip(min=0)
  sweet=xr.where((dd<-.03)&(dd>-.22),1.,0.); raw=recovery*trend* sweet/(vol+.012)*l
  raw=raw.rolling(time=3,min_periods=1).mean()*l; g=raw.sum("asset"); w=xr.where(g>EPS,raw/g,0.)
- return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).clip(min=0).transpose("time","asset")
+ return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).clip(min=0).transpose("time","asset").reset_coords(drop=True)
 def strategy(data): return calculate_weights(data)
 def load_data(period):
  import qnt.data as qndata

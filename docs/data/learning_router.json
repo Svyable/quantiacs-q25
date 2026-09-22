@@ -13,7 +13,7 @@
       "uncertainty": "The recent window is bounded and is not a claim about all historical strategies."
     },
     {
-      "evidence": "Median Dev\u2212Research SR@12 is -1.729; 0/9 comparable cells held or improved.",
+      "evidence": "Median Dev\u2212Research SR@12 is -1.565; 0/9 comparable cells held or improved.",
       "id": "selection_transfer",
       "state": "RESEARCH_OPTIMISM_OBSERVED",
       "uncertainty": "This describes the recent comparable cells, not a universal shrinkage coefficient."
@@ -25,9 +25,9 @@
       "uncertainty": "A single forward event is a calibration warning, not a population estimate."
     },
     {
-      "evidence": "Measured evidence exists but the canonical evidence frontier has not absorbed it yet.",
+      "evidence": "Canonical measurement is ahead of the latest full matrix packet.",
       "id": "evidence_freshness",
-      "state": "CANONICAL_INGEST_BOTTLENECK",
+      "state": "EVIDENCE_DEPTH_BOTTLENECK",
       "uncertainty": "Pipeline state is derived from committed repository artifacts only."
     }
   ],
@@ -36,12 +36,12 @@
       "campaigns": [
         "frontier_20260916p"
       ],
-      "count": 1,
-      "reason": "Measured evidence exists but the canonical evidence frontier has not absorbed it yet.",
-      "stage": "CANONICAL_INGEST"
+      "count": 6,
+      "reason": "Canonical measurement is ahead of the latest full matrix packet.",
+      "stage": "EVIDENCE_DEPTH"
     },
     "canonical_latest": {
-      "campaign": "frontier_20260913o",
+      "campaign": "frontier_20260916p",
       "decision": "PROMOTE_ZERO",
       "kind": "summary_only"
     },
@@ -49,28 +49,16 @@
     "frozen_unmeasured": [],
     "operational_actions": [
       {
-        "action": "INGEST_MEASURED_EVIDENCE",
-        "campaign": "frontier_20260916p",
-        "priority": 1,
-        "why": "A successful benchmark receipt exists but canonical observed evidence is not committed."
-      },
-      {
         "action": "DEEPEN_MATRIX_EVIDENCE",
-        "campaign": "frontier_20260913o",
+        "campaign": "frontier_20260916p",
         "priority": 4,
         "why": "Latest committed campaign is not represented by a full canonical matrix packet."
       }
     ],
-    "pending_canonical_ingest": [
-      {
-        "campaign": "frontier_20260916p",
-        "family_count": 1,
-        "measured_decision": "PROMOTE_ZERO_FREEZE_ALL"
-      }
-    ],
+    "pending_canonical_ingest": [],
     "surface_debt": {
       "latest_full_matrix_campaign": "frontier_20260912k",
-      "measured_campaigns_since_full_matrix": 5,
+      "measured_campaigns_since_full_matrix": 6,
       "research_matrix_mentions_latest": false,
       "summary_only_latest": true
     }
@@ -82,24 +70,17 @@
     "strategy_ranking": "OUT_OF_SCOPE"
   },
   "router": {
-    "current_state_backlog": [
-      {
-        "action": "DEEPEN_MATRIX_EVIDENCE",
-        "campaign": "frontier_20260913o",
-        "priority": 4,
-        "why": "Latest committed campaign is not represented by a full canonical matrix packet."
-      }
-    ],
+    "current_state_backlog": [],
     "mutation_guardrail": "Never retune a frozen or measured campaign to answer diagnostics produced by its own returns.",
     "new_hypothesis_budget": {
       "state": "BLOCKED_BY_EXISTING_EVIDENCE_WORK",
       "why": "Finish higher-priority ingestion / measurement / evidence-depth work before opening another mutable campaign."
     },
     "next_action": {
-      "action": "INGEST_MEASURED_EVIDENCE",
+      "action": "DEEPEN_MATRIX_EVIDENCE",
       "campaign": "frontier_20260916p",
-      "priority": 1,
-      "why": "A successful benchmark receipt exists but canonical observed evidence is not committed."
+      "priority": 4,
+      "why": "Latest committed campaign is not represented by a full canonical matrix packet."
     }
   },
   "schema_version": 1

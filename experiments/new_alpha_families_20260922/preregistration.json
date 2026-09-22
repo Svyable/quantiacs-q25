@@ -1,0 +1,19 @@
+{
+  "experiment_id": "new_alpha_families_20260922",
+  "status": "PREREGISTERED_UNMEASURED",
+  "competition": "crypto_daily_long",
+  "universe": "sponsor is_liquid / automatic top-10 monthly liquid universe",
+  "constraints": {"long_only": true, "name_cap": 0.25, "gross_cap": 1.0, "hand_picked_assets": false},
+  "candidates": [
+    {"id":"q25_residual_momentum_v1","hypothesis":"Cross-sectionally residualized 21/63-day momentum removes common crypto beta and preserves relative continuation.","parameters":{"mom_fast":21,"mom_slow":63,"blend":[0.65,0.35],"vol":28,"smooth":3}},
+    {"id":"q25_breadth_conditioned_trend_v1","hypothesis":"Trend continuation is more reliable when participation is broad; continuous breadth sizing suppresses narrow rallies.","parameters":{"trend":42,"ma":50,"top_fraction":0.4,"breadth_floor":0.35,"breadth_full":0.65}},
+    {"id":"q25_liquidity_persistence_v1","hypothesis":"Persistent membership in the sponsor-provided liquid universe identifies more stable tradability; conditioning positive momentum on eligibility persistence improves robustness.","parameters":{"momentum":28,"liquidity_window":30,"liquidity_power":2,"vol":21,"smooth":4}}
+  ],
+  "chronology": {"research":"2016-01-01/2020-12-31","development":"2021-01-01/2022-12-31","holdout":"2023-01-01/latest; frozen until research+development gates pass"},
+  "cost_atr_percent": [4,8,12],
+  "required_checks": ["prefix_causality","asset_order_invariance","long_only","liquid_only","gross_weight","name_cap","bounded_replay","single_vs_multipass_parity","determinism"],
+  "required_metrics": ["sharpe","return","max_drawdown","turnover","volatility","benchmark_relative","vol10_live_economics","regime_stability","incumbent_return_correlation"],
+  "destructive_controls": ["time_shift_signal_plus_1_day_must_fail_causality","cross_sectional_score_permutation","equal_weight_liquid_baseline"],
+  "advancement_gates": {"is_sharpe_4pct_gt":1.0,"development_sharpe_gt":0.0,"cost_monotonic_report_required":true,"all_mechanics_checks_pass":true,"no_holdout_retuning":true},
+  "selection_rule": "No candidate is promoted from this preregistration alone. Economic measurements must be recorded without parameter rescue; failed candidates are preserved."
+}

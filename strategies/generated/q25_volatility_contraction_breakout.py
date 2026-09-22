@@ -8,7 +8,7 @@ def calculate_weights(data):
  peak=c.shift(time=1).rolling(time=28,min_periods=20).max(); breakout=(c/(peak+EPS)-1).clip(min=0)
  contraction=(1-v14/(v56+EPS)).clip(min=0,max=1); raw=breakout*contraction/(v14+.01)*l
  raw=raw.rolling(time=3,min_periods=1).mean()*l; g=raw.sum("asset"); w=xr.where(g>EPS,raw/g,0.)
- return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).clip(min=0).transpose("time","asset")
+ return xr.where(w>NAME_CAP,NAME_CAP,w).fillna(0).clip(min=0).transpose("time","asset").reset_coords(drop=True)
 def strategy(data): return calculate_weights(data)
 def load_data(period):
  import qnt.data as qndata

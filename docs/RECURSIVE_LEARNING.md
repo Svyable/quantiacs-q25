@@ -9,13 +9,13 @@ description: Temporal dogfood telemetry for whether the Q25 research loop is bec
 
 ## Recent campaign window
 
-Window: **frontier_20260912n, frontier_20260913m, frontier_20260913o**.
+Window: **frontier_20260913m, frontier_20260913o, frontier_20260916p**.
 
 | Campaign | Families | Falsification | Control support | Economic survival | Best robust SR | Median causal margin | Median Dev−Research SR |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `frontier_20260912n` | 1 | 1/1 (100.0%) | 0/1 (0.0%) | 0/1 (0.0%) | -0.676 | -0.261 | -1.806 |
 | `frontier_20260913m` | 3 | 3/3 (100.0%) | 0/3 (0.0%) | 0/3 (0.0%) | -0.007 | -0.621 | -0.767 |
 | `frontier_20260913o` | 1 | 1/1 (100.0%) | 1/1 (100.0%) | 0/1 (0.0%) | 0.171 | 0.110 | -1.757 |
+| `frontier_20260916p` | 1 | 1/1 (100.0%) | 0/1 (0.0%) | 0/1 (0.0%) | -1.354 | -1.257 | -1.606 |
 
 ## What the loop learned
 
@@ -25,17 +25,17 @@ Window: **frontier_20260912n, frontier_20260913m, frontier_20260913o**.
 - Promotion-ready causal+economic intersections: **0/5 (0.0%)**.
 - Families falsified by destructive controls: **4**.
 - Control-supported but still economically weak families: **1**.
-- Pooled median Dev−Research SR@12 gap across 9 comparable base cells: **-1.729**.
+- Pooled median Dev−Research SR@12 gap across 9 comparable base cells: **-1.565**.
 - Base cells with Dev SR@12 ≥ Research SR@12: **0/9**.
 
 Exact family-name novelty is only a lexical breadth proxy; it is not semantic originality or contest-correlation evidence.
 
 ## Trajectory
 
-- **best_robust_sharpe**: -0.676 → 0.171 (Δ 0.848; UP).
-- **control_support_rate**: 0.000 → 1.000 (Δ 1.000; MIXED).
-- **median_central_control_margin**: -0.261 → 0.110 (Δ 0.370; MIXED).
-- **median_dev_minus_research_sharpe_12**: -1.806 → -1.757 (Δ 0.049; MIXED).
+- **best_robust_sharpe**: -0.007 → -1.354 (Δ -1.347; MIXED).
+- **control_support_rate**: 0.000 → 0.000 (Δ 0.000; MIXED).
+- **median_central_control_margin**: -0.621 → -1.257 (Δ -0.637; MIXED).
+- **median_dev_minus_research_sharpe_12**: -0.767 → -1.606 (Δ -0.839; MIXED).
 
 ## Validation calibration
 
@@ -45,10 +45,10 @@ Median forward−development Sharpe delta: **-1.062**.
 
 ## Evidence debt
 
-- Latest measured campaign: `frontier_20260913o`.
+- Latest measured campaign: `frontier_20260916p`.
 - Latest full matrix: `frontier_20260912k`.
-- Measured campaigns since full matrix: **5**.
-- Frozen measurement queue: **1**; next `frontier_20260916p`.
+- Measured campaigns since full matrix: **6**.
+- Frozen measurement queue: **0**; next `—`.
 
 ## State tags
 
@@ -59,7 +59,6 @@ Median forward−development Sharpe delta: **-1.062**.
 
 ## Derived next actions
 
-- **P1 MEASURE_FROZEN_QUEUE_FIRST** — A preregistered campaign is already frozen. Measure it unchanged before mutating hypotheses from newer diagnostics.
 - **P2 DEEPEN_CANONICAL_MATRIX_EVIDENCE** — The measurement frontier is ahead of the latest full matrix; deepen evidence before the public surface drifts further.
 - **P3 TREAT_RESEARCH_FOLD_HIGHS_AS_OPTIMISTIC** — Recent base cells have a negative pooled median Dev−Research Sharpe gap. Demand stability evidence before spending more research budget on research-fold leaders.
 - **P4 CALIBRATE_DEVELOPMENT_CONFIDENCE** — Observed frozen forward validation retained only part of the development Sharpe. Keep development hits explicitly provisional.

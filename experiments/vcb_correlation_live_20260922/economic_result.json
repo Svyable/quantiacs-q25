@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vcb_correlation_live_20260922",
+  "status": "VERIFIED_ADVANCE_TO_HOLDOUT_AUTHORIZATION",
+  "source_run": 35770491084,
+  "source_artifact_id": 10714066882,
+  "source_artifact_digest": "sha256:96206665b1e7f3cd4da7bd8e9830d4160f00eb7ca7e80cb25eddaecf2b098dc8",
+  "cost_atr_percent": 4,
+  "data": {"max_date": "2022-12-31", "holdout_2023_plus_loaded": false},
+  "candidate": {
+    "full_2016_2022": {"ann_return": 0.7611187062151731, "ann_volatility": 0.3950107535797251, "quantiacs_sharpe": 1.9268303440289893, "vol10_normalized_return": 0.1926830344028992, "vol10_scale": 0.2531576649338408},
+    "development_2021_2022": {"ann_return": 0.3490168201933379, "ann_volatility": 0.2834942936646979, "quantiacs_sharpe": 1.2311246751447376, "vol10_normalized_return": 0.12311246751447372, "vol10_scale": 0.3527407860924168}
+  },
+  "incumbent": {
+    "full_2016_2022": {"ann_return": 0.9786089014372997, "ann_volatility": 0.6879101577380187, "quantiacs_sharpe": 1.4225824265412161, "vol10_normalized_return": 0.14225824265412138, "vol10_scale": 0.1453678200200144},
+    "development_2021_2022": {"ann_return": 0.6967207212548564, "ann_volatility": 0.6910542658880807, "quantiacs_sharpe": 1.0081997256170516, "vol10_normalized_return": 0.10081997256170522, "vol10_scale": 0.1447064361457765}
+  },
+  "correlation": {"full_2016_2022": 0.32477361361718154, "development_2021_2022": 0.3028765271656846},
+  "equal_weight_blend": {"development_2021_2022": {"ann_return": 0.5228687707240971, "ann_volatility": 0.4112779042424636, "sharpe": 1.2713271618303292, "vol10_normalized_return": 0.12713271618303293, "vol10_scale": 0.2431445963142389}},
+  "gates": {"vcb_full_2016_2022_sharpe_gt_1": true, "vcb_development_2021_2022_sharpe_gt_0": true, "absolute_development_return_correlation_lt_0_8": true, "candidate_10pct_vol_normalized_return_gt_0": true, "no_holdout_loaded": true},
+  "decision": "ADVANCE_TO_HOLDOUT_AUTHORIZATION"
+}

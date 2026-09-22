@@ -1,0 +1,16 @@
+{
+  "experiment_id": "forced_union_20260922",
+  "created": "2026-09-22",
+  "status": "FROZEN_BEFORE_NEW_ECONOMIC_MEASUREMENT",
+  "parent_evidence": {"path": "experiments/lattice_closure_20260921/economic_result.json", "blob_sha": "b17b978dc7100deeffdf0e608c5c6a3126d553bd"},
+  "preregistration_canonical_sha256": "29144f7fa36e76f4bde9cf028e195249b9c2699d299fe85e752c7ba40cfb19b3",
+  "hypothesis": "The fixed union of fast and exactly-doubled-horizon Pareto skylines is a simpler robustness filter than conflict-sensitive lattice closure and can improve chronological development performance without sacrificing official-cost resilience.",
+  "mechanism": {"source_basis": "strategies/generated/q25_dual_horizon_lattice_closure.py", "mode": "join_only", "parameter_changes": "none", "asset_selection": "automatic", "data": "Quantiacs crypto_daily_long OHLCV plus historical is_liquid only", "long_only": true, "name_cap": 0.25, "lookback_days": 365},
+  "frozen_parameters": {"fast_horizons": [7,14,12,48,30], "slow_horizons": [14,28,24,96,60], "pareto_max_dominators": 1, "score_power": 1.20, "score_shift_sd": 0.10, "vol_floor": 0.015, "smoothing_days": 3},
+  "chronology": {"research": "2016-01-01/2020-12-31", "development": "2021-01-01/2022-12-31", "spent_validation_diagnostic": "2023-01-01/2024-12-31", "non_selection_diagnostic": "2025-01-01 onward", "untouched_live": "2026-10-01/2027-01-31"},
+  "advancement_gates": {"selection_2016_2022_sharpe_gt_1_costs": [0.04,0.08,0.12], "development_2021_2022_must_beat_base_pareto_0p04": true, "development_2021_2022_must_beat_root_only_0p04": true, "research_may_trail_base_by_at_most": 0.05, "must_beat_join_destructive_score_shuffle": true, "no_parameter_grid": true, "no_retune_after_observation": true},
+  "required_mechanics": ["prefix_causality","asset_order_invariance","long_only_liquid_cap_gross","terminal_365_day_bounded_replay","single_vs_multipass_parity_or_documented_required_route","determinism"],
+  "required_metrics": ["sharpe","return","max_drawdown","turnover","volatility","benchmark_relative_10pct_vol","correlation_vs_incumbents","regime_stability"],
+  "destructive_controls": ["base_pareto","root_only","fast_only","slow_only","score_shuffle_with_selection_held_fixed"],
+  "prior_observation_disclosure": {"join_only_was_observed_as_control": true, "selection_2016_2022_0p04_sharpe": 2.219388, "development_2021_2022_0p04_sharpe": 0.804089, "full_2016_plus_0p04_sharpe": 1.923528, "note": "These observations motivate this distinct experiment and are not fresh evidence. No promotion is allowed from them."}
+}

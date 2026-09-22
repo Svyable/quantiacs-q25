@@ -91,7 +91,7 @@ def _lookahead_detector(data: xr.DataArray) -> dict:
         future_return = close.shift(time=-1) / close - 1.0
         raw = xr.where(future_return > 0.0, 1.0, 0.0) * liquid
         gross = raw.sum("asset")
-        return xr.where(gross > 0.0, raw / gross, 0.0).clip(min=0.0).transpose("time", "asset")
+        return xr.where(gross > 0.0, raw / gross, 0.0).clip(min=0.0).transpose("time", "asset").reset_coords(drop=True)
 
     try:
         check_causality(invalid_future_signal, data, checkpoints=9)

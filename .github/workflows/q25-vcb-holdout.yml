@@ -1,0 +1,26 @@
+name: q25-vcb-holdout
+on:
+  pull_request:
+    paths:
+      - 'research/measure_vcb_holdout.py'
+      - 'experiments/vcb_holdout_20260922/preregistration.json'
+      - 'strategies/generated/q25_volatility_contraction_breakout.py'
+      - 'strategies/generated/q25_deadline_hit126_consistency.py'
+      - '.github/workflows/q25-vcb-holdout.yml'
+  workflow_dispatch:
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Execute frozen one-shot holdout
+        run: python -m research.measure_vcb_holdout | tee /tmp/vcb-holdout.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vcb-holdout-evidence
+          path: /tmp/vcb-holdout.json

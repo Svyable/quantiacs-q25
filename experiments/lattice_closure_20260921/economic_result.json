@@ -1,0 +1,70 @@
+{
+  "experiment_id": "lattice_closure_20260921",
+  "strategy_id": "q25_dual_horizon_lattice_closure_v1",
+  "status": "FALSIFIED_DEVELOPMENT",
+  "authoritative_workflow_run": 35683487432,
+  "artifact_id": 10676370561,
+  "repaired_source_blob": "77552a563db0368ed38a1df24694c015df82e06e",
+  "evidence_chronology": {
+    "invalid_parent_1": "transport syntax corruption; benchmark skipped",
+    "invalid_parent_2": "frozen-control parity failure; benchmark skipped",
+    "first_valid_economic_measurement": "run 35683487432 after fresh mechanics PASS"
+  },
+  "selection_2016_2022": {
+    "closure": {
+      "0.04": 2.2108813443257644,
+      "0.08": 1.9999802418956505,
+      "0.12": 1.7879725921385907
+    },
+    "base_pareto": {
+      "0.04": 2.191722413278605,
+      "0.08": 1.9794900401433564
+    },
+    "root_only": {
+      "0.04": 2.21223
+    },
+    "meet_only": {
+      "0.04": 2.204159
+    },
+    "join_only": {
+      "0.04": 2.219388
+    },
+    "slow_only": {
+      "0.04": 2.205586
+    },
+    "anti_slow": {
+      "0.04": 0.76147
+    }
+  },
+  "development_2021_2022_0p04": {
+    "closure": 0.7641519028086742,
+    "base_pareto": 0.7984244304557688,
+    "root_only": 0.7928,
+    "join_only": 0.804089,
+    "anti_slow": 1.082045
+  },
+  "research_2016_2020_0p04": {
+    "closure": 2.6788076943939885,
+    "base_pareto": 2.643567703768371
+  },
+  "full_2016_plus_0p04": {
+    "closure": 1.9168442356207016,
+    "base_pareto": 1.902609,
+    "root_only": 1.919117,
+    "join_only": 1.923528
+  },
+  "gates": {
+    "sharpe_0p04_gt_1": true,
+    "sharpe_0p08_gt_1": true,
+    "sharpe_0p12_gt_1": true,
+    "beats_base_pareto_0p04": true,
+    "beats_base_pareto_0p08": true,
+    "beats_root_only_0p04": false,
+    "beats_meet_only_0p04": true,
+    "beats_anti_slow_0p04": true,
+    "beats_base_in_dev_0p04": false,
+    "research_delta_vs_base_gte_minus_0p05": true
+  },
+  "adjudication": "Freeze the candidate. Do not retune it and do not promote a control from this experiment.",
+  "interpretation": "Slow-horizon information is not useless, but conflict-triggered descent/ascent did not add robust value. The forced union control was stronger than the dynamic closure on the preregistered selection period and development slice; this may motivate a distinct future experiment but is not promoted here."
+}

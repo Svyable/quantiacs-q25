@@ -1,0 +1,25 @@
+name: q25-vcb-correlation-live
+on:
+  pull_request:
+    paths:
+      - 'research/measure_vcb_correlation_live.py'
+      - 'strategies/generated/q25_volatility_contraction_breakout.py'
+      - 'strategies/generated/q25_deadline_hit126_consistency.py'
+      - '.github/workflows/q25-vcb-correlation-live.yml'
+  workflow_dispatch:
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Measure frozen pre-holdout comparison
+        run: python -m research.measure_vcb_correlation_live | tee /tmp/vcb-correlation-live.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vcb-correlation-live-evidence
+          path: /tmp/vcb-correlation-live.json

@@ -1,0 +1,15 @@
+{
+  "experiment_id": "vcb_hardening_20260922",
+  "parent_experiment": "orthogonal_alpha_pack_2_20260922",
+  "strategy_id": "q25_volatility_contraction_breakout_v1",
+  "status": "PREREGISTERED_HARDENING_NO_HOLDOUT",
+  "formula_changes_allowed": false,
+  "parameter_changes_allowed": false,
+  "holdout_access_allowed": false,
+  "observed_selection": {"period":"2016-01-01/2022-12-31","sharpe_atr_cost":{"0.04":1.926830,"0.08":1.721545,"0.12":1.514529}},
+  "observed_development": {"period":"2021-01-01/2022-12-31","sharpe_atr_cost":{"0.04":1.231125,"0.08":0.944528,"0.12":0.656440}},
+  "required_mechanics": ["bounded_replay_exact","single_vs_multipass_parity","determinism","asset_order_invariance","prefix_causality","long_only","liquid_only","name_cap","gross_cap"],
+  "required_economics": ["benchmark_relative","vol10_live_economics","regime_stability","incumbent_return_correlation","turnover","max_drawdown","volatility"],
+  "destructive_controls": ["cross_sectional_score_permutation","signal_plus_1_day_must_fail_causality","equal_weight_liquid_baseline"],
+  "advancement_rule": "Open 2023+ holdout only if every mechanics check passes, destructive controls behave as preregistered, exact 4/8/12% cost results remain bound to the frozen formula, and uniqueness/live-economics evidence is complete. No parameter rescue."
+}

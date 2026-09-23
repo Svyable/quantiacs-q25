@@ -15,7 +15,7 @@ def _load(path, name):
 def _data(seed=7, n=240, assets=("a","b","c","d","e")):
     rng=np.random.default_rng(seed); t=np.arange(np.datetime64("2020-01-01"), np.datetime64("2020-01-01")+np.timedelta64(n,"D"))
     close=100*np.exp(np.cumsum(rng.normal(.001,.025,(n,len(assets))),axis=0)); liq=np.ones_like(close)
-    return xr.DataArray(np.stack([close,liq]),dims=("field","time","asset"),coords={"field":["close","is_liquid"],"time":t,"asset":assets})
+    return xr.DataArray(np.stack([close,liq]),dims=("field","time","asset"),coords={"field":["close","is_liquid"],"time":t,"asset":list(assets)})
 
 
 def test_adapter_exactly_matches_frozen_candidate():

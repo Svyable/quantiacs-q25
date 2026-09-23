@@ -296,21 +296,20 @@ candidate_contract:
   external_inspiration_requires_source_provenance: true
 
 campaign_default:
-  ideation_count: 24
-  preregister_count: 6
-  implement_count: 3
-  internet_sweep_suggested_allocation:
-    onchain_state_cross_section: 7
-    online_surprise_and_disagreement: 7
-    price_volume_elasticity: 5
-    benchmark_composition_ecology: 5
+  mode: "broad_batch_alpha_factory"
+  preregistration_required_for_exploration: false
+  candidate_batch_soft_max: 500
+  minimum_distinct_families_soft: 8
+  deep_test_only_survivors: true
+  search_ledger_required: true
+  rolling_origin_required_for_survivor_claims: true
+  recency_weighted_and_unweighted_required: true
+  correlation_cluster_before_deep_test: true
   note: >-
-    These counts are a default research cadence, not a statistical guarantee.
-    Generate broadly before testing, then spend compute only on the most novel,
-    falsifiable proposals. If on-chain/index data are not currently Q25-admissible,
-    reallocate those idea slots to OHLCV-only surprise, topology, vol-term and
-    range-volume work. Do not alter a rejected mechanism repeatedly until it
-    passes; open a new experiment only for a materially new hypothesis.
+    Search broadly and cheaply, then spend expensive controls and hardening on
+    survivors. Candidate counts are soft compute budgets, not scientific gates.
+    Do not hide losing cells or convert exploratory reuse into pristine validation.
+
 
 stop_rules:
   - "Kill obvious incumbent clones before a backtest."

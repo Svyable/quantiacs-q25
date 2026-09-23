@@ -22,11 +22,11 @@ def main():
  data=qndata.cryptodaily_load_data(min_date=START,max_date=END); assert str(data.time.values[-1])[:10]<=END; validate_panel(data,"2016-01-01",END)
  ff=importlib.import_module("strategies.generated.q25_factor_factory"); vcb=importlib.import_module("strategies.generated.q25_volatility_contraction_breakout"); inc=importlib.import_module("strategies.generated.q25_deadline_hit126_consistency")
  e=QuantiacsEvaluator(data)
- with xr.set_options(use_bottleneck=False): vw=vcb.calculate_weights(data); iw=inc.compute_weights(data)
+ vw=vcb.calculate_weights(data); iw=inc.compute_weights(data)
  check_weights(vw,data); check_weights(iw,data); vm,vr=e.evaluate(vw,FOLDS,[.04]); im,ir=e.evaluate(iw,FOLDS,[.04])
  out={"schema_version":1,"experiment_id":p["experiment_id"],"max_date":str(data.time.values[-1])[:10],"cost_atr_percent":[4,8,12],"factors":{}}
  for name,fn in ff.FACTORS.items():
-  with xr.set_options(use_bottleneck=False): w=fn(data)
+  w=fn(data)
   check_weights(w,data); m,r=e.evaluate(w,FOLDS,COSTS); dev=r["development"]; vdev=vr["development"]; idev=ir["development"]
   blend=.5*dev+.5*vdev; ssel=m["selection"]["0.04"]["sharpe_ratio"]; sdev=m["development"]["0.04"]["sharpe_ratio"]; s12=m["selection"]["0.12"]["sharpe_ratio"]
   gates={"selection_sharpe_4pct_gt_1":bool(ssel is not None and ssel>1),"development_sharpe_4pct_gt_0":bool(sdev is not None and sdev>0),"selection_sharpe_12pct_gt_0":bool(s12 is not None and s12>0),"development_abs_corr_vcb_lt_0_8":bool((_corr(dev,vdev) is not None) and abs(_corr(dev,vdev))<.8),"blend_sharpe_gt_both":bool(_sharpe(blend)>max(_sharpe(dev),_sharpe(vdev)))}

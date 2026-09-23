@@ -1,12 +1,16 @@
 # quantiacs-q25 — Q25 Quantitative Research Lab
 
-> **Causal crypto alpha, with a memory.** We preregister mechanisms, run exact public/default Quantiacs evaluation, attack them with matched controls, preserve failures, and let forward evidence overwrite attractive development stories.
+> **Broad search. Causal replay. Portfolio contribution.** The lab uses all completed Sponsor history, including recent regimes, and validates research through rolling-origin/prequential evidence rather than permanent historical embargoes.
 >
-> 🌐 **Live research surface:** https://svyable.github.io/quantiacs-q25/ · 📊 [Methodology health](docs/METHODOLOGY_HEALTH.md) · 🧭 [Strategy atlas](docs/STRATEGY_ATLAS.md) · 🧪 [Research matrix](docs/RESEARCH_MATRIX.md)
+> 🌐 **Live research surface:** https://svyable.github.io/quantiacs-q25/ · 🧭 [Research Mandate V2](docs/RESEARCH_MANDATE_V2.md) · 📊 [Methodology health](docs/METHODOLOGY_HEALTH.md) · 🧪 [Research matrix](docs/RESEARCH_MATRIX.md)
 
-This repository is the research-and-validation stack for the **Quantiacs Q25 Crypto Top-10 Long** contest. The goal is not to manufacture one spectacular backtest. The goal is to discover the smallest set of **causal, distinct, cost-aware mechanisms** that can survive chronology, controls, drawdown, turnover, validation, cleaner, multipass and uniqueness checks.
+This repository is the research-and-validation stack for the **Quantiacs Q25 Crypto Top-10 Long** contest.
 
-**The repository is the source of truth.** GitHub Pages is the visual control surface. Measured claims originate in frozen experiment artifacts and generated health packets before they appear in narrative copy.
+The current operating doctrine is **Research Mandate V2**: use all completed history; search broadly; account for the search; generate causal rolling-origin evidence; weight recent evidence explicitly; cluster redundancy; and promote strategies for **marginal portfolio value**, not standalone backtest beauty.
+
+Historical frozen experiments remain immutable evidence. Previously observed periods may inform new research as `ADAPTIVE_REUSE`; they are not misrepresented as pristine holdouts. Genuine unseen evidence begins with observations that have not happened yet.
+
+Contest hard gates remain unchanged: Sponsor data, automatic liquid universe, long-only, no lookahead or loopholes, official transaction costs, deterministic execution, and exact IS Sharpe > 1.0 since 2016-01-01. **No personal Quantiacs API key is required for local/public research**; use `API_KEY=default` through the repo access path.
 
 ---
 

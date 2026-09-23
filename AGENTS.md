@@ -2,248 +2,144 @@
 
 This is the first read for any coding/research agent in this repository.
 
-The job is **not to produce more strategy files**. The job is to increase independent information about the Q25 portfolio: discover a causal mechanism, preregister it, implement it, dogfood the exact evaluator, try to destroy the thesis, and leave a traceable evidence packet.
+## Normative mandate
 
-## Read before touching strategy code
+**Research Mandate V2 is authoritative for new research.**
 
-1. `configs/rules_snapshot.yaml`
-2. `docs/LOCAL_RESEARCH_ACCESS.md`
-3. `docs/EVIDENCE_MODEL.md`
-4. `docs/RESEARCH_MATRIX.md`
-5. `docs/AGENT_PROMPT.md`
-6. `configs/historical_top10.yaml`
-7. `configs/research_frontier.yaml`
-8. `configs/external_research_leads.yaml`
-9. `docs/EXTERNAL_RESEARCH_LEADS.md`
-10. `docs/STRATEGY_ATLAS.md`
-11. `docs/STRATEGY_GENERATION_PLAYBOOK.md`
-12. `docs/RESEARCH_METHOD.md`
-13. `docs/TESTING_PYRAMID.md`
-14. `configs/promotion_gates.yaml`
-15. `configs/chronological_folds.yaml`
-16. `configs/cost_ladder.yaml`
+Read first:
 
-Also inspect the executable incumbents and controls before claiming novelty. A new filename is not a new mechanism.
+1. `configs/rules_snapshot.yaml` — contest hard constraints.
+2. `configs/research_mandate_v2.yaml` — machine-readable research mandate.
+3. `docs/RESEARCH_MANDATE_V2.md` — rationale and operating doctrine.
+4. `docs/LOCAL_RESEARCH_ACCESS.md` — public/default Quantiacs execution.
+5. `docs/EVIDENCE_MODEL.md` — evidence vocabulary.
+6. `docs/STRATEGY_ATLAS.md` and `configs/research_frontier.yaml` — incumbents, failures, crowded families.
+7. `docs/RESEARCH_METHOD.md` — execution loop.
+8. `configs/promotion_gates.yaml` and `configs/cost_ladder.yaml` — admission and cost policy.
 
-## The three-axis evidence model
+Historical preregistrations and one-shot holdout artifacts remain immutable records. They **do not impose a permanent historical holdout on new work**.
 
-Never collapse these into one status:
+## Mission
 
-- **Strategy quality** — economics of a valid observed return stream: robust Sharpe, CAGR/return, Sortino, Calmar, drawdown, turnover, cost sensitivity, residual contribution.
-- **Evidence quality** — development vs validation vs diagnostic vs authenticated preclear, provenance hashes, completeness, comparable harness.
-- **Implementation health** — source audit, causality, liquid-only, long-only, cleaner parity, bounded replay, runtime.
+Build the strongest reproducible Q25 **portfolio**, not the prettiest individual backtest.
 
-A software/integrity failure is **not** a zero Sharpe and does not automatically falsify every other preregistered cell in the family. A great development Sharpe is also **not validation**.
+Use **all completed Sponsor history**, including recent years, for research. The most recent data is often the most relevant evidence about the current market. Once a period has been observed, label later use `ADAPTIVE_REUSE`; do not pretend it is pristine out-of-sample evidence.
 
-`docs/EVIDENCE_MODEL.md` is normative.
+Only future observations that have not yet occurred are genuinely unseen.
 
-## Local Quantiacs access — do not block on credentials
+## Default research loop
 
-A personal Quantiacs API key is not required for local/public-data research. The repo configures **`API_KEY=default` before importing `qnt`** when no participant credential is present.
-
-Therefore:
-
-- do not ask the user for credentials before local research;
-- do not mark performance `PENDING` just because a personal key is absent;
-- run exact Quantiacs local stats when the public/default endpoint is reachable;
-- reserve authenticated credentials for participant-specific correlation/precheck, identity and submission;
-- if public infrastructure fails, record `BLOCKED_INFRA`, preserve the frozen candidate, and do not retune while fixing infrastructure.
-
-See `docs/LOCAL_RESEARCH_ACCESS.md`.
-
-## Dogfood contract
-
-A strategy change is incomplete until the same repository machinery used to criticize incumbents has criticized it.
-
-Default loop:
-
-```text
-map nearest incumbent
-→ generate broad hypothesis slate
-→ score novelty/falsifiability before returns
-→ preregister
-→ causal implementation
-→ static/unit/prefix/replay checks
-→ API_KEY=default exact Quantiacs run
-→ candidate packet
-→ ablation + destructive falsifier
-→ residual/control diagnostics
-→ evidence-aware matrix
-→ kill / repair / forward-test
+```
+inspect current main + open work + evidence memory
+→ repair broken measurement first
+→ generate a broad candidate batch
+→ evaluate causally at many rolling origins
+→ retain every evaluated candidate in the search ledger
+→ cluster redundant return streams
+→ test recent + unweighted evidence and 4/8/12%-ATR costs
+→ deep-test survivors with parameter neighborhoods + destructive controls
+→ measure marginal contribution to current qualified portfolio
+→ Pareto-select simple robust challengers
+→ exact contest eligibility + production hardening
+→ freeze only at production/live-forward boundary
+→ learn from future evidence when it actually arrives
 ```
 
-Each attempted cell must emit or preserve:
+Do not preregister every exploratory formula. Exploration is allowed to search.
 
-- campaign / candidate / family / mode / exact params;
-- preregistration, source, data and toolbox hashes;
-- evidence stage and Quantiacs access mode;
-- failure status **and failure stage** if invalid;
-- Sharpe across research/dev × configured cost ladder;
-- worst-fold/cost Sharpe;
-- CAGR, Sortino, Calmar and hit-rate where return streams support them;
-- max drawdown and turnover;
-- causality / prefix / bounded replay status;
-- cleaner parity;
-- destructive-control relationship;
-- available residual/correlation diagnostics.
+## Hard invariants — never relax
 
-Missing evidence stays missing. Never copy a metric from a related implementation.
+- Sponsor/Quantiacs data only for contest strategy logic.
+- `competition_type = crypto_daily_long`.
+- Historical `is_liquid`; automatic universe; no manual symbols.
+- Long-only.
+- Same causal algorithm through time; no arbitrary year/date switches.
+- No lookahead, centered future information, negative shifts, or future-finalized universe membership.
+- No toolbox/backtester loopholes.
+- Deterministic/reproducible behavior.
+- Exact official transaction cost: **4% × ATR(14) for every position-size change**.
+- Use **8% and 12% × ATR** stress when judging robustness.
+- Exact in-sample Sharpe since **2016-01-01 must be strictly > 1.0** for contest eligibility.
+- The future contest/live interval must never be fit.
+- A software/infrastructure failure is unknown economics, not a failed alpha.
 
-After changing canonical evidence, run:
+## Local research access
 
-```bash
-python scripts/build_research_dashboard.py
-python scripts/build_research_dashboard.py --check
-python -m pytest -q tests
-```
+Do not block local research on participant credentials. When no personal credential is configured, set **`API_KEY=default` before importing `qnt`** and use the public/default Quantiacs path described in `docs/LOCAL_RESEARCH_ACCESS.md`. A real credential is reserved for participant-specific correlation/precheck and submission operations and must never be committed.
 
-The generated `docs/RESEARCH_MATRIX.md` and `docs/data/strategy_matrix.json` are public views, not hand-edited scoreboards.
+## Broad experimentation mandate
 
-## Current read-through
+Broad search is encouraged. Agents may evaluate hundreds of causal candidates across:
 
-HELIOS (`experiments/helios_20260914/pm_report.md`) is a user-directed
-VIPER–HELIOS v22 family refinement, not independent-alpha discovery. All seven
-preregistered cells and three controls completed exact 2016–2022 evaluation.
-Best base robust SR was 0.320; central 0.271 lost to misassigned factor-skill
-weights (0.302) and no-ATR-hurdle control (0.294). `FALSIFIED_DEVELOPMENT`;
-promote zero. Preserve the formulas and window grid. Prefix/365-day replay
-passed; the reference report's custom P&L and expanding learner require a
-separate audit. See `docs/HELIOS_REFINEMENT.md` and its exact evidence packet.
+- cross-sectional ranks and residual signals;
+- multiple horizons and decays;
+- volatility, breadth, liquidity, range/volume and crash state;
+- factor interactions;
+- causal online models;
+- execution-aware transformations;
+- ensembles and simple blend rules;
+- residualization against incumbent return streams.
 
-Frontier-L (`experiments/frontier_20260912l/pm_report.md`) measured three
-preregistered non-graph families with the exact public/default harness on the
-reused 2016–2022 development surface; all 18 cells completed and 2023–2024
-remained excluded because it is spent. Dollar-volume share migration is
-`KILL_WEAK_ALPHA`: the central 42-day parent scores 0.614 and beats its ablation
-(0.281) and identity-rotation falsifier (-0.201), but every base window misses
-the fixed 1.0 floor. Permutation-entropy contraction and relative-value
-convergence are `FALSIFIED_DEVELOPMENT`. Promote zero. Do not retune, invert or
-grid-rescue these families. Canonical summary/context/diagnostics and the
-observed 18-row matrix snapshot are in `evidence/frontier_20260912l/`; the raw
-return streams remain anchored by the recorded GitHub Actions artifact digest.
+Parameter search is allowed in exploration. So are feature interactions and blend exploration.
 
-Frontier-K (`experiments/frontier_20260912k/pm_report.md`) measured three
-previously unmeasured reserves. All 18 exact local cells completed on 2016–2022;
-2023–2024 was excluded because it is spent. Nearest-peer detachment is
-`KILL_WEAK_ALPHA` (best robust SR 0.782, beats both controls, misses the 1.0
-floor). Subspace rotation and cohort residual divergence are
-`FALSIFIED_DEVELOPMENT`. Promote zero. Stop mining residual-correlation node
-changes. `topology_migration_w84` already failed its frozen forward gate
-(0.314 SR@12%). Evidence is in `evidence/frontier_20260912k/`.
+The cost is **accountability**: every evaluated candidate belongs in the search ledger. Do not show only the winner.
 
-Frontier-G (`experiments/frontier_20260911g/pm_report.md`) tested residual-edge
-uncertainty change, two-speed forecast agreement and cost-relative residual
-persistence. All 18 objects completed exact local evaluation after a
-coordinate-order repair in the agreement family. Agreement was frozen as
-`KILL_WEAK_ALPHA`: the central 42-day base scored 0.458, beat both its ablation
-(0.255) and disagreement falsifier (−0.134), and still missed the 1.0 floor.
-Edge-uncertainty change and cost-relative persistence were frozen as
-`FALSIFIED_DEVELOPMENT`. Preserve these formulas and grids. No execution-delay
-or later chronological diagnostic was triggered. Full evidence is in
-`evidence/frontier_20260911g/` with source and preregistration freezes.
+## Evidence: rolling-origin over calendar theater
 
-Frontier-F (`experiments/frontier_20260911f/pm_report.md`) tested signed-triangle
-coherence, a conditional weekly-payoff posterior and an adaptive expert/cash
-policy. The policy is an `allocator_experiment`, not independent alpha. All 18
-objects completed exact local evaluation; all three approaches were frozen as
-`FALSIFIED_DEVELOPMENT`. The best base posterior scored 0.944; its central
-market-state-conditioned model lost to the pooled-state ablation. The policy
-lost to swapped expert labels, and every signed-triangle base had negative
-development Sharpe. Preserve these formulas and grids. No execution-delay or
-later chronological diagnostic was triggered. Full evidence is in
-`evidence/frontier_20260911f/` with source and preregistration freezes.
+New work should default to rolling-origin/prequential evaluation rather than fixed train/dev/holdout partitions.
 
-Frontier-E (`experiments/frontier_20260911e/pm_report.md`) tested downside impact
-relief, range acceptance escape and upside response convexity. All 18 objects
-completed exact local evaluation, but all three families were frozen as
-`FALSIFIED_DEVELOPMENT`. Convexity's best base robust Sharpe was 0.827; its
-inverted control was stronger at 0.985. Neither is a promotion. Unlike the
-Frontier-D ordinal interaction, these defining transforms do materially alter
-capital. Preserve their failed directions and grids; do not rescue them by
-retuning. No later chronological window was opened. See the separate
-`evidence/frontier_20260911e/` context and immutable implementation freeze.
+At each historical origin, use only information available at that origin, then score what follows. Aggregate only after forward slices are generated causally.
 
-Frontier-D (`experiments/frontier_20260910d/pm_report.md`) measured all ten
-candidate cells and three controls with exact public/default Quantiacs data.
-Both variance-ratio reversal and rank-transition reliability were frozen as
-`FALSIFIED_DEVELOPMENT`; do not rescue them with a wider parameter grid. The
-rank-reliability term produced identical development returns to its ablation.
-Use `research/mechanism_diagnostics.py` to check whether proposed signal changes
-survive portfolio construction, and preserve eligibility exits until the next
-scheduled rebalance. Evidence is in `evidence/frontier_20260910d/` and remains
-separate from older campaign contexts.
+Report both:
 
-The latest observed Frontier-B packet is **development only**. Its strongest valid base cell is `topology_migration_w84`; topology is therefore a priority seam for forward research, not a production winner. One topology grid cell failed implementation/integrity and must be repaired without parameter expansion.
+- ordinary/unweighted results; and
+- recency-aware results using the current mandate default.
 
-The liquidity-hysteresis base family is weak as standalone alpha in the captured development packet. Preserve lifecycle/hysteresis as a possible conditioning variable; do not keep tuning the same standalone hypothesis.
+Historical periods previously used as forward tests remain valuable evidence and must retain their original labels. They are also allowed to inform later research as `ADAPTIVE_REUSE`.
 
-Shock-recovery base economics remain unresolved because invalid implementation cells did not earn a valid return stream.
+## Survivor burden
 
-The historical V10/V11/C165/V12/defensive roster remains a **separate frozen evidence lane** until those exact implementations are brought through the current harness.
+Cheap search first; expensive skepticism later.
 
-## Family adjudication
+A serious survivor should earn:
 
-Independent preregistered cells should continue running even when a sibling cell fails.
+- origin-level and aggregate prequential metrics;
+- recent-period evidence;
+- exact 4/8/12% ATR cost sensitivity;
+- parameter-neighborhood/plateau stability;
+- a mechanism-specific destructive control;
+- simple baseline comparison;
+- prefix/bounded-replay and asset-order checks where relevant;
+- long-only/liquid/gross invariants;
+- correlation clustering against tested candidates;
+- comparison with the current qualified portfolio;
+- marginal Sharpe/return contribution, drawdown overlap and turnover overlap;
+- 10%-volatility-normalized economics.
 
-Use:
+A one-point optimum is weak evidence.
 
-- `CONTINUE / NEEDS_FORWARD_EVIDENCE` when valid development evidence survives controls;
-- `CONTINUE / REPAIR_INVALID_CELLS_THEN_FORWARD` when promising valid cells coexist with implementation/integrity failures;
-- `FREEZE / KILL_WEAK_ALPHA` when every valid base cell is below the predefined development floor;
-- `FREEZE / FALSIFIED_DEVELOPMENT` when a valid destructive control or ablation matches/beats its valid parent;
-- `PENDING / INSUFFICIENT_VALID_EVIDENCE` when no valid base cell exists.
+## Portfolio-first selection
 
-Do not family-rank a campaign with unattempted preregistered cells.
+Standalone Sharpe is not the objective function.
 
-## Novelty gate before returns
+A lower-Sharpe strategy can be valuable if it produces independent returns, improves drawdowns, or raises the portfolio's cost-adjusted prequential performance. A high-Sharpe clone can add little.
 
-For an independent alpha, compare with the nearest incumbent on:
+Use Pareto frontiers. Do not force research into one mega-score.
 
-1. information primitive;
-2. transform;
-3. timing/state condition;
-4. portfolio construction.
+## Freeze policy
 
-Require at least **two changed axes** before calling it a new alpha family. A new lookback, threshold, top-K, cap, classifier, smoothing constant or blend weight is usually a refinement.
+Freeze when immutability matters:
 
-The default campaign remains **24 hypotheses → 6 preregistrations → at most 3 implementations**.
+- a production candidate is being claimed;
+- a genuine future-forward observation is about to begin;
+- an evidence artifact depends on proving the specification did not change.
 
-## Frontier pressure
+Do not make freezing a tax on initial idea generation.
 
-Do not let a successful family create a monoculture. Current useful seams include correlation-topology change, topology rank stability, fragmentation/recovery, volatility term structure, forecast surprise/disagreement, price-volume elasticity, assimilation-delay dynamics, tail dependence, range-volume geometry, opportunity density, and execution-aware alpha density.
+## Research memory
 
-On-chain state and index ecology remain `UNVERIFIED_FOR_Q25` until current admissibility, timestamps, replay and runtime are established. `configs/external_research_leads.yaml` and `docs/EXTERNAL_RESEARCH_LEADS.md` contain provenance and caveats.
+Preserve failures, search regions, destructive controls and infrastructure defects. Before opening a new family, inspect the strategy atlas, research frontier and recent evidence.
 
-For any **forecast surprise** or ML idea, start with a tiny causal model and a non-ML ablation. For **price-volume elasticity**, destroy the price/volume pairing as a mechanism falsifier rather than merely shifting a lookback.
+The lab should learn faster over time because it remembers what failed.
 
-## Falsification beats tuning
-
-Use destructive controls that attack the proposed causal story:
-
-- remove the defining transform;
-- permute identities/dates while preserving marginal distributions;
-- replace the state with a matched generic market state;
-- freeze online coefficients;
-- add execution delay;
-- invert the gate;
-- replace exact ecology/lifecycle information with simple `is_liquid`.
-
-If the destructive control preserves the edge, the story is wrong or incomplete.
-
-Do not rescue a failed family by widening the parameter grid after seeing returns.
-
-## Hard prohibitions
-
-- no fabricated or transplanted metrics;
-- no future leakage, centered windows or negative shifts;
-- no manual symbols;
-- no external non-Quantiacs strategy data in contest code;
-- no full-history Sharpe hyperparameter optimizer as evidence;
-- no one-point optimum promotion;
-- no blend-weight rescue after a failed correlation gate;
-- no fitting on the 2026-10-01 → 2027-01-31 live window;
-- no treating leaderboard titles as implementation disclosure;
-- no treating a software exception as economic falsification;
-- no stopping local research to request a personal key before trying `API_KEY=default`.
-
-A successful agent run may promote **zero** strategies. Success is a cleaner frontier, stronger controls, repaired measurement, and more information per research look.
+A successful run can promote zero strategies. It should still increase information, repair measurement, broaden high-quality search, or make the portfolio decision surface clearer.

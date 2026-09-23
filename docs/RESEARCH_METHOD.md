@@ -1,212 +1,170 @@
 # Research Method — Quantiacs Q25
 
-**Operating system for causal, unique, low-cost crypto-long research.**
-
-Q25 is **research-and-validation**, not “write strategy → maximize Sharpe → tweak until green.”
+The normative policy for new work is [Research Mandate V2](RESEARCH_MANDATE_V2.md) and `configs/research_mandate_v2.yaml`.
 
 ## Objective
 
-Find **causal, unique, low-cost** mechanisms with a credible chance of **positive Sharpe** over the **unseen live period (2026-10-01 → 2027-01-31)**.
+Discover and combine causal Q25 signals that improve the **current portfolio** after exact transaction costs, while satisfying contest hard constraints.
 
-Prefer **residual / unique alpha** over high-Sharpe clones of public or internal cores.
+The research system uses all completed Sponsor history. It does not maintain a permanent historical holdout. Statistical honesty comes from causal rolling-origin evaluation, explicit adaptive-reuse labels, search accounting, robustness tests, and genuine future evidence.
 
-Never ask *“How can I increase this backtest?”* before *“What independent causal object have we not tested, what portfolio gap could it fill, and what would falsify it?”*
+## 1. Inspect before searching
 
-## Research memory comes before ideation
+Before new experiments:
 
-Before creating a new strategy, read:
+- inspect current `main`, open PRs and failing workflows;
+- repair measurement/reproducibility blockers first;
+- read the strategy atlas and research frontier;
+- inspect recent evidence and failed families;
+- identify the current qualified champion portfolio and nearest family peers.
 
-1. `docs/LOCAL_RESEARCH_ACCESS.md` — how to run measured local research without a personal key;
-2. `configs/historical_top10.yaml` — frozen incumbent roster;
-3. `configs/research_frontier.yaml` — crowded families and preferred frontier;
-4. `configs/external_research_leads.yaml` — public-research leads and admissibility labels;
-5. `docs/STRATEGY_ATLAS.md` — what incumbents actually measure;
-6. `docs/STRATEGY_GENERATION_PLAYBOOK.md` — campaign design for new strategies.
+A new filename is not a new idea.
 
-A research agent that skips these files is likely to spend compute rediscovering an old family or stop unnecessarily before measuring it.
+Local measurement should not wait for participant credentials: use the repository public/default path with `API_KEY=default` before importing `qnt` when no personal key is configured. Account-bound credentials are only for participant-specific services.
 
-## Local access model: measure first, authenticate only when needed
+## 2. Search broadly
 
-A personal Quantiacs API key is **not required for local/public-data research**. The current open-source toolbox explicitly accepts `API_KEY=default`, and its own tests use that sentinel. This repository's runner sets it before importing `qnt` when no credential is configured.
+Create batches rather than isolated pet hypotheses.
 
-Use two distinct evidence layers:
+Exploration may search parameters, horizons, operators, interactions, residualizations and simple blends. Prefer economically interpretable primitives, but do not artificially limit the search to three parameters or a tiny number of formulas.
 
-| Access mode | Credential | Appropriate work |
-|---|---|---|
-| `public_default` | `API_KEY=default` | public Quantiacs data, local toolbox backtests/stats, prefix checks, cost ladders, folds, local multipass where supported |
-| `authenticated` | real participant key / hosted session | participant-specific remote correlation/precheck, account identity, submission and other account-bound services |
+Record the entire candidate set and search footprint.
 
-Do not ask for a personal credential before attempting the local/public path. Do not leave local strategy metrics `PENDING` merely because a personal key is absent.
+Exploratory performance is allowed to influence the next experiment. Label it honestly as exploration/adaptive reuse rather than pretending it is independent confirmation.
 
-If public/default data access genuinely fails, record `BLOCKED_INFRA` with toolbox/version/access mode and preserve the exact frozen candidate. Infrastructure blocking is not alpha failure.
+## 3. Evaluate prequentially
 
-See [LOCAL_RESEARCH_ACCESS.md](LOCAL_RESEARCH_ACCESS.md) for source-level evidence and import-order details.
+Default to repeated rolling origins.
 
-## Novelty is a pre-backtest gate
+At each origin `t`:
 
-Compare a proposal with the nearest incumbent on four axes:
+1. expose only information available through `t`;
+2. run the same declared fitting/selection algorithm;
+3. generate post-`t` weights;
+4. score the forward horizon;
+5. retain origin-level metrics.
 
-1. information primitive;
-2. transform;
-3. timing / state condition;
-4. portfolio construction.
+Use expanding or rolling estimation according to the mechanism. Purge overlapping targets when necessary.
 
-A candidate should differ on **at least two axes** before it is treated as a new independent-alpha hypothesis. One-axis changes are useful only when labeled honestly as ablations, allocator tests, controls, or family refinements.
+The default starting configuration is quarterly origins, ~90-day forward horizons, at least eight origins where history permits. These values may be changed for mechanism fit, but the procedure must remain causal and be reported.
 
-A new lookback, threshold, top-K, rebalance day or blend weight is not a new mechanism.
+## 4. Make recent data count
 
-## Broad-before-deep campaign design
+Report ordinary and recency-weighted evidence. The V2 default half-life is 730 days.
 
-Default discovery cadence:
+A fixed exponential decay is allowed because it is the same rule through time. A hand-written switch such as “after 2024 use different weights” is not.
 
-- generate **24** hypotheses without performance feedback;
-- score novelty, causality, falsifiability, parameter economy, cost plausibility and portfolio complement;
-- preregister the best **6**;
-- implement the best **3**;
-- run measured local/public Quantiacs research;
-- run the full pyramid;
-- promote zero or more based on evidence.
+Recent history may influence training, selection and ensemble composition.
 
-The counts are defaults, not magic. The principle is more important: **diversify hypotheses before spending research looks**.
+## 5. Account for search
 
-Initial candidates should usually have no more than **three free parameters**. Prefer coarse stability tests over dense lookback optimization.
+Every tested candidate belongs in the experiment/search ledger, including failures.
 
-## Three evidence layers
+For each batch retain at least:
 
-| Layer | Role | Status rule |
-|-------|------|-------------|
-| **1. Rules / docs snapshot** | Contest hard rules + promotion policy (`configs/rules_snapshot.yaml`, `promotion_gates.yaml`) | Always current; dated |
-| **2. Local toolbox research** | Public/default data → single-pass screen → exact stats → prefix causality → folds/costs/multipass | **Measure whenever executable**; `API_KEY=default` is sufficient for the public/local path |
-| **3. Hosted/account-bound boundary** | Hosted notebook, participant-specific correlation/precheck, submission | Mark specific unrun account-bound checks **PENDING** |
+- formula/strategy identity;
+- parameters;
+- parent/family;
+- source revision;
+- evaluation origins;
+- costs;
+- aggregate and recent metrics;
+- status/failure stage;
+- return-stream hash when practical.
 
-Do not invent Sharpe, returns, or drawdown. A metric is `PENDING` only when that layer genuinely did not run or could not run.
+For heavily searched families, prefer block-bootstrap or equivalent search-bias diagnostics before treating the top cell as strong evidence.
 
-## Dogfood the evaluator
+## 6. Funnel by cost
 
-Once a strategy is executable, use the actual Quantiacs toolbox to characterize it. Do not stop at “code compiles” or “tests pass.” Where supported, report:
+Do not run expensive tests on everything.
 
-- Sharpe;
-- mean return and correctly derived CAGR-style return;
-- Sortino / downside-risk diagnostics;
-- volatility and maximum drawdown;
-- turnover / holding diagnostics;
-- Sharpe across the ATR cost ladder;
-- chronological folds and explicitly labeled diagnostics;
-- simple controls / CRYPTO10 comparison;
-- prefix-causality, bounded-replay, cleaner-mutation, missed-date, long-only, gross and liquidity checks;
-- matched correlations / residual alpha against incumbent streams when available.
+Cheap stage:
+- admissibility/static checks;
+- causal formula construction;
+- approximate or exact 4% screen;
+- rolling-origin return generation;
+- correlation clustering.
 
-Metrics measured with `public_default` are real **local Quantiacs-toolbox evidence**, not official participant-specific uniqueness clearance or a submission result.
+Survivor stage:
+- exact 4/8/12%-ATR economics;
+- parameter neighborhoods;
+- destructive controls;
+- prefix/bounded replay;
+- deterministic and asset-order invariance tests;
+- runtime/cleaner checks;
+- regime and recent-origin stability;
+- portfolio marginal contribution.
 
-## Dual research tracks
+Production stage:
+- exact full IS eligibility;
+- single/multipass parity where applicable;
+- current correlation/uniqueness checks;
+- production adapter identity;
+- live-forward freeze.
 
-### A) `discovery` — high-capacity mechanism probe
+## 7. Portfolio-first decision
 
-Use enough capacity to determine whether a new information primitive appears to contain structure. This track carries a heavier multiple-testing burden and should not become an excuse for unbounded feature search.
+Do not select solely by standalone Sharpe.
 
-### B) `robustness` — deliberately simple mechanism test
+Compare each survivor with the current qualified portfolio on:
 
-Few bounded signals, slower/event-driven rebalance, **cash allowed** (gross < 1 OK), **capped allocation**, no hand-picked assets, execution delay left to evaluator. See `factory/tracks.py` and `strategies/robust_weekly_waterfill.py`.
+- marginal portfolio Sharpe/utility;
+- correlation;
+- drawdown overlap;
+- turnover overlap;
+- cost robustness;
+- recent prequential Sharpe;
+- full-history Sharpe;
+- max drawdown;
+- 10%-vol normalized return;
+- complexity.
 
-**Convergence rule:** when both tracks independently support the **same mechanism**, treat that as stronger evidence than either track alone. If only the complicated version works, assume fragility until disproven.
+Cluster highly redundant candidates. Prefer a small set of complementary signals over a zoo of near-duplicates.
 
-## Current frontier preference
+Blend search is allowed during exploration. Production should use a simple rule that is stable over a broad weight neighborhood.
 
-The machine-readable source is `configs/research_frontier.yaml`. Current priority areas include:
+## 8. Falsify survivors
 
-- on-chain state × cross-section, conditional on current Q25 admissibility;
-- forecast surprise / model disagreement;
-- price-volume elasticity / absorption geometry;
-- benchmark/index ecology, conditional on current Q25 admissibility;
-- assimilation-delay dynamics;
-- residual correlation-topology change;
-- liquidity-transition hysteresis;
-- volatility term structure / vol-of-vol;
-- tail-dependence state;
-- range-volume geometry;
-- shock-recovery surfaces;
-- nonlinear cross-sectional response;
-- opportunity density / alpha breadth;
-- execution-aware alpha density.
+Every serious survivor needs a mechanism-specific destructive control and a simple baseline.
 
-These are **research priorities, not claims of edge**.
+Examples include identity permutation, time/lag perturbation, removing residualization, replacing a special state with a generic matched state, simplifying the allocator, or adding execution delay.
 
-## Iteration loop
+If a control preserves the edge, the interpretation is weakened even when the return stream is attractive.
 
-1. **Map incumbents** — identify nearest existing family and novelty gap.
-2. **Generate broadly** — idea slate before returns.
-3. **Preregister** — write `preregistration.json` + SHA256 before holdout-sensitive testing (`scripts/new_experiment.py`, `research/preregister.py`).
-4. **Hypothesis** — name mechanism, nearest incumbent, novelty axes, falsifier and ablation.
-5. **L0–L1** — static admissibility + deterministic strategy tests (`research/static_audit.py`).
-6. **Initialize local access** — use the repo runner; `API_KEY=default` if no participant key exists.
-7. **Single-pass screen** — cheap exploratory stats only; do not promote on screen alone.
-8. **L3 exact stats** — Quantiacs stats fields; cost ladder L4.
-9. **L2 prefix** — causality / look-ahead check (`research/prefix_test.py`).
-10. **L5–L6** — regimes + chronological folds; live window untouched.
-11. **L7–L9** — residual vs core, multiple-testing ledger, adversarial falsification.
-12. **Portfolio admission** — test marginal contribution, not just standalone metrics.
-13. **Promote or kill** — gates in `configs/promotion_gates.yaml`; append to formula ledger.
-14. **Hosted/account boundary** — only after local gates; submission checklist; mark account-bound checks PENDING if skipped.
+## 9. Evidence vocabulary
 
-## Falsification before optimization
+- `EXPLORATORY`: influenced search or tuning.
+- `PREQUENTIAL`: generated forward relative to each historical origin.
+- `ADAPTIVE_REUSE`: already-observed history reused in later research.
+- `LIVE_FORWARD`: genuinely future observations after a production freeze.
+- `BLOCKED_INFRA`: no economic conclusion.
 
-Every serious candidate needs a destructive test that should break it if the mechanism interpretation is true.
+Do not call an observed historical period pristine OOS.
 
-Examples:
+## 10. Historical freezes
 
-- sign inversion;
-- lag/leader shuffle;
-- state-mask inversion;
-- matched-frequency random event dates;
-- remove residualization;
-- replace special allocator with equal weight;
-- extra execution delay;
-- replace the proposed primitive with a matched volatility/control primitive.
+Existing train/dev/validation/holdout artifacts are preserved exactly as historical evidence. Their original claims and hashes remain valid.
 
-If the falsifier preserves the edge, the explanation is wrong or incomplete. Freeze the candidate instead of inventing a rescue story.
+They do not prevent future agents from using those dates in new research. Later use must be labeled adaptive reuse and cannot retroactively upgrade old evidence.
 
-## Originality hierarchy
+## 11. Hard contest boundary
 
-Originality is tested three times:
+No methodology freedom overrides:
 
-1. **Before returns** — four-axis novelty map.
-2. **During research** — matched correlations / residualization against incumbent families and simple controls.
-3. **At the platform boundary** — current participant-specific external strategy-correlation check.
+- Sponsor data only;
+- automatic top-10 liquid universe;
+- long-only;
+- no manual assets;
+- no lookahead;
+- same algorithm through time;
+- official cost model;
+- deterministic execution;
+- IS Sharpe > 1.0 since 2016-01-01;
+- required platform uniqueness/correlation checks;
+- future live data never used before it exists.
 
-A strong raw backtest with no residual value is a family refinement, not a new alpha.
+## 12. Repository completion rule
 
-Do not tune blend weights to make a failed correlation gate barely pass.
+A research run is complete when it leaves a reproducible artifact: code/config/docs, objective tests, an evidence/search record when economics were run, a dedicated branch/PR, and a clear next experiment.
 
-## Compact robustness design patterns
-
-- Quantiacs data only (`cryptodaily` + historical `is_liquid`)
-- slow/event-driven rebalance where the mechanism permits
-- permit cash
-- capped water-fill / explicit name caps
-- long-only × `is_liquid`
-- optional risk modules only when they test a named hypothesis
-- explicit signal-per-cost logic for execution-aware ideas
-
-## Behavioral rules
-
-1. No fabricated metrics. Empty / `null` / `PENDING` only until a real run or genuine infrastructure block.
-2. **No personal API key is required for local/public research.** Initialize `API_KEY=default` before `qnt` imports when no participant key exists; real credentials are account-bound only and must never be committed or printed.
-3. Long-only, historical `is_liquid`, sponsor data only, no manual coin picking.
-4. Hard IS Sharpe **> 1.0** since 2016-01-01.
-5. Desk / firm names are inspiration only — no affiliation claimed.
-6. Prefer unique residual alpha over clone Sharpe.
-7. Failures are first-class: append to `experiments/` ledgers; do not delete.
-8. Ask what would falsify the mechanism before tuning parameters.
-9. Do not use previously observed diagnostic windows as fresh validation.
-10. “No promotion” is a valid successful research outcome.
-11. **Dogfood the evaluator:** an executable strategy with reachable public data should produce measured local evidence, not credential-based excuses.
-
-## Related docs
-
-- [LOCAL_RESEARCH_ACCESS.md](LOCAL_RESEARCH_ACCESS.md) — credential-free local/public Quantiacs research and authenticated boundary
-- [STRATEGY_GENERATION_PLAYBOOK.md](STRATEGY_GENERATION_PLAYBOOK.md) — **start here for new strategy campaigns**
-- [AGENT_PROMPT.md](AGENT_PROMPT.md) — paste-ready next-agent contract
-- [STRATEGY_ATLAS.md](STRATEGY_ATLAS.md) — incumbent mechanism map
-- [TESTING_PYRAMID.md](TESTING_PYRAMID.md) — Levels 0–9
-- [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) — hosted/account-bound workflow
-- [`../configs/research_frontier.yaml`](../configs/research_frontier.yaml) — machine-readable novelty frontier
+Failures are preserved, not erased.

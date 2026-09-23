@@ -1,91 +1,67 @@
-# Predeclared promotion gates for Q25 research.
-# CONTEST_HARD = must satisfy for eligibility / ranking rules.
-# POLICY_SOFT  = research policy; numeric thresholds are TODO for the human.
-# Never invent observed metrics; gates evaluate real runs only.
-
-version: 1
-updated: "2026-09-07"
+# Q25 promotion/admission policy.
+# Contest hard gates remain binary. Research ranking is Pareto/multi-objective.
+version: 2
+updated: "2026-09-23"
 
 contest_hard:
   sharpe_is_min:
     value: 1.0
+    operator: "strictly_greater_than"
+    start: "2016-01-01"
     class: CONTEST_HARD
-    note: "IS Sharpe > 1.0 since 2016-01-01"
-  long_only:
-    value: true
-    class: CONTEST_HARD
-  liquid_only:
-    value: true
-    class: CONTEST_HARD
+  long_only: {value: true, class: CONTEST_HARD}
+  liquid_only: {value: true, class: CONTEST_HARD}
+  no_manual_coin_picking: {value: true, class: CONTEST_HARD}
+  sponsor_data_only: {value: true, class: CONTEST_HARD}
+  reject_buy_and_hold: {value: true, class: CONTEST_HARD}
+  reject_toolbox_loopholes: {value: true, class: CONTEST_HARD}
   uniqueness_correlation:
     value: true
     class: CONTEST_HARD
-    note: "Must pass Quantiacs uniqueness / correlation filter"
+    note: "Must pass current Quantiacs uniqueness/correlation requirement before submission."
   positive_contest_period_performance:
     value: true
     class: CONTEST_HARD
-    note: "Positive performance over contest/live ranking period required"
-  reject_buy_and_hold:
-    value: true
-    class: CONTEST_HARD
-  reject_toolbox_loopholes:
-    value: true
-    class: CONTEST_HARD
-  no_manual_coin_picking:
-    value: true
-    class: CONTEST_HARD
-  sponsor_data_only:
-    value: true
-    class: CONTEST_HARD
 
-policy_soft:
-  # --- HUMAN MUST SET numeric soft thresholds below (TODO) ---
-  sharpe_is_soft_min:
-    value: null  # TODO(human): e.g. aspirational cook target; see targets.yaml
-    class: POLICY_SOFT
-    status: TODO_HUMAN
-  cost_stressed_sharpe_min:
-    value: null  # TODO(human): min Sharpe at cost 0.08 or 0.12
-    class: POLICY_SOFT
-    status: TODO_HUMAN
-    cost_bps_ref: [0.08, 0.12]
-  max_drawdown_max:
-    value: null  # TODO(human): e.g. 0.40 absolute
-    class: POLICY_SOFT
-    status: TODO_HUMAN
-  fold_validation_sharpe_min:
-    value: null  # TODO(human): min Sharpe on chronological validation fold
-    class: POLICY_SOFT
-    status: TODO_HUMAN
-  residual_sharpe_min:
-    value: null  # TODO(human): residual vs core after L7
-    class: POLICY_SOFT
-    status: TODO_HUMAN
-  max_corr_vs_core:
-    value: null  # TODO(human): e.g. 0.85 — reject near-clones
-    class: POLICY_SOFT
-    status: TODO_HUMAN
-  multipass_consistent_with_singlepass:
-    value: true
-    class: POLICY_SOFT
-    note: "Qualitative consistency; set numeric tolerance TODO(human)"
-    tolerance: null  # TODO(human)
-  cleaner_mutation_sharpe_approx_zero:
-    value: true
-    class: POLICY_SOFT
-    note: "Noise/cleaner mutation should not pass; max |Sharpe| TODO(human)"
-    max_abs_sharpe: null  # TODO(human)
-  prefix_causality_pass:
-    value: true
-    class: POLICY_SOFT
-  preregistration_present:
-    value: true
-    class: POLICY_SOFT
-  dual_track_convergence_bonus:
-    value: true
-    class: POLICY_SOFT
-    note: "Not a hard gate; stronger evidence when discovery+robustness agree"
+research_v2:
+  selection: "pareto_frontier"
+  single_scalar_megascore: false
+  permanent_historical_holdout_required: false
+  rolling_origin_required_for_serious_survivor: true
+  recent_evidence_required: true
+  recency_weighted_and_unweighted_reported: true
+  search_ledger_required: true
+  parameter_neighborhood_required: true
+  destructive_control_required: true
+  simple_baseline_required: true
+  portfolio_marginal_contribution_required: true
+  cost_atr_fractions: [0.04, 0.08, 0.12]
+  required_dimensions:
+    - full_history_sharpe
+    - recent_prequential_sharpe
+    - marginal_portfolio_sharpe
+    - return_correlation
+    - max_drawdown
+    - drawdown_overlap
+    - turnover
+    - turnover_overlap
+    - cost_robustness
+    - vol10_normalized_return
+    - parameter_stability
+    - complexity
+  note: "No universal soft threshold on every dimension. Use Pareto dominance, mechanism evidence and contest hard gates."
 
-notes: |
-  Soft cook aspirations remain in configs/targets.yaml and are NOT automatic
-  promotion criteria until the human copies numbers into policy_soft above.
+production:
+  exact_current_is_required: true
+  deterministic_required: true
+  prefix_or_bounded_replay_required: true
+  asset_order_invariance_where_relevant: true
+  authenticated_uniqueness_required_before_submission: true
+  freeze_before_genuine_live_forward: true
+  simple_stable_blend_preferred: true
+
+historical_compatibility:
+  preserve_old_preregistrations: true
+  preserve_old_holdout_decisions: true
+  old_holdouts_may_be_reused_by_new_research: true
+  reuse_label: "ADAPTIVE_REUSE"

@@ -1,24 +1,37 @@
-# Chronological selection / walk-forward folds (L6).
-# Selection decisions use earlier folds only. The 2023-2024 fold has now been
-# observed under a preregistered topology-migration forward test and is SPENT.
-# Live remains untouched.
+# Q25 chronology policy.
+# Historical fixed folds are retained as evidence landmarks for old campaigns.
+# Research Mandate V2 does NOT reserve them as permanent holdouts for new work.
 
+protocol:
+  version: 2
+  primary: "rolling_origin_prequential"
+  completed_history_available_for_research: true
+  permanent_historical_holdout: false
+  observed_history_reuse_label: "ADAPTIVE_REUSE"
+  default_origin_frequency: "quarterly"
+  default_forward_horizon_days: 90
+  minimum_origins: 8
+  recency_half_life_days: 730
+  live_fit_forbidden: true
+
+# Compatibility/history landmarks. Existing evidence and scripts may reference
+# these IDs. Their historical statuses must not be rewritten.
 folds:
   - id: research
     start: "2016-01-01"
     end: "2020-12-31"
-    use: "hypothesis / feature search; repeatedly observed development surface"
+    use: "historical development landmark; available to new V2 research"
     status: "OBSERVED_REUSED"
   - id: dev
     start: "2021-01-01"
     end: "2022-12-31"
-    use: "parameter development; repeatedly observed development surface"
+    use: "historical development landmark; available to new V2 research"
     status: "OBSERVED_REUSED"
   - id: validation
     start: "2023-01-01"
     end: "2024-12-31"
-    use: "SPENT preregistered forward evidence; never again a fresh selection or mutation fold"
-    status: "SPENT_DO_NOT_MUTATE"
+    use: "historical spent forward-test landmark; available to new research only as ADAPTIVE_REUSE"
+    status: "SPENT_DO_NOT_MUTATE_HISTORICAL_RECORD"
     first_observed_workflow_run: 34675541608
     first_observed_pr: 22
     durable_evidence: "evidence/frontier_20260910b/forward_validation_2023_2024/observed_summary.json"
@@ -26,17 +39,19 @@ folds:
   - id: diagnostic
     start: "2025-01-01"
     end: null
-    use: "diagnostics only — not free validation and never repair a failed forward test"
-    status: "CONTAMINATED_DIAGNOSTIC"
+    use: "observed recent history; high-value V2 research data; never call pristine OOS after use"
+    status: "OBSERVED_ADAPTIVE_REUSE"
   - id: live
     start: "2026-10-01"
     end: "2027-01-31"
-    use: "UNTOUCHED — contest live evaluation"
-    status: "UNTOUCHED_LIVE"
+    use: "future contest/live interval; fit forbidden before observations occur"
+    status: "FUTURE_LIVE"
 
 rules:
-  - Do not fit or select on live.
-  - Do not promote solely on diagnostic (2025+).
-  - Do not use 2023-2024 to invent, tune, switch, or rescue a new strategy after its first observation.
-  - Exact 2023-2024 replay is reproducibility only; it does not restore fresh validation status.
-  - Record which fold drove each promotion decision in the experiment ledger.
+  - "New V2 research may use every completed historical observation."
+  - "Do not retroactively alter the evidence label or decision of an old frozen experiment."
+  - "Do not describe previously observed history as pristine out-of-sample."
+  - "Use rolling-origin causality to generate prequential evidence."
+  - "At each origin, fitting and selection may use only information then available."
+  - "Recent data may receive fixed causal recency weighting."
+  - "Do not fit future live observations before they occur."

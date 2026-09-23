@@ -279,7 +279,8 @@ priority_frontiers:
     avoid: "Do not import public metrics or exact tuned parameters and do not call a basic low-vol rank a new mechanism."
 
 candidate_contract:
-  max_initial_free_parameters: 3
+  max_initial_free_parameters: null
+  complexity_penalty_required: true
   require_named_falsifier: true
   require_nearest_incumbent: true
   require_novelty_axes_changed: true
@@ -288,32 +289,33 @@ candidate_contract:
   require_historical_is_liquid: true
   forbid_manual_symbols: true
   forbid_external_strategy_data: true
-  forbid_holdout_tuning: true
+  allow_completed_history_adaptive_reuse: true
+  search_ledger_required: true
+  forbid_live_forward_tuning: true
   external_data_requires_current_q25_verification: true
   external_inspiration_requires_source_provenance: true
 
 campaign_default:
-  ideation_count: 24
-  preregister_count: 6
-  implement_count: 3
-  internet_sweep_suggested_allocation:
-    onchain_state_cross_section: 7
-    online_surprise_and_disagreement: 7
-    price_volume_elasticity: 5
-    benchmark_composition_ecology: 5
+  mode: "broad_batch_alpha_factory"
+  preregistration_required_for_exploration: false
+  candidate_batch_soft_max: 500
+  minimum_distinct_families_soft: 8
+  deep_test_only_survivors: true
+  search_ledger_required: true
+  rolling_origin_required_for_survivor_claims: true
+  recency_weighted_and_unweighted_required: true
+  correlation_cluster_before_deep_test: true
   note: >-
-    These counts are a default research cadence, not a statistical guarantee.
-    Generate broadly before testing, then spend compute only on the most novel,
-    falsifiable proposals. If on-chain/index data are not currently Q25-admissible,
-    reallocate those idea slots to OHLCV-only surprise, topology, vol-term and
-    range-volume work. Do not alter a rejected mechanism repeatedly until it
-    passes; open a new experiment only for a materially new hypothesis.
+    Search broadly and cheaply, then spend expensive controls and hardening on
+    survivors. Candidate counts are soft compute budgets, not scientific gates.
+    Do not hide losing cells or convert exploratory reuse into pristine validation.
+
 
 stop_rules:
   - "Kill obvious incumbent clones before a backtest."
   - "Kill a mechanism when its stated falsifier passes or the mechanism interpretation collapses."
   - "Do not relax a gate because a candidate narrowly misses it."
-  - "Do not treat an already observed diagnostic period as a fresh validation set."
+  - "Previously observed history may be reused, but label it ADAPTIVE_REUSE and never call it pristine validation."
   - "Do not promote a family merely because one parameter point has the highest Sharpe."
   - "Do not convert a failed correlation gate into a blend-weight optimization problem."
   - "Do not use a Q24-supported dataset in Q25 until current Q25 admissibility and timing are verified."

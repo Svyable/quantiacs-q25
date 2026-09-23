@@ -54,65 +54,52 @@ jobs:
           print("historical_top10.yaml integrity OK")
           PY
 
-      - name: Validate research frontier and agent contract
+      - name: Validate Research Mandate V2 and frontier contract
         run: |
           python - <<'PY'
           from pathlib import Path
           import yaml
-          from factory.mechanisms import mechanism_ids
 
+          mandate = yaml.safe_load(Path("configs/research_mandate_v2.yaml").read_text())
           frontier = yaml.safe_load(Path("configs/research_frontier.yaml").read_text())
-          axes = frontier["novelty_axes"]
-          assert axes == [
-              "information_primitive",
-              "transform",
-              "timing_or_state_condition",
-              "portfolio_construction",
-          ]
-          assert len(frontier["priority_frontiers"]) >= 12
-          assert frontier["candidate_contract"]["max_initial_free_parameters"] <= 3
-          assert frontier["candidate_contract"]["external_data_requires_current_q25_verification"] is True
-          assert frontier["campaign_default"]["ideation_count"] > frontier["campaign_default"]["preregister_count"]
-          assert frontier["campaign_default"]["preregister_count"] >= frontier["campaign_default"]["implement_count"]
-          assert frontier["external_research_ref"] == "configs/external_research_leads.yaml"
+          chronology = yaml.safe_load(Path("configs/chronological_folds.yaml").read_text())
+          promotion = yaml.safe_load(Path("configs/promotion_gates.yaml").read_text())
 
-          mechanisms = set(mechanism_ids())
-          required = {
-              "price_delay",
-              "correlation_topology",
-              "liquidity_hysteresis",
-              "vol_term_structure",
-              "tail_dependence",
-              "range_volume_geometry",
-              "nonlinear_response",
-              "opportunity_density",
-              "execution_aware_alpha",
-              "onchain_state",
-              "forecast_surprise",
-              "forecast_disagreement",
-              "price_elasticity",
-              "index_ecology",
-              "persistent_low_vol_control",
-          }
-          missing = required - mechanisms
-          assert not missing, f"frontier mechanisms missing from catalog: {sorted(missing)}"
+          assert mandate["version"] == 2
+          assert mandate["data_use"]["completed_history_available_for_research"] is True
+          assert mandate["data_use"]["permanent_historical_holdout_required"] is False
+          assert mandate["evaluation"]["primary_design"] == "rolling_origin_prequential"
+          assert mandate["recency"]["enabled"] is True
+          assert mandate["exploration"]["broad_search_allowed"] is True
+          assert mandate["exploration"]["parameter_search_allowed"] is True
+          assert mandate["exploration"]["search_ledger_required"] is True
+          assert mandate["portfolio_selection"]["standalone_sharpe_is_not_primary"] is True
+          assert mandate["promotion"]["pareto_frontier_required"] is True
+
+          contract = frontier["candidate_contract"]
+          assert contract["max_initial_free_parameters"] is None
+          assert contract["complexity_penalty_required"] is True
+          assert contract["allow_completed_history_adaptive_reuse"] is True
+          assert contract["search_ledger_required"] is True
+          assert contract["forbid_live_forward_tuning"] is True
+          assert contract["external_data_requires_current_q25_verification"] is True
+
+          assert chronology["protocol"]["primary"] == "rolling_origin_prequential"
+          assert chronology["protocol"]["permanent_historical_holdout"] is False
+          assert promotion["research_v2"]["selection"] == "pareto_frontier"
+          assert promotion["research_v2"]["single_scalar_megascore"] is False
 
           prompt = Path("docs/AGENT_PROMPT.md").read_text()
-          playbook = Path("docs/STRATEGY_GENERATION_PLAYBOOK.md").read_text()
           agents = Path("AGENTS.md").read_text()
-          external_doc = Path("docs/EXTERNAL_RESEARCH_LEADS.md").read_text()
+          doc = Path("docs/RESEARCH_MANDATE_V2.md").read_text()
+          assert "all completed Sponsor history" in agents
+          assert "rolling-origin" in agents
+          assert "API_KEY=default" in agents
           assert "configs/research_frontier.yaml" in prompt
-          assert "24 hypothesis" in prompt.lower()
           assert "nearest incumbent" in prompt.lower()
-          assert "novelty axes" in playbook.lower()
-          assert "EXTERNAL_RESEARCH_LEADS.md" in agents
-          assert "external_research_leads.yaml" in agents
-          assert "UNVERIFIED_FOR_Q25" in agents
-          assert "forecast surprise" in agents.lower()
-          assert "price-volume elasticity" in agents.lower()
-          assert "leaderboard title" in external_doc.lower()
-          assert "public sharpe" in external_doc.lower()
-          print("research frontier / next-agent contract integrity OK")
+          assert "API_KEY=default" in prompt
+          assert "Historical one-shot holdout experiments" in doc
+          print("Research Mandate V2 / frontier contract integrity OK")
           PY
 
       - name: Validate public-default local research access contract

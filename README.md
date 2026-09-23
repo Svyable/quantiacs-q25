@@ -10,7 +10,7 @@ The current operating doctrine is **Research Mandate V2**: use all completed his
 
 Historical frozen experiments remain immutable evidence. Previously observed periods may inform new research as `ADAPTIVE_REUSE`; they are not misrepresented as pristine holdouts. Genuine unseen evidence begins with observations that have not happened yet.
 
-Contest hard gates remain unchanged: Sponsor data, automatic liquid universe, long-only, no lookahead or loopholes, official transaction costs, deterministic execution, and exact IS Sharpe > 1.0 since 2016-01-01.
+Contest hard gates remain unchanged: Sponsor data, automatic liquid universe, long-only, no lookahead or loopholes, official transaction costs, deterministic execution, and exact IS Sharpe > 1.0 since 2016-01-01. **No personal Quantiacs API key is required for local/public research**; use `API_KEY=default` through the repo access path.
 
 ---
 

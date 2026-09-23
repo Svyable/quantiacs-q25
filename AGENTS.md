@@ -63,6 +63,10 @@ Do not preregister every exploratory formula. Exploration is allowed to search.
 - The future contest/live interval must never be fit.
 - A software/infrastructure failure is unknown economics, not a failed alpha.
 
+## Local research access
+
+Do not block local research on participant credentials. When no personal credential is configured, set **`API_KEY=default` before importing `qnt`** and use the public/default Quantiacs path described in `docs/LOCAL_RESEARCH_ACCESS.md`. A real credential is reserved for participant-specific correlation/precheck and submission operations and must never be committed.
+
 ## Broad experimentation mandate
 
 Broad search is encouraged. Agents may evaluate hundreds of causal candidates across:

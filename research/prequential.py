@@ -30,6 +30,14 @@ class OriginWindow:
         }
 
 
+@dataclass(frozen=True)
+class Origin:
+    """Calendar-quarter scoring window with an explicit purged train boundary."""
+    train_end: pd.Timestamp
+    forward_start: pd.Timestamp
+    forward_end: pd.Timestamp
+
+
 def _dates(values: Iterable[object]) -> pd.DatetimeIndex:
     idx = pd.DatetimeIndex(pd.to_datetime(list(values))).sort_values().unique()
     if len(idx) < 2:
@@ -101,6 +109,35 @@ def rolling_origins(
     for window in origins:
         unique[window.origin] = window
     return list(unique.values())
+
+
+def quarterly_origins(start, end, *, min_train_days=730, forward_days=90, purge_days=0):
+    """Build deterministic completed quarterly windows with an explicit purge gap."""
+    start, end = pd.Timestamp(start).normalize(), pd.Timestamp(end).normalize()
+    if end < start or min_train_days < 1 or forward_days < 1 or purge_days < 0:
+        raise ValueError("invalid rolling-origin parameters")
+    earliest = start + pd.Timedelta(days=min_train_days + purge_days)
+    out = []
+    for forward_start in pd.date_range(earliest, end, freq="QS"):
+        forward_end = forward_start + pd.Timedelta(days=forward_days - 1)
+        if forward_end > end:
+            continue
+        train_end = forward_start - pd.Timedelta(days=purge_days + 1)
+        out.append(Origin(train_end, forward_start, forward_end))
+    return tuple(out)
+
+
+def validate_origins(origins, *, minimum=8):
+    """Fail closed on chronology or insufficient completed origins."""
+    if len(origins) < minimum:
+        raise ValueError(f"need at least {minimum} completed origins, got {len(origins)}")
+    previous = None
+    for origin in origins:
+        if not origin.train_end < origin.forward_start <= origin.forward_end:
+            raise ValueError("non-causal origin")
+        if previous is not None and origin.forward_start <= previous:
+            raise ValueError("origins are not strictly chronological")
+        previous = origin.forward_start
 
 
 def exponential_recency_weights(

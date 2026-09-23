@@ -56,3 +56,12 @@ def test_normative_doc_preserves_historical_evidence_without_historical_embargo(
     assert "not deleted or rewritten" in text
     assert "ADAPTIVE_REUSE" in text
     assert "LIVE_FORWARD" in text
+
+
+def test_frontier_contract_no_longer_requires_historical_holdout_embargo():
+    frontier = yaml.safe_load((ROOT / "configs" / "research_frontier.yaml").read_text())
+    c = frontier["candidate_contract"]
+    assert c["allow_completed_history_adaptive_reuse"] is True
+    assert c["search_ledger_required"] is True
+    assert c["forbid_live_forward_tuning"] is True
+    assert "forbid_holdout_tuning" not in c

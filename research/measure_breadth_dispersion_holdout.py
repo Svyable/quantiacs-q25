@@ -24,7 +24,8 @@ def main():
     p=json.load(open("experiments/breadth_dispersion_holdout_20260923/preregistration.json")); assert p["status"]=="PREREGISTERED" and p["holdout_start"]==HOLDOUT
     data=qndata.cryptodaily_load_data(min_date=START); end=str(data.time.values[-1])[:10]; validate_panel(data,HOLDOUT,end)
     ff=importlib.import_module("strategies.generated.q25_factor_factory"); vcb=importlib.import_module("strategies.generated.q25_volatility_contraction_breakout")
-    w=ff.FACTORS["breadth_dispersion"](data); vw=vcb.calculate_weights(data); check_weights(w,data); check_weights(vw,data)
+    # Use the exact frozen FACTORS registry key from the merged factor factory.
+    w=ff.FACTORS["breadth_dispersion_interaction"](data); vw=vcb.calculate_weights(data); check_weights(w,data); check_weights(vw,data)
     folds=[{"id":"holdout","start":HOLDOUT,"end":end}]; e=QuantiacsEvaluator(data)
     m,r=e.evaluate(w,folds,COSTS); vm,vr=e.evaluate(vw,folds,[.04]); ret=r["holdout"]; vret=vr["holdout"]; blend=.5*ret+.5*vret
     corr=_corr(ret,vret); s4=m["holdout"]["0.04"]["sharpe_ratio"]; s12=m["holdout"]["0.12"]["sharpe_ratio"]; vs=vm["holdout"]["0.04"]["sharpe_ratio"]; bs=_sharpe(blend)

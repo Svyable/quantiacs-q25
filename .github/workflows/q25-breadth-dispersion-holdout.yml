@@ -1,0 +1,26 @@
+name: q25-breadth-dispersion-holdout
+on:
+  pull_request:
+    paths:
+      - 'research/measure_breadth_dispersion_holdout.py'
+      - 'experiments/breadth_dispersion_holdout_20260923/preregistration.json'
+      - 'strategies/generated/q25_factor_factory.py'
+      - 'strategies/generated/q25_volatility_contraction_breakout.py'
+      - '.github/workflows/q25-breadth-dispersion-holdout.yml'
+  workflow_dispatch:
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Execute frozen 2023+ breadth-dispersion holdout
+        run: set -o pipefail; python -m research.measure_breadth_dispersion_holdout | tee /tmp/breadth-dispersion-holdout.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: breadth-dispersion-holdout-evidence
+          path: /tmp/breadth-dispersion-holdout.json

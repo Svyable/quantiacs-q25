@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "experiment_id": "factor_factory_20260922",
+  "status": "PREREGISTERED",
+  "objective": "Test a small library of simple, economically distinct cross-sectional alphas and advance only factors that add cost-adjusted information beyond the qualified VCB/incumbent book.",
+  "data": "Quantiacs/Sponsor crypto_daily_long only",
+  "universe": "automatic top-10 monthly liquid universe",
+  "chronology": {"research": ["2016-01-01","2020-12-31"], "development": ["2021-01-01","2022-12-31"], "holdout": ["2023-01-01","UNOPENED_FOR_THIS_EXPERIMENT"]},
+  "official_cost_atr_percent": 4,
+  "cost_sensitivity_atr_percent": [4,8,12],
+  "families": {
+    "residual_reversal": "negative 7-day return residualized cross-sectionally against 28-day return; rank positive reversal scores only; inverse 21-day volatility sizing",
+    "liquidity_acceleration": "positive 28-day momentum multiplied by improvement in trailing 14-day versus 56-day is_liquid persistence; inverse 21-day volatility sizing",
+    "crash_resilient_momentum": "positive 42-day momentum penalized by trailing 63-day downside semideviation relative to total volatility; inverse 28-day volatility sizing",
+    "breadth_dispersion_interaction": "positive 35-day relative momentum activated continuously when cross-sectional momentum dispersion and positive breadth are jointly above their trailing 63-day medians"
+  },
+  "common_portfolio_rules": {"long_only": true, "name_cap": 0.25, "gross_weight_lte": 1.0, "illiquid_weight_eq": 0.0, "asset_selection": "automatic", "smoothing_days": 3},
+  "advancement_gates": {"selection_2016_2022_sharpe_4pct_gt": 1.0, "development_2021_2022_sharpe_4pct_gt": 0.0, "selection_12pct_cost_sharpe_gt": 0.0, "development_abs_return_correlation_to_vcb_lt": 0.8, "incremental_50_50_blend_development_sharpe_gt_both_components": true, "bounded_replay": true, "asset_order_invariant": true, "deterministic": true},
+  "required_controls": ["cross-sectional score identity permutation", "one-day signal lag perturbation", "equal-weight liquid baseline"],
+  "required_metrics": ["Sharpe", "annualized return", "CAGR", "volatility", "max drawdown", "turnover", "10%-vol normalized return", "VCB correlation", "incumbent correlation", "50/50 incremental blend Sharpe", "research/development regime split"],
+  "selection_rule": "No parameter search. Evaluate every frozen family exactly once through 2022. Preserve all failures. A factor may advance only if every advancement gate passes.",
+  "forbidden": ["2023+ access during discovery", "asset hand-picking", "parameter grids", "date switches", "post-hoc rescue", "changing a mechanism after observing economics"]
+}

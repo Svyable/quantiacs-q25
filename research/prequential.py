@@ -61,7 +61,9 @@ def rolling_origins(
     through ``train_end``, matching :func:`quarterly_origins`. The score window
     starts strictly after the origin. Only origins whose full declared forward
     horizon has elapsed are returned, and no window crosses ``live_start``.
-    Construction is deterministic and independent of returns.
+    Construction is deterministic and independent of returns. Calendar targets
+    advance independently of observed timestamps so sparse Sponsor histories
+    cannot stall the origin scheduler.
     """
     if min_train_days <= 0 or forward_days <= 0 or step_days <= 0:
         raise ValueError("window lengths must be positive")
@@ -81,11 +83,17 @@ def rolling_origins(
 
     origins: list[OriginWindow] = []
     target = eligible[0]
+    previous_origin: pd.Timestamp | None = None
     while target < latest:
         origin_candidates = completed[completed <= target]
         if len(origin_candidates) == 0:
             break
         origin = origin_candidates[-1]
+        # A sparse calendar can map several scheduled targets to the same last
+        # observation. Advance the schedule, rather than re-emitting/stalling.
+        if previous_origin is not None and origin <= previous_origin:
+            target = target + pd.Timedelta(days=step_days)
+            continue
         score_limit = origin + pd.Timedelta(days=forward_days)
         if score_limit > latest or score_limit >= live:
             break
@@ -98,14 +106,10 @@ def rolling_origins(
             break
         score_end = score_candidates[-1]
         origins.append(OriginWindow(origin, first, origin, score_start, score_end))
-        target = origin + pd.Timedelta(days=step_days)
-        if target <= origin:
-            raise RuntimeError("origin schedule did not advance")
+        previous_origin = origin
+        target = target + pd.Timedelta(days=step_days)
 
-    unique: dict[pd.Timestamp, OriginWindow] = {}
-    for window in origins:
-        unique[window.origin] = window
-    return list(unique.values())
+    return origins
 
 
 def quarterly_origins(start, end, *, min_train_days=730, forward_days=90, purge_days=0):

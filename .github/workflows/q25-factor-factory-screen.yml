@@ -1,0 +1,25 @@
+name: q25-factor-factory-screen
+on:
+  pull_request:
+    paths:
+      - 'research/measure_factor_factory.py'
+      - 'experiments/factor_factory_20260922/preregistration.json'
+      - 'strategies/generated/q25_factor_factory.py'
+      - '.github/workflows/q25-factor-factory-screen.yml'
+  workflow_dispatch:
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Execute frozen <=2022 factor screen
+        run: python -m research.measure_factor_factory | tee /tmp/factor-factory.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: factor-factory-evidence
+          path: /tmp/factor-factory.json

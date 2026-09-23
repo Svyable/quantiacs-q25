@@ -8,7 +8,7 @@ Increase the robust cost-adjusted performance of the **portfolio**, not merely t
 
 Use the whole completed Sponsor-data history, including the latest years. Do not reserve a permanent historical holdout for new research. Use causal rolling-origin/prequential evaluation and label reuse honestly.
 
-Read `AGENTS.md`, `configs/research_mandate_v2.yaml`, and `docs/RESEARCH_MANDATE_V2.md` before research.
+Read `AGENTS.md`, `configs/research_mandate_v2.yaml`, `docs/RESEARCH_MANDATE_V2.md`, `docs/LOCAL_RESEARCH_ACCESS.md`, and `configs/research_frontier.yaml` before research. Map the nearest incumbent before claiming novelty. For local public research without participant credentials, set `API_KEY=default` before importing `qnt`; do not stop to request a personal key.
 
 ## Each run
 

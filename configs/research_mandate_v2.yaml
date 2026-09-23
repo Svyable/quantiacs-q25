@@ -1,0 +1,118 @@
+version: 2
+updated: "2026-09-23"
+name: "Prequential Alpha Factory Mandate"
+
+objective:
+  primary: "Maximize robust, causal, cost-aware portfolio performance for Q25 using all completed Sponsor history."
+  optimization_unit: "marginal portfolio contribution, not standalone Sharpe alone"
+  future_truth: "Only observations not yet occurred are genuinely unseen."
+
+hard_invariants:
+  sponsor_data_only: true
+  competition_type: "crypto_daily_long"
+  historical_is_liquid_only: true
+  long_only: true
+  automatic_asset_selection: true
+  manual_symbols_forbidden: true
+  same_algorithm_through_time: true
+  arbitrary_calendar_switches_forbidden: true
+  lookahead_forbidden: true
+  toolbox_loopholes_forbidden: true
+  deterministic_required: true
+  contest_is_start: "2016-01-01"
+  contest_is_sharpe_strictly_gt: 1.0
+  official_cost_atr_fraction: 0.04
+  stress_cost_atr_fractions: [0.08, 0.12]
+  live_start: "2026-10-01"
+  live_end: "2027-01-31"
+  live_fit_forbidden: true
+
+data_use:
+  completed_history_available_for_research: true
+  permanent_historical_holdout_required: false
+  recent_history_is_high_value: true
+  observed_period_must_be_labeled_observed: true
+  formerly_spent_holdouts_remain_historical_evidence: true
+  no_claim_of_pristine_oos_after_observation: true
+
+evaluation:
+  primary_design: "rolling_origin_prequential"
+  expanding_or_rolling_training_allowed: true
+  minimum_origins: 8
+  preferred_origin_frequency: "quarterly"
+  preferred_forward_horizon_days: 90
+  purge_days: "max(feature_lookback, target_horizon) when target overlap exists"
+  require_origin_level_metrics: true
+  require_aggregate_metrics: true
+  require_recent_metrics: true
+  require_regime_metrics: true
+  require_cost_ladder: true
+  require_prefix_or_bounded_replay: true
+  require_asset_order_invariance_where_relevant: true
+
+recency:
+  enabled: true
+  default_half_life_days: 730
+  rule: "Recency weighting may weight evidence, never future observations."
+  report_unweighted_alongside_weighted: true
+
+exploration:
+  broad_search_allowed: true
+  batch_factor_search_allowed: true
+  parameter_search_allowed: true
+  feature_interactions_allowed: true
+  ensemble_search_allowed: true
+  max_candidates_per_batch_soft: 500
+  search_ledger_required: true
+  record_every_evaluated_candidate: true
+  preserve_failures: true
+  no_posthoc_relabeling_as_confirmatory: true
+
+robustness:
+  parameter_neighborhood_required_for_survivors: true
+  destructive_control_required_for_survivors: true
+  simple_baseline_required: true
+  correlation_clustering_required: true
+  complexity_penalty_required: true
+  turnover_and_cost_sensitivity_required: true
+  block_bootstrap_or_equivalent_search_bias_diagnostic_preferred: true
+
+portfolio_selection:
+  standalone_sharpe_is_not_primary: true
+  require_current_portfolio_comparison: true
+  required_metrics:
+    - "marginal_sharpe"
+    - "return_correlation"
+    - "drawdown_overlap"
+    - "turnover_overlap"
+    - "cost_robustness"
+    - "recent_prequential_sharpe"
+    - "full_history_sharpe"
+    - "max_drawdown"
+    - "vol10_normalized_return"
+  blend_weight_search:
+    allowed_in_exploration: true
+    production_requires_stable_simple_rule: true
+
+evidence_labels:
+  exploratory: "May guide search; not independent validation."
+  prequential: "Outcome was future relative to each historical origin under the declared rolling procedure."
+  adaptive_reuse: "Observed history reused after prior inspection; informative but not pristine."
+  live_forward: "Observed only after production freeze; strongest future evidence."
+  infrastructure_failure: "Unknown economics; never count as alpha failure."
+
+promotion:
+  no_single_scalar_gate: true
+  pareto_frontier_required: true
+  contest_hard_gates_still_apply: true
+  production_candidate_must_be_simple_enough_to_reproduce: true
+  production_candidate_must_clear_exact_current_is: true
+  authenticated_uniqueness_required_before_submission: true
+
+agent_behavior:
+  repair_measurement_blockers_before_new_search: true
+  continue_highest_value_unfinished_work: true
+  do_not_preregister_every_idea: true
+  freeze_only_when_claiming_a_specific_production_candidate_or_live_forward_test: true
+  prefer_information_gain_per_compute: true
+  preserve_rejected_formulas_and_search_regions: true

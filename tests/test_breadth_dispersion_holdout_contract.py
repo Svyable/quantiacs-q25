@@ -5,9 +5,9 @@ ROOT = Path(__file__).resolve().parents[1]
 P = ROOT / "experiments" / "breadth_dispersion_holdout_20260923" / "preregistration.json"
 
 
-def test_breadth_dispersion_holdout_is_fail_closed():
+def test_breadth_dispersion_holdout_is_preserved_but_not_an_active_permanent_gate():
     p = json.loads(P.read_text())
-    assert p["status"] == "PREREGISTERED"
+    assert p["status"] == "SUPERSEDED_UNEXECUTED_BY_RESEARCH_MANDATE_V2"
     assert p["candidate"] == "breadth_dispersion"
     assert p["mechanism_frozen"] is True
     assert p["parameters_frozen"] is True
@@ -25,3 +25,8 @@ def test_breadth_dispersion_holdout_is_fail_closed():
     assert gates["no_post_holdout_retuning"] is True
     assert "post-hoc grids" in p["forbidden"]
     assert "parameter changes" in p["forbidden"]
+    s = p["supersession"]
+    assert s["mandate"] == "configs/research_mandate_v2.yaml"
+    assert s["economic_result_observed"] is False
+    assert s["preserve_original_parameters"] is True
+    assert s["next_evidence_design"] == "rolling_origin_prequential"

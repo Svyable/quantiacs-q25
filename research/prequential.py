@@ -57,9 +57,11 @@ def rolling_origins(
 ) -> list[OriginWindow]:
     """Build expanding-window prequential origins from completed history.
 
-    The score window starts strictly after the origin. Only origins whose full
-    declared forward horizon has elapsed are returned, and no window crosses
-    ``live_start``. Construction is deterministic and independent of returns.
+    ``min_train_days`` counts the inclusive calendar span from ``train_start``
+    through ``train_end``, matching :func:`quarterly_origins`. The score window
+    starts strictly after the origin. Only origins whose full declared forward
+    horizon has elapsed are returned, and no window crosses ``live_start``.
+    Construction is deterministic and independent of returns.
     """
     if min_train_days <= 0 or forward_days <= 0 or step_days <= 0:
         raise ValueError("window lengths must be positive")
@@ -72,7 +74,7 @@ def rolling_origins(
 
     first = completed[0]
     latest = completed[-1]
-    first_origin_target = first + pd.Timedelta(days=min_train_days)
+    first_origin_target = first + pd.Timedelta(days=min_train_days - 1)
     eligible = completed[completed >= first_origin_target]
     if len(eligible) == 0:
         return []
@@ -95,15 +97,7 @@ def rolling_origins(
         if len(score_candidates) == 0:
             break
         score_end = score_candidates[-1]
-        origins.append(
-            OriginWindow(
-                origin=origin,
-                train_start=first,
-                train_end=origin,
-                score_start=score_start,
-                score_end=score_end,
-            )
-        )
+        origins.append(OriginWindow(origin, first, origin, score_start, score_end))
         target = origin + pd.Timedelta(days=step_days)
         if target <= origin:
             raise RuntimeError("origin schedule did not advance")
@@ -118,13 +112,12 @@ def quarterly_origins(start, end, *, min_train_days=730, forward_days=90, purge_
     """Build deterministic completed quarterly windows with an explicit purge gap.
 
     ``min_train_days`` is measured from ``start`` through the inclusive
-    ``train_end``.  The first forward quarter is therefore the first quarter
+    ``train_end``. The first forward quarter is therefore the first quarter
     whose purged training boundary contains at least that much history.
     """
     start, end = pd.Timestamp(start).normalize(), pd.Timestamp(end).normalize()
     if end < start or min_train_days < 1 or forward_days < 1 or purge_days < 0:
         raise ValueError("invalid rolling-origin parameters")
-
     minimum_train_end = start + pd.Timedelta(days=min_train_days - 1)
     earliest_forward = minimum_train_end + pd.Timedelta(days=purge_days + 1)
     out = []
@@ -152,20 +145,13 @@ def validate_origins(origins, *, minimum=8, purge_days=None):
         if purge_days is not None:
             observed_gap = (origin.forward_start - origin.train_end).days - 1
             if observed_gap != purge_days:
-                raise ValueError(
-                    f"purge mismatch: expected {purge_days} days, got {observed_gap}"
-                )
+                raise ValueError(f"purge mismatch: expected {purge_days} days, got {observed_gap}")
         if previous is not None and origin.forward_start <= previous:
             raise ValueError("origins are not strictly chronological")
         previous = origin.forward_start
 
 
-def exponential_recency_weights(
-    timestamps: Iterable[object],
-    *,
-    half_life_days: float = 730.0,
-    as_of: str | pd.Timestamp | None = None,
-) -> pd.Series:
+def exponential_recency_weights(timestamps: Iterable[object], *, half_life_days: float = 730.0, as_of: str | pd.Timestamp | None = None) -> pd.Series:
     """Return normalized causal recency weights for already-observed dates."""
     if half_life_days <= 0:
         raise ValueError("half_life_days must be positive")

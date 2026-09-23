@@ -20,15 +20,24 @@ def test_rolling_origins_are_strictly_causal_and_do_not_cross_live_start():
     assert [w.origin for w in windows] == sorted({w.origin for w in windows})
 
 
-def test_rolling_origins_exclude_incomplete_latest_forward_window():
-    idx = pd.date_range("2020-01-01", "2021-12-15", freq="D")
+def test_min_train_days_is_inclusive_calendar_span():
+    idx = pd.date_range("2020-01-01", "2020-04-30", freq="D")
     windows = rolling_origins(
         idx,
-        min_train_days=365,
-        forward_days=90,
-        step_days=90,
-        live_start="2022-01-01",
+        min_train_days=10,
+        forward_days=10,
+        step_days=10,
+        live_start="2021-01-01",
     )
+    assert windows
+    first = windows[0]
+    assert first.origin == pd.Timestamp("2020-01-10")
+    assert (first.train_end - first.train_start).days + 1 == 10
+
+
+def test_rolling_origins_exclude_incomplete_latest_forward_window():
+    idx = pd.date_range("2020-01-01", "2021-12-15", freq="D")
+    windows = rolling_origins(idx, min_train_days=365, forward_days=90, step_days=90, live_start="2022-01-01")
     assert windows
     assert all(w.origin + pd.Timedelta(days=90) <= idx[-1] for w in windows)
     assert windows[-1].origin <= idx[-1] - pd.Timedelta(days=90)
@@ -56,10 +65,7 @@ def test_recency_weights_are_normalized_monotone_and_half_life_consistent():
 
 def test_recency_refuses_future_observations():
     with pytest.raises(ValueError, match="future observations"):
-        exponential_recency_weights(
-            ["2026-01-01", "2026-02-01"],
-            as_of="2026-01-15",
-        )
+        exponential_recency_weights(["2026-01-01", "2026-02-01"], as_of="2026-01-15")
 
 
 def test_weighted_mean_aligns_without_imputation():

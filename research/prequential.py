@@ -112,29 +112,46 @@ def rolling_origins(
 
 
 def quarterly_origins(start, end, *, min_train_days=730, forward_days=90, purge_days=0):
-    """Build deterministic completed quarterly windows with an explicit purge gap."""
+    """Build deterministic completed quarterly windows with an explicit purge gap.
+
+    ``min_train_days`` is measured from ``start`` through the inclusive
+    ``train_end``.  The first forward quarter is therefore the first quarter
+    whose purged training boundary contains at least that much history.
+    """
     start, end = pd.Timestamp(start).normalize(), pd.Timestamp(end).normalize()
     if end < start or min_train_days < 1 or forward_days < 1 or purge_days < 0:
         raise ValueError("invalid rolling-origin parameters")
-    earliest = start + pd.Timedelta(days=min_train_days + purge_days)
+
+    minimum_train_end = start + pd.Timedelta(days=min_train_days - 1)
+    earliest_forward = minimum_train_end + pd.Timedelta(days=purge_days + 1)
     out = []
-    for forward_start in pd.date_range(earliest, end, freq="QS"):
+    for forward_start in pd.date_range(earliest_forward, end, freq="QS"):
+        train_end = forward_start - pd.Timedelta(days=purge_days + 1)
+        if (train_end - start).days + 1 < min_train_days:
+            continue
         forward_end = forward_start + pd.Timedelta(days=forward_days - 1)
         if forward_end > end:
             continue
-        train_end = forward_start - pd.Timedelta(days=purge_days + 1)
         out.append(Origin(train_end, forward_start, forward_end))
     return tuple(out)
 
 
-def validate_origins(origins, *, minimum=8):
-    """Fail closed on chronology or insufficient completed origins."""
+def validate_origins(origins, *, minimum=8, purge_days=None):
+    """Fail closed on chronology, purge separation, or insufficient origins."""
+    if minimum < 1 or (purge_days is not None and purge_days < 0):
+        raise ValueError("invalid validation parameters")
     if len(origins) < minimum:
         raise ValueError(f"need at least {minimum} completed origins, got {len(origins)}")
     previous = None
     for origin in origins:
         if not origin.train_end < origin.forward_start <= origin.forward_end:
             raise ValueError("non-causal origin")
+        if purge_days is not None:
+            observed_gap = (origin.forward_start - origin.train_end).days - 1
+            if observed_gap != purge_days:
+                raise ValueError(
+                    f"purge mismatch: expected {purge_days} days, got {observed_gap}"
+                )
         if previous is not None and origin.forward_start <= previous:
             raise ValueError("origins are not strictly chronological")
         previous = origin.forward_start

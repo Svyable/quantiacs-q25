@@ -55,6 +55,28 @@ def test_rolling_origin_prefix_is_invariant_to_appending_future_history():
         assert by_origin[w.origin] == w
 
 
+def test_rolling_origins_advance_across_sparse_calendar_gaps():
+    # Several scheduled 30-day targets fall inside this 120-day data outage.
+    # The scheduler must advance its calendar target rather than repeatedly
+    # selecting the same last observation (the historical implementation could
+    # loop forever here).
+    idx = pd.DatetimeIndex(
+        list(pd.date_range("2020-01-01", "2020-03-31", freq="D"))
+        + list(pd.date_range("2020-08-01", "2021-03-31", freq="D"))
+    )
+    windows = rolling_origins(
+        idx,
+        min_train_days=30,
+        forward_days=20,
+        step_days=30,
+        live_start="2022-01-01",
+    )
+    origins = [w.origin for w in windows]
+    assert origins
+    assert origins == sorted(set(origins))
+    assert any(origin >= pd.Timestamp("2020-08-01") for origin in origins)
+
+
 def test_recency_weights_are_normalized_monotone_and_half_life_consistent():
     idx = pd.DatetimeIndex(["2022-01-01", "2024-01-01", "2026-01-01"])
     w = exponential_recency_weights(idx, half_life_days=730, as_of="2026-01-01")

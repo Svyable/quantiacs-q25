@@ -65,3 +65,16 @@ def test_frontier_contract_no_longer_requires_historical_holdout_embargo():
     assert c["search_ledger_required"] is True
     assert c["forbid_live_forward_tuning"] is True
     assert "forbid_holdout_tuning" not in c
+
+
+def test_frontier_default_is_broad_batch_not_preregister_funnel():
+    frontier = yaml.safe_load((ROOT / "configs" / "research_frontier.yaml").read_text())
+    c = frontier["candidate_contract"]
+    d = frontier["campaign_default"]
+    assert c["max_initial_free_parameters"] is None
+    assert c["complexity_penalty_required"] is True
+    assert d["mode"] == "broad_batch_alpha_factory"
+    assert d["preregistration_required_for_exploration"] is False
+    assert d["candidate_batch_soft_max"] >= 100
+    assert d["search_ledger_required"] is True
+    assert d["rolling_origin_required_for_survivor_claims"] is True

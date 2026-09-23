@@ -20,6 +20,8 @@ Before new experiments:
 
 A new filename is not a new idea.
 
+Local measurement should not wait for participant credentials: use the repository public/default path with `API_KEY=default` before importing `qnt` when no personal key is configured. Account-bound credentials are only for participant-specific services.
+
 ## 2. Search broadly
 
 Create batches rather than isolated pet hypotheses.

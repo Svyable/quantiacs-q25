@@ -19,8 +19,11 @@ jobs:
           python-version: '3.11'
       - run: pip install -r requirements.txt
       - name: Execute frozen 2023+ breadth-dispersion holdout
-        run: set -o pipefail; python -m research.measure_breadth_dispersion_holdout | tee /tmp/breadth-dispersion-holdout.json
-      - uses: actions/upload-artifact@v4
+        run: set -o pipefail; python -m research.measure_breadth_dispersion_holdout 2>&1 | tee /tmp/breadth-dispersion-holdout.json
+      - name: Preserve holdout evidence or failure trace
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: breadth-dispersion-holdout-evidence
           path: /tmp/breadth-dispersion-holdout.json
+          if-no-files-found: error

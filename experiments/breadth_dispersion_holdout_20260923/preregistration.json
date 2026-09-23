@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "breadth_dispersion_holdout_20260923",
+  "status": "PREREGISTERED",
+  "hypothesis": "The already-frozen breadth×dispersion factor that advanced on the untouched-through-2022 factor-factory screen retains positive standalone and incremental VCB ensemble value on the previously unopened 2023+ holdout without parameter changes.",
+  "source_experiment": "factor_factory_20260922",
+  "candidate": "breadth_dispersion",
+  "mechanism_frozen": true,
+  "parameters_frozen": true,
+  "holdout_start": "2023-01-01",
+  "holdout_end": "latest_sponsor_data_at_execution",
+  "selection_history_end": "2022-12-31",
+  "cost_atr_percent": 4,
+  "stress_cost_atr_percent": [8, 12],
+  "blend_with": "q25_volatility_contraction_breakout_v1",
+  "blend_weight_candidate": 0.5,
+  "blend_weight_vcb": 0.5,
+  "advancement_gates": {
+    "standalone_holdout_sharpe_gt": 0.0,
+    "standalone_holdout_12pct_cost_sharpe_gt": 0.0,
+    "holdout_abs_return_correlation_to_vcb_lt": 0.8,
+    "frozen_50_50_blend_holdout_sharpe_gt_each_component": true,
+    "long_only": true,
+    "illiquid_weight_eq": 0.0,
+    "name_cap_lte": 0.25,
+    "gross_weight_lte": 1.0,
+    "no_post_holdout_retuning": true
+  },
+  "required_measurements": [
+    "Sharpe at 4/8/12% ATR costs",
+    "annualized return",
+    "annualized volatility",
+    "maximum drawdown",
+    "average turnover",
+    "VCB return correlation",
+    "50/50 VCB blend Sharpe",
+    "year/regime stability where sample permits"
+  ],
+  "destructive_controls": [
+    "one-day lag perturbation",
+    "equal-weight liquid baseline"
+  ],
+  "forbidden": [
+    "formula changes",
+    "parameter changes",
+    "asset hand-picking",
+    "date switches",
+    "post-hoc grids",
+    "changing the frozen 50/50 blend after observing holdout"
+  ],
+  "decision_rule": "ADVANCE only if every holdout advancement gate passes. Otherwise preserve the result as FALSIFIED and do not retune on this holdout."
+}

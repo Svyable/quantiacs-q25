@@ -57,8 +57,9 @@ def rolling_origins(
 ) -> list[OriginWindow]:
     """Build expanding-window prequential origins from completed history.
 
-    The score window starts strictly after the origin. No window crosses
-    live_start. Construction is deterministic and independent of returns.
+    The score window starts strictly after the origin. Only origins whose full
+    declared forward horizon has elapsed are returned, and no window crosses
+    ``live_start``. Construction is deterministic and independent of returns.
     """
     if min_train_days <= 0 or forward_days <= 0 or step_days <= 0:
         raise ValueError("window lengths must be positive")
@@ -83,11 +84,13 @@ def rolling_origins(
         if len(origin_candidates) == 0:
             break
         origin = origin_candidates[-1]
+        score_limit = origin + pd.Timedelta(days=forward_days)
+        if score_limit > latest or score_limit >= live:
+            break
         future = completed[completed > origin]
         if len(future) == 0:
             break
         score_start = future[0]
-        score_limit = origin + pd.Timedelta(days=forward_days)
         score_candidates = completed[(completed >= score_start) & (completed <= score_limit)]
         if len(score_candidates) == 0:
             break

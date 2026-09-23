@@ -16,7 +16,22 @@ def test_rolling_origins_are_strictly_causal_and_do_not_cross_live_start():
     assert all(w.score_start > w.origin for w in windows)
     assert all(w.score_end >= w.score_start for w in windows)
     assert all(w.score_end < pd.Timestamp("2026-10-01") for w in windows)
+    assert all(w.origin + pd.Timedelta(days=90) <= idx[-1] for w in windows)
     assert [w.origin for w in windows] == sorted({w.origin for w in windows})
+
+
+def test_rolling_origins_exclude_incomplete_latest_forward_window():
+    idx = pd.date_range("2020-01-01", "2021-12-15", freq="D")
+    windows = rolling_origins(
+        idx,
+        min_train_days=365,
+        forward_days=90,
+        step_days=90,
+        live_start="2022-01-01",
+    )
+    assert windows
+    assert all(w.origin + pd.Timedelta(days=90) <= idx[-1] for w in windows)
+    assert windows[-1].origin <= idx[-1] - pd.Timedelta(days=90)
 
 
 def test_rolling_origin_prefix_is_invariant_to_appending_future_history():

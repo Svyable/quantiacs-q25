@@ -279,7 +279,8 @@ priority_frontiers:
     avoid: "Do not import public metrics or exact tuned parameters and do not call a basic low-vol rank a new mechanism."
 
 candidate_contract:
-  max_initial_free_parameters: 3
+  max_initial_free_parameters: null
+  complexity_penalty_required: true
   require_named_falsifier: true
   require_nearest_incumbent: true
   require_novelty_axes_changed: true

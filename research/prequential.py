@@ -116,7 +116,7 @@ def exponential_recency_weights(
     cutoff = pd.Timestamp(as_of) if as_of is not None else idx[-1]
     if (idx > cutoff).any():
         raise ValueError("timestamps after as_of are future observations")
-    age_days = (cutoff - idx).days.astype(float)
+    age_days = np.asarray((cutoff - idx).days, dtype=float)
     raw = np.exp(-np.log(2.0) * age_days / float(half_life_days))
     raw = raw / raw.sum()
     return pd.Series(raw, index=idx, name="recency_weight")

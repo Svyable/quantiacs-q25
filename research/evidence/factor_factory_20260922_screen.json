@@ -1,0 +1,56 @@
+{
+  "artifact_digest": "sha256:ee743180d9b89a64df095fc65b4c1bac6011d5db684eeebd79f5de4465108da8",
+  "artifact_id": 10736266633,
+  "cost_atr_percent": [4, 8, 12],
+  "experiment_id": "factor_factory_20260922",
+  "max_date": "2022-12-31",
+  "results": {
+    "breadth_dispersion_interaction": {
+      "decision": "ADVANCE",
+      "selection_sharpe_4pct": 1.3871987130363965,
+      "selection_sharpe_12pct": 1.1206865864843631,
+      "development_sharpe_4pct": 1.0680800243215947,
+      "development_vcb_correlation": 0.3575748116191024,
+      "development_incumbent_correlation": 0.4367295281967958,
+      "development_50_50_vcb_blend_sharpe": 1.3564760402163927,
+      "development_ann_return_4pct": 0.4804913301258364,
+      "development_volatility_4pct": 0.44986454121827335,
+      "development_max_drawdown_4pct": -0.4938424619026902,
+      "development_avg_turnover_4pct": 0.06656251577649822
+    },
+    "crash_resilient_momentum": {
+      "decision": "FALSIFIED",
+      "selection_sharpe_4pct": 1.476485816011424,
+      "selection_sharpe_12pct": 1.2242035428977651,
+      "development_sharpe_4pct": 0.9298132736740581,
+      "development_vcb_correlation": 0.47460826268683504,
+      "development_incumbent_correlation": 0.7586292350269104,
+      "development_50_50_vcb_blend_sharpe": 1.1508754550336837,
+      "failed_gate": "blend_sharpe_gt_both"
+    },
+    "liquidity_acceleration": {
+      "decision": "FALSIFIED",
+      "selection_sharpe_4pct": 0.3292531550337351,
+      "selection_sharpe_12pct": 0.11178016118417708,
+      "development_sharpe_4pct": -0.4413863658946286,
+      "development_vcb_correlation": 0.32250837118537634,
+      "development_incumbent_correlation": 0.5363795284914904,
+      "development_50_50_vcb_blend_sharpe": 0.48906441609810125,
+      "failed_gates": ["selection_sharpe_4pct_gt_1", "development_sharpe_4pct_gt_0", "blend_sharpe_gt_both"]
+    },
+    "residual_reversal": {
+      "decision": "FALSIFIED",
+      "selection_sharpe_4pct": 0.48259817921350256,
+      "selection_sharpe_12pct": -0.2454660274837519,
+      "development_sharpe_4pct": -0.17541339312108192,
+      "development_vcb_correlation": 0.3423670997440267,
+      "development_incumbent_correlation": 0.7697774524087581,
+      "development_50_50_vcb_blend_sharpe": 0.19487820992744767,
+      "failed_gates": ["selection_sharpe_4pct_gt_1", "selection_sharpe_12pct_gt_0", "development_sharpe_4pct_gt_0", "blend_sharpe_gt_both"]
+    }
+  },
+  "schema_version": 1,
+  "source_workflow_run": 35828745488,
+  "status": "ADJUDICATED",
+  "holdout_2023_plus_opened": false
+}

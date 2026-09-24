@@ -103,7 +103,11 @@ def rolling_origins(
         score_start = future[0]
         score_candidates = completed[(completed >= score_start) & (completed <= score_limit)]
         if len(score_candidates) == 0:
-            break
+            # The entire nominal score horizon may lie inside a Sponsor data
+            # outage. That origin is not a completed scoring window, but it is
+            # not evidence that later scheduled origins are unavailable.
+            target = target + pd.Timedelta(days=step_days)
+            continue
         score_end = score_candidates[-1]
         origins.append(OriginWindow(origin, first, origin, score_start, score_end))
         previous_origin = origin

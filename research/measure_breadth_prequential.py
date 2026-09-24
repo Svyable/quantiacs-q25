@@ -57,7 +57,9 @@ def main():
     for i,o in enumerate(origins):
         k=f"o{i:02d}"; c=cr[k]; v=vr[k]; blend=.5*c+.5*v; ccat.append(c); vcat.append(v)
         rows.append({"window":o.as_dict(),"sharpe_4pct":cm[k]["0.04"]["sharpe_ratio"],"sharpe_8pct":cm[k]["0.08"]["sharpe_ratio"],"sharpe_12pct":cm[k]["0.12"]["sharpe_ratio"],"vcb_sharpe_4pct":vm[k]["0.04"]["sharpe_ratio"],"vcb_correlation":_corr(c,v),"blend_50_50_sharpe":_sharpe(blend)})
-    ca=pd.concat([x.to_pandas() for x in ccat]).sort_index(); va=pd.concat([x.to_pandas() for x in vcat]).sort_index()
+    # QuantiacsEvaluator returns pandas Series for 4%-ATR relative returns.
+    # Keep aggregation in pandas; converting a Series via .to_pandas() is invalid.
+    ca=pd.concat(ccat).sort_index(); va=pd.concat(vcat).sort_index()
     ca=ca[~ca.index.duplicated(keep="first")]; va=va[~va.index.duplicated(keep="first")]
     import xarray as xr
     car=xr.DataArray(ca.values,dims=["time"],coords={"time":ca.index}); var=xr.DataArray(va.values,dims=["time"],coords={"time":va.index})

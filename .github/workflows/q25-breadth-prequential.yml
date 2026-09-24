@@ -1,0 +1,41 @@
+name: q25-breadth-prequential
+on:
+  pull_request:
+    paths:
+      - 'research/measure_breadth_prequential.py'
+      - 'research/prequential.py'
+      - 'strategies/generated/q25_factor_factory.py'
+      - 'strategies/generated/q25_volatility_contraction_breakout.py'
+      - '.github/workflows/q25-breadth-prequential.yml'
+  workflow_dispatch:
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Execute completed-history breadth prequential backfill
+        env:
+          Q25_EVIDENCE_PATH: /tmp/breadth-prequential.json
+        run: python -m research.measure_breadth_prequential
+      - name: Validate machine-readable evidence
+        run: |
+          python -m json.tool /tmp/breadth-prequential.json >/dev/null
+          python - <<'PY'
+          import json
+          p='/tmp/breadth-prequential.json'
+          d=json.load(open(p))
+          assert d['schema_version'] == 1
+          assert d['evidence_label'] == 'ADAPTIVE_REUSE'
+          assert d['origin_count'] >= 8
+          assert len(d['origin_level']) == d['origin_count']
+          assert d['parameters']['cost_atr_percent'] == [4, 8, 12]
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: breadth-prequential-evidence
+          path: /tmp/breadth-prequential.json

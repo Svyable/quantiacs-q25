@@ -1,0 +1,36 @@
+name: q25-turnover-ensemble
+on:
+  pull_request:
+    paths:
+      - 'research/measure_turnover_ensemble.py'
+      - 'strategies/generated/q25_vcb_breadth_turnover_ensemble.py'
+      - '.github/workflows/q25-turnover-ensemble.yml'
+  workflow_dispatch:
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Execute frozen turnover ensemble evaluation
+        env:
+          Q25_EVIDENCE_PATH: /tmp/turnover-ensemble.json
+        run: python -m research.measure_turnover_ensemble
+      - name: Validate evidence contract
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/turnover-ensemble.json'))
+          assert d['schema_version']==1 and d['evidence_label']=='ADAPTIVE_REUSE'
+          assert d['origin_count']>=8 and len(d['origin_level'])==d['origin_count']
+          assert d['parameters']=={'band':0.02,'cost_atr_percent':[4,8,12]}
+          assert 0 <= d['current_is']['band_turnover']
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: turnover-ensemble-evidence
+          path: /tmp/turnover-ensemble.json

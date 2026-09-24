@@ -19,7 +19,22 @@ jobs:
           python-version: '3.11'
       - run: pip install -r requirements.txt
       - name: Execute completed-history breadth prequential backfill
-        run: python -m research.measure_breadth_prequential | tee /tmp/breadth-prequential.json
+        env:
+          Q25_EVIDENCE_PATH: /tmp/breadth-prequential.json
+        run: python -m research.measure_breadth_prequential
+      - name: Validate machine-readable evidence
+        run: |
+          python -m json.tool /tmp/breadth-prequential.json >/dev/null
+          python - <<'PY'
+          import json
+          p='/tmp/breadth-prequential.json'
+          d=json.load(open(p))
+          assert d['schema_version'] == 1
+          assert d['evidence_label'] == 'ADAPTIVE_REUSE'
+          assert d['origin_count'] >= 8
+          assert len(d['origin_level']) == d['origin_count']
+          assert d['parameters']['cost_atr_percent'] == [4, 8, 12]
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: breadth-prequential-evidence

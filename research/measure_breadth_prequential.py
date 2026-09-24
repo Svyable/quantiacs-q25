@@ -6,6 +6,7 @@ never fits on score-window outcomes and never crosses the 2026-10-01 live bounda
 """
 from __future__ import annotations
 import importlib, json, os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 os.environ.setdefault("API_KEY", "default")
@@ -28,6 +29,14 @@ def _corr(a,b):
     return None if z.sum()<2 or np.std(av[z])==0 or np.std(bv[z])==0 else float(np.corrcoef(av[z],bv[z])[0,1])
 
 def _sharpe(r): return _summary(r)["sharpe"]
+
+def _emit(out):
+    payload=json.dumps(out,indent=2,sort_keys=True,allow_nan=False)+"\n"
+    output_path=os.environ.get("Q25_EVIDENCE_PATH")
+    if output_path:
+        path=Path(output_path); path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.with_suffix(path.suffix+".tmp"); tmp.write_text(payload,encoding="utf-8"); tmp.replace(path)
+    print(payload,end="")
 
 def main():
     data=qndata.cryptodaily_load_data(min_date=START)
@@ -57,5 +66,5 @@ def main():
     s=pd.Series([r["sharpe_4pct"] for r in rows],index=pd.DatetimeIndex(ends),dtype=float)
     recent=float((s*rw).sum())
     out={"schema_version":1,"experiment_id":"breadth_dispersion_prequential_backfill_20260923","evidence_label":"ADAPTIVE_REUSE","candidate":CANDIDATE,"latest_sponsor_date":latest,"origin_count":len(origins),"parameters":{"min_train_days":MIN_TRAIN_DAYS,"forward_days":FORWARD_DAYS,"step_days":STEP_DAYS,"recency_half_life_days":HALF_LIFE_DAYS,"cost_atr_percent":[4,8,12]},"current_is":cfull["current_is"],"current_is_vcb":vfull["current_is"],"origin_level":rows,"aggregate":{"candidate_4pct":_summary(car),"vcb_4pct":_summary(var),"candidate_vcb_correlation":_corr(car,var),"blend_50_50_4pct":_summary(b),"unweighted_mean_origin_sharpe_4pct":float(s.mean()),"recency_weighted_mean_origin_sharpe_4pct":recent,"positive_origin_fraction_4pct":float((s>0).mean())}}
-    print(json.dumps(out,indent=2,sort_keys=True,allow_nan=False))
+    _emit(out)
 if __name__=="__main__": main()

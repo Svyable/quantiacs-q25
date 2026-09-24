@@ -33,7 +33,10 @@ def emit(out):
 def main():
     data=qndata.cryptodaily_load_data(min_date=START); data=data.sel(time=data.time < np.datetime64(LIVE_START)); latest=str(data.time.values[-1])[:10]; validate_panel(data,IS_START,latest)
     ff=importlib.import_module("strategies.generated.q25_factor_factory"); vcb=importlib.import_module("strategies.generated.q25_volatility_contraction_breakout"); ens=importlib.import_module("strategies.generated.q25_vcb_breadth_turnover_ensemble")
-    bw=ff.FACTORS["breadth_dispersion_interaction"](data); vw=vcb.calculate_weights(data); static=.5*bw+.5*vw; band=ens.apply_no_trade_band(static); lag=ens.apply_no_trade_band(static.shift(time=1).fillna(0))
+    bw=ff.FACTORS["breadth_dispersion_interaction"](data); vw=vcb.calculate_weights(data); static=.5*bw+.5*vw
+    liquid=data.sel(field="is_liquid").fillna(0)>0
+    band=ens.apply_no_trade_band(static,eligible=liquid)
+    lag=ens.apply_no_trade_band(static.shift(time=1).fillna(0),eligible=liquid)
     for w in (bw,vw,static,band,lag): check_weights(w,data)
     origins=rolling_origins(data.time.values,min_train_days=730,forward_days=90,step_days=90,live_start=LIVE_START); folds=[{"id":f"o{i:02d}","start":o.score_start.strftime("%Y-%m-%d"),"end":o.score_end.strftime("%Y-%m-%d")} for i,o in enumerate(origins)]; full=[{"id":"current_is","start":IS_START,"end":latest}]
     e=QuantiacsEvaluator(data); bm,br=e.evaluate(band,folds,COSTS); sm,sr=e.evaluate(static,folds,[.04]); lm,lr=e.evaluate(lag,folds,[.04]); cm,cr=e.evaluate(bw,folds,[.04]); vm,vr=e.evaluate(vw,folds,[.04]); bf,_=e.evaluate(band,full,COSTS); sf,_=e.evaluate(static,full,[.04])

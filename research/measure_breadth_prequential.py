@@ -57,16 +57,14 @@ def main():
     for i,o in enumerate(origins):
         k=f"o{i:02d}"; c=cr[k]; v=vr[k]; blend=.5*c+.5*v; ccat.append(c); vcat.append(v)
         rows.append({"window":o.as_dict(),"sharpe_4pct":cm[k]["0.04"]["sharpe_ratio"],"sharpe_8pct":cm[k]["0.08"]["sharpe_ratio"],"sharpe_12pct":cm[k]["0.12"]["sharpe_ratio"],"vcb_sharpe_4pct":vm[k]["0.04"]["sharpe_ratio"],"vcb_correlation":_corr(c,v),"blend_50_50_sharpe":_sharpe(blend)})
-    # QuantiacsEvaluator returns pandas Series for 4%-ATR relative returns.
-    # Keep aggregation in pandas; converting a Series via .to_pandas() is invalid.
+    # Evaluator returns pandas Series for 4%-ATR relative returns. Preserve that
+    # contract end-to-end so alignment/correlation semantics stay explicit.
     ca=pd.concat(ccat).sort_index(); va=pd.concat(vcat).sort_index()
     ca=ca[~ca.index.duplicated(keep="first")]; va=va[~va.index.duplicated(keep="first")]
-    import xarray as xr
-    car=xr.DataArray(ca.values,dims=["time"],coords={"time":ca.index}); var=xr.DataArray(va.values,dims=["time"],coords={"time":va.index})
-    b=.5*car+.5*var
+    ca,va=ca.align(va,join="inner"); b=.5*ca+.5*va
     ends=[pd.Timestamp(o.score_end) for o in origins]; rw=exponential_recency_weights(ends,half_life_days=HALF_LIFE_DAYS,as_of=max(ends))
     s=pd.Series([r["sharpe_4pct"] for r in rows],index=pd.DatetimeIndex(ends),dtype=float)
     recent=float((s*rw).sum())
-    out={"schema_version":1,"experiment_id":"breadth_dispersion_prequential_backfill_20260923","evidence_label":"ADAPTIVE_REUSE","candidate":CANDIDATE,"latest_sponsor_date":latest,"origin_count":len(origins),"parameters":{"min_train_days":MIN_TRAIN_DAYS,"forward_days":FORWARD_DAYS,"step_days":STEP_DAYS,"recency_half_life_days":HALF_LIFE_DAYS,"cost_atr_percent":[4,8,12]},"current_is":cfull["current_is"],"current_is_vcb":vfull["current_is"],"origin_level":rows,"aggregate":{"candidate_4pct":_summary(car),"vcb_4pct":_summary(var),"candidate_vcb_correlation":_corr(car,var),"blend_50_50_4pct":_summary(b),"unweighted_mean_origin_sharpe_4pct":float(s.mean()),"recency_weighted_mean_origin_sharpe_4pct":recent,"positive_origin_fraction_4pct":float((s>0).mean())}}
+    out={"schema_version":1,"experiment_id":"breadth_dispersion_prequential_backfill_20260923","evidence_label":"ADAPTIVE_REUSE","candidate":CANDIDATE,"latest_sponsor_date":latest,"origin_count":len(origins),"parameters":{"min_train_days":MIN_TRAIN_DAYS,"forward_days":FORWARD_DAYS,"step_days":STEP_DAYS,"recency_half_life_days":HALF_LIFE_DAYS,"cost_atr_percent":[4,8,12]},"current_is":cfull["current_is"],"current_is_vcb":vfull["current_is"],"origin_level":rows,"aggregate":{"candidate_4pct":_summary(ca),"vcb_4pct":_summary(va),"candidate_vcb_correlation":_corr(ca,va),"blend_50_50_4pct":_summary(b),"unweighted_mean_origin_sharpe_4pct":float(s.mean()),"recency_weighted_mean_origin_sharpe_4pct":recent,"positive_origin_fraction_4pct":float((s>0).mean())}}
     _emit(out)
 if __name__=="__main__": main()

@@ -63,6 +63,32 @@ def test_prefix_causality_bounded_replay_and_asset_order():
     xr.testing.assert_identical(w, adapter.calculate_weights(d))
 
 
+def _zero_price_data():
+    d = _data(seed=5, n=900)
+    d.loc[dict(field="close", asset="c", time=d.time.values[300:305])] = 0.0
+    d.loc[dict(field="is_liquid", asset="c", time=d.time.values[300:305])] = 0.0
+    return d
+
+
+def test_zero_close_is_backend_invariant_and_causal():
+    adapter = _load("ens_zero"); d = _zero_price_data()
+    default = adapter.calculate_weights(d)
+    with xr.set_options(use_bottleneck=False):
+        native = adapter.calculate_weights(d)
+    assert float(abs(default - native).max()) <= 1e-10
+    assert check_causality(adapter.calculate_weights, d, full=default)["status"] == "PASS"
+
+
+def test_frozen_research_members_diverge_across_backends_on_zero_close():
+    # Documents the defect the adapter hardens: an infinite return poisons
+    # bottleneck's running-sum rolling kernels long after the event.
+    d = _zero_price_data()
+    default = .5 * ff.FACTORS["breadth_dispersion_interaction"](d) + .5 * vcb.calculate_weights(d)
+    with xr.set_options(use_bottleneck=False):
+        native = .5 * ff.FACTORS["breadth_dispersion_interaction"](d) + .5 * vcb.calculate_weights(d)
+    assert float(abs(default - native).max()) > 1e-3
+
+
 def test_strategy_returns_latest_row_only():
     adapter = _load("ens_last"); d = _data()
     last = adapter.strategy(d)

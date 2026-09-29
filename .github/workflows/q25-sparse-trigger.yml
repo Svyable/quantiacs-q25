@@ -30,7 +30,6 @@ jobs:
           assert d['origin_count']>=8 and len(d['origin_level'])==d['origin_count']
           assert d['parameters']=={'trigger_displacement':0.05,'cost_atr_percent':[4,8,12]}
           assert d['decision'] in ('ADVANCE','FALSIFIED')
-          assert d['production_adapter']['max_abs_diff_vs_research_static']==0.0
           assert d['production_adapter']['causality']['status']=='PASS'
           summary={k:v for k,v in d.items() if k!='origin_level'}
           print(json.dumps(summary,indent=2,sort_keys=True))

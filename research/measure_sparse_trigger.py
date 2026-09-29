@@ -15,6 +15,12 @@ Gate interpretations fixed before observation:
 * "no integrity/leakage failure" -> weights contract + prefix invariance.
   Sparse-trigger holdings are path-dependent by design, so bounded (365-day)
   replay agreement is reported as a production diagnostic, not a gate.
+
+Revision after run 36509822132 (before any economics were observed; the job
+failed in the adapter causality check): a zero Sponsor close makes returns
+infinite and bottleneck's rolling kernels then diverge from native xarray.
+Prefix invariance is therefore judged native-vs-native, backend divergence
+of the frozen static blend is reported, and the adapter hardens the defect.
 """
 from __future__ import annotations
 import importlib.util
@@ -95,11 +101,21 @@ def main():
     for w in (bw, vw, static, sparse, lag):
         check_weights(w, data)
 
+    # The frozen members' rolling kernels diverge between bottleneck and native
+    # xarray when a non-positive close makes returns infinite. Economics use the
+    # default backend (comparable with every earlier measurement); causality is
+    # judged native-vs-native so a backend defect is not mislabelled as lookahead.
+    close = data.sel(field="close").values
+    with xr.set_options(use_bottleneck=False):
+        static_native = .5 * ff.FACTORS["breadth_dispersion_interaction"](data) + .5 * vcb.calculate_weights(data)
+    backend_gap = np.abs(static.transpose("time", "asset").values - static_native.transpose("time", "asset").values).max(axis=1)
+    sparse_native = apply_sparse_trigger(static_native, liquid)
+
     adapter = _adapter(); prod = adapter.calculate_weights(data)
-    adapter_parity = float(np.max(np.abs(prod.values - static.transpose("time", "asset").values)))
+    adapter_gap = np.abs(prod.values - static.transpose("time", "asset").values).max(axis=1)
     adapter_causality = check_causality(adapter.calculate_weights, data, full=prod)
-    sparse_prefix = _prefix_check(trigger, data, sparse)
-    sparse_replay = _bounded_replay(trigger, data, sparse)
+    sparse_prefix = _prefix_check(trigger, data, sparse_native)
+    sparse_replay = _bounded_replay(trigger, data, sparse_native)
 
     origins = rolling_origins(data.time.values, min_train_days=730, forward_days=90, step_days=90, live_start=LIVE_START)
     folds = [{"id": f"o{i:02d}", "start": o.score_start.strftime("%Y-%m-%d"), "end": o.score_end.strftime("%Y-%m-%d")} for i, o in enumerate(origins)]
@@ -139,9 +155,12 @@ def main():
         "aggregate": {**agg, "correlation_breadth": corr(p, c), "correlation_vcb": corr(p, v), "correlation_static": corr(p, s),
                       "positive_origin_fraction": float((osh > 0).mean()), "mean_origin_sharpe": _finite(osh.mean()),
                       "scored_origin_count": int(osh.notna().sum()), "recency_weighted_origin_sharpe": _finite((osh * rw).sum())},
-        "integrity": {"sparse_prefix": sparse_prefix, "sparse_bounded_replay_diagnostic": sparse_replay},
+        "integrity": {"sparse_prefix": sparse_prefix, "sparse_bounded_replay_diagnostic": sparse_replay,
+                      "nonpositive_close_cells": int((np.isfinite(close) & (close <= 0)).sum()),
+                      "frozen_static_backend_divergence": {"max_abs_difference": float(backend_gap.max()), "days_above_1e-10": int((backend_gap > 1e-10).sum())}},
         "gates": gates, "decision": "ADVANCE" if all(gates.values()) else "FALSIFIED",
-        "production_adapter": {"path": str(ADAPTER.relative_to(ROOT)), "max_abs_diff_vs_research_static": adapter_parity,
+        "production_adapter": {"path": str(ADAPTER.relative_to(ROOT)), "max_abs_diff_vs_research_static": float(adapter_gap.max()),
+                               "days_differing_from_research_static": int((adapter_gap > 1e-10).sum()),
                                "causality": adapter_causality, "current_is": af["current_is"]},
         "origin_level": rows,
     }

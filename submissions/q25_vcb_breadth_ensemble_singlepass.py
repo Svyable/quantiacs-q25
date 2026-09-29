@@ -9,9 +9,16 @@ Evidence: research/evidence/breadth_prequential_20260924.md (39 completed
 90-day origins, ADAPTIVE_REUSE). The 50/50 blend is the incumbent reference
 that both execution overlays (2% band, 5% sparse trigger) must beat.
 
-No economic parameter or formula is changed here; only contest execution/check
-plumbing is added. The file is self-contained so it can be pasted into a
-Quantiacs notebook without the research package.
+No economic parameter is changed here. One hardening differs from the research
+sources: non-positive closes are treated as missing *before* returns are formed.
+A zero close makes c / c.shift(1) infinite, and bottleneck's running-sum rolling
+kernels then diverge from xarray's native rolling for hundreds of later days,
+so the frozen sources' weights depend on which backend is installed (observed
+as a prefix-causality failure on Sponsor data in the q25-sparse-trigger run).
+Such assets are already excluded by the is_liquid/close > 0 mask, so on panels
+without non-positive closes the adapter is bit-identical to the research blend
+(tested). The file is self-contained so it can be pasted into a Quantiacs
+notebook without the research package.
 """
 from __future__ import annotations
 import os
@@ -19,7 +26,7 @@ import numpy as np
 import xarray as xr
 
 COMPETITION_TYPE = "crypto_daily_long"
-STRATEGY_ID = "q25_vcb_breadth_static_ensemble_v1"
+STRATEGY_ID = "q25_vcb_breadth_static_ensemble_v2"
 IN_SAMPLE_START = "2016-01-01"
 LOOKBACK_DAYS = 365
 NAME_CAP = .25
@@ -31,6 +38,7 @@ BREADTH_WEIGHT = .5
 def _inputs(data):
     c = data.sel(field="close").transpose("time", "asset").astype(float)
     l = xr.where((data.sel(field="is_liquid").transpose("time", "asset") == 1) & np.isfinite(c) & (c > 0), 1., 0.)
+    c = c.where(c > 0)
     r = c / c.shift(time=1) - 1
     return c, l, r
 

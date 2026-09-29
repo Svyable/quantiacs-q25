@@ -11,7 +11,7 @@ Machine-readable roster: [`configs/historical_top10.yaml`](../configs/historical
 ## 0 — Current qualified incumbent (2026-09-29): VCB × breadth-dispersion, static 50/50
 
 **Mode:** `q25_vcb_breadth_static_ensemble_v1`  
-**Production adapter:** [`submissions/q25_vcb_breadth_ensemble_singlepass.py`](../submissions/q25_vcb_breadth_ensemble_singlepass.py) (self-contained; exact parity with the research members is tested)  
+**Production adapter:** [`submissions/q25_vcb_breadth_ensemble_singlepass.py`](../submissions/q25_vcb_breadth_ensemble_singlepass.py) (self-contained; `_v2` treats non-positive closes as missing, which fixes a bottleneck-vs-native rolling divergence that the frozen members show after a zero Sponsor close; it is bit-identical to the research blend wherever no such close exists)  
 **Evidence label:** `ADAPTIVE_REUSE` over 39 completed 90-day origins, Sponsor data through 2026-09-23
 
 | Stream | Stitched SR @ 4% ATR | Max DD | Note |

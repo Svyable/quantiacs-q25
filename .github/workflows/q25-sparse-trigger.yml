@@ -1,0 +1,40 @@
+name: q25-sparse-trigger
+on:
+  pull_request:
+    paths:
+      - 'research/measure_sparse_trigger.py'
+      - 'strategies/generated/q25_vcb_breadth_sparse_trigger_ensemble.py'
+      - 'submissions/q25_vcb_breadth_ensemble_singlepass.py'
+      - '.github/workflows/q25-sparse-trigger.yml'
+  workflow_dispatch:
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Execute frozen sparse-trigger evaluation and production-adapter check
+        env:
+          Q25_EVIDENCE_PATH: /tmp/sparse-trigger.json
+        run: python -m research.measure_sparse_trigger
+      - name: Validate evidence contract
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/sparse-trigger.json'))
+          assert d['schema_version']==1 and d['evidence_label']=='ADAPTIVE_REUSE'
+          assert d['origin_count']>=8 and len(d['origin_level'])==d['origin_count']
+          assert d['parameters']=={'trigger_displacement':0.05,'cost_atr_percent':[4,8,12]}
+          assert d['decision'] in ('ADVANCE','FALSIFIED')
+          assert d['production_adapter']['causality']['status']=='PASS'
+          summary={k:v for k,v in d.items() if k!='origin_level'}
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sparse-trigger-evidence
+          path: /tmp/sparse-trigger.json

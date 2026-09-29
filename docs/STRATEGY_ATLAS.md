@@ -8,6 +8,30 @@ Machine-readable roster: [`configs/historical_top10.yaml`](../configs/historical
 
 ---
 
+## 0 — Current qualified incumbent (2026-09-29): VCB × breadth-dispersion, static 50/50
+
+**Mode:** `q25_vcb_breadth_static_ensemble_v1`  
+**Production adapter:** [`submissions/q25_vcb_breadth_ensemble_singlepass.py`](../submissions/q25_vcb_breadth_ensemble_singlepass.py) (self-contained; `_v2` treats non-positive closes as missing, which fixes a bottleneck-vs-native rolling divergence that the frozen members show after a zero Sponsor close; it is bit-identical to the research blend wherever no such close exists)  
+**Evidence label:** `ADAPTIVE_REUSE` over 39 completed 90-day origins, Sponsor data through 2026-09-23
+
+| Stream | Stitched SR @ 4% ATR | Max DD | Note |
+|---|---:|---:|---|
+| VCB (volatility-contraction breakout) | 1.496 | — | current-IS SR 1.648; survived its one-shot 2023+ holdout (SR 0.859) |
+| Breadth × dispersion interaction | 1.553 | -19.8% | recency-weighted origin SR only 0.469, so it is a diversifier and not a standalone pick |
+| **Static 50/50 blend** | **1.757** | **-9.3%** | ρ(VCB, breadth) = 0.47; the blend beats both members on Sharpe and drawdown |
+| 2% per-asset no-trade band | 1.788 | -9.4% | **FALSIFIED**: turnover fell 6.8%, short of the frozen 10% gate |
+| 5% portfolio sparse trigger | pending | pending | preregistered; measured by `research/measure_sparse_trigger.py` |
+
+**Mechanism.** VCB buys positive breakouts above the prior 28-day high that emerge from unusually quiet short-horizon volatility (14D / 56D contraction), inverse-vol sized with a 25% name cap. Breadth × dispersion buys 35-day relative leaders only when market breadth *and* cross-sectional dispersion both rise above their trailing 63-day medians. Both are long-only, historical-`is_liquid`, and allowed to hold cash.
+
+**What can kill it:** the breadth sleeve's weak recent origins; both sleeves being breakout/leadership-flavoured, so a sharp reversal regime could hit them together; the account-bound correlation check, which has not been run yet.
+
+Reference sources: [breadth prequential evidence](../research/evidence/breadth_prequential_20260924.md), [VCB holdout](../research/evidence/vcb_holdout_20260922.md), [turnover-band falsification](../research/evidence/vcb_breadth_turnover_ensemble_20260924.md).
+
+The historical top-ten below remains the archived research roster. Clean 2026-09-18 re-implementations of co-crash shelter (current-IS SR 0.757) and residual-dispersion switch (0.850) both **failed** the contest gate, so treat the archived metrics of #5 and #6 as untransferred.
+
+---
+
 ## 1 — V10 multi-factor ensemble · Pareto
 
 **Mode:** `aqr_ensemble_pareto_v10`  

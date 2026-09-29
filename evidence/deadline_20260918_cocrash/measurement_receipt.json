@@ -1,0 +1,27 @@
+{
+  "experiment_id": "deadline_20260918_cocrash",
+  "candidate_id": "q25_deadline_cocrash_shelter_v1",
+  "observed_at_utc": "2026-09-18T13:30:19Z",
+  "evidence_stage": "CURRENT_PUBLIC_QUANTIACS_SINGLE_PASS",
+  "quantiacs_access_mode": "public_default",
+  "workflow_run_id": 35350505323,
+  "workflow_job_id": 105617243026,
+  "artifact_id": 10549668072,
+  "artifact_sha256": "6e6304eee9177925e7dad229ac40694b9e15aa95e55d4c77224d2492056aebf2",
+  "mechanical_integrity": "PASS",
+  "cleaner": {
+    "liquidity": "PASS",
+    "missed_dates": "PASS",
+    "positive_positions": "PASS"
+  },
+  "metrics": {
+    "0.00": {"sharpe_ratio": 0.8382878509990936, "equity": 29.377150486630086, "max_drawdown": -0.8596602420566413, "avg_turnover": 0.0556997457347479, "volatility": 0.5839383150892865},
+    "0.04": {"sharpe_ratio": 0.7574668589729023, "equity": 17.70831385510274, "max_drawdown": -0.8753097919915899, "avg_turnover": 0.05573916113829868, "volatility": 0.5840655743211468},
+    "0.08": {"sharpe_ratio": 0.6764574408037514, "equity": 10.660226185233661, "max_drawdown": -0.890576480562198, "avg_turnover": 0.05577948721900398, "volatility": 0.5843417986247884},
+    "0.12": {"sharpe_ratio": 0.5952882599280357, "equity": 6.4073897661121695, "max_drawdown": -0.9040482762478491, "avg_turnover": 0.055820802527678445, "volatility": 0.5847668790078299}
+  },
+  "decision": "FAIL_CONTEST_GATE",
+  "reason": "Current public/default Quantiacs in-sample Sharpe at the contest 0.04 ATR slippage setting is 0.7574668589729023, below the required >1.0 gate. Drawdown is also unacceptable. Preserve the frozen source; do not retune after this observation.",
+  "post_observation_mutation_allowed": false,
+  "hosted_account_correlation_precheck": "NOT_RUN_NOT_ELIGIBLE_TO_ADVANCE"
+}

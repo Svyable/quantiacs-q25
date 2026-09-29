@@ -8,7 +8,7 @@
 # configs/external_research_leads.yaml and docs/EXTERNAL_RESEARCH_LEADS.md.
 # Do not infer edge from priority alone.
 
-as_of: "2026-09-12"
+as_of: "2026-09-29"
 external_research_ref: "configs/external_research_leads.yaml"
 
 novelty_axes:
@@ -91,10 +91,16 @@ occupied_or_crowded:
     note: "Simple abnormal-volume -> next residual-return network variants are V12-family work unless the network object or state variable is materially new."
   - family: "crash_comovement_defense"
     incumbents: [CoCrash126]
-    note: "Simple low co-crash / low-beta / downside-safety sorts are likely crowded."
+    note: "Simple low co-crash / low-beta / downside-safety sorts are likely crowded. The fresh 2026-09-18 contest adapter q25_deadline_cocrash_shelter_v1 measured current-IS SR 0.757 @ 4% ATR with max DD -87.5%: FAIL_CONTEST_GATE (evidence/deadline_20260918_cocrash). The archived CoCrash126 metrics did not transfer to a clean re-implementation."
   - family: "residual_dispersion_timing"
     incumbents: [hrt_dispersion_switch]
-    note: "Simple residual-dispersion gates are occupied."
+    note: "Simple residual-dispersion gates are occupied. The fresh 2026-09-18 contest adapter q25_deadline_residual_dispersion_v1 measured current-IS SR 0.850 @ 4% ATR with max DD -81.6%: FAIL_CONTEST_GATE (evidence/deadline_20260918_residual_dispersion). The archived hrt_dispersion_switch metrics did not transfer to a clean re-implementation."
+  - family: "volatility_contraction_breakout"
+    incumbents: [q25_volatility_contraction_breakout_v1, q25_vcb_breadth_static_ensemble_v1]
+    note: "Current qualified incumbent lineage (2026-09-24). VCB current-IS SR 1.648; the static 50/50 blend with breadth_dispersion_interaction reaches stitched 39-origin SR 1.757 with max DD -9.3% (ADAPTIVE_REUSE). The 2% per-asset no-trade band was FALSIFIED on its turnover gate; the 5% portfolio sparse trigger is measured by research/measure_sparse_trigger.py. New breakout/contraction variants are refinements of this lineage, not new alpha."
+  - family: "breadth_dispersion_interaction"
+    incumbents: [breadth_dispersion_interaction, q25_vcb_breadth_static_ensemble_v1]
+    note: "ADVANCE AS DIVERSIFIER only: stitched SR 1.553 but recency-weighted origin SR 0.469 and 56% positive origins. Its 0.47 correlation to VCB is what makes the blend work; do not promote standalone."
   - family: "breadth_risk_gate"
     incumbents: [Breadth]
     note: "Simple percent-above-MA / breadth-thrust risk-on gates are occupied."

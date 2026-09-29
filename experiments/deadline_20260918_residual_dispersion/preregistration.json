@@ -1,0 +1,44 @@
+{
+  "experiment_id": "deadline_20260918_residual_dispersion",
+  "created": "2026-09-18",
+  "track": "submission_hardening",
+  "status": "FROZEN_BEFORE_CURRENT_DATA_MEASUREMENT",
+  "candidate": {
+    "id": "q25_deadline_residual_dispersion_v1",
+    "source": "strategies/generated/q25_deadline_residual_dispersion.py",
+    "mechanism": "market-neutral residual quality is traded only when smoothed cross-sectional residual dispersion exceeds its own trailing median; weekly top-four positive residual-quality selection with inverse residual-risk sizing",
+    "parameters": {
+      "beta_window": 126,
+      "beta_min": 63,
+      "score_window": 63,
+      "score_min": 42,
+      "dispersion_smooth": 21,
+      "dispersion_history": 252,
+      "dispersion_min": 126,
+      "dispersion_threshold": "trailing_median",
+      "risk_window": 63,
+      "risk_min": 42,
+      "top_k": 4,
+      "name_cap": 0.25,
+      "rebalance": "Monday",
+      "inactive_state_gross": 0.0
+    }
+  },
+  "evidence_policy": {
+    "historical_residual_dispersion_metrics_transfer_to_this_source": false,
+    "retune_after_observing_this_run": false,
+    "selection_period_start": "2016-01-01",
+    "primary_cost_fraction_atr": 0.04,
+    "stress_costs_fraction_atr": [0.08, 0.12],
+    "contest_hard_is_sharpe": ">1.0",
+    "promotion_requires_prefix_causality": true,
+    "promotion_requires_long_liquid_only": true,
+    "promotion_requires_current_quantiacs_measurement": true,
+    "hosted_account_correlation_check": "PENDING"
+  },
+  "planned_destructive_controls_if_base_survives": [
+    "remove dispersion gate while preserving residual score and sizing",
+    "invert dispersion gate",
+    "replace residual returns with raw returns"
+  ]
+}

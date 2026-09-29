@@ -20,7 +20,8 @@ Machine-readable roster: [`configs/historical_top10.yaml`](../configs/historical
 | Breadth × dispersion interaction | 1.553 | -19.8% | recency-weighted origin SR only 0.469, so it is a diversifier and not a standalone pick |
 | **Static 50/50 blend** | **1.757** | **-9.3%** | ρ(VCB, breadth) = 0.47; the blend beats both members on Sharpe and drawdown |
 | 2% per-asset no-trade band | 1.788 | -9.4% | **FALSIFIED**: turnover fell 6.8%, short of the frozen 10% gate |
-| 5% portfolio sparse trigger | pending | pending | preregistered; measured by `research/measure_sparse_trigger.py` |
+| 5% portfolio sparse trigger | 1.756 | -9.4% | **FALSIFIED**: turnover fell 4.9%, short of the frozen 10% gate ([evidence](../research/evidence/vcb_breadth_sparse_trigger_20260924.md)) |
+| **Production adapter v2** (current IS 2016→) | 1.716 / 1.528 / 1.339 @ 4/8/12% ATR | -33.7% | backend-invariant; contest gate passes at every cost level |
 
 **Mechanism.** VCB buys positive breakouts above the prior 28-day high that emerge from unusually quiet short-horizon volatility (14D / 56D contraction), inverse-vol sized with a 25% name cap. Breadth × dispersion buys 35-day relative leaders only when market breadth *and* cross-sectional dispersion both rise above their trailing 63-day medians. Both are long-only, historical-`is_liquid`, and allowed to hold cash.
 
